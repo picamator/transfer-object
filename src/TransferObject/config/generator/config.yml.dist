@@ -1,0 +1,6 @@
+generator:
+  classNamespace: '{namespace}'
+  generatedPath:
+    path: '{path-to-directory-where-transfer-objects-are-generated}'
+  definitionPath:
+    path: '{path-to-directory-where-definition-is-located}'

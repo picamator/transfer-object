@@ -1,0 +1,6 @@
+generator:
+  classNamespace: 'Picamator\TransferObject\Generated'
+  generatedPath:
+    path: 'Generated'
+  definitionPath:
+    path: 'config\definition'

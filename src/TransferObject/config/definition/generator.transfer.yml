@@ -1,0 +1,23 @@
+Definition:
+  template:
+    type: Template
+  validator:
+    type: DefinitionValidator
+
+DefinitionValidator:
+  isValid:
+    type: bool
+  errorMessages:
+    collectionType: ErrorMessage
+
+ErrorMessage:
+  message:
+    type: string
+  context:
+    type: array
+
+Generator:
+  definitionKey:
+    type: string
+  validator:
+    type: DefinitionValidator
