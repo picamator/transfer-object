@@ -27,7 +27,7 @@ readonly class GeneratorFiber implements GeneratorFiberInterface
         $this->filesystem->createTempDir();
         Fiber::suspend($this->reader->countDefinitions());
 
-        $isSuccessful = true;
+        $isSuccessful = $this->reader->countDefinitions() > 0;
         foreach ($this->reader->getDefinitions() as $definitionKey => $definitionTransfer) {
             if ($definitionTransfer->validator->isValid) {
                 $content = $this->renderer->renderTemplate($definitionTransfer->template);
