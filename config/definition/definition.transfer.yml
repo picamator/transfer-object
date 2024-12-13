@@ -1,0 +1,31 @@
+Definition:
+  content:
+    type: DefinitionContent
+  validator:
+    type: DefinitionValidator
+
+DefinitionContent:
+  className:
+    type: string
+  properties:
+    collectionType: DefinitionProperty
+
+DefinitionProperty:
+  propertyName:
+    type: string
+  type:
+    type: string
+  collectionType:
+    type: string
+
+DefinitionValidator:
+  isValid:
+    type: bool
+  errorMessages:
+    type: ArrayObject
+
+Generator:
+  definitionKey:
+    type: string
+  validator:
+    type: DefinitionValidator

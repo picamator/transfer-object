@@ -13,9 +13,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 class GeneratorCommand extends Command
 {
     use WritelnTrait;
-    use ProgressBarTrait;
 
-    private const string ROOT_PATH = __DIR__ . DIRECTORY_SEPARATOR . '..' .DIRECTORY_SEPARATOR;
+    private const string ROOT_PATH = __DIR__
+        . DIRECTORY_SEPARATOR . '..'
+        . DIRECTORY_SEPARATOR . '..'
+        . DIRECTORY_SEPARATOR . '..'
+        . DIRECTORY_SEPARATOR;
 
     private const string NAME = 'generate:transfer';
     private const string DESCRIPTION = 'Generates Transfer Objects based on definitions.';
@@ -37,28 +40,29 @@ class GeneratorCommand extends Command
                     DefinitionPathTransfer::PATH => static::ROOT_PATH . 'config/definition',
                 ],
                 ConfigTransfer::GENERATED_PATH => [
-                    GeneratedPathTransfer::PATH => static::ROOT_PATH . 'Generated',
+                    GeneratedPathTransfer::PATH => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'Generated',
                 ],
             ]);
 
-        $generatorFiber = new GeneratorFactory($configTransfer)->createGeneratorFiber()->getGeneratorFiber();
-
-        /** @var int $definitionFileCount */
-        $definitionFileCount = $generatorFiber->start();
-        $this->progressStart($input, $output, $definitionFileCount);
-
+        $generatorFiber = new GeneratorFactory($configTransfer)->getGeneratorFiber();
+        $generatorFiber->start();
         while (!$generatorFiber->isTerminated()) {
             /** @var \Picamator\TransferObject\Generated\GeneratorTransfer|null $generatorTransfer */
             $generatorTransfer = $generatorFiber->resume();
             if ($generatorTransfer !== null) {
-                $this->progressAdvance($generatorTransfer->definitionKey);
                 $this->writelnGeneratorTransfer($generatorTransfer, $output);
             }
         }
 
-        $this->progressFinish();
+        if ($generatorFiber->getReturn()) {
+            $this->writelnSuccess($output);
 
-        return $generatorFiber->getReturn() ? Command::SUCCESS : Command::FAILURE;
+            return Command::SUCCESS;
+        }
+
+        $this->writelnError($output, static::FAILED_MESSAGE);
+
+        return Command::FAILURE;
     }
 }
 

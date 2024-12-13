@@ -15,8 +15,6 @@ use <?php echo $import ?>;
  * Specification:
  * - Class is generated based on definition.
  * - In order to modify file please change definition and run generator.
- *
- * Generated on <?php echo new DateTime()->format('Y-m-d H:i:s') . PHP_EOL; ?>
  */
 final class <?php echo $templateTransfer->className ?> extends AbstractTransfer
 {

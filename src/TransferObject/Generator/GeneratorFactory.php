@@ -2,103 +2,84 @@
 
 namespace Picamator\TransferObject\Generator;
 
-use Picamator\TransferObject\Generator\Filesystem\DefinitionFilesystem;
-use Picamator\TransferObject\Generator\Filesystem\DefinitionFilesystemInterface;
-use Picamator\TransferObject\Generator\Filesystem\GeneratedFilesystem;
-use Picamator\TransferObject\Generator\Filesystem\GeneratedFilesystemInterface;
-use Picamator\TransferObject\Generator\Parser\ContentParserInterface;
-use Picamator\TransferObject\Generator\Parser\YmlContentParser;
-use Picamator\TransferObject\Generator\Reader\DefinitionReader;
-use Picamator\TransferObject\Generator\Reader\DefinitionReaderBuilder;
-use Picamator\TransferObject\Generator\Reader\DefinitionReaderBuilderInterface;
-use Picamator\TransferObject\Generator\Reader\DefinitionReaderInterface;
-use Picamator\TransferObject\Generator\Template\TemplateRender;
-use Picamator\TransferObject\Generator\Template\TemplateRenderInterface;
+use Fiber;
+use Picamator\TransferObject\Definition\DefinitionFactory;
+use Picamator\TransferObject\Definition\Reader\DefinitionReaderInterface;
 use Picamator\TransferObject\Generated\ConfigTransfer;
-use Picamator\TransferObject\Generator\Validator\DefinitionValidator;
-use Picamator\TransferObject\Generator\Validator\DefinitionValidatorInterface;
+use Picamator\TransferObject\Generator\Expander\CollectionTypeTemplateExpander;
+use Picamator\TransferObject\Generator\Expander\DefaultTemplateExpander;
+use Picamator\TransferObject\Generator\Expander\TemplateExpanderInterface;
+use Picamator\TransferObject\Generator\Expander\TypeTemplateExpander;
+use Picamator\TransferObject\Generator\Fiber\GeneratorFiberCallback;
+use Picamator\TransferObject\Generator\Fiber\GeneratorFiberCallbackInterface;
+use Picamator\TransferObject\Generator\Filesystem\GeneratorFilesystem;
+use Picamator\TransferObject\Generator\Filesystem\GeneratorFilesystemInterface;
+use Picamator\TransferObject\Generator\Render\TemplateRender;
+use Picamator\TransferObject\Generator\Render\TemplateRenderInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Yaml\Parser;
 
 readonly class GeneratorFactory
 {
-    public function __construct(private ConfigTransfer $configTransfer)
-    {
+    public function __construct(
+        private ConfigTransfer $configTransfer,
+    ) {
     }
 
-    public function createGeneratorFiber(): GeneratorFiberInterface
+    public function getGeneratorFiber(): Fiber
     {
-        return new GeneratorFiber(
+        return new Fiber($this->createFiberCallback()->getFiberCallback(...));
+    }
+
+    protected function createFiberCallback(): GeneratorFiberCallbackInterface
+    {
+        return new GeneratorFiberCallback(
             $this->createDefinitionReader(),
             $this->createTemplateRender(),
-            $this->createGeneratedFilesystem(),
+            $this->createGeneratorFilesystem(),
         );
     }
 
-    private function createGeneratedFilesystem(): GeneratedFilesystemInterface
+    protected function createGeneratorFilesystem(): GeneratorFilesystemInterface
     {
-        return new GeneratedFilesystem(
+        return new GeneratorFilesystem(
             $this->createFilesystem(),
             $this->createFinder(),
             $this->configTransfer,
         );
     }
 
-    private function createFilesystem(): Filesystem
+    protected function createFilesystem(): Filesystem
     {
         return new Filesystem();
     }
 
-    private function createTemplateRender(): TemplateRenderInterface
+    protected function createTemplateRender(): TemplateRenderInterface
     {
-        return new TemplateRender();
-    }
-
-    private function createDefinitionReader(): DefinitionReaderInterface
-    {
-        return new DefinitionReader(
-            $this->createDefinitionFilesystem(),
-            $this->createYmlContentParser(),
-            $this->createDefinitionReaderBuilder(),
-        );
-    }
-
-    private function createDefinitionReaderBuilder(): DefinitionReaderBuilderInterface
-    {
-        return new DefinitionReaderBuilder($this->createDefinitionValidator(), $this->configTransfer);
-    }
-
-    private function createDefinitionValidator(): DefinitionValidatorInterface
-    {
-        return new DefinitionValidator();
-    }
-
-    private function createDefinitionValidatorBuilder(): DefinitionValidatorBuilderInterface
-    {
-        return new DefinitionValidatorBuilder();
-    }
-
-    private function createYmlContentParser(): ContentParserInterface
-    {
-        return new YmlContentParser($this->createYmlParser());
-    }
-
-    private function createYmlParser(): Parser
-    {
-        return new Parser();
-    }
-
-    private function createDefinitionFilesystem(): DefinitionFilesystemInterface
-    {
-        return new DefinitionFilesystem(
-            $this->createFinder(),
+        return new TemplateRender(
             $this->configTransfer,
+            $this->createTemplateExpander(),
         );
     }
 
-    private function createFinder(): Finder
+    protected function createTemplateExpander(): TemplateExpanderInterface
+    {
+        $templateExpander = new CollectionTypeTemplateExpander();
+        $templateExpander
+            ->setNext(new TypeTemplateExpander())
+            ->setNext(new DefaultTemplateExpander());
+
+        return $templateExpander;
+    }
+
+
+    protected function createFinder(): Finder
     {
         return new Finder();
+    }
+
+    protected function createDefinitionReader(): DefinitionReaderInterface
+    {
+        return new DefinitionFactory($this->configTransfer)->createDefinitionReader();
     }
 }
