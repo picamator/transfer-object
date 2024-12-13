@@ -5,28 +5,18 @@ namespace Picamator\TransferObject\Command;
 use Picamator\TransferObject\Generated\GeneratorTransfer;
 use Symfony\Component\Console\Output\OutputInterface;
 
-trait WritelnTrait
+trait GeneratorWritelnTrait
 {
     protected const string FAILED_TEMPLATE = 'Failed generating %s.';
-
-    protected const string SUCCESS_MESSAGE = 'Transfer Objects successfully generated.';
     protected const string FAILED_MESSAGE = 'Failed generate Transfer Objects.';
+    protected const string SUCCESS_MESSAGE = 'Transfer Objects successfully generated.';
 
-    protected function writelnSuccess(OutputInterface $output): void
+    protected function writelnSuccess(OutputInterface $output, string $message): void
     {
-        $output->writeln(sprintf('<info>%s</info>', static::SUCCESS_MESSAGE));
+        $output->writeln(sprintf('<info>%s</info>', $message));
     }
 
     protected function writelnGeneratorTransfer(GeneratorTransfer $generatorTransfer, OutputInterface $output): void
-    {
-        if ($generatorTransfer->validator->isValid) {
-            return;
-        }
-
-        $this->writelnGeneratorErrors($generatorTransfer, $output);
-    }
-
-    protected function writelnGeneratorErrors(GeneratorTransfer $generatorTransfer, OutputInterface $output): void
     {
         $this->writelnError($output, sprintf(static::FAILED_TEMPLATE, $generatorTransfer->definitionKey));
 

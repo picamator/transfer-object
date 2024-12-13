@@ -2,9 +2,9 @@
 
 namespace Picamator\TransferObject\Generator\Filesystem;
 
+use Picamator\TransferObject\Config\ConfigInterface;
 use Picamator\TransferObject\Exception\GeneratorTransferException;
 use Picamator\TransferObject\Generator\Enum\TransferEnum;
-use Picamator\TransferObject\Generated\ConfigTransfer;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Throwable;
@@ -13,13 +13,13 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 {
     private const string TEMPORARY_DIR = '_tmp';
 
-    private const string FILE_EXTENSIONS = TransferEnum::FILE_EXTENSIONS->value;
+    private const string FILE_SUFFIX_EXTENSION = TransferEnum::FILE_NAME_SUFFIX->value . TransferEnum::FILE_EXTENSIONS->value;
     private const string FILE_NAME_PATTERN = TransferEnum::FILE_NAME_PATTERN->value;
 
     public function __construct(
         private Filesystem $filesystem,
         private Finder $finder,
-        private ConfigTransfer $configTransfer,
+        private ConfigInterface $config,
     ) {
     }
 
@@ -47,7 +47,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 
     public function writeFile(string $className, string $content): void
     {
-        $filePath = $this->getTemporaryPath() . DIRECTORY_SEPARATOR . $className . static::FILE_EXTENSIONS;
+        $filePath = $this->getTemporaryPath() . DIRECTORY_SEPARATOR . $className  . static::FILE_SUFFIX_EXTENSION;
 
         try {
             $this->filesystem->appendToFile($filePath, $content);
@@ -64,7 +64,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
         try {
             $finder = $this->finder
                 ->name(static::FILE_NAME_PATTERN)
-                ->in($this->configTransfer->generatedPath->path)
+                ->in($this->config->getTransferPath())
                 ->exclude(static::TEMPORARY_DIR)
                 ->files();
 
@@ -87,7 +87,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
                 ->in($this->getTemporaryPath())
                 ->files();
 
-            $destinationPath = $this->configTransfer->generatedPath->path . DIRECTORY_SEPARATOR;
+            $destinationPath = $this->config->getTransferPath() . DIRECTORY_SEPARATOR;
             foreach ($finder as $file) {
                 $this->filesystem->copy($file->getRealPath(), $destinationPath. $file->getFilename());
             }
@@ -114,6 +114,6 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 
     private function getTemporaryPath(): string
     {
-        return $this->configTransfer->generatedPath->path . DIRECTORY_SEPARATOR . static::TEMPORARY_DIR;
+        return $this->config->getTransferPath() . DIRECTORY_SEPARATOR . static::TEMPORARY_DIR;
     }
 }

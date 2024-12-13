@@ -2,6 +2,7 @@
 
 namespace Picamator\TransferObject\Definition;
 
+use Picamator\TransferObject\Config\ConfigTrait;
 use Picamator\TransferObject\Definition\Filesystem\DefinitionFilesystem;
 use Picamator\TransferObject\Definition\Filesystem\DefinitionFilesystemInterface;
 use Picamator\TransferObject\Definition\Parser\ContentParserInterface;
@@ -14,16 +15,12 @@ use Picamator\TransferObject\Definition\Validator\ContentValidator;
 use Picamator\TransferObject\Definition\Validator\ContentValidatorInterface;
 use Picamator\TransferObject\Definition\Validator\PropertyValidator;
 use Picamator\TransferObject\Definition\Validator\PropertyValidatorInterface;
-use Picamator\TransferObject\Generated\ConfigTransfer;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Parser;
 
 readonly class DefinitionFactory
 {
-    public function __construct(
-        private ConfigTransfer $configTransfer,
-    ) {
-    }
+    use ConfigTrait;
 
     public function createDefinitionReader(): DefinitionReaderInterface
     {
@@ -66,7 +63,7 @@ readonly class DefinitionFactory
     {
         return new DefinitionFilesystem(
             $this->createFinder(),
-            $this->configTransfer,
+            $this->getConfig(),
         );
     }
 

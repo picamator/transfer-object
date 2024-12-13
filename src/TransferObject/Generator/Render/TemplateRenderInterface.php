@@ -6,5 +6,8 @@ use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 
 interface TemplateRenderInterface
 {
+    /**
+     * @throws \Picamator\TransferObject\Exception\GeneratorTransferException
+     */
     public function renderTemplate(DefinitionContentTransfer $contentTransfer): string;
 }

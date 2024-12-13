@@ -2,7 +2,7 @@
 
 namespace Picamator\TransferObject\Definition\Parser;
 
-use Picamator\TransferObject\Exception\GeneratorTransferException;
+use Picamator\TransferObject\Exception\DefinitionTransferException;
 use Symfony\Component\Yaml\Parser;
 use Throwable;
 
@@ -17,7 +17,7 @@ readonly class YmlContentParser implements ContentParserInterface
         try {
             return $this->yml->parse($content);
         } catch (Throwable $e) {
-            throw new GeneratorTransferException(
+            throw new DefinitionTransferException(
                 sprintf('Cannot parse content "%s".', $content),
                 previous: $e,
             );

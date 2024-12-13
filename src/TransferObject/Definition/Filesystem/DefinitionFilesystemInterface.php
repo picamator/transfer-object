@@ -7,7 +7,7 @@ use Generator;
 interface DefinitionFilesystemInterface
 {
     /**
-     * @throws \Picamator\TransferObject\Exception\GeneratorTransferException
+     * @throws \Picamator\TransferObject\Exception\DefinitionTransferException
      *
      * @return Generator<string>
      */

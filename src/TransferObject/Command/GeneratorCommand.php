@@ -5,20 +5,15 @@ namespace Picamator\TransferObject\Command;
 use Picamator\TransferObject\Generated\ConfigTransfer;
 use Picamator\TransferObject\Generated\DefinitionPathTransfer;
 use Picamator\TransferObject\Generated\GeneratedPathTransfer;
-use Picamator\TransferObject\Generator\GeneratorFactory;
+use Picamator\TransferObject\Generated\GeneratorTransfer;
+use Picamator\TransferObject\Generator\GeneratorFacade;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class GeneratorCommand extends Command
 {
-    use WritelnTrait;
-
-    private const string ROOT_PATH = __DIR__
-        . DIRECTORY_SEPARATOR . '..'
-        . DIRECTORY_SEPARATOR . '..'
-        . DIRECTORY_SEPARATOR . '..'
-        . DIRECTORY_SEPARATOR;
+    use GeneratorWritelnTrait;
 
     private const string NAME = 'generate:transfer';
     private const string DESCRIPTION = 'Generates Transfer Objects based on definitions.';
@@ -37,25 +32,18 @@ class GeneratorCommand extends Command
             ->fromArray([
                 ConfigTransfer::CLASS_NAMESPACE => 'Picamator\TransferObject\Generated',
                 ConfigTransfer::DEFINITION_PATH => [
-                    DefinitionPathTransfer::PATH => static::ROOT_PATH . 'config/definition',
+                    DefinitionPathTransfer::PATH => __DIR__ . DIRECTORY_SEPARATOR . 'config/definition',
                 ],
                 ConfigTransfer::GENERATED_PATH => [
                     GeneratedPathTransfer::PATH => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'Generated',
                 ],
             ]);
 
-        $generatorFiber = new GeneratorFactory($configTransfer)->getGeneratorFiber();
-        $generatorFiber->start();
-        while (!$generatorFiber->isTerminated()) {
-            /** @var \Picamator\TransferObject\Generated\GeneratorTransfer|null $generatorTransfer */
-            $generatorTransfer = $generatorFiber->resume();
-            if ($generatorTransfer !== null) {
-                $this->writelnGeneratorTransfer($generatorTransfer, $output);
-            }
-        }
+        $errorItemCallback = fn(GeneratorTransfer $generatorTransfer) => $this->writelnGeneratorTransfer($generatorTransfer, $output);
+        $isSuccess = new GeneratorFacade()->generateTransfers($configTransfer, $errorItemCallback);
 
-        if ($generatorFiber->getReturn()) {
-            $this->writelnSuccess($output);
+        if ($isSuccess) {
+            $this->writelnSuccess($output, static::SUCCESS_MESSAGE);
 
             return Command::SUCCESS;
         }

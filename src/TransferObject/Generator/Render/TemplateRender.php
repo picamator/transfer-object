@@ -3,19 +3,24 @@
 namespace Picamator\TransferObject\Generator\Render;
 
 use ArrayObject;
-use Picamator\TransferObject\Generated\ConfigTransfer;
+use Picamator\TransferObject\Config\ConfigInterface;
+use Picamator\TransferObject\Exception\GeneratorTransferException;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
+use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
+use Picamator\TransferObject\Generator\Enum\ArrayObjectEnum;
+use Picamator\TransferObject\Generator\Enum\CollectionPropertyTypeEnum;
+use Picamator\TransferObject\Generator\Enum\PropertyTypeEnum;
 use Picamator\TransferObject\Generator\Enum\TransferEnum;
-use Picamator\TransferObject\Generator\Expander\TemplateExpanderInterface;
 
 readonly class TemplateRender implements TemplateRenderInterface
 {
-    private const string TEMPLATE_PATH = __DIR__ . DIRECTORY_SEPARATOR . '../Template/Transfer.tpl.php';
+    use TemplateRenderTrait;
+
+    private const string TEMPLATE_PATH = __DIR__ . DIRECTORY_SEPARATOR . 'Template.tpl.php';
 
     public function __construct(
-        private ConfigTransfer $configTransfer,
-        private TemplateExpanderInterface $expander,
+        private ConfigInterface $config,
     ) {
     }
 
@@ -24,16 +29,27 @@ readonly class TemplateRender implements TemplateRenderInterface
         $templateTransfer = $this->createTemplateTransfer($contentTransfer);
 
         ob_start();
-
         include static::TEMPLATE_PATH;
+        $renderedOutput = ob_get_clean();
 
-        return ob_get_clean();
+        $lastError = error_get_last();
+        if ($lastError === null) {
+            return $renderedOutput;
+        }
+
+        throw new GeneratorTransferException(
+            sprintf(
+                'Template render error "%s", line %s',
+                $lastError['message'],
+                $lastError['line'],
+            ),
+        );
     }
 
     private function createTemplateTransfer(DefinitionContentTransfer $contentTransfer): TemplateTransfer
     {
         $templateTransfer = new TemplateTransfer();
-        $templateTransfer->classNamespace = $this->configTransfer->classNamespace;
+        $templateTransfer->classNamespace = $this->config->getTransferNamespace();
         $templateTransfer->className = $this->getTransferName($contentTransfer->className);
 
         $templateTransfer->imports = new ArrayObject([TransferEnum::ABSTRACT_CLASS_NAME->value]);
@@ -45,8 +61,13 @@ readonly class TemplateRender implements TemplateRenderInterface
 
         foreach ($contentTransfer->properties as $propertyTransfer) {
             $propertyName = $propertyTransfer->propertyName;
-            $templateTransfer->metaConstants[$this->getMetaConstant($propertyName)] = $propertyTransfer->propertyName;;
-            $this->expander->expandTemplate($propertyTransfer, $templateTransfer);
+            $templateTransfer->metaConstants[$this->getMetaConstant($propertyName)] = $propertyTransfer->propertyName;
+
+            match (true) {
+                $this->isTransferCollectionType($propertyTransfer) => $this->expandTransferCollectionType($propertyTransfer, $templateTransfer),
+                $this->isTransferType($propertyTransfer) => $this->expandTransferType($propertyTransfer, $templateTransfer),
+                default => $this->expandDefaultType($propertyTransfer, $templateTransfer),
+            };
         }
 
         $templateTransfer->imports = new ArrayObject(array_unique($templateTransfer->imports->getArrayCopy()));
@@ -57,27 +78,33 @@ readonly class TemplateRender implements TemplateRenderInterface
         return $templateTransfer;
     }
 
-    private function sortTemplateTransfer(TemplateTransfer $templateTransfer): void
+    private function expandDefaultType(DefinitionPropertyTransfer $propertyTransfer, TemplateTransfer $templateTransfer): void
     {
-        foreach ($templateTransfer as $key => $value) {
-            if (!$value instanceof ArrayObject) {
-                continue;
-            }
-
-            $value = $value->getArrayCopy();
-            natsort($value);
-
-            $templateTransfer->{$key} = new ArrayObject($value);
-        }
+        $propertyName = $propertyTransfer->propertyName;
+        $templateTransfer->properties[$propertyName] = $propertyTransfer->type;
     }
 
-    private function getMetaConstant(string $propertyName): string
+    private function expandTransferType(DefinitionPropertyTransfer $propertyTransfer, TemplateTransfer $templateTransfer): void
     {
-        return strtoupper(preg_replace('/([A-Z])/', '_$0', $propertyName));
+        $templateTransfer->imports[] = PropertyTypeEnum::CLASS_NAME->value;
+
+        $transferName = $this->getTransferName($propertyTransfer->type);
+        $propertyName = $propertyTransfer->propertyName;
+
+        $templateTransfer->properties[$propertyName] = $transferName;
+        $templateTransfer->attributes[$propertyName] = sprintf(PropertyTypeEnum::ATTRIBUTE_TEMPLATE->value, $transferName);
     }
 
-    private function getTransferName(string $propertyType): string
+    private function expandTransferCollectionType(DefinitionPropertyTransfer $propertyTransfer, TemplateTransfer $templateTransfer): void
     {
-        return $propertyType . TransferEnum::FILE_NAME_SUFFIX->value;
+        $templateTransfer->imports[] = ArrayObjectEnum::CLASS_NAME->value;
+        $templateTransfer->imports[] = CollectionPropertyTypeEnum::CLASS_NAME->value;
+
+        $transferName = $this->getTransferName($propertyTransfer->collectionType);
+
+        $propertyName = $propertyTransfer->propertyName;
+        $templateTransfer->properties[$propertyName] = ArrayObjectEnum::CLASS_NAME->value;
+        $templateTransfer->attributes[$propertyName] = sprintf(CollectionPropertyTypeEnum::ATTRIBUTE_TEMPLATE->value, $transferName);
+        $templateTransfer->dockBlocks[$propertyName] = sprintf(CollectionPropertyTypeEnum::DOCK_BLOCK_TEMPLATE->value, $transferName);
     }
 }

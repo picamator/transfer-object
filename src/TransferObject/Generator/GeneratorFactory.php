@@ -2,16 +2,11 @@
 
 namespace Picamator\TransferObject\Generator;
 
-use Fiber;
-use Picamator\TransferObject\Definition\DefinitionFactory;
-use Picamator\TransferObject\Definition\Reader\DefinitionReaderInterface;
-use Picamator\TransferObject\Generated\ConfigTransfer;
-use Picamator\TransferObject\Generator\Expander\CollectionTypeTemplateExpander;
-use Picamator\TransferObject\Generator\Expander\DefaultTemplateExpander;
-use Picamator\TransferObject\Generator\Expander\TemplateExpanderInterface;
-use Picamator\TransferObject\Generator\Expander\TypeTemplateExpander;
-use Picamator\TransferObject\Generator\Fiber\GeneratorFiberCallback;
-use Picamator\TransferObject\Generator\Fiber\GeneratorFiberCallbackInterface;
+use Picamator\TransferObject\Config\ConfigTrait;
+use Picamator\TransferObject\Definition\DefinitionFacade;
+use Picamator\TransferObject\Definition\DefinitionFacadeInterface;
+use Picamator\TransferObject\Generator\Fiber\GeneratorFiber;
+use Picamator\TransferObject\Generator\Fiber\GeneratorFiberInterface;
 use Picamator\TransferObject\Generator\Filesystem\GeneratorFilesystem;
 use Picamator\TransferObject\Generator\Filesystem\GeneratorFilesystemInterface;
 use Picamator\TransferObject\Generator\Render\TemplateRender;
@@ -21,20 +16,12 @@ use Symfony\Component\Finder\Finder;
 
 readonly class GeneratorFactory
 {
-    public function __construct(
-        private ConfigTransfer $configTransfer,
-    ) {
-    }
+    use ConfigTrait;
 
-    public function getGeneratorFiber(): Fiber
+    public function createGeneratorFiber(): GeneratorFiberInterface
     {
-        return new Fiber($this->createFiberCallback()->getFiberCallback(...));
-    }
-
-    protected function createFiberCallback(): GeneratorFiberCallbackInterface
-    {
-        return new GeneratorFiberCallback(
-            $this->createDefinitionReader(),
+        return new GeneratorFiber(
+            $this->createDefinitionFacade(),
             $this->createTemplateRender(),
             $this->createGeneratorFilesystem(),
         );
@@ -45,7 +32,7 @@ readonly class GeneratorFactory
         return new GeneratorFilesystem(
             $this->createFilesystem(),
             $this->createFinder(),
-            $this->configTransfer,
+            $this->getConfig(),
         );
     }
 
@@ -57,29 +44,17 @@ readonly class GeneratorFactory
     protected function createTemplateRender(): TemplateRenderInterface
     {
         return new TemplateRender(
-            $this->configTransfer,
-            $this->createTemplateExpander(),
+            $this->getConfig(),
         );
     }
-
-    protected function createTemplateExpander(): TemplateExpanderInterface
-    {
-        $templateExpander = new CollectionTypeTemplateExpander();
-        $templateExpander
-            ->setNext(new TypeTemplateExpander())
-            ->setNext(new DefaultTemplateExpander());
-
-        return $templateExpander;
-    }
-
 
     protected function createFinder(): Finder
     {
         return new Finder();
     }
 
-    protected function createDefinitionReader(): DefinitionReaderInterface
+    protected function createDefinitionFacade(): DefinitionFacadeInterface
     {
-        return new DefinitionFactory($this->configTransfer)->createDefinitionReader();
+        return new DefinitionFacade();
     }
 }

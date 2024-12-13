@@ -5,7 +5,7 @@ namespace Picamator\TransferObject\Definition\Parser;
 interface ContentParserInterface
 {
     /**
-     * @throws \Picamator\TransferObject\Exception\GeneratorTransferException
+     * @throws \Picamator\TransferObject\Exception\DefinitionTransferException
      */
     public function parseContent(string $content): array;
 }
