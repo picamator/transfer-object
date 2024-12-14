@@ -47,7 +47,7 @@ generator:
 | `transferPath` | Path where generated TO should be saved. |
 | `definitionPath` | Path where TO Definition is located.     |
 
-See [Configuration Sample](/doc/Samples/generator.yml) for more details.
+See [Configuration Sample](/doc/Samples/config/generator.yml) for more details.
 
 Definition
 ----------
@@ -67,7 +67,7 @@ Customer:
         type: string
 ```
 
-More can be found on [Definition Sample](/doc/Samples/definitions) for more details.
+More can be found on [Definition Sample](/doc/Samples/config/definition) for more details.
 
 ### Defintion Types
 | Definition File Key | Supported Values                                                                               | Details                                                              |
@@ -96,3 +96,16 @@ Table bellow shows how to run specific composer srcripts on Docker Container
 | PHPStan     | `docker compose run transfer-object-php composer phpstan`               ||
 | PHPUnit  | `docker compose run transfer-object-php composer test`                  |
 | Generate TOs | `docker compose run transfer-object-php composer generate-transfer -c /home/transfer/transfer-object/config/generator.yml` |
+
+Contribution
+------------
+If you find this project worth to use please add a star. Follow changes to see all activities.
+And if you see room for improvement, proposals please feel free to create an issue or send pull request.
+Here is a great [guide to start contributing](https://guides.github.com/activities/contributing-to-open-source/).
+
+Please note that this project is released with a [Contributor Code of Conduct](http://contributor-covenant.org/version/1/4/).
+By participating in this project and its community you agree to abide by those terms.
+
+License
+-------
+Transfer Object Generator is licensed under the MIT License. Please see the [LICENSE](LICENSE) file for details.
