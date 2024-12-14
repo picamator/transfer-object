@@ -39,3 +39,25 @@ Customer:
 Generated Object
 ----------------
 @todo
+
+Development Environemnt
+-----------------------
+
+TO Generator provides Docker environment with one container `transfer-object-php`.
+
+In order to star working install [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) first.
+
+To start working following command should be executed:
+
+
+1. Build containers: `docker compose build`
+2. Start start container (will run coponser install): `docker compose -f docker/docker-compose.yml up`
+
+### Composer Scripts
+Table bellow shows how to run specific composer srcripts on Docker Container
+
+| Name     | Command                                                                            |
+|----------|------------------------------------------------------------------------------------|
+| PHP Stan | `docker compose run transfer-object-php composer phpstan` |
+| PHPMD    | `docker compose run transfer-object-php composer phpmd` |
+| PHPUnit  | `docker compose run transfer-object-php composer test` |

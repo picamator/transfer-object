@@ -30,6 +30,9 @@
     "phpstan/phpstan": "^2.0",
     "phpmd/phpmd": "^2.15"
   },
+  "archive": {
+    "exclude": ["docker", "docker-compose.yml", "tests"]
+  },
   "scripts": {
     "test": "./vendor/bin/phpunit",
     "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon",
