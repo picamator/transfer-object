@@ -56,8 +56,9 @@ To start working following command should be executed:
 ### Composer Scripts
 Table bellow shows how to run specific composer srcripts on Docker Container
 
-| Name     | Command                                                                            |
-|----------|------------------------------------------------------------------------------------|
-| PHP Stan | `docker compose run transfer-object-php composer phpstan` |
-| PHPMD    | `docker compose run transfer-object-php composer phpmd` |
-| PHPUnit  | `docker compose run transfer-object-php composer test` |
+| Name      | Command                                                     |
+|-----------|-------------------------------------------------------------|
+| PHP Stan  | `docker compose run transfer-object-php composer phpstan`   |
+| PHPMD     | `docker compose run transfer-object-php composer phpmd`     |
+| PHPUnit   | `docker compose run transfer-object-php composer test`      |
+| Generator | `docker compose run transfer-object-php composer generator` |

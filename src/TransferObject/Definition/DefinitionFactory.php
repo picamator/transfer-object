@@ -2,7 +2,7 @@
 
 namespace Picamator\TransferObject\Definition;
 
-use Picamator\TransferObject\Config\ConfigTrait;
+use Picamator\TransferObject\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\Definition\Filesystem\DefinitionFilesystem;
 use Picamator\TransferObject\Definition\Filesystem\DefinitionFilesystemInterface;
 use Picamator\TransferObject\Definition\Parser\ContentParserInterface;
@@ -20,7 +20,7 @@ use Symfony\Component\Yaml\Parser;
 
 readonly class DefinitionFactory
 {
-    use ConfigTrait;
+    use ConfigFactoryTrait;
 
     public function createDefinitionReader(): DefinitionReaderInterface
     {

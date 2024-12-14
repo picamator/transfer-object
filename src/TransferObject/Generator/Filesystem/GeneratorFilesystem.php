@@ -2,7 +2,7 @@
 
 namespace Picamator\TransferObject\Generator\Filesystem;
 
-use Picamator\TransferObject\Config\ConfigInterface;
+use Picamator\TransferObject\Config\Container\ConfigInterface;
 use Picamator\TransferObject\Exception\GeneratorTransferException;
 use Picamator\TransferObject\Generator\Enum\TransferEnum;
 use Symfony\Component\Filesystem\Filesystem;
@@ -50,7 +50,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
         $filePath = $this->getTemporaryPath() . DIRECTORY_SEPARATOR . $className  . self::FILE_SUFFIX_EXTENSION;
 
         try {
-            $this->filesystem->appendToFile($filePath, $content);
+            $this->filesystem->dumpFile($filePath, $content);
         } catch (Throwable $e) {
             throw new GeneratorTransferException(
                 sprintf('Cannot write file "%s".', $filePath),

@@ -2,7 +2,7 @@
 
 namespace Picamator\TransferObject\Generator;
 
-use Picamator\TransferObject\Config\ConfigTrait;
+use Picamator\TransferObject\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\Definition\DefinitionFacade;
 use Picamator\TransferObject\Definition\DefinitionFacadeInterface;
 use Picamator\TransferObject\Generator\Fiber\GeneratorFiber;
@@ -16,7 +16,7 @@ use Symfony\Component\Finder\Finder;
 
 readonly class GeneratorFactory
 {
-    use ConfigTrait;
+    use ConfigFactoryTrait;
 
     public function createGeneratorFiber(): GeneratorFiberInterface
     {

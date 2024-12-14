@@ -3,19 +3,19 @@
 namespace Picamator\TransferObject\Definition\Filesystem;
 
 use Generator;
-use Picamator\TransferObject\Config\ConfigInterface;
+use Picamator\TransferObject\Config\Container\ConfigInterface;
 use Picamator\TransferObject\Definition\Enum\DefinitionEnum;
 use Picamator\TransferObject\Exception\DefinitionTransferException;
 use Symfony\Component\Finder\Finder;
 use Throwable;
 
-class DefinitionFilesystem implements DefinitionFilesystemInterface
+readonly class DefinitionFilesystem implements DefinitionFilesystemInterface
 {
     private const string FILE_NAME_PATTERN = DefinitionEnum::FILE_NAME_PATTERN->value;
 
     public function __construct(
-        private readonly Finder $finder,
-        private readonly ConfigInterface $config,
+        private Finder $finder,
+        private ConfigInterface $config,
     ) {
     }
 
@@ -25,6 +25,8 @@ class DefinitionFilesystem implements DefinitionFilesystemInterface
         foreach ($definitionFinder as $file) {
             yield $file->getFilename() => $file->getContents();
         }
+
+        return $definitionFinder->count();
     }
 
     private function getDefinitionFinder(): Finder

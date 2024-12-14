@@ -4,7 +4,7 @@ namespace Picamator\TransferObject\Definition;
 
 use Generator;
 
-class DefinitionFacade implements DefinitionFacadeInterface
+readonly class DefinitionFacade implements DefinitionFacadeInterface
 {
     public function getDefinitions(): Generator
     {

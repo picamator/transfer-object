@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Picamator\TransferObject\Config;
+namespace Picamator\TransferObject\Config\Container;
 
 interface ConfigInterface
 {

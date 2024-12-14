@@ -1,0 +1,15 @@
+<?php declare(strict_types=1);
+
+namespace Picamator\TransferObject\Config;
+
+use Picamator\TransferObject\Generated\ConfigValidatorTransfer;
+
+readonly class ConfigFacade implements ConfigFacadeInterface
+{
+    public function loadConfig(string $configPath): ConfigValidatorTransfer
+    {
+        return new ConfigFactory()
+            ->createConfigLoader()
+            ->loadConfig($configPath);
+    }
+}

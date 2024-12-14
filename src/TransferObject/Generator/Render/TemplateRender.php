@@ -3,7 +3,7 @@
 namespace Picamator\TransferObject\Generator\Render;
 
 use ArrayObject;
-use Picamator\TransferObject\Config\ConfigInterface;
+use Picamator\TransferObject\Config\Container\ConfigInterface;
 use Picamator\TransferObject\Exception\GeneratorTransferException;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;

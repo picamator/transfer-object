@@ -2,7 +2,10 @@
 
 namespace Picamator\TransferObject\Config;
 
-trait ConfigTrait
+use Picamator\TransferObject\Config\Container\ConfigContainer;
+use Picamator\TransferObject\Config\Container\ConfigInterface;
+
+trait ConfigFactoryTrait
 {
     protected function getConfig(): ConfigInterface
     {

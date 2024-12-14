@@ -24,7 +24,7 @@ final class DefinitionContentTransfer extends AbstractTransfer
     public const string CLASS_NAME = 'className';
     protected const string CLASS_NAME_DATA_NAME = 'CLASS_NAME';
     protected const int CLASS_NAME_DATA_INDEX = 0;
-
+    
     public ?string $className {
         get => $this->data[self::CLASS_NAME_DATA_INDEX];
         set => $this->data[self::CLASS_NAME_DATA_INDEX] = $value;
@@ -35,8 +35,8 @@ final class DefinitionContentTransfer extends AbstractTransfer
     public const string PROPERTIES = 'properties';
     protected const string PROPERTIES_DATA_NAME = 'PROPERTIES';
     protected const int PROPERTIES_DATA_INDEX = 1;
-
-    /** @var \ArrayObject<\Picamator\TransferObject\Generated\DefinitionPropertyTransfer>|null */
+    
+    /** @var \ArrayObject<DefinitionPropertyTransfer>|null */
     public ?ArrayObject $properties {
         get => $this->data[self::PROPERTIES_DATA_INDEX] ?? new ArrayObject();
         set => $this->data[self::PROPERTIES_DATA_INDEX] = $value;

@@ -36,11 +36,13 @@
   "scripts": {
     "test": "./vendor/bin/phpunit",
     "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon",
-    "phpmd": "./vendor/bin/phpmd"
+    "phpmd": "./vendor/bin/phpmd",
+    "generator": "php ./generator.php"
   },
   "scripts-descriptions": {
     "test": "Run PHPUnit tests.",
     "phpstan": "Run PHPStan - PHP Static Analysis Tool.",
-    "phpmd": "Run PHPMD - PHP Mess Detector."
+    "phpmd": "Run PHPMD - PHP Mess Detector.",
+    "generator": "Run Transfer Object Generator."
   }
 }
