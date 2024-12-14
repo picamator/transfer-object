@@ -3,6 +3,7 @@ parameters:
   paths:
     - src
     - tests
+    - doc
   excludePaths:
     - tests/*/data/*
   ignoreErrors:
