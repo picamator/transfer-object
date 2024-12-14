@@ -66,13 +66,13 @@ readonly class PropertyValidator implements PropertyValidatorInterface
 
     private function validatePropertyUnionType(DefinitionPropertyTransfer $propertyTransfer): ?string
     {
-        $type = $propertyTransfer->type ?: $propertyTransfer->collectionType;
-        if (!str_contains($type, static::UNION_TYPE_SEPARATOR)) {
+        $type = $propertyTransfer->type ?: $propertyTransfer->collectionType ?: '';
+        if ($type !== '' && !str_contains($type, self::UNION_TYPE_SEPARATOR)) {
             return null;
         }
 
         return sprintf(
-            static::PROPERTY_TYPE_UNION_ERROR_MESSAGE_TEMPLATE,
+            self::PROPERTY_TYPE_UNION_ERROR_MESSAGE_TEMPLATE,
             $propertyTransfer->propertyName,
             $type,
         );
@@ -85,19 +85,19 @@ readonly class PropertyValidator implements PropertyValidatorInterface
         }
 
         return sprintf(
-            static::PROPERTY_DEFINITION_ERROR_MESSAGE_TEMPLATE,
+            self::PROPERTY_DEFINITION_ERROR_MESSAGE_TEMPLATE,
             $propertyTransfer->propertyName,
         );
     }
 
     private function validatePropertyName(DefinitionPropertyTransfer $propertyTransfer): ?string
     {
-        if ($this->isValid($propertyTransfer->propertyName)) {
+        if ($this->isValidVariable($propertyTransfer->propertyName)) {
             return null;
         }
 
         return sprintf(
-            static::PROPERTY_NAME_ERROR_MESSAGE_TEMPLATE,
+            self::PROPERTY_NAME_ERROR_MESSAGE_TEMPLATE,
             $propertyTransfer->propertyName,
         );
     }

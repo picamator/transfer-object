@@ -47,7 +47,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 
     public function writeFile(string $className, string $content): void
     {
-        $filePath = $this->getTemporaryPath() . DIRECTORY_SEPARATOR . $className  . static::FILE_SUFFIX_EXTENSION;
+        $filePath = $this->getTemporaryPath() . DIRECTORY_SEPARATOR . $className  . self::FILE_SUFFIX_EXTENSION;
 
         try {
             $this->filesystem->appendToFile($filePath, $content);
@@ -63,9 +63,9 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
     {
         try {
             $finder = $this->finder
-                ->name(static::FILE_NAME_PATTERN)
+                ->name(self::FILE_NAME_PATTERN)
                 ->in($this->config->getTransferPath())
-                ->exclude(static::TEMPORARY_DIR)
+                ->exclude(self::TEMPORARY_DIR)
                 ->files();
 
             $this->filesystem->remove($finder);
@@ -83,7 +83,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
     {
         try {
             $finder = $this->finder
-                ->name(static::FILE_NAME_PATTERN)
+                ->name(self::FILE_NAME_PATTERN)
                 ->in($this->getTemporaryPath())
                 ->files();
 
@@ -114,6 +114,6 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 
     private function getTemporaryPath(): string
     {
-        return $this->config->getTransferPath() . DIRECTORY_SEPARATOR . static::TEMPORARY_DIR;
+        return $this->config->getTransferPath() . DIRECTORY_SEPARATOR . self::TEMPORARY_DIR;
     }
 }

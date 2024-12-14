@@ -1,5 +1,4 @@
 {
-  "version": "1.0.0",
   "name": "picamator/transfer-object",
   "description": "Transfer Object based on property Hooks, includes generator by yml definition.",
   "keywords": ["Transfer Object", "Code Generator"],
@@ -9,6 +8,9 @@
       "name": "Sergii Pryz"
     }
   ],
+  "support": {
+    "issues": "https://github.com/picamator/transfer-object/issues"
+  },
   "autoload": {
     "psr-4": {
       "Picamator\\": "src/"
@@ -22,5 +24,20 @@
     "symfony/yaml": "^7.0",
     "symfony/filesystem": "^7.0",
     "symfony/console": "^7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^11.5",
+    "phpstan/phpstan": "^2.0",
+    "phpmd/phpmd": "^2.15"
+  },
+  "scripts": {
+    "test": "./vendor/bin/phpunit",
+    "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon",
+    "phpmd": "./vendor/bin/phpmd"
+  },
+  "scripts-descriptions": {
+    "test": "Run PHPUnit tests.",
+    "phpstan": "Run PHPStan - PHP Static Analysis Tool.",
+    "phpmd": "Run PHPMD - PHP Mess Detector."
   }
 }

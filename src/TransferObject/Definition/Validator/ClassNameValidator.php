@@ -10,10 +10,10 @@ readonly class ClassNameValidator implements ClassNameValidatorInterface
 
     public function validate(?string $className): ?string
     {
-        if ($this->isValid($className)) {
+        if ($this->isValidVariable($className)) {
             return null;
         }
 
-        return sprintf(static::CLASS_NAME_ERROR_MESSAGE_TEMPLATE, $className);
+        return sprintf(self::CLASS_NAME_ERROR_MESSAGE_TEMPLATE, $className);
     }
 }

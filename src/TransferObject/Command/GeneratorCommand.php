@@ -9,7 +9,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class GeneratorCommand extends Command
+final class GeneratorCommand extends Command
 {
     use GeneratorWritelnTrait;
 
@@ -19,9 +19,9 @@ class GeneratorCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName(static::NAME)
-            ->setDescription(static::DESCRIPTION)
-            ->setHelp(static::HELP);
+        $this->setName(self::NAME)
+            ->setDescription(self::DESCRIPTION)
+            ->setHelp(self::HELP);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -36,12 +36,12 @@ class GeneratorCommand extends Command
         $isSuccess = new GeneratorFacade()->generateTransfers($errorItemCallback);
 
         if ($isSuccess) {
-            $this->writelnSuccess($output, static::SUCCESS_MESSAGE);
+            $this->writelnSuccess($output, self::SUCCESS_MESSAGE);
 
             return Command::SUCCESS;
         }
 
-        $this->writelnError($output, static::FAILED_MESSAGE);
+        $this->writelnError($output, self::FAILED_MESSAGE);
 
         return Command::FAILURE;
     }

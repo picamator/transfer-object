@@ -43,7 +43,7 @@ readonly class GeneratorFiber implements GeneratorFiberInterface
         foreach ($definitionGenerator as $definitionKey => $definitionTransfer) {
             $this->generateTransfer($definitionTransfer);
 
-            $isValid = $isValid && $definitionTransfer->validator->isValid;
+            $isValid = $isValid && $definitionTransfer->validator?->isValid;
             $generatorTransfer = $this->createGeneratorTransfer($definitionKey, $definitionTransfer);
 
             Fiber::suspend($generatorTransfer);
@@ -69,7 +69,7 @@ readonly class GeneratorFiber implements GeneratorFiberInterface
 
     private function generateTransfer(DefinitionTransfer $definitionTransfer): void
     {
-        if (!$definitionTransfer->validator->isValid) {
+        if (!$definitionTransfer->validator?->isValid) {
             return;
         }
 

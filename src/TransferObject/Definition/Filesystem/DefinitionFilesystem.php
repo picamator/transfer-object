@@ -30,13 +30,13 @@ class DefinitionFilesystem implements DefinitionFilesystemInterface
     private function getDefinitionFinder(): Finder
     {
         try {
-            return $this->finder->name(static::FILE_NAME_PATTERN)->in($this->config->getDefinitionPath())->files();
+            return $this->finder->name(self::FILE_NAME_PATTERN)->in($this->config->getDefinitionPath())->files();
         } catch (Throwable $e) {
             throw new DefinitionTransferException(
                 sprintf(
                     'Failed find definition files "%s" in the "%s".',
                     $this->config->getDefinitionPath(),
-                    static::FILE_NAME_PATTERN,
+                    self::FILE_NAME_PATTERN,
                 ),
                 previous: $e,
             );

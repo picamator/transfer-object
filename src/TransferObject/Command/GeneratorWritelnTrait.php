@@ -2,6 +2,7 @@
 
 namespace Picamator\TransferObject\Command;
 
+use ArrayObject;
 use Picamator\TransferObject\Generated\GeneratorTransfer;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -20,7 +21,8 @@ trait GeneratorWritelnTrait
     {
         $this->writelnError($output, sprintf(static::FAILED_TEMPLATE, $generatorTransfer->definitionKey));
 
-        foreach ($generatorTransfer->validator->errorMessages as $message) {
+        $errorMessages = $generatorTransfer->validator->errorMessages ?? new ArrayObject();
+        foreach ($errorMessages as $message) {
             $this->writelnError($output, $message);
         }
     }

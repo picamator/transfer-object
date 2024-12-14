@@ -52,6 +52,9 @@ readonly class DefinitionReader implements DefinitionReaderInterface
         return $definitionTransfer;
     }
 
+    /**
+     * @param array<string, array<string, string>> $properties
+     */
     private function createContentTransfer(string $className, array $properties): DefinitionContentTransfer
     {
         $contentTransfer = new DefinitionContentTransfer();
