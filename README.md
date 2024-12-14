@@ -15,10 +15,8 @@ Moreover, TO implements following interfaces:
 
 Definition
 ----------
-
 @todo
 
 Generated Object
 ----------------
-
 @todo

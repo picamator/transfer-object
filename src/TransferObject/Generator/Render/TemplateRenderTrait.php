@@ -6,10 +6,16 @@ use ArrayObject;
 use Picamator\TransferObject\Definition\Enum\DefinitionTypeEnum;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
+use Picamator\TransferObject\Generator\Enum\ArrayObjectEnum;
 use Picamator\TransferObject\Generator\Enum\TransferEnum;
 
 trait TemplateRenderTrait
 {
+    protected function isArrayObject(DefinitionPropertyTransfer $propertyTransfer): bool
+    {
+        return ArrayObjectEnum::CLASS_NAME->value === $propertyTransfer->type;
+    }
+
     protected function isTransferType(DefinitionPropertyTransfer $propertyTransfer): bool
     {
         return DefinitionTypeEnum::tryFrom($propertyTransfer->type) === null;

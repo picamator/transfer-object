@@ -2,9 +2,7 @@
 
 namespace Picamator\TransferObject\Command;
 
-use Picamator\TransferObject\Generated\ConfigTransfer;
-use Picamator\TransferObject\Generated\DefinitionPathTransfer;
-use Picamator\TransferObject\Generated\GeneratedPathTransfer;
+use Picamator\TransferObject\Config\ConfigContainer;
 use Picamator\TransferObject\Generated\GeneratorTransfer;
 use Picamator\TransferObject\Generator\GeneratorFacade;
 use Symfony\Component\Console\Command\Command;
@@ -28,19 +26,14 @@ class GeneratorCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $configTransfer = new ConfigTransfer()
-            ->fromArray([
-                ConfigTransfer::CLASS_NAMESPACE => 'Picamator\TransferObject\Generated',
-                ConfigTransfer::DEFINITION_PATH => [
-                    DefinitionPathTransfer::PATH => __DIR__ . DIRECTORY_SEPARATOR . 'config/definition',
-                ],
-                ConfigTransfer::GENERATED_PATH => [
-                    GeneratedPathTransfer::PATH => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'Generated',
-                ],
-            ]);
+        ConfigContainer::loadConfig(
+            transferNamespace: 'Picamator\TransferObject\Generated',
+            transferPath: __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'Generated',
+            definitionPath:  __DIR__ . DIRECTORY_SEPARATOR . 'definition',
+        );
 
         $errorItemCallback = fn(GeneratorTransfer $generatorTransfer) => $this->writelnGeneratorTransfer($generatorTransfer, $output);
-        $isSuccess = new GeneratorFacade()->generateTransfers($configTransfer, $errorItemCallback);
+        $isSuccess = new GeneratorFacade()->generateTransfers($errorItemCallback);
 
         if ($isSuccess) {
             $this->writelnSuccess($output, static::SUCCESS_MESSAGE);

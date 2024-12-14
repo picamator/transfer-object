@@ -9,8 +9,6 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
  * Specification:
  * - Class is generated based on definition.
  * - In order to modify file please change definition and run generator.
- *
- * Generated on 2024-12-10 21:10:30
  */
 final class GeneratorTransfer extends AbstractTransfer
 {

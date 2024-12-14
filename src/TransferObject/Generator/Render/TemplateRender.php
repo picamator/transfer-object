@@ -82,6 +82,10 @@ readonly class TemplateRender implements TemplateRenderInterface
     {
         $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->properties[$propertyName] = $propertyTransfer->type;
+
+        if ($this->isArrayObject($propertyTransfer)) {
+            $templateTransfer->imports[] = ArrayObjectEnum::CLASS_NAME->value;
+        }
     }
 
     private function expandTransferType(DefinitionPropertyTransfer $propertyTransfer, TemplateTransfer $templateTransfer): void
