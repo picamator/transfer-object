@@ -1,7 +1,7 @@
 {
   "name": "picamator/transfer-object",
   "description": "Transfer Object based on property Hooks, includes generator by yml definition.",
-  "keywords": ["Transfer Object", "Code Generator"],
+  "keywords": ["dev", "code generator", "transfer object"],
   "license": "MIT",
   "authors": [
     {
@@ -11,10 +11,14 @@
   "support": {
     "issues": "https://github.com/picamator/transfer-object/issues"
   },
+  "bin": [
+    "generate-transfer"
+  ],
   "autoload": {
     "psr-4": {
       "Picamator\\": "src/"
-    }
+    },
+    "exclude-from-classmap": ["/tests/", "/doc/"]
   },
   "autoload-dev": {
     "psr-4": {
@@ -43,7 +47,7 @@
     "test": "./vendor/bin/phpunit",
     "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon",
     "phpmd": "./vendor/bin/phpmd",
-    "generate-transfer": "php ./generate-transfer.php"
+    "generate-transfer": "php ./generate-transfer"
   },
   "scripts-descriptions": {
     "test": "Run PHPUnit tests.",

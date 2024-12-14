@@ -20,7 +20,6 @@ final class GeneratorCommand extends Command
     private const string OPTION_NAME_CONFIGURATION = 'configuration';
     private const string OPTION_SHORTCUT_CONFIGURATION = 'c';
     private const string OPTION_DESCRIPTION_CONFIGURATION = 'Path to YML configuration.';
-    private const string OPTION_DEFAULT_CONFIGURATION = '/home/transfer/transfer-object/config/generator.yml';
 
     private const string FAILED_TEMPLATE = 'Failed generating %s.';
     private const string FAILED_MESSAGE = 'Failed generate Transfer Objects.';
@@ -36,7 +35,6 @@ final class GeneratorCommand extends Command
                 shortcut: self::OPTION_SHORTCUT_CONFIGURATION,
                 mode: InputOption::VALUE_REQUIRED,
                 description: self::OPTION_DESCRIPTION_CONFIGURATION,
-                default: self::OPTION_DEFAULT_CONFIGURATION,
             );
     }
 
