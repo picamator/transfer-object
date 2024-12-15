@@ -14,7 +14,7 @@ final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttr
     }
 
     /**
-     * @return \ArrayObject<int,\Picamator\TransferObject\Transfer\TransferInterface>
+     * @return \ArrayObject<string,\Picamator\TransferObject\Transfer\TransferInterface>
      */
     public function fromArray(array $data): ArrayObject
     {
@@ -34,7 +34,7 @@ final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttr
     }
 
     /**
-     * @inheritDoc
+     * @return \ArrayObject<int,\Picamator\TransferObject\Transfer\TransferInterface>
      */
     public function clone(ArrayObject $data): ArrayObject
     {
@@ -49,6 +49,9 @@ final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttr
         return $clonedData;
     }
 
+    /**
+     * @param array<string,mixed> $data
+     */
     private function createTransfer(array $data): TransferInterface
     {
         /** @var \Picamator\TransferObject\Transfer\TransferInterface $transfer */

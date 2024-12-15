@@ -28,6 +28,9 @@ final readonly class PropertyTypeAttribute implements PropertyTypeAttributeInter
         return clone $data;
     }
 
+    /**
+     * @param array<string,mixed> $data
+     */
     private function createTransfer(array $data): TransferInterface
     {
         /** @var \Picamator\TransferObject\Transfer\TransferInterface $transfer */
