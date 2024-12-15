@@ -2,4 +2,4 @@ Customer:
   firstName:
     type: string
   lastName:
-    type: bool
+    type: string

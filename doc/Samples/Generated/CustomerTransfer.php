@@ -33,7 +33,7 @@ final class CustomerTransfer extends AbstractTransfer
     protected const string LAST_NAME_DATA_NAME = 'LAST_NAME';
     protected const int LAST_NAME_DATA_INDEX = 1;
 
-    public ?bool $lastName {
+    public ?string $lastName {
         get => $this->data[self::LAST_NAME_DATA_INDEX];
         set => $this->data[self::LAST_NAME_DATA_INDEX] = $value;
     }

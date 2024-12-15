@@ -14,10 +14,18 @@ TO Generator includes console commands:
 - Build TOs based on `YML` definitions
 - Build `YML` defintions based on `JSON`
 
-Samples
--------
+Try Samples
+-----------
+New TO with their properties sets looks like
 
-TODO
+```php
+$customerTransfer = new CustomerTransfer();
+$customerTransfer->firstName = 'Jan';
+$customerTransfer->lastName = 'Kowalski';
+```
+
+In order to see how converting from array, to transfer or iterate over the TO,
+plese check [Try Samples](/doc/Samples/try-samples.php) script.
 
 Installation
 ------------
@@ -37,19 +45,18 @@ After intalation TO generator command `generate-transfer` was added on `./vendor
 ```
 
 ### Helper
-Attiotionally to the command `generate-transfer` it is possible to integrate TO generator to project using Helper,
+Attiotionally to the command `generate-transfer` it is possible to integrate TO generator to project using `HelperFacade`
 
 ```php
 \Picamator\TransferObject\Helper\HelperFacadeInterface
 ```
 
 There are two interface methods:
-1. `generateTransfers()`, basically the same as the command doing but without output to `stdout`
-2. `generateDefinitions()`, generated Definition file based on json, e.g. some API response
+1. `generateTransfers()`, works the same as a command but without output to `stdout`
+2. `generateDefinitions()`, generates Definition `YML` file based on `JSON`, e.g. some API response
 
 Configuration File
 ------------------
-
 Configuraration is an `YML` file includes namsepace, path to definitions and generated classes.
 
 ```yml
