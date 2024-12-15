@@ -52,7 +52,9 @@ final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttr
      */
     public function clone(ArrayObject $data): ArrayObject
     {
+        /** @var \ArrayObject<\Picamator\TransferObject\Transfer\TransferInterface> $clonedData */
         $clonedData = new ArrayObject();
+
         /** @var \Picamator\TransferObject\Transfer\TransferInterface $transfer */
         foreach ($data as $transfer) {
             $clonedData[] = clone $transfer;

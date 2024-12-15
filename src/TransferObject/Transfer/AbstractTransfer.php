@@ -32,12 +32,12 @@ abstract class AbstractTransfer implements TransferInterface
         }
     }
 
-    public final function jsonSerialize(): false|string
+    public final function jsonSerialize(): string
     {
         return json_encode($this->toArray(), flags: JSON_THROW_ON_ERROR);
     }
 
-    public final function serialize(): ?string
+    public final function serialize(): string
     {
         return serialize($this->data);
     }

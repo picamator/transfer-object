@@ -29,7 +29,7 @@ readonly class TemplateRender implements TemplateRenderInterface
         $templateTransfer = $this->createTemplateTransfer($contentTransfer);
 
         ob_start();
-        include static::TEMPLATE_PATH;
+        include self::TEMPLATE_PATH;
         $renderedOutput = ob_get_clean();
 
         $lastError = error_get_last();

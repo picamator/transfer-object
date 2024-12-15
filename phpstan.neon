@@ -6,6 +6,3 @@ parameters:
     - doc
   excludePaths:
     - tests/*/data/*
-  ignoreErrors:
-    -
-      identifier: missingType.generics

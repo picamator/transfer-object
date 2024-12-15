@@ -23,9 +23,9 @@ interface PropertyTypeAttributeInterface
     public function toSnakeArray(ArrayObject $data): array;
 
     /**
-     * @param \ArrayObject<\Picamator\TransferObject\Transfer\TransferInterface>|ArrayObject<mixed> $data
+     * @param \ArrayObject<\Picamator\TransferObject\Transfer\TransferInterface>|\ArrayObject<mixed> $data
      *
-     * @return \ArrayObject<\Picamator\TransferObject\Transfer\TransferInterface>|ArrayObject<mixed>
+     * @return \ArrayObject<\Picamator\TransferObject\Transfer\TransferInterface>|\ArrayObject<mixed>
      */
     public function clone(ArrayObject $data): ArrayObject;
 }

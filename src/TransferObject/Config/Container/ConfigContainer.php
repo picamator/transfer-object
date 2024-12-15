@@ -7,7 +7,7 @@ use Picamator\TransferObject\Generated\ConfigTransfer;
 
 class ConfigContainer
 {
-    private static ?ConfigInterface $config;
+    private static ConfigInterface $config;
 
     public static function loadConfig(ConfigTransfer $configTransfer): void
     {
@@ -23,7 +23,7 @@ class ConfigContainer
      */
     public static function getConfig(): ConfigInterface
     {
-        if (self::$config === null) {
+        if (!isset(self::$config)) {
             throw new ConfigTransferException('Config was not loaded. Run loadConfig() first.');
         }
 
