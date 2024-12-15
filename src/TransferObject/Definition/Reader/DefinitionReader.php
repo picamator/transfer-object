@@ -2,7 +2,6 @@
 
 namespace Picamator\TransferObject\Definition\Reader;
 
-use ArrayObject;
 use Generator;
 use Picamator\TransferObject\Definition\Enum\DefinitionKeyEnum;
 use Picamator\TransferObject\Definition\Filesystem\DefinitionFilesystemInterface;
@@ -56,7 +55,6 @@ readonly class DefinitionReader implements DefinitionReaderInterface
     {
         $contentTransfer = new DefinitionContentTransfer();
         $contentTransfer->className = $className;
-        $contentTransfer->properties = new ArrayObject();
 
         foreach ($properties as $propertyName => $propertyType) {
             $propertyTransfer = new DefinitionPropertyTransfer();

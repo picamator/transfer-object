@@ -32,8 +32,7 @@ readonly class ContentValidator implements ContentValidatorInterface
     private function handleValidator(DefinitionContentTransfer $contentTransfer): array
     {
         $errorMessages[] = $this->classNameValidator->validate($contentTransfer->className);
-        $properties = $contentTransfer->properties ?? new ArrayObject();
-        foreach ($properties as $propertyTransfer) {
+        foreach ($contentTransfer->properties as $propertyTransfer) {
             $errorMessages[] = $this->propertyValidator->validate($propertyTransfer);
         }
 

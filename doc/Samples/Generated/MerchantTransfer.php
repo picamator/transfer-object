@@ -22,7 +22,7 @@ final class MerchantTransfer extends AbstractTransfer
     public const string IS_ACTIVE = 'isActive';
     protected const string IS_ACTIVE_DATA_NAME = 'IS_ACTIVE';
     protected const int IS_ACTIVE_DATA_INDEX = 0;
-    
+
     public ?bool $isActive {
         get => $this->data[self::IS_ACTIVE_DATA_INDEX];
         set => $this->data[self::IS_ACTIVE_DATA_INDEX] = $value;
@@ -32,7 +32,7 @@ final class MerchantTransfer extends AbstractTransfer
     public const string MERCHANT_REFERENCE = 'merchantReference';
     protected const string MERCHANT_REFERENCE_DATA_NAME = 'MERCHANT_REFERENCE';
     protected const int MERCHANT_REFERENCE_DATA_INDEX = 1;
-    
+
     public ?string $merchantReference {
         get => $this->data[self::MERCHANT_REFERENCE_DATA_INDEX];
         set => $this->data[self::MERCHANT_REFERENCE_DATA_INDEX] = $value;

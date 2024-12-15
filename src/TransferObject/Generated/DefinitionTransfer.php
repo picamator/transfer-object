@@ -24,7 +24,7 @@ final class DefinitionTransfer extends AbstractTransfer
     public const string CONTENT = 'content';
     protected const string CONTENT_DATA_NAME = 'CONTENT';
     protected const int CONTENT_DATA_INDEX = 0;
-    
+
     public ?DefinitionContentTransfer $content {
         get => $this->data[self::CONTENT_DATA_INDEX];
         set => $this->data[self::CONTENT_DATA_INDEX] = $value;
@@ -35,7 +35,7 @@ final class DefinitionTransfer extends AbstractTransfer
     public const string VALIDATOR = 'validator';
     protected const string VALIDATOR_DATA_NAME = 'VALIDATOR';
     protected const int VALIDATOR_DATA_INDEX = 1;
-    
+
     public ?DefinitionValidatorTransfer $validator {
         get => $this->data[self::VALIDATOR_DATA_INDEX];
         set => $this->data[self::VALIDATOR_DATA_INDEX] = $value;

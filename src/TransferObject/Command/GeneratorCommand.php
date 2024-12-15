@@ -69,7 +69,7 @@ final class GeneratorCommand extends Command
     {
         $inputOutput->error(sprintf(self::FAILED_TEMPLATE, $generatorTransfer->definitionKey));
 
-        $errorMessages = $generatorTransfer->validator?->errorMessages?->getArrayCopy();
+        $errorMessages = $generatorTransfer->validator?->errorMessages->getArrayCopy();
         $inputOutput->warning($errorMessages);
     }
 }

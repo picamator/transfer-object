@@ -7,6 +7,8 @@ Template:
     type: ArrayObject
   properties:
     type: ArrayObject
+  defaultValues:
+    type: ArrayObject
   propertiesCount:
     type: int
   metaConstants:

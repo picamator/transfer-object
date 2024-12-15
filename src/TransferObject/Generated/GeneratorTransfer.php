@@ -23,7 +23,7 @@ final class GeneratorTransfer extends AbstractTransfer
     public const string DEFINITION_KEY = 'definitionKey';
     protected const string DEFINITION_KEY_DATA_NAME = 'DEFINITION_KEY';
     protected const int DEFINITION_KEY_DATA_INDEX = 0;
-    
+
     public ?string $definitionKey {
         get => $this->data[self::DEFINITION_KEY_DATA_INDEX];
         set => $this->data[self::DEFINITION_KEY_DATA_INDEX] = $value;
@@ -34,7 +34,7 @@ final class GeneratorTransfer extends AbstractTransfer
     public const string VALIDATOR = 'validator';
     protected const string VALIDATOR_DATA_NAME = 'VALIDATOR';
     protected const int VALIDATOR_DATA_INDEX = 1;
-    
+
     public ?DefinitionValidatorTransfer $validator {
         get => $this->data[self::VALIDATOR_DATA_INDEX];
         set => $this->data[self::VALIDATOR_DATA_INDEX] = $value;

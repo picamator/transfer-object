@@ -22,7 +22,7 @@ final class UserTransfer extends AbstractTransfer
     public const string FIRST_NAME = 'firstName';
     protected const string FIRST_NAME_DATA_NAME = 'FIRST_NAME';
     protected const int FIRST_NAME_DATA_INDEX = 0;
-    
+
     public ?string $firstName {
         get => $this->data[self::FIRST_NAME_DATA_INDEX];
         set => $this->data[self::FIRST_NAME_DATA_INDEX] = $value;
@@ -32,7 +32,7 @@ final class UserTransfer extends AbstractTransfer
     public const string LAST_NAME = 'lastName';
     protected const string LAST_NAME_DATA_NAME = 'LAST_NAME';
     protected const int LAST_NAME_DATA_INDEX = 1;
-    
+
     public ?string $lastName {
         get => $this->data[self::LAST_NAME_DATA_INDEX];
         set => $this->data[self::LAST_NAME_DATA_INDEX] = $value;

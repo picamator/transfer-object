@@ -22,7 +22,7 @@ final class ConfigValidatorTransfer extends AbstractTransfer
     public const string ERROR_MESSAGE = 'errorMessage';
     protected const string ERROR_MESSAGE_DATA_NAME = 'ERROR_MESSAGE';
     protected const int ERROR_MESSAGE_DATA_INDEX = 0;
-    
+
     public ?string $errorMessage {
         get => $this->data[self::ERROR_MESSAGE_DATA_INDEX];
         set => $this->data[self::ERROR_MESSAGE_DATA_INDEX] = $value;
@@ -32,7 +32,7 @@ final class ConfigValidatorTransfer extends AbstractTransfer
     public const string IS_VALID = 'isValid';
     protected const string IS_VALID_DATA_NAME = 'IS_VALID';
     protected const int IS_VALID_DATA_INDEX = 1;
-    
+
     public ?bool $isValid {
         get => $this->data[self::IS_VALID_DATA_INDEX];
         set => $this->data[self::IS_VALID_DATA_INDEX] = $value;

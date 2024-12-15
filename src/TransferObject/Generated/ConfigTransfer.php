@@ -23,7 +23,7 @@ final class ConfigTransfer extends AbstractTransfer
     public const string DEFINITION_PATH = 'definitionPath';
     protected const string DEFINITION_PATH_DATA_NAME = 'DEFINITION_PATH';
     protected const int DEFINITION_PATH_DATA_INDEX = 0;
-    
+
     public ?string $definitionPath {
         get => $this->data[self::DEFINITION_PATH_DATA_INDEX];
         set => $this->data[self::DEFINITION_PATH_DATA_INDEX] = $value;
@@ -33,7 +33,7 @@ final class ConfigTransfer extends AbstractTransfer
     public const string TRANSFER_NAMESPACE = 'transferNamespace';
     protected const string TRANSFER_NAMESPACE_DATA_NAME = 'TRANSFER_NAMESPACE';
     protected const int TRANSFER_NAMESPACE_DATA_INDEX = 1;
-    
+
     public ?string $transferNamespace {
         get => $this->data[self::TRANSFER_NAMESPACE_DATA_INDEX];
         set => $this->data[self::TRANSFER_NAMESPACE_DATA_INDEX] = $value;
@@ -43,7 +43,7 @@ final class ConfigTransfer extends AbstractTransfer
     public const string TRANSFER_PATH = 'transferPath';
     protected const string TRANSFER_PATH_DATA_NAME = 'TRANSFER_PATH';
     protected const int TRANSFER_PATH_DATA_INDEX = 2;
-    
+
     public ?string $transferPath {
         get => $this->data[self::TRANSFER_PATH_DATA_INDEX];
         set => $this->data[self::TRANSFER_PATH_DATA_INDEX] = $value;

@@ -21,6 +21,7 @@ abstract class AbstractTransfer implements TransferInterface
     public final function __construct()
     {
         $this->initData();
+        $this->initDefault();
     }
 
     public final function getIterator(): Traversable
@@ -160,6 +161,13 @@ abstract class AbstractTransfer implements TransferInterface
     public final function __debugInfo(): array
     {
         return $this->toArray();
+    }
+
+    private function initDefault(): void
+    {
+        foreach ($this as $key => $value) {
+            $this->{$key} = $this->{$key};
+        }
     }
 
     private function initData(): void

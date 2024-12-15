@@ -23,8 +23,8 @@ final class DefinitionValidatorTransfer extends AbstractTransfer
     public const string ERROR_MESSAGES = 'errorMessages';
     protected const string ERROR_MESSAGES_DATA_NAME = 'ERROR_MESSAGES';
     protected const int ERROR_MESSAGES_DATA_INDEX = 0;
-    
-    public ?ArrayObject $errorMessages {
+
+    public ArrayObject $errorMessages {
         get => $this->data[self::ERROR_MESSAGES_DATA_INDEX] ?? new ArrayObject();
         set => $this->data[self::ERROR_MESSAGES_DATA_INDEX] = $value;
     }
@@ -33,7 +33,7 @@ final class DefinitionValidatorTransfer extends AbstractTransfer
     public const string IS_VALID = 'isValid';
     protected const string IS_VALID_DATA_NAME = 'IS_VALID';
     protected const int IS_VALID_DATA_INDEX = 1;
-    
+
     public ?bool $isValid {
         get => $this->data[self::IS_VALID_DATA_INDEX];
         set => $this->data[self::IS_VALID_DATA_INDEX] = $value;
