@@ -26,11 +26,14 @@ $merchantTransfer->isActive = true;
 var_dump($customerTransfer);
 var_dump($merchantTransfer);
 
+foreach ($merchantTransfer as $key => $value) {
+    echo 'key: ' . $key . PHP_EOL;
+    echo 'value: ' . $value . PHP_EOL;
+}
+
 echo <<<'STORY'
 ======================================
         Create another Transfer
-                &
-             Iterate
 ======================================
 
 STORY;
@@ -51,10 +54,7 @@ $agentTransfer = new AgentTransfer()
         ],
     ]);
 
-foreach ($agentTransfer->customer as $key => $value) {
-    echo 'key: ' . $key . PHP_EOL;
-    echo 'value: ' . $value . PHP_EOL;
-}
+var_dump($agentTransfer->toArray());
 
 echo <<<'STORY'
 ======================================
