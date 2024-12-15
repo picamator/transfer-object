@@ -10,7 +10,7 @@ interface TransferGeneratorInterface
      * @throws \Picamator\TransferObject\Exception\GeneratorTransferException
      * @throws \Picamator\TransferObject\Exception\HelperTransferException
      *
-     * @return \ArrayObject<\Picamator\TransferObject\Generated\GeneratorTransfer>
+     * @return \ArrayObject<int,\Picamator\TransferObject\Generated\GeneratorTransfer>
      */
     public function generateTransfers(string $configPath): ArrayObject;
 }

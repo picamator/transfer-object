@@ -9,35 +9,20 @@ use Picamator\TransferObject\Transfer\TransferInterface;
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
 final readonly class PropertyTypeAttribute implements PropertyTypeAttributeInterface
 {
-    public function __construct(
-        private string $typeName,
-    ) {
+    public function __construct(private string $typeName)
+    {
     }
 
-    /**
-     * @inheritDoc
-     */
     public function fromArray(array $data): ArrayObject|TransferInterface
     {
         return $this->createTransfer($data);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function toArray(ArrayObject $data): array
     {
         return $data->getArrayCopy();
     }
 
-    public function toSnakeArray(ArrayObject $data): array
-    {
-        return $data->getArrayCopy();
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function clone(ArrayObject $data): ArrayObject
     {
         return clone $data;

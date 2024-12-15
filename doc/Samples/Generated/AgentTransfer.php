@@ -38,7 +38,7 @@ final class AgentTransfer extends AbstractTransfer
     protected const string MERCHANTS_DATA_NAME = 'MERCHANTS';
     protected const int MERCHANTS_DATA_INDEX = 1;
 
-    /** @var \ArrayObject<MerchantTransfer> */
+    /** @var \ArrayObject<int,MerchantTransfer> */
     public ArrayObject $merchants {
         get => $this->data[self::MERCHANTS_DATA_INDEX] ?? new ArrayObject();
         set => $this->data[self::MERCHANTS_DATA_INDEX] = $value;

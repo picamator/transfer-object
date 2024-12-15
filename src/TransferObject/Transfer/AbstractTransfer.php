@@ -16,6 +16,9 @@ abstract class AbstractTransfer implements TransferInterface
 
     private const string DATA_INDEX = '_DATA_INDEX';
 
+    /**
+     * @var SplFixedArray<mixed>
+     */
     protected SplFixedArray $data;
 
     public final function __construct()
@@ -47,6 +50,9 @@ abstract class AbstractTransfer implements TransferInterface
         $this->data = unserialize($data);
     }
 
+    /**
+     * @return array<string,SplFixedArray<mixed>>
+     */
     public final function __serialize(): array
     {
         return [
@@ -54,6 +60,9 @@ abstract class AbstractTransfer implements TransferInterface
         ];
     }
 
+    /**
+     * @param array<string,mixed> $data
+     */
     public final function __unserialize(array $data): void
     {
         $this->data = $data['data'];

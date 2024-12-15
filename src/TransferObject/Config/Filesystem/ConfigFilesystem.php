@@ -25,6 +25,8 @@ readonly class ConfigFilesystem implements ConfigFilesystemInterface
 
     /**
      * @throws \Picamator\TransferObject\Exception\ConfigTransferException
+     *
+     * @return array<string, mixed>
      */
     private function parseConfig(string $configPath): array
     {

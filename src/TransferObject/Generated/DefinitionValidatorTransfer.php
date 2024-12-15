@@ -24,6 +24,7 @@ final class DefinitionValidatorTransfer extends AbstractTransfer
     protected const string ERROR_MESSAGES_DATA_NAME = 'ERROR_MESSAGES';
     protected const int ERROR_MESSAGES_DATA_INDEX = 0;
 
+    /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $errorMessages {
         get => $this->data[self::ERROR_MESSAGES_DATA_INDEX] ?? new ArrayObject();
         set => $this->data[self::ERROR_MESSAGES_DATA_INDEX] = $value;

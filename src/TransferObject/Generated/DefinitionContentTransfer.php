@@ -36,7 +36,7 @@ final class DefinitionContentTransfer extends AbstractTransfer
     protected const string PROPERTIES_DATA_NAME = 'PROPERTIES';
     protected const int PROPERTIES_DATA_INDEX = 1;
 
-    /** @var \ArrayObject<DefinitionPropertyTransfer> */
+    /** @var \ArrayObject<int,DefinitionPropertyTransfer> */
     public ArrayObject $properties {
         get => $this->data[self::PROPERTIES_DATA_INDEX] ?? new ArrayObject();
         set => $this->data[self::PROPERTIES_DATA_INDEX] = $value;

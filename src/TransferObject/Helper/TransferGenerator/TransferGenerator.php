@@ -20,7 +20,7 @@ readonly class TransferGenerator implements TransferGeneratorInterface
     {
         $this->loadConfig($configPath);
 
-        /** @var \ArrayObject<\Picamator\TransferObject\Generated\GeneratorTransfer> $generatorTransfers */
+        /** @var \ArrayObject<int,\Picamator\TransferObject\Generated\GeneratorTransfer> $generatorTransfers */
         $generatorTransfers = new ArrayObject();
         $errorItemCallback = fn(GeneratorTransfer $generatorTransfer) => $generatorTransfers[] = $generatorTransfer;
 

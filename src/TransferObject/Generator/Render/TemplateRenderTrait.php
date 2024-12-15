@@ -44,7 +44,7 @@ trait TemplateRenderTrait
     protected function sortAndUnify(TemplateTransfer $templateTransfer): void
     {
         foreach (static::SORTABLE_PROPERTIES as $property) {
-            /** @var \ArrayObject $value */
+            /** @var \ArrayObject<int|string,string> $value */
             $value = $templateTransfer->{$property};
             $value = $value->getArrayCopy();
 

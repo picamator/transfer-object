@@ -9,24 +9,20 @@ use Picamator\TransferObject\Transfer\TransferInterface;
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
 final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttributeInterface
 {
-    public function __construct(
-        private string $typeName,
-    ) {
+    public function __construct(private string $typeName)
+    {
     }
 
     /**
-     * @inheritDoc
+     * @return \ArrayObject<int,\Picamator\TransferObject\Transfer\TransferInterface>
      */
-    public function fromArray(array $data): ArrayObject|TransferInterface
+    public function fromArray(array $data): ArrayObject
     {
         $collectionData = array_map($this->createTransfer(...), $data);
 
         return new ArrayObject($collectionData);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function toArray(ArrayObject $data): array
     {
         $collection = [];
@@ -37,22 +33,12 @@ final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttr
         return $collection;
     }
 
-    public function toSnakeArray(ArrayObject $data): array
-    {
-        $collection = [];
-        foreach ($data as $transfer) {
-            $collection[] = $transfer->toSnakeArray();
-        }
-
-        return $collection;
-    }
-
     /**
      * @inheritDoc
      */
     public function clone(ArrayObject $data): ArrayObject
     {
-        /** @var \ArrayObject<\Picamator\TransferObject\Transfer\TransferInterface> $clonedData */
+        /** @var \ArrayObject<int,\Picamator\TransferObject\Transfer\TransferInterface> $clonedData */
         $clonedData = new ArrayObject();
 
         /** @var \Picamator\TransferObject\Transfer\TransferInterface $transfer */

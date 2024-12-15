@@ -2,6 +2,8 @@
 
 namespace Picamator\TransferObject\Helper;
 
+use ArrayObject;
+
 interface HelperFacadeInterface
 {
     /**
@@ -12,9 +14,9 @@ interface HelperFacadeInterface
      *
      * @throws \Picamator\TransferObject\Exception\GeneratorTransferException
      *
-     * @return \ArrayObject<\Picamator\TransferObject\Generated\GeneratorTransfer>
+     * @return \ArrayObject<int,\Picamator\TransferObject\Generated\GeneratorTransfer>
      */
-    public function generateTransfers(string $configPath): \ArrayObject;
+    public function generateTransfers(string $configPath): ArrayObject;
 
     /**
      * Specification:

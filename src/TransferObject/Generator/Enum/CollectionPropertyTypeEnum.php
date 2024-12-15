@@ -8,5 +8,5 @@ enum CollectionPropertyTypeEnum: string
 {
     case CLASS_NAME = CollectionPropertyTypeAttribute::class;
     case ATTRIBUTE_TEMPLATE = 'CollectionPropertyTypeAttribute(%s::class)';
-    case DOCK_BLOCK_TEMPLATE = '\ArrayObject<%s>';
+    case DOCK_BLOCK_TEMPLATE = '\ArrayObject<int,%s>';
 }
