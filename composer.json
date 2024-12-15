@@ -11,6 +11,9 @@
   "support": {
     "issues": "https://github.com/picamator/transfer-object/issues"
   },
+  "bin": [
+    "generate-transfer"
+  ],
   "autoload": {
     "psr-4": {
       "Picamator\\": "src/"
@@ -42,7 +45,7 @@
   "scripts": {
     "test": "./vendor/bin/phpunit",
     "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon",
-    "generate-transfer": "php ./generate-transfer.php"
+    "generate-transfer": "php ./generate-transfer"
   },
   "scripts-descriptions": {
     "test": "Run PHPUnit tests.",

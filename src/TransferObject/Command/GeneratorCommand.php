@@ -42,7 +42,7 @@ final class GeneratorCommand extends Command
     {
         $inputOutput = new SymfonyStyle($input, $output);
 
-        $configPath = $input->getOption(self::OPTION_NAME_CONFIGURATION);
+        $configPath = $input->getOption(self::OPTION_NAME_CONFIGURATION) ?: '';
         $validatorTransfer = new ConfigFacade()->loadConfig($configPath);
         if (!$validatorTransfer->isValid) {
             $inputOutput->error(self::FAILED_MESSAGE);
