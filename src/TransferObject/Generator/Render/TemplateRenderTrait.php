@@ -12,6 +12,11 @@ use Picamator\TransferObject\Generator\Enum\TransferEnum;
 
 trait TemplateRenderTrait
 {
+    protected const array SORTABLE_PROPERTIES = [
+        'imports',
+        'metaConstants',
+    ];
+
     protected function isArrayObject(DefinitionPropertyTransfer $propertyTransfer): bool
     {
         return ArrayObjectEnum::CLASS_NAME->value === $propertyTransfer->type;
@@ -34,15 +39,13 @@ trait TemplateRenderTrait
 
     protected function sortTemplateTransfer(TemplateTransfer $templateTransfer): void
     {
-        foreach ($templateTransfer as $key => $value) {
-            if (!$value instanceof ArrayObject) {
-                continue;
-            }
-
+        foreach (static::SORTABLE_PROPERTIES as $property) {
+            /** @var \ArrayObject $value */
+            $value = $templateTransfer->{$property};
             $value = $value->getArrayCopy();
             natsort($value);
 
-            $templateTransfer->{$key} = new ArrayObject($value);
+            $templateTransfer->{$property} = new ArrayObject($value);
         }
     }
 
