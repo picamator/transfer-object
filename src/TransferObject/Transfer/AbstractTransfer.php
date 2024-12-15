@@ -68,6 +68,9 @@ abstract class AbstractTransfer implements TransferInterface
         $this->data = $data['data'];
     }
 
+    /**
+     * @return int
+     */
     public final function count(): int
     {
         return static::META_DATA_SIZE;

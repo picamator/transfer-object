@@ -30,18 +30,18 @@ readonly class TemplateRender implements TemplateRenderInterface
 
         ob_start();
         include self::TEMPLATE_PATH;
-        $renderedOutput = ob_get_clean();
+        $output = ob_get_clean();
 
         $lastError = error_get_last();
-        if ($lastError === null) {
-            return $renderedOutput;
+        if ($lastError === null && $output !== false) {
+            return $output;
         }
 
         throw new GeneratorTransferException(
             sprintf(
                 'Template render error "%s", line "%s".',
-                $lastError['message'],
-                $lastError['line'],
+                $lastError['message'] ?? '',
+                $lastError['line'] ?? '',
             ),
         );
     }

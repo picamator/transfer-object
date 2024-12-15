@@ -7,7 +7,9 @@ use IteratorAggregate;
 use JsonSerializable;
 use Serializable;
 
-/** @extends \IteratorAggregate<string, mixed> */
+/**
+ * @extends \IteratorAggregate<string, mixed>
+ */
 interface TransferInterface extends IteratorAggregate, JsonSerializable, Serializable, Countable
 {
     /**
