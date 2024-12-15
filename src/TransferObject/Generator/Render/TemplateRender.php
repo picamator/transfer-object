@@ -2,7 +2,6 @@
 
 namespace Picamator\TransferObject\Generator\Render;
 
-use ArrayObject;
 use Picamator\TransferObject\Config\Container\ConfigInterface;
 use Picamator\TransferObject\Exception\GeneratorTransferException;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
@@ -65,10 +64,9 @@ readonly class TemplateRender implements TemplateRenderInterface
             };
         }
 
-        $templateTransfer->imports = new ArrayObject(array_unique($templateTransfer->imports->getArrayCopy()));
         $templateTransfer->propertiesCount = $templateTransfer->properties->count();
 
-        $this->sortTemplateTransfer($templateTransfer);
+        $this->sortAndUnify($templateTransfer);
 
         return $templateTransfer;
     }

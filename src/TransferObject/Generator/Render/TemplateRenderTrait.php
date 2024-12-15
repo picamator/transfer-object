@@ -17,6 +17,10 @@ trait TemplateRenderTrait
         'metaConstants',
     ];
 
+    protected const array UNIQUE_PROPERTIES = [
+        'imports',
+    ];
+
     protected function isArrayObject(DefinitionPropertyTransfer $propertyTransfer): bool
     {
         return ArrayObjectEnum::CLASS_NAME->value === $propertyTransfer->type;
@@ -37,12 +41,17 @@ trait TemplateRenderTrait
         return $propertyTransfer->collectionType !== null;
     }
 
-    protected function sortTemplateTransfer(TemplateTransfer $templateTransfer): void
+    protected function sortAndUnify(TemplateTransfer $templateTransfer): void
     {
         foreach (static::SORTABLE_PROPERTIES as $property) {
             /** @var \ArrayObject $value */
             $value = $templateTransfer->{$property};
             $value = $value->getArrayCopy();
+
+            if (in_array($property,static::UNIQUE_PROPERTIES, true)) {
+                $value = array_unique($value);
+            }
+
             natsort($value);
 
             $templateTransfer->{$property} = new ArrayObject($value);
