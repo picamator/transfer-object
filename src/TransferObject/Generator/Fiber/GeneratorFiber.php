@@ -24,6 +24,7 @@ readonly class GeneratorFiber implements GeneratorFiberInterface
         $generatorFiber = new Fiber($this->getFiberCallback(...));
         $generatorFiber->start();
         while (!$generatorFiber->isTerminated()) {
+            /** @var \Picamator\TransferObject\Generated\GeneratorTransfer $generatorTransfer */
             $generatorTransfer = $generatorFiber->resume();
             if ($generatorTransfer?->validator?->isValid === false) {
                 $errorItemCallback($generatorTransfer);

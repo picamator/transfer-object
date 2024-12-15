@@ -23,7 +23,6 @@ readonly class DefinitionReader implements DefinitionReaderInterface
 
     public function getDefinitions(): Generator
     {
-        $definitionCount = 0;
         $definitionContents = $this->filesystem->getDefinitionContent();
         foreach ($definitionContents as $fileName => $definitionContent) {
             $definition = $this->parser->parseContent($definitionContent);
@@ -32,13 +31,11 @@ readonly class DefinitionReader implements DefinitionReaderInterface
                 $contentTransfer = $this->createContentTransfer($className, $properties);
                 $definitionTransfer = $this->createDefinitionTransfer($contentTransfer);
 
-                $definitionCount++;
-
                 yield $fileName . ':' . $className => $definitionTransfer;
             }
         }
 
-        return $definitionCount;
+        return $definitionContents->getReturn();
     }
 
     private function createDefinitionTransfer(DefinitionContentTransfer $contentTransfer): DefinitionTransfer
