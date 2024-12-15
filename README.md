@@ -14,6 +14,11 @@ TO Generator includes console commands:
 - Build TOs based on `YML` definitions
 - Build `YML` defintions based on `JSON`
 
+Samples
+-------
+
+TODO
+
 Installation
 ------------
 
@@ -24,14 +29,28 @@ composer require-dev picamator/transfer-object
 Usage
 -----
 
+### Terminal
+After intalation TO generator command `generate-transfer` was added on `./vendor/bin` direcotry.
+
 ```bash
 ./vendor/bin/generate-transfer -c [path to configuration file]
 ```
 
+### Helper
+Attiotionally to the command `generate-transfer` it is possible to integrate TO generator to project using Helper,
+
+```php
+\Picamator\TransferObject\Helper\HelperFacadeInterface
+```
+
+There are two interface methods:
+1. `generateTransfers()`, basically the same as the command doing but without output to `stdout`
+2. `generateDefinitions()`, generated Definition file based on json, e.g. some API response
+
 Configuration File
 ------------------
 
-Configuraration is an `YML file includes namsepace, path to definitions and generated classes.
+Configuraration is an `YML` file includes namsepace, path to definitions and generated classes.
 
 ```yml
 generator:
@@ -77,8 +96,8 @@ More can be found on [Definition Sample](/doc/Samples/config/definition) for mor
 | collectionType      | Any TO name without prefix `Transfer`.                                                         | Generated property will have `ArrayObject` where each element is TO. |
 
 
-Development Environemnt
------------------------
+Development
+-----------
 TO Generator provides Docker environment with one container `transfer-object-php`.
 
 In order to star working install [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) first.
