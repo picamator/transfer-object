@@ -4,14 +4,13 @@ namespace Picamator\TransferObject\Definition\Filesystem;
 
 use Generator;
 use Picamator\TransferObject\Config\Container\ConfigInterface;
-use Picamator\TransferObject\Definition\Enum\DefinitionEnum;
 use Picamator\TransferObject\Exception\DefinitionTransferException;
 use Symfony\Component\Finder\Finder;
 use Throwable;
 
 readonly class DefinitionFilesystem implements DefinitionFilesystemInterface
 {
-    private const string FILE_NAME_PATTERN = DefinitionEnum::FILE_NAME_PATTERN->value;
+    private const string FILE_NAME_PATTERN = '*.transfer.yml';
 
     public function __construct(
         private Finder $finder,

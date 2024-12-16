@@ -6,9 +6,8 @@ use ArrayObject;
 use Picamator\TransferObject\Definition\Enum\DefinitionTypeEnum;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
-use Picamator\TransferObject\Generator\Enum\ArrayEnum;
-use Picamator\TransferObject\Generator\Enum\ArrayObjectEnum;
 use Picamator\TransferObject\Generator\Enum\TransferEnum;
+use Picamator\TransferObject\Generator\Enum\TypeEnum;
 
 trait TemplateRenderTrait
 {
@@ -23,12 +22,12 @@ trait TemplateRenderTrait
 
     protected function isArrayObject(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        return ArrayObjectEnum::CLASS_NAME->value === $propertyTransfer->type;
+        return TypeEnum::ARRAY_OBJECT->value === $propertyTransfer->type;
     }
 
     protected function isArray(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        return ArrayEnum::TYPE->value === $propertyTransfer->type;
+        return TypeEnum::ARRAY->value === $propertyTransfer->type;
     }
 
     protected function isTransferType(DefinitionPropertyTransfer $propertyTransfer): bool
