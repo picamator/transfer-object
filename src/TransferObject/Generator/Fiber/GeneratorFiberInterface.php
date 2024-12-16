@@ -2,9 +2,7 @@
 
 namespace Picamator\TransferObject\Generator\Fiber;
 
-use Closure;
-
 interface GeneratorFiberInterface
 {
-    public function generateTransfers(Closure $errorItemCallback): bool;
+    public function generateTransfers(callable $errorItemCallback): bool;
 }

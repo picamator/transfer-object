@@ -2,8 +2,6 @@
 
 namespace Picamator\TransferObject\Generator;
 
-use Closure;
-
 interface GeneratorFacadeInterface
 {
     /**
@@ -15,5 +13,5 @@ interface GeneratorFacadeInterface
      *
      * @throws \Picamator\TransferObject\Exception\GeneratorTransferException
      */
-    public function generateTransfers(Closure $errorItemCallback): bool;
+    public function generateTransfers(callable $errorItemCallback): bool;
 }

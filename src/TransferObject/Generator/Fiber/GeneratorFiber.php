@@ -2,7 +2,6 @@
 
 namespace Picamator\TransferObject\Generator\Fiber;
 
-use Closure;
 use Fiber;
 use Picamator\TransferObject\Definition\DefinitionFacadeInterface;
 use Picamator\TransferObject\Generated\DefinitionTransfer;
@@ -19,7 +18,7 @@ readonly class GeneratorFiber implements GeneratorFiberInterface
     ) {
     }
 
-    public function generateTransfers(Closure $errorItemCallback): bool
+    public function generateTransfers(callable $errorItemCallback): bool
     {
         $generatorFiber = new Fiber($this->getFiberCallback(...));
         $generatorFiber->start();
