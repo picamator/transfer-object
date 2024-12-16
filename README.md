@@ -2,19 +2,19 @@ Transfer Object Generator
 ==========================
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Transfer Object (or further TO) Generator creates TO with:
+Transfer Object (or further TO) Generator is based on:
 
 - PHP 8.4 property Hooks
 - FixedArray as a main storage
-- Transformation from and to Array as well as between TOs
-- Implementation `IteratorAggregate`, `JsonSerializable`, `Serializable`, `Countable` interfaces
+- Interface to transform `from` and `to` Array as well as between TOs
+- Interfaces such as `IteratorAggregate`, `JsonSerializable`, `Serializable`, `Countable` interfaces
 
-TO Generator includes console commands:
+TO Generator includes console commands and helper classes to:
 
 - Build TOs based on `YML` definitions
 - Build `YML` defintions based on `JSON`
 
-Try Samples
+Samples
 -----------
 New TO with their properties sets looks like
 
@@ -38,14 +38,14 @@ Usage
 -----
 
 ### Terminal
-After intalation TO generator command `generate-transfer` was added on `./vendor/bin` direcotry.
+After instalation TO generator command `generate-transfer` is available on `./vendor/bin` direcotry.
 
 ```bash
 ./vendor/bin/generate-transfer -c [path to configuration file]
 ```
 
 ### Helper
-Attiotionally to the command `generate-transfer` it is possible to integrate TO generator to project using `HelperFacade`
+Additionally to the command `generate-transfer` it is possible to integrate TO generator by
 
 ```php
 \Picamator\TransferObject\Helper\HelperFacadeInterface
