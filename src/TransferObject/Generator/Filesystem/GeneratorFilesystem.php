@@ -48,6 +48,11 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
     public function writeFile(string $className, string $content): void
     {
         $filePath = $this->getTemporaryPath() . DIRECTORY_SEPARATOR . $className  . self::FILE_SUFFIX_EXTENSION;
+        if ($this->filesystem->exists($filePath)) {
+            throw new GeneratorTransferException(
+                sprintf('Duplication file "%s". Cannot merge files.', $filePath),
+            );
+        }
 
         try {
             $this->filesystem->dumpFile($filePath, $content);
