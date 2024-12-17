@@ -4,6 +4,6 @@ namespace Picamator\TransferObject\Generator\Enum;
 
 enum DefaultValueTemplateEnum: string
 {
-    case ARRAY_TEMPLATE = '[]';
-    case ARRAY_OBJECT_TEMPLATE = 'new ArrayObject()';
+    case ARRAY = '[]';
+    case ARRAY_OBJECT = 'new ArrayObject()';
 }

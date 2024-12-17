@@ -4,7 +4,6 @@ namespace Picamator\TransferObject\Generator\Filesystem;
 
 use Picamator\TransferObject\Config\Container\ConfigInterface;
 use Picamator\TransferObject\Exception\GeneratorTransferException;
-use Picamator\TransferObject\Generator\Enum\TransferEnum;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Throwable;
@@ -13,8 +12,8 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 {
     private const string TEMPORARY_DIR = '_tmp';
 
-    private const string FILE_SUFFIX_EXTENSION = TransferEnum::FILE_NAME_SUFFIX->value . TransferEnum::FILE_EXTENSIONS->value;
-    private const string FILE_NAME_PATTERN = TransferEnum::FILE_NAME_PATTERN->value;
+    private const string FILE_NAME_TEMPLATE = '%sTransfer.php';
+    private const string FILE_NAME_PATTERN = '*Transfer.php';
 
     public function __construct(
         private Filesystem $filesystem,
@@ -47,10 +46,10 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 
     public function writeFile(string $className, string $content): void
     {
-        $filePath = $this->getTemporaryPath() . DIRECTORY_SEPARATOR . $className  . self::FILE_SUFFIX_EXTENSION;
+        $filePath = $this->getTemporaryPath() . DIRECTORY_SEPARATOR . sprintf(self::FILE_NAME_TEMPLATE, $className);
         if ($this->filesystem->exists($filePath)) {
             throw new GeneratorTransferException(
-                sprintf('Duplication file "%s". Cannot merge files.', $filePath),
+                sprintf('Cannot save file "%s". File with the same name already exit.', $filePath),
             );
         }
 

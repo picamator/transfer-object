@@ -4,7 +4,7 @@ namespace Picamator\TransferObject\Generator\Enum;
 
 enum DockBlockTemplateEnum: string
 {
-    case COLLECTION_TYPE_TEMPLATE = '\ArrayObject<int,%s>';
-    case ARRAY_TEMPLATE = '/** @var array<mixed> */';
-    case ARRAY_OBJECT_TEMPLATE = '\ArrayObject<string|int,mixed>';
+    case COLLECTION = '\ArrayObject<int,%s>';
+    case ARRAY = '/** @var array<mixed> */';
+    case ARRAY_OBJECT = '\ArrayObject<string|int,mixed>';
 }

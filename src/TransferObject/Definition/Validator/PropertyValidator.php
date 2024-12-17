@@ -2,7 +2,7 @@
 
 namespace Picamator\TransferObject\Definition\Validator;
 
-use Picamator\TransferObject\Definition\Enum\DefinitionTypeEnum;
+use Picamator\TransferObject\Definition\Enum\TypeValueEnum;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 
 readonly class PropertyValidator implements PropertyValidatorInterface
@@ -58,7 +58,7 @@ readonly class PropertyValidator implements PropertyValidatorInterface
             return null;
         }
 
-        if (DefinitionTypeEnum::tryFrom($propertyTransfer->type) !== null) {
+        if (!TypeValueEnum::isTransfer($propertyTransfer->type)) {
             return null;
         }
 

@@ -2,10 +2,9 @@
 
 namespace Picamator\TransferObject\Generator\Enum;
 
+use Picamator\TransferObject\Transfer\AbstractTransfer;
+
 enum TransferEnum: string
 {
-    case ABSTRACT_CLASS_NAME = 'Picamator\TransferObject\Transfer\AbstractTransfer';
-    case FILE_NAME_SUFFIX = 'Transfer';
-    case FILE_NAME_PATTERN = '*Transfer.php';
-    case FILE_EXTENSIONS = '.php';
+    case ABSTRACT_CLASS = AbstractTransfer::class;
 }

@@ -3,7 +3,7 @@
 namespace Picamator\TransferObject\Definition\Reader;
 
 use Generator;
-use Picamator\TransferObject\Definition\Enum\DefinitionKeyEnum;
+use Picamator\TransferObject\Definition\Enum\TypeKeyEnum;
 use Picamator\TransferObject\Definition\Filesystem\DefinitionFilesystemInterface;
 use Picamator\TransferObject\Definition\Parser\ContentParserInterface;
 use Picamator\TransferObject\Definition\Validator\ContentValidatorInterface;
@@ -59,8 +59,8 @@ readonly class DefinitionReader implements DefinitionReaderInterface
         foreach ($properties as $propertyName => $propertyType) {
             $propertyTransfer = new DefinitionPropertyTransfer();
             $propertyTransfer->propertyName = $propertyName;
-            $propertyTransfer->type = $propertyType[DefinitionKeyEnum::TYPE->value] ?? null;
-            $propertyTransfer->collectionType = $propertyType[DefinitionKeyEnum::COLLECTION_TYPE->value] ?? null;
+            $propertyTransfer->type = $propertyType[TypeKeyEnum::TYPE->value] ?? null;
+            $propertyTransfer->collectionType = $propertyType[TypeKeyEnum::COLLECTION_TYPE->value] ?? null;
 
             $contentTransfer->properties[] = $propertyTransfer;
         }

@@ -3,6 +3,7 @@
 namespace Picamator\TransferObject\Generator\Render;
 
 use Picamator\TransferObject\Config\Container\ConfigInterface;
+use Picamator\TransferObject\Definition\Enum\TypeValueEnum;
 use Picamator\TransferObject\Exception\GeneratorTransferException;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
@@ -12,7 +13,6 @@ use Picamator\TransferObject\Generator\Enum\AttributeTemplateEnum;
 use Picamator\TransferObject\Generator\Enum\DefaultValueTemplateEnum;
 use Picamator\TransferObject\Generator\Enum\DockBlockTemplateEnum;
 use Picamator\TransferObject\Generator\Enum\TransferEnum;
-use Picamator\TransferObject\Generator\Enum\TypeEnum;
 
 readonly class TemplateRender implements TemplateRenderInterface
 {
@@ -52,15 +52,15 @@ readonly class TemplateRender implements TemplateRenderInterface
         $templateTransfer = new TemplateTransfer();
         $templateTransfer->classNamespace = $this->config->getTransferNamespace();
         $templateTransfer->className = $this->getTransferName($contentTransfer->className);
-        $templateTransfer->imports[] = TransferEnum::ABSTRACT_CLASS_NAME->value;
+        $templateTransfer->imports[] = TransferEnum::ABSTRACT_CLASS->value;
 
         foreach ($contentTransfer->properties as $propertyTransfer) {
             $propertyName = $propertyTransfer->propertyName;
             $templateTransfer->metaConstants[$this->getMetaConstant($propertyName)] = $propertyTransfer->propertyName;
 
             match (true) {
-                $this->isTransferCollectionType($propertyTransfer) => $this->expandTransferCollectionType($propertyTransfer, $templateTransfer),
-                $this->isTransferType($propertyTransfer) => $this->expandTransferType($propertyTransfer, $templateTransfer),
+                $this->isCollectionType($propertyTransfer) => $this->expandTransferCollectionType($propertyTransfer, $templateTransfer),
+                TypeValueEnum::isTransfer($propertyTransfer->type) => $this->expandTransferType($propertyTransfer, $templateTransfer),
                 default => $this->expandDefaultType($propertyTransfer, $templateTransfer),
             };
         }
@@ -77,17 +77,17 @@ readonly class TemplateRender implements TemplateRenderInterface
         $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->properties[$propertyName] = $propertyTransfer->type;
 
-        if ($this->isArrayObject($propertyTransfer)) {
-            $templateTransfer->imports[] = TypeEnum::ARRAY_OBJECT->value;
-            $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY_OBJECT_TEMPLATE->value;
-            $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY_OBJECT_TEMPLATE->value;
+        if (TypeValueEnum::isArrayObject($propertyTransfer->type)) {
+            $templateTransfer->imports[] = TypeValueEnum::ARRAY_OBJECT->value;
+            $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY_OBJECT->value;
+            $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY_OBJECT->value;
 
             return;
         }
 
-        if ($this->isArray($propertyTransfer)) {
-            $templateTransfer->defaultValues[$propertyName] = TypeEnum::ARRAY->value;
-            $templateTransfer->dockBlocks[$propertyName] = DefaultValueTemplateEnum::ARRAY_TEMPLATE->value;
+        if (TypeValueEnum::isArray($propertyTransfer->type)) {
+            $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY->value;
+            $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY->value;
         }
     }
 
@@ -104,15 +104,15 @@ readonly class TemplateRender implements TemplateRenderInterface
 
     private function expandTransferCollectionType(DefinitionPropertyTransfer $propertyTransfer, TemplateTransfer $templateTransfer): void
     {
-        $templateTransfer->imports[] = TypeEnum::ARRAY_OBJECT->value;
+        $templateTransfer->imports[] = TypeValueEnum::ARRAY_OBJECT->value;
         $templateTransfer->imports[] = AttributeEnum::COLLECTION_TYPE_ATTRIBUTE->value;
 
         $transferName = $this->getTransferName($propertyTransfer->collectionType);
 
         $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->properties[$propertyName] = TypeEnum::ARRAY_OBJECT->value;
+        $templateTransfer->properties[$propertyName] = TypeValueEnum::ARRAY_OBJECT->value;
         $templateTransfer->attributes[$propertyName] = sprintf(AttributeTemplateEnum::COLLECTION_TYPE_ATTRIBUTE->value, $transferName);
-        $templateTransfer->dockBlocks[$propertyName] = sprintf(DockBlockTemplateEnum::COLLECTION_TYPE_TEMPLATE->value, $transferName);
-        $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY_OBJECT_TEMPLATE->value;
+        $templateTransfer->dockBlocks[$propertyName] = sprintf(DockBlockTemplateEnum::COLLECTION->value, $transferName);
+        $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY_OBJECT->value;
     }
 }

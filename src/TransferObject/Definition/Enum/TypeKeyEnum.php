@@ -2,7 +2,7 @@
 
 namespace Picamator\TransferObject\Definition\Enum;
 
-enum DefinitionKeyEnum: string
+enum TypeKeyEnum: string
 {
     case TYPE = 'type';
     case COLLECTION_TYPE = 'collectionType';
