@@ -25,8 +25,8 @@ final class GeneratorTransfer extends AbstractTransfer
     protected const int DEFINITION_KEY_DATA_INDEX = 0;
 
     public ?string $definitionKey {
-        get => $this->data[self::DEFINITION_KEY_DATA_INDEX];
-        set => $this->data[self::DEFINITION_KEY_DATA_INDEX] = $value;
+        get => $this->_data[self::DEFINITION_KEY_DATA_INDEX];
+        set => $this->_data[self::DEFINITION_KEY_DATA_INDEX] = $value;
     }
 
     // validator
@@ -36,7 +36,7 @@ final class GeneratorTransfer extends AbstractTransfer
     protected const int VALIDATOR_DATA_INDEX = 1;
 
     public ?DefinitionValidatorTransfer $validator {
-        get => $this->data[self::VALIDATOR_DATA_INDEX];
-        set => $this->data[self::VALIDATOR_DATA_INDEX] = $value;
+        get => $this->_data[self::VALIDATOR_DATA_INDEX];
+        set => $this->_data[self::VALIDATOR_DATA_INDEX] = $value;
     }
 }

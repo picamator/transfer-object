@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Picamator\TransferObject\Generator\Fiber;
+namespace Picamator\TransferObject\Generator\Transfer;
 
 use Fiber;
 use Picamator\TransferObject\Definition\DefinitionFacadeInterface;
@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\GeneratorTransfer;
 use Picamator\TransferObject\Generator\Filesystem\GeneratorFilesystemInterface;
 use Picamator\TransferObject\Generator\Render\TemplateRenderInterface;
 
-readonly class GeneratorFiber implements GeneratorFiberInterface
+readonly class TransferGenerator implements TransferGeneratorInterface
 {
     public function __construct(
         private DefinitionFacadeInterface $definitionFacade,

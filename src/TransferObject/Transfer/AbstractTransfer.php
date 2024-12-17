@@ -19,7 +19,7 @@ abstract class AbstractTransfer implements TransferInterface
     /**
      * @var SplFixedArray<mixed>
      */
-    protected SplFixedArray $data;
+    protected SplFixedArray $_data;
 
     public final function __construct()
     {
@@ -31,7 +31,7 @@ abstract class AbstractTransfer implements TransferInterface
         foreach (static::META_DATA as $metaKey => $metaName) {
             $metaIndex = $metaName . self::DATA_INDEX;
 
-            yield $metaKey => $this->data[static::{$metaIndex}];
+            yield $metaKey => $this->_data[static::{$metaIndex}];
         }
     }
 
@@ -42,12 +42,12 @@ abstract class AbstractTransfer implements TransferInterface
 
     public final function serialize(): string
     {
-        return serialize($this->data);
+        return serialize($this->_data);
     }
 
     public final function unserialize(string $data): void
     {
-        $this->data = unserialize($data);
+        $this->_data = unserialize($data);
     }
 
     /**
@@ -56,7 +56,7 @@ abstract class AbstractTransfer implements TransferInterface
     public final function __serialize(): array
     {
         return [
-            'data' => $this->data,
+            'data' => $this->_data,
         ];
     }
 
@@ -65,7 +65,7 @@ abstract class AbstractTransfer implements TransferInterface
      */
     public final function __unserialize(array $data): void
     {
-        $this->data = $data['data'];
+        $this->_data = $data['data'];
     }
 
     /**
@@ -154,7 +154,7 @@ abstract class AbstractTransfer implements TransferInterface
 
     public final function __clone(): void
     {
-        $this->data = clone $this->data;
+        $this->_data = clone $this->_data;
         foreach (static::META_DATA as $key => $metaName) {
             $dataItem = $this->{$key};
             if (!is_object($dataItem)) {
@@ -176,11 +176,11 @@ abstract class AbstractTransfer implements TransferInterface
 
     private function initData(): void
     {
-        $this->data = new SplFixedArray(static::META_DATA_SIZE);
+        $this->_data = new SplFixedArray(static::META_DATA_SIZE);
 
         foreach (static::META_DATA as $metaKey => $metaName) {
             $metaIndex = $metaName . self::DATA_INDEX;
-            $this->data[static::{$metaIndex}] = $this->{$metaKey};
+            $this->_data[static::{$metaIndex}] = $this->{$metaKey};
         }
     }
 }

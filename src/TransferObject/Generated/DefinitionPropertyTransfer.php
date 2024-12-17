@@ -25,8 +25,8 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     protected const int COLLECTION_TYPE_DATA_INDEX = 0;
 
     public ?string $collectionType {
-        get => $this->data[self::COLLECTION_TYPE_DATA_INDEX];
-        set => $this->data[self::COLLECTION_TYPE_DATA_INDEX] = $value;
+        get => $this->_data[self::COLLECTION_TYPE_DATA_INDEX];
+        set => $this->_data[self::COLLECTION_TYPE_DATA_INDEX] = $value;
     }
 
     // propertyName
@@ -35,8 +35,8 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     protected const int PROPERTY_NAME_DATA_INDEX = 1;
 
     public ?string $propertyName {
-        get => $this->data[self::PROPERTY_NAME_DATA_INDEX];
-        set => $this->data[self::PROPERTY_NAME_DATA_INDEX] = $value;
+        get => $this->_data[self::PROPERTY_NAME_DATA_INDEX];
+        set => $this->_data[self::PROPERTY_NAME_DATA_INDEX] = $value;
     }
 
     // type
@@ -45,7 +45,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     protected const int TYPE_DATA_INDEX = 2;
 
     public ?string $type {
-        get => $this->data[self::TYPE_DATA_INDEX];
-        set => $this->data[self::TYPE_DATA_INDEX] = $value;
+        get => $this->_data[self::TYPE_DATA_INDEX];
+        set => $this->_data[self::TYPE_DATA_INDEX] = $value;
     }
 }

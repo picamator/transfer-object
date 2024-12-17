@@ -28,8 +28,8 @@ final class AgentTransfer extends AbstractTransfer
     protected const int CUSTOMER_DATA_INDEX = 0;
 
     public ?CustomerTransfer $customer {
-        get => $this->data[self::CUSTOMER_DATA_INDEX];
-        set => $this->data[self::CUSTOMER_DATA_INDEX] = $value;
+        get => $this->_data[self::CUSTOMER_DATA_INDEX];
+        set => $this->_data[self::CUSTOMER_DATA_INDEX] = $value;
     }
 
     // merchants
@@ -40,7 +40,7 @@ final class AgentTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,MerchantTransfer> */
     public ArrayObject $merchants {
-        get => $this->data[self::MERCHANTS_DATA_INDEX] ?? new ArrayObject();
-        set => $this->data[self::MERCHANTS_DATA_INDEX] = $value;
+        get => $this->_data[self::MERCHANTS_DATA_INDEX] ?? new ArrayObject();
+        set => $this->_data[self::MERCHANTS_DATA_INDEX] = $value;
     }
 }

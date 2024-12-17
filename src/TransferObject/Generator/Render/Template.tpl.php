@@ -37,8 +37,8 @@ final class <?php echo $templateTransfer->className ?> extends AbstractTransfer
 <?php echo PHP_EOL ?>
 <?php echo !isset($templateTransfer->dockBlocks[$property]) ? '' : '    /** @var ' . $templateTransfer->dockBlocks[$property] . ' */' . PHP_EOL ?>
     public <?php echo isset($templateTransfer->defaultValues[$property]) ? '' : '?' ?><?php echo $templateTransfer->properties[$property] ?> $<?php echo $property ?> {
-        get => $this->data[self::<?php echo $constant ?>_DATA_INDEX]<?php echo isset($templateTransfer->defaultValues[$property]) ? ' ?? ' . $templateTransfer->defaultValues[$property] : '' ?>;
-        set => $this->data[self::<?php echo $constant ?>_DATA_INDEX] = $value;
+        get => $this->_data[self::<?php echo $constant ?>_DATA_INDEX]<?php echo isset($templateTransfer->defaultValues[$property]) ? ' ?? ' . $templateTransfer->defaultValues[$property] : '' ?>;
+        set => $this->_data[self::<?php echo $constant ?>_DATA_INDEX] = $value;
     }
 <?php echo $i < $templateTransfer->propertiesCount ? PHP_EOL : '' ?>
 <?php endforeach?>

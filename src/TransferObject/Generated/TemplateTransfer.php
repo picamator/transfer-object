@@ -33,8 +33,8 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $attributes {
-        get => $this->data[self::ATTRIBUTES_DATA_INDEX] ?? new ArrayObject();
-        set => $this->data[self::ATTRIBUTES_DATA_INDEX] = $value;
+        get => $this->_data[self::ATTRIBUTES_DATA_INDEX] ?? new ArrayObject();
+        set => $this->_data[self::ATTRIBUTES_DATA_INDEX] = $value;
     }
 
     // className
@@ -43,8 +43,8 @@ final class TemplateTransfer extends AbstractTransfer
     protected const int CLASS_NAME_DATA_INDEX = 1;
 
     public ?string $className {
-        get => $this->data[self::CLASS_NAME_DATA_INDEX];
-        set => $this->data[self::CLASS_NAME_DATA_INDEX] = $value;
+        get => $this->_data[self::CLASS_NAME_DATA_INDEX];
+        set => $this->_data[self::CLASS_NAME_DATA_INDEX] = $value;
     }
 
     // classNamespace
@@ -53,8 +53,8 @@ final class TemplateTransfer extends AbstractTransfer
     protected const int CLASS_NAMESPACE_DATA_INDEX = 2;
 
     public ?string $classNamespace {
-        get => $this->data[self::CLASS_NAMESPACE_DATA_INDEX];
-        set => $this->data[self::CLASS_NAMESPACE_DATA_INDEX] = $value;
+        get => $this->_data[self::CLASS_NAMESPACE_DATA_INDEX];
+        set => $this->_data[self::CLASS_NAMESPACE_DATA_INDEX] = $value;
     }
 
     // defaultValues
@@ -64,8 +64,8 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $defaultValues {
-        get => $this->data[self::DEFAULT_VALUES_DATA_INDEX] ?? new ArrayObject();
-        set => $this->data[self::DEFAULT_VALUES_DATA_INDEX] = $value;
+        get => $this->_data[self::DEFAULT_VALUES_DATA_INDEX] ?? new ArrayObject();
+        set => $this->_data[self::DEFAULT_VALUES_DATA_INDEX] = $value;
     }
 
     // dockBlocks
@@ -75,8 +75,8 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $dockBlocks {
-        get => $this->data[self::DOCK_BLOCKS_DATA_INDEX] ?? new ArrayObject();
-        set => $this->data[self::DOCK_BLOCKS_DATA_INDEX] = $value;
+        get => $this->_data[self::DOCK_BLOCKS_DATA_INDEX] ?? new ArrayObject();
+        set => $this->_data[self::DOCK_BLOCKS_DATA_INDEX] = $value;
     }
 
     // imports
@@ -86,8 +86,8 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $imports {
-        get => $this->data[self::IMPORTS_DATA_INDEX] ?? new ArrayObject();
-        set => $this->data[self::IMPORTS_DATA_INDEX] = $value;
+        get => $this->_data[self::IMPORTS_DATA_INDEX] ?? new ArrayObject();
+        set => $this->_data[self::IMPORTS_DATA_INDEX] = $value;
     }
 
     // metaConstants
@@ -97,8 +97,8 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $metaConstants {
-        get => $this->data[self::META_CONSTANTS_DATA_INDEX] ?? new ArrayObject();
-        set => $this->data[self::META_CONSTANTS_DATA_INDEX] = $value;
+        get => $this->_data[self::META_CONSTANTS_DATA_INDEX] ?? new ArrayObject();
+        set => $this->_data[self::META_CONSTANTS_DATA_INDEX] = $value;
     }
 
     // properties
@@ -108,8 +108,8 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $properties {
-        get => $this->data[self::PROPERTIES_DATA_INDEX] ?? new ArrayObject();
-        set => $this->data[self::PROPERTIES_DATA_INDEX] = $value;
+        get => $this->_data[self::PROPERTIES_DATA_INDEX] ?? new ArrayObject();
+        set => $this->_data[self::PROPERTIES_DATA_INDEX] = $value;
     }
 
     // propertiesCount
@@ -118,7 +118,7 @@ final class TemplateTransfer extends AbstractTransfer
     protected const int PROPERTIES_COUNT_DATA_INDEX = 8;
 
     public ?int $propertiesCount {
-        get => $this->data[self::PROPERTIES_COUNT_DATA_INDEX];
-        set => $this->data[self::PROPERTIES_COUNT_DATA_INDEX] = $value;
+        get => $this->_data[self::PROPERTIES_COUNT_DATA_INDEX];
+        set => $this->_data[self::PROPERTIES_COUNT_DATA_INDEX] = $value;
     }
 }

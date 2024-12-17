@@ -24,8 +24,8 @@ final class MerchantTransfer extends AbstractTransfer
     protected const int IS_ACTIVE_DATA_INDEX = 0;
 
     public ?bool $isActive {
-        get => $this->data[self::IS_ACTIVE_DATA_INDEX];
-        set => $this->data[self::IS_ACTIVE_DATA_INDEX] = $value;
+        get => $this->_data[self::IS_ACTIVE_DATA_INDEX];
+        set => $this->_data[self::IS_ACTIVE_DATA_INDEX] = $value;
     }
 
     // merchantReference
@@ -34,7 +34,7 @@ final class MerchantTransfer extends AbstractTransfer
     protected const int MERCHANT_REFERENCE_DATA_INDEX = 1;
 
     public ?string $merchantReference {
-        get => $this->data[self::MERCHANT_REFERENCE_DATA_INDEX];
-        set => $this->data[self::MERCHANT_REFERENCE_DATA_INDEX] = $value;
+        get => $this->_data[self::MERCHANT_REFERENCE_DATA_INDEX];
+        set => $this->_data[self::MERCHANT_REFERENCE_DATA_INDEX] = $value;
     }
 }

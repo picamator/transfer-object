@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Picamator\TransferObject\Generator\Fiber;
+namespace Picamator\TransferObject\Generator\Transfer;
 
-interface GeneratorFiberInterface
+interface TransferGeneratorInterface
 {
     public function generateTransfers(callable $errorItemCallback): bool;
 }

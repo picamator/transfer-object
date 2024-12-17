@@ -24,6 +24,11 @@ enum TypeValueEnum: string
         return self::ARRAY_OBJECT->value === $type;
     }
 
+    public static function isIterable(string $type): bool
+    {
+        return self::ITERABLE->value === $type;
+    }
+
     public static function isTransfer(string $type): bool
     {
         return self::tryFrom($type) === null;

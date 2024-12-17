@@ -2,6 +2,7 @@
 
 namespace Picamator\TransferObject\Generated;
 
+use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 
 /**
@@ -9,7 +10,7 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - Class is generated based on definition.
  * - In order to modify file please change definition and run generator.
  */
-final class DefinitionValidatorTransfer extends AbstractTransfer
+final class HelperValidatorTransfer extends AbstractTransfer
 {
     protected const int META_DATA_SIZE = 2;
 
@@ -22,19 +23,20 @@ final class DefinitionValidatorTransfer extends AbstractTransfer
     public const string ERROR_MESSAGES = 'errorMessages';
     protected const string ERROR_MESSAGES_DATA_NAME = 'ERROR_MESSAGES';
     protected const int ERROR_MESSAGES_DATA_INDEX = 0;
-    
-    public ?ArrayObject $errorMessages {
-        get => $this->data[self::ERROR_MESSAGES_DATA_INDEX] ?? new ArrayObject();
-        set => $this->data[self::ERROR_MESSAGES_DATA_INDEX] = $value;
+
+    /** @var \ArrayObject<string|int,mixed> */
+    public ArrayObject $errorMessages {
+        get => $this->_data[self::ERROR_MESSAGES_DATA_INDEX] ?? new ArrayObject();
+        set => $this->_data[self::ERROR_MESSAGES_DATA_INDEX] = $value;
     }
 
     // isValid
     public const string IS_VALID = 'isValid';
     protected const string IS_VALID_DATA_NAME = 'IS_VALID';
     protected const int IS_VALID_DATA_INDEX = 1;
-    
+
     public ?bool $isValid {
-        get => $this->data[self::IS_VALID_DATA_INDEX];
-        set => $this->data[self::IS_VALID_DATA_INDEX] = $value;
+        get => $this->_data[self::IS_VALID_DATA_INDEX];
+        set => $this->_data[self::IS_VALID_DATA_INDEX] = $value;
     }
 }

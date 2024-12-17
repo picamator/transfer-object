@@ -7,7 +7,7 @@ readonly class GeneratorFacade implements GeneratorFacadeInterface
     public function generateTransfers(callable $errorItemCallback): bool
     {
         return new GeneratorFactory()
-            ->createGeneratorFiber()
+            ->createTransferGenerator()
             ->generateTransfers($errorItemCallback);
     }
 }

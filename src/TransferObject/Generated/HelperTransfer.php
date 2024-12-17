@@ -9,24 +9,25 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - Class is generated based on definition.
  * - In order to modify file please change definition and run generator.
  */
-final class ConfigTransfer extends AbstractTransfer
+final class HelperTransfer extends AbstractTransfer
 {
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::DEFINITION_PATH => self::DEFINITION_PATH_DATA_NAME,
+        self::TRANSFER_DATA => self::TRANSFER_DATA_DATA_NAME,
         self::TRANSFER_NAMESPACE => self::TRANSFER_NAMESPACE_DATA_NAME,
         self::TRANSFER_PATH => self::TRANSFER_PATH_DATA_NAME,
     ];
 
-    // definitionPath
-    public const string DEFINITION_PATH = 'definitionPath';
-    protected const string DEFINITION_PATH_DATA_NAME = 'DEFINITION_PATH';
-    protected const int DEFINITION_PATH_DATA_INDEX = 0;
+    // transferData
+    public const string TRANSFER_DATA = 'transferData';
+    protected const string TRANSFER_DATA_DATA_NAME = 'TRANSFER_DATA';
+    protected const int TRANSFER_DATA_DATA_INDEX = 0;
 
-    public ?string $definitionPath {
-        get => $this->_data[self::DEFINITION_PATH_DATA_INDEX];
-        set => $this->_data[self::DEFINITION_PATH_DATA_INDEX] = $value;
+    /** @var iterable<mixed> */
+    public ?iterable $transferData {
+        get => $this->_data[self::TRANSFER_DATA_DATA_INDEX];
+        set => $this->_data[self::TRANSFER_DATA_DATA_INDEX] = $value;
     }
 
     // transferNamespace

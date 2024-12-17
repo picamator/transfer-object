@@ -1,0 +1,13 @@
+Helper:
+  transferNamespace:
+    type: string
+  transferPath:
+    type: string
+  transferData:
+    type: iterable
+
+HelperValidator:
+  isValid:
+    type: bool
+  errorMessages:
+    type: ArrayObject

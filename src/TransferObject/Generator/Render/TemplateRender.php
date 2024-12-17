@@ -88,6 +88,12 @@ readonly class TemplateRender implements TemplateRenderInterface
         if (TypeValueEnum::isArray($propertyTransfer->type)) {
             $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY->value;
             $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY->value;
+
+            return;
+        }
+
+        if (TypeValueEnum::isIterable($propertyTransfer->type)) {
+            $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ITERABLE->value;
         }
     }
 
