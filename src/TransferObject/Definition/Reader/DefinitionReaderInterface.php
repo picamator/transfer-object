@@ -7,7 +7,7 @@ use Generator;
 interface DefinitionReaderInterface
 {
     /**
-     * @return \Generator<\Picamator\TransferObject\Generated\DefinitionTransfer>
+     * @return \Generator<\Picamator\TransferObject\Transfer\Generated\DefinitionTransfer>
      */
     public function getDefinitions(): Generator;
 }

@@ -4,10 +4,10 @@ namespace Picamator\TransferObject\Generator\Transfer;
 
 use Fiber;
 use Picamator\TransferObject\Definition\DefinitionFacadeInterface;
-use Picamator\TransferObject\Generated\DefinitionTransfer;
-use Picamator\TransferObject\Generated\GeneratorTransfer;
 use Picamator\TransferObject\Generator\Filesystem\GeneratorFilesystemInterface;
 use Picamator\TransferObject\Generator\Render\TemplateRenderInterface;
+use Picamator\TransferObject\Transfer\Generated\DefinitionTransfer;
+use Picamator\TransferObject\Transfer\Generated\GeneratorTransfer;
 
 readonly class TransferGenerator implements TransferGeneratorInterface
 {
@@ -23,7 +23,7 @@ readonly class TransferGenerator implements TransferGeneratorInterface
         $generatorFiber = new Fiber($this->getFiberCallback(...));
         $generatorFiber->start();
         while (!$generatorFiber->isTerminated()) {
-            /** @var \Picamator\TransferObject\Generated\GeneratorTransfer|null $generatorTransfer */
+            /** @var \Picamator\TransferObject\Transfer\Generated\GeneratorTransfer|null $generatorTransfer */
             $generatorTransfer = $generatorFiber->resume();
             if ($generatorTransfer?->validator?->isValid === false) {
                 $errorItemCallback($generatorTransfer);

@@ -1,0 +1,4 @@
+generator:
+  transferNamespace: "Picamator\\TransferObject\\Helper\\Generated"
+  transferPath: "/home/transfer/transfer-object/doc/Helper/Generated"
+  definitionPath: "/home/transfer/transfer-object/doc/Helper/config/definition"

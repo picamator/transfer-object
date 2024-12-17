@@ -2,7 +2,7 @@
 
 namespace Picamator\TransferObject\Config;
 
-use Picamator\TransferObject\Generated\ConfigValidatorTransfer;
+use Picamator\TransferObject\Transfer\Generated\ConfigValidatorTransfer;
 
 interface ConfigFacadeInterface
 {

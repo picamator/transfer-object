@@ -2,7 +2,7 @@
 
 namespace Picamator\TransferObject\Generator\Render;
 
-use Picamator\TransferObject\Generated\DefinitionContentTransfer;
+use Picamator\TransferObject\Transfer\Generated\DefinitionContentTransfer;
 
 interface TemplateRenderInterface
 {

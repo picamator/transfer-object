@@ -3,7 +3,7 @@
 namespace Picamator\TransferObject\Config\Container;
 
 use Picamator\TransferObject\Exception\ConfigTransferException;
-use Picamator\TransferObject\Generated\ConfigTransfer;
+use Picamator\TransferObject\Transfer\Generated\ConfigTransfer;
 
 class ConfigContainer
 {

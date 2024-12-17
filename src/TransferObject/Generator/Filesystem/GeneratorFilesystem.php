@@ -75,9 +75,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
             $this->filesystem->remove($finder);
         } catch (Throwable $e) {
             throw new GeneratorTransferException(
-                sprintf(
-                    'Cannot delete previously generated files.',
-                ),
+                'Cannot delete previously generated files.',
                 previous: $e,
             );
         }

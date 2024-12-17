@@ -1,0 +1,30 @@
+Product:
+  sku:
+    type: string
+  name:
+    type: string
+  price:
+    type: float
+  currency:
+    type: string
+  stock:
+    type: int
+  isDiscounted:
+    type: bool
+  deliveryOptions:
+    collectionType: DeliveryOptions
+  details:
+    type: Details
+  stores:
+    type: array
+
+DeliveryOptions:
+  name:
+    type: string
+
+Details:
+  description:
+    type: string
+  isRegional:
+    type: bool
+

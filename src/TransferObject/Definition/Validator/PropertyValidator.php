@@ -3,7 +3,7 @@
 namespace Picamator\TransferObject\Definition\Validator;
 
 use Picamator\TransferObject\Definition\Enum\TypeValueEnum;
-use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
+use Picamator\TransferObject\Transfer\Generated\DefinitionPropertyTransfer;
 
 readonly class PropertyValidator implements PropertyValidatorInterface
 {

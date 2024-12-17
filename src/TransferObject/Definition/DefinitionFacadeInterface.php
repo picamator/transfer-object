@@ -14,7 +14,7 @@ interface DefinitionFacadeInterface
      * - Converts definition content to `\Picamator\TransferObject\Generated\DefinitionTransfer`
      * - Returns Generator that additionally returns who many files where processed `Generator::getReturn()`
      *
-     * @return \Generator<\Picamator\TransferObject\Generated\DefinitionTransfer>
+     * @return \Generator<\Picamator\TransferObject\Transfer\Generated\DefinitionTransfer>
      */
     public function getDefinitions(): Generator;
 }

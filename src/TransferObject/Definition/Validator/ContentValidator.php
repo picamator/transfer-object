@@ -3,8 +3,8 @@
 namespace Picamator\TransferObject\Definition\Validator;
 
 use ArrayObject;
-use Picamator\TransferObject\Generated\DefinitionContentTransfer;
-use Picamator\TransferObject\Generated\DefinitionValidatorTransfer;
+use Picamator\TransferObject\Transfer\Generated\DefinitionContentTransfer;
+use Picamator\TransferObject\Transfer\Generated\DefinitionValidatorTransfer;
 
 readonly class ContentValidator implements ContentValidatorInterface
 {

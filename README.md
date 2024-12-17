@@ -44,16 +44,23 @@ After instalation TO generator command `generate-transfer` is available on `./ve
 ./vendor/bin/generate-transfer -c [path to configuration file]
 ```
 
-### Helper
-Additionally to the command `generate-transfer` it is possible to integrate TO generator by
+### Helper (experemental)
+Helper class allows to generate TO Definitions based on object's data e.g. API Reponse, ORM Entity etc.
+
+For instance:
 
 ```php
-\Picamator\TransferObject\Helper\HelperFacadeInterface
+$productData = [
+    'sku' => 'T-123',
+    'name' => 'Tomato',
+];
 ```
 
-There are two interface methods:
-1. `generateTransfers()`, works the same as a command but without output to `stdout`
-2. `generateDefinitions()`, generates Definition `YML` file based on `JSON`, e.g. some API response
+Snippet [try-helper.php](/doc/Helper/try-helper.php) shows who to generate TO Definitions and base on them generate TO.
+
+The second part [try-helper-part-2.php](/doc/Helper/try-helper-part-2.php) validates newly generated TOs.
+
+_Note_: Experemental feature works only for the well structured data, resolving `null` type as a `string`.
 
 Configuration File
 ------------------
@@ -96,11 +103,11 @@ Customer:
 More can be found on [Definition Sample](/doc/Samples/config/definition) for more details.
 
 ### Defintion Types
-| Definition File Key | Supported Values                                                                               | Details                                                              |
-|---------------------|------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
-| type                | `bool`, `true`, `false`, `int`, `float`, `string`, `array`, `ArrayObject`, `mixed`, `iterable` | One of the listed values without Union `\|`.                         |
-| type                | Any TO name without prefix `Transfer`.                                                         | Generated property will have the coresponding TO type.               |
-| collectionType      | Any TO name without prefix `Transfer`.                                                         | Generated property will have `ArrayObject` where each element is TO. |
+| Definition File Key | Supported Values                                                                             | Details                                                              |
+|---------------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
+| type                | `bool`, `true`, `false`, `int`, `float`, `string`, `array`, `ArrayObject`, `iterable` | One of the listed values without Union `\|`.                         |
+| type                | Any TO name without prefix `Transfer`.                                                       | Generated property will have the coresponding TO type.               |
+| collectionType      | Any TO name without prefix `Transfer`.                                                       | Generated property will have `ArrayObject` where each element is TO. |
 
 
 Development

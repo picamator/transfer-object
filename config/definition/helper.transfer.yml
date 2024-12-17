@@ -1,13 +1,19 @@
 Helper:
-  transferNamespace:
+  definitionPath:
     type: string
-  transferPath:
-    type: string
-  transferData:
-    type: iterable
+  content:
+    type: HelperContent
 
-HelperValidator:
-  isValid:
-    type: bool
-  errorMessages:
-    type: ArrayObject
+HelperContent:
+  className:
+    type: string
+  content:
+    type: array
+
+HelperFilesystem:
+  fileName:
+    type: string
+  definitionPath:
+    type: string
+  content:
+    type: string

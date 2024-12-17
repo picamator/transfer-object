@@ -3,7 +3,7 @@
 namespace Picamator\TransferObject\Config\Filesystem;
 
 use Picamator\TransferObject\Exception\ConfigTransferException;
-use Picamator\TransferObject\Generated\ConfigTransfer;
+use Picamator\TransferObject\Transfer\Generated\ConfigTransfer;
 use Symfony\Component\Yaml\Parser;
 use Throwable;
 

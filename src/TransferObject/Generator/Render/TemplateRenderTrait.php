@@ -3,8 +3,8 @@
 namespace Picamator\TransferObject\Generator\Render;
 
 use ArrayObject;
-use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
-use Picamator\TransferObject\Generated\TemplateTransfer;
+use Picamator\TransferObject\Transfer\Generated\DefinitionPropertyTransfer;
+use Picamator\TransferObject\Transfer\Generated\TemplateTransfer;
 
 trait TemplateRenderTrait
 {
@@ -24,20 +24,25 @@ trait TemplateRenderTrait
         return $propertyTransfer->collectionType !== null;
     }
 
-    protected function sortAndUnify(TemplateTransfer $templateTransfer): void
+    protected function uniqueTemplate(TemplateTransfer $templateTransfer): void
+    {
+        foreach (static::UNIQUE_PROPERTIES as $property) {
+            /** @var \ArrayObject<int|string,string> $value */
+            $value = $templateTransfer->{$property};
+
+            $value = $value->getArrayCopy();
+            $value = array_unique($value);
+
+            $templateTransfer->{$property} = new ArrayObject($value);
+        }
+    }
+
+    protected function sortTemplate(TemplateTransfer $templateTransfer): void
     {
         foreach (static::SORTABLE_PROPERTIES as $property) {
             /** @var \ArrayObject<int|string,string> $value */
             $value = $templateTransfer->{$property};
-            $value = $value->getArrayCopy();
-
-            if (in_array($property,static::UNIQUE_PROPERTIES, true)) {
-                $value = array_unique($value);
-            }
-
-            natsort($value);
-
-            $templateTransfer->{$property} = new ArrayObject($value);
+            $value->natsort();
         }
     }
 

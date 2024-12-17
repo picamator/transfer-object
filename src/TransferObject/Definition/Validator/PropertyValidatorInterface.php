@@ -2,7 +2,7 @@
 
 namespace Picamator\TransferObject\Definition\Validator;
 
-use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
+use Picamator\TransferObject\Transfer\Generated\DefinitionPropertyTransfer;
 
 interface PropertyValidatorInterface
 {

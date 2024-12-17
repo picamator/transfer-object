@@ -4,8 +4,8 @@ namespace Picamator\TransferObject\Config\Loader;
 
 use Picamator\TransferObject\Config\Container\ConfigContainer;
 use Picamator\TransferObject\Config\Filesystem\ConfigFilesystemInterface;
-use Picamator\TransferObject\Generated\ConfigTransfer;
-use Picamator\TransferObject\Generated\ConfigValidatorTransfer;
+use Picamator\TransferObject\Transfer\Generated\ConfigTransfer;
+use Picamator\TransferObject\Transfer\Generated\ConfigValidatorTransfer;
 
 readonly class ConfigLoader implements ConfigLoaderInterface
 {

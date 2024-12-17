@@ -2,12 +2,11 @@
 
 namespace Picamator\TransferObject\Helper;
 
-use Picamator\TransferObject\Generated\HelperTransfer;
-use Picamator\TransferObject\Generated\HelperValidatorTransfer;
+use Picamator\TransferObject\Transfer\Generated\HelperTransfer;
 
 readonly class HelperFacade implements HelperFacadeInterface
 {
-    public function generateDefinitions(HelperTransfer $helperTransfer): HelperValidatorTransfer
+    public function generateDefinitions(HelperTransfer $helperTransfer): int
     {
         return new HelperFactory()
             ->createDefinitionGenerator()

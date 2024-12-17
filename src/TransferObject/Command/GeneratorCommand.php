@@ -3,8 +3,8 @@
 namespace Picamator\TransferObject\Command;
 
 use Picamator\TransferObject\Config\ConfigFacade;
-use Picamator\TransferObject\Generated\GeneratorTransfer;
 use Picamator\TransferObject\Generator\GeneratorFacade;
+use Picamator\TransferObject\Transfer\Generated\GeneratorTransfer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;

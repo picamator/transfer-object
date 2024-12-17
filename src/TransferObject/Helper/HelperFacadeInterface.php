@@ -2,8 +2,7 @@
 
 namespace Picamator\TransferObject\Helper;
 
-use Picamator\TransferObject\Generated\HelperTransfer;
-use Picamator\TransferObject\Generated\HelperValidatorTransfer;
+use Picamator\TransferObject\Transfer\Generated\HelperTransfer;
 
 interface HelperFacadeInterface
 {
@@ -11,9 +10,9 @@ interface HelperFacadeInterface
      * Specification:
      * - Generates Definitions by iterable transferData
      * - Saves Definition on the file
-     * - Returns `true` in success or `false` otherwise
+     * - Returns generated definitions number
      *
-     * @throws \Picamator\TransferObject\Exception\GeneratorTransferException
+     * @throws \Picamator\TransferObject\Exception\HelperTransferException
      */
-    public function generateDefinitions(HelperTransfer $helperTransfer): HelperValidatorTransfer;
+    public function generateDefinitions(HelperTransfer $helperTransfer): int;
 }

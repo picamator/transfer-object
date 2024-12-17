@@ -2,7 +2,7 @@
 
 namespace Picamator\TransferObject\Config\Filesystem;
 
-use Picamator\TransferObject\Generated\ConfigTransfer;
+use Picamator\TransferObject\Transfer\Generated\ConfigTransfer;
 
 interface ConfigFilesystemInterface
 {

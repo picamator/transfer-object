@@ -5,14 +5,14 @@ namespace Picamator\TransferObject\Generator\Render;
 use Picamator\TransferObject\Config\Container\ConfigInterface;
 use Picamator\TransferObject\Definition\Enum\TypeValueEnum;
 use Picamator\TransferObject\Exception\GeneratorTransferException;
-use Picamator\TransferObject\Generated\DefinitionContentTransfer;
-use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
-use Picamator\TransferObject\Generated\TemplateTransfer;
 use Picamator\TransferObject\Generator\Enum\AttributeEnum;
 use Picamator\TransferObject\Generator\Enum\AttributeTemplateEnum;
 use Picamator\TransferObject\Generator\Enum\DefaultValueTemplateEnum;
 use Picamator\TransferObject\Generator\Enum\DockBlockTemplateEnum;
 use Picamator\TransferObject\Generator\Enum\TransferEnum;
+use Picamator\TransferObject\Transfer\Generated\DefinitionContentTransfer;
+use Picamator\TransferObject\Transfer\Generated\DefinitionPropertyTransfer;
+use Picamator\TransferObject\Transfer\Generated\TemplateTransfer;
 
 readonly class TemplateRender implements TemplateRenderInterface
 {
@@ -61,18 +61,19 @@ readonly class TemplateRender implements TemplateRenderInterface
             match (true) {
                 $this->isCollectionType($propertyTransfer) => $this->expandTransferCollectionType($propertyTransfer, $templateTransfer),
                 TypeValueEnum::isTransfer($propertyTransfer->type) => $this->expandTransferType($propertyTransfer, $templateTransfer),
-                default => $this->expandDefaultType($propertyTransfer, $templateTransfer),
+                default => $this->expandPrimitiveType($propertyTransfer, $templateTransfer),
             };
         }
 
         $templateTransfer->propertiesCount = $templateTransfer->properties->count();
 
-        $this->sortAndUnify($templateTransfer);
+        $this->uniqueTemplate($templateTransfer);
+        $this->sortTemplate($templateTransfer);
 
         return $templateTransfer;
     }
 
-    private function expandDefaultType(DefinitionPropertyTransfer $propertyTransfer, TemplateTransfer $templateTransfer): void
+    private function expandPrimitiveType(DefinitionPropertyTransfer $propertyTransfer, TemplateTransfer $templateTransfer): void
     {
         $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->properties[$propertyName] = $propertyTransfer->type;
@@ -93,7 +94,9 @@ readonly class TemplateRender implements TemplateRenderInterface
         }
 
         if (TypeValueEnum::isIterable($propertyTransfer->type)) {
+            $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY->value;
             $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ITERABLE->value;
+
         }
     }
 

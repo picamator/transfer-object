@@ -1,5 +1,6 @@
 <?php
-use Picamator\TransferObject\Generated\TemplateTransfer;
+
+use Picamator\TransferObject\Transfer\Generated\TemplateTransfer;
 
 $templateTransfer ??= new TemplateTransfer();
 ?>

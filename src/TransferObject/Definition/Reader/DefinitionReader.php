@@ -7,9 +7,9 @@ use Picamator\TransferObject\Definition\Enum\TypeKeyEnum;
 use Picamator\TransferObject\Definition\Filesystem\DefinitionFilesystemInterface;
 use Picamator\TransferObject\Definition\Parser\ContentParserInterface;
 use Picamator\TransferObject\Definition\Validator\ContentValidatorInterface;
-use Picamator\TransferObject\Generated\DefinitionContentTransfer;
-use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
-use Picamator\TransferObject\Generated\DefinitionTransfer;
+use Picamator\TransferObject\Transfer\Generated\DefinitionContentTransfer;
+use Picamator\TransferObject\Transfer\Generated\DefinitionPropertyTransfer;
+use Picamator\TransferObject\Transfer\Generated\DefinitionTransfer;
 
 readonly class DefinitionReader implements DefinitionReaderInterface
 {
