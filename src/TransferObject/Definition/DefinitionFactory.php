@@ -3,8 +3,8 @@
 namespace Picamator\TransferObject\Definition;
 
 use Picamator\TransferObject\Config\ConfigFactoryTrait;
-use Picamator\TransferObject\Definition\Filesystem\DefinitionFilesystem;
-use Picamator\TransferObject\Definition\Filesystem\DefinitionFilesystemInterface;
+use Picamator\TransferObject\Definition\Filesystem\DefinitionFinder;
+use Picamator\TransferObject\Definition\Filesystem\DefinitionFinderInterface;
 use Picamator\TransferObject\Definition\Parser\ContentParserInterface;
 use Picamator\TransferObject\Definition\Parser\YmlContentParser;
 use Picamator\TransferObject\Definition\Reader\DefinitionReader;
@@ -25,7 +25,7 @@ readonly class DefinitionFactory
     public function createDefinitionReader(): DefinitionReaderInterface
     {
         return new DefinitionReader(
-            $this->createFilesystem(),
+            $this->createDefinitionFinder(),
             $this->createContentParser(),
             $this->createContentValidator(),
         );
@@ -59,9 +59,9 @@ readonly class DefinitionFactory
         return new Parser();
     }
 
-    protected function createFilesystem(): DefinitionFilesystemInterface
+    protected function createDefinitionFinder(): DefinitionFinderInterface
     {
-        return new DefinitionFilesystem(
+        return new DefinitionFinder(
             $this->createFinder(),
             $this->getConfig(),
         );

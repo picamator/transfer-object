@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Picamator\TransferObject\Helper\Reader;
+namespace Picamator\TransferObject\Helper\Builder;
 
-trait HelperReaderTrait
+trait DefinitionBuilderTrait
 {
     protected function getClassName(string $propertyName): string
     {

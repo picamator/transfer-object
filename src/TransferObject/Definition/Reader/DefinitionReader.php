@@ -4,7 +4,7 @@ namespace Picamator\TransferObject\Definition\Reader;
 
 use Generator;
 use Picamator\TransferObject\Definition\Enum\TypeKeyEnum;
-use Picamator\TransferObject\Definition\Filesystem\DefinitionFilesystemInterface;
+use Picamator\TransferObject\Definition\Filesystem\DefinitionFinderInterface;
 use Picamator\TransferObject\Definition\Parser\ContentParserInterface;
 use Picamator\TransferObject\Definition\Validator\ContentValidatorInterface;
 use Picamator\TransferObject\Transfer\Generated\DefinitionContentTransfer;
@@ -14,7 +14,7 @@ use Picamator\TransferObject\Transfer\Generated\DefinitionTransfer;
 readonly class DefinitionReader implements DefinitionReaderInterface
 {
     public function __construct(
-        private DefinitionFilesystemInterface $filesystem,
+        private DefinitionFinderInterface $finder,
         private ContentParserInterface $parser,
         private ContentValidatorInterface $validator,
     ) {
@@ -22,7 +22,7 @@ readonly class DefinitionReader implements DefinitionReaderInterface
 
     public function getDefinitions(): Generator
     {
-        $definitionContents = $this->filesystem->getDefinitionContent();
+        $definitionContents = $this->finder->getDefinitionContent();
         foreach ($definitionContents as $fileName => $definitionContent) {
             $definition = $this->parser->parseContent($definitionContent);
 

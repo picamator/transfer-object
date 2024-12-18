@@ -4,7 +4,7 @@ namespace Picamator\TransferObject\Helper\Filesystem;
 
 use Picamator\TransferObject\Transfer\Generated\HelperFilesystemTransfer;
 
-interface HelperFilesystemInterface
+interface DefinitionFilesystemInterface
 {
     /**
      * @throws \Picamator\TransferObject\Exception\HelperTransferException

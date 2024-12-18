@@ -2,14 +2,14 @@
 
 namespace Picamator\TransferObject\Helper;
 
-use Picamator\TransferObject\Helper\Definition\DefinitionGenerator;
-use Picamator\TransferObject\Helper\Definition\DefinitionGeneratorInterface;
-use Picamator\TransferObject\Helper\Filesystem\HelperFilesystem;
-use Picamator\TransferObject\Helper\Filesystem\HelperFilesystemInterface;
-use Picamator\TransferObject\Helper\Reader\HelperReader;
-use Picamator\TransferObject\Helper\Reader\HelperReaderInterface;
-use Picamator\TransferObject\Helper\Render\HelperRender;
-use Picamator\TransferObject\Helper\Render\HelperRenderInterface;
+use Picamator\TransferObject\Helper\Generator\DefinitionGenerator;
+use Picamator\TransferObject\Helper\Generator\DefinitionGeneratorInterface;
+use Picamator\TransferObject\Helper\Filesystem\DefinitionFilesystem;
+use Picamator\TransferObject\Helper\Filesystem\DefinitionFilesystemInterface;
+use Picamator\TransferObject\Helper\Builder\DefinitionBuilder;
+use Picamator\TransferObject\Helper\Builder\DefinitionBuilderInterface;
+use Picamator\TransferObject\Helper\Render\DefinitionRender;
+use Picamator\TransferObject\Helper\Render\DefinitionRenderInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 readonly class HelperFactory
@@ -17,29 +17,29 @@ readonly class HelperFactory
    public function createDefinitionGenerator(): DefinitionGeneratorInterface
    {
        return new DefinitionGenerator(
-           $this->createHelperReader(),
-           $this->createHelperRender(),
-           $this->createHelperFilesystem(),
+           $this->createDefinitionReader(),
+           $this->createDefinitionRender(),
+           $this->createDefinitionFilesystem(),
        );
    }
 
-   private function createHelperFilesystem(): HelperFilesystemInterface
+   protected function createDefinitionFilesystem(): DefinitionFilesystemInterface
    {
-       return new HelperFilesystem($this->createFilesystem());
+       return new DefinitionFilesystem($this->createFilesystem());
    }
 
-   private function createFilesystem(): Filesystem
+   protected function createFilesystem(): Filesystem
    {
        return new Filesystem();
    }
 
-   protected function createHelperRender(): HelperRenderInterface
+   protected function createDefinitionRender(): DefinitionRenderInterface
    {
-       return new HelperRender();
+       return new DefinitionRender();
    }
 
-   protected function createHelperReader(): HelperReaderInterface
+   protected function createDefinitionReader(): DefinitionBuilderInterface
    {
-       return new HelperReader();
+       return new DefinitionBuilder();
    }
 }

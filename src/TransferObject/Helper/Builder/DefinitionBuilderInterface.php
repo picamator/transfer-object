@@ -1,16 +1,16 @@
 <?php declare(strict_types = 1);
 
-namespace Picamator\TransferObject\Helper\Reader;
+namespace Picamator\TransferObject\Helper\Builder;
 
 use Generator;
 use Picamator\TransferObject\Transfer\Generated\HelperContentTransfer;
 
-interface HelperReaderInterface
+interface DefinitionBuilderInterface
 {
     /**
      * @throws \Picamator\TransferObject\Exception\HelperTransferException
      *
      * @return \Generator<\Picamator\TransferObject\Transfer\Generated\DefinitionContentTransfer>
      */
-    public function getDefinitionContents(HelperContentTransfer $helperContentTransfer): Generator;
+    public function buildDefinitionContents(HelperContentTransfer $helperContentTransfer): Generator;
 }

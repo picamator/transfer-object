@@ -4,7 +4,7 @@ namespace Picamator\TransferObject\Helper\Render;
 
 use Picamator\TransferObject\Transfer\Generated\DefinitionContentTransfer;
 
-interface HelperRenderInterface
+interface DefinitionRenderInterface
 {
     public function renderDefinitionContent(DefinitionContentTransfer $contentTransfer): string;
 }

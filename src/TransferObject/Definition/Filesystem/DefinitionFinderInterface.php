@@ -4,7 +4,7 @@ namespace Picamator\TransferObject\Definition\Filesystem;
 
 use Generator;
 
-interface DefinitionFilesystemInterface
+interface DefinitionFinderInterface
 {
     /**
      * @throws \Picamator\TransferObject\Exception\DefinitionTransferException

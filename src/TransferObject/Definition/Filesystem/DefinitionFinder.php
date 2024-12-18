@@ -8,7 +8,7 @@ use Picamator\TransferObject\Exception\DefinitionTransferException;
 use Symfony\Component\Finder\Finder;
 use Throwable;
 
-readonly class DefinitionFilesystem implements DefinitionFilesystemInterface
+readonly class DefinitionFinder implements DefinitionFinderInterface
 {
     private const string FILE_NAME_PATTERN = '*.transfer.yml';
 

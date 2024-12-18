@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Picamator\TransferObject\Helper\Definition;
+namespace Picamator\TransferObject\Helper\Generator;
 
 use Picamator\TransferObject\Transfer\Generated\HelperTransfer;
 

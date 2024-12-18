@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Picamator\TransferObject\Helper\Reader;
+namespace Picamator\TransferObject\Helper\Builder;
 
 use ArrayObject;
 use Generator;
@@ -10,11 +10,11 @@ use Picamator\TransferObject\Transfer\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Transfer\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Transfer\Generated\HelperContentTransfer;
 
-readonly class HelperReader implements HelperReaderInterface
+readonly class DefinitionBuilder implements DefinitionBuilderInterface
 {
-    use HelperReaderTrait;
+    use DefinitionBuilderTrait;
 
-    public function getDefinitionContents(HelperContentTransfer $helperContentTransfer): Generator
+    public function buildDefinitionContents(HelperContentTransfer $helperContentTransfer): Generator
     {
         $definitionGenerator = $this->getDefinition($helperContentTransfer);
         foreach ($definitionGenerator as $definitionTransfer) {
@@ -24,7 +24,7 @@ readonly class HelperReader implements HelperReaderInterface
         /** @var \ArrayObject<\Picamator\TransferObject\Transfer\Generated\HelperContentTransfer> $helperContentTransfers */
         $helperContentTransfers = $definitionGenerator->getReturn();
         foreach ($helperContentTransfers as $helperContentTransfer) {
-            yield from $this->getDefinitionContents($helperContentTransfer);
+            yield from $this->buildDefinitionContents($helperContentTransfer);
         }
     }
 

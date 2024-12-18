@@ -4,7 +4,7 @@ namespace Picamator\TransferObject\Helper\Render;
 
 use Picamator\TransferObject\Transfer\Generated\DefinitionContentTransfer;
 
-readonly class HelperRender implements HelperRenderInterface
+readonly class DefinitionRender implements DefinitionRenderInterface
 {
     private const string CLASS_TEMPLATE =<<<'START'
 %s:
