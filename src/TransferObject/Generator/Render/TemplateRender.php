@@ -66,8 +66,6 @@ readonly class TemplateRender implements TemplateRenderInterface
         }
 
         $templateTransfer->propertiesCount = $templateTransfer->properties->count();
-
-        $this->uniqueTemplate($templateTransfer);
         $this->sortTemplate($templateTransfer);
 
         return $templateTransfer;
@@ -79,7 +77,7 @@ readonly class TemplateRender implements TemplateRenderInterface
         $templateTransfer->properties[$propertyName] = $propertyTransfer->type;
 
         if (TypeValueEnum::isArrayObject($propertyTransfer->type)) {
-            $templateTransfer->imports[] = TypeValueEnum::ARRAY_OBJECT->value;
+            $templateTransfer->imports[TypeValueEnum::ARRAY_OBJECT->value] ??= TypeValueEnum::ARRAY_OBJECT->value;
             $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY_OBJECT->value;
             $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY_OBJECT->value;
 
@@ -102,7 +100,7 @@ readonly class TemplateRender implements TemplateRenderInterface
 
     private function expandTransferType(DefinitionPropertyTransfer $propertyTransfer, TemplateTransfer $templateTransfer): void
     {
-        $templateTransfer->imports[] = AttributeEnum::TYPE_ATTRIBUTE->value;
+        $templateTransfer->imports[AttributeEnum::TYPE_ATTRIBUTE->value] ??= AttributeEnum::TYPE_ATTRIBUTE->value;
 
         $transferName = $this->getTransferName($propertyTransfer->type);
         $propertyName = $propertyTransfer->propertyName;
@@ -113,8 +111,8 @@ readonly class TemplateRender implements TemplateRenderInterface
 
     private function expandTransferCollectionType(DefinitionPropertyTransfer $propertyTransfer, TemplateTransfer $templateTransfer): void
     {
-        $templateTransfer->imports[] = TypeValueEnum::ARRAY_OBJECT->value;
-        $templateTransfer->imports[] = AttributeEnum::COLLECTION_TYPE_ATTRIBUTE->value;
+        $templateTransfer->imports[TypeValueEnum::ARRAY_OBJECT->value] ??= TypeValueEnum::ARRAY_OBJECT->value;
+        $templateTransfer->imports[AttributeEnum::COLLECTION_TYPE_ATTRIBUTE->value] ??= AttributeEnum::COLLECTION_TYPE_ATTRIBUTE->value;
 
         $transferName = $this->getTransferName($propertyTransfer->collectionType);
 
