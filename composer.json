@@ -22,7 +22,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Picamator\\Tests\\": "tests/",
+      "Picamator\\Tests\\Unit\\": "tests/unit/",
+      "Picamator\\Tests\\Integration\\": "tests/integration/",
       "Picamator\\TransferObject\\": "doc/"
     }
   },
@@ -43,12 +44,12 @@
     "exclude": ["docker", "docker-compose.yml", "tests"]
   },
   "scripts": {
-    "test": "./vendor/bin/phpunit",
+    "phpunit": "./vendor/bin/phpunit",
     "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon",
     "generate-transfer": "php ./generate-transfer"
   },
   "scripts-descriptions": {
-    "test": "Run PHPUnit tests.",
+    "phpunit": "Run PHPUnit tests.",
     "phpstan": "Run PHPStan - PHP Static Analysis Tool.",
     "generate-transfer": "Run Transfer Object Generator."
   }

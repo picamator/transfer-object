@@ -1,0 +1,5 @@
+Agent:
+  customer:
+    type: Customer
+  merchants:
+    collectionType: Merchant

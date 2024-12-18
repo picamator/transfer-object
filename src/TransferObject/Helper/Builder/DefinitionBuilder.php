@@ -71,9 +71,9 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
      * @throws \Picamator\TransferObject\Exception\HelperTransferException
      */
     private function getPrimitiveTypePropertyTransfer(
-        string           $propertyName,
+        string $propertyName,
         VariableTypeEnum $typeEnum,
-        mixed            $propertyValue,
+        mixed $propertyValue,
     ): DefinitionPropertyTransfer {
         $propertyTransfer = new DefinitionPropertyTransfer();
         if ($typeEnum->isNull() || $typeEnum->isString()) {

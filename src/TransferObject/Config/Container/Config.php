@@ -7,7 +7,7 @@ final readonly class Config implements ConfigInterface
     public function __construct(
         private string $transferNamespace,
         private string $transferPath,
-        private string $definitionPath
+        private string $definitionPath,
     ) {
     }
 
