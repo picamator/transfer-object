@@ -17,7 +17,7 @@ readonly class HelperFactory
    public function createDefinitionGenerator(): DefinitionGeneratorInterface
    {
        return new DefinitionGenerator(
-           $this->createDefinitionReader(),
+           $this->createDefinitionBuilder(),
            $this->createDefinitionRender(),
            $this->createDefinitionFilesystem(),
        );
@@ -38,7 +38,7 @@ readonly class HelperFactory
        return new DefinitionRender();
    }
 
-   protected function createDefinitionReader(): DefinitionBuilderInterface
+   protected function createDefinitionBuilder(): DefinitionBuilderInterface
    {
        return new DefinitionBuilder();
    }

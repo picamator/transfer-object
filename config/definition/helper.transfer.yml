@@ -4,6 +4,12 @@ Helper:
   content:
     type: HelperContent
 
+HelperBuilder:
+  definitionContent:
+    type: DefinitionContent
+  helperContents:
+    collectionType: HelperContent
+
 HelperContent:
   className:
     type: string

@@ -8,8 +8,8 @@ interface HelperFacadeInterface
 {
     /**
      * Specification:
-     * - Generates Definitions by iterable transferData
-     * - Saves Definition on the file
+     * - Generates definitions by content data
+     * - Saves definitions on the file
      * - Returns generated definitions number
      *
      * @throws \Picamator\TransferObject\Exception\HelperTransferException
