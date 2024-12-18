@@ -21,8 +21,9 @@ final class GeneratorCommand extends Command
     private const string OPTION_SHORTCUT_CONFIGURATION = 'c';
     private const string OPTION_DESCRIPTION_CONFIGURATION = 'Path to YML configuration.';
 
-    private const string FAILED_TEMPLATE = 'Failed generating %s.';
-    private const string FAILED_MESSAGE = 'Failed generate Transfer Objects.';
+    private const string ERROR_TEMPLATE = 'Failed generating %s.';
+    private const string ERROR_MISSED_OPTION_CONFIG_MESSAGE = 'Command\'s option -c is not set. Please provide path to YML configuration.';
+    private const string ERROR_MESSAGE = 'Failed generate Transfer Objects.';
     private const string SUCCESS_MESSAGE = 'Transfer Objects successfully generated.';
 
     protected function configure(): void
@@ -42,17 +43,12 @@ final class GeneratorCommand extends Command
     {
         $inputOutput = new SymfonyStyle($input, $output);
 
-        $configPath = $input->getOption(self::OPTION_NAME_CONFIGURATION) ?: '';
-        $validatorTransfer = new ConfigFacade()->loadConfig($configPath);
-        if (!$validatorTransfer->isValid) {
-            $inputOutput->error(self::FAILED_MESSAGE);
-            $inputOutput->error($validatorTransfer->errorMessage);
-
+        $isSuccess = $this->loadConfig($input, $inputOutput);
+        if (!$isSuccess) {
             return Command::FAILURE;
         }
 
-        $errorItemCallback = fn(GeneratorTransfer $generatorTransfer) => $this->handleErrors($inputOutput, $generatorTransfer);
-        $isSuccess = new GeneratorFacade()->generateTransfers($errorItemCallback);
+        $isSuccess = $this->generateTransfers($inputOutput);
 
         if ($isSuccess) {
             $inputOutput->success(self::SUCCESS_MESSAGE);
@@ -60,17 +56,53 @@ final class GeneratorCommand extends Command
             return Command::SUCCESS;
         }
 
-        $inputOutput->error(self::FAILED_MESSAGE);
+        $inputOutput->error(self::ERROR_MESSAGE);
 
         return Command::FAILURE;
     }
 
+    private function generateTransfers(SymfonyStyle $inputOutput): bool
+    {
+        $generatorFiber = new GeneratorFacade()->getGeneratorFiber();
+        $generatorFiber->start();
+        while (!$generatorFiber->isTerminated()) {
+            /** @var \Picamator\TransferObject\Transfer\Generated\GeneratorTransfer|null $generatorTransfer */
+            $generatorTransfer = $generatorFiber->resume();
+            if ($generatorTransfer?->validator?->isValid === false) {
+                $this->handleErrors($inputOutput, $generatorTransfer);
+            }
+        }
+
+        return $generatorFiber->getReturn();
+    }
+
     private function handleErrors(SymfonyStyle $inputOutput, GeneratorTransfer $generatorTransfer): void
     {
-        $inputOutput->error(sprintf(self::FAILED_TEMPLATE, $generatorTransfer->definitionKey));
+        $inputOutput->error(sprintf(self::ERROR_TEMPLATE, $generatorTransfer->definitionKey));
 
         $errorMessages = $generatorTransfer->validator?->errorMessages->getArrayCopy();
         $inputOutput->warning($errorMessages);
+    }
+
+    private function loadConfig(InputInterface $input, SymfonyStyle $inputOutput): bool
+    {
+        $configPath = $input->getOption(self::OPTION_NAME_CONFIGURATION) ?: '';
+        if ($configPath === '') {
+            $inputOutput->error(self::ERROR_MESSAGE);
+            $inputOutput->error(self::ERROR_MISSED_OPTION_CONFIG_MESSAGE);
+
+            return false;
+        }
+
+        $validatorTransfer = new ConfigFacade()->loadConfig($configPath);
+        if (!$validatorTransfer->isValid) {
+            $inputOutput->error(self::ERROR_MESSAGE);
+            $inputOutput->error($validatorTransfer->errorMessage);
+
+            return false;
+        }
+
+        return true;
     }
 }
 

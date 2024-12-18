@@ -2,11 +2,12 @@
 
 namespace Picamator\TransferObject\Generator;
 
+use Fiber;
 use Picamator\TransferObject\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\Definition\DefinitionFacade;
 use Picamator\TransferObject\Definition\DefinitionFacadeInterface;
-use Picamator\TransferObject\Generator\Transfer\TransferGenerator;
-use Picamator\TransferObject\Generator\Transfer\TransferGeneratorInterface;
+use Picamator\TransferObject\Generator\Generator\GeneratorFiberCallback;
+use Picamator\TransferObject\Generator\Generator\GeneratorFiberCallbackInterface;
 use Picamator\TransferObject\Generator\Filesystem\GeneratorFilesystem;
 use Picamator\TransferObject\Generator\Filesystem\GeneratorFilesystemInterface;
 use Picamator\TransferObject\Generator\Render\TemplateRender;
@@ -18,9 +19,14 @@ readonly class GeneratorFactory
 {
     use ConfigFactoryTrait;
 
-    public function createTransferGenerator(): TransferGeneratorInterface
+    public function createGeneratorFiber(): Fiber
     {
-        return new TransferGenerator(
+        return new Fiber($this->createGeneratorFiberCallback()->fiberCallback(...));
+    }
+
+    protected function createGeneratorFiberCallback(): GeneratorFiberCallbackInterface
+    {
+        return new GeneratorFiberCallback(
             $this->createDefinitionFacade(),
             $this->createTemplateRender(),
             $this->createGeneratorFilesystem(),

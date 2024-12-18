@@ -2,12 +2,13 @@
 
 namespace Picamator\TransferObject\Generator;
 
+use Fiber;
+
 readonly class GeneratorFacade implements GeneratorFacadeInterface
 {
-    public function generateTransfers(callable $errorItemCallback): bool
+    public function getGeneratorFiber(): Fiber
     {
         return new GeneratorFactory()
-            ->createTransferGenerator()
-            ->generateTransfers($errorItemCallback);
+            ->createGeneratorFiber();
     }
 }
