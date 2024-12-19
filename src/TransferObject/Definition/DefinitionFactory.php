@@ -2,6 +2,7 @@
 
 namespace Picamator\TransferObject\Definition;
 
+use ArrayObject;
 use Picamator\TransferObject\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\Definition\Filesystem\DefinitionFinder;
 use Picamator\TransferObject\Definition\Filesystem\DefinitionFinderInterface;
@@ -13,8 +14,13 @@ use Picamator\TransferObject\Definition\Validator\ClassNameValidator;
 use Picamator\TransferObject\Definition\Validator\ClassNameValidatorInterface;
 use Picamator\TransferObject\Definition\Validator\ContentValidator;
 use Picamator\TransferObject\Definition\Validator\ContentValidatorInterface;
-use Picamator\TransferObject\Definition\Validator\PropertyValidator;
-use Picamator\TransferObject\Definition\Validator\PropertyValidatorInterface;
+use Picamator\TransferObject\Definition\Validator\Property\CollectionTypePropertyValidator;
+use Picamator\TransferObject\Definition\Validator\Property\DefinitionPropertyValidator;
+use Picamator\TransferObject\Definition\Validator\Property\NamePropertyValidator;
+use Picamator\TransferObject\Definition\Validator\Property\PropertyValidator;
+use Picamator\TransferObject\Definition\Validator\Property\PropertyValidatorInterface;
+use Picamator\TransferObject\Definition\Validator\Property\TypePropertyValidator;
+use Picamator\TransferObject\Definition\Validator\Property\UnionTypePropertyValidator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Parser;
 
@@ -41,7 +47,46 @@ readonly class DefinitionFactory
 
     protected function createPropertyValidator(): PropertyValidatorInterface
     {
-        return new PropertyValidator($this->createClassNameValidator());
+        return new PropertyValidator($this->createPropertyValidators());
+    }
+
+    /**
+     * @return ArrayObject<\Picamator\TransferObject\Definition\Validator\Property\PropertyValidatorInterface>
+     */
+    protected function createPropertyValidators(): ArrayObject
+    {
+        return new ArrayObject([
+            $this->createNamePropertyValidator(),
+            $this->createDefinitionPropertyValidator(),
+            $this->createUnionTypePropertyValidator(),
+            $this->createTypePropertyValidator(),
+            $this->createCollectionTypePropertyValidator(),
+        ]);
+    }
+
+    protected function createCollectionTypePropertyValidator(): PropertyValidatorInterface
+    {
+        return new CollectionTypePropertyValidator($this->createClassNameValidator());
+    }
+
+    protected function createTypePropertyValidator(): PropertyValidatorInterface
+    {
+        return new TypePropertyValidator($this->createClassNameValidator());
+    }
+
+    protected function createUnionTypePropertyValidator(): PropertyValidatorInterface
+    {
+        return new UnionTypePropertyValidator();
+    }
+
+    protected function createDefinitionPropertyValidator(): PropertyValidatorInterface
+    {
+        return new DefinitionPropertyValidator();
+    }
+
+    protected function createNamePropertyValidator(): PropertyValidatorInterface
+    {
+        return new NamePropertyValidator();
     }
 
     protected function createClassNameValidator(): ClassNameValidatorInterface

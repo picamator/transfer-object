@@ -3,6 +3,7 @@
 namespace Picamator\TransferObject\Definition\Validator;
 
 use ArrayObject;
+use Picamator\TransferObject\Definition\Validator\Property\PropertyValidatorInterface;
 use Picamator\TransferObject\Transfer\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Transfer\Generated\DefinitionValidatorTransfer;
 
@@ -17,11 +18,11 @@ readonly class ContentValidator implements ContentValidatorInterface
     public function validate(DefinitionContentTransfer $contentTransfer): DefinitionValidatorTransfer
     {
         $errorMessages = $this->handleValidator($contentTransfer);
-        $isValid = count($errorMessages) === 0;
+        $isValid = $errorMessages->count() === 0;
 
         $validatorTransfer = new DefinitionValidatorTransfer();
         $validatorTransfer->isValid = $isValid;
-        $validatorTransfer->errorMessages = new ArrayObject($errorMessages);
+        $validatorTransfer->errorMessages = $errorMessages;
 
         return $validatorTransfer;
     }
@@ -29,13 +30,24 @@ readonly class ContentValidator implements ContentValidatorInterface
     /**
      * @return array<string>
      */
-    private function handleValidator(DefinitionContentTransfer $contentTransfer): array
+    private function handleValidator(DefinitionContentTransfer $contentTransfer): ArrayObject
     {
-        $errorMessages[] = $this->classNameValidator->validate($contentTransfer->className);
-        foreach ($contentTransfer->properties as $propertyTransfer) {
-            $errorMessages[] = $this->propertyValidator->validate($propertyTransfer);
+        $errorMessages = new ArrayObject();
+        $validatorTransfer = $this->classNameValidator->validate($contentTransfer->className);
+
+        if (!$validatorTransfer->isValid) {
+            $errorMessages[] = $validatorTransfer->errorMessage;
         }
 
-        return array_filter($errorMessages);
+        foreach ($contentTransfer->properties as $propertyTransfer) {
+            $validatorTransfer = $this->propertyValidator->validate($propertyTransfer);
+            if ($validatorTransfer->isValid) {
+                continue;
+            }
+
+            $errorMessages[] = $validatorTransfer->errorMessage;
+        }
+
+        return $errorMessages;
     }
 }
