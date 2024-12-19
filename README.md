@@ -128,8 +128,8 @@ Table below shows how to run specific composer scripts on Docker Container
 |------------------|-------------------------------------------------------------------------|
 | PHPStan          | `docker compose run transfer-object-php composer phpstan`               ||
 | PHPUnit          | `docker compose run transfer-object-php composer phpunit`                  |
-| Generate TOs     | `docker compose run transfer-object-php composer generate-transfer -c /home/transfer/transfer-object/config/generator.yml` |
-| Generate Samples | `docker compose run transfer-object-php composer generate-transfer -c /home/transfer/transfer-object/doc/Samples/config/generator.yml` |
+| Generate TOs     | `docker compose run transfer-object-php composer generate-transfer -- -c /home/transfer/transfer-object/config/generator.yml` |
+| Generate Samples | `docker compose run transfer-object-php composer generate-transfer -- -c /home/transfer/transfer-object/doc/Samples/config/generator.yml` |
 
 Contribution
 ------------
