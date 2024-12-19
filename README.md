@@ -4,7 +4,7 @@ Transfer Object Generator
 
 Transfer Object (or further TO) Generator is based on:
 
-- PHP 8.4 property Hooks
+- PHP 8.4 property hooks
 - FixedArray as a main storage
 - Interface to transform `from` and `to` Array as well as between TOs
 - Interfaces such as `IteratorAggregate`, `JsonSerializable`, `Serializable`, `Countable` interfaces
@@ -16,7 +16,7 @@ TO Generator includes console commands and helper classes to:
 
 Samples
 -----------
-New TO with their properties sets looks like
+New TO with their properties set looks like
 
 ```php
 $customerTransfer = new CustomerTransfer();
@@ -25,7 +25,7 @@ $customerTransfer->lastName = 'Kowalski';
 ```
 
 In order to see how converting from array, to transfer or iterate over the TO,
-plese check [Try Samples](/doc/Samples/try-samples.php) script.
+please check [Try Samples](/doc/Samples/try-samples.php) script.
 
 Installation
 ------------
@@ -38,14 +38,14 @@ Usage
 -----
 
 ### Terminal
-After instalation TO generator command `generate-transfer` is available on `./vendor/bin` direcotry.
+After installation TO generator command `generate-transfer` is available on `./vendor/bin` directory.
 
 ```bash
 ./vendor/bin/generate-transfer -c [path to configuration file]
 ```
 
-### Helper (experemental)
-Helper class allows to generate TO Definitions based on object's data e.g. API Reponse, ORM Entity etc.
+### Helper (experimental)
+Helper class allows to generate TO definitions based on object's data e.g. API response, ORM entity etc.
 
 For instance:
 
@@ -56,15 +56,15 @@ $productData = [
 ];
 ```
 
-Snippet [try-helper.php](/doc/Helper/try-helper.php) shows who to generate TO Definitions and base on them generate TO.
+Snippet [try-helper.php](/doc/Helper/try-helper.php) shows how to generate TO definitions and based on them how to generate TOs.
 
 The second part [try-helper-part-2.php](/doc/Helper/try-helper-part-2.php) validates newly generated TOs.
 
-_Note_: Experemental feature works only for the well structured data, resolving `null` type as a `string`.
+_Note_: Experimental feature works only for the well structured data, resolving `null` type as a `string`.
 
 Configuration File
 ------------------
-Configuraration is an `YML` file includes namsepace, path to definitions and generated classes.
+The configuration is an `YML` file, which includes namespace, path to definitions and generated classes.
 
 ```yml
 generator:
@@ -78,19 +78,19 @@ generator:
 | `generator` | Configuration name.                      |
 | `transferNamespace` | TO namespace.                            |
 | `transferPath` | Path where generated TO should be saved. |
-| `definitionPath` | Path where TO Definition is located.     |
+| `definitionPath` | Path where TO definition is located.     |
 
 See [Configuration Sample](/doc/Samples/config/generator.yml) for more details.
 
 Definition
 ----------
-TO Defintion is an `YML` file, that can contains one or many defitiotions.
+The TO defintion is an `YML` file, that can contain one or many definitions.
 
  - Each root level is a new TO name
  - Second level is a property name
- - Third level is a property type supporting only tww keys `type` and `collectionType`
+ - Third level is a property type supporting only two keys `type` and `collectionType`
 
-For example, defintion for `CustomerTransfer` with two `string` properties
+For example, definition for `CustomerTransfer` with two `string` properties
 
 ```yml
 Customer:
@@ -102,7 +102,7 @@ Customer:
 
 More can be found on [Definition Sample](/doc/Samples/config/definition) for more details.
 
-### Defintion Types
+### Definition Types
 | Definition File Key | Supported Values                                                                             | Details                                                              |
 |---------------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
 | type                | `bool`, `true`, `false`, `int`, `float`, `string`, `array`, `ArrayObject`, `iterable` | One of the listed values without Union `\|`.                         |
@@ -114,22 +114,22 @@ Development
 -----------
 TO Generator provides Docker environment with one container `transfer-object-php`.
 
-In order to star working install [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) first.
+In order to start working install [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) first.
 
-To start working following command should be executed:
+To start working following commands should be executed:
 
 1. Build containers: `docker compose build`
-2. Start start container (will run coponser install): `docker compose up`
+2. Start container (will run composer install): `docker compose up`
 
 ### Composer Scripts
-Table bellow shows how to run specific composer srcripts on Docker Container
+Table below shows how to run specific composer scripts on Docker Container
 
 | Name             | Command                                                                 |
 |------------------|-------------------------------------------------------------------------|
 | PHPStan          | `docker compose run transfer-object-php composer phpstan`               ||
 | PHPUnit          | `docker compose run transfer-object-php composer phpunit`                  |
-| Generate TOs     | `docker compose run transfer-object-php composer generate-transfer -c /home/transfer/transfer-object/config/generator.yml` |
-| Generate Samples | `docker compose run transfer-object-php composer generate-transfer -c /home/transfer/transfer-object/doc/Samples/config/generator.yml` |
+| Generate TOs     | `docker compose run transfer-object-php composer generate-transfer -- -c /home/transfer/transfer-object/config/generator.yml` |
+| Generate Samples | `docker compose run transfer-object-php composer generate-transfer -- -c /home/transfer/transfer-object/doc/Samples/config/generator.yml` |
 
 Contribution
 ------------
