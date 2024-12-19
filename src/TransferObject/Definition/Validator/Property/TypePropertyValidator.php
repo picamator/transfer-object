@@ -2,13 +2,16 @@
 
 namespace Picamator\TransferObject\Definition\Validator\Property;
 
-use Picamator\TransferObject\Definition\Enum\TypeValueEnum;
+use Picamator\TransferObject\Definition\Enum\UnsupportedTypeEnum;
+use Picamator\TransferObject\Definition\Enum\TypeEnum;
 use Picamator\TransferObject\Definition\Validator\ClassNameValidatorInterface;
 use Picamator\TransferObject\Transfer\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Transfer\Generated\ValidatorTransfer;
 
 readonly class TypePropertyValidator implements PropertyValidatorInterface
 {
+    private const string PROPERTY_TYPE_UNSUPPORTED_ERROR_MESSAGE_TEMPLATE = 'Property "%s" type "%s" is not supported.';
+
     public function __construct(
         private ClassNameValidatorInterface $classNameValidator,
     ) {
@@ -16,22 +19,35 @@ readonly class TypePropertyValidator implements PropertyValidatorInterface
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorTransfer
     {
+        $validatorTransfer = new ValidatorTransfer();
         if ($propertyTransfer->type === null) {
-            return $this->createValidatorTransfer();
+            $validatorTransfer->isValid = true;
+
+            return $validatorTransfer;
         }
 
-        if (!TypeValueEnum::isTransfer($propertyTransfer->type)) {
-            return $this->createValidatorTransfer();
+        if (UnsupportedTypeEnum::isUnsupported($propertyTransfer->type)) {
+            $validatorTransfer->isValid = false;
+            $validatorTransfer->errorMessage = $this->getErrorMessage($propertyTransfer);
+
+            return $validatorTransfer;
+        }
+
+        if (!TypeEnum::isTransfer($propertyTransfer->type)) {
+            $validatorTransfer->isValid = true;
+
+            return $validatorTransfer;
         }
 
         return $this->classNameValidator->validate($propertyTransfer->type);
     }
 
-    private function createValidatorTransfer(): ValidatorTransfer
+    private function getErrorMessage(DefinitionPropertyTransfer $propertyTransfer): string
     {
-        $validatorTransfer = new ValidatorTransfer();
-        $validatorTransfer->isValid = true;
-
-        return $validatorTransfer;
+        return sprintf(
+            self::PROPERTY_TYPE_UNSUPPORTED_ERROR_MESSAGE_TEMPLATE,
+            $propertyTransfer->propertyName,
+            $propertyTransfer->type ?? '',
+        );
     }
 }

@@ -28,6 +28,9 @@ readonly class DefinitionFinder implements DefinitionFinderInterface
         return $definitionFinder->count();
     }
 
+    /**
+     * @throws \Picamator\TransferObject\Exception\DefinitionTransferException
+     */
     private function getDefinitionFinder(): Finder
     {
         try {

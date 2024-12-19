@@ -4,7 +4,7 @@ namespace Picamator\TransferObject\Helper\Builder;
 
 use ArrayObject;
 use Generator;
-use Picamator\TransferObject\Definition\Enum\TypeValueEnum;
+use Picamator\TransferObject\Definition\Enum\TypeEnum;
 use Picamator\TransferObject\Exception\HelperTransferException;
 use Picamator\TransferObject\Helper\Enum\VariableTypeEnum;
 use Picamator\TransferObject\Transfer\Generated\DefinitionContentTransfer;
@@ -92,14 +92,14 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
 
         if ($propertyValue instanceof ArrayObject) {
             $propertyTransfer->propertyName = $propertyName;
-            $propertyTransfer->type = TypeValueEnum::ARRAY_OBJECT->value;
+            $propertyTransfer->type = TypeEnum::ARRAY_OBJECT->value;
 
             return $propertyTransfer;
         }
 
         if (is_iterable($propertyValue)) {
             $propertyTransfer->propertyName = $propertyName;
-            $propertyTransfer->type = TypeValueEnum::ITERABLE->value;
+            $propertyTransfer->type = TypeEnum::ITERABLE->value;
 
             return $propertyTransfer;
         }

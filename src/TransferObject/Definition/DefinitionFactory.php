@@ -19,6 +19,7 @@ use Picamator\TransferObject\Definition\Validator\Property\DefinitionPropertyVal
 use Picamator\TransferObject\Definition\Validator\Property\NamePropertyValidator;
 use Picamator\TransferObject\Definition\Validator\Property\PropertyValidator;
 use Picamator\TransferObject\Definition\Validator\Property\PropertyValidatorInterface;
+use Picamator\TransferObject\Definition\Validator\Property\ReservedPropertyValidator;
 use Picamator\TransferObject\Definition\Validator\Property\TypePropertyValidator;
 use Picamator\TransferObject\Definition\Validator\Property\UnionTypePropertyValidator;
 use Symfony\Component\Finder\Finder;
@@ -57,6 +58,7 @@ readonly class DefinitionFactory
     {
         return new ArrayObject([
             $this->createNamePropertyValidator(),
+            $this->createReservedPropertyValidator(),
             $this->createDefinitionPropertyValidator(),
             $this->createUnionTypePropertyValidator(),
             $this->createTypePropertyValidator(),
@@ -82,6 +84,11 @@ readonly class DefinitionFactory
     protected function createDefinitionPropertyValidator(): PropertyValidatorInterface
     {
         return new DefinitionPropertyValidator();
+    }
+
+    protected function createReservedPropertyValidator(): PropertyValidatorInterface
+    {
+        return new ReservedPropertyValidator();
     }
 
     protected function createNamePropertyValidator(): PropertyValidatorInterface

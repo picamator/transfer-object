@@ -3,7 +3,6 @@
 namespace Picamator\TransferObject\Definition\Reader;
 
 use Generator;
-use Picamator\TransferObject\Definition\Enum\TypeKeyEnum;
 use Picamator\TransferObject\Definition\Filesystem\DefinitionFinderInterface;
 use Picamator\TransferObject\Definition\Parser\ContentParserInterface;
 use Picamator\TransferObject\Definition\Validator\ContentValidatorInterface;
@@ -13,6 +12,9 @@ use Picamator\TransferObject\Transfer\Generated\DefinitionTransfer;
 
 readonly class DefinitionReader implements DefinitionReaderInterface
 {
+    private const string TYPE_KEY = 'type';
+    private const string COLLECTION_TYPE_KEY = 'collectionType';
+
     public function __construct(
         private DefinitionFinderInterface $finder,
         private ContentParserInterface $parser,
@@ -59,8 +61,8 @@ readonly class DefinitionReader implements DefinitionReaderInterface
         foreach ($properties as $propertyName => $propertyType) {
             $propertyTransfer = new DefinitionPropertyTransfer();
             $propertyTransfer->propertyName = $propertyName;
-            $propertyTransfer->type = $propertyType[TypeKeyEnum::TYPE->value] ?? null;
-            $propertyTransfer->collectionType = $propertyType[TypeKeyEnum::COLLECTION_TYPE->value] ?? null;
+            $propertyTransfer->type = $propertyType[self::TYPE_KEY] ?? null;
+            $propertyTransfer->collectionType = $propertyType[self::COLLECTION_TYPE_KEY] ?? null;
 
             $contentTransfer->properties[] = $propertyTransfer;
         }

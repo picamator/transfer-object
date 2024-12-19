@@ -33,7 +33,7 @@ readonly class UnionTypePropertyValidator implements PropertyValidatorInterface
     {
         return sprintf(
             self::PROPERTY_TYPE_UNION_ERROR_MESSAGE_TEMPLATE,
-            $propertyTransfer,
+            $propertyTransfer->propertyName,
             $propertyType ?? '',
         );
     }

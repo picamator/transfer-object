@@ -2,7 +2,7 @@
 
 namespace Picamator\TransferObject\Definition\Enum;
 
-enum TypeValueEnum: string
+enum TypeEnum: string
 {
     case BOOL = 'bool';
     case TRUE = 'true';
