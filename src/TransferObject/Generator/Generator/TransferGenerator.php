@@ -5,11 +5,12 @@ namespace Picamator\TransferObject\Generator\Generator;
 use Fiber;
 use Picamator\TransferObject\Definition\DefinitionFacadeInterface;
 use Picamator\TransferObject\Generator\Filesystem\GeneratorFilesystemInterface;
+use Picamator\TransferObject\Generator\GeneratorFacade;
 use Picamator\TransferObject\Generator\Render\TemplateRenderInterface;
 use Picamator\TransferObject\Transfer\Generated\DefinitionTransfer;
 use Picamator\TransferObject\Transfer\Generated\GeneratorTransfer;
 
-readonly class GeneratorFiberCallback implements GeneratorFiberCallbackInterface
+readonly class TransferGenerator implements TransferGeneratorInterface
 {
     public function __construct(
         private DefinitionFacadeInterface $definitionFacade,
@@ -18,7 +19,23 @@ readonly class GeneratorFiberCallback implements GeneratorFiberCallbackInterface
     ) {
     }
 
-    public function fiberCallback(): bool
+    public function generateTransfers(callable $handleCallback): bool
+    {
+        $generatorFiber = new Fiber($this->fiberCallback(...));
+
+        $generatorFiber->start();
+        while (!$generatorFiber->isTerminated()) {
+            /** @var \Picamator\TransferObject\Transfer\Generated\GeneratorTransfer|null $generatorTransfer */
+            $generatorTransfer = $generatorFiber->resume();
+            if ($generatorTransfer?->validator?->isValid === false) {
+                $handleCallback($generatorTransfer);
+            }
+        }
+
+        return $generatorFiber->getReturn();
+    }
+
+    private function fiberCallback(): bool
     {
         $this->filesystem->createTempDir();
         Fiber::suspend();

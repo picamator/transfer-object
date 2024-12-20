@@ -2,18 +2,16 @@
 
 namespace Picamator\TransferObject\Generator;
 
-use Fiber;
-
 interface GeneratorFacadeInterface
 {
     /**
      * Specification:
-     * - Suspends Fiber on creating temporary
-     * - Suspends Fiber after each Transfer Object generation returning `\Picamator\TransferObject\Generated\GeneratorTransfer`
+     * - Generates Transfer Objects using Fibers
+     * - Fiber First Suspend on creating temporary directory
+     * - Fiber Next Suspend after generating one Transfer Object passing `GeneratorTransfer` into callback
      * - Returns `true` when whole process is successful, `false` otherwise
-     * - Returns `false` if any definition file was found
      *
      * @throws \Picamator\TransferObject\Exception\GeneratorTransferException
      */
-    public function getGeneratorFiber(): Fiber;
+    public function generateTransfers(callable $handleCallback): bool;
 }
