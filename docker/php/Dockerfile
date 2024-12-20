@@ -45,4 +45,5 @@ ADD ./config/69-xdebug.ini /usr/local/etc/php/conf.d/
 # switch user
 USER transfer
 
-CMD ["composer", "install"]
+# Workaround to keep container running
+CMD ["tail", "-f", "/dev/null"]

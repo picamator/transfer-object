@@ -119,17 +119,26 @@ In order to start working install [Docker](https://docs.docker.com/engine/instal
 To start working following commands should be executed:
 
 1. Build containers: `docker compose build`
-2. Start container (will run composer install): `docker compose up`
+2. Start container: `docker compose up -d`
+3. Install composer dependencies: `docker exec -i transfer-object-php-8.4 composer install`
 
 ### Composer Scripts
 Table below shows how to run specific composer scripts on Docker Container
 
-| Name             | Command                                                                 |
-|------------------|-------------------------------------------------------------------------|
-| PHPStan          | `docker compose run transfer-object-php composer phpstan`               ||
-| PHPUnit          | `docker compose run transfer-object-php composer phpunit`                  |
-| Generate TOs     | `docker compose run transfer-object-php composer generate-transfer -- -c /home/transfer/transfer-object/config/generator.yml` |
-| Generate Samples | `docker compose run transfer-object-php composer generate-transfer -- -c /home/transfer/transfer-object/doc/Samples/config/generator.yml` |
+| Name                                                         | Command                                                                 |
+|--------------------------------------------------------------|-------------------------------------------------------------------------|
+| [PHPStan](https://github.com/phpstan/phpstan)                                                  | `docker exec -i transfer-object-php-8.4 composer phpstan`               ||
+| [PHPUnit](https://github.com/sebastianbergmann/phpunit)      | `docker exec -i transfer-object-php-8.4 composer phpunit`                 |
+| [CaptainHook](https://github.com/captainhookphp/captainhook) | `docker exec -i transfer-object-php-8.4 composer captainhook` |
+| Generate TOs                                                 | `docker exec -i transfer-object-php-8.4 composer generate-transfer -- -c /home/transfer/transfer-object/config/generator.yml` |
+| Generate Samples                                             | `docker exec -i transfer-object-php-8.4 composer generate-transfer -- -c /home/transfer/transfer-object/doc/Samples/config/generator.yml` |
+
+
+### CaptanHooks
+Pre-commit hooks to run PHPStan and PHPUnit can be configured by running:
+```bash
+docker exec -i transfer-object-php-8.4 composer captainhook install --only-enabled --run-mode=docker --run-exec="docker exec -i transfer-object-php-8.4"
+```
 
 Contribution
 ------------
