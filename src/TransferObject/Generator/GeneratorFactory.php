@@ -67,7 +67,7 @@ readonly class GeneratorFactory
     }
 
     /**
-     * @return ArrayObject<\Picamator\TransferObject\Generator\Render\Expander\TemplateExpanderInterface>
+     * @return ArrayObject<int,\Picamator\TransferObject\Generator\Render\Expander\TemplateExpanderInterface>
      */
     protected function createTemplateExpanders(): ArrayObject
     {

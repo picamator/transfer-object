@@ -14,7 +14,7 @@ readonly class TemplateBuilder implements TemplateBuilderInterface
     use TemplateRenderTrait;
 
     /**
-     * @param \ArrayObject<\Picamator\TransferObject\Generator\Render\Expander\TemplateExpanderInterface> $templateExpanders
+     * @param \ArrayObject<int,\Picamator\TransferObject\Generator\Render\Expander\TemplateExpanderInterface> $templateExpanders
      */
     public function __construct(
         private ConfigInterface $config,

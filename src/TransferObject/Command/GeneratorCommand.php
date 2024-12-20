@@ -78,7 +78,7 @@ final class GeneratorCommand extends Command
 
         $inputOutput->error(sprintf(self::ERROR_TEMPLATE, $generatorTransfer->definitionKey));
 
-        $errorMessages = $generatorTransfer->validator?->errorMessages ?? new ArrayObject();
+        $errorMessages = $generatorTransfer->validator->errorMessages;
         $errorMessages = array_map(fn(ValidatorMessageTransfer $messageTransfer) => $messageTransfer->errorMessage, $errorMessages->getArrayCopy());
 
         $inputOutput->warning($errorMessages);

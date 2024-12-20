@@ -21,11 +21,6 @@ class DependencyContainer implements ContainerInterface
     ];
 
     /**
-     * @var array<string,mixed>
-     */
-    private static array $container = [];
-
-    /**
      * @throws \Picamator\TransferObject\Exception\DependencyNotFoundTransferException
      */
     public function get(string $id): mixed

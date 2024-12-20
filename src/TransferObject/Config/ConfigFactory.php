@@ -36,7 +36,7 @@ readonly class ConfigFactory
     }
 
     /**
-     * @return \ArrayObject<\Picamator\TransferObject\Config\Validator\ConfigValidatorInterface>
+     * @return \ArrayObject<int,\Picamator\TransferObject\Config\Validator\ConfigValidatorInterface>
      */
     protected function createConfigValidators(): ArrayObject
     {

@@ -55,7 +55,7 @@ readonly class DefinitionFactory
     }
 
     /**
-     * @return ArrayObject<\Picamator\TransferObject\Definition\Validator\Property\PropertyValidatorInterface>
+     * @return ArrayObject<int,\Picamator\TransferObject\Definition\Validator\Property\PropertyValidatorInterface>
      */
     protected function createPropertyValidators(): ArrayObject
     {

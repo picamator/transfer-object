@@ -39,7 +39,7 @@ trait BuilderTrait
                 sprintf(
                     'Property "%s" type "%s" is not supported.',
                     $propertyName,
-                    gettype($propertyValue),
+                    $propertyType,
                 ),
             );
         }
@@ -47,6 +47,9 @@ trait BuilderTrait
         return VariableTypeEnum::tryFrom($propertyType);
     }
 
+    /**
+     * @param array<int|string,mixed> $content
+     */
     protected function createHelperContentTransfer(string $className, array $content): HelperContentTransfer
     {
         $contentTransfer = new HelperContentTransfer();

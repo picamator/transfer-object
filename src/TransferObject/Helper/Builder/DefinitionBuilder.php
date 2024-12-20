@@ -36,9 +36,11 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
         $definitionContentTransfer = new DefinitionContentTransfer();
         $definitionContentTransfer->className = $helperContentTransfer->className;
 
+        /** @var ArrayObject<int,\Picamator\TransferObject\Transfer\Generated\HelperContentTransfer> $helperContentTransfers */
         $helperContentTransfers = new ArrayObject();
         foreach ($helperContentTransfer->content as $propertyName => $propertyValue) {
             $this->assertPropertyName($propertyName);
+            $propertyName = (string)$propertyName;
             $typeEnum = $this->getTypeEnum($propertyName, $propertyValue);
 
             if ($this->isTransfer($typeEnum, $propertyValue)) {

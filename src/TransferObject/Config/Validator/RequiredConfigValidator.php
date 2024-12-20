@@ -25,7 +25,9 @@ readonly class RequiredConfigValidator implements ConfigValidatorInterface
         return $this->createSuccessMessageTransfer();
     }
 
-
+    /**
+     * @param array<string,string> $missedConfig
+     */
     private function getErrorMessage(array $missedConfig): string
     {
         return sprintf(
