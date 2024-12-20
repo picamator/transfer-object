@@ -135,7 +135,7 @@ Table below shows how to run specific composer scripts on Docker Container
 
 
 ### CaptanHooks
-Pre-commit hooks to run PHPStan and PHPUnit can be configured by running:
+CaptainHooks can be configured by running:
 ```bash
 docker exec -i transfer-object-php-8.4 composer captainhook install --only-enabled --run-mode=docker --run-exec="docker exec -i transfer-object-php-8.4"
 ```
