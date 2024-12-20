@@ -2,7 +2,6 @@
 
 namespace Picamator\TransferObject\Generator\Render;
 
-use Picamator\TransferObject\Transfer\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Transfer\Generated\TemplateTransfer;
 
 trait TemplateRenderTrait
@@ -13,11 +12,6 @@ trait TemplateRenderTrait
         'imports',
         'metaConstants',
     ];
-
-    protected function isCollectionType(DefinitionPropertyTransfer $propertyTransfer): bool
-    {
-        return $propertyTransfer->collectionType !== null;
-    }
 
     protected function sortTemplate(TemplateTransfer $templateTransfer): void
     {
