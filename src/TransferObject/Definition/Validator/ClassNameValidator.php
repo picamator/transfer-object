@@ -7,23 +7,19 @@ use Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer;
 readonly class ClassNameValidator implements ClassNameValidatorInterface
 {
     use VariableValidatorTrait;
+    use ValidatorMessageTrait;
 
     private const string CLASS_NAME_ERROR_MESSAGE_TEMPLATE = 'Invalid class "%s" name.';
 
     public function validate(?string $className): ValidatorMessageTransfer
     {
-        $validatorTransfer = new ValidatorMessageTransfer();
-
         if ($this->isValidVariable($className)) {
-            $validatorTransfer->isValid = true;
-
-            return $validatorTransfer;
+            return $this->createSuccessMessageTransfer();
         }
 
-        $validatorTransfer->errorMessage = $this->getErrorMessage($className);
-        $validatorTransfer->isValid = false;
+        $errorMessage = $this->getErrorMessage($className);
 
-        return $validatorTransfer;
+        return $this->createErrorMessageTransfer($errorMessage);
     }
 
     private function getErrorMessage(?string $className): string

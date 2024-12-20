@@ -27,10 +27,10 @@ readonly class PropertyValidator implements PropertyValidatorInterface
             return $validatorTransfer;
         }
 
-        return $this->createValidatorTransfer();
+        return $this->createSuccessMessageTransfer();
     }
 
-    private function createValidatorTransfer(): ValidatorMessageTransfer
+    private function createSuccessMessageTransfer(): ValidatorMessageTransfer
     {
         $validatorTransfer = new ValidatorMessageTransfer();
         $validatorTransfer->isValid = true;

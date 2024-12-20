@@ -3,27 +3,25 @@
 namespace Picamator\TransferObject\Definition\Validator\Property;
 
 use Picamator\TransferObject\Definition\Enum\ReservedPropertyEnum;
+use Picamator\TransferObject\Definition\Validator\ValidatorMessageTrait;
 use Picamator\TransferObject\Transfer\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer;
 
 readonly class ReservedPropertyValidator implements PropertyValidatorInterface
 {
+    use ValidatorMessageTrait;
+
     private const string PROPERTY_NAME_INVALID_ERROR_MESSAGE_TEMPLATE = 'Cannot use reserved "%s" property name.';
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
-        $validatorTransfer = new ValidatorMessageTransfer();
-
         if (!ReservedPropertyEnum::tryFrom($propertyTransfer->propertyName)) {
-            $validatorTransfer->isValid = true;
-
-            return $validatorTransfer;
+            return $this->createSuccessMessageTransfer();
         }
 
-        $validatorTransfer->errorMessage = $this->getErrorMessage($propertyTransfer);
-        $validatorTransfer->isValid = false;
+        $errorMessage = $this->getErrorMessage($propertyTransfer);
 
-        return $validatorTransfer;
+        return $this->createErrorMessageTransfer($errorMessage);
     }
 
     private function getErrorMessage(DefinitionPropertyTransfer $propertyTransfer): string
