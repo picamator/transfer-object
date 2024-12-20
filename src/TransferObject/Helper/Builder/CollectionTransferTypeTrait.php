@@ -2,7 +2,6 @@
 
 namespace Picamator\TransferObject\Helper\Builder;
 
-use Picamator\TransferObject\Exception\HelperTransferException;
 use Picamator\TransferObject\Helper\Enum\VariableTypeEnum;
 use Picamator\TransferObject\Transfer\Generated\DefinitionPropertyTransfer;
 

@@ -2,7 +2,7 @@
 
 namespace Picamator\TransferObject\Exception;
 
-use \Throwable;
+use Throwable;
 
 interface TransferExceptionInterface extends Throwable
 {

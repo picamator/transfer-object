@@ -5,7 +5,6 @@ namespace Picamator\TransferObject\Generator\Generator;
 use Fiber;
 use Picamator\TransferObject\Definition\DefinitionFacadeInterface;
 use Picamator\TransferObject\Generator\Filesystem\GeneratorFilesystemInterface;
-use Picamator\TransferObject\Generator\GeneratorFacade;
 use Picamator\TransferObject\Generator\Render\TemplateRenderInterface;
 use Picamator\TransferObject\Transfer\Generated\DefinitionTransfer;
 use Picamator\TransferObject\Transfer\Generated\GeneratorTransfer;

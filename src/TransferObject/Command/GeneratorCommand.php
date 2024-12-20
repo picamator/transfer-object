@@ -2,7 +2,6 @@
 
 namespace Picamator\TransferObject\Command;
 
-use ArrayObject;
 use Picamator\TransferObject\Config\ConfigFacade;
 use Picamator\TransferObject\Generator\GeneratorFacade;
 use Picamator\TransferObject\Transfer\Generated\GeneratorTransfer;

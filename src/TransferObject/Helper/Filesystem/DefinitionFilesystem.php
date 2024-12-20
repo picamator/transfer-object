@@ -7,7 +7,7 @@ use Picamator\TransferObject\Transfer\Generated\HelperFilesystemTransfer;
 use Symfony\Component\Filesystem\Filesystem;
 use Throwable;
 
-class DefinitionFilesystem implements DefinitionFilesystemInterface
+readonly class DefinitionFilesystem implements DefinitionFilesystemInterface
 {
     private const string FILE_NAME_PATTERN = '%s.transfer.yml';
 
