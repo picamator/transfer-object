@@ -22,12 +22,15 @@ use Picamator\TransferObject\Definition\Validator\Property\PropertyValidatorInte
 use Picamator\TransferObject\Definition\Validator\Property\ReservedPropertyValidator;
 use Picamator\TransferObject\Definition\Validator\Property\TypePropertyValidator;
 use Picamator\TransferObject\Definition\Validator\Property\UnionTypePropertyValidator;
+use Picamator\TransferObject\Dependency\DependencyContainer;
+use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Parser;
 
 readonly class DefinitionFactory
 {
     use ConfigFactoryTrait;
+    use DependencyFactoryTrait;
 
     public function createDefinitionReader(): DefinitionReaderInterface
     {
@@ -108,7 +111,7 @@ readonly class DefinitionFactory
 
     protected function createYmlParser(): Parser
     {
-        return new Parser();
+        return $this->getDependency(DependencyContainer::YML_PARSER);
     }
 
     protected function createDefinitionFinder(): DefinitionFinderInterface
@@ -121,6 +124,6 @@ readonly class DefinitionFactory
 
     protected function createFinder(): Finder
     {
-        return new Finder();
+        return $this->getDependency(DependencyContainer::FINDER);
     }
 }

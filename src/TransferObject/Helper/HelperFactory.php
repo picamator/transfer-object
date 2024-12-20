@@ -2,6 +2,8 @@
 
 namespace Picamator\TransferObject\Helper;
 
+use Picamator\TransferObject\Dependency\DependencyContainer;
+use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
 use Picamator\TransferObject\Helper\Generator\DefinitionGenerator;
 use Picamator\TransferObject\Helper\Generator\DefinitionGeneratorInterface;
 use Picamator\TransferObject\Helper\Filesystem\DefinitionFilesystem;
@@ -14,32 +16,34 @@ use Symfony\Component\Filesystem\Filesystem;
 
 readonly class HelperFactory
 {
-   public function createDefinitionGenerator(): DefinitionGeneratorInterface
-   {
-       return new DefinitionGenerator(
-           $this->createDefinitionBuilder(),
-           $this->createDefinitionRender(),
-           $this->createDefinitionFilesystem(),
-       );
-   }
+    use DependencyFactoryTrait;
 
-   protected function createDefinitionFilesystem(): DefinitionFilesystemInterface
-   {
-       return new DefinitionFilesystem($this->createFilesystem());
-   }
+    public function createDefinitionGenerator(): DefinitionGeneratorInterface
+    {
+        return new DefinitionGenerator(
+            $this->createDefinitionBuilder(),
+            $this->createDefinitionRender(),
+            $this->createDefinitionFilesystem(),
+        );
+    }
 
-   protected function createFilesystem(): Filesystem
-   {
-       return new Filesystem();
-   }
+    protected function createDefinitionFilesystem(): DefinitionFilesystemInterface
+    {
+        return new DefinitionFilesystem($this->createFilesystem());
+    }
 
-   protected function createDefinitionRender(): DefinitionRenderInterface
-   {
-       return new DefinitionRender();
-   }
+    protected function createFilesystem(): Filesystem
+    {
+        return $this->getDependency(DependencyContainer::FILESYSTEM);
+    }
 
-   protected function createDefinitionBuilder(): DefinitionBuilderInterface
-   {
-       return new DefinitionBuilder();
-   }
+    protected function createDefinitionRender(): DefinitionRenderInterface
+    {
+        return new DefinitionRender();
+    }
+
+    protected function createDefinitionBuilder(): DefinitionBuilderInterface
+    {
+        return new DefinitionBuilder();
+    }
 }

@@ -6,6 +6,8 @@ use ArrayObject;
 use Picamator\TransferObject\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\Definition\DefinitionFacade;
 use Picamator\TransferObject\Definition\DefinitionFacadeInterface;
+use Picamator\TransferObject\Dependency\DependencyContainer;
+use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
 use Picamator\TransferObject\Generator\Generator\TransferGenerator;
 use Picamator\TransferObject\Generator\Generator\TransferGeneratorInterface;
 use Picamator\TransferObject\Generator\Filesystem\GeneratorFilesystem;
@@ -24,6 +26,7 @@ use Symfony\Component\Finder\Finder;
 readonly class GeneratorFactory
 {
     use ConfigFactoryTrait;
+    use DependencyFactoryTrait;
 
     public function createTransferGenerator(): TransferGeneratorInterface
     {
@@ -45,7 +48,7 @@ readonly class GeneratorFactory
 
     protected function createFilesystem(): Filesystem
     {
-        return new Filesystem();
+        return $this->getDependency(DependencyContainer::FILESYSTEM);
     }
 
     protected function createTemplateRender(): TemplateRenderInterface
@@ -92,7 +95,7 @@ readonly class GeneratorFactory
 
     protected function createFinder(): Finder
     {
-        return new Finder();
+        return $this->getDependency(DependencyContainer::FINDER);
     }
 
     protected function createDefinitionFacade(): DefinitionFacadeInterface

@@ -2,6 +2,8 @@
 
 namespace Picamator\TransferObject\Exception;
 
-class ConfigTransferException extends TransferException
+use \Throwable;
+
+interface TransferExceptionInterface extends Throwable
 {
 }

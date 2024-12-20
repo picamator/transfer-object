@@ -67,10 +67,10 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
     {
         try {
             $finder = $this->finder
+                ->files()
                 ->name(self::FILE_NAME_PATTERN)
                 ->in($this->config->getTransferPath())
-                ->exclude(self::TEMPORARY_DIR)
-                ->files();
+                ->exclude(self::TEMPORARY_DIR);
 
             $this->filesystem->remove($finder);
         } catch (Throwable $e) {

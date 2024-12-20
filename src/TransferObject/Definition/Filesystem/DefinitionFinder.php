@@ -34,7 +34,10 @@ readonly class DefinitionFinder implements DefinitionFinderInterface
     private function getDefinitionFinder(): Finder
     {
         try {
-            return $this->finder->name(self::FILE_NAME_PATTERN)->in($this->config->getDefinitionPath())->files();
+            return $this->finder
+                ->files()
+                ->name(self::FILE_NAME_PATTERN)
+                ->in($this->config->getDefinitionPath());
         } catch (Throwable $e) {
             throw new DefinitionTransferException(
                 sprintf(

@@ -13,11 +13,15 @@ use Picamator\TransferObject\Config\Validator\ConfigValidator;
 use Picamator\TransferObject\Config\Validator\ConfigValidatorInterface;
 use Picamator\TransferObject\Config\Validator\DefinitionPathConfigValidator;
 use Picamator\TransferObject\Config\Validator\RequiredConfigValidator;
+use Picamator\TransferObject\Dependency\DependencyContainer;
+use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Parser;
 
 readonly class ConfigFactory
 {
+    use DependencyFactoryTrait;
+
     public function createConfigLoader(): ConfigLoaderInterface
     {
         return new ConfigLoader(
@@ -54,7 +58,7 @@ readonly class ConfigFactory
 
     protected function createFilesystem(): Filesystem
     {
-        return new Filesystem();
+        return $this->getDependency(DependencyContainer::FILESYSTEM);
     }
 
     protected function createRequiredConfigValidator(): ConfigValidatorInterface
@@ -69,6 +73,6 @@ readonly class ConfigFactory
 
     protected function createYmlParser(): Parser
     {
-        return new Parser();
+        return $this->getDependency(DependencyContainer::YML_PARSER);
     }
 }

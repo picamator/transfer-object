@@ -2,8 +2,6 @@
 
 namespace Picamator\TransferObject\Exception;
 
-use Exception;
-
-class DefinitionTransferException extends Exception
+class DefinitionTransferException extends TransferException
 {
 }
