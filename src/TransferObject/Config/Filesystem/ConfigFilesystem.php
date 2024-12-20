@@ -3,39 +3,24 @@
 namespace Picamator\TransferObject\Config\Filesystem;
 
 use Picamator\TransferObject\Exception\ConfigTransferException;
-use Picamator\TransferObject\Transfer\Generated\ConfigTransfer;
-use Symfony\Component\Yaml\Parser;
+use Symfony\Component\Filesystem\Filesystem;
 use Throwable;
 
 readonly class ConfigFilesystem implements ConfigFilesystemInterface
 {
-    private const string CONFIG_SECTION_KEY = 'generator';
-
     public function __construct(
-        private Parser $yml
+        private Filesystem $filesystem,
     ) {
     }
 
-    public function getConfig(string $configPath): ConfigTransfer
-    {
-        $configContent = $this->parseConfig($configPath)[self::CONFIG_SECTION_KEY] ?? [];
-
-        return new ConfigTransfer()->fromArray($configContent);
-    }
-
-    /**
-     * @throws \Picamator\TransferObject\Exception\ConfigTransferException
-     *
-     * @return array<string, mixed>
-     */
-    private function parseConfig(string $configPath): array
+    public function exists(string $configPath): bool
     {
         try {
-            return $this->yml->parseFile($configPath);
+            return $this->filesystem->exists($configPath);
         } catch (Throwable $e) {
             throw new ConfigTransferException(
                 sprintf(
-                    'Cannot parse configuration file "%s".',
+                    'Cannot check file if "%s" exist.',
                     $configPath,
                 ),
                 previous: $e,
