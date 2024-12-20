@@ -71,6 +71,9 @@ readonly class DefinitionReader implements DefinitionReaderInterface
         return $contentTransfer;
     }
 
+    /**
+     * @param array<string,mixed> $propertyType
+     */
     private function getCollectionType(array $propertyType): ?string
     {
         $collectionType = $propertyType[self::COLLECTION_TYPE_KEY] ?? null;
@@ -82,6 +85,9 @@ readonly class DefinitionReader implements DefinitionReaderInterface
         return (string)$collectionType;
     }
 
+    /**
+     * @param array<string,mixed> $propertyType
+     */
     private function getType(array $propertyType): ?string
     {
         $type = $propertyType[self::TYPE_KEY] ?? null;

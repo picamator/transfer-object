@@ -28,7 +28,7 @@ class GeneratorFacadeTest extends TestCase
     public function testGenerateTransferObjectByValidConfigurationShouldSucceed(): void
     {
         // Arrange
-        $this->configFacade->loadConfig(static::CONFIG_PATH);
+        $this->configFacade->loadConfig(self::CONFIG_PATH);
 
         // Act
         $actual = $this->generatorFacade->generateTransfers($this->assertGeneratorCallback(...));
