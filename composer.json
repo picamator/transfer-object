@@ -22,8 +22,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Picamator\\Tests\\Unit\\": "tests/unit/",
-      "Picamator\\Tests\\Integration\\": "tests/integration/",
+      "Picamator\\Tests\\Unit\\": "tests/Unit/",
+      "Picamator\\Tests\\Integration\\": "tests/Integration/",
       "Picamator\\TransferObject\\": "doc/"
     }
   },

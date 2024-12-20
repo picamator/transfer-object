@@ -18,13 +18,16 @@ class ConfigContainerTest extends TestCase
 
     public function testGetConfigWithoutLoadShouldThrowException(): void
     {
+        // Act
         $this->expectException(ConfigTransferException::class);
 
+        // Assert
         $this->configContainer->getConfig();
     }
 
     public function testLoadConfigAndGetShouldReturnConfig(): void
     {
+        // Arrange
         $configTransfer = new ConfigTransfer()
             ->fromArray([
                 ConfigTransfer::TRANSFER_NAMESPACE => 'Test\SomeNamespace',
@@ -34,7 +37,10 @@ class ConfigContainerTest extends TestCase
 
         $this->configContainer->loadConfig($configTransfer);
 
+        // Act
         $actual = $this->configContainer->getConfig();
+
+        // Assert
         $this->assertSame($configTransfer->transferNamespace, $actual->getTransferNamespace());
         $this->assertSame($configTransfer->transferPath, $actual->getTransferPath());
         $this->assertSame($configTransfer->definitionPath, $actual->getDefinitionPath());

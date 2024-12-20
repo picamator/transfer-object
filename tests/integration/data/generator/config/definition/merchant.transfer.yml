@@ -1,5 +1,0 @@
-Merchant:
-  merchantReference:
-    type: string
-  isActive:
-    type: bool

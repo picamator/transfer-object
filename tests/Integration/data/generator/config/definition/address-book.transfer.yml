@@ -1,0 +1,9 @@
+AddressBook:
+  uuid:
+    type: string
+  name:
+    type: string
+  addresses:
+    collectionType: Address
+  labels:
+    type: array

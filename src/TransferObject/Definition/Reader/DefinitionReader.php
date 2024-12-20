@@ -3,6 +3,7 @@
 namespace Picamator\TransferObject\Definition\Reader;
 
 use Generator;
+use Picamator\TransferObject\Definition\Enum\TypeEnum;
 use Picamator\TransferObject\Definition\Filesystem\DefinitionFinderInterface;
 use Picamator\TransferObject\Definition\Parser\ContentParserInterface;
 use Picamator\TransferObject\Definition\Validator\ContentValidatorInterface;
@@ -29,7 +30,7 @@ readonly class DefinitionReader implements DefinitionReaderInterface
             $definition = $this->parser->parseContent($definitionContent);
 
             foreach ($definition as $className => $properties) {
-                $contentTransfer = $this->createContentTransfer($className, $properties);
+                $contentTransfer = $this->createContentTransfer((string)$className, $properties);
                 $definitionTransfer = $this->createDefinitionTransfer($contentTransfer);
 
                 yield $fileName . ':' . $className => $definitionTransfer;
@@ -51,7 +52,7 @@ readonly class DefinitionReader implements DefinitionReaderInterface
     }
 
     /**
-     * @param array<string, array<string, string>> $properties
+     * @param array<string|int, array<string, string>> $properties
      */
     private function createContentTransfer(string $className, array $properties): DefinitionContentTransfer
     {
@@ -60,13 +61,34 @@ readonly class DefinitionReader implements DefinitionReaderInterface
 
         foreach ($properties as $propertyName => $propertyType) {
             $propertyTransfer = new DefinitionPropertyTransfer();
-            $propertyTransfer->propertyName = $propertyName;
-            $propertyTransfer->type = $propertyType[self::TYPE_KEY] ?? null;
-            $propertyTransfer->collectionType = $propertyType[self::COLLECTION_TYPE_KEY] ?? null;
+            $propertyTransfer->propertyName = (string)$propertyName;
+            $propertyTransfer->type = $this->getType($propertyType);
+            $propertyTransfer->collectionType = $this->getCollectionType($propertyType);
 
             $contentTransfer->properties[] = $propertyTransfer;
         }
 
         return $contentTransfer;
+    }
+
+    private function getCollectionType(array $propertyType): ?string
+    {
+        $collectionType = $propertyType[self::COLLECTION_TYPE_KEY] ?? null;
+
+        if ($collectionType === null) {
+            return null;
+        }
+
+        return (string)$collectionType;
+    }
+
+    private function getType(array $propertyType): ?string
+    {
+        $type = $propertyType[self::TYPE_KEY] ?? null;
+        if (is_bool($type)) {
+            $type = TypeEnum::getTrueFalse($type)->value;
+        }
+
+        return $type;
     }
 }

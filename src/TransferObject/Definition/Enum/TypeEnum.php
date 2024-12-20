@@ -33,4 +33,13 @@ enum TypeEnum: string
     {
         return self::tryFrom($type) === null;
     }
+
+    public static function getTrueFalse(bool $value): self
+    {
+        if ($value === true) {
+            return self::TRUE;
+        }
+
+        return self::FALSE;
+    }
 }

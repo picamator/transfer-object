@@ -1,5 +1,5 @@
-User:
-  firstName:
+Country:
+  name:
     type: string
-  lastName:
+  iso2Code:
     type: string
