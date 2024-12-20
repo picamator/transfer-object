@@ -22,7 +22,7 @@ DefinitionValidator:
   isValid:
     type: bool
   errorMessages:
-    type: ArrayObject
+    collectionType: ValidatorMessage
 
 Generator:
   definitionKey:

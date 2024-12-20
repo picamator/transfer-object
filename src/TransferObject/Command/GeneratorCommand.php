@@ -2,9 +2,11 @@
 
 namespace Picamator\TransferObject\Command;
 
+use ArrayObject;
 use Picamator\TransferObject\Config\ConfigFacade;
 use Picamator\TransferObject\Generator\GeneratorFacade;
 use Picamator\TransferObject\Transfer\Generated\GeneratorTransfer;
+use Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -80,7 +82,9 @@ final class GeneratorCommand extends Command
     {
         $inputOutput->error(sprintf(self::ERROR_TEMPLATE, $generatorTransfer->definitionKey));
 
-        $errorMessages = $generatorTransfer->validator?->errorMessages->getArrayCopy();
+        $errorMessages = $generatorTransfer->validator?->errorMessages ?? new ArrayObject();
+        $errorMessages = array_map(fn(ValidatorMessageTransfer $messageTransfer) => $messageTransfer->errorMessage, $errorMessages->getArrayCopy());
+
         $inputOutput->warning($errorMessages);
     }
 

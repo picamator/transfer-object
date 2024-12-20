@@ -4,7 +4,7 @@ namespace Picamator\TransferObject\Definition\Validator\Property;
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\Generated\DefinitionPropertyTransfer;
-use Picamator\TransferObject\Transfer\Generated\ValidatorTransfer;
+use Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer;
 
 readonly class PropertyValidator implements PropertyValidatorInterface
 {
@@ -16,7 +16,7 @@ readonly class PropertyValidator implements PropertyValidatorInterface
     ) {
     }
 
-    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorTransfer
+    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
         foreach ($this->propertyValidators as $validator) {
             $validatorTransfer = $validator->validate($propertyTransfer);
@@ -30,9 +30,9 @@ readonly class PropertyValidator implements PropertyValidatorInterface
         return $this->createValidatorTransfer();
     }
 
-    private function createValidatorTransfer(): ValidatorTransfer
+    private function createValidatorTransfer(): ValidatorMessageTransfer
     {
-        $validatorTransfer = new ValidatorTransfer();
+        $validatorTransfer = new ValidatorMessageTransfer();
         $validatorTransfer->isValid = true;
 
         return $validatorTransfer;

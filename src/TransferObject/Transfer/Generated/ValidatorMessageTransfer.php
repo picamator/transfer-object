@@ -9,7 +9,7 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - Class is generated based on definition.
  * - In order to modify file please change definition and run generator.
  */
-final class ConfigValidatorTransfer extends AbstractTransfer
+final class ValidatorMessageTransfer extends AbstractTransfer
 {
     protected const int META_DATA_SIZE = 2;
 

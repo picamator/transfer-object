@@ -4,6 +4,7 @@ namespace Picamator\TransferObject\Transfer\Generated;
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
+use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
 
 /**
  * Specification:
@@ -20,11 +21,12 @@ final class DefinitionValidatorTransfer extends AbstractTransfer
     ];
 
     // errorMessages
+    #[CollectionPropertyTypeAttribute(ValidatorMessageTransfer::class)]
     public const string ERROR_MESSAGES = 'errorMessages';
     protected const string ERROR_MESSAGES_DATA_NAME = 'ERROR_MESSAGES';
     protected const int ERROR_MESSAGES_DATA_INDEX = 0;
 
-    /** @var \ArrayObject<string|int,mixed> */
+    /** @var \ArrayObject<int,ValidatorMessageTransfer> */
     public ArrayObject $errorMessages {
         get => $this->_data[self::ERROR_MESSAGES_DATA_INDEX] ?? new ArrayObject();
         set => $this->_data[self::ERROR_MESSAGES_DATA_INDEX] = $value;

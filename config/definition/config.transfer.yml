@@ -5,9 +5,3 @@ Config:
     type: string
   definitionPath:
     type: string
-
-ConfigValidator:
-  isValid:
-    type: bool
-  errorMessage:
-    type: string

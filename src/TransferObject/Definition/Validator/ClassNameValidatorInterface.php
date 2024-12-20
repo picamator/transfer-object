@@ -2,9 +2,9 @@
 
 namespace Picamator\TransferObject\Definition\Validator;
 
-use Picamator\TransferObject\Transfer\Generated\ValidatorTransfer;
+use Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer;
 
 interface ClassNameValidatorInterface
 {
-    public function validate(?string $className): ValidatorTransfer;
+    public function validate(?string $className): ValidatorMessageTransfer;
 }

@@ -6,7 +6,7 @@ use Picamator\TransferObject\Definition\Enum\UnsupportedTypeEnum;
 use Picamator\TransferObject\Definition\Enum\TypeEnum;
 use Picamator\TransferObject\Definition\Validator\ClassNameValidatorInterface;
 use Picamator\TransferObject\Transfer\Generated\DefinitionPropertyTransfer;
-use Picamator\TransferObject\Transfer\Generated\ValidatorTransfer;
+use Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer;
 
 readonly class TypePropertyValidator implements PropertyValidatorInterface
 {
@@ -17,9 +17,9 @@ readonly class TypePropertyValidator implements PropertyValidatorInterface
     ) {
     }
 
-    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorTransfer
+    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
-        $validatorTransfer = new ValidatorTransfer();
+        $validatorTransfer = new ValidatorMessageTransfer();
         if ($propertyTransfer->type === null) {
             $validatorTransfer->isValid = true;
 

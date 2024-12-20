@@ -3,16 +3,16 @@
 namespace Picamator\TransferObject\Definition\Validator\Property;
 
 use Picamator\TransferObject\Transfer\Generated\DefinitionPropertyTransfer;
-use Picamator\TransferObject\Transfer\Generated\ValidatorTransfer;
+use Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer;
 
 readonly class UnionTypePropertyValidator implements PropertyValidatorInterface
 {
     private const string UNION_TYPE_SEPARATOR = '|';
     private const string PROPERTY_TYPE_UNION_ERROR_MESSAGE_TEMPLATE = 'Union property "%s" type "%s" is not supported.';
 
-    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorTransfer
+    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
-        $validatorTransfer = new ValidatorTransfer();
+        $validatorTransfer = new ValidatorMessageTransfer();
 
         $propertyType = $propertyTransfer->type;
         $propertyType ??= $propertyTransfer->collectionType;

@@ -28,24 +28,24 @@ readonly class ContentValidator implements ContentValidatorInterface
     }
 
     /**
-     * @return array<string>
+     * @return ArrayObject<\Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer>
      */
     private function handleValidator(DefinitionContentTransfer $contentTransfer): ArrayObject
     {
         $errorMessages = new ArrayObject();
-        $validatorTransfer = $this->classNameValidator->validate($contentTransfer->className);
+        $validatorMessageTransfer = $this->classNameValidator->validate($contentTransfer->className);
 
-        if (!$validatorTransfer->isValid) {
-            $errorMessages[] = $validatorTransfer->errorMessage;
+        if (!$validatorMessageTransfer->isValid) {
+            $errorMessages[] = $validatorMessageTransfer->errorMessage;
         }
 
         foreach ($contentTransfer->properties as $propertyTransfer) {
-            $validatorTransfer = $this->propertyValidator->validate($propertyTransfer);
-            if ($validatorTransfer->isValid) {
+            $validatorMessageTransfer = $this->propertyValidator->validate($propertyTransfer);
+            if ($validatorMessageTransfer->isValid) {
                 continue;
             }
 
-            $errorMessages[] = $validatorTransfer->errorMessage;
+            $errorMessages[] = $validatorMessageTransfer;
         }
 
         return $errorMessages;

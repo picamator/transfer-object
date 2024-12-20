@@ -2,9 +2,9 @@
 
 namespace Picamator\TransferObject\Config;
 
-use Picamator\TransferObject\Transfer\Generated\ConfigValidatorTransfer;
+use Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer;
 
 interface ConfigFacadeInterface
 {
-    public function loadConfig(string $configPath): ConfigValidatorTransfer;
+    public function loadConfig(string $configPath): ValidatorMessageTransfer;
 }

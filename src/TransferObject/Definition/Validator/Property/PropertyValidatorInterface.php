@@ -3,9 +3,9 @@
 namespace Picamator\TransferObject\Definition\Validator\Property;
 
 use Picamator\TransferObject\Transfer\Generated\DefinitionPropertyTransfer;
-use Picamator\TransferObject\Transfer\Generated\ValidatorTransfer;
+use Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer;
 
 interface PropertyValidatorInterface
 {
-    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorTransfer;
+    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer;
 }

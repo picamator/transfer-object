@@ -2,7 +2,7 @@
 
 namespace Picamator\TransferObject\Definition\Validator;
 
-use Picamator\TransferObject\Transfer\Generated\ValidatorTransfer;
+use Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer;
 
 readonly class ClassNameValidator implements ClassNameValidatorInterface
 {
@@ -10,9 +10,9 @@ readonly class ClassNameValidator implements ClassNameValidatorInterface
 
     private const string CLASS_NAME_ERROR_MESSAGE_TEMPLATE = 'Invalid class "%s" name.';
 
-    public function validate(?string $className): ValidatorTransfer
+    public function validate(?string $className): ValidatorMessageTransfer
     {
-        $validatorTransfer = new ValidatorTransfer();
+        $validatorTransfer = new ValidatorMessageTransfer();
 
         if ($this->isValidVariable($className)) {
             $validatorTransfer->isValid = true;

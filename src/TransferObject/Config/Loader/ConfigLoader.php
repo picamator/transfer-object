@@ -5,7 +5,7 @@ namespace Picamator\TransferObject\Config\Loader;
 use Picamator\TransferObject\Config\Container\ConfigContainer;
 use Picamator\TransferObject\Config\Filesystem\ConfigFilesystemInterface;
 use Picamator\TransferObject\Transfer\Generated\ConfigTransfer;
-use Picamator\TransferObject\Transfer\Generated\ConfigValidatorTransfer;
+use Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer;
 
 readonly class ConfigLoader implements ConfigLoaderInterface
 {
@@ -16,21 +16,21 @@ readonly class ConfigLoader implements ConfigLoaderInterface
     ) {
     }
 
-    public function loadConfig(string $configPath): ConfigValidatorTransfer
+    public function loadConfig(string $configPath): ValidatorMessageTransfer
     {
         $configTransfer = $this->filesystem->getConfig($configPath);
-        $validatorTransfer = $this->validateConfig($configTransfer);
+        $messageTransfer = $this->validateConfig($configTransfer);
 
-        if ($validatorTransfer->isValid) {
+        if ($messageTransfer->isValid) {
             ConfigContainer::loadConfig($configTransfer);
         }
 
-        return $validatorTransfer;
+        return $messageTransfer;
     }
 
-    private function validateConfig(ConfigTransfer $configTransfer): ConfigValidatorTransfer
+    private function validateConfig(ConfigTransfer $configTransfer): ValidatorMessageTransfer
     {
-        $validatorTransfer = new ConfigValidatorTransfer();
+        $validatorTransfer = new ValidatorMessageTransfer();
         $validatorTransfer->isValid = true;
 
         $configContent = $configTransfer->toArray();
@@ -40,7 +40,7 @@ readonly class ConfigLoader implements ConfigLoaderInterface
             $validatorTransfer->isValid = false;
             $validatorTransfer->errorMessage = sprintf(
                 self::ERROR_MESSAGE_TEMPLATE,
-                implode(', ', array_keys($missedConfig)),
+                implode(',', array_keys($missedConfig)),
             );
         }
 
