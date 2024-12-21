@@ -2,7 +2,6 @@
 
 namespace Picamator\TransferObject\Generator\Render\Expander;
 
-use Picamator\TransferObject\Definition\Enum\TypeEnum;
 use Picamator\TransferObject\Generator\Enum\AttributeEnum;
 use Picamator\TransferObject\Generator\Enum\AttributeTemplateEnum;
 use Picamator\TransferObject\Generator\Render\TemplateRenderTrait;
@@ -15,7 +14,7 @@ readonly class TransferTypeTemplateExpander implements TemplateExpanderInterface
 
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        return $propertyTransfer->type !== null && TypeEnum::isTransfer($propertyTransfer->type);
+        return $propertyTransfer->transferType !== null;
     }
 
     public function expandTemplateTransfer(
@@ -24,7 +23,7 @@ readonly class TransferTypeTemplateExpander implements TemplateExpanderInterface
     ): void {
         $templateTransfer->imports[AttributeEnum::TYPE_ATTRIBUTE->value] ??= AttributeEnum::TYPE_ATTRIBUTE->value;
 
-        $transferName = $this->getTransferName($propertyTransfer->type);
+        $transferName = $this->getTransferName($propertyTransfer->transferType);
         $propertyName = $propertyTransfer->propertyName;
 
         $templateTransfer->properties[$propertyName] = $transferName;

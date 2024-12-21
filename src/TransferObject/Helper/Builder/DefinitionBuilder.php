@@ -4,7 +4,7 @@ namespace Picamator\TransferObject\Helper\Builder;
 
 use ArrayObject;
 use Generator;
-use Picamator\TransferObject\Definition\Enum\TypeEnum;
+use Picamator\TransferObject\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\Exception\HelperTransferException;
 use Picamator\TransferObject\Helper\Enum\VariableTypeEnum;
 use Picamator\TransferObject\Transfer\Generated\DefinitionContentTransfer;
@@ -46,7 +46,7 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
             if ($this->isTransfer($typeEnum, $propertyValue)) {
                 $propertyTransfer = $this->createTransferTypePropertyTransfer($propertyName);
                 $definitionContentTransfer->properties[] = $propertyTransfer;
-                $helperContentTransfers[] = $this->createHelperContentTransfer($propertyTransfer->type, $propertyValue);
+                $helperContentTransfers[] = $this->createHelperContentTransfer($propertyTransfer->transferType, $propertyValue);
 
                 continue;
             }
@@ -59,7 +59,7 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
                 continue;
             }
 
-            $definitionContentTransfer->properties[] = $this->getPrimitiveTypePropertyTransfer($propertyName, $typeEnum, $propertyValue);
+            $definitionContentTransfer->properties[] = $this->getBuildInTypePropertyTransfer($propertyName, $typeEnum, $propertyValue);
         }
 
         $builderTransfer = new HelperBuilderTransfer();
@@ -72,7 +72,7 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
     /**
      * @throws \Picamator\TransferObject\Exception\HelperTransferException
      */
-    private function getPrimitiveTypePropertyTransfer(
+    private function getBuildInTypePropertyTransfer(
         string $propertyName,
         VariableTypeEnum $typeEnum,
         mixed $propertyValue,
@@ -80,28 +80,28 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
         $propertyTransfer = new DefinitionPropertyTransfer();
         if ($typeEnum->isNull() || $typeEnum->isString()) {
             $propertyTransfer->propertyName = $propertyName;
-            $propertyTransfer->type = VariableTypeEnum::string->name;
+            $propertyTransfer->buildInType = VariableTypeEnum::string->name;
 
             return $propertyTransfer;
         }
 
         if (!$typeEnum->isObject()) {
             $propertyTransfer->propertyName = $propertyName;
-            $propertyTransfer->type = $typeEnum->name;
+            $propertyTransfer->buildInType = $typeEnum->name;
 
             return $propertyTransfer;
         }
 
         if ($propertyValue instanceof ArrayObject) {
             $propertyTransfer->propertyName = $propertyName;
-            $propertyTransfer->type = TypeEnum::ARRAY_OBJECT->value;
+            $propertyTransfer->buildInType = BuildInTypeEnum::ARRAY_OBJECT->value;
 
             return $propertyTransfer;
         }
 
         if (is_iterable($propertyValue)) {
             $propertyTransfer->propertyName = $propertyName;
-            $propertyTransfer->type = TypeEnum::ITERABLE->value;
+            $propertyTransfer->buildInType = BuildInTypeEnum::ITERABLE->value;
 
             return $propertyTransfer;
         }

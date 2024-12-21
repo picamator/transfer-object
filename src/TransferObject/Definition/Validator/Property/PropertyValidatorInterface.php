@@ -7,5 +7,7 @@ use Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer;
 
 interface PropertyValidatorInterface
 {
+    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool;
+
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer;
 }

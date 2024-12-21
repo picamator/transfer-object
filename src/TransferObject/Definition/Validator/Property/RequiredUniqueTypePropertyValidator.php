@@ -2,17 +2,16 @@
 
 namespace Picamator\TransferObject\Definition\Validator\Property;
 
+use Picamator\TransferObject\Definition\Enum\DefinitionTypeKeyEnum;
 use Picamator\TransferObject\Definition\Validator\ValidatorMessageTrait;
-use Picamator\TransferObject\Definition\Validator\VariableValidatorTrait;
 use Picamator\TransferObject\Transfer\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer;
 
-readonly class NamePropertyValidator implements PropertyValidatorInterface
+readonly class RequiredUniqueTypePropertyValidator implements PropertyValidatorInterface
 {
-    use VariableValidatorTrait;
     use ValidatorMessageTrait;
 
-    private const string PROPERTY_NAME_ERROR_MESSAGE_TEMPLATE = 'Invalid property "%s" name.';
+    private const string PROPERTY_REQUIRED_UNIQUE_ERROR_MESSAGE_TEMPLATE = 'Property "%s" type definition is not set or set twice.';
 
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): true
     {
@@ -21,7 +20,13 @@ readonly class NamePropertyValidator implements PropertyValidatorInterface
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
-        if ($this->isValidVariable($propertyTransfer->propertyName)) {
+        $definedTypes = [];
+        foreach (DefinitionTypeKeyEnum::cases() as $definitionTypeKey) {
+            $definedTypes[] = $propertyTransfer->{$definitionTypeKey->value};
+        }
+
+        $definedTypes = array_filter($definedTypes);
+        if (count($definedTypes) === 1) {
             return $this->createSuccessMessageTransfer();
         }
 
@@ -33,7 +38,7 @@ readonly class NamePropertyValidator implements PropertyValidatorInterface
     private function getErrorMessage(DefinitionPropertyTransfer $propertyTransfer): string
     {
         return sprintf(
-            self::PROPERTY_NAME_ERROR_MESSAGE_TEMPLATE,
+            self::PROPERTY_REQUIRED_UNIQUE_ERROR_MESSAGE_TEMPLATE,
             $propertyTransfer->propertyName,
         );
     }

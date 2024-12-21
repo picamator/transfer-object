@@ -2,7 +2,7 @@
 
 namespace Picamator\TransferObject\Definition\Enum;
 
-enum TypeEnum: string
+enum BuildInTypeEnum: string
 {
     case BOOL = 'bool';
     case TRUE = 'true';
@@ -13,6 +13,10 @@ enum TypeEnum: string
     case ARRAY = 'array';
     case ARRAY_OBJECT = 'ArrayObject';
     case ITERABLE = 'iterable';
+    case NULL = 'null';
+    case OBJECT = 'object';
+    case MIXED = 'mixed';
+    case CALLABLE = 'callable';
 
     public static function isArray(string $type): bool
     {
@@ -29,9 +33,9 @@ enum TypeEnum: string
         return self::ITERABLE->value === $type;
     }
 
-    public static function isTransfer(string $type): bool
+    public static function isBuildInType(string $type): bool
     {
-        return self::tryFrom($type) === null;
+        return self::tryFrom($type) !== null;
     }
 
     public static function getTrueFalse(bool $value): self

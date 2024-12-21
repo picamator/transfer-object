@@ -25,7 +25,8 @@ START;
         $content = sprintf(self::CLASS_TEMPLATE, $contentTransfer->className) . PHP_EOL;
         foreach ($contentTransfer->properties as $propertyTransfer) {
             $content .= match (true) {
-                $propertyTransfer->type !== null => sprintf(self::TYPE_TEMPLATE, $propertyTransfer->propertyName, $propertyTransfer->type),
+                $propertyTransfer->buildInType !== null => sprintf(self::TYPE_TEMPLATE, $propertyTransfer->propertyName, $propertyTransfer->buildInType),
+                $propertyTransfer->transferType !== null => sprintf(self::TYPE_TEMPLATE, $propertyTransfer->propertyName, $propertyTransfer->transferType),
                 $propertyTransfer->collectionType !== null => sprintf(self::COLLECTION_TYPE_TEMPLATE, $propertyTransfer->propertyName, $propertyTransfer->collectionType),
                 default => '',
             } . PHP_EOL;

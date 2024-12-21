@@ -13,6 +13,11 @@ readonly class ReservedPropertyValidator implements PropertyValidatorInterface
 
     private const string PROPERTY_NAME_INVALID_ERROR_MESSAGE_TEMPLATE = 'Cannot use reserved "%s" property name.';
 
+    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): true
+    {
+        return true;
+    }
+
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
         if (!ReservedPropertyEnum::tryFrom($propertyTransfer->propertyName)) {

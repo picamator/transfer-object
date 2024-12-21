@@ -3,21 +3,25 @@
 namespace Picamator\TransferObject\Definition\Validator;
 
 use ArrayObject;
-use Picamator\TransferObject\Definition\Validator\Property\PropertyValidatorInterface;
 use Picamator\TransferObject\Transfer\Generated\DefinitionContentTransfer;
+use Picamator\TransferObject\Transfer\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Transfer\Generated\DefinitionValidatorTransfer;
+use Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer;
 
 readonly class ContentValidator implements ContentValidatorInterface
 {
+    /**
+     * @param \ArrayObject<int,\Picamator\TransferObject\Definition\Validator\Property\PropertyValidatorInterface> $propertyValidators
+     */
     public function __construct(
         private ClassNameValidatorInterface $classNameValidator,
-        private PropertyValidatorInterface $propertyValidator,
+        private ArrayObject $propertyValidators,
     ) {
     }
 
     public function validate(DefinitionContentTransfer $contentTransfer): DefinitionValidatorTransfer
     {
-        $errorMessages = $this->handleValidator($contentTransfer);
+        $errorMessages = $this->handleContentValidator($contentTransfer);
         $isValid = $errorMessages->count() === 0;
 
         $validatorTransfer = new DefinitionValidatorTransfer();
@@ -30,25 +34,43 @@ readonly class ContentValidator implements ContentValidatorInterface
     /**
      * @return ArrayObject<int,\Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer>
      */
-    private function handleValidator(DefinitionContentTransfer $contentTransfer): ArrayObject
+    private function handleContentValidator(DefinitionContentTransfer $contentTransfer): ArrayObject
     {
         /** @var \ArrayObject<int,\Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer> $errorMessages */
         $errorMessages = new ArrayObject();
-        $validatorMessageTransfer = $this->classNameValidator->validate($contentTransfer->className);
+        $messageTransfer = $this->classNameValidator->validate($contentTransfer->className);
 
-        if (!$validatorMessageTransfer->isValid) {
-            $errorMessages[] = $validatorMessageTransfer;
+        if (!$messageTransfer->isValid) {
+            $errorMessages[] = $messageTransfer;
         }
 
         foreach ($contentTransfer->properties as $propertyTransfer) {
-            $validatorMessageTransfer = $this->propertyValidator->validate($propertyTransfer);
-            if ($validatorMessageTransfer->isValid) {
+            $messageTransfer = $this->handlerPropertyValidators($propertyTransfer);
+            if ($messageTransfer === null) {
                 continue;
             }
 
-            $errorMessages[] = $validatorMessageTransfer;
+            $errorMessages[] = $messageTransfer;
         }
 
         return $errorMessages;
+    }
+
+    private function handlerPropertyValidators(DefinitionPropertyTransfer $propertyTransfer): ?ValidatorMessageTransfer
+    {
+        foreach ($this->propertyValidators as $validator) {
+            if (!$validator->isApplicable($propertyTransfer)) {
+               continue;
+            }
+
+            $messageTransfer = $validator->validate($propertyTransfer);
+            if ($messageTransfer->isValid) {
+                continue;
+            }
+
+            return $messageTransfer;
+        }
+
+        return null;
     }
 }

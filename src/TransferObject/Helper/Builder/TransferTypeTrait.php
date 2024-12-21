@@ -22,7 +22,7 @@ trait TransferTypeTrait
     {
         $propertyTransfer = new DefinitionPropertyTransfer();
         $propertyTransfer->propertyName = $propertyName;
-        $propertyTransfer->type = $this->getClassName($propertyName);
+        $propertyTransfer->transferType = $this->getClassName($propertyName);
 
         return $propertyTransfer;
     }

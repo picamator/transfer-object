@@ -13,7 +13,9 @@ DefinitionContent:
 DefinitionProperty:
   propertyName:
     type: string
-  type:
+  buildInType:
+    type: string
+  transferType:
     type: string
   collectionType:
     type: string

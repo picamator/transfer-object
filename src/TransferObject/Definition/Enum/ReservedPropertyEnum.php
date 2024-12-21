@@ -6,7 +6,7 @@ enum ReservedPropertyEnum: string
 {
     case _DATA = '_data';
 
-    public static function isInvalid(string $type): bool
+    public static function isReserved(string $type): bool
     {
         return self::tryFrom($type) !== null;
     }

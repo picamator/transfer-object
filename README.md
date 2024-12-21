@@ -44,7 +44,7 @@ Usage
 After installation TO generator command `generate-transfer` is available on `./vendor/bin` directory.
 
 ```bash
-./vendor/bin/generate-transfer -c [path to configuration file]
+./vendor/bin/generate-transfer [-c|--configuration CONFIGURATION]
 ```
 
 ### Helper (experimental)

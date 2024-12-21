@@ -2,7 +2,7 @@
 
 namespace Picamator\TransferObject\Generator\Render\Expander;
 
-use Picamator\TransferObject\Definition\Enum\TypeEnum;
+use Picamator\TransferObject\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\Generator\Enum\AttributeEnum;
 use Picamator\TransferObject\Generator\Enum\AttributeTemplateEnum;
 use Picamator\TransferObject\Generator\Enum\DefaultValueTemplateEnum;
@@ -24,16 +24,15 @@ readonly class CollectionTypeTemplateExpander implements TemplateExpanderInterfa
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $templateTransfer->imports[TypeEnum::ARRAY_OBJECT->value] ??= TypeEnum::ARRAY_OBJECT->value;
+        $templateTransfer->imports[BuildInTypeEnum::ARRAY_OBJECT->value] ??= BuildInTypeEnum::ARRAY_OBJECT->value;
         $templateTransfer->imports[AttributeEnum::COLLECTION_TYPE_ATTRIBUTE->value] ??= AttributeEnum::COLLECTION_TYPE_ATTRIBUTE->value;
 
         $transferName = $this->getTransferName($propertyTransfer->collectionType);
 
         $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->properties[$propertyName] = TypeEnum::ARRAY_OBJECT->value;
+        $templateTransfer->properties[$propertyName] = BuildInTypeEnum::ARRAY_OBJECT->value;
         $templateTransfer->attributes[$propertyName] = sprintf(AttributeTemplateEnum::COLLECTION_TYPE_ATTRIBUTE->value, $transferName);
         $templateTransfer->dockBlocks[$propertyName] = sprintf(DockBlockTemplateEnum::COLLECTION->value, $transferName);
         $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY_OBJECT->value;
     }
-
 }

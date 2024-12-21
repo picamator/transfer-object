@@ -3,14 +3,11 @@
 namespace Picamator\TransferObject\Definition\Validator\Property;
 
 use Picamator\TransferObject\Definition\Validator\ClassNameValidatorInterface;
-use Picamator\TransferObject\Definition\Validator\ValidatorMessageTrait;
 use Picamator\TransferObject\Transfer\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Transfer\Generated\ValidatorMessageTransfer;
 
-readonly class CollectionTypePropertyValidator implements PropertyValidatorInterface
+readonly class TransferTypePropertyValidator implements PropertyValidatorInterface
 {
-    use ValidatorMessageTrait;
-
     public function __construct(
         private ClassNameValidatorInterface $classNameValidator,
     ) {
@@ -18,11 +15,11 @@ readonly class CollectionTypePropertyValidator implements PropertyValidatorInter
 
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        return $propertyTransfer->collectionType !== null;
+        return $propertyTransfer->transferType !== null;
     }
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
-        return $this->classNameValidator->validate($propertyTransfer->collectionType);
+        return $this->classNameValidator->validate($propertyTransfer->transferType);
     }
 }

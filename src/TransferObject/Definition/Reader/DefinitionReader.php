@@ -3,7 +3,7 @@
 namespace Picamator\TransferObject\Definition\Reader;
 
 use Generator;
-use Picamator\TransferObject\Definition\Enum\TypeEnum;
+use Picamator\TransferObject\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\Definition\Filesystem\DefinitionFinderInterface;
 use Picamator\TransferObject\Definition\Parser\ContentParserInterface;
 use Picamator\TransferObject\Definition\Validator\ContentValidatorInterface;
@@ -62,8 +62,8 @@ readonly class DefinitionReader implements DefinitionReaderInterface
         foreach ($properties as $propertyName => $propertyType) {
             $propertyTransfer = new DefinitionPropertyTransfer();
             $propertyTransfer->propertyName = (string)$propertyName;
-            $propertyTransfer->type = $this->getType($propertyType);
             $propertyTransfer->collectionType = $this->getCollectionType($propertyType);
+            $this->expandTypeKey($propertyType, $propertyTransfer);
 
             $contentTransfer->properties[] = $propertyTransfer;
         }
@@ -77,7 +77,6 @@ readonly class DefinitionReader implements DefinitionReaderInterface
     private function getCollectionType(array $propertyType): ?string
     {
         $collectionType = $propertyType[self::COLLECTION_TYPE_KEY] ?? null;
-
         if ($collectionType === null) {
             return null;
         }
@@ -88,13 +87,23 @@ readonly class DefinitionReader implements DefinitionReaderInterface
     /**
      * @param array<string,mixed> $propertyType
      */
-    private function getType(array $propertyType): ?string
+    private function expandTypeKey(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
         $type = $propertyType[self::TYPE_KEY] ?? null;
-        if (is_bool($type)) {
-            $type = TypeEnum::getTrueFalse($type)->value;
+        if ($type === null) {
+            return;
         }
 
-        return $type;
+        if (is_bool($type)) {
+            $type = BuildInTypeEnum::getTrueFalse($type)->value;
+        }
+
+        if (BuildInTypeEnum::isBuildInType($type)) {
+            $propertyTransfer->buildInType = $type;
+
+            return;
+        }
+
+        $propertyTransfer->transferType = $type;
     }
 }

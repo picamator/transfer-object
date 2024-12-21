@@ -52,8 +52,6 @@ readonly class TemplateBuilder implements TemplateBuilderInterface
             }
 
             $expander->expandTemplateTransfer($propertyTransfer, $templateTransfer);
-
-            return;
         }
     }
 }

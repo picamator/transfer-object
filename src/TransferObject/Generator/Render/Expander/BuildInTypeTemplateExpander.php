@@ -2,7 +2,7 @@
 
 namespace Picamator\TransferObject\Generator\Render\Expander;
 
-use Picamator\TransferObject\Definition\Enum\TypeEnum;
+use Picamator\TransferObject\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\Generator\Enum\DefaultValueTemplateEnum;
 use Picamator\TransferObject\Generator\Enum\DockBlockTemplateEnum;
 use Picamator\TransferObject\Generator\Render\TemplateRenderTrait;
@@ -13,9 +13,9 @@ readonly class BuildInTypeTemplateExpander implements TemplateExpanderInterface
 {
     use TemplateRenderTrait;
 
-    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): true
+    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        return true;
+        return $propertyTransfer->buildInType !== null;
     }
 
     public function expandTemplateTransfer(
@@ -23,24 +23,24 @@ readonly class BuildInTypeTemplateExpander implements TemplateExpanderInterface
         TemplateTransfer $templateTransfer,
     ): void {
         $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->properties[$propertyName] = $propertyTransfer->type;
+        $templateTransfer->properties[$propertyName] = $propertyTransfer->buildInType;
 
-        if (TypeEnum::isArrayObject($propertyTransfer->type)) {
-            $templateTransfer->imports[TypeEnum::ARRAY_OBJECT->value] ??= TypeEnum::ARRAY_OBJECT->value;
+        if (BuildInTypeEnum::isArrayObject($propertyTransfer->buildInType)) {
+            $templateTransfer->imports[BuildInTypeEnum::ARRAY_OBJECT->value] ??= BuildInTypeEnum::ARRAY_OBJECT->value;
             $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY_OBJECT->value;
             $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY_OBJECT->value;
 
             return;
         }
 
-        if (TypeEnum::isArray($propertyTransfer->type)) {
+        if (BuildInTypeEnum::isArray($propertyTransfer->buildInType)) {
             $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY->value;
             $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY->value;
 
             return;
         }
 
-        if (TypeEnum::isIterable($propertyTransfer->type)) {
+        if (BuildInTypeEnum::isIterable($propertyTransfer->buildInType)) {
             $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY->value;
             $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ITERABLE->value;
         }
