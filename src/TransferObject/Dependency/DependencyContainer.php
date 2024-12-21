@@ -15,12 +15,21 @@ class DependencyContainer implements ContainerInterface
     public const string YML_PARSER = 'ymlParser';
 
     protected const array DEPENDENCIES = [
-        self::FILESYSTEM => Filesystem::class,
-        self::FINDER => Finder::class,
-        self::YML_PARSER => Parser::class,
+        self::FILESYSTEM => 'createFileSystem',
+        self::FINDER => 'createFinder',
+        self::YML_PARSER => 'createYmlParser',
     ];
 
     /**
+     * @var array<string,mixed>
+     */
+    protected static array $container = [];
+
+    /**
+     * @uses createFileSystem()
+     * @uses createFinder()
+     * @uses createYmlParser()
+     *
      * @throws \Picamator\TransferObject\Exception\DependencyNotFoundTransferException
      */
     public function get(string $id): mixed
@@ -31,11 +40,35 @@ class DependencyContainer implements ContainerInterface
             );
         }
 
-        return new (static::DEPENDENCIES[$id]);
+        return static::{static::DEPENDENCIES[$id]}();
     }
 
     public function has(string $id): bool
     {
         return array_key_exists($id, static::DEPENDENCIES);
+    }
+
+    protected static function createYmlParser(): Parser
+    {
+        static::$container[static::YML_PARSER] ??= new Parser();
+
+        return static::$container[static::YML_PARSER];
+    }
+
+    /**
+     * Finder does not reset internal state
+     *
+     * @see https://symfony.com/doc/current/components/finder.html
+     */
+    protected static function createFinder(): Finder
+    {
+        return new Finder();
+    }
+
+    protected static function createFileSystem(): Filesystem
+    {
+        static::$container[static::FILESYSTEM] ??= new Filesystem();
+
+        return static::$container[static::FILESYSTEM];
     }
 }
