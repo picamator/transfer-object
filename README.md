@@ -2,30 +2,33 @@ Transfer Object Generator
 ==========================
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Transfer Object (or further TO) Generator is based on:
+Transfer Object Generator builds Transfer Objects (TOs) based on `YML` definitions.
 
-- PHP 8.4 property hooks
-- FixedArray as a main storage
-- Interface to transform `from` and `to` Array as well as between TOs
-- Interfaces such as `IteratorAggregate`, `JsonSerializable`, `Serializable`, `Countable` interfaces
+For instance defintion bellow
+```yml
+Customer:
+  firstName:
+    type: string
+  lastName:
+    type: string
+```
 
-TO Generator includes console commands and helper classes to:
-
-- Build TOs based on `YML` definitions
-- Build `YML` defintions based on `JSON`
-
-Samples
------------
-New TO with their properties set looks like
-
+generates TO
 ```php
 $customerTransfer = new CustomerTransfer();
 $customerTransfer->firstName = 'Jan';
 $customerTransfer->lastName = 'Kowalski';
 ```
 
-In order to see how converting from array, to transfer or iterate over the TO,
-please check [Try Samples](/doc/Samples/try-samples.php) script.
+Moreover any array, can be used as a blueprint to create definition file.
+```php
+$data = [
+    'firstName' => 'Jan',
+    'lastName' => 'Kowalski',
+];
+```
+
+[Try Samples](/doc/Samples/try-samples.php) to see how TO works.
 
 Installation
 ------------
@@ -45,100 +48,27 @@ After installation TO generator command `generate-transfer` is available on `./v
 ```
 
 ### Helper (experimental)
-Helper class allows to generate TO definitions based on object's data e.g. API response, ORM entity etc.
+Helper class allows to generate TO definitions based on data e.g. API response, ORM entity etc.
 
-For instance:
-
-```php
-$productData = [
-    'sku' => 'T-123',
-    'name' => 'Tomato',
-];
-```
-
-Snippet [try-helper.php](/doc/Helper/try-helper.php) shows how to generate TO definitions and based on them how to generate TOs.
-
-The second part [try-helper-part-2.php](/doc/Helper/try-helper-part-2.php) validates newly generated TOs.
+[Try Helper](/doc/Helper/try-helper.php) to generate TO definitions and the second part [Try Helper Part 2](/doc/Helper/try-helper-part-2.php)
+to check newly generated TOs.
 
 _Note_: Experimental feature works only for the well structured data, resolving `null` type as a `string`.
 
 Configuration File
 ------------------
-The configuration is an `YML` file, which includes namespace, path to definitions and generated classes.
-
-```yml
-generator:
-  transferNamespace: "Picamator\\TransferObject\\Generated"
-  transferPath: "/home/transfer/transfer-object/src/TransferObject/Generated"
-  definitionPath: "/home/transfer/transfer-object/config/definition"
-```
-
-| Key Name | Description                              |
-| ---|------------------------------------------|
-| `generator` | Configuration name.                      |
-| `transferNamespace` | TO namespace.                            |
-| `transferPath` | Path where generated TO should be saved. |
-| `definitionPath` | Path where TO definition is located.     |
-
-See [Configuration Sample](/doc/Samples/config/generator.yml) for more details.
+Details about configuration file can be found on [Command Configuration Wiki](/wiki/Command-Configuration),
+or on [Configuration Sample](/doc/Samples/config/generator.yml).
 
 Definition
 ----------
-The TO defintion is an `YML` file, that can contain one or many definitions.
+Details about configuration file can be found on [Definition Wiki](/wiki/Definition)
+or on [Definition Sample](/doc/Samples/config/definition).
 
- - Each root level is a new TO name
- - Second level is a property name
- - Third level is a property type supporting only two keys `type` and `collectionType`
-
-For example, definition for `CustomerTransfer` with two `string` properties
-
-```yml
-Customer:
-    firstName:
-        type: string
-    lastName:
-        type: string
-```
-
-More can be found on [Definition Sample](/doc/Samples/config/definition) for more details.
-
-### Definition Types
-| Definition File Key | Supported Values                                                                             | Details                                                              |
-|---------------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
-| type                | `bool`, `true`, `false`, `int`, `float`, `string`, `array`, `ArrayObject`, `iterable` | One of the listed values without Union `\|`.                         |
-| type                | Any TO name without prefix `Transfer`.                                                       | Generated property will have the coresponding TO type.               |
-| collectionType      | Any TO name without prefix `Transfer`.                                                       | Generated property will have `ArrayObject` where each element is TO. |
-
-
-Development
------------
-TO Generator provides Docker environment with one container `transfer-object-php`.
-
-In order to start working install [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) first.
-
-To start working following commands should be executed:
-
-1. Build containers: `docker compose build`
-2. Start container: `docker compose up -d`
-3. Install composer dependencies: `docker exec -i transfer-object-php-8.4 composer install`
-
-### Composer Scripts
-Table below shows how to run specific composer scripts on Docker Container
-
-| Name                                                         | Command                                                                 |
-|--------------------------------------------------------------|-------------------------------------------------------------------------|
-| [PHPStan](https://github.com/phpstan/phpstan)                                                  | `docker exec -i transfer-object-php-8.4 composer phpstan`               ||
-| [PHPUnit](https://github.com/sebastianbergmann/phpunit)      | `docker exec -i transfer-object-php-8.4 composer phpunit`                 |
-| [CaptainHook](https://github.com/captainhookphp/captainhook) | `docker exec -i transfer-object-php-8.4 composer captainhook` |
-| Generate TOs                                                 | `docker exec -i transfer-object-php-8.4 composer generate-transfer -- -c /home/transfer/transfer-object/config/generator.yml` |
-| Generate Samples                                             | `docker exec -i transfer-object-php-8.4 composer generate-transfer -- -c /home/transfer/transfer-object/doc/Samples/config/generator.yml` |
-
-
-### CaptanHooks
-CaptainHooks can be configured by running:
-```bash
-docker exec -i transfer-object-php-8.4 composer captainhook install --only-enabled --run-mode=docker --run-exec="docker exec -i transfer-object-php-8.4"
-```
+Development Environment
+-----------------------
+Development environment includes Docker, CaptainHooks, UnitTests etc.
+More information can be found on the [Development Environment Wiki](/wiki/Development-Environment).
 
 Contribution
 ------------
