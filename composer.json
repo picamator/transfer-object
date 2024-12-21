@@ -30,7 +30,6 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=8.4",
-    "ext-mbstring": "*",
     "symfony/finder": "^7.0",
     "symfony/yaml": "^7.0",
     "symfony/filesystem": "^7.0",
@@ -43,7 +42,15 @@
     "captainhook/captainhook": "^5.24"
   },
   "archive": {
-    "exclude": ["docker", "docker-compose.yml", "tests"]
+    "exclude": [
+      "docker",
+      "docker-compose.yml",
+      "tests",
+      "captainhook.json",
+      "phpstan.neon",
+      "phpunit.xml",
+      "doc"
+    ]
   },
   "scripts": {
     "phpunit": "./vendor/bin/phpunit",
