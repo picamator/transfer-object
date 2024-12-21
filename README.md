@@ -57,18 +57,18 @@ _Note_: Experimental feature works only for the well structured data, resolving 
 
 Configuration File
 ------------------
-Details about configuration file can be found on [Command Configuration Wiki](/wiki/Command-Configuration),
+Details about configuration file can be found on [Command Configuration Wiki](https://github.com/picamator/transfer-object/wiki/Command-Configuration),
 or on [Configuration Sample](/doc/Samples/config/generator.yml).
 
 Definition
 ----------
-Details about configuration file can be found on [Definition Wiki](/wiki/Definition)
+Details about configuration file can be found on [Definition Wiki](https://github.com/picamator/transfer-object/wiki/Definition)
 or on [Definition Sample](/doc/Samples/config/definition).
 
 Development Environment
 -----------------------
 Development environment includes Docker, CaptainHooks, UnitTests etc.
-More information can be found on the [Development Environment Wiki](/wiki/Development-Environment).
+More information can be found on the [Development Environment Wiki](https://github.com/picamator/transfer-object/wiki/Development-Environment).
 
 Contribution
 ------------
