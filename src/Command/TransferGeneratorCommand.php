@@ -27,6 +27,8 @@ final class TransferGeneratorCommand extends Command
     private const string ERROR_MESSAGE = 'Failed generate Transfer Objects.';
     private const string SUCCESS_MESSAGE = 'Transfer Objects successfully generated.';
 
+    private const string START_SECTION_NAME = 'Transfer Object Generation';
+
     protected function configure(): void
     {
         $this->setName(self::NAME)
@@ -43,6 +45,7 @@ final class TransferGeneratorCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $inputOutput = new SymfonyStyle($input, $output);
+        $inputOutput->section(self::START_SECTION_NAME);
 
         $isSuccess = $this->loadConfig($input, $inputOutput);
         if (!$isSuccess) {
@@ -100,6 +103,8 @@ final class TransferGeneratorCommand extends Command
 
             return false;
         }
+
+        $inputOutput->info($configPath);
 
         return true;
     }

@@ -34,8 +34,6 @@ COPY --from=composer/composer:latest-bin /composer /usr/local/bin/composer
 RUN docker-php-ext-configure zip
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install curl
-RUN docker-php-ext-install bcmath
-RUN docker-php-ext-install mbstring
 
 # xdebug
 RUN pecl install xdebug

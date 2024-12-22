@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+DOCKER_CONTAINER_NAME=transfer-object-php
+
+function show_usage() {
+  echo "==================================="
+  echo "    Transfer Object (Docker SDK)   "
+  echo "==================================="
+  echo "Usage: $0 <argument>"
+  echo "Arguments:"
+  echo "  build                Build Docker containers"
+  echo "  start                Start Docker containers"
+  echo "  stop                 Stop Docker containers"
+  echo "  composer <command>   Run composer command"
+  echo "  phpstan              Run PHPStan"
+  echo "  phpunit              Run PHPUnit"
+  echo "  hook-install         Install CaptainHook"
+  echo "  hook <command>       Run a CaptainHook command"
+  echo "  generate-to          Generate inertanl transfer objects"
+  echo "  generate-samples-to  Generate sample transfer objects"
+}
+
+case $1 in
+  build)
+    docker compose build
+    ;;
+  start)
+    docker compose up -d --remove-orphans
+    ;;
+  stop)
+    docker compose stop
+    ;;
+  composer)
+    docker exec -i $DOCKER_CONTAINER_NAME composer $2
+    ;;
+  phpstan)
+    docker exec -i $DOCKER_CONTAINER_NAME composer phpstan
+    ;;
+  phpunit)
+    docker exec -i $DOCKER_CONTAINER_NAME composer phpunit
+    ;;
+  hook-install)
+    docker exec -i $DOCKER_CONTAINER_NAME composer captainhook install --only-enabled --run-mode=docker --run-exec="docker exec -i $DOCKER_CONTAINER_NAME"
+    ;;
+  hook)
+    docker exec -i $DOCKER_CONTAINER_NAME composer captainhook $2
+    ;;
+  generate-to)
+    docker exec -i $DOCKER_CONTAINER_NAME composer generate-transfer -- -c /home/transfer/transfer-object/config/generator.config.yml
+    ;;
+  generate-samples-to)
+    docker exec -i $DOCKER_CONTAINER_NAME composer generate-transfer -- -c /home/transfer/transfer-object/doc/Samples/config/generator.config.yml
+    ;;
+  *)
+    show_usage
+    exit 0
+    ;;
+esac

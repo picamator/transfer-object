@@ -2,7 +2,7 @@
   "config": {
     "run": {
       "mode": "docker",
-      "exec": "docker exec -i transfer-object-php-8.4"
+      "exec": "docker exec -i transfer-object-php"
     }
   },
   "commit-msg": {

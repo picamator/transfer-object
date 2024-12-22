@@ -1,8 +1,8 @@
 services:
-  transfer-object-php:
+  php:
     build:
       context: docker/php
-    container_name: transfer-object-php-8.4
+    container_name: transfer-object-php
     extra_hosts:
       - "host.docker.internal:host-gateway"
     expose:
