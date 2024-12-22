@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Picamator\TransferObject\Samples\Generated;
+namespace Picamator\Doc\TransferObject\Samples\Generated;
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;

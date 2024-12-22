@@ -16,15 +16,15 @@
   ],
   "autoload": {
     "psr-4": {
-      "Picamator\\": "src/"
+      "Picamator\\TransferObject\\": "src/"
     },
     "exclude-from-classmap": ["/tests/", "/doc/"]
   },
   "autoload-dev": {
     "psr-4": {
-      "Picamator\\Tests\\Unit\\": "tests/Unit/",
-      "Picamator\\Tests\\Integration\\": "tests/Integration/",
-      "Picamator\\TransferObject\\": "doc/"
+      "Picamator\\Tests\\Unit\\TransferObject\\": "tests/unit/",
+      "Picamator\\Tests\\Integration\\TransferObject\\": "tests/integration/",
+      "Picamator\\Doc\\TransferObject\\": "doc/"
     }
   },
   "minimum-stability": "stable",
@@ -44,13 +44,20 @@
   "archive": {
     "exclude": [
       "docker",
-      "docker-compose.yml",
       "tests",
+      "doc",
+      ".editorconfig",
+      ".gitattributes",
+      ".gitignore",
       "captainhook.json",
+      "docker-compose.yml",
       "phpstan.neon",
       "phpunit.xml",
-      "doc"
+      "README.md"
     ]
+  },
+  "config": {
+    "sort-packages": true
   },
   "scripts": {
     "phpunit": "./vendor/bin/phpunit",
