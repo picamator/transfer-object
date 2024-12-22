@@ -15,7 +15,7 @@ function show_usage() {
   echo "  phpstan              Run PHPStan"
   echo "  phpunit              Run PHPUnit"
   echo "  hook-install         Install CaptainHook"
-  echo "  hook <command>       Run a CaptainHook command"
+  echo "  hook <command>       Run CaptainHook command"
   echo "  generate-to          Generate inertanl transfer objects"
   echo "  generate-samples-to  Generate sample transfer objects"
 }

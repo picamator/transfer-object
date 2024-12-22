@@ -1,10 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
 use Picamator\TransferObject\Generated\HelperContentTransfer;
 use Picamator\TransferObject\Generated\HelperTransfer;
 
-require_once __DIR__. '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 
 echo <<<'STORY'

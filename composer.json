@@ -37,9 +37,10 @@
     "psr/container": "^2.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^11.5",
+    "captainhook/captainhook": "^5.24",
     "phpstan/phpstan": "^2.0",
-    "captainhook/captainhook": "^5.24"
+    "phpunit/phpunit": "^11.5",
+    "squizlabs/php_codesniffer": "^3.11"
   },
   "archive": {
     "exclude": [
@@ -52,6 +53,7 @@
       ".gitignore",
       "captainhook.json",
       "docker-compose.yml",
+      "phpcs.xml",
       "phpstan.neon",
       "phpunit.xml",
       "README.md"
@@ -64,12 +66,14 @@
     "phpunit": "./vendor/bin/phpunit",
     "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon",
     "generate-transfer": "php ./generate-transfer",
-    "captainhook": "./vendor/bin/captainhook"
+    "captainhook": "./vendor/bin/captainhook",
+    "phpcs": "./vendor/bin/phpcs"
   },
   "scripts-descriptions": {
     "phpunit": "Run PHPUnit tests.",
     "phpstan": "Run PHPStan - PHP Static Analysis Tool.",
     "generate-transfer": "Run Transfer Object Generator.",
-    "captainhook": "Run CaptanHooks."
+    "captainhook": "Run CaptanHooks.",
+    "phpcs": "Run PHP CodeSniffer."
   }
 }

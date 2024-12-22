@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator\Generator\Filesystem;
 
@@ -9,7 +11,7 @@ interface DefinitionFilesystemInterface
     /**
      * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\GeneratorTransferException
      */
-    public function appendFile(HelperFilesystemTransfer $filesystemTransfer) : void;
+    public function appendFile(HelperFilesystemTransfer $filesystemTransfer): void;
 
     /**
      * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\GeneratorTransferException

@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Picamator\TransferObject\Transfer;
 
@@ -21,12 +23,12 @@ abstract class AbstractTransfer implements TransferInterface
      */
     protected SplFixedArray $_data;
 
-    public final function __construct()
+    final public function __construct()
     {
         $this->initData();
     }
 
-    public final function getIterator(): Traversable
+    final public function getIterator(): Traversable
     {
         foreach (static::META_DATA as $metaKey => $metaName) {
             $metaIndex = $metaName . self::DATA_INDEX;
@@ -35,17 +37,17 @@ abstract class AbstractTransfer implements TransferInterface
         }
     }
 
-    public final function jsonSerialize(): string
+    final public function jsonSerialize(): string
     {
         return json_encode($this->toArray(), flags: JSON_THROW_ON_ERROR);
     }
 
-    public final function serialize(): string
+    final public function serialize(): string
     {
         return serialize($this->_data);
     }
 
-    public final function unserialize(string $data): void
+    final public function unserialize(string $data): void
     {
         $this->_data = unserialize($data);
     }
@@ -53,7 +55,7 @@ abstract class AbstractTransfer implements TransferInterface
     /**
      * @return array<string,SplFixedArray<mixed>>
      */
-    public final function __serialize(): array
+    final public function __serialize(): array
     {
         return [
             'data' => $this->_data,
@@ -63,7 +65,7 @@ abstract class AbstractTransfer implements TransferInterface
     /**
      * @param array<string,mixed> $data
      */
-    public final function __unserialize(array $data): void
+    final public function __unserialize(array $data): void
     {
         $this->_data = $data['data'];
     }
@@ -71,12 +73,12 @@ abstract class AbstractTransfer implements TransferInterface
     /**
      * @return int
      */
-    public final function count(): int
+    final public function count(): int
     {
         return static::META_DATA_SIZE;
     }
 
-    public final function toArray(): array
+    final public function toArray(): array
     {
         $data = [];
         foreach (static::META_DATA as $metaKey => $metaName) {
@@ -95,7 +97,7 @@ abstract class AbstractTransfer implements TransferInterface
         return $data;
     }
 
-    public final function fromArray(array $data): static
+    final public function fromArray(array $data): static
     {
         $this->initData();
         foreach ($data as $key => $value) {
@@ -111,7 +113,7 @@ abstract class AbstractTransfer implements TransferInterface
         return $this;
     }
 
-    public final function toTransfer(TransferInterface $transfer): TransferInterface
+    final public function toTransfer(TransferInterface $transfer): TransferInterface
     {
         foreach ($this as $key => $dataItem) {
             if (!property_exists($transfer, $key)) {
@@ -131,7 +133,7 @@ abstract class AbstractTransfer implements TransferInterface
         return $transfer;
     }
 
-    public final function fromTransfer(TransferInterface $transfer): static
+    final public function fromTransfer(TransferInterface $transfer): static
     {
         $this->initData();
         foreach ($transfer as $key => $dataItem) {
@@ -152,7 +154,7 @@ abstract class AbstractTransfer implements TransferInterface
         return $this;
     }
 
-    public final function __clone(): void
+    final public function __clone(): void
     {
         $this->_data = clone $this->_data;
         foreach (static::META_DATA as $key => $metaName) {
@@ -169,7 +171,7 @@ abstract class AbstractTransfer implements TransferInterface
         }
     }
 
-    public final function __debugInfo(): array
+    final public function __debugInfo(): array
     {
         return $this->toArray();
     }

@@ -15,3 +15,4 @@ nbproject/
 # tooling
 vendor/
 .phpunit.result.cache
+.cs-check.json

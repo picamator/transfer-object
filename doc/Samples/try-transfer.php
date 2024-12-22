@@ -1,11 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 use Picamator\Doc\TransferObject\Samples\Generated\AgentTransfer;
 use Picamator\Doc\TransferObject\Samples\Generated\CustomerTransfer;
 use Picamator\Doc\TransferObject\Samples\Generated\MerchantTransfer;
 use Picamator\Doc\TransferObject\Samples\Generated\UserTransfer;
 
-require_once __DIR__. '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 echo <<<'STORY'
 ======================================
