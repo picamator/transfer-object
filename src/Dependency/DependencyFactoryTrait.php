@@ -7,7 +7,7 @@ namespace Picamator\TransferObject\Dependency;
 trait DependencyFactoryTrait
 {
     /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\DependencyNotFoundTransferException
+     * @throws \Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException
      */
     protected function getDependency(string $id): mixed
     {

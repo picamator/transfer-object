@@ -7,17 +7,17 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Filesystem;
 interface GeneratorFilesystemInterface
 {
     /**
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\GeneratorTransferException
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException
      */
     public function createTempDir(): void;
 
     /**
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\GeneratorTransferException
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException
      */
     public function rotateTempDir(): void;
 
     /**
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\GeneratorTransferException
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException
      */
     public function writeFile(string $className, string $content) : void;
 }

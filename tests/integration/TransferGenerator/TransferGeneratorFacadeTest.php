@@ -6,7 +6,7 @@ namespace Picamator\Tests\Integration\TransferObject\TransferGenerator;
 
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
-use Picamator\TransferObject\Generated\GeneratorTransfer;
+use Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFacade;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFacadeInterface;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
@@ -39,7 +39,7 @@ class TransferGeneratorFacadeTest extends TestCase
         $this->assertTrue($actual);
     }
 
-    private function assertGeneratorCallback(?GeneratorTransfer $generatorTransfer): void
+    private function assertGeneratorCallback(?TransferGeneratorCallbackTransfer $generatorTransfer): void
     {
         if ($generatorTransfer === null) {
             return;

@@ -7,7 +7,7 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Parser;
 interface ContentParserInterface
 {
     /**
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\DefinitionTransferException
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorDefinitionException
      *
      * @return array<string, array<string, array<string, string>>>
      */

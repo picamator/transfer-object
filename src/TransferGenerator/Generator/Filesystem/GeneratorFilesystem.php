@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Filesystem;
 
 use Picamator\TransferObject\TransferGenerator\Config\Container\ConfigInterface;
-use Picamator\TransferObject\TransferGenerator\Exception\GeneratorTransferException;
+use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Throwable;
@@ -32,7 +32,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
             $this->deleteTempDir();
             $this->filesystem->mkdir($temporaryPath);
         } catch (Throwable $e) {
-            throw new GeneratorTransferException(
+            throw new TransferGeneratorException(
                 sprintf('Cannot create temporary directory "%s".', $temporaryPath),
                 previous: $e,
             );
@@ -50,7 +50,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
     {
         $filePath = $this->getTemporaryPath() . DIRECTORY_SEPARATOR . sprintf(self::FILE_NAME_TEMPLATE, $className);
         if ($this->filesystem->exists($filePath)) {
-            throw new GeneratorTransferException(
+            throw new TransferGeneratorException(
                 sprintf('Cannot save file "%s". File with the same name already exit.', $filePath),
             );
         }
@@ -58,7 +58,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
         try {
             $this->filesystem->dumpFile($filePath, $content);
         } catch (Throwable $e) {
-            throw new GeneratorTransferException(
+            throw new TransferGeneratorException(
                 sprintf('Cannot write file "%s".', $filePath),
                 previous: $e,
             );
@@ -76,7 +76,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 
             $this->filesystem->remove($finder);
         } catch (Throwable $e) {
-            throw new GeneratorTransferException(
+            throw new TransferGeneratorException(
                 'Cannot delete previously generated files.',
                 previous: $e,
             );
@@ -96,7 +96,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
                 $this->filesystem->copy($file->getRealPath(), $destinationPath. $file->getFilename());
             }
         } catch (Throwable $e) {
-            throw new GeneratorTransferException('Cannot copy generated files.', previous: $e);
+            throw new TransferGeneratorException('Cannot copy generated files.', previous: $e);
         }
     }
 
@@ -109,7 +109,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
                 $this->filesystem->remove($temporaryPath);
             }
         } catch (Throwable $e) {
-            throw new GeneratorTransferException(
+            throw new TransferGeneratorException(
                 sprintf('Cannot delete temporary directory "%s".', $temporaryPath),
                 previous: $e,
             );

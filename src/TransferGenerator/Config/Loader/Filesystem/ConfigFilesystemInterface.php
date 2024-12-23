@@ -7,7 +7,7 @@ namespace Picamator\TransferObject\TransferGenerator\Config\Loader\Filesystem;
 interface ConfigFilesystemInterface
 {
     /**
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\ConfigTransferException
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigException
      */
     public function exists(string $configPath) : bool;
 }

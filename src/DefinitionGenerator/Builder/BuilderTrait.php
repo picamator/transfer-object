@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\DefinitionGenerator\Builder;
 
 use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\VariableTypeEnum;
-use Picamator\TransferObject\DefinitionGenerator\Exception\GeneratorTransferException;
-use Picamator\TransferObject\Generated\HelperContentTransfer;
+use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
+use Picamator\TransferObject\Generated\DefinitionGeneratorContentTransfer;
 
 trait BuilderTrait
 {
     /**
-     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\GeneratorTransferException
+     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
      */
     protected function assertPropertyName(int|string $propertyName): void
     {
         if (is_int($propertyName)) {
-            throw new GeneratorTransferException(
+            throw new DefinitionGeneratorException(
                 'Cannot generate definition based on root Level integer indexes.'
             );
         }
@@ -30,14 +30,14 @@ trait BuilderTrait
     }
 
     /**
-     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\GeneratorTransferException
+     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
      */
     protected function getTypeEnum(string $propertyName, mixed $propertyValue): VariableTypeEnum
     {
         $propertyType = gettype($propertyValue);
         $typeEnum = VariableTypeEnum::tryFrom($propertyType);
         if ($typeEnum === null) {
-            throw new GeneratorTransferException(
+            throw new DefinitionGeneratorException(
                 sprintf(
                     'Property "%s" type "%s" is not supported.',
                     $propertyName,
@@ -52,9 +52,9 @@ trait BuilderTrait
     /**
      * @param array<int|string,mixed> $content
      */
-    protected function createHelperContentTransfer(string $className, array $content): HelperContentTransfer
+    protected function createGeneratorContentTransfer(string $className, array $content): DefinitionGeneratorContentTransfer
     {
-        $contentTransfer = new HelperContentTransfer();
+        $contentTransfer = new DefinitionGeneratorContentTransfer();
         $contentTransfer->className = $className;
         $contentTransfer->content = $content;
 

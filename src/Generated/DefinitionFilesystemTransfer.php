@@ -5,29 +5,28 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
 
 /**
  * Specification:
  * - Class is generated based on definition.
  * - In order to modify file please change definition and run generator.
  */
-final class HelperTransfer extends AbstractTransfer
+final class DefinitionFilesystemTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 2;
+    protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
         self::CONTENT => self::CONTENT_DATA_NAME,
         self::DEFINITION_PATH => self::DEFINITION_PATH_DATA_NAME,
+        self::FILE_NAME => self::FILE_NAME_DATA_NAME,
     ];
 
     // content
-    #[PropertyTypeAttribute(HelperContentTransfer::class)]
     public const string CONTENT = 'content';
     protected const string CONTENT_DATA_NAME = 'CONTENT';
     protected const int CONTENT_DATA_INDEX = 0;
 
-    public ?HelperContentTransfer $content {
+    public ?string $content {
         get => $this->_data[self::CONTENT_DATA_INDEX];
         set => $this->_data[self::CONTENT_DATA_INDEX] = $value;
     }
@@ -40,5 +39,15 @@ final class HelperTransfer extends AbstractTransfer
     public ?string $definitionPath {
         get => $this->_data[self::DEFINITION_PATH_DATA_INDEX];
         set => $this->_data[self::DEFINITION_PATH_DATA_INDEX] = $value;
+    }
+
+    // fileName
+    public const string FILE_NAME = 'fileName';
+    protected const string FILE_NAME_DATA_NAME = 'FILE_NAME';
+    protected const int FILE_NAME_DATA_INDEX = 2;
+
+    public ?string $fileName {
+        get => $this->_data[self::FILE_NAME_DATA_INDEX];
+        set => $this->_data[self::FILE_NAME_DATA_INDEX] = $value;
     }
 }

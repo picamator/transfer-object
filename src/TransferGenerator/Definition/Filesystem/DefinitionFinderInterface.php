@@ -9,7 +9,7 @@ use Generator;
 interface DefinitionFinderInterface
 {
     /**
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\DefinitionTransferException
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorDefinitionException
      *
      * @return Generator<string>
      */

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Config\Parser;
 
-use Picamator\TransferObject\TransferGenerator\Exception\ConfigTransferException;
+use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigException;
 use Symfony\Component\Yaml\Parser;
 use Throwable;
 
@@ -20,7 +20,7 @@ readonly class YmlFileParser implements FileParserInterface
         try {
             return $this->yml->parseFile($filePath);
         } catch (Throwable $e) {
-            throw new ConfigTransferException(
+            throw new TransferGeneratorConfigException(
                 sprintf(
                     'Cannot parse file "%s".',
                     $filePath,

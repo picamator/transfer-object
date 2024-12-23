@@ -12,7 +12,7 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
  * - Class is generated based on definition.
  * - In order to modify file please change definition and run generator.
  */
-final class GeneratorTransfer extends AbstractTransfer
+final class TransferGeneratorCallbackTransfer extends AbstractTransfer
 {
     protected const int META_DATA_SIZE = 3;
 

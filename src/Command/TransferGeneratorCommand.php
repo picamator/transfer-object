@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Command;
 
-use Picamator\TransferObject\Generated\GeneratorTransfer;
+use Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFacade;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
@@ -69,12 +69,12 @@ final class TransferGeneratorCommand extends Command
 
     private function generateTransfers(SymfonyStyle $inputOutput): bool
     {
-        $handleCallback = fn(?GeneratorTransfer $generatorTransfer) => $this->handleCallback($inputOutput, $generatorTransfer);
+        $handleCallback = fn(?TransferGeneratorCallbackTransfer $generatorTransfer) => $this->handleCallback($inputOutput, $generatorTransfer);
 
         return new TransferGeneratorFacade()->generateTransfers($handleCallback);
     }
 
-    private function handleCallback(SymfonyStyle $inputOutput, ?GeneratorTransfer $generatorTransfer): void
+    private function handleCallback(SymfonyStyle $inputOutput, ?TransferGeneratorCallbackTransfer $generatorTransfer): void
     {
         if ($generatorTransfer?->validator?->isValid !== false) {
             return;

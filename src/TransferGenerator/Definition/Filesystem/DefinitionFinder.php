@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Filesystem;
 
 use Generator;
 use Picamator\TransferObject\TransferGenerator\Config\Container\ConfigInterface;
-use Picamator\TransferObject\TransferGenerator\Exception\DefinitionTransferException;
+use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorDefinitionException;
 use Symfony\Component\Finder\Finder;
 use Throwable;
 
@@ -31,7 +31,7 @@ readonly class DefinitionFinder implements DefinitionFinderInterface
     }
 
     /**
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\DefinitionTransferException
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorDefinitionException
      */
     private function getDefinitionFinder(): Finder
     {
@@ -41,7 +41,7 @@ readonly class DefinitionFinder implements DefinitionFinderInterface
                 ->name(self::FILE_NAME_PATTERN)
                 ->in($this->config->getDefinitionPath());
         } catch (Throwable $e) {
-            throw new DefinitionTransferException(
+            throw new TransferGeneratorDefinitionException(
                 sprintf(
                     'Failed find definition files "%s" in the "%s".',
                     $this->config->getDefinitionPath(),

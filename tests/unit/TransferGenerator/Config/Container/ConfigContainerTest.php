@@ -7,7 +7,7 @@ namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Config\Container
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\ConfigTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Container\ConfigContainer;
-use Picamator\TransferObject\TransferGenerator\Exception\ConfigTransferException;
+use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigException;
 
 class ConfigContainerTest extends TestCase
 {
@@ -21,7 +21,7 @@ class ConfigContainerTest extends TestCase
     public function testGetConfigWithoutLoadShouldThrowException(): void
     {
         // Act
-        $this->expectException(ConfigTransferException::class);
+        $this->expectException(TransferGeneratorConfigException::class);
 
         // Assert
         $this->configContainer->getConfig();

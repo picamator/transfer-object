@@ -9,7 +9,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReade
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderInterface;
 use Picamator\TransferObject\Generated\DefinitionTransfer;
-use Picamator\TransferObject\Generated\GeneratorTransfer;
+use Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer;
 
 readonly class TransferGenerator implements TransferGeneratorInterface
 {
@@ -26,7 +26,7 @@ readonly class TransferGenerator implements TransferGeneratorInterface
 
         $generatorFiber->start();
         while (!$generatorFiber->isTerminated()) {
-            /** @var \Picamator\TransferObject\Generated\GeneratorTransfer|null $generatorTransfer */
+            /** @var \Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer|null $generatorTransfer */
             $generatorTransfer = $generatorFiber->resume();
             if ($generatorTransfer?->validator?->isValid === false) {
                 $handleCallback($generatorTransfer);
@@ -60,9 +60,9 @@ readonly class TransferGenerator implements TransferGeneratorInterface
         return $isValid;
     }
 
-    private function createGeneratorTransfer(string $definitionKey, DefinitionTransfer $definitionTransfer): GeneratorTransfer
+    private function createGeneratorTransfer(string $definitionKey, DefinitionTransfer $definitionTransfer): TransferGeneratorCallbackTransfer
     {
-        $generatorTransfer = new GeneratorTransfer();
+        $generatorTransfer = new TransferGeneratorCallbackTransfer();
 
         $generatorTransfer->className = $definitionTransfer->content?->className;
         $generatorTransfer->definitionKey = $definitionKey;

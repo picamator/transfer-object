@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Dependency;
 
-use Picamator\TransferObject\Dependency\Exception\DependencyNotFoundTransferException;
+use Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -28,16 +28,16 @@ class DependencyContainer implements ContainerInterface
     protected static array $container = [];
 
     /**
-     * @uses createFileSystem()
-     * @uses createFinder()
+     * @throws \Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException
+     *@uses createFinder()
      * @uses createYmlParser()
      *
-     * @throws \Picamator\TransferObject\Dependency\Exception\DependencyNotFoundTransferException
+     * @uses createFileSystem()
      */
     public function get(string $id): mixed
     {
         if (!$this->has($id)) {
-            throw new DependencyNotFoundTransferException(
+            throw new DependencyNotFoundException(
                 sprintf('Dependency "%s" not found.', $id),
             );
         }

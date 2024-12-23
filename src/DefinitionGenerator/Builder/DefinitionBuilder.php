@@ -8,11 +8,11 @@ use ArrayObject;
 use Generator;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\SupportedBuildInTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\VariableTypeEnum;
-use Picamator\TransferObject\DefinitionGenerator\Exception\GeneratorTransferException;
+use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
-use Picamator\TransferObject\Generated\HelperBuilderTransfer;
-use Picamator\TransferObject\Generated\HelperContentTransfer;
+use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
+use Picamator\TransferObject\Generated\DefinitionGeneratorContentTransfer;
 
 readonly class DefinitionBuilder implements DefinitionBuilderInterface
 {
@@ -20,27 +20,27 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
     use TransferTypeTrait;
     use CollectionTransferTypeTrait;
 
-    public function buildDefinitionContents(HelperContentTransfer $helperContentTransfer): Generator
+    public function buildDefinitionContents(DefinitionGeneratorContentTransfer $generatorContentTransfer): Generator
     {
-        $builderTransfer = $this->getBuilderTransfer($helperContentTransfer);
+        $builderTransfer = $this->getBuilderTransfer($generatorContentTransfer);
         yield $builderTransfer->definitionContent;
 
-        foreach ($builderTransfer->helperContents as $helperContentTransfer) {
-            yield from $this->buildDefinitionContents($helperContentTransfer);
+        foreach ($builderTransfer->generatorContents as $generatorContentTransfer) {
+            yield from $this->buildDefinitionContents($generatorContentTransfer);
         }
     }
 
     /**
-     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\GeneratorTransferException
+     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
      */
-    private function getBuilderTransfer(HelperContentTransfer $helperContentTransfer): HelperBuilderTransfer
+    private function getBuilderTransfer(DefinitionGeneratorContentTransfer $generatorContentTransfer): DefinitionBuilderTransfer
     {
         $definitionContentTransfer = new DefinitionContentTransfer();
-        $definitionContentTransfer->className = $helperContentTransfer->className;
+        $definitionContentTransfer->className = $generatorContentTransfer->className;
 
-        /** @var ArrayObject<int,\Picamator\TransferObject\Generated\HelperContentTransfer> $helperContentTransfers */
-        $helperContentTransfers = new ArrayObject();
-        foreach ($helperContentTransfer->content as $propertyName => $propertyValue) {
+        /** @var ArrayObject<int,\Picamator\TransferObject\Generated\DefinitionGeneratorContentTransfer> $generatorContentTransfers */
+        $generatorContentTransfers = new ArrayObject();
+        foreach ($generatorContentTransfer->content as $propertyName => $propertyValue) {
             $this->assertPropertyName($propertyName);
             $propertyName = (string)$propertyName;
             $typeEnum = $this->getTypeEnum($propertyName, $propertyValue);
@@ -48,7 +48,7 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
             if ($this->isTransfer($typeEnum, $propertyValue)) {
                 $propertyTransfer = $this->createTransferTypePropertyTransfer($propertyName);
                 $definitionContentTransfer->properties[] = $propertyTransfer;
-                $helperContentTransfers[] = $this->createHelperContentTransfer($propertyTransfer->transferType, $propertyValue);
+                $generatorContentTransfers[] = $this->createGeneratorContentTransfer($propertyTransfer->transferType, $propertyValue);
 
                 continue;
             }
@@ -56,7 +56,7 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
             if ($this->isCollectionTransfer($typeEnum, $propertyValue)) {
                 $propertyTransfer = $this->getCollectionTypePropertyTransfer($propertyName);
                 $definitionContentTransfer->properties[] = $propertyTransfer;
-                $helperContentTransfers[] = $this->createHelperContentTransfer($propertyTransfer->collectionType, $propertyValue[0]);
+                $generatorContentTransfers[] = $this->createGeneratorContentTransfer($propertyTransfer->collectionType, $propertyValue[0]);
 
                 continue;
             }
@@ -64,15 +64,15 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
             $definitionContentTransfer->properties[] = $this->getBuildInTypePropertyTransfer($propertyName, $typeEnum, $propertyValue);
         }
 
-        $builderTransfer = new HelperBuilderTransfer();
+        $builderTransfer = new DefinitionBuilderTransfer();
         $builderTransfer->definitionContent = $definitionContentTransfer;
-        $builderTransfer->helperContents = $helperContentTransfers;
+        $builderTransfer->generatorContents = $generatorContentTransfers;
 
         return $builderTransfer;
     }
 
     /**
-     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\GeneratorTransferException
+     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
      */
     private function getBuildInTypePropertyTransfer(
         string $propertyName,
@@ -108,7 +108,7 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
             return $propertyTransfer;
         }
 
-        throw new GeneratorTransferException(
+        throw new DefinitionGeneratorException(
             sprintf(
                 'Property "%s" type "%s" is not supported.',
                 $propertyName,

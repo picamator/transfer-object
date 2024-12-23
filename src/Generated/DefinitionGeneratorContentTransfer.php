@@ -11,7 +11,7 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - Class is generated based on definition.
  * - In order to modify file please change definition and run generator.
  */
-final class HelperContentTransfer extends AbstractTransfer
+final class DefinitionGeneratorContentTransfer extends AbstractTransfer
 {
     protected const int META_DATA_SIZE = 2;
 

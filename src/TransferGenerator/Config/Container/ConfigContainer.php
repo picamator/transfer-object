@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Config\Container;
 
-use Picamator\TransferObject\TransferGenerator\Exception\ConfigTransferException;
+use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigException;
 use Picamator\TransferObject\Generated\ConfigTransfer;
 
 class ConfigContainer
@@ -21,12 +21,12 @@ class ConfigContainer
     }
 
     /**
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\ConfigTransferException
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigException
      */
     public static function getConfig(): ConfigInterface
     {
         if (!isset(self::$config)) {
-            throw new ConfigTransferException('Config was not loaded. Run loadConfig() first.');
+            throw new TransferGeneratorConfigException('Config was not loaded. Run loadConfig() first.');
         }
 
         return self::$config;

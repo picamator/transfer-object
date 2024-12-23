@@ -10,10 +10,10 @@ interface TransferGeneratorFacadeInterface
      * Specification:
      * - Generates Transfer Objects using Fibers
      * - Fiber First Suspend on creating temporary directory
-     * - Fiber Next Suspend after generating one Transfer Object passing `GeneratorTransfer` into callback
+     * - Fiber Next Suspend after generating one Transfer Object passing `TransferGeneratorCallbackTransfer` into callback
      * - Returns `true` when whole process is successful, `false` otherwise
      *
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\GeneratorTransferException
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException
      */
     public function generateTransfers(callable $handleCallback): bool;
 }

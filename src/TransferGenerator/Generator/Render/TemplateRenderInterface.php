@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 interface TemplateRenderInterface
 {
     /**
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\GeneratorTransferException
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException
      */
     public function renderTemplate(DefinitionContentTransfer $contentTransfer): string;
 }

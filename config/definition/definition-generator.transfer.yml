@@ -1,0 +1,25 @@
+DefinitionGenerator:
+  definitionPath:
+    type: string
+  content:
+    type: DefinitionGeneratorContent
+
+DefinitionGeneratorContent:
+  className:
+    type: string
+  content:
+    type: array
+
+DefinitionBuilder:
+  definitionContent:
+    type: DefinitionContent
+  generatorContents:
+    collectionType: DefinitionGeneratorContent
+
+DefinitionFilesystem:
+  fileName:
+    type: string
+  definitionPath:
+    type: string
+  content:
+    type: string

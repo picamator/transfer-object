@@ -1,3 +1,11 @@
+Config:
+  transferNamespace:
+    type: string
+  transferPath:
+    type: string
+  definitionPath:
+    type: string
+
 Definition:
   content:
     type: DefinitionContent
@@ -26,7 +34,7 @@ DefinitionValidator:
   errorMessages:
     collectionType: ValidatorMessage
 
-Generator:
+TransferGeneratorCallback:
   className:
     type: string
   definitionKey:

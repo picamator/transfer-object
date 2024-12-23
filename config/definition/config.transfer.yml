@@ -1,7 +1,0 @@
-Config:
-  transferNamespace:
-    type: string
-  transferPath:
-    type: string
-  definitionPath:
-    type: string

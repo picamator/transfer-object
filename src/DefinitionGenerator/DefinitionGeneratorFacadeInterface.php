@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator;
 
-use Picamator\TransferObject\Generated\HelperTransfer;
+use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 
 interface DefinitionGeneratorFacadeInterface
 {
@@ -14,7 +14,7 @@ interface DefinitionGeneratorFacadeInterface
      * - Saves definitions on the file
      * - Returns generated definitions number
      *
-     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\GeneratorTransferException
+     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
      */
-    public function generateDefinitions(HelperTransfer $helperTransfer): int;
+    public function generateDefinitions(DefinitionGeneratorTransfer $generatorTransfer): int;
 }

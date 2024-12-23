@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render;
 
-use Picamator\TransferObject\TransferGenerator\Exception\GeneratorTransferException;
+use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 
 readonly class TemplateRender implements TemplateRenderInterface
@@ -34,7 +34,7 @@ readonly class TemplateRender implements TemplateRenderInterface
             return $output;
         }
 
-        throw new GeneratorTransferException(
+        throw new TransferGeneratorException(
             sprintf(
                 'Template "%s" render error "%s", line "%s".',
                 self::TEMPLATE_PATH,

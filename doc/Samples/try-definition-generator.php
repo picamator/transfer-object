@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
-use Picamator\TransferObject\Generated\HelperContentTransfer;
-use Picamator\TransferObject\Generated\HelperTransfer;
+use Picamator\TransferObject\Generated\DefinitionGeneratorContentTransfer;
+use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -43,14 +43,14 @@ echo <<<'STORY'
 ======================================
 
 STORY;
-$helperTransfer = new HelperTransfer()
+$generatorTransfer = new DefinitionGeneratorTransfer()
     ->fromArray([
-        HelperTransfer::DEFINITION_PATH => '/home/transfer/transfer-object/doc/Samples/config/definition',
-        HelperTransfer::CONTENT => [
-            HelperContentTransfer::CLASS_NAME => 'Product',
-            HelperContentTransfer::CONTENT => $productData,
+        DefinitionGeneratorTransfer::DEFINITION_PATH => '/home/transfer/transfer-object/doc/Samples/config/definition',
+        DefinitionGeneratorTransfer::CONTENT => [
+            DefinitionGeneratorContentTransfer::CLASS_NAME => 'Product',
+            DefinitionGeneratorContentTransfer::CONTENT => $productData,
         ],
     ]);
 
-$generatedDefinitions = new DefinitionGeneratorFacade()->generateDefinitions($helperTransfer);
+$generatedDefinitions = new DefinitionGeneratorFacade()->generateDefinitions($generatorTransfer);
 echo 'Generated definitions: ' . $generatedDefinitions . PHP_EOL;
