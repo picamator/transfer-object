@@ -23,8 +23,4 @@ interface TransferInterface extends IteratorAggregate, JsonSerializable, Seriali
      * @param array<string,mixed> $data
      */
     public function fromArray(array $data): static;
-
-    public function toTransfer(TransferInterface $transfer): TransferInterface;
-
-    public function fromTransfer(TransferInterface $transfer): static;
 }

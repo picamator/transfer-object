@@ -25,11 +25,6 @@ final readonly class PropertyTypeAttribute implements PropertyTypeAttributeInter
         return $data->getArrayCopy();
     }
 
-    public function clone(ArrayObject $data): ArrayObject
-    {
-        return clone $data;
-    }
-
     /**
      * @param array<string,mixed> $data
      */

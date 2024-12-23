@@ -37,6 +37,9 @@ abstract class AbstractTransfer implements TransferInterface
         }
     }
 
+    /**
+     * @throws \JsonException
+     */
     final public function jsonSerialize(): string
     {
         return json_encode($this->toArray(), flags: JSON_THROW_ON_ERROR);
@@ -111,64 +114,6 @@ abstract class AbstractTransfer implements TransferInterface
         }
 
         return $this;
-    }
-
-    final public function toTransfer(TransferInterface $transfer): TransferInterface
-    {
-        foreach ($this as $key => $dataItem) {
-            if (!property_exists($transfer, $key)) {
-                continue;
-            }
-
-            $metaName = static::META_DATA[$key];
-            $transfer->{$key} = match(true) {
-                $dataItem instanceof ArrayObject => $this
-                    ->getPropertyTypeAttribute(className: static::class, constantName: $metaName)?->clone($dataItem)
-                    ?? clone $dataItem,
-                is_object($dataItem) => clone $dataItem,
-                default => $dataItem,
-            };
-        }
-
-        return $transfer;
-    }
-
-    final public function fromTransfer(TransferInterface $transfer): static
-    {
-        $this->initData();
-        foreach ($transfer as $key => $dataItem) {
-            if (!property_exists($this, $key)) {
-                continue;
-            }
-
-            $metaName = static::META_DATA[$key];
-            $this->{$key} = match(true) {
-                $dataItem instanceof ArrayObject => $this
-                    ->getPropertyTypeAttribute(className: $transfer::class, constantName: $metaName)?->clone($dataItem)
-                    ?? clone $dataItem,
-                is_object($dataItem) => clone $dataItem,
-                default => $dataItem,
-            };
-        }
-
-        return $this;
-    }
-
-    final public function __clone(): void
-    {
-        $this->_data = clone $this->_data;
-        foreach (static::META_DATA as $key => $metaName) {
-            $dataItem = $this->{$key};
-            if (!is_object($dataItem)) {
-                continue;
-            }
-
-            $this->{$key} = match(true) {
-                $dataItem instanceof ArrayObject => $this
-                    ->getPropertyTypeAttribute(className: static::class, constantName: $metaName)?->clone($dataItem) ?? clone $dataItem,
-                default => clone $dataItem,
-            };
-        }
     }
 
     final public function __debugInfo(): array

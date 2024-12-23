@@ -22,11 +22,4 @@ interface PropertyTypeAttributeInterface
      * @return array<string|int,mixed>
      */
     public function toArray(ArrayObject $data): array;
-
-    /**
-     * @param \ArrayObject<int,\Picamator\TransferObject\Transfer\TransferInterface>|\ArrayObject<int|string,mixed> $data
-     *
-     * @return \ArrayObject<int,\Picamator\TransferObject\Transfer\TransferInterface>|\ArrayObject<int|string,mixed>
-     */
-    public function clone(ArrayObject $data): ArrayObject;
 }

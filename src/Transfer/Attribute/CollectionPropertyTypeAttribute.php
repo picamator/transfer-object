@@ -36,22 +36,6 @@ final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttr
     }
 
     /**
-     * @return \ArrayObject<int,\Picamator\TransferObject\Transfer\TransferInterface>
-     */
-    public function clone(ArrayObject $data): ArrayObject
-    {
-        /** @var \ArrayObject<int,\Picamator\TransferObject\Transfer\TransferInterface> $clonedData */
-        $clonedData = new ArrayObject();
-
-        /** @var \Picamator\TransferObject\Transfer\TransferInterface $transfer */
-        foreach ($data as $transfer) {
-            $clonedData[] = clone $transfer;
-        }
-
-        return $clonedData;
-    }
-
-    /**
      * @param array<string,mixed> $data
      */
     private function createTransfer(array $data): TransferInterface

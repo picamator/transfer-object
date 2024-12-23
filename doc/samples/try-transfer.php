@@ -72,30 +72,10 @@ var_dump($agentTransfer->count());
 
 echo <<<'STORY'
 ======================================
-           Copy
-            &
-     Compare with Original
+           Copy TO
 ======================================
 
 STORY;
-$copiedAgentTransfer = new AgentTransfer()->fromTransfer($agentTransfer);
 
-var_dump($copiedAgentTransfer->customer === $agentTransfer->customer);
-var_dump($copiedAgentTransfer->merchants[0] === $agentTransfer->merchants[0]);
-
-$userTransfer = new UserTransfer();
-var_dump($userTransfer->fromTransfer($customerTransfer)->toArray());
-var_dump($customerTransfer->toTransfer(new UserTransfer())->toArray());
-
-echo <<<'STORY'
-======================================
-           Clone
-             &
-     Compare with Original
-======================================
-
-STORY;
-$clonedAgentTransfer = clone $agentTransfer;
-var_dump($clonedAgentTransfer === $agentTransfer);
-var_dump($clonedAgentTransfer->merchants[0] === $agentTransfer->merchants[0]);
-var_dump($clonedAgentTransfer->customer === $agentTransfer->customer);
+$userTransfer = new UserTransfer()->fromArray($customerTransfer->toArray());
+var_dump($userTransfer);
