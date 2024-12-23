@@ -27,6 +27,8 @@ DefinitionValidator:
     collectionType: ValidatorMessage
 
 Generator:
+  className:
+    type: string
   definitionKey:
     type: string
   validator:

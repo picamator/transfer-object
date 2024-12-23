@@ -64,6 +64,7 @@ readonly class TransferGenerator implements TransferGeneratorInterface
     {
         $generatorTransfer = new GeneratorTransfer();
 
+        $generatorTransfer->className = $definitionTransfer->content?->className;
         $generatorTransfer->definitionKey = $definitionKey;
         $generatorTransfer->validator = $definitionTransfer->validator;
 
