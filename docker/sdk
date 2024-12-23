@@ -11,6 +11,7 @@ function show_usage() {
   echo "  build                Build Docker containers"
   echo "  start                Start Docker containers"
   echo "  stop                 Stop Docker containers"
+  echo "  cli                  Open container shell"
   echo "  composer <command>   Run composer command"
   echo "  phpstan              Run PHPStan"
   echo "  phpunit              Run PHPUnit"
@@ -29,6 +30,9 @@ case $1 in
     ;;
   stop)
     docker compose stop
+    ;;
+  cli)
+    docker exec -it $DOCKER_CONTAINER_NAME sh
     ;;
   composer)
     docker exec -i $DOCKER_CONTAINER_NAME composer $2
