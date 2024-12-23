@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\Doc\TransferObject\Samples\Generated;
+namespace Picamator\Doc\Samples\TransferObject\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 

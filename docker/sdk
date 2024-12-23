@@ -50,7 +50,7 @@ case $1 in
      docker compose run $DOCKER_SERVICE_NAME composer  generate-transfer -- -c /home/transfer/transfer-object/config/generator.config.yml
     ;;
   to-samples-generate)
-     docker compose run $DOCKER_SERVICE_NAME composer generate-transfer -- -c /home/transfer/transfer-object/doc/Samples/config/generator.config.yml
+     docker compose run $DOCKER_SERVICE_NAME composer generate-transfer -- -c /home/transfer/transfer-object/doc/samples/config/generator.config.yml
     ;;
   *)
     show_usage

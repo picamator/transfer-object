@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Picamator\Doc\TransferObject\Samples\Generated\AgentTransfer;
-use Picamator\Doc\TransferObject\Samples\Generated\CustomerTransfer;
-use Picamator\Doc\TransferObject\Samples\Generated\MerchantTransfer;
-use Picamator\Doc\TransferObject\Samples\Generated\UserTransfer;
+use Picamator\Doc\Samples\TransferObject\Generated\AgentTransfer;
+use Picamator\Doc\Samples\TransferObject\Generated\CustomerTransfer;
+use Picamator\Doc\Samples\TransferObject\Generated\MerchantTransfer;
+use Picamator\Doc\Samples\TransferObject\Generated\UserTransfer;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 

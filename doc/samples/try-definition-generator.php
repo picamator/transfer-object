@@ -45,7 +45,7 @@ echo <<<'STORY'
 STORY;
 $generatorTransfer = new DefinitionGeneratorTransfer()
     ->fromArray([
-        DefinitionGeneratorTransfer::DEFINITION_PATH => '/home/transfer/transfer-object/doc/Samples/config/definition',
+        DefinitionGeneratorTransfer::DEFINITION_PATH => '/home/transfer/transfer-object/doc/samples/config/definition',
         DefinitionGeneratorTransfer::CONTENT => [
             DefinitionGeneratorContentTransfer::CLASS_NAME => 'Product',
             DefinitionGeneratorContentTransfer::CONTENT => $productData,
