@@ -28,15 +28,25 @@ START;
         foreach ($contentTransfer->properties as $propertyTransfer) {
             $content .= match (true) {
                 $propertyTransfer->buildInType !== null
-                    => sprintf(self::TYPE_TEMPLATE, $propertyTransfer->propertyName, $propertyTransfer->buildInType),
+                    => $this->renderType($propertyTransfer->propertyName, $propertyTransfer->buildInType),
                 $propertyTransfer->transferType !== null
-                    => sprintf(self::TYPE_TEMPLATE, $propertyTransfer->propertyName, $propertyTransfer->transferType),
+                    => $this->renderType($propertyTransfer->propertyName, $propertyTransfer->transferType),
                 $propertyTransfer->collectionType !== null
-                    => sprintf(self::COLLECTION_TYPE_TEMPLATE, $propertyTransfer->propertyName, $propertyTransfer->collectionType),
+                    => $this->renderCollectionType($propertyTransfer->propertyName, $propertyTransfer->collectionType),
                 default => '',
             } . PHP_EOL;
         }
 
         return $content . PHP_EOL;
+    }
+
+    private function renderCollectionType(string $propertyName, string $typeName): string
+    {
+        return sprintf(self::COLLECTION_TYPE_TEMPLATE, $propertyName, $typeName);
+    }
+
+    private function renderType(string $propertyName, string $typeName): string
+    {
+        return sprintf(self::TYPE_TEMPLATE, $propertyName, $typeName);
     }
 }

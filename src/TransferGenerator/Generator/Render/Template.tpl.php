@@ -8,7 +8,7 @@ $templateTransfer ??= new TemplateTransfer();
 ?>
 <?php echo "<?php
 
-declare(strict_types = 1);\n" ?>
+declare(strict_types=1);\n" ?>
 
 namespace <?php echo $templateTransfer->classNamespace ?>;
 
