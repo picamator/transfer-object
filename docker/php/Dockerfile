@@ -25,7 +25,6 @@ RUN apt-get -y install git
 RUN apt-get install -y zip libzip-dev
 RUN apt-get -y install curl
 RUN apt-get -y install libcurl4-openssl-dev
-RUN apt-get -y install libonig-dev
 
 # composer
 COPY --from=composer/composer:latest-bin /composer /usr/local/bin/composer
