@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Definition\Validator\Property;
 
-use Picamator\TransferObject\TransferGenerator\Definition\Enum\BlackListBuildInTypeEnum;
+use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\ValidatorMessageTrait;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
@@ -22,7 +22,7 @@ readonly class BuildInTypePropertyValidator implements PropertyValidatorInterfac
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
-        if (!BlackListBuildInTypeEnum::isBackListed($propertyTransfer->buildInType)) {
+        if (BuildInTypeEnum::isAllowed($propertyTransfer->buildInType)) {
             return $this->createSuccessMessageTransfer();
         }
 

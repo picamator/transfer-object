@@ -45,6 +45,11 @@ class TransferGeneratorFacadeTest extends TestCase
             return;
         }
 
-        $this->assertTrue($generatorTransfer->validator?->isValid);
+        $validatorTransfer = $generatorTransfer->validator;
+
+        $this->assertTrue(
+            $validatorTransfer?->isValid,
+            'Fail generate Transfer Object' . PHP_EOL . print_r($validatorTransfer->toArray(), true),
+        );
     }
 }

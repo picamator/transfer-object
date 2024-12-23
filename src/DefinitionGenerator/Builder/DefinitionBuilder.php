@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\DefinitionGenerator\Builder;
 
 use ArrayObject;
 use Generator;
-use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\BuildInTypeEnum;
+use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\SupportedBuildInTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\VariableTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Exception\GeneratorTransferException;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
@@ -96,14 +96,14 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
 
         if ($propertyValue instanceof ArrayObject) {
             $propertyTransfer->propertyName = $propertyName;
-            $propertyTransfer->buildInType = BuildInTypeEnum::ARRAY_OBJECT->value;
+            $propertyTransfer->buildInType = SupportedBuildInTypeEnum::ARRAY_OBJECT->value;
 
             return $propertyTransfer;
         }
 
         if (is_iterable($propertyValue)) {
             $propertyTransfer->propertyName = $propertyName;
-            $propertyTransfer->buildInType = BuildInTypeEnum::ITERABLE->value;
+            $propertyTransfer->buildInType = SupportedBuildInTypeEnum::ITERABLE->value;
 
             return $propertyTransfer;
         }

@@ -20,6 +20,13 @@ enum BuildInTypeEnum: string
     case MIXED = 'mixed';
     case CALLABLE = 'callable';
 
+    private const array NOT_ALLOWED = [
+        self::NULL->value,
+        self::OBJECT->value,
+        self::MIXED->value,
+        self::CALLABLE->value,
+    ];
+
     public static function isArray(string $type): bool
     {
         return self::ARRAY->value === $type;
@@ -47,5 +54,10 @@ enum BuildInTypeEnum: string
         }
 
         return self::FALSE;
+    }
+
+    public static function isAllowed(string $type): bool
+    {
+        return !in_array($type, self::NOT_ALLOWED, true);
     }
 }
