@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 DOCKER_CONTAINER_NAME=transfer-object-php
-DOCKER_SERVICE_NAME=php
 
 function show_usage() {
   echo "==================================="
@@ -32,13 +31,13 @@ case $1 in
     docker compose stop
     ;;
   composer)
-    docker compose run $DOCKER_SERVICE_NAME composer $2
+    docker exec -i $DOCKER_CONTAINER_NAME composer $2
     ;;
   phpstan)
-    docker compose run $DOCKER_SERVICE_NAME composer phpstan
+    docker exec -i $DOCKER_CONTAINER_NAME composer phpstan
     ;;
   phpunit)
-    docker compose run $DOCKER_SERVICE_NAME composer phpunit
+    docker exec -i $DOCKER_CONTAINER_NAME composer phpunit
     ;;
   hook-install)
     docker exec -i $DOCKER_CONTAINER_NAME composer captainhook install --only-enabled --run-mode=docker --run-exec="docker exec -i $DOCKER_CONTAINER_NAME"
@@ -47,10 +46,10 @@ case $1 in
     docker exec -i $DOCKER_CONTAINER_NAME composer captainhook $2
     ;;
   to-generate)
-     docker compose run $DOCKER_SERVICE_NAME composer  generate-transfer -- -c /home/transfer/transfer-object/config/generator.config.yml
+     docker exec -i $DOCKER_CONTAINER_NAME composer  generate-transfer -- -c /home/transfer/transfer-object/config/generator.config.yml
     ;;
   to-samples-generate)
-     docker compose run $DOCKER_SERVICE_NAME composer generate-transfer -- -c /home/transfer/transfer-object/doc/samples/config/generator.config.yml
+     docker exec -i $DOCKER_CONTAINER_NAME composer generate-transfer -- -c /home/transfer/transfer-object/doc/samples/config/generator.config.yml
     ;;
   *)
     show_usage
