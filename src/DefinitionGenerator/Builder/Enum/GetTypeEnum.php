@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator\Builder\Enum;
 
-enum VariableTypeEnum: string
+enum GetTypeEnum: string
 {
     case bool = 'boolean';
     case int = 'integer';
@@ -17,7 +17,7 @@ enum VariableTypeEnum: string
     public function isNull(): bool
     {
         return match($this) {
-            VariableTypeEnum::null => true,
+            GetTypeEnum::null => true,
             default => false,
         };
     }
@@ -25,7 +25,7 @@ enum VariableTypeEnum: string
     public function isString(): bool
     {
         return match($this) {
-            VariableTypeEnum::string => true,
+            GetTypeEnum::string => true,
             default => false,
         };
     }
@@ -33,7 +33,7 @@ enum VariableTypeEnum: string
     public function isObject(): bool
     {
         return match($this) {
-            VariableTypeEnum::object => true,
+            GetTypeEnum::object => true,
             default => false,
         };
     }
@@ -41,7 +41,7 @@ enum VariableTypeEnum: string
     public function isArray(): bool
     {
         return match($this) {
-            VariableTypeEnum::array => true,
+            GetTypeEnum::array => true,
             default => false,
         };
     }

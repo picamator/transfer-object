@@ -26,13 +26,16 @@ START;
     {
         $content = sprintf(self::CLASS_TEMPLATE, $contentTransfer->className) . PHP_EOL;
         foreach ($contentTransfer->properties as $propertyTransfer) {
-            $content .= match (true) {
+            $content .= match(true) {
                 $propertyTransfer->buildInType !== null
                     => $this->renderType($propertyTransfer->propertyName, $propertyTransfer->buildInType),
+
                 $propertyTransfer->transferType !== null
                     => $this->renderType($propertyTransfer->propertyName, $propertyTransfer->transferType),
+
                 $propertyTransfer->collectionType !== null
                     => $this->renderCollectionType($propertyTransfer->propertyName, $propertyTransfer->collectionType),
+
                 default => '',
             } . PHP_EOL;
         }
