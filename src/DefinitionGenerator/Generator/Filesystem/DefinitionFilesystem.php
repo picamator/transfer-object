@@ -4,49 +4,28 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator\Generator\Filesystem;
 
-use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
+use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Generated\DefinitionFilesystemTransfer;
-use Symfony\Component\Filesystem\Filesystem;
-use Throwable;
 
 readonly class DefinitionFilesystem implements DefinitionFilesystemInterface
 {
     private const string FILE_NAME_PATTERN = '%s.transfer.yml';
 
     public function __construct(
-        private Filesystem $filesystem,
+        private FilesystemInterface $filesystem,
     ) {
     }
 
     public function appendFile(DefinitionFilesystemTransfer $filesystemTransfer): void
     {
         $filePath = $this->getFilepath($filesystemTransfer);
-
-        try {
-            $this->filesystem->appendToFile($filePath, $filesystemTransfer->content);
-        } catch (Throwable $e) {
-            throw new DefinitionGeneratorException(
-                sprintf('Cannot update file "%s".', $filePath),
-                previous: $e,
-            );
-        }
+        $this->filesystem->appendToFile($filePath, $filesystemTransfer->content);
     }
 
     public function deleteFile(DefinitionFilesystemTransfer $filesystemTransfer): void
     {
         $filePath = $this->getFilepath($filesystemTransfer);
-
-        try {
-            $this->filesystem->remove($filePath);
-        } catch (Throwable $e) {
-            throw new DefinitionGeneratorException(
-                sprintf(
-                    'Cannot delete previously generated file "%s".',
-                    $filePath,
-                ),
-                previous: $e,
-            );
-        }
+        $this->filesystem->remove($filePath);
     }
 
     private function getFilepath(DefinitionFilesystemTransfer $filesystemTransfer): string

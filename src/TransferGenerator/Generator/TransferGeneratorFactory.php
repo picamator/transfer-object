@@ -7,6 +7,7 @@ namespace Picamator\TransferObject\TransferGenerator\Generator;
 use ArrayObject;
 use Picamator\TransferObject\Dependency\DependencyContainer;
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
+use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\DefinitionFactory;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
@@ -22,7 +23,6 @@ use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateBuilder;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRender;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderInterface;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
 readonly class TransferGeneratorFactory
@@ -48,7 +48,7 @@ readonly class TransferGeneratorFactory
         );
     }
 
-    protected function createFilesystem(): Filesystem
+    protected function createFilesystem(): FilesystemInterface
     {
         return $this->getDependency(DependencyContainer::FILESYSTEM);
     }

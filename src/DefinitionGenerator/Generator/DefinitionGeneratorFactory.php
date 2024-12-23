@@ -19,7 +19,7 @@ use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRender;
 use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRenderInterface;
 use Picamator\TransferObject\Dependency\DependencyContainer;
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
-use Symfony\Component\Filesystem\Filesystem;
+use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 
 readonly class DefinitionGeneratorFactory
 {
@@ -39,7 +39,7 @@ readonly class DefinitionGeneratorFactory
         return new DefinitionFilesystem($this->createFilesystem());
     }
 
-    protected function createFilesystem(): Filesystem
+    protected function createFilesystem(): FilesystemInterface
     {
         return $this->getDependency(DependencyContainer::FILESYSTEM);
     }

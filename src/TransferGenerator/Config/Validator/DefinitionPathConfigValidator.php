@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Config\Validator;
 
+use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Generated\ConfigTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\TransferGenerator\Config\Loader\Filesystem\ConfigFilesystemInterface;
 
 readonly class DefinitionPathConfigValidator implements ConfigValidatorInterface
 {
@@ -15,7 +15,7 @@ readonly class DefinitionPathConfigValidator implements ConfigValidatorInterface
     private const string ERROR_MESSAGE_TEMPLATE = 'Definition path "%s" is not exists.';
 
     public function __construct(
-        private ConfigFilesystemInterface $filesystem
+        private FilesystemInterface $filesystem
     ) {
     }
 

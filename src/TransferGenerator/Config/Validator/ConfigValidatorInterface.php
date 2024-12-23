@@ -9,5 +9,8 @@ use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 
 interface ConfigValidatorInterface
 {
+    /**
+     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
+     */
     public function validate(ConfigTransfer $configTransfer): ValidatorMessageTransfer;
 }

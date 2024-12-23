@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Dependency;
 
 use Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException;
+use Picamator\TransferObject\Dependency\Filesystem\FilesystemBridge;
+use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -67,9 +69,9 @@ class DependencyContainer implements ContainerInterface
         return new Finder();
     }
 
-    protected static function createFileSystem(): Filesystem
+    protected static function createFileSystem(): FilesystemInterface
     {
-        static::$container[static::FILESYSTEM] ??= new Filesystem();
+        static::$container[static::FILESYSTEM] ??= new FilesystemBridge(new Filesystem());
 
         return static::$container[static::FILESYSTEM];
     }

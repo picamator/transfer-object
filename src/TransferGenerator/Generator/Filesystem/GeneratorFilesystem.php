@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Filesystem;
 
+use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Container\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
-use Throwable;
 
 readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 {
@@ -18,7 +17,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
     private const string FILE_NAME_PATTERN = '*Transfer.php';
 
     public function __construct(
-        private Filesystem $filesystem,
+        private FilesystemInterface $filesystem,
         private Finder $finder,
         private ConfigInterface $config,
     ) {
@@ -28,15 +27,8 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
     {
         $temporaryPath = $this->getTemporaryPath();
 
-        try {
-            $this->deleteTempDir();
-            $this->filesystem->mkdir($temporaryPath);
-        } catch (Throwable $e) {
-            throw new TransferGeneratorException(
-                sprintf('Cannot create temporary directory "%s".', $temporaryPath),
-                previous: $e,
-            );
-        }
+        $this->deleteTempDir();
+        $this->filesystem->mkdir($temporaryPath);
     }
 
     public function rotateTempDir(): void
@@ -55,64 +47,38 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
             );
         }
 
-        try {
-            $this->filesystem->dumpFile($filePath, $content);
-        } catch (Throwable $e) {
-            throw new TransferGeneratorException(
-                sprintf('Cannot write file "%s".', $filePath),
-                previous: $e,
-            );
-        }
+        $this->filesystem->dumpFile($filePath, $content);
     }
 
     private function deleteOldFiles(): void
     {
-        try {
-            $finder = $this->finder
-                ->files()
-                ->name(self::FILE_NAME_PATTERN)
-                ->in($this->config->getTransferPath())
-                ->exclude(self::TEMPORARY_DIR);
+        $finder = $this->finder
+            ->files()
+            ->name(self::FILE_NAME_PATTERN)
+            ->in($this->config->getTransferPath())
+            ->exclude(self::TEMPORARY_DIR);
 
-            $this->filesystem->remove($finder);
-        } catch (Throwable $e) {
-            throw new TransferGeneratorException(
-                'Cannot delete previously generated files.',
-                previous: $e,
-            );
-        }
+        $this->filesystem->remove($finder);
     }
 
     private function copyTempFiles(): void
     {
-        try {
-            $finder = $this->finder
-                ->name(self::FILE_NAME_PATTERN)
-                ->in($this->getTemporaryPath())
-                ->files();
+        $finder = $this->finder
+            ->name(self::FILE_NAME_PATTERN)
+            ->in($this->getTemporaryPath())
+            ->files();
 
-            $destinationPath = $this->config->getTransferPath() . DIRECTORY_SEPARATOR;
-            foreach ($finder as $file) {
-                $this->filesystem->copy($file->getRealPath(), $destinationPath. $file->getFilename());
-            }
-        } catch (Throwable $e) {
-            throw new TransferGeneratorException('Cannot copy generated files.', previous: $e);
+        $destinationPath = $this->config->getTransferPath() . DIRECTORY_SEPARATOR;
+        foreach ($finder as $file) {
+            $this->filesystem->copy($file->getRealPath(), $destinationPath. $file->getFilename());
         }
     }
 
     private function deleteTempDir(): void
     {
         $temporaryPath = $this->getTemporaryPath();
-
-        try {
-            if ($this->filesystem->exists($temporaryPath)) {
-                $this->filesystem->remove($temporaryPath);
-            }
-        } catch (Throwable $e) {
-            throw new TransferGeneratorException(
-                sprintf('Cannot delete temporary directory "%s".', $temporaryPath),
-                previous: $e,
-            );
+        if ($this->filesystem->exists($temporaryPath)) {
+            $this->filesystem->remove($temporaryPath);
         }
     }
 
