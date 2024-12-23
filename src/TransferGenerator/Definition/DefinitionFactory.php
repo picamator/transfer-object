@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Definition;
 
 use ArrayObject;
+use Picamator\TransferObject\Dependency\DependencyContainer;
+use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
+use Picamator\TransferObject\Dependency\Finder\FinderInterface;
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinder;
@@ -22,9 +25,6 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\Pro
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\RequiredUniqueTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\ReservedPropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\TransferTypePropertyValidator;
-use Picamator\TransferObject\Dependency\DependencyContainer;
-use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
-use Symfony\Component\Finder\Finder;
 
 readonly class DefinitionFactory
 {
@@ -111,7 +111,7 @@ readonly class DefinitionFactory
         );
     }
 
-    protected function createFinder(): Finder
+    protected function createFinder(): FinderInterface
     {
         return $this->getDependency(DependencyContainer::FINDER);
     }

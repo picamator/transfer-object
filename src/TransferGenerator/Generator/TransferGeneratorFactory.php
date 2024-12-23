@@ -8,6 +8,7 @@ use ArrayObject;
 use Picamator\TransferObject\Dependency\DependencyContainer;
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
+use Picamator\TransferObject\Dependency\Finder\FinderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\DefinitionFactory;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
@@ -95,7 +96,7 @@ readonly class TransferGeneratorFactory
         return new CollectionTypeTemplateExpander();
     }
 
-    protected function createFinder(): Finder
+    protected function createFinder(): FinderInterface
     {
         return $this->getDependency(DependencyContainer::FINDER);
     }

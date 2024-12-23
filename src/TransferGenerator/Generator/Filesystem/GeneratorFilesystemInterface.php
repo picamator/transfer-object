@@ -13,6 +13,7 @@ interface GeneratorFilesystemInterface
 
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
+     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
      */
     public function rotateTempDir(): void;
 

@@ -7,11 +7,12 @@ namespace Picamator\TransferObject\Dependency;
 use Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemBridge;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
+use Picamator\TransferObject\Dependency\Finder\FinderBridge;
+use Picamator\TransferObject\Dependency\Finder\FinderInterface;
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserBridge;
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Parser;
 
 class DependencyContainer implements ContainerInterface
@@ -33,9 +34,9 @@ class DependencyContainer implements ContainerInterface
 
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException
-     *@uses createFinder()
-     * @uses createYmlParser()
      *
+     * @uses createFinder()
+     * @uses createYmlParser()
      * @uses createFileSystem()
      */
     public function get(string $id): mixed
@@ -61,14 +62,11 @@ class DependencyContainer implements ContainerInterface
         return static::$container[static::YML_PARSER];
     }
 
-    /**
-     * Finder does not reset internal state
-     *
-     * @see https://symfony.com/doc/current/components/finder.html
-     */
-    protected static function createFinder(): Finder
+    protected static function createFinder(): FinderInterface
     {
-        return new Finder();
+        static::$container[static::FINDER] ??= new FinderBridge();
+
+        return static::$container[static::FINDER];
     }
 
     protected static function createFileSystem(): FilesystemInterface

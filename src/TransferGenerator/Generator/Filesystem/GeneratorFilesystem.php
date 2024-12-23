@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Filesystem;
 
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
+use Picamator\TransferObject\Dependency\Finder\FinderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Container\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
-use Symfony\Component\Finder\Finder;
 
 readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 {
@@ -18,7 +18,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 
     public function __construct(
         private FilesystemInterface $filesystem,
-        private Finder $finder,
+        private FinderInterface $finder,
         private ConfigInterface $config,
     ) {
     }
@@ -50,23 +50,30 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
         $this->filesystem->dumpFile($filePath, $content);
     }
 
+    /**
+     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
+     */
     private function deleteOldFiles(): void
     {
-        $finder = $this->finder
-            ->files()
-            ->name(self::FILE_NAME_PATTERN)
-            ->in($this->config->getTransferPath())
-            ->exclude(self::TEMPORARY_DIR);
+        $finder = $this->finder->findFilesInDirectoryExclude(
+            filePattern: self::FILE_NAME_PATTERN,
+            dirName: $this->config->getTransferPath(),
+            exclude: self::TEMPORARY_DIR,
+        );
 
         $this->filesystem->remove($finder);
     }
 
+    /**
+     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
+     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
+     */
     private function copyTempFiles(): void
     {
-        $finder = $this->finder
-            ->name(self::FILE_NAME_PATTERN)
-            ->in($this->getTemporaryPath())
-            ->files();
+        $finder = $this->finder->findFilesInDirectory(
+            filePattern: self::FILE_NAME_PATTERN,
+            dirName: $this->getTemporaryPath(),
+        );
 
         $destinationPath = $this->config->getTransferPath() . DIRECTORY_SEPARATOR;
         foreach ($finder as $file) {
@@ -74,6 +81,9 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
         }
     }
 
+    /**
+     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
+     */
     private function deleteTempDir(): void
     {
         $temporaryPath = $this->getTemporaryPath();
