@@ -6,7 +6,9 @@ use Picamator\TransferObject\Generated\TemplateTransfer;
 
 $templateTransfer ??= new TemplateTransfer();
 ?>
-<?php echo "<?php declare(strict_types = 1);\n" ?>
+<?php echo "<?php
+
+declare(strict_types = 1);\n" ?>
 
 namespace <?php echo $templateTransfer->classNamespace ?>;
 

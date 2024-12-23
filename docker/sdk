@@ -17,8 +17,8 @@ function show_usage() {
   echo "  phpunit              Run PHPUnit"
   echo "  hook-install         Install CaptainHook"
   echo "  hook <command>       Run CaptainHook command"
-  echo "  generate-to          Generate inertanl transfer objects"
-  echo "  generate-samples-to  Generate sample transfer objects"
+  echo "  to-generate          Generate inertanl transfer objects"
+  echo "  to-samples-generate  Generate sample transfer objects"
 }
 
 case $1 in
@@ -46,11 +46,11 @@ case $1 in
   hook)
     docker exec -i $DOCKER_CONTAINER_NAME composer captainhook $2
     ;;
-  generate-to)
+  to-generate)
      docker compose run $DOCKER_SERVICE_NAME composer  generate-transfer -- -c /home/transfer/transfer-object/config/generator.config.yml
     ;;
-  generate-samples-to)
-     docker compose run $DOCKER_SERVICE_NAME generate-transfer -- -c /home/transfer/transfer-object/doc/Samples/config/generator.config.yml
+  to-samples-generate)
+     docker compose run $DOCKER_SERVICE_NAME composer generate-transfer -- -c /home/transfer/transfer-object/doc/Samples/config/generator.config.yml
     ;;
   *)
     show_usage
