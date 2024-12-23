@@ -14,7 +14,7 @@ interface DefinitionGeneratorFacadeInterface
      * - Saves definitions on the file
      * - Returns generated definitions number
      *
-     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
+     * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
      */
     public function generateDefinitions(DefinitionGeneratorTransfer $generatorTransfer): int;
 }

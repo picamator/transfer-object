@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Definition;
 
 use ArrayObject;
+use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinder;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinderInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Parser\ContentParserInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Parser\YmlContentParser;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReader;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\ClassNameValidator;
@@ -26,7 +25,6 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\Tra
 use Picamator\TransferObject\Dependency\DependencyContainer;
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Yaml\Parser;
 
 readonly class DefinitionFactory
 {
@@ -37,7 +35,7 @@ readonly class DefinitionFactory
     {
         return new DefinitionReader(
             $this->createDefinitionFinder(),
-            $this->createContentParser(),
+            $this->createYmlParser(),
             $this->createContentValidator(),
         );
     }
@@ -100,12 +98,7 @@ readonly class DefinitionFactory
         return new ClassNameValidator();
     }
 
-    protected function createContentParser(): ContentParserInterface
-    {
-        return new YmlContentParser($this->createYmlParser());
-    }
-
-    protected function createYmlParser(): Parser
+    protected function createYmlParser(): YmlParserInterface
     {
         return $this->getDependency(DependencyContainer::YML_PARSER);
     }

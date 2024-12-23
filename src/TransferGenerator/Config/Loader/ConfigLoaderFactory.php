@@ -8,15 +8,13 @@ use ArrayObject;
 use Picamator\TransferObject\Dependency\DependencyContainer;
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
+use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\Loader\ConfigLoader;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\Loader\ConfigLoaderInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Parser\FileParserInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Parser\YmlFileParser;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigValidator;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\DefinitionPathConfigValidator;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\RequiredConfigValidator;
-use Symfony\Component\Yaml\Parser;
 
 readonly class ConfigLoaderFactory
 {
@@ -25,7 +23,7 @@ readonly class ConfigLoaderFactory
     public function createConfigLoader(): ConfigLoaderInterface
     {
         return new ConfigLoader(
-            $this->createFileParser(),
+            $this->createYmlParser(),
             $this->createConfigValidator(),
         );
     }
@@ -61,12 +59,7 @@ readonly class ConfigLoaderFactory
         return new RequiredConfigValidator();
     }
 
-    protected function createFileParser(): FileParserInterface
-    {
-        return new YmlFileParser($this->createYmlParser());
-    }
-
-    protected function createYmlParser(): Parser
+    protected function createYmlParser(): YmlParserInterface
     {
         return $this->getDependency(DependencyContainer::YML_PARSER);
     }

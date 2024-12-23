@@ -7,6 +7,8 @@ namespace Picamator\TransferObject\Dependency;
 use Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemBridge;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
+use Picamator\TransferObject\Dependency\YmlParser\YmlParserBridge;
+use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -52,9 +54,9 @@ class DependencyContainer implements ContainerInterface
         return array_key_exists($id, static::DEPENDENCIES);
     }
 
-    protected static function createYmlParser(): Parser
+    protected static function createYmlParser(): YmlParserInterface
     {
-        static::$container[static::YML_PARSER] ??= new Parser();
+        static::$container[static::YML_PARSER] ??= new YmlParserBridge(new Parser());
 
         return static::$container[static::YML_PARSER];
     }

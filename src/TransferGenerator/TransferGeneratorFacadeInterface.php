@@ -13,8 +13,7 @@ interface TransferGeneratorFacadeInterface
      * - Fiber Next Suspend after generating one Transfer Object passing `TransferGeneratorCallbackTransfer` into callback
      * - Returns `true` when whole process is successful, `false` otherwise
      *
-     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException
+     * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
      */
     public function generateTransfers(callable $handleCallback): bool;
 }

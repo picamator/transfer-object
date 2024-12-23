@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Definition\Reader;
 
 use Generator;
+use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinderInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Parser\ContentParserInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\ContentValidatorInterface;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
@@ -20,7 +20,7 @@ readonly class DefinitionReader implements DefinitionReaderInterface
 
     public function __construct(
         private DefinitionFinderInterface $finder,
-        private ContentParserInterface $parser,
+        private YmlParserInterface $parser,
         private ContentValidatorInterface $validator,
     ) {
     }
@@ -29,7 +29,7 @@ readonly class DefinitionReader implements DefinitionReaderInterface
     {
         $definitionContents = $this->finder->getDefinitionContent();
         foreach ($definitionContents as $fileName => $definitionContent) {
-            $definition = $this->parser->parseContent($definitionContent);
+            $definition = $this->parser->parse($definitionContent);
 
             foreach ($definition as $className => $properties) {
                 $contentTransfer = $this->createContentTransfer((string)$className, $properties);

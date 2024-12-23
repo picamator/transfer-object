@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Config\Loader\Loader;
 
+use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Picamator\TransferObject\Generated\ConfigTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Container\ConfigContainer;
-use Picamator\TransferObject\TransferGenerator\Config\Parser\FileParserInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigValidatorInterface;
 
 readonly class ConfigLoader implements ConfigLoaderInterface
@@ -15,7 +15,7 @@ readonly class ConfigLoader implements ConfigLoaderInterface
     private const string CONFIG_SECTION_KEY = 'generator';
 
     public function __construct(
-        private FileParserInterface $parser,
+        private YmlParserInterface $parser,
         private ConfigValidatorInterface $validator,
     ) {
     }

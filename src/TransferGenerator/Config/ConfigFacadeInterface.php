@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 interface ConfigFacadeInterface
 {
     /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
+     * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
      */
     public function loadConfig(string $configPath): ValidatorMessageTransfer;
 }
