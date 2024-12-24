@@ -6,8 +6,9 @@ function show_usage() {
   echo "==================================="
   echo "    Transfer Object (Docker SDK)   "
   echo "==================================="
-  echo "Usage: $0 <argument>"
+  echo "Usage: $0 [-x] <argument>"
   echo "Arguments:"
+  echo "  -x                   Enable Xdebug during build"
   echo "  build                Build Docker containers"
   echo "  start                Start Docker containers"
   echo "  stop                 Stop Docker containers"
@@ -21,9 +22,30 @@ function show_usage() {
   echo "  to-samples-generate  Generate sample transfer objects"
 }
 
+# options
+ENABLE_XDEBUG=0
+
+while getopts ":x" opt; do
+  case ${opt} in
+    x )
+      ENABLE_XDEBUG=1
+      ;;
+    \? )
+      show_usage
+      exit 1
+      ;;
+  esac
+done
+shift $((OPTIND -1))
+
+# arguments
 case $1 in
   build)
-    docker compose build
+    if [ "$ENABLE_XDEBUG" -eq 1 ]; then
+      ENABLE_XDEBUG=1 docker compose build
+    else
+      docker compose build
+    fi
     ;;
   start)
     docker compose up -d --remove-orphans

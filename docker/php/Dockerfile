@@ -35,12 +35,21 @@ RUN docker-php-ext-install zip
 RUN docker-php-ext-install curl
 
 # xdebug
-RUN pecl install xdebug
-RUN docker-php-ext-enable xdebug
-ADD ./config/69-xdebug.ini /usr/local/etc/php/conf.d/
+ARG ENABLE_XDEBUG=0
+
+RUN if [ "$ENABLE_XDEBUG" = "1" ]; then \
+    pecl install xdebug && \
+    docker-php-ext-enable xdebug && \
+    echo "xdebug.max_nesting_level=1000" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
+    echo "xdebug.mode=debug,coverage" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
+    echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
+    echo "xdebug.client_port=9003" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
+    echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
+    echo "xdebug.output_dir=/tmp/xdebug" >> /usr/local/etc/php/conf.d/99-xdebug.ini; \
+    fi
 
 # switch user
 USER transfer
 
-# Workaround to keep container running
+# workaround to keep container running
 CMD ["tail", "-f", "/dev/null"]
