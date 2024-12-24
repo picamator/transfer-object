@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Dependency\Finder;
 
-use Symfony\Component\Finder\SplFileInfo;
+use SplFileInfo;
+use Symfony\Component\Finder\SplFileInfo as SymfonySplFileInfo;
 
-final readonly class SplFileInfoBridge
+final class SplFileInfoBridge extends SplFileInfo
 {
-    public function __construct(private SplFileInfo $fileInfo)
-    {
+    public function __construct(
+        private readonly SymfonySplFileInfo $fileInfo
+    ) {
+        parent::__construct($fileInfo->getRealPath());
     }
 
     public function getRelativePath(): string

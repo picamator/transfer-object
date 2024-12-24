@@ -9,7 +9,6 @@ use IteratorAggregate;
 use Picamator\TransferObject\Dependency\Exception\FinderException;
 use Symfony\Component\Finder\Finder;
 use Throwable;
-use Traversable;
 
 final readonly class FinderBridge implements FinderInterface
 {
@@ -62,20 +61,6 @@ final readonly class FinderBridge implements FinderInterface
      */
     private function getFinderBridge(Finder $finder): IteratorAggregate&Countable
     {
-        return new readonly class($finder) implements IteratorAggregate, Countable {
-            public function __construct(private Finder $finder)
-            {
-            }
-
-            public function getIterator(): Traversable
-            {
-                return new FinderIterator($this->finder);
-            }
-
-            public function count(): int
-            {
-                return $this->finder->count();
-            }
-        };
+        return new FinderIterator($finder);
     }
 }

@@ -36,6 +36,15 @@ readonly class TransferGenerator implements TransferGeneratorInterface
         return $generatorFiber->getReturn();
     }
 
+    public function getTransferGeneratorFiber(): Fiber
+    {
+        return new Fiber($this->fiberCallback(...));
+    }
+
+    /**
+     * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
+     * @throws \FiberError
+     */
     private function fiberCallback(): bool
     {
         $this->filesystem->createTempDir();

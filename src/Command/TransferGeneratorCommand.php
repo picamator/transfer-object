@@ -69,17 +69,22 @@ final class TransferGeneratorCommand extends Command
 
     private function generateTransfers(SymfonyStyle $inputOutput): bool
     {
-        $handleCallback = fn(?TransferGeneratorCallbackTransfer $generatorTransfer) => $this->handleCallback($inputOutput, $generatorTransfer);
+        $generatorFiber = new TransferGeneratorFacade()->getTransferGeneratorFiber();
 
-        return new TransferGeneratorFacade()->generateTransfers($handleCallback);
-    }
-
-    private function handleCallback(SymfonyStyle $inputOutput, ?TransferGeneratorCallbackTransfer $generatorTransfer): void
-    {
-        if ($generatorTransfer?->validator?->isValid !== false) {
-            return;
+        $generatorFiber->start();
+        while (!$generatorFiber->isTerminated()) {
+            /** @var \Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer|null $generatorTransfer */
+            $generatorTransfer = $generatorFiber->resume();
+            if ($generatorTransfer?->validator?->isValid === false) {
+                $this->writelnGeneratorError($inputOutput, $generatorTransfer);
+            }
         }
 
+        return $generatorFiber->getReturn();
+    }
+
+    private function writelnGeneratorError(SymfonyStyle $inputOutput, TransferGeneratorCallbackTransfer $generatorTransfer): void
+    {
         $inputOutput->error(sprintf(self::ERROR_TEMPLATE, $generatorTransfer->definitionKey));
 
         $errorMessages = $generatorTransfer->validator->errorMessages;
