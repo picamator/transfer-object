@@ -1,0 +1,92 @@
+Forecast:
+  coord:
+    type: Coord
+  weather:
+    collectionType: Weather
+  base:
+    type: string
+  main:
+    type: Main
+  visibility:
+    type: int
+  wind:
+    type: Wind
+  rain:
+    type: Rain
+  clouds:
+    type: Clouds
+  dt:
+    type: int
+  sys:
+    type: Sys
+  timezone:
+    type: int
+  id:
+    type: int
+  name:
+    type: string
+  cod:
+    type: int
+
+Coord:
+  lon:
+    type: float
+  lat:
+    type: float
+
+Weather:
+  id:
+    type: int
+  main:
+    type: string
+  description:
+    type: string
+  icon:
+    type: string
+
+Main:
+  temp:
+    type: float
+  feels_like:
+    type: float
+  temp_min:
+    type: float
+  temp_max:
+    type: float
+  pressure:
+    type: int
+  humidity:
+    type: int
+  sea_level:
+    type: int
+  grnd_level:
+    type: int
+
+Wind:
+  speed:
+    type: float
+  deg:
+    type: int
+  gust:
+    type: float
+
+Rain:
+  1h:
+    type: float
+
+Clouds:
+  all:
+    type: int
+
+Sys:
+  type:
+    type: int
+  id:
+    type: int
+  country:
+    type: string
+  sunrise:
+    type: int
+  sunset:
+    type: int
+

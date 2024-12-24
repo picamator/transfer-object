@@ -50,5 +50,11 @@ class DefinitionGeneratorFacadeTest extends TestCase
             'sampleFileName' => 'nasa-neo-rest-v1-neo-2465633.json',
             'definitionFileName' => 'asteroid.transfer.yml',
         ];
+
+        yield 'Open Weather Response' => [
+            'className' => 'Forecast',
+            'sampleFileName' => 'open-weather.json',
+            'definitionFileName' => 'forecast.transfer.yml',
+        ];
     }
 }
