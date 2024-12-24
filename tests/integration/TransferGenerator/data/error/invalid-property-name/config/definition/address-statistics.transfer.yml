@@ -1,0 +1,5 @@
+AddressStatistics:
+  addressBookUuid:
+    type: string
+  00-addressUuid:
+    type: string

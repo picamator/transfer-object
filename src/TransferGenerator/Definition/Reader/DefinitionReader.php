@@ -79,11 +79,11 @@ readonly class DefinitionReader implements DefinitionReaderInterface
     private function getCollectionType(array $propertyType): ?string
     {
         $collectionType = $propertyType[self::COLLECTION_TYPE_KEY] ?? null;
-        if ($collectionType === null) {
+        if (!is_string($collectionType)) {
             return null;
         }
 
-        return (string)$collectionType;
+        return $collectionType;
     }
 
     /**
@@ -98,6 +98,10 @@ readonly class DefinitionReader implements DefinitionReaderInterface
 
         if (is_bool($type)) {
             $type = BuildInTypeEnum::getTrueFalse($type)->value;
+        }
+
+        if (!is_string($type)) {
+            return;
         }
 
         if (BuildInTypeEnum::isBuildInType($type)) {

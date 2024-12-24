@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Integration\TransferObject\TransferGenerator;
 
-use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer;
+use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFacade;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFacadeInterface;
-use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacadeInterface;
 
-class SuccessTransferGeneratorFacadeTest extends TestCase
+class TransferGeneratorFacadeSuccessTest extends TestCase
 {
     use TransferGeneratorFacadeTrait;
 
@@ -32,14 +31,14 @@ class SuccessTransferGeneratorFacadeTest extends TestCase
         $this->configFacade = new ConfigFacade();
     }
 
-    #[TestDox('Generates Transfer Objects with valid definition file.')]
-    public function testGenerateTransferObjectByValidConfigurationShouldSucceed(): void
+    public function testGenerateTransferObjectByValidDefinitionShouldSucceed(): void
     {
         // Arrange
-        $this->configFacade->loadConfig(self::CONFIG_PATH);
+        $messageTransfer = $this->configFacade->loadConfig(self::CONFIG_PATH);
+        $this->assertTrue($messageTransfer->isValid, $messageTransfer->errorMessage ?? '');
 
         // Act
-        $actual = $this->generateTransfers($this->assertGeneratorCallback(...));
+        $actual = $this->generateTransfers($this->assertCallback(...));
 
         // Assert
         $this->assertTrue($actual);
@@ -48,21 +47,17 @@ class SuccessTransferGeneratorFacadeTest extends TestCase
         }
     }
 
-    private function assertGeneratorCallback(?TransferGeneratorCallbackTransfer $generatorTransfer): void
+    private function assertCallback(?TransferGeneratorCallbackTransfer $generatorTransfer): void
     {
         if ($generatorTransfer === null) {
             return;
         }
 
-        $assertMessage = '';
-        if (!$generatorTransfer->validator->isValid) {
-            $assertMessage = 'Fail generate Transfer Object'
-                . PHP_EOL . var_export($generatorTransfer->toArray(), true);
-        }
+        $isValid = $generatorTransfer->validator->isValid;
+        $assertMessage = !$isValid
+            ? 'Fail asserting success' . PHP_EOL . var_export($generatorTransfer->toArray(), true)
+            : '';
 
-        $this->assertTrue(
-            $generatorTransfer->validator->isValid,
-            $assertMessage,
-        );
+        $this->assertTrue($isValid, $assertMessage);
     }
 }

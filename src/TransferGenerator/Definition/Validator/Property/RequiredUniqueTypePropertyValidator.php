@@ -13,7 +13,7 @@ readonly class RequiredUniqueTypePropertyValidator implements PropertyValidatorI
 {
     use ValidatorMessageTrait;
 
-    private const string PROPERTY_REQUIRED_UNIQUE_ERROR_MESSAGE_TEMPLATE = 'Property "%s" type definition is not set or set twice.';
+    private const string PROPERTY_REQUIRED_UNIQUE_ERROR_MESSAGE_TEMPLATE = 'Property "%s" type definition is missed or set twice.';
 
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): true
     {
