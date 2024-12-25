@@ -18,9 +18,10 @@ readonly class CollectionTypeBuilderExpander implements BuilderExpanderInterface
             return false;
         }
 
-        $firstItem = $content->getPropertyValue()[0] ?? null;
+        $propertyValue = (array)$content->getPropertyValue();
+        $countArrayItems = $this->countArrayItems($propertyValue);
 
-        return is_array($firstItem) && key($firstItem) !== 0;
+        return $countArrayItems === count($propertyValue);
     }
 
     public function expandBuilderTransfer(
@@ -30,9 +31,11 @@ readonly class CollectionTypeBuilderExpander implements BuilderExpanderInterface
         $propertyTransfer = $this->createPropertyTransfer($content->getPropertyName());
         $builderTransfer->definitionContent->properties[] = $propertyTransfer;
 
+        $firstCollectionItem = current((array)$content->getPropertyValue()) ?: [];
+
         $builderTransfer->generatorContents[] = $this->createGeneratorContentTransfer(
             $propertyTransfer->collectionType,
-            $content->getPropertyValue()[0],
+            $firstCollectionItem,
         );
     }
 
@@ -43,5 +46,18 @@ readonly class CollectionTypeBuilderExpander implements BuilderExpanderInterface
         $propertyTransfer->collectionType = $this->getClassName($propertyName);
 
         return $propertyTransfer;
+    }
+
+    /**
+     * @param array<string,mixed> $propertyValue
+     */
+    private function countArrayItems(array $propertyValue): int
+    {
+        $countArrayItem = 0;
+        foreach ($propertyValue as $item) {
+            $countArrayItem += is_array($item) ? 1: 0;
+        }
+
+        return $countArrayItem;
     }
 }

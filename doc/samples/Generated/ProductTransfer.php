@@ -16,13 +16,15 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
  */
 final class ProductTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 9;
+    protected const int META_DATA_SIZE = 11;
 
     protected const array META_DATA = [
+        self::AVAILABILITIES => self::AVAILABILITIES_DATA_NAME,
         self::CURRENCY => self::CURRENCY_DATA_NAME,
         self::DELIVERY_OPTIONS => self::DELIVERY_OPTIONS_DATA_NAME,
         self::DETAILS => self::DETAILS_DATA_NAME,
         self::IS_DISCOUNTED => self::IS_DISCOUNTED_DATA_NAME,
+        self::MEASUREMENT_UNIT => self::MEASUREMENT_UNIT_DATA_NAME,
         self::NAME => self::NAME_DATA_NAME,
         self::PRICE => self::PRICE_DATA_NAME,
         self::SKU => self::SKU_DATA_NAME,
@@ -30,10 +32,22 @@ final class ProductTransfer extends AbstractTransfer
         self::STORES => self::STORES_DATA_NAME,
     ];
 
+    // availabilities
+    #[CollectionPropertyTypeAttribute(AvailabilitiesTransfer::class)]
+    public const string AVAILABILITIES = 'availabilities';
+    protected const string AVAILABILITIES_DATA_NAME = 'AVAILABILITIES';
+    protected const int AVAILABILITIES_DATA_INDEX = 0;
+
+    /** @var \ArrayObject<int,AvailabilitiesTransfer> */
+    public ArrayObject $availabilities {
+        get => $this->_data[self::AVAILABILITIES_DATA_INDEX] ?? new ArrayObject();
+        set => $this->_data[self::AVAILABILITIES_DATA_INDEX] = $value;
+    }
+
     // currency
     public const string CURRENCY = 'currency';
     protected const string CURRENCY_DATA_NAME = 'CURRENCY';
-    protected const int CURRENCY_DATA_INDEX = 0;
+    protected const int CURRENCY_DATA_INDEX = 1;
 
     public ?string $currency {
         get => $this->_data[self::CURRENCY_DATA_INDEX];
@@ -44,7 +58,7 @@ final class ProductTransfer extends AbstractTransfer
     #[CollectionPropertyTypeAttribute(DeliveryOptionsTransfer::class)]
     public const string DELIVERY_OPTIONS = 'deliveryOptions';
     protected const string DELIVERY_OPTIONS_DATA_NAME = 'DELIVERY_OPTIONS';
-    protected const int DELIVERY_OPTIONS_DATA_INDEX = 1;
+    protected const int DELIVERY_OPTIONS_DATA_INDEX = 2;
 
     /** @var \ArrayObject<int,DeliveryOptionsTransfer> */
     public ArrayObject $deliveryOptions {
@@ -56,7 +70,7 @@ final class ProductTransfer extends AbstractTransfer
     #[PropertyTypeAttribute(DetailsTransfer::class)]
     public const string DETAILS = 'details';
     protected const string DETAILS_DATA_NAME = 'DETAILS';
-    protected const int DETAILS_DATA_INDEX = 2;
+    protected const int DETAILS_DATA_INDEX = 3;
 
     public ?DetailsTransfer $details {
         get => $this->_data[self::DETAILS_DATA_INDEX];
@@ -66,17 +80,28 @@ final class ProductTransfer extends AbstractTransfer
     // isDiscounted
     public const string IS_DISCOUNTED = 'isDiscounted';
     protected const string IS_DISCOUNTED_DATA_NAME = 'IS_DISCOUNTED';
-    protected const int IS_DISCOUNTED_DATA_INDEX = 3;
+    protected const int IS_DISCOUNTED_DATA_INDEX = 4;
 
     public ?bool $isDiscounted {
         get => $this->_data[self::IS_DISCOUNTED_DATA_INDEX];
         set => $this->_data[self::IS_DISCOUNTED_DATA_INDEX] = $value;
     }
 
+    // measurementUnit
+    #[PropertyTypeAttribute(MeasurementUnitTransfer::class)]
+    public const string MEASUREMENT_UNIT = 'measurementUnit';
+    protected const string MEASUREMENT_UNIT_DATA_NAME = 'MEASUREMENT_UNIT';
+    protected const int MEASUREMENT_UNIT_DATA_INDEX = 5;
+
+    public ?MeasurementUnitTransfer $measurementUnit {
+        get => $this->_data[self::MEASUREMENT_UNIT_DATA_INDEX];
+        set => $this->_data[self::MEASUREMENT_UNIT_DATA_INDEX] = $value;
+    }
+
     // name
     public const string NAME = 'name';
     protected const string NAME_DATA_NAME = 'NAME';
-    protected const int NAME_DATA_INDEX = 4;
+    protected const int NAME_DATA_INDEX = 6;
 
     public ?string $name {
         get => $this->_data[self::NAME_DATA_INDEX];
@@ -86,7 +111,7 @@ final class ProductTransfer extends AbstractTransfer
     // price
     public const string PRICE = 'price';
     protected const string PRICE_DATA_NAME = 'PRICE';
-    protected const int PRICE_DATA_INDEX = 5;
+    protected const int PRICE_DATA_INDEX = 7;
 
     public ?float $price {
         get => $this->_data[self::PRICE_DATA_INDEX];
@@ -96,7 +121,7 @@ final class ProductTransfer extends AbstractTransfer
     // sku
     public const string SKU = 'sku';
     protected const string SKU_DATA_NAME = 'SKU';
-    protected const int SKU_DATA_INDEX = 6;
+    protected const int SKU_DATA_INDEX = 8;
 
     public ?string $sku {
         get => $this->_data[self::SKU_DATA_INDEX];
@@ -106,7 +131,7 @@ final class ProductTransfer extends AbstractTransfer
     // stock
     public const string STOCK = 'stock';
     protected const string STOCK_DATA_NAME = 'STOCK';
-    protected const int STOCK_DATA_INDEX = 7;
+    protected const int STOCK_DATA_INDEX = 9;
 
     public ?int $stock {
         get => $this->_data[self::STOCK_DATA_INDEX];
@@ -116,7 +141,7 @@ final class ProductTransfer extends AbstractTransfer
     // stores
     public const string STORES = 'stores';
     protected const string STORES_DATA_NAME = 'STORES';
-    protected const int STORES_DATA_INDEX = 8;
+    protected const int STORES_DATA_INDEX = 10;
 
     /** @var array<int|string,mixed> */
     public array $stores {

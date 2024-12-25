@@ -12,7 +12,7 @@ Forecast:
   wind:
     type: Wind
   rain:
-    type: Rain
+    type: array
   clouds:
     type: Clouds
   dt:
@@ -68,10 +68,6 @@ Wind:
   deg:
     type: int
   gust:
-    type: float
-
-Rain:
-  1h:
     type: float
 
 Clouds:

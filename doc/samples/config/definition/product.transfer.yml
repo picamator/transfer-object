@@ -17,6 +17,10 @@ Product:
     type: Details
   stores:
     type: array
+  availabilities:
+    collectionType: Availabilities
+  measurementUnit:
+    type: MeasurementUnit
 
 DeliveryOptions:
   name:
@@ -27,4 +31,28 @@ Details:
     type: string
   isRegional:
     type: bool
+
+Availabilities:
+  total:
+    type: int
+  buffer:
+    type: int
+
+MeasurementUnit:
+  palette:
+    type: Palette
+  box:
+    type: Box
+
+Palette:
+  type:
+    type: string
+  items:
+    type: int
+
+Box:
+  type:
+    type: string
+  items:
+    type: int
 

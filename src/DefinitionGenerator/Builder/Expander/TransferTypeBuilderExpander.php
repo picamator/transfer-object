@@ -18,9 +18,10 @@ readonly class TransferTypeBuilderExpander implements BuilderExpanderInterface
             return false;
         }
 
-        $key = key($content->getPropertyValue());
+        $propertyValue = (array)$content->getPropertyValue();
+        $key = key($propertyValue);
 
-        return is_string($key);
+        return is_string($key) && $this->isValidVariable($key);
     }
 
     public function expandBuilderTransfer(

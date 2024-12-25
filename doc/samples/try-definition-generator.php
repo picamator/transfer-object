@@ -26,13 +26,33 @@ $productData = [
     'isDiscounted' => false,
     'deliveryOptions' => [
         ['name' => 'express'],
-        ['name' => 'standard']
+        ['name' => 'standard'],
     ],
     'details' => [
         'description' => 'Tomato from fields.',
         'isRegional' => true,
     ],
     'stores' => ['DE', 'AT'],
+    'availabilities' => [
+        '2024-12-25' => [
+            'total' => 100,
+            'buffer' => 5,
+        ],
+        '2024-12-26' => [
+            'total' => 200,
+            'buffer' => 10,
+        ],
+    ],
+    'measurementUnit' => [
+        'palette' => [
+            'type' => 'p',
+            'items' => 1_000,
+        ],
+        'box' => [
+            'type' => 'b',
+            'items' => 10,
+        ],
+    ]
 ];
 
 var_dump($productData);
