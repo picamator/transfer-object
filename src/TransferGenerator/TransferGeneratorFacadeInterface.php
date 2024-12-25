@@ -12,7 +12,7 @@ interface TransferGeneratorFacadeInterface
      * Specification:
      * - Provides Transfer Generator Fiber
      * - First Suspend on creating temporary directory
-     * - Next Suspend after generating each Transfer Object passing `TransferGeneratorCallbackTransfer` as suspend argument
+     * - Next Suspend after generating each Transfer Object passing `TransferGeneratorCallbackTransfer` as argument
      * - Fiber returns `true` when whole process is successful, `false` otherwise
      *
      * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface

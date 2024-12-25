@@ -87,7 +87,7 @@ abstract class AbstractTransfer implements TransferInterface
         foreach (static::META_DATA as $metaKey => $metaName) {
             $dataItem = $this->{$metaKey};
 
-            $data[$metaKey] = match(true) {
+            $data[$metaKey] = match (true) {
                 $dataItem instanceof TransferInterface => $dataItem->toArray(),
                 $dataItem instanceof ArrayObject => $this
                     ->getPropertyTypeAttribute(className: static::class, constantName: $metaName)?->toArray($dataItem)
@@ -108,9 +108,10 @@ abstract class AbstractTransfer implements TransferInterface
                 continue;
             }
 
-            $this->{$key} = $this
-                ->getPropertyTypeAttribute(className: static::class, constantName: static::META_DATA[$key])?->fromArray($value)
-                ?? $value;
+            $this->{$key} = $this->getPropertyTypeAttribute(
+                className: static::class,
+                constantName: static::META_DATA[$key]
+            )?->fromArray($value) ?? $value;
         }
 
         return $this;

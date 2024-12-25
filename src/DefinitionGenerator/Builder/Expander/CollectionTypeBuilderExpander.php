@@ -55,7 +55,7 @@ readonly class CollectionTypeBuilderExpander implements BuilderExpanderInterface
     {
         $countArrayItem = 0;
         foreach ($propertyValue as $item) {
-            $countArrayItem += is_array($item) ? 1: 0;
+            $countArrayItem += is_array($item) ? 1 : 0;
         }
 
         return $countArrayItem;

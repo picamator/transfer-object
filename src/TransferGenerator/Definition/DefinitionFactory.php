@@ -55,7 +55,7 @@ readonly class DefinitionFactory
     }
 
     /**
-     * @return \ArrayObject<int,\Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\PropertyExpanderInterface> $propertyExpanders
+     * @return \ArrayObject<int,PropertyExpanderInterface> $propertyExpanders
      */
     protected function createPropertyExpanders(): ArrayObject
     {

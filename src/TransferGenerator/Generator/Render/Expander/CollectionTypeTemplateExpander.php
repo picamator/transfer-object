@@ -27,13 +27,17 @@ readonly class CollectionTypeTemplateExpander implements TemplateExpanderInterfa
         TemplateTransfer $templateTransfer,
     ): void {
         $templateTransfer->imports[BuildInTypeEnum::ARRAY_OBJECT->value] ??= BuildInTypeEnum::ARRAY_OBJECT->value;
-        $templateTransfer->imports[AttributeEnum::COLLECTION_TYPE_ATTRIBUTE->value] ??= AttributeEnum::COLLECTION_TYPE_ATTRIBUTE->value;
+        $templateTransfer->imports[AttributeEnum::COLLECTION_TYPE_ATTRIBUTE->value]
+            ??= AttributeEnum::COLLECTION_TYPE_ATTRIBUTE->value;
 
         $transferName = $this->getTransferName($propertyTransfer->collectionType);
 
         $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->properties[$propertyName] = BuildInTypeEnum::ARRAY_OBJECT->value;
-        $templateTransfer->attributes[$propertyName] = sprintf(AttributeTemplateEnum::COLLECTION_TYPE_ATTRIBUTE->value, $transferName);
+        $templateTransfer->attributes[$propertyName] = sprintf(
+            AttributeTemplateEnum::COLLECTION_TYPE_ATTRIBUTE->value,
+            $transferName,
+        );
         $templateTransfer->dockBlocks[$propertyName] = sprintf(DockBlockTemplateEnum::COLLECTION->value, $transferName);
         $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY_OBJECT->value;
     }

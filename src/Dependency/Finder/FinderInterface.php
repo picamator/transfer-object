@@ -21,5 +21,9 @@ interface FinderInterface
      *
      * @return Countable&IteratorAggregate<string,SplFileInfoBridge>
      */
-    public function findFilesInDirectoryExclude(string $filePattern, string $dirName, string $exclude): IteratorAggregate&Countable;
+    public function findFilesInDirectoryExclude(
+        string $filePattern,
+        string $dirName,
+        string $exclude,
+    ): IteratorAggregate&Countable;
 }

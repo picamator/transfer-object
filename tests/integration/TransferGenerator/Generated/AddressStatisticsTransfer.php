@@ -19,7 +19,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     protected const array META_DATA = [
         self::ADDRESS_BOOK_UUID => self::ADDRESS_BOOK_UUID_DATA_NAME,
         self::ADDRESS_UUID => self::ADDRESS_UUID_DATA_NAME,
-        self::GROUPED_LABLES => self::GROUPED_LABLES_DATA_NAME,
+        self::GROUPED_LABELS => self::GROUPED_LABELS_DATA_NAME,
         self::IS_ACTIVE => self::IS_ACTIVE_DATA_NAME,
         self::IS_BLOCKED => self::IS_BLOCKED_DATA_NAME,
         self::ORDER_AVERAGE => self::ORDER_AVERAGE_DATA_NAME,
@@ -47,15 +47,15 @@ final class AddressStatisticsTransfer extends AbstractTransfer
         set => $this->_data[self::ADDRESS_UUID_DATA_INDEX] = $value;
     }
 
-    // groupedLables
-    public const string GROUPED_LABLES = 'groupedLables';
-    protected const string GROUPED_LABLES_DATA_NAME = 'GROUPED_LABLES';
-    protected const int GROUPED_LABLES_DATA_INDEX = 2;
+    // groupedLabels
+    public const string GROUPED_LABELS = 'groupedLabels';
+    protected const string GROUPED_LABELS_DATA_NAME = 'GROUPED_LABELS';
+    protected const int GROUPED_LABELS_DATA_INDEX = 2;
 
     /** @var iterable<mixed> */
-    public iterable $groupedLables {
-        get => $this->_data[self::GROUPED_LABLES_DATA_INDEX] ?? [];
-        set => $this->_data[self::GROUPED_LABLES_DATA_INDEX] = $value;
+    public iterable $groupedLabels {
+        get => $this->_data[self::GROUPED_LABELS_DATA_INDEX] ?? [];
+        set => $this->_data[self::GROUPED_LABELS_DATA_INDEX] = $value;
     }
 
     // isActive

@@ -16,7 +16,7 @@ enum GetTypeEnum: string
 
     public function isNull(): bool
     {
-        return match($this) {
+        return match ($this) {
             GetTypeEnum::null => true,
             default => false,
         };
@@ -24,7 +24,7 @@ enum GetTypeEnum: string
 
     public function isString(): bool
     {
-        return match($this) {
+        return match ($this) {
             GetTypeEnum::string => true,
             default => false,
         };
@@ -32,7 +32,7 @@ enum GetTypeEnum: string
 
     public function isObject(): bool
     {
-        return match($this) {
+        return match ($this) {
             GetTypeEnum::object => true,
             default => false,
         };
@@ -40,7 +40,7 @@ enum GetTypeEnum: string
 
     public function isArray(): bool
     {
-        return match($this) {
+        return match ($this) {
             GetTypeEnum::array => true,
             default => false,
         };

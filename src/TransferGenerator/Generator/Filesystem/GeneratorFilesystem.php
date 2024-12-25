@@ -52,6 +52,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
+     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      */
     private function deleteOldFiles(): void
     {
@@ -77,7 +78,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 
         $destinationPath = $this->config->getTransferPath() . DIRECTORY_SEPARATOR;
         foreach ($finder as $file) {
-            $this->filesystem->copy($file->getRealPath(), $destinationPath. $file->getFilename());
+            $this->filesystem->copy($file->getRealPath(), $destinationPath . $file->getFilename());
         }
     }
 

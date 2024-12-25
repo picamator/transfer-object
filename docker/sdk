@@ -16,6 +16,7 @@ function show_usage() {
   echo "  composer <command>   Run composer command"
   echo "  phpstan              Run PHPStan"
   echo "  phpunit              Run PHPUnit"
+  echo "  phpcs                Run PHP CodeSniffer"
   echo "  hook-install         Install CaptainHook"
   echo "  hook <command>       Run CaptainHook command"
   echo "  to-generate          Generate inertanl transfer objects"
@@ -64,6 +65,9 @@ case $1 in
     ;;
   phpunit)
     docker exec -i $DOCKER_CONTAINER_NAME composer phpunit
+    ;;
+  phpcs)
+    docker exec -i $DOCKER_CONTAINER_NAME composer phpcs
     ;;
   hook-install)
     docker exec -i $DOCKER_CONTAINER_NAME composer captainhook install --only-enabled --run-mode=docker --run-exec="docker exec -i $DOCKER_CONTAINER_NAME"

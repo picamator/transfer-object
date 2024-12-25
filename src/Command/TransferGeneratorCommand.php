@@ -25,7 +25,8 @@ final class TransferGeneratorCommand extends Command
     private const string OPTION_DESCRIPTION_CONFIGURATION = 'Path to YML configuration.';
 
     private const string ERROR_TEMPLATE = 'Failed generating %s.';
-    private const string ERROR_MISSED_OPTION_CONFIG_MESSAGE = 'Command\'s option -c is not set. Please provide path to YML configuration.';
+    private const string ERROR_MISSED_OPTION_CONFIG_MESSAGE =
+        'Command\'s option -c is not set. Please provide path to YML configuration.';
     private const string ERROR_MESSAGE = 'Failed generate Transfer Objects.';
     private const string SUCCESS_MESSAGE = 'Transfer Objects successfully generated.';
 
@@ -83,12 +84,17 @@ final class TransferGeneratorCommand extends Command
         return $generatorFiber->getReturn();
     }
 
-    private function writelnGeneratorError(SymfonyStyle $inputOutput, TransferGeneratorCallbackTransfer $generatorTransfer): void
-    {
+    private function writelnGeneratorError(
+        SymfonyStyle $inputOutput,
+        TransferGeneratorCallbackTransfer $generatorTransfer,
+    ): void {
         $inputOutput->error(sprintf(self::ERROR_TEMPLATE, $generatorTransfer->definitionKey));
 
         $errorMessages = $generatorTransfer->validator->errorMessages;
-        $errorMessages = array_map(fn(ValidatorMessageTransfer $messageTransfer) => $messageTransfer->errorMessage, $errorMessages->getArrayCopy());
+        $errorMessages = array_map(
+            fn(ValidatorMessageTransfer $messageTransfer) => $messageTransfer->errorMessage,
+            $errorMessages->getArrayCopy()
+        );
 
         $inputOutput->warning($errorMessages);
     }
@@ -116,4 +122,3 @@ final class TransferGeneratorCommand extends Command
         return true;
     }
 }
-

@@ -14,7 +14,7 @@ trait DefinitionBuilderTrait
         $this->assertPropertyName($propertyName);
         $typeEnum = $this->getTypeEnum($propertyName, $propertyValue);
 
-        return new readonly class($typeEnum, $propertyName, $propertyValue) implements BuilderContentInterface
+        return new readonly class ($typeEnum, $propertyName, $propertyValue) implements BuilderContentInterface
         {
             public function __construct(
                 private GetTypeEnum $type,

@@ -24,6 +24,9 @@
       },
       {
         "action": "composer phpstan"
+      },
+      {
+        "action": "composer phpcs"
       }
     ]
   },

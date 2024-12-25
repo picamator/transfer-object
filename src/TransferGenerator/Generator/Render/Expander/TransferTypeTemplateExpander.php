@@ -29,6 +29,9 @@ readonly class TransferTypeTemplateExpander implements TemplateExpanderInterface
         $propertyName = $propertyTransfer->propertyName;
 
         $templateTransfer->properties[$propertyName] = $transferName;
-        $templateTransfer->attributes[$propertyName] = sprintf(AttributeTemplateEnum::TYPE_ATTRIBUTE->value, $transferName);
+        $templateTransfer->attributes[$propertyName] = sprintf(
+            AttributeTemplateEnum::TYPE_ATTRIBUTE->value,
+            $transferName,
+        );
     }
 }

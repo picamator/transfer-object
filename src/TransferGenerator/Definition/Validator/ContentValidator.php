@@ -9,11 +9,12 @@ use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\DefinitionValidatorTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface;
 
 readonly class ContentValidator implements ContentValidatorInterface
 {
     /**
-     * @param \ArrayObject<int,\Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface> $propertyValidators
+     * @param \ArrayObject<int,PropertyValidatorInterface> $propertyValidators
      */
     public function __construct(
         private ClassNameValidatorInterface $classNameValidator,
@@ -62,7 +63,7 @@ readonly class ContentValidator implements ContentValidatorInterface
     {
         foreach ($this->propertyValidators as $validator) {
             if (!$validator->isApplicable($propertyTransfer)) {
-               continue;
+                continue;
             }
 
             $messageTransfer = $validator->validate($propertyTransfer);

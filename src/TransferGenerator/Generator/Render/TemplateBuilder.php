@@ -10,13 +10,14 @@ use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransferEnum;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TemplateExpanderInterface;
 
 readonly class TemplateBuilder implements TemplateBuilderInterface
 {
     use TemplateRenderTrait;
 
     /**
-     * @param \ArrayObject<int,\Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TemplateExpanderInterface> $templateExpanders
+     * @param \ArrayObject<int,TemplateExpanderInterface> $templateExpanders
      */
     public function __construct(
         private ConfigInterface $config,

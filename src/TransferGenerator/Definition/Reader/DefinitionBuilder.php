@@ -8,12 +8,13 @@ use ArrayObject;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\DefinitionTransfer;
+use Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\PropertyExpanderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\ContentValidatorInterface;
 
 readonly class DefinitionBuilder implements DefinitionBuilderInterface
 {
     /**
-     * @param \ArrayObject<int,\Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\PropertyExpanderInterface> $propertyExpanders
+     * @param \ArrayObject<int,PropertyExpanderInterface> $propertyExpanders
      */
     public function __construct(
         private ContentValidatorInterface $validator,

@@ -31,7 +31,7 @@ readonly class BuildInTypePropertyExpander implements PropertyExpanderInterface
             return null;
         }
 
-        return match(true) {
+        return match (true) {
             is_bool($type) => BuildInTypeEnum::getTrueFalse($type)->value,
             BuildInTypeEnum::isBuildInType($type) => $type,
             default => null,

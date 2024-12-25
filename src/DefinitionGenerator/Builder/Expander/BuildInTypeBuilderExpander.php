@@ -25,7 +25,7 @@ readonly class BuildInTypeBuilderExpander implements BuilderExpanderInterface
         BuilderContentInterface $content,
         DefinitionBuilderTransfer $builderTransfer,
     ): void {
-        $propertyTransfer = match(true) {
+        $propertyTransfer = match (true) {
             $content->getType()->isNull() || $content->getType()->isString()
                 => $this->createPropertyTransfer($content->getPropertyName(), GetTypeEnum::string->name),
 

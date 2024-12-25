@@ -17,7 +17,7 @@ START;
     type: %s
 START;
 
-    private const string COLLECTION_TYPE_TEMPLATE =<<<'START'
+    private const string COLLECTION_TYPE_TEMPLATE = <<<'START'
   %s:
     collectionType: %s
 START;
@@ -26,7 +26,7 @@ START;
     {
         $content = sprintf(self::CLASS_TEMPLATE, $contentTransfer->className) . PHP_EOL;
         foreach ($contentTransfer->properties as $propertyTransfer) {
-            $content .= match(true) {
+            $content .= match (true) {
                 $propertyTransfer->buildInType !== null
                     => $this->renderType($propertyTransfer->propertyName, $propertyTransfer->buildInType),
 

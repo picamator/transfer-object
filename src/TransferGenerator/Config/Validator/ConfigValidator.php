@@ -13,7 +13,7 @@ readonly class ConfigValidator implements ConfigValidatorInterface
     use ValidatorMessageTrait;
 
     /**
-     * @param \ArrayObject<int,\Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigValidatorInterface> $configValidators
+     * @param \ArrayObject<int,ConfigValidatorInterface> $configValidators
      */
     public function __construct(
         private ArrayObject $configValidators,

@@ -52,6 +52,8 @@ readonly final class FilesystemBridge implements FilesystemInterface
 
     /**
      * @param string|iterable<string,mixed> $files
+     *
+     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      */
     public function remove(string|iterable $files): void
     {

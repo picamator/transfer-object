@@ -44,6 +44,7 @@ readonly class TransferGenerator implements TransferGeneratorInterface
     /**
      * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
      * @throws \FiberError
+     * @throws \Throwable
      */
     private function fiberCallback(): bool
     {
@@ -69,8 +70,10 @@ readonly class TransferGenerator implements TransferGeneratorInterface
         return $isValid;
     }
 
-    private function createGeneratorTransfer(string $definitionKey, DefinitionTransfer $definitionTransfer): TransferGeneratorCallbackTransfer
-    {
+    private function createGeneratorTransfer(
+        string $definitionKey,
+        DefinitionTransfer $definitionTransfer,
+    ): TransferGeneratorCallbackTransfer {
         $generatorTransfer = new TransferGeneratorCallbackTransfer();
 
         $generatorTransfer->className = $definitionTransfer->content?->className;
@@ -90,4 +93,3 @@ readonly class TransferGenerator implements TransferGeneratorInterface
         $this->filesystem->writeFile($definitionTransfer->content->className, $content);
     }
 }
-

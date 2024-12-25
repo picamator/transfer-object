@@ -36,8 +36,9 @@ trait TransferGeneratorHelperTrait
         return new ConfigFacade()->loadConfig($configPath);
     }
 
-    protected function assertGenerateTransferSuccessCallback(?TransferGeneratorCallbackTransfer $generatorTransfer): void
-    {
+    protected function assertGenerateTransferSuccessCallback(
+        ?TransferGeneratorCallbackTransfer $generatorTransfer
+    ): void {
         if ($generatorTransfer === null) {
             return;
         }

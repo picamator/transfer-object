@@ -21,5 +21,5 @@ interface GeneratorFilesystemInterface
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException
      */
-    public function writeFile(string $className, string $content) : void;
+    public function writeFile(string $className, string $content): void;
 }

@@ -1,6 +1,6 @@
 <?php
-
-declare(strict_types = 1);
+// phpcs:ignoreFile
+declare(strict_types=1);
 
 use Picamator\TransferObject\Generated\TemplateTransfer;
 
@@ -14,7 +14,7 @@ namespace <?php echo $templateTransfer->classNamespace ?>;
 
 <?php foreach ($templateTransfer->imports as $import): ?>
 use <?php echo $import ?>;
-<?php endforeach?>
+<?php endforeach ?>
 
 /**
  * Specification:
@@ -28,7 +28,7 @@ final class <?php echo $templateTransfer->className ?> extends AbstractTransfer
     protected const array META_DATA = [
 <?php foreach ($templateTransfer->metaConstants as $constant => $property): ?>
         self::<?php echo $constant ?> => self::<?php echo $constant ?>_DATA_NAME,
-<?php endforeach?>
+<?php endforeach ?>
     ];
 
 <?php $i = 0; ?>
@@ -46,5 +46,5 @@ final class <?php echo $templateTransfer->className ?> extends AbstractTransfer
         set => $this->_data[self::<?php echo $constant ?>_DATA_INDEX] = $value;
     }
 <?php echo $i < $templateTransfer->propertiesCount ? PHP_EOL : '' ?>
-<?php endforeach?>
+<?php endforeach ?>
 }

@@ -33,8 +33,11 @@ final readonly class FinderBridge implements FinderInterface
         }
     }
 
-    public function findFilesInDirectoryExclude(string $filePattern, string $dirName, string $exclude): IteratorAggregate&Countable
-    {
+    public function findFilesInDirectoryExclude(
+        string $filePattern,
+        string $dirName,
+        string $exclude,
+    ): IteratorAggregate&Countable {
         try {
             $finder = Finder::create()
                 ->files()

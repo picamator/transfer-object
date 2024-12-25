@@ -9,7 +9,7 @@ AddressStatistics:
     type: float
   orderReferences:
     type: ArrayObject
-  groupedLables:
+  groupedLabels:
     type: iterable
   isBlocked:
     type: false

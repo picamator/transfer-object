@@ -12,12 +12,12 @@ interface PropertyTypeAttributeInterface
     /**
      * @param array<string,mixed> $data
      *
-     * @return \ArrayObject<string,\Picamator\TransferObject\Transfer\TransferInterface>|\Picamator\TransferObject\Transfer\TransferInterface
+     * @return \ArrayObject<string,TransferInterface>|TransferInterface
      */
     public function fromArray(array $data): ArrayObject|TransferInterface;
 
     /**
-     * @param \ArrayObject<int,\Picamator\TransferObject\Transfer\TransferInterface>|\ArrayObject<int|string,mixed> $data
+     * @param \ArrayObject<int,TransferInterface>|\ArrayObject<int|string,mixed> $data
      *
      * @return array<string|int,mixed>
      */

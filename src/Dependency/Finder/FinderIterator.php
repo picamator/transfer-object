@@ -20,9 +20,9 @@ final readonly class FinderIterator implements IteratorAggregate, Countable
 
     public function getIterator(): Traversable
     {
-        foreach($this->finder->getIterator() as $key => $splFileInfo) {
+        foreach ($this->finder->getIterator() as $key => $splFileInfo) {
             yield $key => new SplFileInfoBridge($splFileInfo);
-        };
+        }
     }
 
     public function count(): int

@@ -24,8 +24,10 @@ trait BuilderExpanderTrait
     /**
      * @param array<int|string,mixed> $content
      */
-    protected function createGeneratorContentTransfer(string $className, array $content): DefinitionGeneratorContentTransfer
-    {
+    protected function createGeneratorContentTransfer(
+        string $className,
+        array $content,
+    ): DefinitionGeneratorContentTransfer {
         $contentTransfer = new DefinitionGeneratorContentTransfer();
         $contentTransfer->className = $className;
         $contentTransfer->content = $content;
