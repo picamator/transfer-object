@@ -27,12 +27,10 @@ final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttr
 
     public function toArray(ArrayObject $data): array
     {
-        $collection = [];
-        foreach ($data as $transfer) {
-            $collection[] = $transfer->toArray();
-        }
-
-        return $collection;
+        return array_map(
+            fn(TransferInterface $transfer): array => $transfer->toArray(),
+            $data->getArrayCopy()
+        );
     }
 
     /**

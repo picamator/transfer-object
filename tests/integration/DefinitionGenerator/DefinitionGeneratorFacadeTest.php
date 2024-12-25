@@ -8,6 +8,8 @@ use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
+use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\AsteroidTransfer;
+use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\ForecastTransfer;
 use Picamator\Tests\Integration\TransferObject\Helper\DefinitionGeneratorHelperTrait;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
@@ -31,7 +33,7 @@ class DefinitionGeneratorFacadeTest extends TestCase
     }
 
     #[DataProvider('generateDefinitionDataProvider')]
-    public function testGenerateDefinition(
+    public function testGenerateDefinitionShouldSuccessfullyCreateDefinitionFile(
         string $className,
         string $sampleFileName,
         string $definitionFileName,
@@ -54,20 +56,6 @@ class DefinitionGeneratorFacadeTest extends TestCase
         $this->assertFileExists($generatedPath);
     }
 
-    #[Depends('testGenerateDefinition')]
-    public function testGenerateTransferBasedOnDefinition(): void
-    {
-        // Arrange
-        $messageTransfer = $this->loadConfig(self::TRANSFER_OBJECT_GENERATOR_CONFIG_PATH);
-        $this->assertTrue($messageTransfer->isValid, $messageTransfer->errorMessage ?? '');
-
-        // Act
-        $actual = $this->generateTransfers($this->assertGenerateTransferSuccessCallback(...));
-
-        // Assert
-        $this->assertTrue($actual);
-    }
-
     /**
      * @return Generator<string,mixed>
      */
@@ -83,6 +71,59 @@ class DefinitionGeneratorFacadeTest extends TestCase
             'className' => 'Forecast',
             'sampleFileName' => 'open-weather.json',
             'definitionFileName' => 'forecast.transfer.yml',
+        ];
+    }
+
+    #[Depends('testGenerateDefinitionShouldSuccessfullyCreateDefinitionFile')]
+    public function testGenerateTransferBasedOnDefinitionShouldSuccessfullyGenerateTransferObjects(): void
+    {
+        // Arrange
+        $messageTransfer = $this->loadConfig(self::TRANSFER_OBJECT_GENERATOR_CONFIG_PATH);
+        $this->assertTrue($messageTransfer->isValid, $messageTransfer->errorMessage ?? '');
+
+        // Act
+        $actual = $this->generateTransfers($this->assertGenerateTransferSuccessCallback(...));
+
+        // Assert
+        $this->assertTrue($actual);
+    }
+
+    #[DataProvider('matchDefinitionDataProvider')]
+    #[Depends('testGenerateTransferBasedOnDefinitionShouldSuccessfullyGenerateTransferObjects')]
+    public function testCompareSampleDataWithTransferObjectShouldSuccessfullyMatch(
+        string $classFullName,
+        string $sampleFileName,
+    ): void {
+        // Arrange
+        $this->assertTrue(class_exists($classFullName), sprintf('Class %s does not exist.', $classFullName));
+
+        /** @var \Picamator\TransferObject\Transfer\TransferInterface $transfer */
+        $transfer = new $classFullName();
+
+        $sampleJsonPath = self::SAMPLE_JSON_PATH . $sampleFileName;
+        $sampleContent = $this->getSampleContent($sampleJsonPath);
+
+        // Act
+        $transfer->fromArray($sampleContent);
+        $actual = $transfer->toArray();
+
+        // Assert
+        $this->assertEquals($sampleContent, $actual);
+    }
+
+    /**
+     * @return Generator<string,mixed>
+     */
+    public static function matchDefinitionDataProvider(): Generator
+    {
+        yield 'NASA NEO asteroid 465633 (2009 JR5)' => [
+            AsteroidTransfer::class,
+            'nasa-neo-rest-v1-neo-2465633.json',
+        ];
+
+        yield 'Open Weather Response' => [
+            ForecastTransfer::class,
+            'open-weather.json',
         ];
     }
 }

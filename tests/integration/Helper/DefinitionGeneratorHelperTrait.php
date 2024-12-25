@@ -34,7 +34,7 @@ trait DefinitionGeneratorHelperTrait
      *
      * @return array<string,mixed>
      */
-    private function getSampleContent(string $sampleJsonPath): array
+    protected function getSampleContent(string $sampleJsonPath): array
     {
         $sampleContent = file_get_contents($sampleJsonPath);
         if ($sampleContent === false) {
