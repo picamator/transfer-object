@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Transfer\Attribute;
 
-use ArrayObject;
 use Attribute;
 use Picamator\TransferObject\Transfer\TransferInterface;
 
@@ -15,12 +14,20 @@ final readonly class PropertyTypeAttribute implements PropertyTypeAttributeInter
     {
     }
 
-    public function fromArray(array $data): ArrayObject|TransferInterface
+    /**
+     * @param array<string,mixed> $data
+     */
+    public function fromArray(mixed $data): TransferInterface
     {
         return $this->createTransfer($data);
     }
 
-    public function toArray(ArrayObject $data): array
+    /**
+     * @param \ArrayObject<string|int,mixed> $data
+     *
+     * @return array<int|string,mixed>
+     */
+    public function toArray(mixed $data): array
     {
         return $data->getArrayCopy();
     }

@@ -1,0 +1,5 @@
+AddressStatistics:
+  addressBookUuid:
+    type: Uuid
+  addressType:
+    enumType: '\Picamator\Tests\Integration\TransferObject\TransferGenerator\Enum\AddressTypeEnum'

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Transfer;
 
 use ArrayObject;
+use BackedEnum;
 use SplFixedArray;
 use Traversable;
 
@@ -89,9 +90,9 @@ abstract class AbstractTransfer implements TransferInterface
 
             $data[$metaKey] = match (true) {
                 $dataItem instanceof TransferInterface => $dataItem->toArray(),
-                $dataItem instanceof ArrayObject => $this
-                    ->getPropertyTypeAttribute(className: static::class, constantName: $metaName)?->toArray($dataItem)
-                    ?? $dataItem,
+                $dataItem instanceof ArrayObject || $dataItem instanceof BackedEnum
+                    => $this->getPropertyTypeAttribute(className: static::class, constantName: $metaName)
+                        ?->toArray($dataItem) ?? $dataItem,
                 $dataItem instanceof Traversable => iterator_to_array($dataItem),
                 default => $dataItem,
             };

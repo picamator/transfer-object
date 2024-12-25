@@ -18,6 +18,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReade
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\BuildInTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\CollectionTypePropertyExpander;
+use Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\EnumTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\PropertyExpanderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\TransferTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\ClassNameValidator;
@@ -26,6 +27,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\ContentValid
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\ContentValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\BuildInTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\CollectionTypePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\EnumTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\NamePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\RequiredTypePropertyValidator;
@@ -63,7 +65,13 @@ readonly class DefinitionFactory
             $this->createCollectionTypePropertyExpander(),
             $this->createBuildInTypePropertyExpander(),
             $this->createTransferTypePropertyExpander(),
+            $this->createEnumTypePropertyExpander(),
         ]);
+    }
+
+    protected function createEnumTypePropertyExpander(): PropertyExpanderInterface
+    {
+        return new EnumTypePropertyExpander();
     }
 
     protected function createTransferTypePropertyExpander(): PropertyExpanderInterface
@@ -101,7 +109,13 @@ readonly class DefinitionFactory
             $this->createBuildInTypePropertyValidator(),
             $this->createTransferTypePropertyValidator(),
             $this->createCollectionTypePropertyValidator(),
+            $this->createEnumTypePropertyValidator(),
         ]);
+    }
+
+    protected function createEnumTypePropertyValidator(): PropertyValidatorInterface
+    {
+        return new EnumTypePropertyValidator();
     }
 
     protected function createCollectionTypePropertyValidator(): PropertyValidatorInterface

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Picamator\Doc\Samples\TransferObject\Enum\CountryEnum;
 use Picamator\Doc\Samples\TransferObject\Generated\AgentTransfer;
 use Picamator\Doc\Samples\TransferObject\Generated\CustomerTransfer;
 use Picamator\Doc\Samples\TransferObject\Generated\MerchantTransfer;
@@ -23,12 +24,13 @@ $customerTransfer->lastName = 'Kowalski';
 
 $merchantTransfer = new MerchantTransfer();
 $merchantTransfer->merchantReference = 'PL-234-567';
+$merchantTransfer->country = CountryEnum::PL;
 $merchantTransfer->isActive = true;
 
 var_dump($customerTransfer);
 var_dump($merchantTransfer);
 
-foreach ($merchantTransfer as $key => $value) {
+foreach ($customerTransfer as $key => $value) {
     echo 'key: ' . $key . PHP_EOL;
     echo 'value: ' . $value . PHP_EOL;
 }
@@ -47,11 +49,13 @@ $agentTransfer = new AgentTransfer()
         ],
         AgentTransfer::MERCHANTS => [
             [
-                MerchantTransfer::IS_ACTIVE => true,
+                MerchantTransfer::COUNTRY => 'DE',
                 MerchantTransfer::MERCHANT_REFERENCE => 'DE-234-567',
-            ], [
                 MerchantTransfer::IS_ACTIVE => false,
-                MerchantTransfer::MERCHANT_REFERENCE => 'AT-774-444',
+            ], [
+                MerchantTransfer::COUNTRY => 'PL',
+                MerchantTransfer::MERCHANT_REFERENCE => 'PL-774-444',
+                MerchantTransfer::IS_ACTIVE => true,
             ],
         ],
     ]);

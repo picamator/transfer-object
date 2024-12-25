@@ -4,22 +4,9 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Transfer\Attribute;
 
-use ArrayObject;
-use Picamator\TransferObject\Transfer\TransferInterface;
-
 interface PropertyTypeAttributeInterface
 {
-    /**
-     * @param array<string,mixed> $data
-     *
-     * @return \ArrayObject<string,TransferInterface>|TransferInterface
-     */
-    public function fromArray(array $data): ArrayObject|TransferInterface;
+    public function fromArray(mixed $data): mixed;
 
-    /**
-     * @param \ArrayObject<int,TransferInterface>|\ArrayObject<int|string,mixed> $data
-     *
-     * @return array<string|int,mixed>
-     */
-    public function toArray(ArrayObject $data): array;
+    public function toArray(mixed $data): mixed;
 }

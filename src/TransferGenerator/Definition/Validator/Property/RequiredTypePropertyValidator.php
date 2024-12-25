@@ -13,7 +13,7 @@ readonly class RequiredTypePropertyValidator implements PropertyValidatorInterfa
 {
     use ValidatorMessageTrait;
 
-    private const string PROPERTY_REQUIRED_ERROR_MESSAGE_TEMPLATE = 'Property "%s" type definition is missed.';
+    private const string MISSED_REQUIRED_TYPE_ERROR_MESSAGE_TEMPLATE = 'Property "%s" type definition is missed.';
 
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): true
     {
@@ -40,7 +40,7 @@ readonly class RequiredTypePropertyValidator implements PropertyValidatorInterfa
     private function getErrorMessage(DefinitionPropertyTransfer $propertyTransfer): string
     {
         return sprintf(
-            self::PROPERTY_REQUIRED_ERROR_MESSAGE_TEMPLATE,
+            self::MISSED_REQUIRED_TYPE_ERROR_MESSAGE_TEMPLATE,
             $propertyTransfer->propertyName,
         );
     }

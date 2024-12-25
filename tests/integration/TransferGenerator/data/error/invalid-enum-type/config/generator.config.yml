@@ -1,0 +1,4 @@
+generator:
+  transferNamespace: "Picamator\\Tests\\Integration\\TransferObject\\TransferGenerator\\Generated"
+  transferPath: "/home/transfer/transfer-object/tests/integration/TransferGenerator/Generated"
+  definitionPath: "/home/transfer/transfer-object/tests/integration/TransferGenerator/data/error/invalid-enum-type/config/definition"

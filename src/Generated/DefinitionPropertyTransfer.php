@@ -13,11 +13,12 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  */
 final class DefinitionPropertyTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 4;
+    protected const int META_DATA_SIZE = 5;
 
     protected const array META_DATA = [
         self::BUILD_IN_TYPE => self::BUILD_IN_TYPE_DATA_NAME,
         self::COLLECTION_TYPE => self::COLLECTION_TYPE_DATA_NAME,
+        self::ENUM_TYPE => self::ENUM_TYPE_DATA_NAME,
         self::PROPERTY_NAME => self::PROPERTY_NAME_DATA_NAME,
         self::TRANSFER_TYPE => self::TRANSFER_TYPE_DATA_NAME,
     ];
@@ -42,10 +43,20 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
         set => $this->_data[self::COLLECTION_TYPE_DATA_INDEX] = $value;
     }
 
+    // enumType
+    public const string ENUM_TYPE = 'enumType';
+    protected const string ENUM_TYPE_DATA_NAME = 'ENUM_TYPE';
+    protected const int ENUM_TYPE_DATA_INDEX = 2;
+
+    public ?string $enumType {
+        get => $this->_data[self::ENUM_TYPE_DATA_INDEX];
+        set => $this->_data[self::ENUM_TYPE_DATA_INDEX] = $value;
+    }
+
     // propertyName
     public const string PROPERTY_NAME = 'propertyName';
     protected const string PROPERTY_NAME_DATA_NAME = 'PROPERTY_NAME';
-    protected const int PROPERTY_NAME_DATA_INDEX = 2;
+    protected const int PROPERTY_NAME_DATA_INDEX = 3;
 
     public ?string $propertyName {
         get => $this->_data[self::PROPERTY_NAME_DATA_INDEX];
@@ -55,7 +66,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     // transferType
     public const string TRANSFER_TYPE = 'transferType';
     protected const string TRANSFER_TYPE_DATA_NAME = 'TRANSFER_TYPE';
-    protected const int TRANSFER_TYPE_DATA_INDEX = 3;
+    protected const int TRANSFER_TYPE_DATA_INDEX = 4;
 
     public ?string $transferType {
         get => $this->_data[self::TRANSFER_TYPE_DATA_INDEX];

@@ -82,6 +82,12 @@ class TransferGeneratorFacadeErrorTest extends TestCase
             'configCaseName' => 'invalid-type-definition',
             'expectedMessage' => 'Property "addressBookUuid" type definition is missed.',
         ];
+
+        yield 'basic enum type is not supported should return error' => [
+            'configCaseName' => 'invalid-enum-type',
+            // phpcs:ignore
+            'expectedMessage' => 'Property "addressType" type "\Picamator\Tests\Integration\TransferObject\TransferGenerator\Enum\AddressTypeEnum" is not BakedEnum.',
+        ];
     }
 
     private function getConfigPath(string $configCaseName): string
