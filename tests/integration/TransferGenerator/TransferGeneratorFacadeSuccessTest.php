@@ -5,16 +5,13 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\TransferGenerator;
 
 use PHPUnit\Framework\TestCase;
-use Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer;
-use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\TransferGenerator\Config\ConfigFacade;
-use Picamator\TransferObject\TransferGenerator\Config\ConfigFacadeInterface;
+use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 
 class TransferGeneratorFacadeSuccessTest extends TestCase
 {
-    use TransferGeneratorFacadeTrait;
+    use TransferGeneratorHelperTrait;
 
-    private const string CONFIG_PATH = __DIR__ . '/data/success/config/generator.config.yml';
+    private const string GENERATOR_CONFIG_PATH = __DIR__ . '/data/success/config/generator.config.yml';
     private const string TRANSFER_OBJECT_PATH = __DIR__ . '/Generated/';
 
     private const array EXPECTED_GENERATED_TRANSFER_OBJECT = [
@@ -24,40 +21,19 @@ class TransferGeneratorFacadeSuccessTest extends TestCase
         self::TRANSFER_OBJECT_PATH . 'CountryTransfer.php',
     ];
 
-    private ConfigFacadeInterface $configFacade;
-
-    protected function setUp(): void
-    {
-        $this->configFacade = new ConfigFacade();
-    }
-
     public function testGenerateTransferObjectByValidDefinitionShouldSucceed(): void
     {
         // Arrange
-        $messageTransfer = $this->configFacade->loadConfig(self::CONFIG_PATH);
+        $messageTransfer = $this->loadConfig(self::GENERATOR_CONFIG_PATH);
         $this->assertTrue($messageTransfer->isValid, $messageTransfer->errorMessage ?? '');
 
         // Act
-        $actual = $this->generateTransfers($this->assertCallback(...));
+        $actual = $this->generateTransfers($this->assertGenerateTransferSuccessCallback(...));
 
         // Assert
         $this->assertTrue($actual);
         foreach (self::EXPECTED_GENERATED_TRANSFER_OBJECT as $transferObjectFile) {
             $this->assertFileExists($transferObjectFile);
         }
-    }
-
-    private function assertCallback(?TransferGeneratorCallbackTransfer $generatorTransfer): void
-    {
-        if ($generatorTransfer === null) {
-            return;
-        }
-
-        $isValid = $generatorTransfer->validator->isValid;
-        $assertMessage = !$isValid
-            ? 'Fail asserting success' . PHP_EOL . var_export($generatorTransfer->toArray(), true)
-            : '';
-
-        $this->assertTrue($isValid, $assertMessage);
     }
 }
