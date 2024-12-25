@@ -24,8 +24,8 @@ readonly class ConfigLoader implements ConfigLoaderInterface
     {
         $configContent = $this->parser->parseFile($configPath);
         $configTransfer = $this->createConfigTransfer($configContent);
-        $messageTransfer = $this->validator->validate($configTransfer);
 
+        $messageTransfer = $this->validator->validate($configTransfer);
         if ($messageTransfer->isValid) {
             ConfigContainer::loadConfig($configTransfer);
         }
@@ -34,11 +34,12 @@ readonly class ConfigLoader implements ConfigLoaderInterface
     }
 
     /**
-     * @param array<string,array<string,string>> $configContent
+     * @param array<string,array<string,mixed>> $configContent
      */
     private function createConfigTransfer(array $configContent): ConfigTransfer
     {
         $configSection = $configContent[self::CONFIG_SECTION_KEY] ?? [];
+        $configSection = array_filter($configSection, fn(mixed $configItem): bool => is_string($configItem));
 
         return new ConfigTransfer()->fromArray($configSection);
     }

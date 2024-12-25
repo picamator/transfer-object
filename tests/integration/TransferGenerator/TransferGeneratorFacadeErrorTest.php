@@ -77,14 +77,9 @@ class TransferGeneratorFacadeErrorTest extends TestCase
             'expectedMessage' => 'Cannot use reserved "_data" property name.',
         ];
 
-        yield 'duplicate property type should return error' => [
-            'configCaseName' => 'duplicate-type',
-            'expectedMessage' => 'Property "addressUuid" type definition is missed or set twice.',
-        ];
-
         yield 'missed property type should return error' => [
-            'configCaseName' => 'duplicate-type',
-            'expectedMessage' => 'Property "addressUuid" type definition is missed or set twice.',
+            'configCaseName' => 'missed-type',
+            'expectedMessage' => 'Property "addressUuid" type definition is missed.',
         ];
 
         yield 'unsupported type should return error' => [
@@ -94,7 +89,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
 
         yield 'property type defined with array yml structure should fail to recognize type and return error' => [
             'configCaseName' => 'invalid-type-definition',
-            'expectedMessage' => 'Property "addressBookUuid" type definition is missed or set twice.',
+            'expectedMessage' => 'Property "addressBookUuid" type definition is missed.',
         ];
     }
 

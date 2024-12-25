@@ -9,11 +9,11 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\ValidatorMes
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 
-readonly class RequiredUniqueTypePropertyValidator implements PropertyValidatorInterface
+readonly class RequiredTypePropertyValidator implements PropertyValidatorInterface
 {
     use ValidatorMessageTrait;
 
-    private const string PROPERTY_REQUIRED_UNIQUE_ERROR_MESSAGE_TEMPLATE = 'Property "%s" type definition is missed or set twice.';
+    private const string PROPERTY_REQUIRED_ERROR_MESSAGE_TEMPLATE = 'Property "%s" type definition is missed.';
 
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): true
     {
@@ -40,7 +40,7 @@ readonly class RequiredUniqueTypePropertyValidator implements PropertyValidatorI
     private function getErrorMessage(DefinitionPropertyTransfer $propertyTransfer): string
     {
         return sprintf(
-            self::PROPERTY_REQUIRED_UNIQUE_ERROR_MESSAGE_TEMPLATE,
+            self::PROPERTY_REQUIRED_ERROR_MESSAGE_TEMPLATE,
             $propertyTransfer->propertyName,
         );
     }

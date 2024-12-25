@@ -12,8 +12,14 @@ use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinder;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinderInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionBuilder;
+use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReader;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\BuildInTypePropertyExpander;
+use Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\CollectionTypePropertyExpander;
+use Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\PropertyExpanderInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\TransferTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\ClassNameValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\ClassNameValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\ContentValidator;
@@ -22,7 +28,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\Bui
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\CollectionTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\NamePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\RequiredUniqueTypePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\RequiredTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\ReservedPropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\TransferTypePropertyValidator;
 
@@ -36,8 +42,43 @@ readonly class DefinitionFactory
         return new DefinitionReader(
             $this->createDefinitionFinder(),
             $this->createYmlParser(),
-            $this->createContentValidator(),
+            $this->createDefinitionBuilder(),
         );
+    }
+
+    protected function createDefinitionBuilder(): DefinitionBuilderInterface
+    {
+        return new DefinitionBuilder(
+            $this->createContentValidator(),
+            $this->createPropertyExpanders(),
+        );
+    }
+
+    /**
+     * @return \ArrayObject<int,\Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\PropertyExpanderInterface> $propertyExpanders
+     */
+    protected function createPropertyExpanders(): ArrayObject
+    {
+        return new ArrayObject([
+            $this->createCollectionTypePropertyExpander(),
+            $this->createBuildInTypePropertyExpander(),
+            $this->createTransferTypePropertyExpander(),
+        ]);
+    }
+
+    protected function createTransferTypePropertyExpander(): PropertyExpanderInterface
+    {
+        return new TransferTypePropertyExpander();
+    }
+
+    protected function createBuildInTypePropertyExpander(): PropertyExpanderInterface
+    {
+        return new BuildInTypePropertyExpander();
+    }
+
+    protected function createCollectionTypePropertyExpander(): PropertyExpanderInterface
+    {
+        return new CollectionTypePropertyExpander();
     }
 
     protected function createContentValidator(): ContentValidatorInterface
@@ -56,7 +97,7 @@ readonly class DefinitionFactory
         return new ArrayObject([
             $this->createNamePropertyValidator(),
             $this->createReservedPropertyValidator(),
-            $this->createRequiredUniqueTypePropertyValidator(),
+            $this->createRequiredTypePropertyValidator(),
             $this->createBuildInTypePropertyValidator(),
             $this->createTransferTypePropertyValidator(),
             $this->createCollectionTypePropertyValidator(),
@@ -78,9 +119,9 @@ readonly class DefinitionFactory
         return new BuildInTypePropertyValidator();
     }
 
-    protected function createRequiredUniqueTypePropertyValidator(): PropertyValidatorInterface
+    protected function createRequiredTypePropertyValidator(): PropertyValidatorInterface
     {
-        return new RequiredUniqueTypePropertyValidator();
+        return new RequiredTypePropertyValidator();
     }
 
     protected function createReservedPropertyValidator(): PropertyValidatorInterface
