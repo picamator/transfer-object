@@ -11,6 +11,7 @@ use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\ObjectTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
+use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 
 readonly class BuildInTypeBuilderExpander implements BuilderExpanderInterface
 {
@@ -35,9 +36,6 @@ readonly class BuildInTypeBuilderExpander implements BuilderExpanderInterface
             $content->getPropertyValue() instanceof ArrayObject
                 => $this->createPropertyTransfer($content->getPropertyName(), ObjectTypeEnum::ARRAY_OBJECT->value),
 
-            is_iterable($content->getPropertyValue())
-                => $this->createPropertyTransfer($content->getPropertyName(), ObjectTypeEnum::ITERABLE->value),
-
             default => throw new DefinitionGeneratorException(
                 sprintf(
                     'Property "%s" type "%s" is not supported.',
@@ -54,7 +52,7 @@ readonly class BuildInTypeBuilderExpander implements BuilderExpanderInterface
     {
         $propertyTransfer = new DefinitionPropertyTransfer();
         $propertyTransfer->propertyName = $propertyName;
-        $propertyTransfer->buildInType = $buildInType;
+        $propertyTransfer->buildInType = BuildInTypeEnum::from($buildInType);
 
         return $propertyTransfer;
     }

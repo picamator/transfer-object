@@ -21,27 +21,12 @@ enum BuildInTypeEnum: string
     case CALLABLE = 'callable';
 
     private const array NOT_ALLOWED = [
-        self::ITERABLE->value,
-        self::NULL->value,
-        self::OBJECT->value,
-        self::MIXED->value,
-        self::CALLABLE->value,
+        self::ITERABLE,
+        self::NULL,
+        self::OBJECT,
+        self::MIXED,
+        self::CALLABLE,
     ];
-
-    public static function isArray(string $type): bool
-    {
-        return self::ARRAY->value === $type;
-    }
-
-    public static function isArrayObject(string $type): bool
-    {
-        return self::ARRAY_OBJECT->value === $type;
-    }
-
-    public static function isBuildInType(string $type): bool
-    {
-        return self::tryFrom($type) !== null;
-    }
 
     public static function getTrueFalse(bool $value): self
     {
@@ -52,8 +37,18 @@ enum BuildInTypeEnum: string
         return self::FALSE;
     }
 
-    public static function isAllowed(string $type): bool
+    public function isArray(): bool
     {
-        return !in_array($type, self::NOT_ALLOWED, true);
+        return $this === self::ARRAY;
+    }
+
+    public function isArrayObject(): bool
+    {
+        return $this === self::ARRAY_OBJECT;
+    }
+
+    public function isAllowed(): bool
+    {
+        return !in_array($this, self::NOT_ALLOWED, true);
     }
 }

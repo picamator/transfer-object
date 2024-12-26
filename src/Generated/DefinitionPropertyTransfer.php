@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Generated;
 
+use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
+use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
 
 /**
  * Specification:
@@ -24,11 +26,12 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     ];
 
     // buildInType
+    #[EnumPropertyTypeAttribute(BuildInTypeEnum::class)]
     public const string BUILD_IN_TYPE = 'buildInType';
     protected const string BUILD_IN_TYPE_DATA_NAME = 'BUILD_IN_TYPE';
     protected const int BUILD_IN_TYPE_DATA_INDEX = 0;
 
-    public ?string $buildInType {
+    public ?BuildInTypeEnum $buildInType {
         get => $this->_data[self::BUILD_IN_TYPE_DATA_INDEX];
         set => $this->_data[self::BUILD_IN_TYPE_DATA_INDEX] = $value;
     }

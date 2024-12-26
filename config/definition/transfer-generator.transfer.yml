@@ -22,7 +22,7 @@ DefinitionProperty:
   propertyName:
     type: string
   buildInType:
-    type: string
+    enumType: '\Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum'
   transferType:
     type: string
   collectionType:

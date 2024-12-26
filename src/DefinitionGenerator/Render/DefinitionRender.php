@@ -29,7 +29,7 @@ START;
         foreach ($contentTransfer->properties as $propertyTransfer) {
             $content .= match (true) {
                 $propertyTransfer->buildInType !== null
-                    => $this->renderType($propertyTransfer->propertyName, $propertyTransfer->buildInType),
+                    => $this->renderType($propertyTransfer->propertyName, $propertyTransfer->buildInType->value),
 
                 $propertyTransfer->transferType !== null
                     => $this->renderType($propertyTransfer->propertyName, $propertyTransfer->transferType),

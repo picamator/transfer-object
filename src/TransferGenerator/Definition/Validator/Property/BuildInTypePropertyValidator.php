@@ -22,7 +22,7 @@ readonly class BuildInTypePropertyValidator implements PropertyValidatorInterfac
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
-        if (BuildInTypeEnum::isAllowed($propertyTransfer->buildInType)) {
+        if ($propertyTransfer->buildInType?->isAllowed()) {
             return $this->createSuccessMessageTransfer();
         }
 
@@ -36,7 +36,7 @@ readonly class BuildInTypePropertyValidator implements PropertyValidatorInterfac
         return sprintf(
             self::UNSUPPORTED_PROPERTY_TYPE_ERROR_MESSAGE_TEMPLATE,
             $propertyTransfer->propertyName,
-            $propertyTransfer->buildInType ?? '',
+            $propertyTransfer->buildInType->value ?? '',
         );
     }
 }

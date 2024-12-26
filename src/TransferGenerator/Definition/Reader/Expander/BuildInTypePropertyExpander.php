@@ -24,17 +24,15 @@ readonly class BuildInTypePropertyExpander implements PropertyExpanderInterface
     /**
      * @param array<string,string|bool> $propertyType
      */
-    private function getType(array $propertyType): ?string
+    private function getType(array $propertyType): ?BuildInTypeEnum
     {
         $type = $propertyType[self::TYPE_KEY] ?? null;
         if ($type === null) {
             return null;
         }
 
-        return match (true) {
-            is_bool($type) => BuildInTypeEnum::getTrueFalse($type)->value,
-            BuildInTypeEnum::isBuildInType($type) => $type,
-            default => null,
-        };
+        return is_bool($type)
+            ? BuildInTypeEnum::getTrueFalse($type)
+            : BuildInTypeEnum::tryFrom($type);
     }
 }
