@@ -15,11 +15,11 @@ final readonly class EnumPropertyTypeAttribute implements PropertyTypeAttributeI
     }
 
     /**
-     * @param string|int $data
+     * @param string|int|null $data
      */
     public function fromArray(mixed $data): ?BackedEnum
     {
-        if (!is_subclass_of($this->typeName, BackedEnum::class)) {
+        if ($data === null || !is_subclass_of($this->typeName, BackedEnum::class)) {
             return null;
         }
 
@@ -27,10 +27,10 @@ final readonly class EnumPropertyTypeAttribute implements PropertyTypeAttributeI
     }
 
     /**
-     * @param BackedEnum $data
+     * @param BackedEnum|null $data
      */
-    public function toArray(mixed $data): string|int
+    public function toArray(mixed $data): string|int|null
     {
-        return $data->value;
+        return $data?->value;
     }
 }

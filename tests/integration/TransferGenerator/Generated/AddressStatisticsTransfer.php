@@ -6,6 +6,7 @@ namespace Picamator\Tests\Integration\TransferObject\TransferGenerator\Generated
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
+use Picamator\TransferObject\Transfer\Attribute\ArrayObjectPropertyTypeAttribute;
 
 /**
  * Specification:
@@ -87,6 +88,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     }
 
     // orderReferences
+    #[ArrayObjectPropertyTypeAttribute()]
     public const string ORDER_REFERENCES = 'orderReferences';
     protected const string ORDER_REFERENCES_DATA_NAME = 'ORDER_REFERENCES';
     protected const int ORDER_REFERENCES_DATA_INDEX = 6;

@@ -16,13 +16,13 @@ final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttr
     }
 
     /**
-     * @param array<string,mixed> $data
+     * @param array<string|int,mixed>|null $data
      *
-     * @return \ArrayObject<string,\Picamator\TransferObject\Transfer\TransferInterface>
+     * @return \ArrayObject<string|int,\Picamator\TransferObject\Transfer\TransferInterface>
      */
     public function fromArray(mixed $data): ArrayObject
     {
-        $collectionData = array_map($this->createTransfer(...), $data);
+        $collectionData = array_map($this->createTransfer(...), $data ?? []);
 
         return new ArrayObject($collectionData);
     }

@@ -15,21 +15,25 @@ final readonly class PropertyTypeAttribute implements PropertyTypeAttributeInter
     }
 
     /**
-     * @param array<string,mixed> $data
+     * @param array<string,mixed>|null $data
      */
-    public function fromArray(mixed $data): TransferInterface
+    public function fromArray(mixed $data): ?TransferInterface
     {
+        if ($data === null) {
+            return null;
+        }
+
         return $this->createTransfer($data);
     }
 
     /**
-     * @param \Picamator\TransferObject\Transfer\TransferInterface $data
+     * @param \Picamator\TransferObject\Transfer\TransferInterface|null $data
      *
-     * @return array<int|string,mixed>
+     * @return array<int|string,mixed>|null
      */
-    public function toArray(mixed $data): array
+    public function toArray(mixed $data): ?array
     {
-        return $data->toArray();
+        return $data?->toArray();
     }
 
     /**

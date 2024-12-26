@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Transfer;
 
-use ArrayObject;
 use SplFixedArray;
 use Traversable;
 
 abstract class AbstractTransfer implements TransferInterface
 {
-    use PropertyTypeTrait;
+    use PropertyTypeTrait {
+        getConstantAttribute as private;
+        hasConstantAttribute as private;
+    }
 
     protected const int META_DATA_SIZE = 0;
 
@@ -86,16 +88,9 @@ abstract class AbstractTransfer implements TransferInterface
         $data = [];
         foreach (static::META_DATA as $metaKey => $metaName) {
             $dataItem = $this->{$metaKey};
-
-            $data[$metaKey] = match (true) {
-                $dataItem === null => null,
-
-                $this->hasConstantAttribute($metaName) => $this->getConstantAttribute($metaName)?->toArray($dataItem),
-
-                $dataItem instanceof ArrayObject => $dataItem->getArrayCopy(),
-
-                default => $dataItem,
-            };
+            $data[$metaKey] = $this->hasConstantAttribute($metaName)
+                ? $this->getConstantAttribute($metaName)?->toArray($dataItem)
+                : $dataItem;
         }
 
         return $data;
@@ -106,16 +101,9 @@ abstract class AbstractTransfer implements TransferInterface
         $this->initData();
         $data = array_intersect_key($data, static::META_DATA);
         foreach ($data as $key => $value) {
-            $this->{$key} = match (true) {
-                $value === null => null,
-
-                $this->hasConstantAttribute(static::META_DATA[$key])
-                    => $this->getConstantAttribute(static::META_DATA[$key])?->fromArray($value),
-
-                $this->isArrayObjectPropertyType($key) => new ArrayObject($value),
-
-                default => $value,
-            };
+            $this->{$key} = $this->hasConstantAttribute(static::META_DATA[$key])
+                ? $this->getConstantAttribute(static::META_DATA[$key])?->fromArray($value)
+                : $value;
         }
 
         return $this;

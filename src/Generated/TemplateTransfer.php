@@ -6,6 +6,7 @@ namespace Picamator\TransferObject\Generated;
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
+use Picamator\TransferObject\Transfer\Attribute\ArrayObjectPropertyTypeAttribute;
 
 /**
  * Specification:
@@ -29,6 +30,7 @@ final class TemplateTransfer extends AbstractTransfer
     ];
 
     // attributes
+    #[ArrayObjectPropertyTypeAttribute()]
     public const string ATTRIBUTES = 'attributes';
     protected const string ATTRIBUTES_DATA_NAME = 'ATTRIBUTES';
     protected const int ATTRIBUTES_DATA_INDEX = 0;
@@ -60,6 +62,7 @@ final class TemplateTransfer extends AbstractTransfer
     }
 
     // defaultValues
+    #[ArrayObjectPropertyTypeAttribute()]
     public const string DEFAULT_VALUES = 'defaultValues';
     protected const string DEFAULT_VALUES_DATA_NAME = 'DEFAULT_VALUES';
     protected const int DEFAULT_VALUES_DATA_INDEX = 3;
@@ -71,6 +74,7 @@ final class TemplateTransfer extends AbstractTransfer
     }
 
     // dockBlocks
+    #[ArrayObjectPropertyTypeAttribute()]
     public const string DOCK_BLOCKS = 'dockBlocks';
     protected const string DOCK_BLOCKS_DATA_NAME = 'DOCK_BLOCKS';
     protected const int DOCK_BLOCKS_DATA_INDEX = 4;
@@ -82,6 +86,7 @@ final class TemplateTransfer extends AbstractTransfer
     }
 
     // imports
+    #[ArrayObjectPropertyTypeAttribute()]
     public const string IMPORTS = 'imports';
     protected const string IMPORTS_DATA_NAME = 'IMPORTS';
     protected const int IMPORTS_DATA_INDEX = 5;
@@ -93,6 +98,7 @@ final class TemplateTransfer extends AbstractTransfer
     }
 
     // metaConstants
+    #[ArrayObjectPropertyTypeAttribute()]
     public const string META_CONSTANTS = 'metaConstants';
     protected const string META_CONSTANTS_DATA_NAME = 'META_CONSTANTS';
     protected const int META_CONSTANTS_DATA_INDEX = 6;
@@ -104,6 +110,7 @@ final class TemplateTransfer extends AbstractTransfer
     }
 
     // properties
+    #[ArrayObjectPropertyTypeAttribute()]
     public const string PROPERTIES = 'properties';
     protected const string PROPERTIES_DATA_NAME = 'PROPERTIES';
     protected const int PROPERTIES_DATA_INDEX = 7;

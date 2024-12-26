@@ -7,18 +7,17 @@ namespace Picamator\TransferObject\Transfer;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttributeInterface;
 use ReflectionAttribute;
 use ReflectionClassConstant;
-use ReflectionProperty;
 
 trait PropertyTypeTrait
 {
-    private function getConstantAttribute(string $constantName): ?PropertyTypeAttributeInterface
+    protected function getConstantAttribute(string $constantName): ?PropertyTypeAttributeInterface
     {
         $attributeReflection = $this->getConstantAttributeReflection($constantName);
 
         return $attributeReflection?->newInstance();
     }
 
-    private function hasConstantAttribute(string $constantName): bool
+    protected function hasConstantAttribute(string $constantName): bool
     {
         $attributeReflection = $this->getConstantAttributeReflection($constantName);
 
@@ -38,14 +37,5 @@ trait PropertyTypeTrait
         );
 
         return $attributeReflections[0] ?? null;
-    }
-
-    private function isArrayObjectPropertyType(string $propertyName): bool
-    {
-        $reflection = new ReflectionProperty(static::class, $propertyName);
-        /** @var \ReflectionNamedType|null $typeName */
-        $typeName = $reflection->getType();
-
-        return $typeName?->getName() === 'ArrayObject';
     }
 }
