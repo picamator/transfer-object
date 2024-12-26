@@ -37,8 +37,8 @@ RUN docker-php-ext-install curl
 # xdebug
 ARG ENABLE_XDEBUG=0
 
+RUN pecl install xdebug
 RUN if [ "$ENABLE_XDEBUG" = "1" ]; then \
-    pecl install xdebug && \
     docker-php-ext-enable xdebug && \
     echo "xdebug.max_nesting_level=1000" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
     echo "xdebug.mode=debug,coverage" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
