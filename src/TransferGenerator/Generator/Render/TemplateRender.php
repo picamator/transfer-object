@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 
 readonly class TemplateRender implements TemplateRenderInterface
 {
-    private const string TEMPLATE_PATH = __DIR__ . DIRECTORY_SEPARATOR . 'Template.tpl.php';
+    private const string TEMPLATE_PATH = __DIR__ . '/Template/Template.tpl.php';
 
     public function __construct(
         private TemplateBuilderInterface $templateBuilder,
