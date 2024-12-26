@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Transfer;
 
 use ArrayObject;
-use BackedEnum;
 use SplFixedArray;
 use Traversable;
 
@@ -89,11 +88,12 @@ abstract class AbstractTransfer implements TransferInterface
             $dataItem = $this->{$metaKey};
 
             $data[$metaKey] = match (true) {
-                $dataItem instanceof TransferInterface => $dataItem->toArray(),
-                $dataItem instanceof ArrayObject || $dataItem instanceof BackedEnum
-                    => $this->getPropertyTypeAttribute(className: static::class, constantName: $metaName)
-                        ?->toArray($dataItem) ?? $dataItem,
-                $dataItem instanceof Traversable => iterator_to_array($dataItem),
+                $dataItem === null => null,
+
+                $this->hasConstantAttribute($metaName) => $this->getConstantAttribute($metaName)?->toArray($dataItem),
+
+                $dataItem instanceof ArrayObject => $dataItem->getArrayCopy(),
+
                 default => $dataItem,
             };
         }
@@ -104,15 +104,18 @@ abstract class AbstractTransfer implements TransferInterface
     final public function fromArray(array $data): static
     {
         $this->initData();
+        $data = array_intersect_key($data, static::META_DATA);
         foreach ($data as $key => $value) {
-            if (!isset(static::META_DATA[$key])) {
-                continue;
-            }
+            $this->{$key} = match (true) {
+                $value === null => null,
 
-            $this->{$key} = $this->getPropertyTypeAttribute(
-                className: static::class,
-                constantName: static::META_DATA[$key]
-            )?->fromArray($value) ?? $value;
+                $this->hasConstantAttribute(static::META_DATA[$key])
+                    => $this->getConstantAttribute(static::META_DATA[$key])?->fromArray($value),
+
+                $this->isArrayObjectPropertyType($key) => new ArrayObject($value),
+
+                default => $value,
+            };
         }
 
         return $this;

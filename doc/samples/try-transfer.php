@@ -58,6 +58,7 @@ $agentTransfer = new AgentTransfer()
                 MerchantTransfer::IS_ACTIVE => true,
             ],
         ],
+        'uuid' => '123-123-123-123',
     ]);
 
 var_dump($agentTransfer->toArray());

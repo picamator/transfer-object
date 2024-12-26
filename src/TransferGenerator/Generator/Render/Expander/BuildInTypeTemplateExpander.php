@@ -38,13 +38,6 @@ readonly class BuildInTypeTemplateExpander implements TemplateExpanderInterface
         if (BuildInTypeEnum::isArray($propertyTransfer->buildInType)) {
             $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY->value;
             $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY->value;
-
-            return;
-        }
-
-        if (BuildInTypeEnum::isIterable($propertyTransfer->buildInType)) {
-            $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY->value;
-            $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ITERABLE->value;
         }
     }
 }

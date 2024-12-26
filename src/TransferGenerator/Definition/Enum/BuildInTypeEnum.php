@@ -21,6 +21,7 @@ enum BuildInTypeEnum: string
     case CALLABLE = 'callable';
 
     private const array NOT_ALLOWED = [
+        self::ITERABLE->value,
         self::NULL->value,
         self::OBJECT->value,
         self::MIXED->value,
@@ -35,11 +36,6 @@ enum BuildInTypeEnum: string
     public static function isArrayObject(string $type): bool
     {
         return self::ARRAY_OBJECT->value === $type;
-    }
-
-    public static function isIterable(string $type): bool
-    {
-        return self::ITERABLE->value === $type;
     }
 
     public static function isBuildInType(string $type): bool

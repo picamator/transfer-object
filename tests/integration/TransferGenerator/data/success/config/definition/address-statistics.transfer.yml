@@ -9,8 +9,6 @@ AddressStatistics:
     type: float
   orderReferences:
     type: ArrayObject
-  groupedLabels:
-    type: iterable
   isBlocked:
     type: false
   isActive:

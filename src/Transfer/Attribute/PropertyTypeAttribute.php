@@ -23,13 +23,13 @@ final readonly class PropertyTypeAttribute implements PropertyTypeAttributeInter
     }
 
     /**
-     * @param \ArrayObject<string|int,mixed> $data
+     * @param \Picamator\TransferObject\Transfer\TransferInterface $data
      *
      * @return array<int|string,mixed>
      */
     public function toArray(mixed $data): array
     {
-        return $data->getArrayCopy();
+        return $data->toArray();
     }
 
     /**

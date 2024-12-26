@@ -14,12 +14,11 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  */
 final class AddressStatisticsTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 8;
+    protected const int META_DATA_SIZE = 7;
 
     protected const array META_DATA = [
         self::ADDRESS_BOOK_UUID => self::ADDRESS_BOOK_UUID_DATA_NAME,
         self::ADDRESS_UUID => self::ADDRESS_UUID_DATA_NAME,
-        self::GROUPED_LABELS => self::GROUPED_LABELS_DATA_NAME,
         self::IS_ACTIVE => self::IS_ACTIVE_DATA_NAME,
         self::IS_BLOCKED => self::IS_BLOCKED_DATA_NAME,
         self::ORDER_AVERAGE => self::ORDER_AVERAGE_DATA_NAME,
@@ -47,21 +46,10 @@ final class AddressStatisticsTransfer extends AbstractTransfer
         set => $this->_data[self::ADDRESS_UUID_DATA_INDEX] = $value;
     }
 
-    // groupedLabels
-    public const string GROUPED_LABELS = 'groupedLabels';
-    protected const string GROUPED_LABELS_DATA_NAME = 'GROUPED_LABELS';
-    protected const int GROUPED_LABELS_DATA_INDEX = 2;
-
-    /** @var iterable<mixed> */
-    public iterable $groupedLabels {
-        get => $this->_data[self::GROUPED_LABELS_DATA_INDEX] ?? [];
-        set => $this->_data[self::GROUPED_LABELS_DATA_INDEX] = $value;
-    }
-
     // isActive
     public const string IS_ACTIVE = 'isActive';
     protected const string IS_ACTIVE_DATA_NAME = 'IS_ACTIVE';
-    protected const int IS_ACTIVE_DATA_INDEX = 3;
+    protected const int IS_ACTIVE_DATA_INDEX = 2;
 
     public ?true $isActive {
         get => $this->_data[self::IS_ACTIVE_DATA_INDEX];
@@ -71,7 +59,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     // isBlocked
     public const string IS_BLOCKED = 'isBlocked';
     protected const string IS_BLOCKED_DATA_NAME = 'IS_BLOCKED';
-    protected const int IS_BLOCKED_DATA_INDEX = 4;
+    protected const int IS_BLOCKED_DATA_INDEX = 3;
 
     public ?false $isBlocked {
         get => $this->_data[self::IS_BLOCKED_DATA_INDEX];
@@ -81,7 +69,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     // orderAverage
     public const string ORDER_AVERAGE = 'orderAverage';
     protected const string ORDER_AVERAGE_DATA_NAME = 'ORDER_AVERAGE';
-    protected const int ORDER_AVERAGE_DATA_INDEX = 5;
+    protected const int ORDER_AVERAGE_DATA_INDEX = 4;
 
     public ?float $orderAverage {
         get => $this->_data[self::ORDER_AVERAGE_DATA_INDEX];
@@ -91,7 +79,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     // orderCount
     public const string ORDER_COUNT = 'orderCount';
     protected const string ORDER_COUNT_DATA_NAME = 'ORDER_COUNT';
-    protected const int ORDER_COUNT_DATA_INDEX = 6;
+    protected const int ORDER_COUNT_DATA_INDEX = 5;
 
     public ?int $orderCount {
         get => $this->_data[self::ORDER_COUNT_DATA_INDEX];
@@ -101,7 +89,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     // orderReferences
     public const string ORDER_REFERENCES = 'orderReferences';
     protected const string ORDER_REFERENCES_DATA_NAME = 'ORDER_REFERENCES';
-    protected const int ORDER_REFERENCES_DATA_INDEX = 7;
+    protected const int ORDER_REFERENCES_DATA_INDEX = 6;
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $orderReferences {
