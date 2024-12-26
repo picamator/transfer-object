@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator\Render;
 
+use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 
 readonly class DefinitionRender implements DefinitionRenderInterface
@@ -36,7 +37,12 @@ START;
                 $propertyTransfer->collectionType !== null
                     => $this->renderCollectionType($propertyTransfer->propertyName, $propertyTransfer->collectionType),
 
-                default => '',
+                default => throw new DefinitionGeneratorException(
+                    sprintf(
+                        'Fail build definition content "%s". Unknown property type.',
+                        $contentTransfer->jsonSerialize(),
+                    ),
+                ),
             } . PHP_EOL;
         }
 

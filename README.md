@@ -64,7 +64,7 @@ See example configuration file [generator.config.yml](/doc/samples/config/genera
 Definition Files
 ----------------
 
-Details about the definition files can be found on the [Definition Wiki](https://github.com/picamator/transfer-object/wiki/Definition).
+Details about the definition files can be found on the [Definition Wiki](https://github.com/picamator/transfer-object/wiki/Definition-File).
 See example definition files [here](/doc/samples/config/definition).
 
 Development Environment
