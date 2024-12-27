@@ -10,7 +10,7 @@ if (file_exists(__DIR__ . '/../autoload.php')) {
 use Picamator\TransferObject\Command\TransferGeneratorCommand;
 use Symfony\Component\Console\Application;
 
-$application = new Application(name:'Transfer Object Generator', version:'latest');
+$application = new Application(name:'TransferObject', version:'current');
 $command = new TransferGeneratorCommand();
 
 $application->add($command);
