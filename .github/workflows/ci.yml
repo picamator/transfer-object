@@ -30,6 +30,6 @@ jobs:
       - name: Run PHPUnit
         uses: php-actions/phpunit@v4
         env:
-          PROJECT_ROOT: ${{ github.workspace }}
+          PROJECT_ROOT: "/app"
         with:
           php_version: "8.4"
