@@ -40,11 +40,11 @@ abstract class AbstractTransfer implements TransferInterface
     }
 
     /**
-     * @throws \JsonException
+     * @return array<string,mixed>
      */
-    final public function jsonSerialize(): string
+    final public function jsonSerialize(): array
     {
-        return json_encode($this->toArray(), flags: JSON_THROW_ON_ERROR);
+        return $this->toArray();
     }
 
     final public function serialize(): string
@@ -100,6 +100,7 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->initData();
         $data = array_intersect_key($data, static::META_DATA);
+        $data = array_filter($data, fn(mixed $item): bool => $item !== null);
         foreach ($data as $key => $value) {
             $this->{$key} = $this->hasConstantAttribute(static::META_DATA[$key])
                 ? $this->getConstantAttribute(static::META_DATA[$key])?->fromArray($value)

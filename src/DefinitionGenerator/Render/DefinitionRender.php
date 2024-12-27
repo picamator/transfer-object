@@ -40,7 +40,7 @@ START;
                 default => throw new DefinitionGeneratorException(
                     sprintf(
                         'Fail build definition content "%s". Unknown property type.',
-                        $contentTransfer->jsonSerialize(),
+                        var_export($contentTransfer, true),
                     ),
                 ),
             } . PHP_EOL;

@@ -14,6 +14,7 @@ enum BuildInTypeEnum: string
     case STRING = 'string';
     case ARRAY = 'array';
     case ARRAY_OBJECT = 'ArrayObject';
+
     case ITERABLE = 'iterable';
     case NULL = 'null';
     case OBJECT = 'object';

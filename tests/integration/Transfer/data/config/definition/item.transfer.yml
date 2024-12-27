@@ -1,0 +1,19 @@
+Item:
+  iAmBool:
+    type: bool
+  iAmTrue:
+    type: true
+  iAmFalse:
+    type: false
+  iAmInt:
+    type: int
+  iAmFloat:
+    type: float
+  iAmString:
+    type: string
+  iAmArray:
+    type: array
+  iAmArrayObject:
+    type: ArrayObject
+  iAmEnum:
+    enumType: '\Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum'
