@@ -23,6 +23,7 @@ readonly class ConfigLoaderFactory
     public function createConfigLoader(): ConfigLoaderInterface
     {
         return new ConfigLoader(
+            $this->createFilesystem(),
             $this->createYmlParser(),
             $this->createConfigValidator(),
         );

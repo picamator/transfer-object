@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Config\Loader\Loader;
 
+use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Picamator\TransferObject\Generated\ConfigTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
@@ -14,7 +15,10 @@ readonly class ConfigLoader implements ConfigLoaderInterface
 {
     private const string CONFIG_SECTION_KEY = 'generator';
 
+    private const string CONFIG_FILE_DOS_NOT_EXIST_ERROR_MESSAGE = 'Config file "%s" does not exist.';
+
     public function __construct(
+        private FilesystemInterface $filesystem,
         private YmlParserInterface $parser,
         private ConfigValidatorInterface $validator,
     ) {
@@ -22,6 +26,10 @@ readonly class ConfigLoader implements ConfigLoaderInterface
 
     public function loadConfig(string $configPath): ValidatorMessageTransfer
     {
+        if (!$this->filesystem->exists($configPath)) {
+            return $this->createErrorMessageTransfer($configPath);
+        }
+
         $configContent = $this->parser->parseFile($configPath);
         $configTransfer = $this->createConfigTransfer($configContent);
 
@@ -42,5 +50,14 @@ readonly class ConfigLoader implements ConfigLoaderInterface
         $configSection = array_filter($configSection, fn(mixed $configItem): bool => is_string($configItem));
 
         return new ConfigTransfer()->fromArray($configSection);
+    }
+
+    private function createErrorMessageTransfer(string $configPath): ValidatorMessageTransfer
+    {
+        $messageTransfer = new ValidatorMessageTransfer();
+        $messageTransfer->errorMessage = sprintf(self::CONFIG_FILE_DOS_NOT_EXIST_ERROR_MESSAGE, $configPath);
+        $messageTransfer->isValid = false;
+
+        return $messageTransfer;
     }
 }
