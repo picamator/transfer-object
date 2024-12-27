@@ -20,22 +20,6 @@ readonly class TransferGenerator implements TransferGeneratorInterface
     ) {
     }
 
-    public function generateTransfers(callable $handleCallback): bool
-    {
-        $generatorFiber = new Fiber($this->fiberCallback(...));
-
-        $generatorFiber->start();
-        while (!$generatorFiber->isTerminated()) {
-            /** @var \Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer|null $generatorTransfer */
-            $generatorTransfer = $generatorFiber->resume();
-            if ($generatorTransfer?->validator?->isValid === false) {
-                $handleCallback($generatorTransfer);
-            }
-        }
-
-        return $generatorFiber->getReturn();
-    }
-
     public function getTransferGeneratorFiber(): Fiber
     {
         return new Fiber($this->fiberCallback(...));
