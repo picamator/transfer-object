@@ -1,6 +1,7 @@
 Transfer Object Generator
 ==========================
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![development workflow](https:///github.com/picamator/transfer-object/actions/workflows/ci.yml/badge.svg?event=push)
 
 The Transfer Object (TO) Generator builds Transfer Objects based on `YML` definitions.
 
