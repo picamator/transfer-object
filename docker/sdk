@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 DOCKER_CONTAINER_NAME=transfer-object-php
+PROJECT_ROOT="/home/transfer/transfer-object"
 
 function show_usage() {
   echo "==================================="
@@ -76,10 +77,10 @@ case $1 in
     docker exec -i $DOCKER_CONTAINER_NAME composer captainhook $2
     ;;
   to-generate)
-     docker exec -i $DOCKER_CONTAINER_NAME composer  generate-transfer -- -c /home/transfer/transfer-object/config/generator.config.yml
+     docker exec -i $DOCKER_CONTAINER_NAME composer  generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
     ;;
   to-samples-generate)
-     docker exec -i $DOCKER_CONTAINER_NAME composer generate-transfer -- -c /home/transfer/transfer-object/doc/samples/config/generator.config.yml
+     docker exec -i $DOCKER_CONTAINER_NAME composer generate-transfer -- -c ${PROJECT_ROOT}/doc/samples/config/generator.config.yml
     ;;
   *)
     show_usage

@@ -8,6 +8,7 @@ use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
+$projectRoot = getenv('PROJECT_ROOT') ?: '';
 
 echo <<<'STORY'
 ======================================
@@ -68,7 +69,7 @@ echo <<<'STORY'
 STORY;
 $generatorTransfer = new DefinitionGeneratorTransfer()
     ->fromArray([
-        DefinitionGeneratorTransfer::DEFINITION_PATH => '/home/transfer/transfer-object/doc/samples/config/definition',
+        DefinitionGeneratorTransfer::DEFINITION_PATH => $projectRoot . '/doc/samples/config/definition',
         DefinitionGeneratorTransfer::CONTENT => [
             DefinitionGeneratorContentTransfer::CLASS_NAME => 'Product',
             DefinitionGeneratorContentTransfer::CONTENT => $productData,

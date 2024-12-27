@@ -51,5 +51,8 @@ RUN if [ "$ENABLE_XDEBUG" = "1" ]; then \
 # switch user
 USER transfer
 
+# environemnt
+ENV PROJECT_ROOT="/home/transfer/transfer-object"
+
 # workaround to keep container running
 CMD ["tail", "-f", "/dev/null"]

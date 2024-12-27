@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Render;
 
+use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
@@ -26,6 +27,7 @@ class TemplateRenderTest extends TestCase
         $this->render = new TemplateRender($this->builderMock);
     }
 
+    #[WithoutErrorHandler]
     public function testTemplateTransferKeyMismatchShouldThrowException(): void
     {
         // Arrange

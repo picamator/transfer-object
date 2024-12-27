@@ -6,6 +6,9 @@ jobs:
   phpstan-phpcs-phpunit:
     runs-on: ubuntu-latest
 
+    env:
+      PROJECT_ROOT: ${GITHUB_WORKSPACE}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4

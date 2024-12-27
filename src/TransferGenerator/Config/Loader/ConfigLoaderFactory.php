@@ -11,6 +11,8 @@ use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\Loader\ConfigLoader;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\Loader\ConfigLoaderInterface;
+use Picamator\TransferObject\TransferGenerator\Config\Loader\Reader\ConfigReader;
+use Picamator\TransferObject\TransferGenerator\Config\Loader\Reader\ConfigReaderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigValidator;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\DefinitionPathConfigValidator;
@@ -25,7 +27,7 @@ readonly class ConfigLoaderFactory
     {
         return new ConfigLoader(
             $this->createFilesystem(),
-            $this->createYmlParser(),
+            $this->createConfigReader(),
             $this->createConfigValidator(),
         );
     }
@@ -65,6 +67,11 @@ readonly class ConfigLoaderFactory
     protected function createRequiredConfigValidator(): ConfigValidatorInterface
     {
         return new RequiredConfigValidator();
+    }
+
+    protected function createConfigReader(): ConfigReaderInterface
+    {
+        return new ConfigReader($this->createYmlParser());
     }
 
     protected function createYmlParser(): YmlParserInterface
