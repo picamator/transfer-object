@@ -33,6 +33,9 @@ $productData = [
         'isRegional' => true,
     ],
     'stores' => ['DE', 'AT'],
+    'labels' => new ArrayObject([
+       'sale' => 'Sale',
+    ]),
     'availabilities' => [
         '2024-12-25' => [
             'total' => 100,

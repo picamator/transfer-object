@@ -17,6 +17,8 @@ Product:
     type: Details
   stores:
     type: array
+  labels:
+    type: ArrayObject
   availabilities:
     collectionType: Availabilities
   measurementUnit:
