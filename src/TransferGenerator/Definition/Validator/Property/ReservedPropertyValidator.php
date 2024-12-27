@@ -22,7 +22,7 @@ readonly class ReservedPropertyValidator implements PropertyValidatorInterface
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
-        if (!ReservedPropertyEnum::tryFrom($propertyTransfer->propertyName)) {
+        if (!ReservedPropertyEnum::isReserved($propertyTransfer->propertyName)) {
             return $this->createSuccessMessageTransfer();
         }
 

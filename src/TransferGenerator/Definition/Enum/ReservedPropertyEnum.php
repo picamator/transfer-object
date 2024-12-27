@@ -8,8 +8,8 @@ enum ReservedPropertyEnum: string
 {
     case _DATA = '_data';
 
-    public static function isReserved(string $type): bool
+    public static function isReserved(string $propertyName): bool
     {
-        return self::tryFrom($type) !== null;
+        return self::tryFrom($propertyName) !== null;
     }
 }
