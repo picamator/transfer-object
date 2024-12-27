@@ -10,6 +10,7 @@ use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
+use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBasicEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemCollectionTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer;
 
@@ -84,6 +85,39 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
                         ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
                         ItemTransfer::I_AM_ENUM => ImBackedEnum::SOME_CASE->value,
+                    ]
+                ],
+            ],
+        ];
+
+        yield 'all transfer object properties are set backed enum has basic enum should resolve as null' => [
+            [
+                ItemCollectionTransfer::ITEMS => [
+                    [
+                        ItemTransfer::I_AM_BOOL => true,
+                        ItemTransfer::I_AM_TRUE => true,
+                        ItemTransfer::I_AM_FALSE => false,
+                        ItemTransfer::I_AM_INT => 1,
+                        ItemTransfer::I_AM_FLOAT => 0.1,
+                        ItemTransfer::I_AM_STRING => 'test string',
+                        ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
+                        ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
+                        ItemTransfer::I_AM_ENUM => ImBasicEnum::SOMETHING,
+                    ]
+                ],
+            ],
+            [
+                ItemCollectionTransfer::ITEMS => [
+                    [
+                        ItemTransfer::I_AM_BOOL => true,
+                        ItemTransfer::I_AM_TRUE => true,
+                        ItemTransfer::I_AM_FALSE => false,
+                        ItemTransfer::I_AM_INT => 1,
+                        ItemTransfer::I_AM_FLOAT => 0.1,
+                        ItemTransfer::I_AM_STRING => 'test string',
+                        ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
+                        ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
+                        ItemTransfer::I_AM_ENUM => null,
                     ]
                 ],
             ],

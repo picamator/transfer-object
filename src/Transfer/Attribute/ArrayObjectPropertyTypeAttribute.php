@@ -11,13 +11,13 @@ use Attribute;
 final readonly class ArrayObjectPropertyTypeAttribute implements PropertyTypeAttributeInterface
 {
     /**
-     * @param array<string|int,mixed>|null $data
+     * @param array<string|int,mixed> $data
      *
      * @return \ArrayObject<string|int,mixed>
      */
     public function fromArray(mixed $data): ArrayObject
     {
-        return new ArrayObject($data ?? []);
+        return new ArrayObject($data);
     }
 
     /**
