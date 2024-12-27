@@ -23,7 +23,7 @@ class DefinitionGeneratorFacadeTest extends TestCase
     private const string SAMPLE_JSON_PATH = __DIR__ . '/data/json-samples/';
     private const string DEFINITION_PATH = __DIR__ . '/data/config/definition';
 
-    private const string TRANSFER_OBJECT_GENERATOR_CONFIG_PATH = __DIR__ . '/data/config/generator.config.yml';
+    private const string CONFIG_PATH = __DIR__ . '/data/config/generator.config.yml';
 
     private DefinitionGeneratorFacadeInterface $definitionGeneratorFacade;
 
@@ -78,7 +78,7 @@ class DefinitionGeneratorFacadeTest extends TestCase
     public function testGenerateTransferBasedOnDefinitionShouldSuccessfullyGenerateTransferObjects(): void
     {
         // Arrange
-        $messageTransfer = $this->loadConfig(self::TRANSFER_OBJECT_GENERATOR_CONFIG_PATH);
+        $messageTransfer = $this->loadConfig(self::CONFIG_PATH);
         $this->assertTrue($messageTransfer->isValid, $messageTransfer->errorMessage ?? '');
 
         // Act

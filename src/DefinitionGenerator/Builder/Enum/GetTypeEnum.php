@@ -16,33 +16,21 @@ enum GetTypeEnum: string
 
     public function isNull(): bool
     {
-        return match ($this) {
-            GetTypeEnum::null => true,
-            default => false,
-        };
+        return $this === GetTypeEnum::null;
     }
 
     public function isString(): bool
     {
-        return match ($this) {
-            GetTypeEnum::string => true,
-            default => false,
-        };
+        return $this === GetTypeEnum::string;
     }
 
     public function isObject(): bool
     {
-        return match ($this) {
-            GetTypeEnum::object => true,
-            default => false,
-        };
+        return $this === GetTypeEnum::object;
     }
 
     public function isArray(): bool
     {
-        return match ($this) {
-            GetTypeEnum::array => true,
-            default => false,
-        };
+        return $this === GetTypeEnum::array;
     }
 }

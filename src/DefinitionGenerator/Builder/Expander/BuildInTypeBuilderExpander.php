@@ -30,19 +30,18 @@ readonly class BuildInTypeBuilderExpander implements BuilderExpanderInterface
             $content->getType()->isNull() || $content->getType()->isString()
                 => $this->createPropertyTransfer($content->getPropertyName(), GetTypeEnum::string->name),
 
-            !$content->getType()->isObject()
-                => $this->createPropertyTransfer($content->getPropertyName(), $content->getType()->name),
-
-            $content->getPropertyValue() instanceof ArrayObject
+            $content->getType()->isObject() && $content->getPropertyValue() instanceof ArrayObject
                 => $this->createPropertyTransfer($content->getPropertyName(), ObjectTypeEnum::ARRAY_OBJECT->value),
 
-            default => throw new DefinitionGeneratorException(
+            $content->getType()->isObject() => throw new DefinitionGeneratorException(
                 sprintf(
                     'Property "%s" type "%s" is not supported.',
                     $content->getPropertyName(),
                     get_class($content->getPropertyValue()),
                 ),
             ),
+
+            default => $this->createPropertyTransfer($content->getPropertyName(), $content->getType()->name),
         };
 
         $builderTransfer->definitionContent->properties[] = $propertyTransfer;

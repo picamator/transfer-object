@@ -11,7 +11,6 @@ trait DefinitionBuilderTrait
 {
     protected function createBuilderContent(string $propertyName, mixed $propertyValue): BuilderContentInterface
     {
-        $this->assertPropertyName($propertyName);
         $typeEnum = $this->getTypeEnum($propertyName, $propertyValue);
 
         return new readonly class ($typeEnum, $propertyName, $propertyValue) implements BuilderContentInterface
@@ -47,28 +46,16 @@ trait DefinitionBuilderTrait
     {
         $propertyType = gettype($propertyValue);
         $typeEnum = GetTypeEnum::tryFrom($propertyType);
-        if ($typeEnum === null) {
-            throw new DefinitionGeneratorException(
-                sprintf(
-                    'Property "%s" type "%s" is not supported.',
-                    $propertyName,
-                    $propertyType,
-                ),
-            );
+        if ($typeEnum !== null) {
+            return $typeEnum;
         }
 
-        return $typeEnum;
-    }
-
-    /**
-     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
-     */
-    private function assertPropertyName(int|string $propertyName): void
-    {
-        if (is_int($propertyName)) {
-            throw new DefinitionGeneratorException(
-                'Cannot generate definition based on integer indexes.'
-            );
-        }
+        throw new DefinitionGeneratorException(
+            sprintf(
+                'Property "%s" type "%s" is not supported.',
+                $propertyName,
+                $propertyType,
+            ),
+        );
     }
 }
