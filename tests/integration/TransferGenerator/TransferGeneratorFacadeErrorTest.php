@@ -53,6 +53,11 @@ class TransferGeneratorFacadeErrorTest extends TestCase
             'expectedMessage' => 'Invalid class "00-AddressStatistics" name.',
         ];
 
+        yield 'invalid property name should return error' => [
+            'configCaseName' => 'invalid-property-name',
+            'expectedMessage' => 'Invalid property "00-addressUuid" name.',
+        ];
+
         yield 'invalid collection type should return error' => [
             'configCaseName' => 'invalid-collection-type',
             'expectedMessage' => 'Invalid class "00Uuid" name.',
