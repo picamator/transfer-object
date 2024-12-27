@@ -17,3 +17,8 @@ vendor/
 .phpunit.result.cache
 .cs-check.json
 .env
+
+# project
+src/**/_tmp
+doc/samples/**/_tmp
+tests/**/_tmp
