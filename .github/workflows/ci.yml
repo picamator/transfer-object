@@ -15,17 +15,17 @@ jobs:
         with:
           php_version: "8.4"
 
-#      - name: Run PHPStan
-#        uses: php-actions/phpstan@v3
-#        with:
-#          php_version: "8.4"
-#          configuration: phpstan.neon
-#
-#      - name: Run PHPCS
-#        uses: php-actions/phpcs@v1
-#        with:
-#          php_version: "8.4"
-#          standard: phpcs.xml
+      - name: Run PHPStan
+        uses: php-actions/phpstan@v3
+        with:
+          php_version: "8.4"
+          configuration: phpstan.neon
+
+      - name: Run PHPCS
+        uses: php-actions/phpcs@v1
+        with:
+          php_version: "8.4"
+          standard: phpcs.xml
 
       - name: Run PHPUnit
         uses: php-actions/phpunit@v4
