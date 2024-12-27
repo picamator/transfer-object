@@ -14,6 +14,7 @@ use Picamator\TransferObject\TransferGenerator\Config\Loader\Loader\ConfigLoader
 use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigValidator;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\DefinitionPathConfigValidator;
+use Picamator\TransferObject\TransferGenerator\Config\Validator\TransferNamespaceConfigValidator;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\RequiredConfigValidator;
 
 readonly class ConfigLoaderFactory
@@ -42,7 +43,13 @@ readonly class ConfigLoaderFactory
         return new ArrayObject([
             $this->createRequiredConfigValidator(),
             $this->createDefinitionPathConfigValidator(),
+            $this->createTransferNamespaceConfigValidator(),
         ]);
+    }
+
+    protected function createTransferNamespaceConfigValidator(): ConfigValidatorInterface
+    {
+        return new TransferNamespaceConfigValidator();
     }
 
     protected function createDefinitionPathConfigValidator(): ConfigValidatorInterface

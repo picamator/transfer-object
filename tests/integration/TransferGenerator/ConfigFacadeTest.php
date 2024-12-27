@@ -40,10 +40,12 @@ class ConfigFacadeTest extends TestCase
      */
     public static function invalidConfigDataProvider(): Generator
     {
+        yield 'config file does not exist' => ['config-file-does-not-exist.config.yml'];
+
         yield 'missed required keys' => ['missed-required-keys.config.yml'];
 
         yield 'definition path is not exist' => ['definition-path-is-not-exist.config.yml'];
 
-        yield 'config file does not exist' => ['config-file-does-not-exist.config.yml'];
+        yield 'invalid namespace' => ['invalid-transfer-namespace.config.yml'];
     }
 }
