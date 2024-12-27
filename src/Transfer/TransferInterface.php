@@ -7,12 +7,11 @@ namespace Picamator\TransferObject\Transfer;
 use Countable;
 use IteratorAggregate;
 use JsonSerializable;
-use Serializable;
 
 /**
  * @extends \IteratorAggregate<string, mixed>
  */
-interface TransferInterface extends IteratorAggregate, JsonSerializable, Serializable, Countable
+interface TransferInterface extends IteratorAggregate, JsonSerializable, Countable
 {
     /**
      * @return array<string,mixed>

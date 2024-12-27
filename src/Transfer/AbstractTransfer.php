@@ -47,16 +47,6 @@ abstract class AbstractTransfer implements TransferInterface
         return $this->toArray();
     }
 
-    final public function serialize(): string
-    {
-        return serialize($this->_data);
-    }
-
-    final public function unserialize(string $data): void
-    {
-        $this->_data = unserialize($data);
-    }
-
     /**
      * @return array<string,SplFixedArray<mixed>>
      */
