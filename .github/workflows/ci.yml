@@ -1,35 +1,33 @@
 name: CI
 
-on:
-  push:
-    branches:
-      - 'release/rc-*'
-  pull_request:
-    branches:
-      - 'release/rc-*'
+on: [push]
 
 jobs:
-  test:
+  phpstan-phpcs-phpunit:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-          extensions: xdebug
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+        uses: php-actions/composer@v6
+        with:
+          php_version: "8.4"
 
       - name: Run PHPStan
-        run: vendor/bin/phpstan -c phpstan.neon
+        uses: php-actions/phpstan@v3
+        with:
+          php_version: "8.4"
+          configuration: phpstan.neon
 
       - name: Run PHPCS
-        run: vendor/bin/phpcs
+        uses: php-actions/phpcs@v1
+        with:
+          php_version: "8.4"
+          standard: phpcs.xml
 
-      - name: Run Unit Tests
-        run: vendor/bin/phpunit --coverage-text
+      - name: Run PHPUnit
+        uses: php-actions/phpunit@v4
+        with:
+          php_version: "8.4"
