@@ -8,5 +8,8 @@ use Picamator\TransferObject\Generated\ConfigContentTransfer;
 
 interface ConfigParserInterface
 {
+    /**
+     * @throws \Picamator\TransferObject\Dependency\Exception\YmlParserException
+     */
     public function parseConfig(string $configPath): ConfigContentTransfer;
 }

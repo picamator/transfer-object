@@ -6,8 +6,10 @@ namespace Picamator\TransferObject\TransferGenerator\Config\Reader;
 
 use Picamator\TransferObject\Generated\ConfigTransfer;
 use Picamator\TransferObject\Generated\ConfigValidatorTransfer;
+use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Parser\ConfigParserInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigValidatorInterface;
+use Throwable;
 
 readonly class ConfigReader implements ConfigReaderInterface
 {
@@ -18,6 +20,19 @@ readonly class ConfigReader implements ConfigReaderInterface
     }
 
     public function getConfig(string $configPath): ConfigTransfer
+    {
+        try {
+            return $this->handleGetConfig($configPath);
+        } catch (Throwable $e) {
+            return $this->createErrorConfigTransfer($e);
+        }
+    }
+
+    /**
+     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
+     * @throws \Picamator\TransferObject\Dependency\Exception\YmlParserException
+     */
+    private function handleGetConfig(string $configPath): ConfigTransfer
     {
         $validatorTransfer = $this->validator->validateFile($configPath);
         if (!$validatorTransfer->isValid) {
@@ -41,6 +56,21 @@ readonly class ConfigReader implements ConfigReaderInterface
     {
         $configTransfer = new ConfigTransfer();
         $configTransfer->validator = $validatorTransfer;
+
+        return $configTransfer;
+    }
+
+    private function createErrorConfigTransfer(Throwable $e): ConfigTransfer
+    {
+        $configTransfer = new ConfigTransfer();
+        $configTransfer->validator = new ConfigValidatorTransfer();
+
+        $configTransfer->validator->isValid = false;
+        $configTransfer->validator->errorMessages[] = new ValidatorMessageTransfer()
+            ->fromArray([
+                ValidatorMessageTransfer::IS_VALID => false,
+                ValidatorMessageTransfer::ERROR_MESSAGE => $e->getMessage(),
+            ]);
 
         return $configTransfer;
     }

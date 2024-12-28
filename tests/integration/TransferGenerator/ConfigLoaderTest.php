@@ -47,5 +47,7 @@ class ConfigLoaderTest extends TestCase
         yield 'definition path is not exist' => ['definition-path-is-not-exist.config.yml'];
 
         yield 'invalid namespace' => ['invalid-transfer-namespace.config.yml'];
+
+        yield 'invalid yml format' => ['invalid-yml-format.config.yml'];
     }
 }
