@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 
 use Fiber;
+use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderInterface;
 use Picamator\TransferObject\Generated\DefinitionTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer;
+use Throwable;
 
 readonly class TransferGenerator implements TransferGeneratorInterface
 {
@@ -26,7 +28,6 @@ readonly class TransferGenerator implements TransferGeneratorInterface
     }
 
     /**
-     * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
      * @throws \FiberError
      * @throws \Throwable
      */
@@ -35,18 +36,19 @@ readonly class TransferGenerator implements TransferGeneratorInterface
         $this->filesystem->createTempDir();
         Fiber::suspend();
 
-        $isValid = true;
+        $validCount = 0;
         $definitionGenerator = $this->definitionReader->getDefinitions();
         foreach ($definitionGenerator as $definitionKey => $definitionTransfer) {
-            $this->generateTransfer($definitionTransfer);
+            $definitionTransfer = $this->generateTransfer($definitionTransfer);
 
-            $isValid = $isValid && $definitionTransfer->validator?->isValid;
+            $validCount += (int)$definitionTransfer->validator?->isValid;
             $generatorTransfer = $this->createGeneratorTransfer($definitionKey, $definitionTransfer);
 
             Fiber::suspend($generatorTransfer);
         }
 
-        $isValid = $isValid && $definitionGenerator->getReturn() > 0;
+        $totalCount = $definitionGenerator->getReturn();
+        $isValid = $totalCount > 0 && $totalCount === $validCount;
         if ($isValid) {
             $this->filesystem->rotateTempDir();
         }
@@ -67,13 +69,26 @@ readonly class TransferGenerator implements TransferGeneratorInterface
         return $generatorTransfer;
     }
 
-    private function generateTransfer(DefinitionTransfer $definitionTransfer): void
+    private function generateTransfer(DefinitionTransfer $definitionTransfer): DefinitionTransfer
     {
         if (!$definitionTransfer->validator?->isValid) {
-            return;
+            return $definitionTransfer;
         }
 
-        $content = $this->renderer->renderTemplate($definitionTransfer->content);
-        $this->filesystem->writeFile($definitionTransfer->content->className, $content);
+        try {
+            $content = $this->renderer->renderTemplate($definitionTransfer->content);
+            $this->filesystem->writeFile($definitionTransfer->content->className, $content);
+
+            return $definitionTransfer;
+        } catch (Throwable $e) {
+            $definitionTransfer->validator->isValid = false;
+            $definitionTransfer->validator->errorMessages[] = new ValidatorMessageTransfer()
+                ->fromArray([
+                    ValidatorMessageTransfer::IS_VALID => false,
+                    ValidatorMessageTransfer::ERROR_MESSAGE => $e->getMessage(),
+                ]);
+
+            return $definitionTransfer;
+        }
     }
 }

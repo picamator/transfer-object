@@ -19,19 +19,17 @@ class GeneratorFilesystemTest extends TestCase
 
     private FilesystemInterface&MockObject $filesystemMock;
 
-    private FinderInterface&MockObject $finderMock;
-
     private ConfigInterface&MockObject $configMock;
 
     protected function setUp(): void
     {
         $this->filesystemMock = $this->createMock(FilesystemInterface::class);
-        $this->finderMock = $this->createMock(FinderInterface::class);
+        $finderMock = $this->createMock(FinderInterface::class);
         $this->configMock = $this->createMock(ConfigInterface::class);
 
         $this->generatorFilesystem = new GeneratorFilesystem(
             $this->filesystemMock,
-            $this->finderMock,
+            $finderMock,
             $this->configMock,
         );
     }

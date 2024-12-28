@@ -7,14 +7,21 @@ namespace Picamator\Tests\Integration\TransferObject\TransferGenerator;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use Picamator\Tests\Integration\TransferObject\Helper\CleanTmpHelperTrait;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 use Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer;
 
 class TransferGeneratorFacadeErrorTest extends TestCase
 {
     use TransferGeneratorHelperTrait;
+    use CleanTmpHelperTrait;
 
     private const string CONFIG_PATH_TEMPLATE = __DIR__ . '/data/error/%s/config/generator.config.yml';
+
+    protected function tearDown(): void
+    {
+        $this->deleteTmpDir(__DIR__ . '/Generated');
+    }
 
     #[DataProvider('invalidDefinitionDataProvider')]
     public function testGenerateTransferObjectByInvalidDefinitionShouldFail(
@@ -33,6 +40,34 @@ class TransferGeneratorFacadeErrorTest extends TestCase
             $this->assertFalse($generatorTransfer->validator->isValid);
             $this->assertCount(1, $generatorTransfer->validator->errorMessages);
             $this->assertSame($expectedMessage, $generatorTransfer->validator->errorMessages[0]->errorMessage);
+        };
+
+        // Act
+        $actual = $this->generateTransfers($callback);
+
+        // Assert
+        $this->assertFalse($actual);
+    }
+
+    public function testGenerateTransferObjectByDuplicateDefinitionShouldFail(): void
+    {
+        $configCaseName = 'duplicate-transfer';
+
+        // Arrange
+        $configPath = $this->getConfigPath($configCaseName);
+        $this->assertLoadConfigSuccess($configPath);
+
+        $callback = function (?TransferGeneratorCallbackTransfer $generatorTransfer): void {
+            if ($generatorTransfer === null || $generatorTransfer->validator->isValid) {
+                return;
+            }
+
+            $this->assertFalse($generatorTransfer->validator->isValid);
+            $this->assertCount(1, $generatorTransfer->validator->errorMessages);
+            $this->assertStringContainsString(
+                'File with the same name already exit.',
+                $generatorTransfer->validator->errorMessages[0]->errorMessage,
+            );
         };
 
         // Act

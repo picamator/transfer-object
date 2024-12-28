@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\Command;
 
 use PHPUnit\Framework\TestCase;
+use Picamator\Tests\Integration\TransferObject\Helper\CleanTmpHelperTrait;
 use Picamator\TransferObject\Command\TransferGeneratorCommand;
 use Symfony\Component\Console\Tester\CommandTester;
 
 class TransferGeneratorCommandTest extends TestCase
 {
+    use CleanTmpHelperTrait;
+
     private const string SUCCESS_CONFIG_PATH = __DIR__ . '/data/success/config/generator.config.yml';
-
     private const string ERROR_CONFIG_PATH = __DIR__ . '/data/error/config/generator.config.yml';
-
-    private const string GENERATED_TEMP_PATH = __DIR__ . '/Generated/_tmp';
 
     private CommandTester $commandTester;
 
@@ -27,9 +27,7 @@ class TransferGeneratorCommandTest extends TestCase
 
     protected function tearDown(): void
     {
-        if (is_dir(self::GENERATED_TEMP_PATH)) {
-            rmdir(self::GENERATED_TEMP_PATH);
-        }
+        $this->deleteTmpDir(__DIR__ . '/Generated');
     }
 
     public function testRunCommandWithoutConfigurationShouldShowErrorMessage(): void

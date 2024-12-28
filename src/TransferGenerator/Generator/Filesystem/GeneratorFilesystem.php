@@ -40,7 +40,9 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 
     public function writeFile(string $className, string $content): void
     {
-        $filePath = $this->getTemporaryPath() . DIRECTORY_SEPARATOR . sprintf(self::FILE_NAME_TEMPLATE, $className);
+        $filePath = $this->getTemporaryPath()
+            . DIRECTORY_SEPARATOR
+            . sprintf(self::FILE_NAME_TEMPLATE, $className);
         if ($this->filesystem->exists($filePath)) {
             throw new TransferGeneratorException(
                 sprintf('Cannot save file "%s". File with the same name already exit.', $filePath),
