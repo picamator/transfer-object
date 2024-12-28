@@ -45,7 +45,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
             . sprintf(self::FILE_NAME_TEMPLATE, $className);
         if ($this->filesystem->exists($filePath)) {
             throw new TransferGeneratorException(
-                sprintf('Cannot save file "%s". File with the same name already exit.', $filePath),
+                sprintf('Cannot save file "%s". A file with the same name already exists.', $filePath),
             );
         }
 

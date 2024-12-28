@@ -20,7 +20,7 @@ final readonly class YmlParserBridge implements YmlParserInterface
             return $this->ymlParser->parseFile($filename);
         } catch (Throwable $e) {
             throw new YmlParserException(
-                sprintf('Fail parse file "%s", error "%s".', $filename, $e->getMessage()),
+                sprintf('Failed to parse file "%s". Error: "%s".', $filename, $e->getMessage()),
                 previous: $e,
             );
         }
@@ -32,7 +32,7 @@ final readonly class YmlParserBridge implements YmlParserInterface
             return $this->ymlParser->parse($value);
         } catch (Throwable $e) {
             throw new YmlParserException(
-                sprintf('Fail parse string "%s", error "%s".', $value, $e->getMessage()),
+                sprintf('Failed to parse string "%s". Error: "%s".', $value, $e->getMessage()),
                 previous: $e,
             );
         }

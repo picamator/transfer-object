@@ -21,7 +21,7 @@ readonly final class FilesystemBridge implements FilesystemInterface
         } catch (Throwable $e) {
             throw new FilesystemException(
                 sprintf(
-                    'Fail to copy "%s" to "%s", error "%s".',
+                    'Failed to copy "%s" to "%s". Error: "%s".',
                     $originFile,
                     $targetFile,
                     $e->getMessage(),
@@ -37,7 +37,7 @@ readonly final class FilesystemBridge implements FilesystemInterface
             $this->filesystem->mkdir($dir);
         } catch (Throwable $e) {
             throw new FilesystemException(
-                sprintf('Fail to create directory "%s", error "%s".', $dir, $e->getMessage()),
+                sprintf('Failed to create directory "%s". Error: "%s".', $dir, $e->getMessage()),
                 previous: $e,
             );
         }
@@ -49,7 +49,7 @@ readonly final class FilesystemBridge implements FilesystemInterface
             return $this->filesystem->exists($file);
         } catch (Throwable $e) {
             throw new FilesystemException(
-                sprintf('Fail to check if file "%s" exists, error "%s".', $file, $e->getMessage()),
+                sprintf('Failed to check if file "%s" exists. Error: "%s".', $file, $e->getMessage()),
                 previous: $e,
             );
         }
@@ -68,7 +68,7 @@ readonly final class FilesystemBridge implements FilesystemInterface
             $filePlaceholder = is_string($files) ? $files : var_export($files, true);
 
             throw new FilesystemException(
-                sprintf('Fail to delete file(s) "%s", error "%s".', $filePlaceholder, $e->getMessage()),
+                sprintf('Failed to delete file(s) "%s". Error: "%s".', $filePlaceholder, $e->getMessage()),
                 previous: $e,
             );
         }
@@ -81,7 +81,7 @@ readonly final class FilesystemBridge implements FilesystemInterface
         } catch (Throwable $e) {
             throw new FilesystemException(
                 sprintf(
-                    'Fail to write content "%s" to file "%s", error "%s".',
+                    'Failed to write content to file "%s". Content: "%s". Error: "%s".',
                     $content,
                     $filename,
                     $e->getMessage(),
@@ -98,7 +98,7 @@ readonly final class FilesystemBridge implements FilesystemInterface
         } catch (Throwable $e) {
             throw new FilesystemException(
                 sprintf(
-                    'Fail to append content "%s" to file "%s", error "%s".',
+                    'Failed to append content to file "%s". Content: "%s". Error: "%s".',
                     $content,
                     $filename,
                     $e->getMessage(),

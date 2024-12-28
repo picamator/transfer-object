@@ -36,7 +36,7 @@ readonly class TemplateRender implements TemplateRenderInterface
 
         throw new TransferGeneratorException(
             sprintf(
-                'Template "%s" render error "%s", line "%s".',
+                'Template "%s" render error. Error: "%s", Line: "%s".',
                 self::TEMPLATE_PATH,
                 $lastError['message'] ?? '',
                 $lastError['line'] ?? '',

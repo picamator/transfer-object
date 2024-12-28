@@ -39,7 +39,7 @@ START;
 
                 default => throw new DefinitionGeneratorException(
                     sprintf(
-                        'Fail build definition content "%s". Unknown property type.',
+                        'Failed to build definition content for "%s". Unknown property type.',
                         var_export($contentTransfer, true),
                     ),
                 ),

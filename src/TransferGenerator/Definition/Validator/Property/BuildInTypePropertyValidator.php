@@ -13,7 +13,8 @@ readonly class BuildInTypePropertyValidator implements PropertyValidatorInterfac
 {
     use ValidatorMessageTrait;
 
-    private const string UNSUPPORTED_PROPERTY_TYPE_ERROR_MESSAGE_TEMPLATE = 'Property "%s" type "%s" is not supported.';
+    private const string UNSUPPORTED_PROPERTY_TYPE_ERROR_MESSAGE_TEMPLATE
+        = 'Property "%s" with type "%s" is not supported.';
 
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {

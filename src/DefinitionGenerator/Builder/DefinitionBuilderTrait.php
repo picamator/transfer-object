@@ -52,7 +52,7 @@ trait DefinitionBuilderTrait
 
         throw new DefinitionGeneratorException(
             sprintf(
-                'Property "%s" type "%s" is not supported.',
+                'Property "%s" with type "%s" is not supported.',
                 $propertyName,
                 $propertyType,
             ),

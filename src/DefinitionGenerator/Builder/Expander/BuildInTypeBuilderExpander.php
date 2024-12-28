@@ -35,7 +35,7 @@ readonly class BuildInTypeBuilderExpander implements BuilderExpanderInterface
 
             $content->getType()->isObject() => throw new DefinitionGeneratorException(
                 sprintf(
-                    'Property "%s" type "%s" is not supported.',
+                    'Property "%s" with type "%s" is not supported.',
                     $content->getPropertyName(),
                     get_class($content->getPropertyValue()),
                 ),

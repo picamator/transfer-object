@@ -68,7 +68,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
             $this->assertFalse($generatorTransfer->validator->isValid);
             $this->assertCount(1, $generatorTransfer->validator->errorMessages);
             $this->assertStringContainsString(
-                'File with the same name already exit.',
+                'A file with the same name already exists.',
                 $generatorTransfer->validator->errorMessages[0]->errorMessage,
             );
         };
@@ -117,7 +117,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
 
         yield 'unsupported type should return error' => [
             'configCaseName' => 'unsupported-type',
-            'expectedMessage' => 'Property "addressBookUuid" type "object" is not supported.',
+            'expectedMessage' => 'Property "addressBookUuid" with type "object" is not supported.',
         ];
 
         yield 'property type defined with array yml structure should fail to recognize type and return error' => [
@@ -132,7 +132,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
 
         yield 'invalid definition yml format should return error' => [
             'configCaseName' => 'invalid-yml-format',
-            'expectedMessage' => 'Fail parse string',
+            'expectedMessage' => 'Failed to parse string "AddressStatistics',
         ];
     }
 
