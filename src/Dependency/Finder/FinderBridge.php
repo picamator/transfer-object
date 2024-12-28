@@ -24,9 +24,10 @@ final readonly class FinderBridge implements FinderInterface
         } catch (Throwable $e) {
             throw new FinderException(
                 sprintf(
-                    'Fail to find files "%s" in directory "%s".',
+                    'Fail to find files "%s" in directory "%s", error "%s".',
                     $filePattern,
                     $dirName,
+                    $e->getMessage(),
                 ),
                 previous: $e,
             );
@@ -49,10 +50,11 @@ final readonly class FinderBridge implements FinderInterface
         } catch (Throwable $e) {
             throw new FinderException(
                 sprintf(
-                    'Fail to find files "%s" in directory "%s" excluding "%s".',
+                    'Fail to find files "%s" in directory "%s" excluding "%s", error "%s".',
                     $filePattern,
                     $dirName,
                     $exclude,
+                    $e->getMessage(),
                 ),
                 previous: $e,
             );
