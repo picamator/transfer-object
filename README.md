@@ -86,18 +86,12 @@ For more details, check out the TO Wiki:
 - [Command Configuration](https://github.com/picamator/transfer-object/wiki/Command-Configuration)
 - [Definition File](https://github.com/picamator/transfer-object/wiki/Definition-File).
 
-Development Environment
------------------------
-
-Want to contribute or further develop the project? We've got you covered with a ready-to-use Docker environment.
-For more information, check out the [Development Environment](https://github.com/picamator/transfer-object/wiki/Development-Environment) on our Wiki.
-
 Contribution
 ------------
 
 If you find this project useful, please add a star to the repository. Follow the project to stay updated with all activities.
 If you have suggestions for improvements or new features, feel free to create an issue or submit a pull request.
-Here is a great [guide to start contributing](https://guides.github.com/activities/contributing-to-open-source/).
+Here is a [Contribution Guide](CONTRIBUTING.md).
 
 Please note that this project is released with a [Contributor Code of Conduct](http://contributor-covenant.org/version/2/1/).
 By participating in this project and its community, you agree to abide by those terms.
