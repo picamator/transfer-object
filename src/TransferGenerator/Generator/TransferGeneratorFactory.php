@@ -9,8 +9,8 @@ use Picamator\TransferObject\Dependency\DependencyContainer;
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Dependency\Finder\FinderInterface;
+use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactory;
-use Picamator\TransferObject\TransferGenerator\Config\Container\ConfigContainerTrait;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoaderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\DefinitionFactory;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
@@ -30,7 +30,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderIn
 
 readonly class TransferGeneratorFactory
 {
-    use ConfigContainerTrait;
+    use ConfigFactoryTrait;
     use DependencyFactoryTrait;
 
     public function createTransferGenerator(): TransferGeneratorInterface

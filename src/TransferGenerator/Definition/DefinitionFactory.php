@@ -9,7 +9,7 @@ use Picamator\TransferObject\Dependency\DependencyContainer;
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
 use Picamator\TransferObject\Dependency\Finder\FinderInterface;
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Container\ConfigContainerTrait;
+use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinder;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionBuilder;
@@ -36,7 +36,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\Tra
 
 readonly class DefinitionFactory
 {
-    use ConfigContainerTrait;
+    use ConfigFactoryTrait;
     use DependencyFactoryTrait;
 
     public function createDefinitionReader(): DefinitionReaderInterface
