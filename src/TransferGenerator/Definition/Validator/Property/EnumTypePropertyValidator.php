@@ -13,7 +13,7 @@ readonly class EnumTypePropertyValidator implements PropertyValidatorInterface
 {
     use ValidatorMessageTrait;
 
-    private const string INVALID_ENUM_TYPE_ERROR_MESSAGE_TEMPLATE = 'Property "%s" type "%s" is not BakedEnum.';
+    private const string INVALID_ENUM_TYPE_ERROR_MESSAGE_TEMPLATE = 'Property "%s" type "%s" is not a BakedEnum.';
 
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {

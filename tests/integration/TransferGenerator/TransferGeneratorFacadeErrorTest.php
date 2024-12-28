@@ -87,32 +87,32 @@ class TransferGeneratorFacadeErrorTest extends TestCase
     {
         yield 'invalid class name should return error' => [
             'configCaseName' => 'invalid-class-name',
-            'expectedMessage' => 'Invalid class "00-AddressStatistics" name.',
+            'expectedMessage' => 'Invalid class name',
         ];
 
         yield 'invalid property name should return error' => [
             'configCaseName' => 'invalid-property-name',
-            'expectedMessage' => 'Invalid property "00-addressUuid" name.',
+            'expectedMessage' => 'Invalid property name',
         ];
 
         yield 'invalid collection type should return error' => [
             'configCaseName' => 'invalid-collection-type',
-            'expectedMessage' => 'Invalid class "00Uuid" name.',
+            'expectedMessage' => 'Invalid class name',
         ];
 
         yield 'invalid transfer type should return error' => [
             'configCaseName' => 'invalid-transfer-type',
-            'expectedMessage' => 'Invalid class "00Uuid" name.',
+            'expectedMessage' => 'Invalid class name',
         ];
 
         yield 'reserved property name should return error' => [
             'configCaseName' => 'reserved-property-name',
-            'expectedMessage' => 'Cannot use reserved "_data" property name.',
+            'expectedMessage' => 'Cannot use reserved property name',
         ];
 
         yield 'missed property type should return error' => [
             'configCaseName' => 'missed-type',
-            'expectedMessage' => 'Property "addressUuid" type definition is missed.',
+            'expectedMessage' => 'Property "addressUuid" type definition is missing.',
         ];
 
         yield 'unsupported type should return error' => [
@@ -122,12 +122,12 @@ class TransferGeneratorFacadeErrorTest extends TestCase
 
         yield 'property type defined with array yml structure should fail to recognize type and return error' => [
             'configCaseName' => 'invalid-type-definition',
-            'expectedMessage' => 'Property "addressBookUuid" type definition is missed.',
+            'expectedMessage' => 'Property "addressBookUuid" type definition is missing.',
         ];
 
         yield 'basic enum type is not supported should return error' => [
             'configCaseName' => 'invalid-enum-type',
-            'expectedMessage' => 'is not BakedEnum.',
+            'expectedMessage' => 'is not a BakedEnum.',
         ];
 
         yield 'invalid definition yml format should return error' => [

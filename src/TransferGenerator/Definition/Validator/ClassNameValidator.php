@@ -11,7 +11,7 @@ readonly class ClassNameValidator implements ClassNameValidatorInterface
     use VariableValidatorTrait;
     use ValidatorMessageTrait;
 
-    private const string CLASS_NAME_ERROR_MESSAGE_TEMPLATE = 'Invalid class "%s" name.';
+    private const string CLASS_NAME_ERROR_MESSAGE_TEMPLATE = 'Invalid class name "%s".';
 
     public function validate(?string $className): ValidatorMessageTransfer
     {

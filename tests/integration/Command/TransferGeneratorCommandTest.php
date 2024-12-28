@@ -38,7 +38,7 @@ class TransferGeneratorCommandTest extends TestCase
 
         // Assert
         $this->assertSame(1, $this->commandTester->getStatusCode());
-        $this->assertStringContainsString('Command\'s option -c is not set', $output);
+        $this->assertStringContainsString('Command option -c is not set', $output);
     }
 
     public function testRunCommandWithInvalidConfigurationShouldShowErrorMessage(): void
@@ -77,6 +77,6 @@ class TransferGeneratorCommandTest extends TestCase
 
         // Assert
         $this->assertSame(1, $this->commandTester->getStatusCode());
-        $this->assertStringContainsString('Failed generate Transfer Objects.', $output);
+        $this->assertStringContainsString('Failed to generate Transfer Objects.', $output);
     }
 }

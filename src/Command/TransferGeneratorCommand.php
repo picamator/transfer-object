@@ -26,8 +26,8 @@ final class TransferGeneratorCommand extends Command
 
     private const string ERROR_TEMPLATE = 'Failed generating %s.';
     private const string ERROR_MISSED_OPTION_CONFIG_MESSAGE =
-        'Command\'s option -c is not set. Please provide path to YML configuration.';
-    private const string ERROR_MESSAGE = 'Failed generate Transfer Objects.';
+        'Command option -c is not set. Please provide the path to the YML configuration.';
+    private const string ERROR_MESSAGE = 'Failed to generate Transfer Objects.';
     private const string SUCCESS_MESSAGE = 'Transfer Objects successfully generated.';
 
     private const string START_SECTION_NAME = 'Transfer Object Generation';

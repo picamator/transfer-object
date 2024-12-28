@@ -12,7 +12,7 @@ readonly class RequiredConfigContentValidator implements ConfigContentValidatorI
 {
     use ValidatorMessageTrait;
 
-    private const string ERROR_MESSAGE_TEMPLATE = 'Missed required configuration keys "%s".';
+    private const string ERROR_MESSAGE_TEMPLATE = 'Missing required configuration keys: "%s".';
 
     public function validate(ConfigContentTransfer $configContentTransfer): ValidatorMessageTransfer
     {
