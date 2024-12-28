@@ -1,12 +1,23 @@
 Transfer Object Generator
 ==========================
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![CI workflow](https://github.com/picamator/transfer-object/actions/workflows/ci.yml/badge.svg?event=push)
+[![CI workflow](https://github.com/picamator/transfer-object/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/picamator/transfer-object/actions)
 
-The Transfer Object (TO) Generator builds Transfer Objects based on `YML` definitions.
+Want to build Transfer Objects (TO) effortlessly without diving deep into configs?
+You're in the right place!
 
-For example, the following definition:
+Build TOs Using an Array as a Sample
+------------------------------------
 
+Imagine you have an array like this:
+```php
+$data = [
+    'firstName' => 'Jan',
+    'lastName' => 'Kowalski',
+];
+```
+
+Convert this array into a definition file that can be used to generate your TO:
 ```yml
 Customer:
   firstName:
@@ -15,31 +26,40 @@ Customer:
     type: string
 ```
 
-generates the following TO:
-
+Then, generate the TO:
 ```php
 $customerTransfer = new CustomerTransfer();
 $customerTransfer->firstName = 'Jan';
 $customerTransfer->lastName = 'Kowalski';
 ```
 
-To see how TO works, please open [try-samples.php](/doc/samples/try-samples.php).
+Use YML Definitions for Basic TOs
+---------------------------------
 
-A definition file can also be generated using a well-structured array:
-
-```php
-$data = [
-    'firstName' => 'Jan',
-    'lastName' => 'Kowalski',
-];
+Prefer using `YML` definitions directly? No problem! Here's a simple example:
+```yml
+Customer:
+  firstName:
+    type: string
+  lastName:
+    type: string
 ```
 
-To see how the Definition Generator works, open [try-definition-generator.php](/doc/samples/try-defitnition-generator.php).
+Why Use Transfer Object Generator?
+-----------------------------------
+
+Transfer Object Generator is your modern solution for generating TOs.
+Whether you're using `YML` definitions or well-structured arrays as blueprints, this tool has got you covered.
+
+Check out how it works:
+
+ - [Try Sample with Array](/doc/samples/try-defitnition-generator.php).
+ - [Try Sample with YML Definition](/doc/samples/try-samples.php) and
 
 Installation
 ------------
 
-Install the package using Composer:
+Easily install via Composer:
 
 ```bash
 composer require-dev picamator/transfer-object
@@ -48,36 +68,35 @@ composer require-dev picamator/transfer-object
 Usage
 -----
 
-### Terminal
+The Transfer Object (TO) generator can be used in two ways:
 
-After installation, the TO generator command `generate-transfer` is available in the `./vendor/bin` directory.
+### Via Command
+
+Run the following command, specifying your configuration file:
 
 ```bash
 ./vendor/bin/generate-transfer [-c|--configuration CONFIGURATION]
 ```
 
-Configuration File
-------------------
+### Via Facade Interface Methods
 
-Details about the configuration file can be found on the [Command Configuration Wiki](https://github.com/picamator/transfer-object/wiki/Command-Configuration).
-See example configuration file [generator.config.yml](/doc/samples/config/generator.config.yml).
+You can also directly call the facade interface methods provided by `TransferGeneratorFacadeInterface`, `DefinitionGeneratorFacadeInterface`.
 
-Definition Files
-----------------
-
-Details about the definition files can be found on the [Definition Wiki](https://github.com/picamator/transfer-object/wiki/Definition-File).
-See example definition files [here](/doc/samples/config/definition).
+For more details, check out the TO Wiki:
+- [Command Configuration](https://github.com/picamator/transfer-object/wiki/Command-Configuration)
+- [Definition File](https://github.com/picamator/transfer-object/wiki/Definition-File).
 
 Development Environment
 -----------------------
 
-The development environment includes Docker, CaptainHook, UnitTests, etc.
-More information can be found on the [Development Environment Wiki](https://github.com/picamator/transfer-object/wiki/Development-Environment).
+Want to contribute or further develop the project? We've got you covered with a ready-to-use Docker environment.
+For more information, check out the [Development Environment](https://github.com/picamator/transfer-object/wiki/Development-Environment) on our Wiki.
 
 Contribution
 ------------
 
-If you find this project useful, please add a star to the repository. Follow the project to stay updated with all activities. If you have suggestions for improvements or new features, feel free to create an issue or submit a pull request.
+If you find this project useful, please add a star to the repository. Follow the project to stay updated with all activities.
+If you have suggestions for improvements or new features, feel free to create an issue or submit a pull request.
 Here is a great [guide to start contributing](https://guides.github.com/activities/contributing-to-open-source/).
 
 Please note that this project is released with a [Contributor Code of Conduct](http://contributor-covenant.org/version/2/1/).
@@ -86,4 +105,5 @@ By participating in this project and its community, you agree to abide by those 
 License
 -------
 
-Transfer Object Generator is licensed under the MIT License. Please see the [LICENSE](LICENSE) file for details.
+Transfer Object Generator is free and open-source software licensed under the MIT License.
+For more details, please see the [LICENSE](LICENSE) file.
