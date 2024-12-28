@@ -23,8 +23,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
     ): void {
         // Arrange
         $configPath = $this->getConfigPath($configCaseName);
-        $messageTransfer = $this->loadConfig($configPath);
-        $this->assertTrue($messageTransfer->isValid, $messageTransfer->errorMessage ?? '');
+        $this->assertLoadConfigSuccess($configPath);
 
         $callback = function (?TransferGeneratorCallbackTransfer $generatorTransfer) use ($expectedMessage): void {
             if ($generatorTransfer === null) {

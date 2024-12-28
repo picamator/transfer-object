@@ -9,7 +9,9 @@ use Picamator\TransferObject\Dependency\DependencyContainer;
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Dependency\Finder\FinderInterface;
-use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
+use Picamator\TransferObject\TransferGenerator\Config\ConfigFactory;
+use Picamator\TransferObject\TransferGenerator\Config\Container\ConfigContainerTrait;
+use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoaderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\DefinitionFactory;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystem;
@@ -25,11 +27,10 @@ use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateBuilder;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRender;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderInterface;
-use Symfony\Component\Finder\Finder;
 
 readonly class TransferGeneratorFactory
 {
-    use ConfigFactoryTrait;
+    use ConfigContainerTrait;
     use DependencyFactoryTrait;
 
     public function createTransferGenerator(): TransferGeneratorInterface
@@ -39,6 +40,11 @@ readonly class TransferGeneratorFactory
             $this->createTemplateRender(),
             $this->createGeneratorFilesystem(),
         );
+    }
+
+    public function createConfigLoader(): ConfigLoaderInterface
+    {
+        return new ConfigFactory()->createConfigLoader();
     }
 
     protected function createGeneratorFilesystem(): GeneratorFilesystemInterface

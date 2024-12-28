@@ -78,11 +78,10 @@ class DefinitionGeneratorFacadeTest extends TestCase
     public function testGenerateTransferBasedOnDefinitionShouldSuccessfullyGenerateTransferObjects(): void
     {
         // Arrange
-        $messageTransfer = $this->loadConfig(self::CONFIG_PATH);
-        $this->assertTrue($messageTransfer->isValid, $messageTransfer->errorMessage ?? '');
+        $this->assertLoadConfigSuccess(self::CONFIG_PATH);
 
         // Act
-        $actual = $this->generateTransfers($this->assertGenerateTransferSuccessCallback(...));
+        $actual = $this->generateTransfers($this->assertGeneratorSuccess(...));
 
         // Assert
         $this->assertTrue($actual);

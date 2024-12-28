@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Command;
 
-use Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer;
-use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\TransferGenerator\Config\ConfigFacade;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
+use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacadeInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -16,6 +14,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class TransferGeneratorCommand extends Command
 {
+    use ValidatorMessageTrait;
+
     private const string NAME = 'generate:transfer';
     private const string DESCRIPTION = 'Generates Transfer Objects based on definitions template.';
     private const string HELP = 'Configuration path should be specified.';
@@ -32,6 +32,13 @@ final class TransferGeneratorCommand extends Command
 
     private const string START_SECTION_NAME = 'Transfer Object Generation';
 
+    public function __construct(
+        ?string $name = null,
+        private readonly TransferGeneratorFacadeInterface $generatorFacade = new TransferGeneratorFacade(),
+    ) {
+        parent::__construct($name);
+    }
+
     protected function configure(): void
     {
         $this->setName(self::NAME)
@@ -47,77 +54,60 @@ final class TransferGeneratorCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $inputOutput = new SymfonyStyle($input, $output);
-        $inputOutput->section(self::START_SECTION_NAME);
+        $configPath = $input->getOption(self::OPTION_NAME_CONFIGURATION) ?: '';
 
-        $isSuccess = $this->loadConfig($input, $inputOutput);
+        $styleOutput = new SymfonyStyle($input, $output);
+        $styleOutput->section(self::START_SECTION_NAME);
+
+        $isSuccess = $this->loadConfig($configPath, $styleOutput);
         if (!$isSuccess) {
             return Command::FAILURE;
         }
 
-        $isSuccess = $this->generateTransfers($inputOutput);
-
+        $isSuccess = $this->generateTransfers($styleOutput);
         if ($isSuccess) {
-            $inputOutput->success(self::SUCCESS_MESSAGE);
+            $styleOutput->success(self::SUCCESS_MESSAGE);
 
             return Command::SUCCESS;
         }
 
-        $inputOutput->error(self::ERROR_MESSAGE);
+        $styleOutput->error(self::ERROR_MESSAGE);
 
         return Command::FAILURE;
     }
 
-    private function generateTransfers(SymfonyStyle $inputOutput): bool
+    private function generateTransfers(SymfonyStyle $styleOutput): bool
     {
-        $generatorFiber = new TransferGeneratorFacade()->getTransferGeneratorFiber();
+        $generatorFiber = $this->generatorFacade->getTransferGeneratorFiber();
 
         $generatorFiber->start();
         while (!$generatorFiber->isTerminated()) {
             /** @var \Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer|null $generatorTransfer */
             $generatorTransfer = $generatorFiber->resume();
             if ($generatorTransfer?->validator?->isValid === false) {
-                $this->writelnGeneratorError($inputOutput, $generatorTransfer);
+                $styleOutput->error(sprintf(self::ERROR_TEMPLATE, $generatorTransfer->definitionKey));
+                $this->writelnValidatorErrorMessages($generatorTransfer->validator->errorMessages, $styleOutput);
             }
         }
 
         return $generatorFiber->getReturn();
     }
 
-    private function writelnGeneratorError(
-        SymfonyStyle $inputOutput,
-        TransferGeneratorCallbackTransfer $generatorTransfer,
-    ): void {
-        $inputOutput->error(sprintf(self::ERROR_TEMPLATE, $generatorTransfer->definitionKey));
-
-        $errorMessages = $generatorTransfer->validator->errorMessages;
-        $errorMessages = array_map(
-            fn(ValidatorMessageTransfer $messageTransfer) => $messageTransfer->errorMessage,
-            $errorMessages->getArrayCopy()
-        );
-
-        $inputOutput->warning($errorMessages);
-    }
-
-    private function loadConfig(InputInterface $input, SymfonyStyle $inputOutput): bool
+    private function loadConfig(string $configPath, SymfonyStyle $styleOutput): bool
     {
-        $configPath = $input->getOption(self::OPTION_NAME_CONFIGURATION) ?: '';
         if ($configPath === '') {
-            $inputOutput->error(self::ERROR_MESSAGE);
-            $inputOutput->error(self::ERROR_MISSED_OPTION_CONFIG_MESSAGE);
+            $styleOutput->error(self::ERROR_MESSAGE);
+            $styleOutput->error(self::ERROR_MISSED_OPTION_CONFIG_MESSAGE);
+        }
+
+        $configTransfer = $this->generatorFacade->loadConfig($configPath);
+        if (!$configTransfer->validator->isValid) {
+            $this->writelnValidatorErrorMessages($configTransfer->validator->errorMessages, $styleOutput);
 
             return false;
         }
 
-        $validatorTransfer = new ConfigFacade()->loadConfig($configPath);
-        if (!$validatorTransfer->isValid) {
-            $inputOutput->error(self::ERROR_MESSAGE);
-            $inputOutput->error($validatorTransfer->errorMessage);
-
-            return false;
-        }
-
-        $inputOutput->info($configPath);
+        $styleOutput->info($configPath);
 
         return true;
     }

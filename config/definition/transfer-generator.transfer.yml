@@ -1,4 +1,16 @@
 Config:
+  content:
+    type: ConfigContent
+  validator:
+    type: ConfigValidator
+
+ConfigValidator:
+  isValid:
+    type: bool
+  errorMessages:
+    collectionType: ValidatorMessage
+
+ConfigContent:
   transferNamespace:
     type: string
   transferPath:

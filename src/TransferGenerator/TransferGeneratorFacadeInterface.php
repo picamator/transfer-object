@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator;
 
 use Fiber;
+use Picamator\TransferObject\Generated\ConfigTransfer;
 
 interface TransferGeneratorFacadeInterface
 {
@@ -21,4 +22,13 @@ interface TransferGeneratorFacadeInterface
      * @return \Fiber<null,null,bool,\Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer>
      */
     public function getTransferGeneratorFiber(): Fiber;
+
+    /**
+     * Specification:
+     * - Reads and parses provided configuration file
+     * - Statically loads configuration to reuse for transfer object generation
+     *
+     * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
+     */
+    public function loadConfig(string $configPath): ConfigTransfer;
 }

@@ -1,0 +1,47 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Picamator\TransferObject\TransferGenerator\Config\Reader;
+
+use Picamator\TransferObject\Generated\ConfigTransfer;
+use Picamator\TransferObject\Generated\ConfigValidatorTransfer;
+use Picamator\TransferObject\TransferGenerator\Config\Parser\ConfigParserInterface;
+use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigValidatorInterface;
+
+readonly class ConfigReader implements ConfigReaderInterface
+{
+    public function __construct(
+        private ConfigParserInterface $parser,
+        private ConfigValidatorInterface $validator,
+    ) {
+    }
+
+    public function getConfig(string $configPath): ConfigTransfer
+    {
+        $validatorTransfer = $this->validator->validateFile($configPath);
+        if (!$validatorTransfer->isValid) {
+            return $this->createConfigTransfer($validatorTransfer);
+        }
+
+        $contentTransfer = $this->parser->parseConfig($configPath);
+
+        $validatorTransfer = $this->validator->validateContent($contentTransfer);
+        if (!$validatorTransfer->isValid) {
+            return $this->createConfigTransfer($validatorTransfer);
+        }
+
+        $configTransfer = $this->createConfigTransfer($validatorTransfer);
+        $configTransfer->content = $contentTransfer;
+
+        return $configTransfer;
+    }
+
+    private function createConfigTransfer(ConfigValidatorTransfer $validatorTransfer): ConfigTransfer
+    {
+        $configTransfer = new ConfigTransfer();
+        $configTransfer->validator = $validatorTransfer;
+
+        return $configTransfer;
+    }
+}

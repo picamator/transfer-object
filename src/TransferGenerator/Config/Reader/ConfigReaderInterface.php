@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Config\Loader\Reader;
+namespace Picamator\TransferObject\TransferGenerator\Config\Reader;
 
 use Picamator\TransferObject\Generated\ConfigTransfer;
 

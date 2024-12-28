@@ -7,12 +7,19 @@ namespace Picamator\TransferObject\DefinitionGenerator;
 use Picamator\TransferObject\DefinitionGenerator\Generator\DefinitionGeneratorFactory;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 
-readonly class DefinitionGeneratorFacade implements DefinitionGeneratorFacadeInterface
+class DefinitionGeneratorFacade implements DefinitionGeneratorFacadeInterface
 {
+    private static DefinitionGeneratorFactory $factory;
+
     public function generateDefinitions(DefinitionGeneratorTransfer $generatorTransfer): int
     {
-        return new DefinitionGeneratorFactory()
+        return $this->getFactory()
             ->createDefinitionGenerator()
             ->generateDefinitions($generatorTransfer);
+    }
+
+    private function getFactory(): DefinitionGeneratorFactory
+    {
+        return self::$factory ??= new DefinitionGeneratorFactory();
     }
 }

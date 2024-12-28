@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Config\Container;
 
 use PHPUnit\Framework\TestCase;
-use Picamator\TransferObject\Generated\ConfigTransfer;
+use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Container\ConfigContainer;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigException;
 
@@ -30,21 +30,21 @@ class ConfigContainerTest extends TestCase
     public function testLoadConfigAndGetShouldReturnConfig(): void
     {
         // Arrange
-        $configTransfer = new ConfigTransfer()
+        $contentTransfer = new ConfigContentTransfer()
             ->fromArray([
-                ConfigTransfer::TRANSFER_NAMESPACE => 'Test\SomeNamespace',
-                ConfigTransfer::TRANSFER_PATH => 'test\path\Generated',
-                ConfigTransfer::DEFINITION_PATH => 'test\path\config\definitions',
+                ConfigContentTransfer::TRANSFER_NAMESPACE => 'Test\SomeNamespace',
+                ConfigContentTransfer::TRANSFER_PATH => 'test\path\Generated',
+                ConfigContentTransfer::DEFINITION_PATH => 'test\path\config\definitions',
             ]);
 
-        $this->configContainer->loadConfig($configTransfer);
+        $this->configContainer->loadConfig($contentTransfer);
 
         // Act
         $actual = $this->configContainer->getConfig();
 
         // Assert
-        $this->assertSame($configTransfer->transferNamespace, $actual->getTransferNamespace());
-        $this->assertSame($configTransfer->transferPath, $actual->getTransferPath());
-        $this->assertSame($configTransfer->definitionPath, $actual->getDefinitionPath());
+        $this->assertSame($contentTransfer->transferNamespace, $actual->getTransferNamespace());
+        $this->assertSame($contentTransfer->transferPath, $actual->getTransferPath());
+        $this->assertSame($contentTransfer->definitionPath, $actual->getDefinitionPath());
     }
 }

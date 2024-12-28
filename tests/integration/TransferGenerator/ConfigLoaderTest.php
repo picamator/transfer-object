@@ -7,18 +7,18 @@ namespace Picamator\Tests\Integration\TransferObject\TransferGenerator;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Picamator\TransferObject\TransferGenerator\Config\ConfigFacade;
-use Picamator\TransferObject\TransferGenerator\Config\ConfigFacadeInterface;
+use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
+use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacadeInterface;
 
-class ConfigFacadeTest extends TestCase
+class ConfigLoaderTest extends TestCase
 {
     private const string CONFIG_PATH = __DIR__ . '/data/config/';
 
-    private ConfigFacadeInterface $configFacade;
+    private TransferGeneratorFacadeInterface $generatorFacade;
 
     protected function setUp(): void
     {
-        $this->configFacade = new ConfigFacade();
+        $this->generatorFacade = new TransferGeneratorFacade();
     }
 
     #[DataProvider('invalidConfigDataProvider')]
@@ -28,11 +28,11 @@ class ConfigFacadeTest extends TestCase
         $configPath = self::CONFIG_PATH . $configName;
 
         // Act
-        $actual = $this->configFacade->loadConfig($configPath);
+        $actual = $this->generatorFacade->loadConfig($configPath);
 
         // Assert
-        $this->assertFalse($actual->isValid);
-        $this->assertNotEmpty($actual->errorMessage);
+        $this->assertFalse($actual->validator->isValid);
+        $this->assertCount(1, $actual->validator->errorMessages);
     }
 
     /**

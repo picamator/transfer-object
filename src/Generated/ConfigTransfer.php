@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
+use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
 
 /**
  * Specification:
@@ -13,41 +14,32 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  */
 final class ConfigTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 3;
+    protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::DEFINITION_PATH => self::DEFINITION_PATH_DATA_NAME,
-        self::TRANSFER_NAMESPACE => self::TRANSFER_NAMESPACE_DATA_NAME,
-        self::TRANSFER_PATH => self::TRANSFER_PATH_DATA_NAME,
+        self::CONTENT => self::CONTENT_DATA_NAME,
+        self::VALIDATOR => self::VALIDATOR_DATA_NAME,
     ];
 
-    // definitionPath
-    public const string DEFINITION_PATH = 'definitionPath';
-    protected const string DEFINITION_PATH_DATA_NAME = 'DEFINITION_PATH';
-    protected const int DEFINITION_PATH_DATA_INDEX = 0;
+    // content
+    #[PropertyTypeAttribute(ConfigContentTransfer::class)]
+    public const string CONTENT = 'content';
+    protected const string CONTENT_DATA_NAME = 'CONTENT';
+    protected const int CONTENT_DATA_INDEX = 0;
 
-    public ?string $definitionPath {
-        get => $this->_data[self::DEFINITION_PATH_DATA_INDEX];
-        set => $this->_data[self::DEFINITION_PATH_DATA_INDEX] = $value;
+    public ?ConfigContentTransfer $content {
+        get => $this->_data[self::CONTENT_DATA_INDEX];
+        set => $this->_data[self::CONTENT_DATA_INDEX] = $value;
     }
 
-    // transferNamespace
-    public const string TRANSFER_NAMESPACE = 'transferNamespace';
-    protected const string TRANSFER_NAMESPACE_DATA_NAME = 'TRANSFER_NAMESPACE';
-    protected const int TRANSFER_NAMESPACE_DATA_INDEX = 1;
+    // validator
+    #[PropertyTypeAttribute(ConfigValidatorTransfer::class)]
+    public const string VALIDATOR = 'validator';
+    protected const string VALIDATOR_DATA_NAME = 'VALIDATOR';
+    protected const int VALIDATOR_DATA_INDEX = 1;
 
-    public ?string $transferNamespace {
-        get => $this->_data[self::TRANSFER_NAMESPACE_DATA_INDEX];
-        set => $this->_data[self::TRANSFER_NAMESPACE_DATA_INDEX] = $value;
-    }
-
-    // transferPath
-    public const string TRANSFER_PATH = 'transferPath';
-    protected const string TRANSFER_PATH_DATA_NAME = 'TRANSFER_PATH';
-    protected const int TRANSFER_PATH_DATA_INDEX = 2;
-
-    public ?string $transferPath {
-        get => $this->_data[self::TRANSFER_PATH_DATA_INDEX];
-        set => $this->_data[self::TRANSFER_PATH_DATA_INDEX] = $value;
+    public ?ConfigValidatorTransfer $validator {
+        get => $this->_data[self::VALIDATOR_DATA_INDEX];
+        set => $this->_data[self::VALIDATOR_DATA_INDEX] = $value;
     }
 }

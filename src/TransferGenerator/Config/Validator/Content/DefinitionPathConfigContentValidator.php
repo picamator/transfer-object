@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Config\Validator;
+namespace Picamator\TransferObject\TransferGenerator\Config\Validator\Content;
 
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
-use Picamator\TransferObject\Generated\ConfigTransfer;
+use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
+use Picamator\TransferObject\TransferGenerator\Config\Validator\ValidatorMessageTrait;
 
-readonly class DefinitionPathConfigValidator implements ConfigValidatorInterface
+readonly class DefinitionPathConfigContentValidator implements ConfigContentValidatorInterface
 {
     use ValidatorMessageTrait;
 
@@ -19,9 +20,9 @@ readonly class DefinitionPathConfigValidator implements ConfigValidatorInterface
     ) {
     }
 
-    public function validate(ConfigTransfer $configTransfer): ValidatorMessageTransfer
+    public function validate(ConfigContentTransfer $configContentTransfer): ValidatorMessageTransfer
     {
-        $definitionPath = $configTransfer->definitionPath ?? '';
+        $definitionPath = $configContentTransfer->definitionPath ?? '';
         $isExists = $this->filesystem->exists($definitionPath);
 
         if (!$isExists) {

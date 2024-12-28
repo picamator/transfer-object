@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Config\Container;
 
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigException;
-use Picamator\TransferObject\Generated\ConfigTransfer;
+use Picamator\TransferObject\Generated\ConfigContentTransfer;
 
 class ConfigContainer
 {
     private static ConfigInterface $config;
 
-    public static function loadConfig(ConfigTransfer $configTransfer): void
+    public static function loadConfig(ConfigContentTransfer $configTransfer): void
     {
         self::$config = new Config(
             transferNamespace: $configTransfer->transferNamespace,

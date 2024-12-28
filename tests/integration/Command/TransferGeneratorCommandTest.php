@@ -53,7 +53,7 @@ class TransferGeneratorCommandTest extends TestCase
 
         // Assert
         $this->assertSame(1, $this->commandTester->getStatusCode());
-        $this->assertStringContainsString('Config file "some-invalid-path.config.yml" does not exist.', $output);
+        $this->assertStringContainsString('Configuration file "some-invalid-path.config.yml" does not exist.', $output);
     }
 
     public function testRunCommandWithValidConfigurationShouldShowSuccessMessage(): void

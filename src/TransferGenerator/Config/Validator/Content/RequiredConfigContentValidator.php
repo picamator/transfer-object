@@ -2,20 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Config\Validator;
+namespace Picamator\TransferObject\TransferGenerator\Config\Validator\Content;
 
-use Picamator\TransferObject\Generated\ConfigTransfer;
+use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
+use Picamator\TransferObject\TransferGenerator\Config\Validator\ValidatorMessageTrait;
 
-readonly class RequiredConfigValidator implements ConfigValidatorInterface
+readonly class RequiredConfigContentValidator implements ConfigContentValidatorInterface
 {
     use ValidatorMessageTrait;
 
     private const string ERROR_MESSAGE_TEMPLATE = 'Missed required configuration keys "%s".';
 
-    public function validate(ConfigTransfer $configTransfer): ValidatorMessageTransfer
+    public function validate(ConfigContentTransfer $configContentTransfer): ValidatorMessageTransfer
     {
-        $configContent = $configTransfer->toArray();
+        $configContent = $configContentTransfer->toArray();
         $missedConfig = array_diff_key($configContent, array_filter($configContent));
 
         if (count($missedConfig) > 0) {
