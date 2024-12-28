@@ -50,7 +50,6 @@
       "doc",
       ".editorconfig",
       ".gitattributes",
-      ".env",
       ".gitignore",
       "captainhook.json",
       "docker-compose.yml",

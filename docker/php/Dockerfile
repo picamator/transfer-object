@@ -14,6 +14,9 @@ VOLUME /home/transfer/transfer-object
 # workdir
 WORKDIR /home/transfer/transfer-object
 
+# environemnt
+ENV PROJECT_ROOT=/home/transfer/transfer-object
+
 # switch user
 USER root
 
@@ -33,11 +36,10 @@ COPY --from=composer/composer:latest-bin /composer /usr/local/bin/composer
 RUN docker-php-ext-configure zip
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install curl
+RUN pecl install xdebug
 
 # xdebug
 ARG ENABLE_XDEBUG=0
-
-RUN pecl install xdebug
 RUN if [ "$ENABLE_XDEBUG" = "1" ]; then \
     docker-php-ext-enable xdebug && \
     echo "xdebug.max_nesting_level=1000" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
@@ -50,9 +52,6 @@ RUN if [ "$ENABLE_XDEBUG" = "1" ]; then \
 
 # switch user
 USER transfer
-
-# environemnt
-ENV PROJECT_ROOT="/home/transfer/transfer-object"
 
 # workaround to keep container running
 CMD ["tail", "-f", "/dev/null"]

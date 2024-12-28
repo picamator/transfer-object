@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  phpstan-phpcs-phpunit:
+  CI:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,13 +15,22 @@ jobs:
         with:
           php_version: "8.4"
 
+      - name: Generate Internal Transfer Object
+        env:
+          PROJECT_ROOT: ${{ github.workspace }}
+        run: |
+          echo "Generate Internal Transfer Objects"
+          composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
+          echo "Generate Samples Transfer Objects"
+          generate-transfer -- -c ${PROJECT_ROOT}/doc/samples/config/generator.config.yml
+
       - name: Run PHPStan
         uses: php-actions/phpstan@v3
         with:
           php_version: "8.4"
           configuration: phpstan.neon
 
-      - name: Run PHPCS
+      - name: Run PHP CodeSniffer
         uses: php-actions/phpcs@v1
         with:
           php_version: "8.4"

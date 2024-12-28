@@ -16,7 +16,6 @@ nbproject/
 vendor/
 .phpunit.result.cache
 .cs-check.json
-.env
 
 # project
 src/**/_tmp

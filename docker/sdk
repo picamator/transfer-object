@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-DOCKER_CONTAINER_NAME=transfer-object-php
-PROJECT_ROOT="/home/transfer/transfer-object"
-
 function show_usage() {
   echo "==================================="
   echo "    Transfer Object (Docker SDK)   "
@@ -23,6 +20,10 @@ function show_usage() {
   echo "  to-generate          Generate inertanl transfer objects"
   echo "  to-samples-generate  Generate sample transfer objects"
 }
+
+# vars
+DOCKER_CONTAINER_NAME=transfer-object-php
+PROJECT_ROOT="/home/transfer/transfer-object"
 
 # options
 ENABLE_XDEBUG=0
@@ -77,7 +78,7 @@ case $1 in
     docker exec -i $DOCKER_CONTAINER_NAME composer captainhook $2
     ;;
   to-generate)
-     docker exec -i $DOCKER_CONTAINER_NAME composer  generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
+     docker exec -i $DOCKER_CONTAINER_NAME composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
     ;;
   to-samples-generate)
      docker exec -i $DOCKER_CONTAINER_NAME composer generate-transfer -- -c ${PROJECT_ROOT}/doc/samples/config/generator.config.yml
