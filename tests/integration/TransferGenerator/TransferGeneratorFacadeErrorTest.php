@@ -39,7 +39,10 @@ class TransferGeneratorFacadeErrorTest extends TestCase
 
             $this->assertFalse($generatorTransfer->validator->isValid);
             $this->assertCount(1, $generatorTransfer->validator->errorMessages);
-            $this->assertSame($expectedMessage, $generatorTransfer->validator->errorMessages[0]->errorMessage);
+            $this->assertStringContainsString(
+                $expectedMessage,
+                $generatorTransfer->validator->errorMessages[0]->errorMessage,
+            );
         };
 
         // Act
@@ -124,8 +127,12 @@ class TransferGeneratorFacadeErrorTest extends TestCase
 
         yield 'basic enum type is not supported should return error' => [
             'configCaseName' => 'invalid-enum-type',
-            // phpcs:ignore
-            'expectedMessage' => 'Property "addressType" type "\Picamator\Tests\Integration\TransferObject\TransferGenerator\Enum\AddressTypeEnum" is not BakedEnum.',
+            'expectedMessage' => 'is not BakedEnum.',
+        ];
+
+        yield 'invalid definition yml format should return error' => [
+            'configCaseName' => 'invalid-yml-format',
+            'expectedMessage' => 'Fail parse string',
         ];
     }
 

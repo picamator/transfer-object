@@ -9,8 +9,6 @@ use Generator;
 interface DefinitionReaderInterface
 {
     /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\YmlParserException
-     *
      * @return \Generator<\Picamator\TransferObject\Generated\DefinitionTransfer>
      */
     public function getDefinitions(): Generator;
