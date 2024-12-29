@@ -17,7 +17,7 @@ $data = [
 ];
 ```
 
-Convert this array into a definition file that can be used to generate your TO:
+Convert this array into a definition file with a simple code snippet:
 ```yml
 Customer:
   firstName:
@@ -26,35 +26,23 @@ Customer:
     type: string
 ```
 
-Then, generate the TO:
+Then, generate TO by running console command:
 ```php
 $customerTransfer = new CustomerTransfer();
 $customerTransfer->firstName = 'Jan';
 $customerTransfer->lastName = 'Kowalski';
 ```
 
-Use YML Definitions for Basic TOs
----------------------------------
-
-Prefer using `YML` definitions directly? No problem! Here's a simple example:
-```yml
-Customer:
-  firstName:
-    type: string
-  lastName:
-    type: string
-```
-
 Why Use Transfer Object Generator?
 -----------------------------------
 
-Transfer Object Generator is your modern solution for generating TOs.
-Whether you're using `YML` definitions or well-structured arrays as blueprints, this tool has got you covered.
+1. Transfer Object Generator is your modern solution for generating TOs.
+2, Whether you're using `YML` definitions or well-structured arrays as blueprints, this tool has got you covered.
 
 Check out how it works:
 
  - [Try Sample with Array](/doc/samples/try-defitnition-generator.php).
- - [Try Sample with YML Definition](/doc/samples/try-transfer-generator.php) and
+ - [Try Sample with YML Definition](/doc/samples/try-transfer-generator.php)
 
 Installation
 ------------
@@ -72,7 +60,7 @@ The Transfer Object (TO) generator can be used in two ways:
 
 ### Via Command
 
-Run the following command, specifying your configuration file:
+Run following command, specifying your configuration file:
 
 ```bash
 ./vendor/bin/generate-transfer [-c|--configuration CONFIGURATION]
