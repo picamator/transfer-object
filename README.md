@@ -41,7 +41,7 @@ Why Use Transfer Object Generator?
 
 Check out how it works:
 
- - [Try Sample with Array](/doc/samples/try-defitnition-generator.php).
+ - [Try Sample with Array](/doc/samples/try-definition-generator.php)
  - [Try Sample with YML Definition](/doc/samples/try-transfer-generator.php)
 
 Installation
@@ -66,13 +66,16 @@ Run following command, specifying your configuration file:
 ./vendor/bin/generate-transfer [-c|--configuration CONFIGURATION]
 ```
 
+For more details, check out the TO Wiki:
+- [Command Configuration](https://github.com/picamator/transfer-object/wiki/Command-Configuration)
+- [Definition File](https://github.com/picamator/transfer-object/wiki/Definition-File)
+
 ### Via Facade Interface Methods
 
 You can also directly call the facade interface methods provided by `TransferGeneratorFacadeInterface`, `DefinitionGeneratorFacadeInterface`.
 
 For more details, check out the TO Wiki:
-- [Command Configuration](https://github.com/picamator/transfer-object/wiki/Command-Configuration)
-- [Definition File](https://github.com/picamator/transfer-object/wiki/Definition-File).
+- [Facade Interfaces](https://github.com/picamator/transfer-object/wiki/Facade-Interfaces)
 
 Contribution
 ------------
