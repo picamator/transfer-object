@@ -44,6 +44,8 @@ readonly class ConfigContentBuilder implements ConfigContentBuilderInterface
     private function filterConfigData(array $sectionData): array
     {
         $sectionData = $sectionData[self::CONFIG_SECTION_KEY] ?? [];
+        $sectionData = is_array($sectionData) ? $sectionData : [];
+
         $filteredData = array_intersect_key($sectionData, ConfigKeyEnum::getValueName());
 
         return array_filter($filteredData, fn(mixed $item): bool => is_string($item));

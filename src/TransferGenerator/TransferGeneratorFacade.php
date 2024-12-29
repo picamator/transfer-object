@@ -6,13 +6,18 @@ namespace Picamator\TransferObject\TransferGenerator;
 
 use Fiber;
 use Generator;
+use Picamator\TransferObject\Command\Helper\ProgressBarInterface;
 use Picamator\TransferObject\Generated\ConfigTransfer;
+use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\Generator\TransferGeneratorFactory;
 
 class TransferGeneratorFacade implements TransferGeneratorFacadeInterface
 {
     private static TransferGeneratorFactory $factory;
 
+    /**
+     * @return \Generator<int,\Picamator\TransferObject\Generated\TransferGeneratorTransfer>
+     */
     public function getTransferGenerator(): Generator
     {
         return $this->getFactory()
@@ -20,6 +25,9 @@ class TransferGeneratorFacade implements TransferGeneratorFacadeInterface
             ->getTransferGenerator();
     }
 
+    /**
+     * @return \Fiber<ProgressBarInterface,null,bool,TransferGeneratorTransfer>
+     */
     public function getTransferGeneratorFiber(): Fiber
     {
         return $this->getFactory()

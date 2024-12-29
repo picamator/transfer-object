@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Picamator\Doc\Samples\TransferObject\Generated;
+namespace Picamator\Doc\Samples\TransferObject\Generated\DefinitionGenerator;
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
+use Picamator\TransferObject\Transfer\Attribute\ArrayObjectPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
 
@@ -16,7 +17,7 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
  */
 final class ProductTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 11;
+    protected const int META_DATA_SIZE = 12;
 
     protected const array META_DATA = [
         self::AVAILABILITIES => self::AVAILABILITIES_DATA_NAME,
@@ -24,6 +25,7 @@ final class ProductTransfer extends AbstractTransfer
         self::DELIVERY_OPTIONS => self::DELIVERY_OPTIONS_DATA_NAME,
         self::DETAILS => self::DETAILS_DATA_NAME,
         self::IS_DISCOUNTED => self::IS_DISCOUNTED_DATA_NAME,
+        self::LABELS => self::LABELS_DATA_NAME,
         self::MEASUREMENT_UNIT => self::MEASUREMENT_UNIT_DATA_NAME,
         self::NAME => self::NAME_DATA_NAME,
         self::PRICE => self::PRICE_DATA_NAME,
@@ -87,11 +89,23 @@ final class ProductTransfer extends AbstractTransfer
         set => $this->_data[self::IS_DISCOUNTED_DATA_INDEX] = $value;
     }
 
+    // labels
+    #[ArrayObjectPropertyTypeAttribute()]
+    public const string LABELS = 'labels';
+    protected const string LABELS_DATA_NAME = 'LABELS';
+    protected const int LABELS_DATA_INDEX = 5;
+
+    /** @var \ArrayObject<string|int,mixed> */
+    public ArrayObject $labels {
+        get => $this->_data[self::LABELS_DATA_INDEX] ?? new ArrayObject();
+        set => $this->_data[self::LABELS_DATA_INDEX] = $value;
+    }
+
     // measurementUnit
     #[PropertyTypeAttribute(MeasurementUnitTransfer::class)]
     public const string MEASUREMENT_UNIT = 'measurementUnit';
     protected const string MEASUREMENT_UNIT_DATA_NAME = 'MEASUREMENT_UNIT';
-    protected const int MEASUREMENT_UNIT_DATA_INDEX = 5;
+    protected const int MEASUREMENT_UNIT_DATA_INDEX = 6;
 
     public ?MeasurementUnitTransfer $measurementUnit {
         get => $this->_data[self::MEASUREMENT_UNIT_DATA_INDEX];
@@ -101,7 +115,7 @@ final class ProductTransfer extends AbstractTransfer
     // name
     public const string NAME = 'name';
     protected const string NAME_DATA_NAME = 'NAME';
-    protected const int NAME_DATA_INDEX = 6;
+    protected const int NAME_DATA_INDEX = 7;
 
     public ?string $name {
         get => $this->_data[self::NAME_DATA_INDEX];
@@ -111,7 +125,7 @@ final class ProductTransfer extends AbstractTransfer
     // price
     public const string PRICE = 'price';
     protected const string PRICE_DATA_NAME = 'PRICE';
-    protected const int PRICE_DATA_INDEX = 7;
+    protected const int PRICE_DATA_INDEX = 8;
 
     public ?float $price {
         get => $this->_data[self::PRICE_DATA_INDEX];
@@ -121,7 +135,7 @@ final class ProductTransfer extends AbstractTransfer
     // sku
     public const string SKU = 'sku';
     protected const string SKU_DATA_NAME = 'SKU';
-    protected const int SKU_DATA_INDEX = 8;
+    protected const int SKU_DATA_INDEX = 9;
 
     public ?string $sku {
         get => $this->_data[self::SKU_DATA_INDEX];
@@ -131,7 +145,7 @@ final class ProductTransfer extends AbstractTransfer
     // stock
     public const string STOCK = 'stock';
     protected const string STOCK_DATA_NAME = 'STOCK';
-    protected const int STOCK_DATA_INDEX = 9;
+    protected const int STOCK_DATA_INDEX = 10;
 
     public ?int $stock {
         get => $this->_data[self::STOCK_DATA_INDEX];
@@ -141,7 +155,7 @@ final class ProductTransfer extends AbstractTransfer
     // stores
     public const string STORES = 'stores';
     protected const string STORES_DATA_NAME = 'STORES';
-    protected const int STORES_DATA_INDEX = 10;
+    protected const int STORES_DATA_INDEX = 11;
 
     /** @var array<int|string,mixed> */
     public array $stores {

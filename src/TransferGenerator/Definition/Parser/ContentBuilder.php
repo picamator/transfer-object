@@ -25,8 +25,8 @@ readonly class ContentBuilder implements ContentBuilderInterface
         $contentTransfer->className = $className;
 
         foreach ($properties as $propertyName => $propertyType) {
-            /** @var array<string,string|bool> $propertyType */
-            $propertyType = array_filter($propertyType ?: [], $this->propertyTypeFilter(...));
+            $propertyType = is_array($propertyType) ? $propertyType : [];
+            $propertyType = array_filter($propertyType, $this->propertyTypeFilter(...));
 
             $propertyTransfer = new DefinitionPropertyTransfer();
             $propertyTransfer->propertyName = (string)$propertyName;

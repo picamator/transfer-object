@@ -35,12 +35,12 @@ class SamplesTest extends TestCase
      */
     public static function samplesNameDataProvider(): Generator
     {
-        yield 'try-transfer sample' => [
-            'sampleName' => 'try-transfer.php',
+        yield 'try-definition-generator' => [
+            'sampleName' => 'try-definition-generator.php',
         ];
 
-        yield 'try-definition-generator sample' => [
-            'sampleName' => 'try-definition-generator.php',
+        yield 'try-transfer-generator' => [
+            'sampleName' => 'try-transfer-generator.php',
         ];
     }
 }

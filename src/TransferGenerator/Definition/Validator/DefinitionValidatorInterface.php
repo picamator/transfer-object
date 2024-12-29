@@ -7,7 +7,7 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Validator;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionValidatorTransfer;
 
-interface ContentValidatorInterface
+interface DefinitionValidatorInterface
 {
     public function validate(DefinitionContentTransfer $contentTransfer): DefinitionValidatorTransfer;
 }

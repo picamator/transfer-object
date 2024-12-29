@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Definition\Validator\Property;
 
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\ClassNameValidatorInterface;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\ClassNameValidatorInterface;
 
 readonly class TransferTypePropertyValidator implements PropertyValidatorInterface
 {

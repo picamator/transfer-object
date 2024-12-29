@@ -25,8 +25,12 @@ use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReade
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\ClassNameValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\ClassNameValidatorInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\ContentValidator;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\ContentValidatorInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\ClassNameContentValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\ContentValidatorInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\EmptyPropertiesContentValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\PropertiesContentValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\DefinitionValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\DefinitionValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\BuildInTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\CollectionTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\EnumTypePropertyValidator;
@@ -50,16 +54,32 @@ readonly class DefinitionFactory
         );
     }
 
-    protected function createContentValidator(): ContentValidatorInterface
+    protected function createContentValidator(): DefinitionValidatorInterface
     {
-        return new ContentValidator(
-            $this->createClassNameValidator(),
-            $this->createPropertyValidators(),
+        return new DefinitionValidator(
+            $this->createContentValidators(),
         );
     }
 
     /**
-     * @return ArrayObject<int,\Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface>
+     * @return \ArrayObject<int,ContentValidatorInterface>
+     */
+    protected function createContentValidators(): ArrayObject
+    {
+        return new ArrayObject([
+            $this->createClassNameContentValidator(),
+            $this->createEmptyPropertiesContentValidator(),
+            $this->createPropertiesContentValidator(),
+        ]);
+    }
+
+    protected function createPropertiesContentValidator(): ContentValidatorInterface
+    {
+        return new PropertiesContentValidator($this->createPropertyValidators());
+    }
+
+    /**
+     * @return \ArrayObject<int,PropertyValidatorInterface>
      */
     protected function createPropertyValidators(): ArrayObject
     {
@@ -107,6 +127,16 @@ readonly class DefinitionFactory
     protected function createNamePropertyValidator(): PropertyValidatorInterface
     {
         return new NamePropertyValidator();
+    }
+
+    protected function createEmptyPropertiesContentValidator(): ContentValidatorInterface
+    {
+        return new EmptyPropertiesContentValidator();
+    }
+
+    protected function createClassNameContentValidator(): ContentValidatorInterface
+    {
+        return new ClassNameContentValidator($this->createClassNameValidator());
     }
 
     protected function createClassNameValidator(): ClassNameValidatorInterface

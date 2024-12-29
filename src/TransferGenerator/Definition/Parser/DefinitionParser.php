@@ -19,8 +19,11 @@ readonly class DefinitionParser implements DefinitionParserInterface
     {
         $count = 0;
         $definition = $this->parser->parse($definitionContent);
+        $definition = is_array($definition) ? $definition : [];
+
         foreach ($definition as $className => $properties) {
             $count++;
+            $properties = is_array($properties) ? $properties : [];
             yield $this->contentBuilder->createContentTransfer(
                 className: (string)$className,
                 properties: $properties,

@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
+use Picamator\Doc\Samples\TransferObject\Generated\DefinitionGenerator\ProductTransfer;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
 use Picamator\TransferObject\Generated\DefinitionGeneratorContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
+use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 $projectRoot = getenv('PROJECT_ROOT') ?: '';
 
 echo <<<'STORY'
-======================================
-            Product
-               &
-            as Array
-======================================
+==============================================
+            Imagine there is a Product
+==============================================
 
 STORY;
 $productData = [
@@ -59,8 +59,6 @@ $productData = [
     ]
 ];
 
-var_dump($productData);
-
 echo <<<'STORY'
 ======================================
         Generate Definition
@@ -69,7 +67,8 @@ echo <<<'STORY'
 STORY;
 $generatorTransfer = new DefinitionGeneratorTransfer()
     ->fromArray([
-        DefinitionGeneratorTransfer::DEFINITION_PATH => $projectRoot . '/doc/samples/config/definition',
+        DefinitionGeneratorTransfer::DEFINITION_PATH => $projectRoot
+            . '/doc/samples/config/definition-generator/definition',
         DefinitionGeneratorTransfer::CONTENT => [
             DefinitionGeneratorContentTransfer::CLASS_NAME => 'Product',
             DefinitionGeneratorContentTransfer::CONTENT => $productData,
@@ -77,4 +76,35 @@ $generatorTransfer = new DefinitionGeneratorTransfer()
     ]);
 
 $generatedDefinitions = new DefinitionGeneratorFacade()->generateDefinitions($generatorTransfer);
-echo 'Generated definitions: ' . $generatedDefinitions . PHP_EOL;
+
+echo "Definitions $generatedDefinitions were successfully generated." . PHP_EOL;
+
+echo <<<'STORY'
+======================================================
+           Generate Transfer Objects
+       Note: for demo error handles were skipped
+======================================================
+
+STORY;
+$transferGeneratorFacade = new TransferGeneratorFacade();
+
+// ----- Load Configuration
+$configPath = __DIR__ . '/config/definition-generator/generator.config.yml';
+$configTransfer = $transferGeneratorFacade->loadConfig($configPath);
+
+// ----- Generate Transfer Objects
+$transferGeneratorFacade->generateTransfers();
+
+echo <<<'STORY'
+======================================================
+        Try newly Generated Transfer Objects
+          Validate that $productData fits TO
+======================================================
+
+STORY;
+
+$productTransfer = new ProductTransfer()->fromArray($productData);
+
+// ----- convert ArrayObject to string before comparison
+$productData['labels'] = $productData['labels']->getArrayCopy();
+var_dump($productData == $productTransfer->toArray());

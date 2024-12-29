@@ -54,7 +54,7 @@ Whether you're using `YML` definitions or well-structured arrays as blueprints, 
 Check out how it works:
 
  - [Try Sample with Array](/doc/samples/try-defitnition-generator.php).
- - [Try Sample with YML Definition](/doc/samples/try-samples.php) and
+ - [Try Sample with YML Definition](/doc/samples/try-transfer-generator.php) and
 
 Installation
 ------------

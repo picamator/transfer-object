@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\Doc\Samples\TransferObject\Generated;
+namespace Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator;
 
 use Picamator\Doc\Samples\TransferObject\Enum\CountryEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;

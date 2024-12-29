@@ -35,7 +35,7 @@ readonly class RequiredConfigContentValidator implements ConfigContentValidatorI
     {
         return sprintf(
             self::ERROR_MESSAGE_TEMPLATE,
-            implode(',', array_keys($missedConfig)),
+            implode(', ', array_keys($missedConfig)),
         );
     }
 }

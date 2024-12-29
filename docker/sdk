@@ -6,20 +6,20 @@ function show_usage() {
   echo "==================================="
   echo "Usage: $0 [-x] <argument>"
   echo "Arguments:"
-  echo "  -x                   Enable Xdebug during build"
-  echo "  build                Build Docker containers"
-  echo "  start                Start Docker containers"
-  echo "  stop                 Stop Docker containers"
-  echo "  cli                  Open container shell"
-  echo "  composer <command>   Run composer command"
-  echo "  phpstan              Run PHPStan"
-  echo "  phpunit              Run PHPUnit"
-  echo "  phpcs                Run PHP CodeSniffer"
-  echo "  phpcbf               Run PHP Code Beautifier and Fixer"
-  echo "  hook-install         Install CaptainHook"
-  echo "  hook <command>       Run CaptainHook command"
-  echo "  to-generate          Generate inertanl transfer objects"
-  echo "  to-samples-generate  Generate sample transfer objects"
+  echo "  -x                         Enable Xdebug during build"
+  echo "  build                      Build Docker containers"
+  echo "  start                      Start Docker containers"
+  echo "  stop                       Stop Docker containers"
+  echo "  cli                        Open container shell"
+  echo "  composer <command>         Run composer command"
+  echo "  phpstan                    Run PHPStan"
+  echo "  phpunit                    Run PHPUnit"
+  echo "  phpcs                      Run PHP CodeSniffer"
+  echo "  phpcbf                     Run PHP Code Beautifier and Fixer"
+  echo "  hook-install               Install CaptainHook"
+  echo "  hook <command>             Run CaptainHook command"
+  echo "  to-in-generate             Generate internal transfer objects"
+  echo "  to-generate <config path>  Generate internal transfer objects"
 }
 
 # vars
@@ -82,11 +82,11 @@ case $1 in
   hook)
     $DOCKER_EXEC composer captainhook $2
     ;;
-  to-generate)
+  to-in-generate)
      $DOCKER_EXEC composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
     ;;
-  to-samples-generate)
-     $DOCKER_EXEC composer generate-transfer -- -c ${PROJECT_ROOT}/doc/samples/config/generator.config.yml
+  to-generate)
+     $DOCKER_EXEC composer generate-transfer -- -c ${PROJECT_ROOT}/$2
     ;;
   *)
     show_usage

@@ -3,19 +3,33 @@
 declare(strict_types=1);
 
 use Picamator\Doc\Samples\TransferObject\Enum\CountryEnum;
-use Picamator\Doc\Samples\TransferObject\Generated\AgentTransfer;
-use Picamator\Doc\Samples\TransferObject\Generated\CustomerTransfer;
-use Picamator\Doc\Samples\TransferObject\Generated\MerchantTransfer;
-use Picamator\Doc\Samples\TransferObject\Generated\UserTransfer;
+use Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator\AgentTransfer;
+use Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator\CustomerTransfer;
+use Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator\MerchantTransfer;
+use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 echo <<<'STORY'
-======================================
-        Create Two Transfers
-               &
-             Debug
-======================================
+======================================================
+           Generate Transfer Objects
+        Note: for demo error handles were skipped
+======================================================
+
+STORY;
+$transferGeneratorFacade = new TransferGeneratorFacade();
+
+// ----- Load Configuration
+$configPath = __DIR__ . '/config/transfer-generator/generator.config.yml';
+$configTransfer = $transferGeneratorFacade->loadConfig($configPath);
+
+// ----- Generate Transfer Objects
+$transferGeneratorFacade->generateTransfers();
+
+echo <<<'STORY'
+======================================================
+        Try newly Generated Transfer Objects
+======================================================
 
 STORY;
 $customerTransfer = new CustomerTransfer();
@@ -27,18 +41,13 @@ $merchantTransfer->merchantReference = 'PL-234-567';
 $merchantTransfer->country = CountryEnum::PL;
 $merchantTransfer->isActive = true;
 
-var_dump($customerTransfer);
+var_dump($customerTransfer->toArray());
 var_dump($merchantTransfer);
 
-foreach ($customerTransfer as $key => $value) {
-    echo 'key: ' . $key . PHP_EOL;
-    echo 'value: ' . $value . PHP_EOL;
-}
-
 echo <<<'STORY'
-======================================
-        Create another Transfer
-======================================
+======================================================
+             Try how fromArray works
+======================================================
 
 STORY;
 $agentTransfer = new AgentTransfer()
@@ -62,25 +71,3 @@ $agentTransfer = new AgentTransfer()
     ]);
 
 var_dump($agentTransfer->toArray());
-
-echo <<<'STORY'
-======================================
-        And then Serialise
-                &
-       JSON Encode, Count it
-======================================
-
-STORY;
-var_dump(serialize($agentTransfer));
-var_dump(json_encode($agentTransfer));
-var_dump($agentTransfer->count());
-
-echo <<<'STORY'
-======================================
-           Copy TO
-======================================
-
-STORY;
-
-$userTransfer = new UserTransfer()->fromArray($customerTransfer->toArray());
-var_dump($userTransfer);
