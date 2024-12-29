@@ -9,7 +9,9 @@ use Generator;
 interface DefinitionReaderInterface
 {
     /**
-     * @return \Generator<\Picamator\TransferObject\Generated\DefinitionTransfer>
+     * @return \Generator<int,\Picamator\TransferObject\Generated\DefinitionTransfer>
      */
     public function getDefinitions(): Generator;
+
+    public function getDefinitionFileCount(): int;
 }

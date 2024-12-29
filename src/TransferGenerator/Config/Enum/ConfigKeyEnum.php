@@ -24,4 +24,12 @@ enum ConfigKeyEnum: string
     {
         return self::PATH_KEYS;
     }
+
+    /**
+     * @return array<string,string>
+     */
+    public static function getValueName(): array
+    {
+        return array_column(self::cases(), column_key: 'name', index_key: 'value');
+    }
 }

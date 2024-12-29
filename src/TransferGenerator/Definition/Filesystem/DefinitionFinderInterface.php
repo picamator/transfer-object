@@ -14,4 +14,6 @@ interface DefinitionFinderInterface
      * @return Generator<string>
      */
     public function getDefinitionContent(): Generator;
+
+    public function getDefinitionCount(): int;
 }

@@ -31,6 +31,17 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
         $this->filesystem->mkdir($temporaryPath);
     }
 
+    /**
+     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
+     */
+    public function deleteTempDir(): void
+    {
+        $temporaryPath = $this->getTemporaryPath();
+        if ($this->filesystem->exists($temporaryPath)) {
+            $this->filesystem->remove($temporaryPath);
+        }
+    }
+
     public function rotateTempDir(): void
     {
         $this->deleteOldFiles();
@@ -81,17 +92,6 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
         $destinationPath = $this->config->getTransferPath() . DIRECTORY_SEPARATOR;
         foreach ($finder as $file) {
             $this->filesystem->copy($file->getRealPath(), $destinationPath . $file->getFilename());
-        }
-    }
-
-    /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
-     */
-    private function deleteTempDir(): void
-    {
-        $temporaryPath = $this->getTemporaryPath();
-        if ($this->filesystem->exists($temporaryPath)) {
-            $this->filesystem->remove($temporaryPath);
         }
     }
 

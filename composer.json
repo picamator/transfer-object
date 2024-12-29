@@ -67,13 +67,15 @@
     "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon",
     "generate-transfer": "php ./generate-transfer",
     "captainhook": "./vendor/bin/captainhook",
-    "phpcs": "./vendor/bin/phpcs"
+    "phpcs": "./vendor/bin/phpcs",
+    "phpcbf": "./vendor/bin/phpcbf"
   },
   "scripts-descriptions": {
     "phpunit": "Run PHPUnit tests.",
     "phpstan": "Run PHPStan - PHP Static Analysis Tool.",
     "generate-transfer": "Run Transfer Object Generator.",
     "captainhook": "Run CaptanHooks.",
-    "phpcs": "Run PHP CodeSniffer."
+    "phpcs": "Run PHP CodeSniffer.",
+    "phpcbf": "Run PHP Code Beautifier and Fixer."
   }
 }

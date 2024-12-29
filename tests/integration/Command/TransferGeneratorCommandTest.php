@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\Command;
 
 use PHPUnit\Framework\TestCase;
-use Picamator\Tests\Integration\TransferObject\Helper\CleanTmpHelperTrait;
 use Picamator\TransferObject\Command\TransferGeneratorCommand;
 use Symfony\Component\Console\Tester\CommandTester;
 
 class TransferGeneratorCommandTest extends TestCase
 {
-    use CleanTmpHelperTrait;
-
     private const string SUCCESS_CONFIG_PATH = __DIR__ . '/data/success/config/generator.config.yml';
     private const string ERROR_CONFIG_PATH = __DIR__ . '/data/error/config/generator.config.yml';
 
@@ -23,11 +20,6 @@ class TransferGeneratorCommandTest extends TestCase
         $command = new TransferGeneratorCommand();
 
         $this->commandTester = new CommandTester($command);
-    }
-
-    protected function tearDown(): void
-    {
-        $this->deleteTmpDir(__DIR__ . '/Generated');
     }
 
     public function testRunCommandWithoutConfigurationShouldShowErrorMessage(): void
@@ -41,7 +33,7 @@ class TransferGeneratorCommandTest extends TestCase
         $this->assertStringContainsString('Command option -c is not set', $output);
     }
 
-    public function testRunCommandWithInvalidConfigurationShouldShowErrorMessage(): void
+    public function testRunCommandWithInvalidConfigurationPathShouldShowErrorMessage(): void
     {
         // Act
         $this->commandTester->execute([
@@ -67,7 +59,7 @@ class TransferGeneratorCommandTest extends TestCase
         $this->assertStringContainsString('Transfer Objects successfully generated.', $output);
     }
 
-    public function testRunCommandWithErrorConfigurationShouldShowErrorMessage(): void
+    public function testRunCommandWithValidConfigurationButInvalidDefinitionShouldShowErrorMessage(): void
     {
         // Act
         $this->commandTester->execute([

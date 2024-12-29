@@ -14,10 +14,11 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
  */
 final class DefinitionTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 2;
+    protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
         self::CONTENT => self::CONTENT_DATA_NAME,
+        self::FILE_NAME => self::FILE_NAME_DATA_NAME,
         self::VALIDATOR => self::VALIDATOR_DATA_NAME,
     ];
 
@@ -32,11 +33,21 @@ final class DefinitionTransfer extends AbstractTransfer
         set => $this->_data[self::CONTENT_DATA_INDEX] = $value;
     }
 
+    // fileName
+    public const string FILE_NAME = 'fileName';
+    protected const string FILE_NAME_DATA_NAME = 'FILE_NAME';
+    protected const int FILE_NAME_DATA_INDEX = 1;
+
+    public ?string $fileName {
+        get => $this->_data[self::FILE_NAME_DATA_INDEX];
+        set => $this->_data[self::FILE_NAME_DATA_INDEX] = $value;
+    }
+
     // validator
     #[PropertyTypeAttribute(DefinitionValidatorTransfer::class)]
     public const string VALIDATOR = 'validator';
     protected const string VALIDATOR_DATA_NAME = 'VALIDATOR';
-    protected const int VALIDATOR_DATA_INDEX = 1;
+    protected const int VALIDATOR_DATA_INDEX = 2;
 
     public ?DefinitionValidatorTransfer $validator {
         get => $this->_data[self::VALIDATOR_DATA_INDEX];

@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator;
 
 use ArrayObject;
+use Fiber;
+use Picamator\TransferObject\Command\Helper\ProgressBarInterface;
 use Picamator\TransferObject\Dependency\DependencyContainer;
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Dependency\Finder\FinderInterface;
+use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactory;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoaderInterface;
@@ -16,6 +19,8 @@ use Picamator\TransferObject\TransferGenerator\Definition\DefinitionFactory;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystem;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\GeneratorProcessor;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\GeneratorProcessorInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGenerator;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\BuildInTypeTemplateExpander;
@@ -33,18 +38,33 @@ readonly class TransferGeneratorFactory
     use ConfigFactoryTrait;
     use DependencyFactoryTrait;
 
+    /**
+     * @return \Fiber<ProgressBarInterface,null,bool,TransferGeneratorTransfer>
+     */
+    public function createTransferGeneratorFiber(): Fiber
+    {
+        return new Fiber($this->createTransferGenerator()->getTransferFiberCallback(...));
+    }
+
     public function createTransferGenerator(): TransferGeneratorInterface
     {
         return new TransferGenerator(
             $this->createDefinitionReader(),
-            $this->createTemplateRender(),
-            $this->createGeneratorFilesystem(),
+            $this->createGeneratorProcessor(),
         );
     }
 
     public function createConfigLoader(): ConfigLoaderInterface
     {
         return new ConfigFactory()->createConfigLoader();
+    }
+
+    protected function createGeneratorProcessor(): GeneratorProcessorInterface
+    {
+        return new GeneratorProcessor(
+            $this->createTemplateRender(),
+            $this->createGeneratorFilesystem(),
+        );
     }
 
     protected function createGeneratorFilesystem(): GeneratorFilesystemInterface

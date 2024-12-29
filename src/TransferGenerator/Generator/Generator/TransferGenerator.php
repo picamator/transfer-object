@@ -5,90 +5,82 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 
 use Fiber;
-use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
+use Generator;
+use Picamator\TransferObject\Command\Helper\ProgressBarInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
-use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
-use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderInterface;
-use Picamator\TransferObject\Generated\DefinitionTransfer;
-use Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer;
-use Throwable;
+use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
 
 readonly class TransferGenerator implements TransferGeneratorInterface
 {
     public function __construct(
         private DefinitionReaderInterface $definitionReader,
-        private TemplateRenderInterface $renderer,
-        private GeneratorFilesystemInterface $filesystem,
+        private GeneratorProcessorInterface $processor,
     ) {
     }
 
-    public function getTransferGeneratorFiber(): Fiber
+    public function getTransferGenerator(): Generator
     {
-        return new Fiber($this->fiberCallback(...));
+        $this->processor->preGenerateTransfer();
+
+        $validCount = 0;
+        $definitionGenerator = $this->definitionReader->getDefinitions();
+        foreach ($definitionGenerator as $definitionTransfer) {
+            $generatorTransfer = $this->processor->generateTransfer($definitionTransfer);
+            $validCount += (int)$generatorTransfer->validator?->isValid;
+
+            yield $generatorTransfer;
+        }
+
+        $totalGenerated = $definitionGenerator->getReturn();
+        $isSuccess = $totalGenerated !== 0 && $totalGenerated === $validCount;
+        $this->processor->postGenerateTransfer($isSuccess);
+
+        return $isSuccess;
     }
 
     /**
      * @throws \FiberError
      * @throws \Throwable
      */
-    private function fiberCallback(): bool
+    public function getTransferFiberCallback(ProgressBarInterface $progressBar): bool
     {
-        $this->filesystem->createTempDir();
-        Fiber::suspend();
+        $progressBar->progressStart($this->definitionReader->getDefinitionFileCount());
+        $generatorIterator = $this->getTransferGenerator();
 
-        $validCount = 0;
-        $definitionGenerator = $this->definitionReader->getDefinitions();
-        foreach ($definitionGenerator as $definitionKey => $definitionTransfer) {
-            $definitionTransfer = $this->generateTransfer($definitionTransfer);
-
-            $validCount += (int)$definitionTransfer->validator?->isValid;
-            $generatorTransfer = $this->createGeneratorTransfer($definitionKey, $definitionTransfer);
+        $currentDefinitionFile = '';
+        foreach ($generatorIterator as $generatorTransfer) {
+            if ($currentDefinitionFile !== $generatorTransfer->fileName) {
+                $currentDefinitionFile = $generatorTransfer->fileName;
+                $progressBar->progressAdvance();
+            }
 
             Fiber::suspend($generatorTransfer);
         }
 
-        $totalCount = $definitionGenerator->getReturn();
-        $isValid = $totalCount > 0 && $totalCount === $validCount;
-        if ($isValid) {
-            $this->filesystem->rotateTempDir();
-        }
+        $progressBar->progressFinish();
 
-        return $isValid;
+        return $generatorIterator->getReturn();
     }
 
-    private function createGeneratorTransfer(
-        string $definitionKey,
-        DefinitionTransfer $definitionTransfer,
-    ): TransferGeneratorCallbackTransfer {
-        $generatorTransfer = new TransferGeneratorCallbackTransfer();
-
-        $generatorTransfer->className = $definitionTransfer->content?->className;
-        $generatorTransfer->definitionKey = $definitionKey;
-        $generatorTransfer->validator = $definitionTransfer->validator;
-
-        return $generatorTransfer;
-    }
-
-    private function generateTransfer(DefinitionTransfer $definitionTransfer): DefinitionTransfer
+    /**
+     * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
+     */
+    public function generateTransfers(): void
     {
-        if (!$definitionTransfer->validator?->isValid) {
-            return $definitionTransfer;
-        }
+        foreach ($this->getTransferGenerator() as $generatorTransfer) {
+            if ($generatorTransfer->validator?->isValid === true) {
+                continue;
+            }
 
-        try {
-            $content = $this->renderer->renderTemplate($definitionTransfer->content);
-            $this->filesystem->writeFile($definitionTransfer->content->className, $content);
-
-            return $definitionTransfer;
-        } catch (Throwable $e) {
-            $definitionTransfer->validator->isValid = false;
-            $definitionTransfer->validator->errorMessages[] = new ValidatorMessageTransfer()
-                ->fromArray([
-                    ValidatorMessageTransfer::IS_VALID => false,
-                    ValidatorMessageTransfer::ERROR_MESSAGE => $e->getMessage(),
-                ]);
-
-            return $definitionTransfer;
+            $errorMessage = $generatorTransfer->validator?->errorMessages[0] ?? null;
+            throw new TransferGeneratorException(
+                sprintf(
+                    'Failed generating Transfer Object "%s" based on definition file "%s". Error: "%s".',
+                    $generatorTransfer->className,
+                    $generatorTransfer->fileName,
+                    $errorMessage?->errorMessage ?: '',
+                ),
+            );
         }
     }
 }

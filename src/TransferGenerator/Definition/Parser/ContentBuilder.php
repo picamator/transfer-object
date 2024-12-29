@@ -2,42 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Definition\Reader;
+namespace Picamator\TransferObject\TransferGenerator\Definition\Parser;
 
 use ArrayObject;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
-use Picamator\TransferObject\Generated\DefinitionTransfer;
-use Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\PropertyExpanderInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\ContentValidatorInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\PropertyExpanderInterface;
 
-readonly class DefinitionBuilder implements DefinitionBuilderInterface
+readonly class ContentBuilder implements ContentBuilderInterface
 {
     /**
      * @param \ArrayObject<int,PropertyExpanderInterface> $propertyExpanders
      */
     public function __construct(
-        private ContentValidatorInterface $validator,
         private ArrayObject $propertyExpanders,
     ) {
     }
 
-    public function buildDefinitionTransfer(string $className, array $properties): DefinitionTransfer
-    {
-        $contentTransfer = $this->createContentTransfer($className, $properties);
-        $validatorTransfer = $this->validator->validate($contentTransfer);
-
-        $definitionTransfer = new DefinitionTransfer();
-        $definitionTransfer->content = $contentTransfer;
-        $definitionTransfer->validator = $validatorTransfer;
-
-        return $definitionTransfer;
-    }
-
-    /**
-     * @param array<string|int, array<string, string|null>> $properties
-     */
-    private function createContentTransfer(string $className, array $properties): DefinitionContentTransfer
+    public function createContentTransfer(string $className, array $properties): DefinitionContentTransfer
     {
         $contentTransfer = new DefinitionContentTransfer();
         $contentTransfer->className = $className;

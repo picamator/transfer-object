@@ -28,7 +28,7 @@ readonly class DefinitionGenerator implements DefinitionGeneratorInterface
 
         $this->filesystem->deleteFile($filesystemTransfer);
 
-        foreach ($this->builder->buildDefinitionContents($generatorTransfer->content) as $contentTransfer) {
+        foreach ($this->builder->createDefinitionContents($generatorTransfer->content) as $contentTransfer) {
             $content = $this->render->renderDefinitionContent($contentTransfer);
 
             $filesystemTransfer->content = $content;

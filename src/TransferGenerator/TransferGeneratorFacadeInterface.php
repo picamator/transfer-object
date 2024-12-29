@@ -5,23 +5,51 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator;
 
 use Fiber;
+use Generator;
+use Picamator\TransferObject\Command\Helper\ProgressBarInterface;
 use Picamator\TransferObject\Generated\ConfigTransfer;
+use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 
 interface TransferGeneratorFacadeInterface
 {
     /**
      * Specification:
-     * - Provides Transfer Generator Fiber
-     * - First Suspend on creating temporary directory
-     * - Next Suspend after generating each Transfer Object passing `TransferGeneratorCallbackTransfer` as argument
-     * - Fiber returns `true` when whole process is successful, `false` otherwise
+     * - Requires config loading `self::loadConfig()`
+     * - Generates new Transfer Object on each iteration
+     * - Transfer object `TransferGeneratorTransfer` might contain error messages if any occur
+     * - Returns `true` when whole process is successful, `false` otherwise
      *
      * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
-     * @throws \FiberError
      *
-     * @return \Fiber<null,null,bool,\Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer>
+     * @return \Generator<int,\Picamator\TransferObject\Generated\TransferGeneratorTransfer>
+     */
+    public function getTransferGenerator(): Generator;
+
+    /**
+     * Specification:
+     * - Requires config loading `self::loadConfig()`
+     * - Provides Transfer Generator Fiber
+     * - Starts with argument `ProgressBarInterface`
+     * - Suspends after generating Transfer Object passing `TransferGeneratorTransfer` back
+     * - Transfer object `TransferGeneratorTransfer` might contain error messages if any occur
+     * - Returns `true` when whole process is successful, `false` otherwise
+     *
+     * @throws \FiberError
+     * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
+     *
+     * @return \Fiber<ProgressBarInterface,null,bool,TransferGeneratorTransfer>
      */
     public function getTransferGeneratorFiber(): Fiber;
+
+    /**
+     * Specification:
+     * - Requires config loading `self::loadConfig()`
+     * - Generates Transfer Objects without output
+     * - Throws exception on any error
+     *
+     * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
+     */
+    public function generateTransfers(): void;
 
     /**
      * Specification:

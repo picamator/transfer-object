@@ -5,59 +5,71 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Definition\Reader;
 
 use Generator;
-use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Picamator\TransferObject\Generated\DefinitionTransfer;
 use Picamator\TransferObject\Generated\DefinitionValidatorTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinderInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParserInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\ContentValidatorInterface;
 use Throwable;
 
 readonly class DefinitionReader implements DefinitionReaderInterface
 {
     public function __construct(
         private DefinitionFinderInterface $finder,
-        private YmlParserInterface $parser,
-        private DefinitionBuilderInterface $definitionBuilder,
+        private DefinitionParserInterface $parser,
+        private ContentValidatorInterface $validator,
     ) {
     }
 
     public function getDefinitions(): Generator
     {
         try {
-            $count = 0;
-            foreach ($this->handleGetDefinitions() as $key => $definition) {
-                $count++;
-                yield $key => $definition;
-            }
+            $definitionGenerator = $this->handleDefinitions();
+            yield from $definitionGenerator;
+
+            return $definitionGenerator->getReturn();
         } catch (Throwable $e) {
-            $count++;
-            yield '----:----' => $this->createErrorDefinitionTransfer($e);
+            yield $this->createErrorDefinitionTransfer($e);
         }
 
-        return $count;
+        return 0;
+    }
+
+    public function getDefinitionFileCount(): int
+    {
+        return $this->finder->getDefinitionCount();
     }
 
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
      * @throws \Picamator\TransferObject\Dependency\Exception\YmlParserException
      *
-     * @return \Generator<\Picamator\TransferObject\Generated\DefinitionTransfer>
+     * @return \Generator<int, \Picamator\TransferObject\Generated\DefinitionTransfer>
      */
-    private function handleGetDefinitions(): Generator
+    private function handleDefinitions(): Generator
     {
+        $count = 0;
         foreach ($this->finder->getDefinitionContent() as $fileName => $definitionContent) {
-            $definition = $this->parser->parse($definitionContent);
-            foreach ($definition as $className => $properties) {
-                yield $fileName . ':' . $className
-                    => $this->definitionBuilder->buildDefinitionTransfer((string)$className, $properties);
+            $contentGenerator = $this->parser->parseDefinition($definitionContent);
+            foreach ($contentGenerator as $contentTransfer) {
+                $definitionTransfer = new DefinitionTransfer();
+                $definitionTransfer->fileName = $fileName;
+                $definitionTransfer->content = $contentTransfer;
+                $definitionTransfer->validator = $this->validator->validate($contentTransfer);
+
+                yield $definitionTransfer;
             }
+
+            $count += $contentGenerator->getReturn();
         }
+
+        return $count;
     }
 
     private function createErrorDefinitionTransfer(Throwable $e): DefinitionTransfer
     {
         $definitionTransfer = new DefinitionTransfer();
-
         $definitionTransfer->validator = new DefinitionValidatorTransfer();
         $definitionTransfer->validator->isValid = false;
         $definitionTransfer->validator->errorMessages[] = new ValidatorMessageTransfer()

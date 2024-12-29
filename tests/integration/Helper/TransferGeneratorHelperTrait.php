@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\Helper;
 
 use ArrayObject;
-use Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer;
+use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 
 trait TransferGeneratorHelperTrait
@@ -15,16 +15,13 @@ trait TransferGeneratorHelperTrait
      */
     protected function generateTransfers(callable $postGenerateItemCallback): bool
     {
-        $generatorFiber = new TransferGeneratorFacade()->getTransferGeneratorFiber();
+        $generatorIterator = new TransferGeneratorFacade()->getTransferGenerator();
 
-        $generatorFiber->start();
-        while (!$generatorFiber->isTerminated()) {
-            /** @var \Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer|null $generatorTransfer */
-            $generatorTransfer = $generatorFiber->resume();
+        foreach ($generatorIterator as $generatorTransfer) {
             $postGenerateItemCallback($generatorTransfer);
         }
 
-        return $generatorFiber->getReturn();
+        return $generatorIterator->getReturn();
     }
 
     /**
@@ -38,7 +35,7 @@ trait TransferGeneratorHelperTrait
         $this->assertTrue($configTransfer->validator->isValid, $message);
     }
 
-    protected function assertGeneratorSuccess(?TransferGeneratorCallbackTransfer $generatorTransfer): void
+    protected function assertGeneratorSuccess(?TransferGeneratorTransfer $generatorTransfer): void
     {
         if ($generatorTransfer === null) {
             return;

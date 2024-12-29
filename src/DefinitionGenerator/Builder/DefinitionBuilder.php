@@ -18,17 +18,18 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
     /**
      * @param \ArrayObject<int,BuilderExpanderInterface> $builderExpanders
      */
-    public function __construct(private ArrayObject $builderExpanders)
-    {
+    public function __construct(
+        private ArrayObject $builderExpanders,
+    ) {
     }
 
-    public function buildDefinitionContents(DefinitionGeneratorContentTransfer $generatorContentTransfer): Generator
+    public function createDefinitionContents(DefinitionGeneratorContentTransfer $generatorContentTransfer): Generator
     {
         $builderTransfer = $this->getBuilderTransfer($generatorContentTransfer);
         yield $builderTransfer->definitionContent;
 
         foreach ($builderTransfer->generatorContents as $generatorContentTransfer) {
-            yield from $this->buildDefinitionContents($generatorContentTransfer);
+            yield from $this->createDefinitionContents($generatorContentTransfer);
         }
     }
 

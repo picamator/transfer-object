@@ -9,8 +9,12 @@ use Picamator\TransferObject\Dependency\DependencyContainer;
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
+use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRender;
+use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRenderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoader;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoaderInterface;
+use Picamator\TransferObject\TransferGenerator\Config\Parser\ConfigContentBuilder;
+use Picamator\TransferObject\TransferGenerator\Config\Parser\ConfigContentBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Parser\ConfigParser;
 use Picamator\TransferObject\TransferGenerator\Config\Parser\ConfigParserInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Reader\ConfigReader;
@@ -90,7 +94,20 @@ readonly class ConfigFactory
 
     protected function createConfigParser(): ConfigParserInterface
     {
-        return new ConfigParser($this->createYmlParser());
+        return new ConfigParser(
+            $this->createYmlParser(),
+            $this->createConfigContentBuilder(),
+        );
+    }
+
+    protected function createConfigContentBuilder(): ConfigContentBuilderInterface
+    {
+        return new ConfigContentBuilder($this->createConfigEnvironmentRender());
+    }
+
+    protected function createConfigEnvironmentRender(): ConfigEnvironmentRenderInterface
+    {
+        return new ConfigEnvironmentRender();
     }
 
     protected function createYmlParser(): YmlParserInterface

@@ -9,5 +9,5 @@ use Picamator\TransferObject\Generated\TemplateTransfer;
 
 interface TemplateBuilderInterface
 {
-    public function buildTemplateTransfer(DefinitionContentTransfer $contentTransfer): TemplateTransfer;
+    public function createTemplateTransfer(DefinitionContentTransfer $contentTransfer): TemplateTransfer;
 }

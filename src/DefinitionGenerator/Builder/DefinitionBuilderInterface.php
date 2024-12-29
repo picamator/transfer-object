@@ -14,5 +14,5 @@ interface DefinitionBuilderInterface
      *
      * @return \Generator<\Picamator\TransferObject\Generated\DefinitionContentTransfer>
      */
-    public function buildDefinitionContents(DefinitionGeneratorContentTransfer $generatorContentTransfer): Generator;
+    public function createDefinitionContents(DefinitionGeneratorContentTransfer $generatorContentTransfer): Generator;
 }

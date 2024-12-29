@@ -4,15 +4,24 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 
-use Fiber;
+use Generator;
+use Picamator\TransferObject\Command\Helper\ProgressBarInterface;
 
 interface TransferGeneratorInterface
 {
     /**
-     * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
-     * @throws \FiberError
-     *
-     * @return \Fiber<null,null,bool,\Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer>
+     * @return \Generator<int,\Picamator\TransferObject\Generated\TransferGeneratorTransfer>
      */
-    public function getTransferGeneratorFiber(): Fiber;
+    public function getTransferGenerator(): Generator;
+
+    /**
+     * @throws \FiberError
+     * @throws \Throwable
+     */
+    public function getTransferFiberCallback(ProgressBarInterface $progressBar): bool;
+
+    /**
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException
+     */
+    public function generateTransfers(): void;
 }

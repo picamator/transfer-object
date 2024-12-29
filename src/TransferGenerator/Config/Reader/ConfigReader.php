@@ -22,7 +22,7 @@ readonly class ConfigReader implements ConfigReaderInterface
     public function getConfig(string $configPath): ConfigTransfer
     {
         try {
-            return $this->handleGetConfig($configPath);
+            return $this->handleConfig($configPath);
         } catch (Throwable $e) {
             return $this->createErrorConfigTransfer($e);
         }
@@ -32,7 +32,7 @@ readonly class ConfigReader implements ConfigReaderInterface
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      * @throws \Picamator\TransferObject\Dependency\Exception\YmlParserException
      */
-    private function handleGetConfig(string $configPath): ConfigTransfer
+    private function handleConfig(string $configPath): ConfigTransfer
     {
         $validatorTransfer = $this->validator->validateFile($configPath);
         if (!$validatorTransfer->isValid) {

@@ -12,13 +12,13 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
  * - Class is generated based on definition.
  * - In order to modify file please change definition and run generator.
  */
-final class TransferGeneratorCallbackTransfer extends AbstractTransfer
+final class TransferGeneratorTransfer extends AbstractTransfer
 {
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
         self::CLASS_NAME => self::CLASS_NAME_DATA_NAME,
-        self::DEFINITION_KEY => self::DEFINITION_KEY_DATA_NAME,
+        self::FILE_NAME => self::FILE_NAME_DATA_NAME,
         self::VALIDATOR => self::VALIDATOR_DATA_NAME,
     ];
 
@@ -32,14 +32,14 @@ final class TransferGeneratorCallbackTransfer extends AbstractTransfer
         set => $this->_data[self::CLASS_NAME_DATA_INDEX] = $value;
     }
 
-    // definitionKey
-    public const string DEFINITION_KEY = 'definitionKey';
-    protected const string DEFINITION_KEY_DATA_NAME = 'DEFINITION_KEY';
-    protected const int DEFINITION_KEY_DATA_INDEX = 1;
+    // fileName
+    public const string FILE_NAME = 'fileName';
+    protected const string FILE_NAME_DATA_NAME = 'FILE_NAME';
+    protected const int FILE_NAME_DATA_INDEX = 1;
 
-    public ?string $definitionKey {
-        get => $this->_data[self::DEFINITION_KEY_DATA_INDEX];
-        set => $this->_data[self::DEFINITION_KEY_DATA_INDEX] = $value;
+    public ?string $fileName {
+        get => $this->_data[self::FILE_NAME_DATA_INDEX];
+        set => $this->_data[self::FILE_NAME_DATA_INDEX] = $value;
     }
 
     // validator

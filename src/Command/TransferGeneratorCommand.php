@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Command;
 
+use ArrayObject;
+use Picamator\TransferObject\Command\Helper\ProgressBar;
+use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
+use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacadeInterface;
 use Symfony\Component\Console\Command\Command;
@@ -14,8 +18,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class TransferGeneratorCommand extends Command
 {
-    use ValidatorMessageTrait;
-
     private const string NAME = 'generate:transfer';
     private const string DESCRIPTION = 'Generates Transfer Objects based on definitions template.';
     private const string HELP = 'Configuration path should be specified.';
@@ -24,7 +26,7 @@ final class TransferGeneratorCommand extends Command
     private const string OPTION_SHORTCUT_CONFIGURATION = 'c';
     private const string OPTION_DESCRIPTION_CONFIGURATION = 'Path to YML configuration.';
 
-    private const string ERROR_TEMPLATE = 'Failed generating %s.';
+    private const string ERROR_TEMPLATE = 'Failed generating Transfer Object "%s" based on definition file "%s".';
     private const string ERROR_MISSED_OPTION_CONFIG_MESSAGE =
         'Command option -c is not set. Please provide the path to the YML configuration.';
     private const string ERROR_MESSAGE = 'Failed to generate Transfer Objects.';
@@ -79,18 +81,35 @@ final class TransferGeneratorCommand extends Command
     private function generateTransfers(SymfonyStyle $styleOutput): bool
     {
         $generatorFiber = $this->generatorFacade->getTransferGeneratorFiber();
+        $progressBar = new ProgressBar($styleOutput);
 
-        $generatorFiber->start();
+        $generatorTransfer = $generatorFiber->start($progressBar);
+        $this->writelnGeneratorTransfer($generatorTransfer, $styleOutput);
+
         while (!$generatorFiber->isTerminated()) {
-            /** @var \Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer|null $generatorTransfer */
             $generatorTransfer = $generatorFiber->resume();
-            if ($generatorTransfer?->validator?->isValid === false) {
-                $styleOutput->error(sprintf(self::ERROR_TEMPLATE, $generatorTransfer->definitionKey));
-                $this->writelnValidatorErrorMessages($generatorTransfer->validator->errorMessages, $styleOutput);
-            }
+            $this->writelnGeneratorTransfer($generatorTransfer, $styleOutput);
         }
 
         return $generatorFiber->getReturn();
+    }
+
+    private function writelnGeneratorTransfer(
+        ?TransferGeneratorTransfer $generatorTransfer,
+        SymfonyStyle $styleOutput,
+    ): void {
+        if ($generatorTransfer === null || $generatorTransfer->validator?->isValid === true) {
+            return;
+        }
+
+        $error = sprintf(
+            self::ERROR_TEMPLATE,
+            $generatorTransfer->className ?: '---',
+            $generatorTransfer->fileName ?: '---',
+        );
+        $styleOutput->error($error);
+
+        $this->writelnValidatorErrorMessages($generatorTransfer->validator->errorMessages, $styleOutput);
     }
 
     private function loadConfig(string $configPath, SymfonyStyle $styleOutput): bool
@@ -98,6 +117,8 @@ final class TransferGeneratorCommand extends Command
         if ($configPath === '') {
             $styleOutput->error(self::ERROR_MESSAGE);
             $styleOutput->error(self::ERROR_MISSED_OPTION_CONFIG_MESSAGE);
+
+            return false;
         }
 
         $configTransfer = $this->generatorFacade->loadConfig($configPath);
@@ -107,8 +128,18 @@ final class TransferGeneratorCommand extends Command
             return false;
         }
 
-        $styleOutput->info($configPath);
+        $styleOutput->info('Config: ' . $configPath);
 
         return true;
+    }
+
+    /**
+     * @param \ArrayObject<int, ValidatorMessageTransfer> $errorMessages
+     */
+    private function writelnValidatorErrorMessages(ArrayObject $errorMessages, SymfonyStyle $styleOutput): void
+    {
+        foreach ($errorMessages as $errorMessage) {
+            $styleOutput->warning($errorMessage->errorMessage);
+        }
     }
 }

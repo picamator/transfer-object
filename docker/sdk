@@ -15,6 +15,7 @@ function show_usage() {
   echo "  phpstan              Run PHPStan"
   echo "  phpunit              Run PHPUnit"
   echo "  phpcs                Run PHP CodeSniffer"
+  echo "  phpcbf               Run PHP Code Beautifier and Fixer"
   echo "  hook-install         Install CaptainHook"
   echo "  hook <command>       Run CaptainHook command"
   echo "  to-generate          Generate inertanl transfer objects"
@@ -24,6 +25,7 @@ function show_usage() {
 # vars
 DOCKER_CONTAINER_NAME=transfer-object-php
 PROJECT_ROOT="/home/transfer/transfer-object"
+DOCKER_EXEC="docker exec -it ${DOCKER_CONTAINER_NAME}"
 
 # options
 ENABLE_XDEBUG=0
@@ -57,31 +59,34 @@ case $1 in
     docker compose stop
     ;;
   cli)
-    docker exec -it $DOCKER_CONTAINER_NAME sh
+    $DOCKER_EXEC sh
     ;;
   composer)
-    docker exec -i $DOCKER_CONTAINER_NAME composer $2
+    $DOCKER_EXEC composer $2
     ;;
   phpstan)
-    docker exec -i $DOCKER_CONTAINER_NAME composer phpstan
+    $DOCKER_EXEC composer phpstan
     ;;
   phpunit)
-    docker exec -i $DOCKER_CONTAINER_NAME composer phpunit
+    $DOCKER_EXEC composer phpunit
     ;;
   phpcs)
-    docker exec -i $DOCKER_CONTAINER_NAME composer phpcs
+    $DOCKER_EXEC composer phpcs
+    ;;
+  phpcbf)
+    $DOCKER_EXEC composer phpcbf
     ;;
   hook-install)
-    docker exec -i $DOCKER_CONTAINER_NAME composer captainhook install --only-enabled --run-mode=docker --run-exec="docker exec -i $DOCKER_CONTAINER_NAME"
+    $DOCKER_EXEC composer captainhook install --only-enabled --run-mode=docker --run-exec="docker exec -i $DOCKER_CONTAINER_NAME"
     ;;
   hook)
-    docker exec -i $DOCKER_CONTAINER_NAME composer captainhook $2
+    $DOCKER_EXEC composer captainhook $2
     ;;
   to-generate)
-     docker exec -i $DOCKER_CONTAINER_NAME composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
+     $DOCKER_EXEC composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
     ;;
   to-samples-generate)
-     docker exec -i $DOCKER_CONTAINER_NAME composer generate-transfer -- -c ${PROJECT_ROOT}/doc/samples/config/generator.config.yml
+     $DOCKER_EXEC composer generate-transfer -- -c ${PROJECT_ROOT}/doc/samples/config/generator.config.yml
     ;;
   *)
     show_usage

@@ -19,6 +19,8 @@ ConfigContent:
     type: string
 
 Definition:
+  fileName:
+    type: string
   content:
     type: DefinitionContent
   validator:
@@ -48,10 +50,10 @@ DefinitionValidator:
   errorMessages:
     collectionType: ValidatorMessage
 
-TransferGeneratorCallback:
-  className:
+TransferGenerator:
+  fileName:
     type: string
-  definitionKey:
+  className:
     type: string
   validator:
     type: DefinitionValidator

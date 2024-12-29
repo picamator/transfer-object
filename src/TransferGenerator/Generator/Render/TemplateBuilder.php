@@ -25,7 +25,7 @@ readonly class TemplateBuilder implements TemplateBuilderInterface
     ) {
     }
 
-    public function buildTemplateTransfer(DefinitionContentTransfer $contentTransfer): TemplateTransfer
+    public function createTemplateTransfer(DefinitionContentTransfer $contentTransfer): TemplateTransfer
     {
         $templateTransfer = new TemplateTransfer();
         $templateTransfer->classNamespace = $this->config->getTransferNamespace();

@@ -12,15 +12,17 @@ use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinder;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinderInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionBuilder;
-use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionBuilderInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\ContentBuilder;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\ContentBuilderInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParser;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParserInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\BuildInTypePropertyExpander;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\CollectionTypePropertyExpander;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\EnumTypePropertyExpander;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\PropertyExpanderInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\TransferTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReader;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\BuildInTypePropertyExpander;
-use Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\CollectionTypePropertyExpander;
-use Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\EnumTypePropertyExpander;
-use Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\PropertyExpanderInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Reader\Expander\TransferTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\ClassNameValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\ClassNameValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\ContentValidator;
@@ -43,50 +45,9 @@ readonly class DefinitionFactory
     {
         return new DefinitionReader(
             $this->createDefinitionFinder(),
-            $this->createYmlParser(),
-            $this->createDefinitionBuilder(),
-        );
-    }
-
-    protected function createDefinitionBuilder(): DefinitionBuilderInterface
-    {
-        return new DefinitionBuilder(
+            $this->createDefinitionParser(),
             $this->createContentValidator(),
-            $this->createPropertyExpanders(),
         );
-    }
-
-    /**
-     * @return \ArrayObject<int,PropertyExpanderInterface> $propertyExpanders
-     */
-    protected function createPropertyExpanders(): ArrayObject
-    {
-        return new ArrayObject([
-            $this->createCollectionTypePropertyExpander(),
-            $this->createBuildInTypePropertyExpander(),
-            $this->createTransferTypePropertyExpander(),
-            $this->createEnumTypePropertyExpander(),
-        ]);
-    }
-
-    protected function createEnumTypePropertyExpander(): PropertyExpanderInterface
-    {
-        return new EnumTypePropertyExpander();
-    }
-
-    protected function createTransferTypePropertyExpander(): PropertyExpanderInterface
-    {
-        return new TransferTypePropertyExpander();
-    }
-
-    protected function createBuildInTypePropertyExpander(): PropertyExpanderInterface
-    {
-        return new BuildInTypePropertyExpander();
-    }
-
-    protected function createCollectionTypePropertyExpander(): PropertyExpanderInterface
-    {
-        return new CollectionTypePropertyExpander();
     }
 
     protected function createContentValidator(): ContentValidatorInterface
@@ -151,6 +112,52 @@ readonly class DefinitionFactory
     protected function createClassNameValidator(): ClassNameValidatorInterface
     {
         return new ClassNameValidator();
+    }
+
+    protected function createDefinitionParser(): DefinitionParserInterface
+    {
+        return new DefinitionParser(
+            $this->createYmlParser(),
+            $this->createContentBuilder(),
+        );
+    }
+
+    protected function createContentBuilder(): ContentBuilderInterface
+    {
+        return new ContentBuilder($this->createPropertyExpanders());
+    }
+
+    /**
+     * @return \ArrayObject<int,PropertyExpanderInterface> $propertyExpanders
+     */
+    protected function createPropertyExpanders(): ArrayObject
+    {
+        return new ArrayObject([
+            $this->createCollectionTypePropertyExpander(),
+            $this->createBuildInTypePropertyExpander(),
+            $this->createTransferTypePropertyExpander(),
+            $this->createEnumTypePropertyExpander(),
+        ]);
+    }
+
+    protected function createEnumTypePropertyExpander(): PropertyExpanderInterface
+    {
+        return new EnumTypePropertyExpander();
+    }
+
+    protected function createTransferTypePropertyExpander(): PropertyExpanderInterface
+    {
+        return new TransferTypePropertyExpander();
+    }
+
+    protected function createBuildInTypePropertyExpander(): PropertyExpanderInterface
+    {
+        return new BuildInTypePropertyExpander();
+    }
+
+    protected function createCollectionTypePropertyExpander(): PropertyExpanderInterface
+    {
+        return new CollectionTypePropertyExpander();
     }
 
     protected function createYmlParser(): YmlParserInterface

@@ -7,21 +7,14 @@ namespace Picamator\Tests\Integration\TransferObject\TransferGenerator;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Picamator\Tests\Integration\TransferObject\Helper\CleanTmpHelperTrait;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
-use Picamator\TransferObject\Generated\TransferGeneratorCallbackTransfer;
+use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 
 class TransferGeneratorFacadeErrorTest extends TestCase
 {
     use TransferGeneratorHelperTrait;
-    use CleanTmpHelperTrait;
 
     private const string CONFIG_PATH_TEMPLATE = __DIR__ . '/data/error/%s/config/generator.config.yml';
-
-    protected function tearDown(): void
-    {
-        $this->deleteTmpDir(__DIR__ . '/Generated');
-    }
 
     #[DataProvider('invalidDefinitionDataProvider')]
     public function testGenerateTransferObjectByInvalidDefinitionShouldFail(
@@ -32,7 +25,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         $configPath = $this->getConfigPath($configCaseName);
         $this->assertLoadConfigSuccess($configPath);
 
-        $callback = function (?TransferGeneratorCallbackTransfer $generatorTransfer) use ($expectedMessage): void {
+        $callback = function (?TransferGeneratorTransfer $generatorTransfer) use ($expectedMessage): void {
             if ($generatorTransfer === null) {
                 return;
             }
@@ -60,7 +53,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         $configPath = $this->getConfigPath($configCaseName);
         $this->assertLoadConfigSuccess($configPath);
 
-        $callback = function (?TransferGeneratorCallbackTransfer $generatorTransfer): void {
+        $callback = function (?TransferGeneratorTransfer $generatorTransfer): void {
             if ($generatorTransfer === null || $generatorTransfer->validator->isValid) {
                 return;
             }
