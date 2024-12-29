@@ -25,9 +25,7 @@ jobs:
           PROJECT_ROOT: ${{ github.workspace }}
         run: |
           echo "Generate Internal Transfer Objects"
-          composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
-          echo "Generate Samples Transfer Objects"
-          composer generate-transfer -- -c ${PROJECT_ROOT}/doc/samples/config/generator.config.yml
+          composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml --ansi
 
       - name: Run PHPStan
         uses: php-actions/phpstan@v3
