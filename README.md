@@ -26,7 +26,7 @@ Customer:
     type: string
 ```
 
-Then, console command will generate TO:
+Then, console command generates TO:
 ```php
 $customerTransfer = new CustomerTransfer();
 $customerTransfer->firstName = 'Jan';
@@ -49,7 +49,7 @@ composer require-dev picamator/transfer-object
 Usage
 -----
 
-The Transfer Object (TO) generator can be used in two ways:
+Transfer Object (TO) generator can be used in two ways:
 
 ### I. Via Terminal
 
@@ -75,8 +75,8 @@ Acknowledgment
 --------------
 
 Many thanks to everyone who inspired me to write this project.
-Special thanks to the contributors, readers, and experimenters who share the same joy as
-I do developing Transfer Object Generator!
+Special thanks to the contributors, readers, and experimenters who, I hope, sharing the same joy as
+I do while developing Transfer Object Generator!
 
 Contribution
 ------------
