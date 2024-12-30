@@ -3,10 +3,10 @@ Transfer Object Generator
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![CI workflow](https://github.com/picamator/transfer-object/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/picamator/transfer-object/actions)
 
-Want to build Transfer Objects (TO) effortlessly without diving deep into configs?
+Want to build Transfer Objects (TO) effortlessly?
 You're in the right place!
 
-Build TOs Using an Array as a Sample
+Build TOs Using an Array as Blueprint
 ------------------------------------
 
 Imagine you have an array like this:
@@ -17,7 +17,7 @@ $data = [
 ];
 ```
 
-Convert this array into a definition file with a simple code snippet:
+TO Generator converts it to Defintion file:
 ```yml
 Customer:
   firstName:
@@ -26,18 +26,12 @@ Customer:
     type: string
 ```
 
-Then, generate TO by running console command:
+Then, console command will generate TO:
 ```php
 $customerTransfer = new CustomerTransfer();
 $customerTransfer->firstName = 'Jan';
 $customerTransfer->lastName = 'Kowalski';
 ```
-
-Why Use Transfer Object Generator?
------------------------------------
-
-1. Transfer Object Generator is your modern solution for generating TOs.
-2, Whether you're using `YML` definitions or well-structured arrays as blueprints, this tool has got you covered.
 
 Check out how it works:
  - [Try Sample with Array](/doc/samples/try-definition-generator.php)
@@ -57,7 +51,7 @@ Usage
 
 The Transfer Object (TO) generator can be used in two ways:
 
-### Via Command
+### I. Via Terminal
 
 Run following command, specifying your configuration file:
 
@@ -69,7 +63,7 @@ For more details are in Wiki:
 - [Command Configuration](https://github.com/picamator/transfer-object/wiki/Command-Configuration)
 - [Definition File](https://github.com/picamator/transfer-object/wiki/Definition-File)
 
-### Via Facade Interface Methods
+### II. Via Facade Interface
 
 You can also directly call facade interface `TransferGeneratorFacadeInterface`, `DefinitionGeneratorFacadeInterface` methods.
 
