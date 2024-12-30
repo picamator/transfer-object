@@ -71,6 +71,13 @@ For more details are in Wiki:
 - [Facade Interfaces](https://github.com/picamator/transfer-object/wiki/Facade-Interfaces)
 - [Visualizing Diagrams](https://github.com/picamator/transfer-object/wiki/Visualising-Diagrams)
 
+Acknowledgment
+--------------
+
+Many thanks to everyone who inspired me to write this project.
+Special thanks to the contributors, readers, and experimenters who share the same joy as
+I do developing Transfer Object Generator!
+
 Contribution
 ------------
 
