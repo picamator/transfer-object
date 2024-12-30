@@ -11,8 +11,8 @@ class TransferGeneratorFacadeSuccessTest extends TestCase
 {
     use TransferGeneratorHelperTrait;
 
-    private const string GENERATOR_CONFIG_PATH = __DIR__ . '/data/success/config/generator.config.yml';
-    private const string TRANSFER_OBJECT_PATH = __DIR__ . '/Generated/';
+    private const string GENERATOR_CONFIG_PATH = __DIR__ . '/data/config/success/generator.config.yml';
+    private const string TRANSFER_OBJECT_PATH = __DIR__ . '/Generated/Success/';
 
     private const array EXPECTED_GENERATED_TRANSFER_OBJECT = [
         self::TRANSFER_OBJECT_PATH . 'AddressBookTransfer.php',

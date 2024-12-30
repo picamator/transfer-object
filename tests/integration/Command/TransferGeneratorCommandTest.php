@@ -10,8 +10,8 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class TransferGeneratorCommandTest extends TestCase
 {
-    private const string SUCCESS_CONFIG_PATH = __DIR__ . '/data/success/config/generator.config.yml';
-    private const string ERROR_CONFIG_PATH = __DIR__ . '/data/error/config/generator.config.yml';
+    private const string SUCCESS_CONFIG_PATH = __DIR__ . '/data/config/success/generator.config.yml';
+    private const string ERROR_CONFIG_PATH = __DIR__ . '/data/config/error/generator.config.yml';
 
     private CommandTester $commandTester;
 

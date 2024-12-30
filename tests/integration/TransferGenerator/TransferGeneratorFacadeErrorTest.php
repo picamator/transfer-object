@@ -14,7 +14,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
 {
     use TransferGeneratorHelperTrait;
 
-    private const string CONFIG_PATH_TEMPLATE = __DIR__ . '/data/error/%s/config/generator.config.yml';
+    private const string CONFIG_PATH_TEMPLATE = __DIR__ . '/data/config/error/%s/generator.config.yml';
 
     #[DataProvider('invalidDefinitionDataProvider')]
     public function testGenerateTransferObjectByInvalidDefinitionShouldFail(

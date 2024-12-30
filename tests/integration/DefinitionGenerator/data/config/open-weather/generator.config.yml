@@ -1,0 +1,4 @@
+generator:
+  transferNamespace: "Picamator\\Tests\\Integration\\TransferObject\\DefinitionGenerator\\Generated\\OpenWeather"
+  transferPath: "${PROJECT_ROOT}/tests/integration/DefinitionGenerator/Generated/OpenWeather"
+  definitionPath: "${PROJECT_ROOT}/tests/integration/DefinitionGenerator/data/config/open-weather/definition"

@@ -12,7 +12,7 @@ use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacadeInterface;
 
 class ConfigLoaderTest extends TestCase
 {
-    private const string CONFIG_PATH = __DIR__ . '/data/config/';
+    private const string CONFIG_PATH = __DIR__ . '/data/config/error/';
 
     private TransferGeneratorFacadeInterface $generatorFacade;
 
@@ -49,5 +49,9 @@ class ConfigLoaderTest extends TestCase
         yield 'invalid namespace' => ['invalid-transfer-namespace.config.yml'];
 
         yield 'invalid yml format' => ['invalid-yml-format.config.yml'];
+
+        yield 'empty config file' => ['empty.config.yml'];
+
+        yield 'generator root kee is boolean' => ['generator-key-bool.config.yml'];
     }
 }

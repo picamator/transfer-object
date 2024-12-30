@@ -8,8 +8,8 @@ use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
-use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\AsteroidTransfer;
-use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\ForecastTransfer;
+use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\NasaNeo\AsteroidTransfer;
+use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\OpenWeather\ForecastTransfer;
 use Picamator\Tests\Integration\TransferObject\Helper\DefinitionGeneratorHelperTrait;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
@@ -21,9 +21,9 @@ class DefinitionGeneratorFacadeTest extends TestCase
     use TransferGeneratorHelperTrait;
 
     private const string SAMPLE_JSON_PATH = __DIR__ . '/data/json-samples/';
-    private const string DEFINITION_PATH = __DIR__ . '/data/config/definition';
 
-    private const string CONFIG_PATH = __DIR__ . '/data/config/generator.config.yml';
+    private const string DEFINITION_PATH_TEMPLATE = __DIR__ . '/data/config/%s/definition';
+    private const string CONFIG_PATH_TEMPLATE = __DIR__ . '/data/config/%s/generator.config.yml';
 
     private DefinitionGeneratorFacadeInterface $definitionGeneratorFacade;
 
@@ -39,11 +39,15 @@ class DefinitionGeneratorFacadeTest extends TestCase
         string $definitionFileName,
     ): void {
         // Arrange
-        $generatedPath = self::DEFINITION_PATH . DIRECTORY_SEPARATOR . $definitionFileName;
+        $pathPlaceholder = pathinfo($sampleFileName, PATHINFO_FILENAME);
+        $definitionPath = sprintf(self::DEFINITION_PATH_TEMPLATE, $pathPlaceholder);
+
+        $generatedPath = $definitionPath . DIRECTORY_SEPARATOR . $definitionFileName;
+
         $sampleJsonPath = self::SAMPLE_JSON_PATH . $sampleFileName;
 
         $generatorTransfer = $this->createDefinitionGenerator(
-            definitionPath:self::DEFINITION_PATH,
+            definitionPath:$definitionPath,
             className: $className,
             sampleJsonPath: $sampleJsonPath,
         );
@@ -52,7 +56,7 @@ class DefinitionGeneratorFacadeTest extends TestCase
         $actual = $this->definitionGeneratorFacade->generateDefinitions($generatorTransfer);
 
         // Assert
-        $this->assertNotSame(0, $actual);
+        $this->assertGreaterThan(0, $actual);
         $this->assertFileExists($generatedPath);
     }
 
@@ -74,17 +78,36 @@ class DefinitionGeneratorFacadeTest extends TestCase
         ];
     }
 
+    #[DataProvider('configPathDataProvider')]
     #[Depends('testGenerateDefinitionShouldSuccessfullyCreateDefinitionFile')]
-    public function testGenerateTransferBasedOnDefinitionShouldSuccessfullyGenerateTransferObjects(): void
-    {
+    public function testGenerateTransferBasedOnDefinitionShouldSuccessfullyGenerateTransferObjects(
+        string $sampleFileName,
+    ): void {
         // Arrange
-        $this->assertLoadConfigSuccess(self::CONFIG_PATH);
+        $pathPlaceholder = pathinfo($sampleFileName, PATHINFO_FILENAME);
+        $configPath = sprintf(self::CONFIG_PATH_TEMPLATE, $pathPlaceholder);
+
+        $this->assertLoadConfigSuccess($configPath);
 
         // Act
         $actual = $this->generateTransfers($this->assertGeneratorSuccess(...));
 
         // Assert
         $this->assertTrue($actual);
+    }
+
+    /**
+     * @return Generator<string,mixed>
+     */
+    public static function configPathDataProvider(): Generator
+    {
+        yield 'NASA NEO asteroid 465633' => [
+            'nasa-neo-rest-v1-neo-2465633.json',
+        ];
+
+        yield 'Open Weather Response' => [
+            'open-weather.json',
+        ];
     }
 
     #[DataProvider('matchDefinitionDataProvider')]
