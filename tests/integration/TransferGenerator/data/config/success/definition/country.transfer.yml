@@ -1,0 +1,5 @@
+Country:
+  name:
+    type: string
+  iso2Code:
+    type: string

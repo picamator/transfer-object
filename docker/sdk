@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+
+function show_usage() {
+  echo "==================================="
+  echo "    Transfer Object (Docker SDK)   "
+  echo "==================================="
+  echo "Usage: $0 [-x] <argument>"
+  echo "Arguments:"
+  echo "  -x                         Enable Xdebug during build"
+  echo "  build                      Build Docker containers"
+  echo "  start                      Start Docker containers"
+  echo "  stop                       Stop Docker containers"
+  echo "  cli                        Open container shell"
+  echo "  composer <command>         Run composer command"
+  echo "  phpstan                    Run PHPStan"
+  echo "  phpunit                    Run PHPUnit"
+  echo "  phpcs                      Run PHP CodeSniffer"
+  echo "  phpcbf                     Run PHP Code Beautifier and Fixer"
+  echo "  hook-install               Install CaptainHook"
+  echo "  hook <command>             Run CaptainHook command"
+  echo "  to-in-generate             Generate internal transfer objects"
+  echo "  to-generate <config path>  Generate internal transfer objects"
+}
+
+# vars
+DOCKER_CONTAINER_NAME=transfer-object-php
+PROJECT_ROOT="/home/transfer/transfer-object"
+DOCKER_EXEC="docker exec -it ${DOCKER_CONTAINER_NAME}"
+
+# options
+ENABLE_XDEBUG=0
+
+while getopts ":x" opt; do
+  case ${opt} in
+    x )
+      ENABLE_XDEBUG=1
+      ;;
+    \? )
+      show_usage
+      exit 1
+      ;;
+  esac
+done
+shift $((OPTIND -1))
+
+# arguments
+case $1 in
+  build)
+    if [ "$ENABLE_XDEBUG" -eq 1 ]; then
+      ENABLE_XDEBUG=1 docker compose build
+    else
+      docker compose build
+    fi
+    ;;
+  start)
+    docker compose up -d --remove-orphans
+    ;;
+  stop)
+    docker compose stop
+    ;;
+  cli)
+    $DOCKER_EXEC sh
+    ;;
+  composer)
+    $DOCKER_EXEC composer $2
+    ;;
+  phpstan)
+    $DOCKER_EXEC composer phpstan
+    ;;
+  phpunit)
+    $DOCKER_EXEC composer phpunit
+    ;;
+  phpcs)
+    $DOCKER_EXEC composer phpcs
+    ;;
+  phpcbf)
+    $DOCKER_EXEC composer phpcbf
+    ;;
+  hook-install)
+    $DOCKER_EXEC composer captainhook install --only-enabled --run-mode=docker --run-exec="docker exec -i $DOCKER_CONTAINER_NAME"
+    ;;
+  hook)
+    $DOCKER_EXEC composer captainhook $2
+    ;;
+  to-in-generate)
+     $DOCKER_EXEC composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
+    ;;
+  to-generate)
+     $DOCKER_EXEC composer generate-transfer -- -c ${PROJECT_ROOT}/$2
+    ;;
+  *)
+    show_usage
+    exit 0
+    ;;
+esac

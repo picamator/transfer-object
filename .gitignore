@@ -1,0 +1,23 @@
+# IDE
+.idea/
+.project/
+nbproject/
+.buildpath/
+.settings/
+*.sublime-*
+
+# OS
+.DS_Store
+*.AppleDouble
+*.AppleDB
+*.AppleDesktop
+
+# tooling
+vendor/
+.phpunit.result.cache
+.cs-check.json
+
+# project
+src/**/_tmp
+doc/samples/**/_tmp
+tests/**/_tmp

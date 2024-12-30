@@ -1,0 +1,4 @@
+generator:
+  transferNamespace: "Picamator\\Tests\\Integration\\TransferObject\\DefinitionGenerator\\Generated\\NasaNeo"
+  transferPath: "${PROJECT_ROOT}/tests/integration/DefinitionGenerator/Generated/NasaNeo"
+  definitionPath: "${PROJECT_ROOT}/tests/integration/DefinitionGenerator/data/config/nasa-neo-rest-v1-neo-2465633/definition"

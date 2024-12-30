@@ -1,0 +1,21 @@
+Address:
+  uuid:
+    type: string
+  firstName:
+    type: string
+  lastName:
+    type: string
+  address1:
+    type: string
+  address2:
+    type: string
+  address3:
+    type: string
+  zipCode:
+    type: string
+  country:
+    collectionType: Country
+  phone:
+    type: string
+  isActive:
+    type: bool

@@ -1,0 +1,19 @@
+Template:
+  className:
+    type: string
+  classNamespace:
+    type: string
+  imports:
+    type: ArrayObject
+  properties:
+    type: ArrayObject
+  defaultValues:
+    type: ArrayObject
+  propertiesCount:
+    type: int
+  metaConstants:
+    type: ArrayObject
+  attributes:
+    type: ArrayObject
+  dockBlocks:
+    type: ArrayObject

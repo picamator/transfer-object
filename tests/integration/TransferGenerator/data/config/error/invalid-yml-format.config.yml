@@ -1,0 +1,4 @@
+generator:
+    transferNamespace: "Project\\SomeValidNamespace"
+  transferPath: "${PROJECT_ROOT}/tests/integration/TransferGenerator/Generated"
+  definitionPath: "${PROJECT_ROOT}/tests/integration"

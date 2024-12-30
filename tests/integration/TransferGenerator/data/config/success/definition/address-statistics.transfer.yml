@@ -1,0 +1,15 @@
+AddressStatistics:
+  addressBookUuid:
+    type: string
+  addressUuid:
+    type: string
+  orderCount:
+    type: int
+  orderAverage:
+    type: float
+  orderReferences:
+    type: ArrayObject
+  isBlocked:
+    type: false
+  isActive:
+    type: true

@@ -1,0 +1,28 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use Picamator\TransferObject\Command\TransferGeneratorCommand;
+use Symfony\Component\Console\Application;
+
+function includeAutoload(string $path): bool
+{
+    return file_exists($path) && include $path;
+}
+
+if (
+    !includeAutoload(__DIR__ . '/../../autoload.php')
+    && !includeAutoload(__DIR__ . '/vendor/autoload.php')
+) {
+    fwrite(STDERR, 'Failed include autoload file.' . PHP_EOL);
+    exit(1);
+}
+
+$application = new Application(name:'TransferObject', version:'current');
+$command = new TransferGeneratorCommand();
+
+$application->add($command);
+
+$application->setDefaultCommand($command->getName(), true);
+$application->run();

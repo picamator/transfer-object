@@ -1,0 +1,4 @@
+generator:
+  transferNamespace: "Picamator\\Tests\\Integration\\TransferObject\\Command\\Generated\\Error"
+  transferPath: "${PROJECT_ROOT}/tests/integration/Command/Generated/Error"
+  definitionPath: "${PROJECT_ROOT}/tests/integration/Command/data/config/error/definition"

@@ -1,0 +1,59 @@
+Config:
+  content:
+    type: ConfigContent
+  validator:
+    type: ConfigValidator
+
+ConfigValidator:
+  isValid:
+    type: bool
+  errorMessages:
+    collectionType: ValidatorMessage
+
+ConfigContent:
+  transferNamespace:
+    type: string
+  transferPath:
+    type: string
+  definitionPath:
+    type: string
+
+Definition:
+  fileName:
+    type: string
+  content:
+    type: DefinitionContent
+  validator:
+    type: DefinitionValidator
+
+DefinitionContent:
+  className:
+    type: string
+  properties:
+    collectionType: DefinitionProperty
+
+DefinitionProperty:
+  propertyName:
+    type: string
+  buildInType:
+    enumType: '\Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum'
+  transferType:
+    type: string
+  collectionType:
+    type: string
+  enumType:
+    type: string
+
+DefinitionValidator:
+  isValid:
+    type: bool
+  errorMessages:
+    collectionType: ValidatorMessage
+
+TransferGenerator:
+  fileName:
+    type: string
+  className:
+    type: string
+  validator:
+    type: DefinitionValidator

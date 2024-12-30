@@ -1,0 +1,60 @@
+Product:
+  sku:
+    type: string
+  name:
+    type: string
+  price:
+    type: float
+  currency:
+    type: string
+  stock:
+    type: int
+  isDiscounted:
+    type: bool
+  deliveryOptions:
+    collectionType: DeliveryOptions
+  details:
+    type: Details
+  stores:
+    type: array
+  labels:
+    type: ArrayObject
+  availabilities:
+    collectionType: Availabilities
+  measurementUnit:
+    type: MeasurementUnit
+
+DeliveryOptions:
+  name:
+    type: string
+
+Details:
+  description:
+    type: string
+  isRegional:
+    type: bool
+
+Availabilities:
+  total:
+    type: int
+  buffer:
+    type: int
+
+MeasurementUnit:
+  palette:
+    type: Palette
+  box:
+    type: Box
+
+Palette:
+  type:
+    type: string
+  items:
+    type: int
+
+Box:
+  type:
+    type: string
+  items:
+    type: int
+

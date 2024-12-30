@@ -1,0 +1,9 @@
+parameters:
+  level: 7
+  paths:
+    - src
+    - tests
+    - doc
+    - generate-transfer
+  excludePaths:
+    - tests/*/data/*

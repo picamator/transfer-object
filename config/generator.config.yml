@@ -1,0 +1,4 @@
+generator:
+  transferNamespace: "Picamator\\TransferObject\\Generated"
+  transferPath: "${PROJECT_ROOT}/src/Generated"
+  definitionPath: "${PROJECT_ROOT}/config/definition"

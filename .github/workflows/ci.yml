@@ -1,0 +1,47 @@
+name: CI
+
+on: [push]
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+
+      - name: Install dependencies
+        uses: php-actions/composer@v6
+        with:
+          php_version: "8.4"
+
+      - name: Generate Internal Transfer Object
+        env:
+          PROJECT_ROOT: ${{ github.workspace }}
+        run: |
+          echo "Generate Internal Transfer Objects"
+          composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml --ansi
+
+      - name: Run PHPStan
+        uses: php-actions/phpstan@v3
+        with:
+          php_version: "8.4"
+          configuration: phpstan.neon
+
+      - name: Run PHP CodeSniffer
+        uses: php-actions/phpcs@v1
+        with:
+          php_version: "8.4"
+          standard: phpcs.xml
+
+      - name: Run PHPUnit
+        uses: php-actions/phpunit@v4
+        env:
+          PROJECT_ROOT: "/app"
+        with:
+          php_version: "8.4"

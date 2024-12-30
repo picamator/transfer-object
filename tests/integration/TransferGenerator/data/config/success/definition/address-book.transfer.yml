@@ -1,0 +1,11 @@
+AddressBook:
+  uuid:
+    type: string
+  name:
+    type: string
+  addresses:
+    collectionType: Address
+  categories:
+    type: array
+  label:
+    enumType: '\Picamator\Tests\Integration\TransferObject\TransferGenerator\Enum\AddressLabelEnum'

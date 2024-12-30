@@ -1,0 +1,4 @@
+generator:
+  transferNamespace: "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Generated"
+  transferPath: "${PROJECT_ROOT}/tests/integration/Transfer/Generated"
+  definitionPath: "${PROJECT_ROOT}/tests/integration/Transfer/data/config/definition"
