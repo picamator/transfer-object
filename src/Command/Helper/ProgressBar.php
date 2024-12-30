@@ -26,5 +26,6 @@ readonly class ProgressBar implements ProgressBarInterface
     public function progressFinish(): void
     {
         $this->symfonyStyle->progressFinish();
+        $this->symfonyStyle->newLine();
     }
 }

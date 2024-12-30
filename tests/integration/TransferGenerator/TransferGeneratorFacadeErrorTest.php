@@ -120,7 +120,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
 
         yield 'basic enum type is not supported should return error' => [
             'configCaseName' => 'invalid-enum-type',
-            'expectedMessage' => 'is not a BakedEnum.',
+            'expectedMessage' => 'is not a BakedEnum',
         ];
 
         yield 'invalid definition yml format should return error' => [
