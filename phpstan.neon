@@ -4,5 +4,6 @@ parameters:
     - src
     - tests
     - doc
+    - generate-transfer
   excludePaths:
     - tests/*/data/*
