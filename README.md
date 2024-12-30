@@ -69,6 +69,7 @@ You can also directly call facade interface `TransferGeneratorFacadeInterface`, 
 
 For more details are in Wiki:
 - [Facade Interfaces](https://github.com/picamator/transfer-object/wiki/Facade-Interfaces)
+- [Visualizing Diagrams](https://github.com/picamator/transfer-object/wiki/Visualising-Diagrams)
 
 Contribution
 ------------
