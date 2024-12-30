@@ -13,5 +13,5 @@ interface DefinitionParserInterface
      *
      * @return Generator<int,\Picamator\TransferObject\Generated\DefinitionContentTransfer>
      */
-    public function parseDefinition(string $definitionContent): Generator;
+    public function parseDefinition(string $filePath): Generator;
 }

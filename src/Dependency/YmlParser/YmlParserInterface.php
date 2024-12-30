@@ -10,9 +10,4 @@ interface YmlParserInterface
      * @throws \Picamator\TransferObject\Dependency\Exception\YmlParserException
      */
     public function parseFile(string $filename): mixed;
-
-    /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\YmlParserException
-     */
-    public function parse(string $value): mixed;
 }

@@ -14,14 +14,5 @@ interface TransferGeneratorInterface
      */
     public function getTransferGenerator(): Generator;
 
-    /**
-     * @throws \FiberError
-     * @throws \Throwable
-     */
-    public function getTransferFiberCallback(ProgressBarInterface $progressBar): bool;
-
-    /**
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException
-     */
-    public function generateTransfers(): void;
+    public function getDefinitionFileCount(): int;
 }

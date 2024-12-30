@@ -37,7 +37,7 @@ class TransferGeneratorFacade implements TransferGeneratorFacadeInterface
     public function generateTransfers(): void
     {
         $this->getFactory()
-            ->createTransferGenerator()
+            ->createBulkTransferGenerator()
             ->generateTransfers();
     }
 

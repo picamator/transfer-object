@@ -25,16 +25,4 @@ final readonly class YmlParserBridge implements YmlParserInterface
             );
         }
     }
-
-    public function parse(string $value): mixed
-    {
-        try {
-            return $this->ymlParser->parse($value);
-        } catch (Throwable $e) {
-            throw new YmlParserException(
-                sprintf('Failed to parse string "%s". Error: "%s".', $value, $e->getMessage()),
-                previous: $e,
-            );
-        }
-    }
 }

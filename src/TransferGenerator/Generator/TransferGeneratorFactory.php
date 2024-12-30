@@ -19,6 +19,10 @@ use Picamator\TransferObject\TransferGenerator\Definition\DefinitionFactory;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystem;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\BulkTransferGenerator;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\BulkTransferGeneratorInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\FiberTransferGenerator;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\FiberTransferGeneratorInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\GeneratorProcessor;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\GeneratorProcessorInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGenerator;
@@ -43,7 +47,12 @@ readonly class TransferGeneratorFactory
      */
     public function createTransferGeneratorFiber(): Fiber
     {
-        return new Fiber($this->createTransferGenerator()->getTransferFiberCallback(...));
+        return new Fiber($this->createFiberTransferGenerator()->getTransferFiberCallback(...));
+    }
+
+    private function createFiberTransferGenerator(): FiberTransferGeneratorInterface
+    {
+        return new FiberTransferGenerator($this->createTransferGenerator());
     }
 
     public function createTransferGenerator(): TransferGeneratorInterface
@@ -52,6 +61,11 @@ readonly class TransferGeneratorFactory
             $this->createDefinitionReader(),
             $this->createGeneratorProcessor(),
         );
+    }
+
+    public function createBulkTransferGenerator(): BulkTransferGeneratorInterface
+    {
+        return new BulkTransferGenerator($this->createTransferGenerator());
     }
 
     public function createConfigLoader(): ConfigLoaderInterface

@@ -15,10 +15,10 @@ readonly class DefinitionParser implements DefinitionParserInterface
     ) {
     }
 
-    public function parseDefinition(string $definitionContent): Generator
+    public function parseDefinition(string $filePath): Generator
     {
         $count = 0;
-        $definition = $this->parser->parse($definitionContent);
+        $definition = $this->parser->parseFile($filePath);
         $definition = is_array($definition) ? $definition : [];
 
         foreach ($definition as $className => $properties) {

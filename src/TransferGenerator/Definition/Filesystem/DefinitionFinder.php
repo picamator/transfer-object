@@ -10,10 +10,13 @@ use IteratorAggregate;
 use Picamator\TransferObject\Dependency\Finder\FinderInterface;
 use Picamator\TransferObject\Dependency\Finder\SplFileInfoBridge;
 use Picamator\TransferObject\TransferGenerator\Config\Container\ConfigInterface;
+use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorDefinitionException;
 
 class DefinitionFinder implements DefinitionFinderInterface
 {
     private const string FILE_NAME_PATTERN = '*.transfer.yml';
+
+    private const string DEFINITIONS_NOT_FOUND_ERROR_MESSAGE = 'Missed Transfer Object definitions.';
 
     /**
      * @var Countable&IteratorAggregate<string,SplFileInfoBridge>
@@ -26,17 +29,21 @@ class DefinitionFinder implements DefinitionFinderInterface
     ) {
     }
 
-    public function getDefinitionContent(): Generator
+    public function getDefinitionFiles(): Generator
     {
         $definitionFinder = $this->getDefinitionFinder();
         foreach ($definitionFinder as $file) {
-            yield $file->getFilename() => $file->getContents();
+            yield $file->getFilename() => $file->getRealPath();
+        }
+
+        if ($definitionFinder->count() === 0) {
+            throw new TransferGeneratorDefinitionException(self::DEFINITIONS_NOT_FOUND_ERROR_MESSAGE);
         }
 
         return $definitionFinder->count();
     }
 
-    public function getDefinitionCount(): int
+    public function getDefinitionFileCount(): int
     {
         return $this->getDefinitionFinder()->count();
     }

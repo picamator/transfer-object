@@ -125,7 +125,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
 
         yield 'invalid definition yml format should return error' => [
             'configCaseName' => 'invalid-yml-format',
-            'expectedMessage' => 'Failed to parse string "AddressStatistics',
+            'expectedMessage' => 'Failed to parse file',
         ];
     }
 

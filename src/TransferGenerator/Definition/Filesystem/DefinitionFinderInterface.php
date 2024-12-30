@@ -10,10 +10,14 @@ interface DefinitionFinderInterface
 {
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorDefinitionException
      *
-     * @return Generator<string>
+     * @return Generator<string,string>
      */
-    public function getDefinitionContent(): Generator;
+    public function getDefinitionFiles(): Generator;
 
-    public function getDefinitionCount(): int;
+    /**
+     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
+     */
+    public function getDefinitionFileCount(): int;
 }
