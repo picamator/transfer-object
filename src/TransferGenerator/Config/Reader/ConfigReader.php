@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Config\Reader;
 
+use Picamator\TransferObject\Dependency\Exception\FilesystemException;
+use Picamator\TransferObject\Dependency\Exception\YmlParserException;
 use Picamator\TransferObject\Generated\ConfigTransfer;
 use Picamator\TransferObject\Generated\ConfigValidatorTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
@@ -23,7 +25,7 @@ readonly class ConfigReader implements ConfigReaderInterface
     {
         try {
             return $this->handleConfig($configPath);
-        } catch (Throwable $e) {
+        } catch (YmlParserException | FilesystemException $e) {
             return $this->createErrorConfigTransfer($e);
         }
     }

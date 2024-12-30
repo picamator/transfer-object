@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Definition\Reader;
 
 use Generator;
+use Picamator\TransferObject\Dependency\Exception\YmlParserException;
 use Picamator\TransferObject\Generated\DefinitionTransfer;
 use Picamator\TransferObject\Generated\DefinitionValidatorTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
@@ -31,8 +32,7 @@ readonly class DefinitionReader implements DefinitionReaderInterface
                 yield from $contentGenerator;
 
                 $count += $contentGenerator->getReturn();
-            } catch (Throwable $e) {
-                $count++;
+            } catch (YmlParserException $e) {
                 yield $this->createErrorDefinitionTransfer($fileName, $e);
             }
         }

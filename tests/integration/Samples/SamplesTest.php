@@ -6,6 +6,7 @@ namespace Picamator\Tests\Integration\TransferObject\Samples;
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\OutputBufferHelperTrait;
 
@@ -15,6 +16,7 @@ class SamplesTest extends TestCase
 
     private const string SAMPLE_PATH = __DIR__ . '/../../../doc/samples/';
 
+    #[WithoutErrorHandler]
     #[DataProvider('samplesNameDataProvider')]
     public function testSamplesBufferOutputShouldSucceed(string $sampleName): void
     {

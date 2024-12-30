@@ -40,7 +40,6 @@ Why Use Transfer Object Generator?
 2, Whether you're using `YML` definitions or well-structured arrays as blueprints, this tool has got you covered.
 
 Check out how it works:
-
  - [Try Sample with Array](/doc/samples/try-definition-generator.php)
  - [Try Sample with YML Definition](/doc/samples/try-transfer-generator.php)
 
@@ -66,15 +65,15 @@ Run following command, specifying your configuration file:
 ./vendor/bin/generate-transfer [-c|--configuration CONFIGURATION]
 ```
 
-For more details, check out the TO Wiki:
+For more details are in Wiki:
 - [Command Configuration](https://github.com/picamator/transfer-object/wiki/Command-Configuration)
 - [Definition File](https://github.com/picamator/transfer-object/wiki/Definition-File)
 
 ### Via Facade Interface Methods
 
-You can also directly call the facade interface methods provided by `TransferGeneratorFacadeInterface`, `DefinitionGeneratorFacadeInterface`.
+You can also directly call facade interface `TransferGeneratorFacadeInterface`, `DefinitionGeneratorFacadeInterface` methods.
 
-For more details, check out the TO Wiki:
+For more details are in Wiki:
 - [Facade Interfaces](https://github.com/picamator/transfer-object/wiki/Facade-Interfaces)
 
 Contribution
