@@ -77,7 +77,7 @@ $generatorTransfer = new DefinitionGeneratorTransfer()
 
 $generatedDefinitions = new DefinitionGeneratorFacade()->generateDefinitions($generatorTransfer);
 
-echo "Definitions $generatedDefinitions were successfully generated." . PHP_EOL;
+echo "Definitions $generatedDefinitions were successfully generated.\n";
 
 echo <<<'STORY'
 ======================================================

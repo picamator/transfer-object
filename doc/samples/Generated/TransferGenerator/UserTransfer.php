@@ -7,9 +7,13 @@ namespace Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 
 /**
+ * Class generated from a definition file.
+ *
  * Specification:
- * - Class is generated based on definition.
- * - In order to modify file please change definition and run generator.
+ * - This class is automatically generated based on a definition file.
+ * - To modify this class, update the definition file and run the generator again.
+ *
+ * Note: Do not manually edit this file, as changes will be overwritten.
  */
 final class UserTransfer extends AbstractTransfer
 {
