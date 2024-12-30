@@ -36,13 +36,18 @@ $customerTransfer = new CustomerTransfer();
 $customerTransfer->firstName = 'Jan';
 $customerTransfer->lastName = 'Kowalski';
 
+foreach ($customerTransfer as $key => $value) {
+    echo "key: $key, value: $value\n";
+}
+
+echo "CustomerTransfer properties count: {$customerTransfer->count()}\n}.";
+
 $merchantTransfer = new MerchantTransfer();
 $merchantTransfer->merchantReference = 'PL-234-567';
 $merchantTransfer->country = CountryEnum::PL;
 $merchantTransfer->isActive = true;
 
-var_dump($customerTransfer->toArray());
-var_dump($merchantTransfer);
+var_dump($merchantTransfer->toArray());
 
 echo <<<'STORY'
 ======================================================

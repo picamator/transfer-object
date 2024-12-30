@@ -40,8 +40,8 @@ readonly class BulkTransferGenerator implements BulkTransferGeneratorInterface
         throw new TransferGeneratorException(
             sprintf(
                 self::ERROR_MESSAGE_TEMPLATE,
-                $generatorTransfer->className,
-                $generatorTransfer->fileName,
+                $generatorTransfer->className ?: '',
+                $generatorTransfer->fileName ?: '',
                 $errorMessage?->errorMessage ?: '',
             ),
         );

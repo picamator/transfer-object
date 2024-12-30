@@ -28,19 +28,16 @@ readonly class DefinitionReader implements DefinitionReaderInterface
     public function getDefinitions(): Generator
     {
         try {
+            $count = 0;
             $definitionFiles = $this->finder->getDefinitionFiles();
+            foreach ($definitionFiles as $fileName => $filePath) {
+                $contentGenerator = $this->getContentGenerator($fileName, $filePath);
+                yield from $contentGenerator;
+
+                $count += $contentGenerator->getReturn();
+            }
         } catch (FinderException | TransferGeneratorDefinitionException $e) {
             yield $this->createErrorDefinitionTransfer($e);
-
-            return 0;
-        }
-
-        $count = 0;
-        foreach ($definitionFiles as $fileName => $filePath) {
-            $contentGenerator = $this->getContentGenerator($fileName, $filePath);
-            yield from $contentGenerator;
-
-            $count += $contentGenerator->getReturn();
         }
 
         return $count;

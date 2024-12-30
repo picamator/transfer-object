@@ -195,4 +195,33 @@ class TransferTest extends TestCase
         // Assert
         $this->assertEquals($itemCollectionTransfer->toArray(), $decoded);
     }
+
+    #[Depends('testGenerateTransferShouldSucceed')]
+    public function testCount(): void
+    {
+        // Arrange
+        $itemCollectionTransfer = new ItemCollectionTransfer();
+        $itemCollectionTransfer->items[] = new ItemTransfer();
+
+        // Act
+        $actual = $itemCollectionTransfer->count();
+
+        // Assert
+        $this->assertEquals(1, $actual);
+        $this->assertCount(1, $itemCollectionTransfer);
+    }
+
+    #[Depends('testGenerateTransferShouldSucceed')]
+    public function testDebugInfo(): void
+    {
+        // Arrange
+        $itemCollectionTransfer = new ItemCollectionTransfer();
+        $itemCollectionTransfer->items[] = new ItemTransfer();
+
+        // Act
+        $actual = $itemCollectionTransfer->__debugInfo();
+
+        // Assert
+        $this->assertEquals($itemCollectionTransfer->toArray(), $actual);
+    }
 }

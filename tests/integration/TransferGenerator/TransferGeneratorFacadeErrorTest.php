@@ -127,6 +127,16 @@ class TransferGeneratorFacadeErrorTest extends TestCase
             'configCaseName' => 'invalid-yml-format',
             'expectedMessage' => 'Failed to parse file',
         ];
+
+        yield 'definition file include class without properties should return error' => [
+            'configCaseName' => 'empty-property-definition',
+            'expectedMessage' => 'Class "AddressStatistics" properties were not defined.',
+        ];
+
+        yield 'definitions not found should return error' => [
+            'configCaseName' => 'empty-definition-directory',
+            'expectedMessage' => 'Missed Transfer Object definitions.',
+        ];
     }
 
     private function getConfigPath(string $configCaseName): string
