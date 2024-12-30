@@ -90,7 +90,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // labels
-    #[ArrayObjectPropertyTypeAttribute()]
+    #[ArrayObjectPropertyTypeAttribute]
     public const string LABELS = 'labels';
     protected const string LABELS_DATA_NAME = 'LABELS';
     protected const int LABELS_DATA_INDEX = 5;

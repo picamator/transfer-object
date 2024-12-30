@@ -21,7 +21,7 @@ final class AddressBookTransfer extends AbstractTransfer
 
     protected const array META_DATA = [
         self::ADDRESSES => self::ADDRESSES_DATA_NAME,
-        self::CATEFORIES => self::CATEFORIES_DATA_NAME,
+        self::CATEGORIES => self::CATEGORIES_DATA_NAME,
         self::LABEL => self::LABEL_DATA_NAME,
         self::NAME => self::NAME_DATA_NAME,
         self::UUID => self::UUID_DATA_NAME,
@@ -39,15 +39,15 @@ final class AddressBookTransfer extends AbstractTransfer
         set => $this->_data[self::ADDRESSES_DATA_INDEX] = $value;
     }
 
-    // catefories
-    public const string CATEFORIES = 'catefories';
-    protected const string CATEFORIES_DATA_NAME = 'CATEFORIES';
-    protected const int CATEFORIES_DATA_INDEX = 1;
+    // categories
+    public const string CATEGORIES = 'categories';
+    protected const string CATEGORIES_DATA_NAME = 'CATEGORIES';
+    protected const int CATEGORIES_DATA_INDEX = 1;
 
     /** @var array<int|string,mixed> */
-    public array $catefories {
-        get => $this->_data[self::CATEFORIES_DATA_INDEX] ?? [];
-        set => $this->_data[self::CATEFORIES_DATA_INDEX] = $value;
+    public array $categories {
+        get => $this->_data[self::CATEGORIES_DATA_INDEX] ?? [];
+        set => $this->_data[self::CATEGORIES_DATA_INDEX] = $value;
     }
 
     // label

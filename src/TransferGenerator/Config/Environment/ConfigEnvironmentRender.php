@@ -15,7 +15,7 @@ class ConfigEnvironmentRender implements ConfigEnvironmentRenderInterface
     {
         $projectRoot = $this->getProjectRoot();
 
-        return str_replace(self::PROJECT_ROOT_PLACEHOLDER, $projectRoot, $path,);
+        return str_replace(self::PROJECT_ROOT_PLACEHOLDER, $projectRoot, $path);
     }
 
     private function getProjectRoot(): string

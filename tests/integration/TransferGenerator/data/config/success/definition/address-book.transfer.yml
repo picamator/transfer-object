@@ -5,7 +5,7 @@ AddressBook:
     type: string
   addresses:
     collectionType: Address
-  catefories:
+  categories:
     type: array
   label:
     enumType: '\Picamator\Tests\Integration\TransferObject\TransferGenerator\Enum\AddressLabelEnum'

@@ -49,6 +49,8 @@ class DefinitionFinder implements DefinitionFinderInterface
     }
 
     /**
+     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
+     *
      * @return Countable&IteratorAggregate<string,SplFileInfoBridge>
      */
     private function getDefinitionFinder(): Countable&IteratorAggregate

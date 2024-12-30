@@ -43,7 +43,7 @@ final class ItemTransfer extends AbstractTransfer
     }
 
     // iAmArrayObject
-    #[ArrayObjectPropertyTypeAttribute()]
+    #[ArrayObjectPropertyTypeAttribute]
     public const string I_AM_ARRAY_OBJECT = 'iAmArrayObject';
     protected const string I_AM_ARRAY_OBJECT_DATA_NAME = 'I_AM_ARRAY_OBJECT';
     protected const int I_AM_ARRAY_OBJECT_DATA_INDEX = 1;
