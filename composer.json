@@ -11,9 +11,6 @@
   "support": {
     "issues": "https://github.com/picamator/transfer-object/issues"
   },
-  "bin": [
-    "generate-transfer"
-  ],
   "autoload": {
     "psr-4": {
       "Picamator\\TransferObject\\": "src/"
@@ -27,7 +24,6 @@
       "Picamator\\Doc\\Samples\\TransferObject\\": "doc/samples"
     }
   },
-  "minimum-stability": "stable",
   "require": {
     "php": ">=8.4",
     "symfony/finder": "^7.0",
@@ -42,23 +38,9 @@
     "phpunit/phpunit": "^11.5",
     "squizlabs/php_codesniffer": "^3.11"
   },
-  "archive": {
-    "exclude": [
-      ".github",
-      "docker",
-      "tests",
-      "doc",
-      ".editorconfig",
-      ".gitattributes",
-      ".gitignore",
-      "captainhook.json",
-      "docker-compose.yml",
-      "phpcs.xml",
-      "phpstan.neon",
-      "phpunit.xml",
-      "README.md"
-    ]
-  },
+  "bin": [
+    "generate-transfer"
+  ],
   "config": {
     "sort-packages": true
   },
