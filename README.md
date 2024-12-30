@@ -17,7 +17,7 @@ $data = [
 ];
 ```
 
-TO Generator converts it to Defintion file:
+TO Generator converts it to Definition file:
 ```yml
 Customer:
   firstName:
