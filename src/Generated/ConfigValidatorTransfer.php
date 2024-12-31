@@ -34,8 +34,8 @@ final class ConfigValidatorTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,ValidatorMessageTransfer> */
     public ArrayObject $errorMessages {
-        get => $this->_data[self::ERROR_MESSAGES_DATA_INDEX] ?? new ArrayObject();
-        set => $this->_data[self::ERROR_MESSAGES_DATA_INDEX] = $value;
+        get => $this->getData(self::ERROR_MESSAGES_DATA_INDEX);
+        set => $this->setData(self::ERROR_MESSAGES_DATA_INDEX, $value);
     }
 
     // isValid
@@ -44,7 +44,7 @@ final class ConfigValidatorTransfer extends AbstractTransfer
     protected const int IS_VALID_DATA_INDEX = 1;
 
     public ?bool $isValid {
-        get => $this->_data[self::IS_VALID_DATA_INDEX];
-        set => $this->_data[self::IS_VALID_DATA_INDEX] = $value;
+        get => $this->getData(self::IS_VALID_DATA_INDEX);
+        set => $this->setData(self::IS_VALID_DATA_INDEX, $value);
     }
 }

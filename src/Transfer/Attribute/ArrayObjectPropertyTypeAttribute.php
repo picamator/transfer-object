@@ -29,4 +29,12 @@ final readonly class ArrayObjectPropertyTypeAttribute implements PropertyTypeAtt
     {
         return $data->getArrayCopy();
     }
+
+    /**
+     * @return \ArrayObject<string|int,mixed>
+     */
+    public function getInitialValue(): ArrayObject
+    {
+        return new ArrayObject();
+    }
 }

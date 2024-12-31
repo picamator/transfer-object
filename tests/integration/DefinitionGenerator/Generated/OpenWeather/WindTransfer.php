@@ -31,8 +31,8 @@ final class WindTransfer extends AbstractTransfer
     protected const int DEG_DATA_INDEX = 0;
 
     public ?int $deg {
-        get => $this->_data[self::DEG_DATA_INDEX];
-        set => $this->_data[self::DEG_DATA_INDEX] = $value;
+        get => $this->getData(self::DEG_DATA_INDEX);
+        set => $this->setData(self::DEG_DATA_INDEX, $value);
     }
 
     // gust
@@ -41,8 +41,8 @@ final class WindTransfer extends AbstractTransfer
     protected const int GUST_DATA_INDEX = 1;
 
     public ?float $gust {
-        get => $this->_data[self::GUST_DATA_INDEX];
-        set => $this->_data[self::GUST_DATA_INDEX] = $value;
+        get => $this->getData(self::GUST_DATA_INDEX);
+        set => $this->setData(self::GUST_DATA_INDEX, $value);
     }
 
     // speed
@@ -51,7 +51,7 @@ final class WindTransfer extends AbstractTransfer
     protected const int SPEED_DATA_INDEX = 2;
 
     public ?float $speed {
-        get => $this->_data[self::SPEED_DATA_INDEX];
-        set => $this->_data[self::SPEED_DATA_INDEX] = $value;
+        get => $this->getData(self::SPEED_DATA_INDEX);
+        set => $this->setData(self::SPEED_DATA_INDEX, $value);
     }
 }

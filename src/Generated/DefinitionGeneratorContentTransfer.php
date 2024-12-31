@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
+use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
 
 /**
  * Class generated from a definition file.
@@ -30,18 +31,19 @@ final class DefinitionGeneratorContentTransfer extends AbstractTransfer
     protected const int CLASS_NAME_DATA_INDEX = 0;
 
     public ?string $className {
-        get => $this->_data[self::CLASS_NAME_DATA_INDEX];
-        set => $this->_data[self::CLASS_NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::CLASS_NAME_DATA_INDEX);
+        set => $this->setData(self::CLASS_NAME_DATA_INDEX, $value);
     }
 
     // content
+    #[ArrayPropertyTypeAttribute]
     public const string CONTENT = 'content';
     protected const string CONTENT_DATA_NAME = 'CONTENT';
     protected const int CONTENT_DATA_INDEX = 1;
 
     /** @var array<int|string,mixed> */
     public array $content {
-        get => $this->_data[self::CONTENT_DATA_INDEX] ?? [];
-        set => $this->_data[self::CONTENT_DATA_INDEX] = $value;
+        get => $this->getData(self::CONTENT_DATA_INDEX);
+        set => $this->setData(self::CONTENT_DATA_INDEX, $value);
     }
 }

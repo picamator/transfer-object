@@ -34,8 +34,8 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     protected const int FEET_DATA_INDEX = 0;
 
     public ?FeetTransfer $feet {
-        get => $this->_data[self::FEET_DATA_INDEX];
-        set => $this->_data[self::FEET_DATA_INDEX] = $value;
+        get => $this->getData(self::FEET_DATA_INDEX);
+        set => $this->setData(self::FEET_DATA_INDEX, $value);
     }
 
     // kilometers
@@ -45,8 +45,8 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     protected const int KILOMETERS_DATA_INDEX = 1;
 
     public ?KilometersTransfer $kilometers {
-        get => $this->_data[self::KILOMETERS_DATA_INDEX];
-        set => $this->_data[self::KILOMETERS_DATA_INDEX] = $value;
+        get => $this->getData(self::KILOMETERS_DATA_INDEX);
+        set => $this->setData(self::KILOMETERS_DATA_INDEX, $value);
     }
 
     // meters
@@ -56,8 +56,8 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     protected const int METERS_DATA_INDEX = 2;
 
     public ?MetersTransfer $meters {
-        get => $this->_data[self::METERS_DATA_INDEX];
-        set => $this->_data[self::METERS_DATA_INDEX] = $value;
+        get => $this->getData(self::METERS_DATA_INDEX);
+        set => $this->setData(self::METERS_DATA_INDEX, $value);
     }
 
     // miles
@@ -67,7 +67,7 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     protected const int MILES_DATA_INDEX = 3;
 
     public ?MilesTransfer $miles {
-        get => $this->_data[self::MILES_DATA_INDEX];
-        set => $this->_data[self::MILES_DATA_INDEX] = $value;
+        get => $this->getData(self::MILES_DATA_INDEX);
+        set => $this->setData(self::MILES_DATA_INDEX, $value);
     }
 }

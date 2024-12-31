@@ -7,6 +7,7 @@ namespace Picamator\Tests\Integration\TransferObject\TransferGenerator\Generated
 use ArrayObject;
 use Picamator\Tests\Integration\TransferObject\TransferGenerator\Enum\AddressLabelEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
+use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
 
@@ -39,19 +40,20 @@ final class AddressBookTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,AddressTransfer> */
     public ArrayObject $addresses {
-        get => $this->_data[self::ADDRESSES_DATA_INDEX] ?? new ArrayObject();
-        set => $this->_data[self::ADDRESSES_DATA_INDEX] = $value;
+        get => $this->getData(self::ADDRESSES_DATA_INDEX);
+        set => $this->setData(self::ADDRESSES_DATA_INDEX, $value);
     }
 
     // categories
+    #[ArrayPropertyTypeAttribute]
     public const string CATEGORIES = 'categories';
     protected const string CATEGORIES_DATA_NAME = 'CATEGORIES';
     protected const int CATEGORIES_DATA_INDEX = 1;
 
     /** @var array<int|string,mixed> */
     public array $categories {
-        get => $this->_data[self::CATEGORIES_DATA_INDEX] ?? [];
-        set => $this->_data[self::CATEGORIES_DATA_INDEX] = $value;
+        get => $this->getData(self::CATEGORIES_DATA_INDEX);
+        set => $this->setData(self::CATEGORIES_DATA_INDEX, $value);
     }
 
     // label
@@ -61,8 +63,8 @@ final class AddressBookTransfer extends AbstractTransfer
     protected const int LABEL_DATA_INDEX = 2;
 
     public ?AddressLabelEnum $label {
-        get => $this->_data[self::LABEL_DATA_INDEX];
-        set => $this->_data[self::LABEL_DATA_INDEX] = $value;
+        get => $this->getData(self::LABEL_DATA_INDEX);
+        set => $this->setData(self::LABEL_DATA_INDEX, $value);
     }
 
     // name
@@ -71,8 +73,8 @@ final class AddressBookTransfer extends AbstractTransfer
     protected const int NAME_DATA_INDEX = 3;
 
     public ?string $name {
-        get => $this->_data[self::NAME_DATA_INDEX];
-        set => $this->_data[self::NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::NAME_DATA_INDEX);
+        set => $this->setData(self::NAME_DATA_INDEX, $value);
     }
 
     // uuid
@@ -81,7 +83,7 @@ final class AddressBookTransfer extends AbstractTransfer
     protected const int UUID_DATA_INDEX = 4;
 
     public ?string $uuid {
-        get => $this->_data[self::UUID_DATA_INDEX];
-        set => $this->_data[self::UUID_DATA_INDEX] = $value;
+        get => $this->getData(self::UUID_DATA_INDEX);
+        set => $this->setData(self::UUID_DATA_INDEX, $value);
     }
 }

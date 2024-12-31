@@ -7,7 +7,6 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeTemplateEnum;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\DefaultValueTemplateEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\DockBlockTemplateEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderTrait;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
@@ -39,6 +38,5 @@ readonly class CollectionTypeTemplateExpander implements TemplateExpanderInterfa
             $transferName,
         );
         $templateTransfer->dockBlocks[$propertyName] = sprintf(DockBlockTemplateEnum::COLLECTION->value, $transferName);
-        $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY_OBJECT->value;
     }
 }

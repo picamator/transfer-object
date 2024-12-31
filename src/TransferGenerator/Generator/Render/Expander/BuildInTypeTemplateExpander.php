@@ -7,7 +7,6 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeTemplateEnum;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\DefaultValueTemplateEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\DockBlockTemplateEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderTrait;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
@@ -46,7 +45,10 @@ readonly class BuildInTypeTemplateExpander implements TemplateExpanderInterface
     ): void {
         $propertyName = $propertyTransfer->propertyName;
 
-        $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY->value;
+        $templateTransfer->imports[AttributeEnum::ARRAY_TYPE_ATTRIBUTE->value]
+            ??= AttributeEnum::ARRAY_TYPE_ATTRIBUTE->value;
+
+        $templateTransfer->attributes[$propertyName] = AttributeTemplateEnum::ARRAY_TYPE_ATTRIBUTE->value;
         $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY->value;
     }
 
@@ -61,8 +63,6 @@ readonly class BuildInTypeTemplateExpander implements TemplateExpanderInterface
             ??= AttributeEnum::ARRAY_OBJECT_TYPE_ATTRIBUTE->value;
 
         $templateTransfer->attributes[$propertyName] = AttributeTemplateEnum::ARRAY_OBJECT_TYPE_ATTRIBUTE->value;
-
-        $templateTransfer->defaultValues[$propertyName] = DefaultValueTemplateEnum::ARRAY_OBJECT->value;
         $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY_OBJECT->value;
     }
 }

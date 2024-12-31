@@ -46,8 +46,8 @@ foreach ($templateTransfer->metaConstants as $constant => $property) {
     protected const int {$constant}_DATA_INDEX = $i;
 {$helper->getDockBlock($property)}
     public {$helper->getNullable($property)}{$templateTransfer->properties[$property]} \$$property {
-        get => \$this->_data[self::{$constant}_DATA_INDEX]{$helper->getDefault($property)};
-        set => \$this->_data[self::{$constant}_DATA_INDEX] = \$value;
+        get => \$this->getData(self::{$constant}_DATA_INDEX);
+        set => \$this->setData(self::{$constant}_DATA_INDEX, \$value);
     }
 
 TEMPLATE;

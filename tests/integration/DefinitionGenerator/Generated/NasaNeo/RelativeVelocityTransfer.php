@@ -31,8 +31,8 @@ final class RelativeVelocityTransfer extends AbstractTransfer
     protected const int KILOMETERS_PER_HOUR_DATA_INDEX = 0;
 
     public ?string $kilometers_per_hour {
-        get => $this->_data[self::KILOMETERS_PER_HOUR_DATA_INDEX];
-        set => $this->_data[self::KILOMETERS_PER_HOUR_DATA_INDEX] = $value;
+        get => $this->getData(self::KILOMETERS_PER_HOUR_DATA_INDEX);
+        set => $this->setData(self::KILOMETERS_PER_HOUR_DATA_INDEX, $value);
     }
 
     // kilometers_per_second
@@ -41,8 +41,8 @@ final class RelativeVelocityTransfer extends AbstractTransfer
     protected const int KILOMETERS_PER_SECOND_DATA_INDEX = 1;
 
     public ?string $kilometers_per_second {
-        get => $this->_data[self::KILOMETERS_PER_SECOND_DATA_INDEX];
-        set => $this->_data[self::KILOMETERS_PER_SECOND_DATA_INDEX] = $value;
+        get => $this->getData(self::KILOMETERS_PER_SECOND_DATA_INDEX);
+        set => $this->setData(self::KILOMETERS_PER_SECOND_DATA_INDEX, $value);
     }
 
     // miles_per_hour
@@ -51,7 +51,7 @@ final class RelativeVelocityTransfer extends AbstractTransfer
     protected const int MILES_PER_HOUR_DATA_INDEX = 2;
 
     public ?string $miles_per_hour {
-        get => $this->_data[self::MILES_PER_HOUR_DATA_INDEX];
-        set => $this->_data[self::MILES_PER_HOUR_DATA_INDEX] = $value;
+        get => $this->getData(self::MILES_PER_HOUR_DATA_INDEX);
+        set => $this->setData(self::MILES_PER_HOUR_DATA_INDEX, $value);
     }
 }

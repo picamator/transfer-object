@@ -29,7 +29,7 @@ final class CloudsTransfer extends AbstractTransfer
     protected const int ALL_DATA_INDEX = 0;
 
     public ?int $all {
-        get => $this->_data[self::ALL_DATA_INDEX];
-        set => $this->_data[self::ALL_DATA_INDEX] = $value;
+        get => $this->getData(self::ALL_DATA_INDEX);
+        set => $this->setData(self::ALL_DATA_INDEX, $value);
     }
 }

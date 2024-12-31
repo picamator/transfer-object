@@ -69,6 +69,7 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
                         ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
                         ItemTransfer::I_AM_ENUM => ImBackedEnum::SOME_CASE->value,
+                        ItemTransfer::DATA => [1, 2, 3],
                     ]
                 ],
             ],
@@ -84,6 +85,7 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
                         ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
                         ItemTransfer::I_AM_ENUM => ImBackedEnum::SOME_CASE->value,
+                        ItemTransfer::DATA => [1, 2, 3],
                     ]
                 ],
             ],
@@ -102,6 +104,7 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
                         ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
                         ItemTransfer::I_AM_ENUM => ImBasicEnum::SOMETHING,
+                        ItemTransfer::DATA => [1, 2, 3],
                     ]
                 ],
             ],
@@ -117,6 +120,7 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
                         ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
                         ItemTransfer::I_AM_ENUM => null,
+                        ItemTransfer::DATA => [1, 2, 3],
                     ]
                 ],
             ],
@@ -135,6 +139,7 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ARRAY => null,
                         ItemTransfer::I_AM_ARRAY_OBJECT => null,
                         ItemTransfer::I_AM_ENUM => null,
+                        ItemTransfer::DATA => null,
                     ]
                 ],
             ],
@@ -150,6 +155,7 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ARRAY => [],
                         ItemTransfer::I_AM_ARRAY_OBJECT => [],
                         ItemTransfer::I_AM_ENUM => null,
+                        ItemTransfer::DATA => [],
                     ]
                 ],
             ],

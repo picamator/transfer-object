@@ -37,7 +37,6 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\Enu
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\NamePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\RequiredTypePropertyValidator;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\ReservedPropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\TransferTypePropertyValidator;
 
 readonly class DefinitionFactory
@@ -85,7 +84,6 @@ readonly class DefinitionFactory
     {
         return new ArrayObject([
             $this->createNamePropertyValidator(),
-            $this->createReservedPropertyValidator(),
             $this->createRequiredTypePropertyValidator(),
             $this->createBuildInTypePropertyValidator(),
             $this->createTransferTypePropertyValidator(),
@@ -117,11 +115,6 @@ readonly class DefinitionFactory
     protected function createRequiredTypePropertyValidator(): PropertyValidatorInterface
     {
         return new RequiredTypePropertyValidator();
-    }
-
-    protected function createReservedPropertyValidator(): PropertyValidatorInterface
-    {
-        return new ReservedPropertyValidator();
     }
 
     protected function createNamePropertyValidator(): PropertyValidatorInterface

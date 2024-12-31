@@ -10,4 +10,5 @@ enum AttributeTemplateEnum: string
     case COLLECTION_TYPE_ATTRIBUTE = '#[CollectionPropertyTypeAttribute(%s::class)]';
     case ENUM_TYPE_ATTRIBUTE = '#[EnumPropertyTypeAttribute(%s::class)]';
     case ARRAY_OBJECT_TYPE_ATTRIBUTE = '#[ArrayObjectPropertyTypeAttribute]';
+    case ARRAY_TYPE_ATTRIBUTE = '#[ArrayPropertyTypeAttribute]';
 }

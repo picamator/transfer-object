@@ -30,8 +30,8 @@ final class UserTransfer extends AbstractTransfer
     protected const int FIRST_NAME_DATA_INDEX = 0;
 
     public ?string $firstName {
-        get => $this->_data[self::FIRST_NAME_DATA_INDEX];
-        set => $this->_data[self::FIRST_NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::FIRST_NAME_DATA_INDEX);
+        set => $this->setData(self::FIRST_NAME_DATA_INDEX, $value);
     }
 
     // lastName
@@ -40,7 +40,7 @@ final class UserTransfer extends AbstractTransfer
     protected const int LAST_NAME_DATA_INDEX = 1;
 
     public ?string $lastName {
-        get => $this->_data[self::LAST_NAME_DATA_INDEX];
-        set => $this->_data[self::LAST_NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::LAST_NAME_DATA_INDEX);
+        set => $this->setData(self::LAST_NAME_DATA_INDEX, $value);
     }
 }

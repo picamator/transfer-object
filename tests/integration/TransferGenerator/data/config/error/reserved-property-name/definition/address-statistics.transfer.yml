@@ -1,5 +1,0 @@
-AddressStatistics:
-  addressBookUuid:
-    type: string
-  _data:
-    type: string
