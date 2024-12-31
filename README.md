@@ -1,9 +1,9 @@
 ![Transfer Object Generator](.github/img/transfer-object-generator.jpg)
 
 [![CI workflow](https://github.com/picamator/transfer-object/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/picamator/transfer-object/actions)
-[![License](http://poser.pugx.org/picamator/transfer-object/license)](https://packagist.org/packages/picamator/transfer-object)
-[![PHP Version Require](http://poser.pugx.org/picamator/transfer-object/require/php)](https://packagist.org/packages/picamator/transfer-object)
-[![Latest Stable Version](http://poser.pugx.org/picamator/transfer-object/v)](https://packagist.org/packages/picamator/transfer-object)
+[![License](https://poser.pugx.org/picamator/transfer-object/license)](https://packagist.org/packages/picamator/transfer-object)
+[![PHP Version Require](https://poser.pugx.org/picamator/transfer-object/require/php)](https://packagist.org/packages/picamator/transfer-object)
+[![Latest Stable Version](https://poser.pugx.org/picamator/transfer-object/v)](https://packagist.org/packages/picamator/transfer-object)
 
 Transfer Object Generator
 ==========================
