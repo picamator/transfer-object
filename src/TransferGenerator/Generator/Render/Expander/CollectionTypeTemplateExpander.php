@@ -38,5 +38,7 @@ readonly class CollectionTypeTemplateExpander implements TemplateExpanderInterfa
             $transferName,
         );
         $templateTransfer->dockBlocks[$propertyName] = sprintf(DockBlockTemplateEnum::COLLECTION->value, $transferName);
+
+        $templateTransfer->nullables[$propertyName] = false;
     }
 }

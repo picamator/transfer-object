@@ -12,6 +12,4 @@ interface TransferGeneratorInterface
      * @return \Generator<int,\Picamator\TransferObject\Generated\TransferGeneratorTransfer>
      */
     public function getTransferGenerator(): Generator;
-
-    public function getDefinitionFileCount(): int;
 }

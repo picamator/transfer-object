@@ -34,6 +34,8 @@ readonly class EnumTypeTemplateExpander implements TemplateExpanderInterface
             AttributeTemplateEnum::ENUM_TYPE_ATTRIBUTE->value,
             $enumClassName,
         );
+
+        $templateTransfer->nullables[$propertyName] = true;
     }
 
     private function getEnumName(DefinitionPropertyTransfer $propertyTransfer): string

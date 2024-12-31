@@ -43,15 +43,6 @@ readonly class DefinitionReader implements DefinitionReaderInterface
         return $count;
     }
 
-    public function getDefinitionFileCount(): int
-    {
-        try {
-            return $this->finder->getDefinitionFileCount();
-        } catch (FinderException) {
-            return 0;
-        }
-    }
-
     /**
      * @return \Generator<int, \Picamator\TransferObject\Generated\DefinitionTransfer>
      */

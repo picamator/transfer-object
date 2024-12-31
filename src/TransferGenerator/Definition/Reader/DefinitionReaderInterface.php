@@ -12,6 +12,4 @@ interface DefinitionReaderInterface
      * @return \Generator<int,\Picamator\TransferObject\Generated\DefinitionTransfer>
      */
     public function getDefinitions(): Generator;
-
-    public function getDefinitionFileCount(): int;
 }

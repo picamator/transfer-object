@@ -19,7 +19,7 @@ use Picamator\TransferObject\Transfer\Attribute\ArrayObjectPropertyTypeAttribute
  */
 final class TemplateTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 8;
+    protected const int META_DATA_SIZE = 9;
 
     protected const array META_DATA = [
         self::ATTRIBUTES => self::ATTRIBUTES_DATA_NAME,
@@ -28,6 +28,7 @@ final class TemplateTransfer extends AbstractTransfer
         self::DOCK_BLOCKS => self::DOCK_BLOCKS_DATA_NAME,
         self::IMPORTS => self::IMPORTS_DATA_NAME,
         self::META_CONSTANTS => self::META_CONSTANTS_DATA_NAME,
+        self::NULLABLES => self::NULLABLES_DATA_NAME,
         self::PROPERTIES => self::PROPERTIES_DATA_NAME,
         self::PROPERTIES_COUNT => self::PROPERTIES_COUNT_DATA_NAME,
     ];
@@ -100,11 +101,23 @@ final class TemplateTransfer extends AbstractTransfer
         set => $this->setData(self::META_CONSTANTS_DATA_INDEX, $value);
     }
 
+    // nullables
+    #[ArrayObjectPropertyTypeAttribute]
+    public const string NULLABLES = 'nullables';
+    protected const string NULLABLES_DATA_NAME = 'NULLABLES';
+    protected const int NULLABLES_DATA_INDEX = 6;
+
+    /** @var \ArrayObject<string|int,mixed> */
+    public ArrayObject $nullables {
+        get => $this->getData(self::NULLABLES_DATA_INDEX);
+        set => $this->setData(self::NULLABLES_DATA_INDEX, $value);
+    }
+
     // properties
     #[ArrayObjectPropertyTypeAttribute]
     public const string PROPERTIES = 'properties';
     protected const string PROPERTIES_DATA_NAME = 'PROPERTIES';
-    protected const int PROPERTIES_DATA_INDEX = 6;
+    protected const int PROPERTIES_DATA_INDEX = 7;
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $properties {
@@ -115,7 +128,7 @@ final class TemplateTransfer extends AbstractTransfer
     // propertiesCount
     public const string PROPERTIES_COUNT = 'propertiesCount';
     protected const string PROPERTIES_COUNT_DATA_NAME = 'PROPERTIES_COUNT';
-    protected const int PROPERTIES_COUNT_DATA_INDEX = 7;
+    protected const int PROPERTIES_COUNT_DATA_INDEX = 8;
 
     public ?int $propertiesCount {
         get => $this->getData(self::PROPERTIES_COUNT_DATA_INDEX);

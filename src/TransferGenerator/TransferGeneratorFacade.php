@@ -6,7 +6,6 @@ namespace Picamator\TransferObject\TransferGenerator;
 
 use Fiber;
 use Generator;
-use Picamator\TransferObject\Command\Helper\ProgressBarInterface;
 use Picamator\TransferObject\Generated\ConfigTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\Generator\TransferGeneratorFactory;
@@ -26,7 +25,7 @@ class TransferGeneratorFacade implements TransferGeneratorFacadeInterface
     }
 
     /**
-     * @return \Fiber<ProgressBarInterface,null,bool,TransferGeneratorTransfer>
+     * @return \Fiber<null,null,bool,TransferGeneratorTransfer>
      */
     public function getTransferGeneratorFiber(): Fiber
     {

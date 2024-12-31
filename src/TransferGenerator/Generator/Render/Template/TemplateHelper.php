@@ -55,6 +55,6 @@ readonly class TemplateHelper implements TemplateHelperInterface
 
     public function getNullable(string $property): string
     {
-        return isset($this->templateTransfer->dockBlocks[$property]) ? '' : '?';
+        return $this->templateTransfer->nullables[$property] ? '?' : '';
     }
 }

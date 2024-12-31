@@ -33,9 +33,4 @@ readonly class TransferGenerator implements TransferGeneratorInterface
 
         return $isSuccess;
     }
-
-    public function getDefinitionFileCount(): int
-    {
-        return $this->definitionReader->getDefinitionFileCount();
-    }
 }
