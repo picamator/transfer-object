@@ -1,7 +1,9 @@
 Transfer Object Generator
 ==========================
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![CI workflow](https://github.com/picamator/transfer-object/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/picamator/transfer-object/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PHP Version Require](http://poser.pugx.org/picamator/transfer-object/require/php)](https://packagist.org/packages/picamator/transfer-object)
+[![Latest Stable Version](http://poser.pugx.org/picamator/transfer-object/v)](https://packagist.org/packages/picamator/transfer-object)
 
 Want to build Transfer Objects (TO) effortlessly?
 You're in the right place!
