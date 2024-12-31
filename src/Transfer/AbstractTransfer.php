@@ -110,12 +110,12 @@ abstract class AbstractTransfer implements TransferInterface
         return $this->toArray();
     }
 
-    protected function getData(int $index): mixed
+    final protected function getData(int $index): mixed
     {
         return $this->data[$index];
     }
 
-    protected function setData(int $index, mixed $value): mixed
+    final protected function setData(int $index, mixed $value): mixed
     {
         return $this->data[$index] = $value;
     }
