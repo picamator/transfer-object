@@ -6,7 +6,6 @@ namespace Picamator\TransferObject\TransferGenerator\Generator;
 
 use ArrayObject;
 use Fiber;
-use Picamator\TransferObject\Command\Helper\ProgressBarInterface;
 use Picamator\TransferObject\Dependency\DependencyContainer;
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
@@ -43,7 +42,7 @@ readonly class TransferGeneratorFactory
     use DependencyFactoryTrait;
 
     /**
-     * @return \Fiber<ProgressBarInterface,null,bool,TransferGeneratorTransfer>
+     * @return \Fiber<null,null,bool,TransferGeneratorTransfer>
      */
     public function createTransferGeneratorFiber(): Fiber
     {

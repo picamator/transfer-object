@@ -6,7 +6,6 @@ namespace Picamator\TransferObject\TransferGenerator;
 
 use Fiber;
 use Generator;
-use Picamator\TransferObject\Command\Helper\ProgressBarInterface;
 use Picamator\TransferObject\Generated\ConfigTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 
@@ -29,7 +28,6 @@ interface TransferGeneratorFacadeInterface
      * Specification:
      * - Requires config loading `self::loadConfig()`
      * - Provides Transfer Generator Fiber
-     * - Starts with argument `ProgressBarInterface`
      * - Suspends after generating Transfer Object passing `TransferGeneratorTransfer` back
      * - Transfer object `TransferGeneratorTransfer` might contain error messages if any occur
      * - Returns `true` when whole process is successful, `false` otherwise
@@ -37,7 +35,7 @@ interface TransferGeneratorFacadeInterface
      * @throws \FiberError
      * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
      *
-     * @return \Fiber<ProgressBarInterface,null,bool,TransferGeneratorTransfer>
+     * @return \Fiber<null,null,bool,TransferGeneratorTransfer>
      */
     public function getTransferGeneratorFiber(): Fiber;
 

@@ -15,9 +15,4 @@ interface DefinitionFinderInterface
      * @return Generator<string,string>
      */
     public function getDefinitionFiles(): Generator;
-
-    /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
-     */
-    public function getDefinitionFileCount(): int;
 }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Command;
 
 use ArrayObject;
-use Picamator\TransferObject\Command\Helper\ProgressBar;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
@@ -81,9 +80,8 @@ final class TransferGeneratorCommand extends Command
     private function generateTransfers(SymfonyStyle $styleOutput): bool
     {
         $generatorFiber = $this->generatorFacade->getTransferGeneratorFiber();
-        $progressBar = new ProgressBar($styleOutput);
 
-        $generatorTransfer = $generatorFiber->start($progressBar);
+        $generatorTransfer = $generatorFiber->start();
         $this->writelnGeneratorTransfer($generatorTransfer, $styleOutput);
 
         while (!$generatorFiber->isTerminated()) {
