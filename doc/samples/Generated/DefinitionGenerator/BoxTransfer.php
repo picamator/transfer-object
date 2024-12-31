@@ -30,8 +30,8 @@ final class BoxTransfer extends AbstractTransfer
     protected const int ITEMS_DATA_INDEX = 0;
 
     public ?int $items {
-        get => $this->_data[self::ITEMS_DATA_INDEX];
-        set => $this->_data[self::ITEMS_DATA_INDEX] = $value;
+        get => $this->getData(self::ITEMS_DATA_INDEX);
+        set => $this->setData(self::ITEMS_DATA_INDEX, $value);
     }
 
     // type
@@ -40,7 +40,7 @@ final class BoxTransfer extends AbstractTransfer
     protected const int TYPE_DATA_INDEX = 1;
 
     public ?string $type {
-        get => $this->_data[self::TYPE_DATA_INDEX];
-        set => $this->_data[self::TYPE_DATA_INDEX] = $value;
+        get => $this->getData(self::TYPE_DATA_INDEX);
+        set => $this->setData(self::TYPE_DATA_INDEX, $value);
     }
 }

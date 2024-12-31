@@ -23,7 +23,7 @@ abstract class AbstractTransfer implements TransferInterface
     /**
      * @var SplFixedArray<mixed>
      */
-    protected SplFixedArray $_data;
+    private SplFixedArray $data;
 
     final public function __construct()
     {
@@ -35,7 +35,7 @@ abstract class AbstractTransfer implements TransferInterface
         foreach (static::META_DATA as $metaKey => $metaName) {
             $metaIndex = $metaName . self::DATA_INDEX;
 
-            yield $metaKey => $this->_data[static::{$metaIndex}];
+            yield $metaKey => $this->data[static::{$metaIndex}];
         }
     }
 
@@ -53,7 +53,7 @@ abstract class AbstractTransfer implements TransferInterface
     final public function __serialize(): array
     {
         return [
-            'data' => $this->_data,
+            'data' => $this->data,
         ];
     }
 
@@ -62,7 +62,7 @@ abstract class AbstractTransfer implements TransferInterface
      */
     final public function __unserialize(array $data): void
     {
-        $this->_data = $data['data'];
+        $this->data = $data['data'];
     }
 
     /**
@@ -77,7 +77,9 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $data = [];
         foreach (static::META_DATA as $metaKey => $metaName) {
-            $dataItem = $this->{$metaKey};
+            $metaIndex = $metaName . self::DATA_INDEX;
+            $dataItem = $this->getData(static::{$metaIndex});
+
             $data[$metaKey] = $this->hasConstantAttribute($metaName)
                 ? $this->getConstantAttribute($metaName)?->toArray($dataItem)
                 : $dataItem;
@@ -92,9 +94,12 @@ abstract class AbstractTransfer implements TransferInterface
         $data = array_intersect_key($data, static::META_DATA);
         $data = array_filter($data, fn(mixed $item): bool => $item !== null);
         foreach ($data as $key => $value) {
-            $this->{$key} = $this->hasConstantAttribute(static::META_DATA[$key])
+            $value = $this->hasConstantAttribute(static::META_DATA[$key])
                 ? $this->getConstantAttribute(static::META_DATA[$key])?->fromArray($value)
                 : $value;
+
+            $metaIndex = static::META_DATA[$key] . self::DATA_INDEX;
+            $this->setData(static::{$metaIndex}, $value);
         }
 
         return $this;
@@ -105,13 +110,27 @@ abstract class AbstractTransfer implements TransferInterface
         return $this->toArray();
     }
 
+    protected function getData(int $index): mixed
+    {
+        return $this->data[$index];
+    }
+
+    protected function setData(int $index, mixed $value): mixed
+    {
+        return $this->data[$index] = $value;
+    }
+
     private function initData(): void
     {
-        $this->_data = new SplFixedArray(static::META_DATA_SIZE);
+        $this->data = new SplFixedArray(static::META_DATA_SIZE);
 
-        foreach (static::META_DATA as $metaKey => $metaName) {
+        foreach (static::META_DATA as $metaName) {
             $metaIndex = $metaName . self::DATA_INDEX;
-            $this->_data[static::{$metaIndex}] = $this->{$metaKey};
+            $initialValue = $this->hasConstantAttribute($metaName)
+                ? $this->getConstantAttribute($metaName)?->getInitialValue()
+                : null;
+
+            $this->setData(static::{$metaIndex}, $initialValue);
         }
     }
 }

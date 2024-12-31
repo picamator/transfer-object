@@ -17,3 +17,5 @@ Item:
     type: ArrayObject
   iAmEnum:
     enumType: '\Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum'
+  data:
+    type: array

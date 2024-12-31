@@ -55,16 +55,6 @@ readonly class TemplateHelper implements TemplateHelperInterface
 
     public function getNullable(string $property): string
     {
-        return isset($this->templateTransfer->defaultValues[$property]) ? '' : '?';
-    }
-
-    public function getDefault(string $property): string
-    {
-        $default = $this->templateTransfer->defaultValues[$property] ?? null;
-        if ($default === null) {
-            return '';
-        }
-
-        return ' ?? ' . $default;
+        return isset($this->templateTransfer->dockBlocks[$property]) ? '' : '?';
     }
 }

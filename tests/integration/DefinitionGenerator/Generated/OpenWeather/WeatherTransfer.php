@@ -32,8 +32,8 @@ final class WeatherTransfer extends AbstractTransfer
     protected const int DESCRIPTION_DATA_INDEX = 0;
 
     public ?string $description {
-        get => $this->_data[self::DESCRIPTION_DATA_INDEX];
-        set => $this->_data[self::DESCRIPTION_DATA_INDEX] = $value;
+        get => $this->getData(self::DESCRIPTION_DATA_INDEX);
+        set => $this->setData(self::DESCRIPTION_DATA_INDEX, $value);
     }
 
     // icon
@@ -42,8 +42,8 @@ final class WeatherTransfer extends AbstractTransfer
     protected const int ICON_DATA_INDEX = 1;
 
     public ?string $icon {
-        get => $this->_data[self::ICON_DATA_INDEX];
-        set => $this->_data[self::ICON_DATA_INDEX] = $value;
+        get => $this->getData(self::ICON_DATA_INDEX);
+        set => $this->setData(self::ICON_DATA_INDEX, $value);
     }
 
     // id
@@ -52,8 +52,8 @@ final class WeatherTransfer extends AbstractTransfer
     protected const int ID_DATA_INDEX = 2;
 
     public ?int $id {
-        get => $this->_data[self::ID_DATA_INDEX];
-        set => $this->_data[self::ID_DATA_INDEX] = $value;
+        get => $this->getData(self::ID_DATA_INDEX);
+        set => $this->setData(self::ID_DATA_INDEX, $value);
     }
 
     // main
@@ -62,7 +62,7 @@ final class WeatherTransfer extends AbstractTransfer
     protected const int MAIN_DATA_INDEX = 3;
 
     public ?string $main {
-        get => $this->_data[self::MAIN_DATA_INDEX];
-        set => $this->_data[self::MAIN_DATA_INDEX] = $value;
+        get => $this->getData(self::MAIN_DATA_INDEX);
+        set => $this->setData(self::MAIN_DATA_INDEX, $value);
     }
 }

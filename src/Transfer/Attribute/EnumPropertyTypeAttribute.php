@@ -33,4 +33,9 @@ final readonly class EnumPropertyTypeAttribute implements PropertyTypeAttributeI
     {
         return $data?->value;
     }
+
+    public function getInitialValue(): null
+    {
+        return null;
+    }
 }

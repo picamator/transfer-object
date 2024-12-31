@@ -41,6 +41,14 @@ final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttr
     }
 
     /**
+     * @return \ArrayObject<string|int,mixed>
+     */
+    public function getInitialValue(): ArrayObject
+    {
+        return new ArrayObject();
+    }
+
+    /**
      * @param array<string,mixed> $data
      */
     private function createTransfer(array $data): TransferInterface

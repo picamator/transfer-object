@@ -98,11 +98,6 @@ class TransferGeneratorFacadeErrorTest extends TestCase
             'expectedMessage' => 'Invalid class name',
         ];
 
-        yield 'reserved property name should return error' => [
-            'configCaseName' => 'reserved-property-name',
-            'expectedMessage' => 'Cannot use reserved property name',
-        ];
-
         yield 'missed property type should return error' => [
             'configCaseName' => 'missed-type',
             'expectedMessage' => 'Property "addressUuid" type definition is missing.',
