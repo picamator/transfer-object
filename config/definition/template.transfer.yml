@@ -15,3 +15,5 @@ Template:
     type: ArrayObject
   dockBlocks:
     type: ArrayObject
+  nullables:
+    type: ArrayObject

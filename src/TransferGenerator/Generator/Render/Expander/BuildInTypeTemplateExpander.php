@@ -27,6 +27,7 @@ readonly class BuildInTypeTemplateExpander implements TemplateExpanderInterface
     ): void {
         $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->properties[$propertyName] = $propertyTransfer->buildInType->value;
+        $templateTransfer->nullables[$propertyName] = true;
 
         if ($propertyTransfer->buildInType->isArrayObject()) {
             $this->expandArrayObjectType($propertyTransfer, $templateTransfer);
@@ -50,6 +51,7 @@ readonly class BuildInTypeTemplateExpander implements TemplateExpanderInterface
 
         $templateTransfer->attributes[$propertyName] = AttributeTemplateEnum::ARRAY_TYPE_ATTRIBUTE->value;
         $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY->value;
+        $templateTransfer->nullables[$propertyName] = false;
     }
 
     private function expandArrayObjectType(
@@ -64,5 +66,6 @@ readonly class BuildInTypeTemplateExpander implements TemplateExpanderInterface
 
         $templateTransfer->attributes[$propertyName] = AttributeTemplateEnum::ARRAY_OBJECT_TYPE_ATTRIBUTE->value;
         $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY_OBJECT->value;
+        $templateTransfer->nullables[$propertyName] = false;
     }
 }

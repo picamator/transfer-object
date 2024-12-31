@@ -33,5 +33,7 @@ readonly class TransferTypeTemplateExpander implements TemplateExpanderInterface
             AttributeTemplateEnum::TYPE_ATTRIBUTE->value,
             $transferName,
         );
+
+        $templateTransfer->nullables[$propertyName] = true;
     }
 }
