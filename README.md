@@ -1,11 +1,14 @@
-Transfer Object Generator
-==========================
+![Transfer Object Generator](.github/img/transfer-object-generator.jpg)
+
 [![CI workflow](https://github.com/picamator/transfer-object/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/picamator/transfer-object/actions)
 [![License](http://poser.pugx.org/picamator/transfer-object/license)](https://packagist.org/packages/picamator/transfer-object)
 [![PHP Version Require](http://poser.pugx.org/picamator/transfer-object/require/php)](https://packagist.org/packages/picamator/transfer-object)
 [![Latest Stable Version](http://poser.pugx.org/picamator/transfer-object/v)](https://packagist.org/packages/picamator/transfer-object)
 
-Want to build Transfer Objects (TO) effortlessly?
+Transfer Object Generator
+==========================
+
+Would you like to build Transfer Objects (TO) effortlessly?
 You're in the right place!
 
 Build TOs Using an Array as Blueprint
@@ -19,7 +22,7 @@ $data = [
 ];
 ```
 
-TO Generator converts it to the Definition file:
+Firslty definition generator converts it to the `YML` file:
 ```yml
 Customer:
   firstName:
