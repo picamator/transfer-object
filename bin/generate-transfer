@@ -13,7 +13,7 @@ function includeAutoload(string $path): bool
 
 if (
     !includeAutoload(__DIR__ . '/../../autoload.php')
-    && !includeAutoload(__DIR__ . '/vendor/autoload.php')
+    && !includeAutoload(__DIR__ . '/../vendor/autoload.php')
 ) {
     fwrite(STDERR, 'Failed include autoload file.' . PHP_EOL);
     exit(1);
