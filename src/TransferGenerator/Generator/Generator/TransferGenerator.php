@@ -6,6 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 
 use Generator;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
+use Throwable;
 
 readonly class TransferGenerator implements TransferGeneratorInterface
 {
@@ -17,20 +18,37 @@ readonly class TransferGenerator implements TransferGeneratorInterface
 
     public function getTransferGenerator(): Generator
     {
-        $this->processor->preGenerateTransfer();
+        $this->processor->preProcess();
 
         $failCount = 0;
         $definitionGenerator = $this->definitionReader->getDefinitions();
         foreach ($definitionGenerator as $definitionTransfer) {
-            $generatorTransfer = $this->processor->generateTransfer($definitionTransfer);
+            $generatorTransfer = $this->processor->process($definitionTransfer);
             $failCount += (int)!$generatorTransfer->validator?->isValid;
 
-            yield $generatorTransfer;
+            try {
+                yield $generatorTransfer;
+            } catch (Throwable $e) {
+                $this->processor->postProcessError();
+
+                return false;
+            }
         }
 
         $isSuccess = $definitionGenerator->getReturn() > 0 && $failCount === 0;
-        $this->processor->postGenerateTransfer($isSuccess);
+        $this->postProcess($isSuccess);
 
         return $isSuccess;
+    }
+
+    private function postProcess(bool $isSuccess): void
+    {
+        if ($isSuccess) {
+            $this->processor->postProcessSuccess();
+
+            return;
+        }
+
+        $this->processor->postProcessError();
     }
 }

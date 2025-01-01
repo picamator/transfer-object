@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 
 use Fiber;
+use Throwable;
 
 readonly class FiberTransferGenerator implements FiberTransferGeneratorInterface
 {
@@ -13,23 +14,17 @@ readonly class FiberTransferGenerator implements FiberTransferGeneratorInterface
     ) {
     }
 
-    /**
-     * @throws \FiberError
-     * @throws \Throwable
-     */
     public function getTransferFiberCallback(): bool
     {
-        $generatorIterator = $this->generator->getTransferGenerator();
-
-        $currentDefinitionFile = '';
-        foreach ($generatorIterator as $generatorTransfer) {
-            if ($currentDefinitionFile !== $generatorTransfer->fileName) {
-                $currentDefinitionFile = $generatorTransfer->fileName;
+        $transferGenerator = $this->generator->getTransferGenerator();
+        foreach ($transferGenerator as $generatorTransfer) {
+            try {
+                Fiber::suspend($generatorTransfer);
+            } catch (Throwable $e) {
+                $transferGenerator->throw($e);
             }
-
-            Fiber::suspend($generatorTransfer);
         }
 
-        return $generatorIterator->getReturn();
+        return $transferGenerator->getReturn();
     }
 }

@@ -31,9 +31,9 @@ class BulkTransferGeneratorTest extends TestCase
         // Arrange
         $generatorTransfer = $this->createErrorGeneratorTransfer();
 
-        $this->generatorMock->expects($this->once())
+        $this->generatorMock->expects($this->exactly(2))
             ->method('getTransferGenerator')
-            ->willReturnCallback(fn () => yield $generatorTransfer);
+            ->willReturnCallback(fn() => yield $generatorTransfer);
 
         $this->expectException(TransferGeneratorException::class);
 

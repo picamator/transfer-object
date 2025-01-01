@@ -22,11 +22,13 @@ readonly class BulkTransferGenerator implements BulkTransferGeneratorInterface
      */
     public function generateTransfers(): void
     {
+        $transferGenerator = $this->generator->getTransferGenerator();
         foreach ($this->generator->getTransferGenerator() as $generatorTransfer) {
             if ($generatorTransfer->validator?->isValid === true) {
                 continue;
             }
 
+            $transferGenerator->throw(new TransferGeneratorException());
             $this->throwError($generatorTransfer);
         }
     }

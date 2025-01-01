@@ -22,23 +22,22 @@ readonly class GeneratorProcessor implements GeneratorProcessorInterface
     ) {
     }
 
-    public function preGenerateTransfer(): void
+    public function preProcess(): void
     {
         $this->filesystem->createTempDir();
     }
 
-    public function postGenerateTransfer(bool $isSuccess): void
+    public function postProcessSuccess(): void
     {
-        if ($isSuccess) {
-            $this->filesystem->rotateTempDir();
+        $this->filesystem->rotateTempDir();
+    }
 
-            return;
-        }
-
+    public function postProcessError(): void
+    {
         $this->filesystem->deleteTempDir();
     }
 
-    public function generateTransfer(DefinitionTransfer $definitionTransfer): TransferGeneratorTransfer
+    public function process(DefinitionTransfer $definitionTransfer): TransferGeneratorTransfer
     {
         if (!$definitionTransfer->validator?->isValid) {
             return $this->createGeneratorTransfer($definitionTransfer);
