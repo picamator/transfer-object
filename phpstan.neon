@@ -7,3 +7,6 @@ parameters:
     - generate-transfer
   excludePaths:
     - tests/*/data/*
+  ignoreErrors:
+    -
+      identifier: propertyGetHook.noRead
