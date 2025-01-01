@@ -1,7 +1,7 @@
 {
   "name": "picamator/transfer-object",
-  "description": "Transfer Object based on property Hooks, includes generator by yml definition.",
-  "keywords": ["dev", "code generator", "transfer object"],
+  "description": "Transfer Object Generator based on property hooks and FixedArray.",
+  "keywords": ["generator", "code generator", "transfer object", "data transfer object", "dto", "dev"],
   "license": "MIT",
   "authors": [
     {
@@ -9,7 +9,8 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/picamator/transfer-object/issues"
+    "issues": "https://github.com/picamator/transfer-object/issues",
+    "wiki": "https://github.com/picamator/transfer-object/wiki"
   },
   "autoload": {
     "psr-4": {
