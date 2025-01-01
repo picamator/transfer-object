@@ -1,0 +1,58 @@
+Product:
+  kind:
+    type: string
+  id:
+    type: string
+  offerId:
+    type: string
+  source:
+    type: string
+  title:
+    type: string
+  description:
+    type: string
+  link:
+    type: string
+  imageLink:
+    type: string
+  contentLanguage:
+    type: string
+  targetCountry:
+    type: string
+  feedLabel:
+    type: string
+  channel:
+    type: string
+  ageGroup:
+    type: string
+  availability:
+    type: string
+  availabilityDate:
+    type: string
+  brand:
+    type: string
+  color:
+    type: string
+  condition:
+    type: string
+  gender:
+    type: string
+  googleProductCategory:
+    type: string
+  gtin:
+    type: string
+  itemGroupId:
+    type: string
+  mpn:
+    type: string
+  price:
+    type: Price
+  sizes:
+    type: array
+
+Price:
+  value:
+    type: string
+  currency:
+    type: string
+
