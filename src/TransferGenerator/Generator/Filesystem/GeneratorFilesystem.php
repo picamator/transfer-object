@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Filesystem;
 
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Dependency\Finder\FinderInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Container\ConfigInterface;
+use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
 
 readonly class GeneratorFilesystem implements GeneratorFilesystemInterface

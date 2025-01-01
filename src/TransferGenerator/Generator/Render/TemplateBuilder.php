@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render;
 
 use ArrayObject;
-use Picamator\TransferObject\TransferGenerator\Config\Container\ConfigInterface;
+use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransferEnum;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;

@@ -8,7 +8,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Dependency\Finder\FinderInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Container\ConfigInterface;
+use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystem;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
