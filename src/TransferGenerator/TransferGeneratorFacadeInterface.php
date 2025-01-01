@@ -14,19 +14,6 @@ interface TransferGeneratorFacadeInterface
     /**
      * Specification:
      * - Requires config loading `self::loadConfig()`
-     * - Generates new Transfer Object on each iteration
-     * - Transfer object `TransferGeneratorTransfer` might contain error messages if any occur
-     * - Returns `true` when whole process is successful, `false` otherwise
-     *
-     * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
-     *
-     * @return \Generator<int,\Picamator\TransferObject\Generated\TransferGeneratorTransfer>
-     */
-    public function getTransferGenerator(): Generator;
-
-    /**
-     * Specification:
-     * - Requires config loading `self::loadConfig()`
      * - Provides Transfer Generator Fiber
      * - Suspends after generating Transfer Object passing `TransferGeneratorTransfer` back
      * - Transfer object `TransferGeneratorTransfer` might contain error messages if any occur
@@ -42,7 +29,7 @@ interface TransferGeneratorFacadeInterface
     /**
      * Specification:
      * - Requires config loading `self::loadConfig()`
-     * - Generates Transfer Objects without output
+     * - Generates Transfer Objects
      * - Throws exception on any error
      *
      * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface

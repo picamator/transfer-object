@@ -15,13 +15,21 @@ trait TransferGeneratorHelperTrait
      */
     protected function generateTransfers(callable $postGenerateItemCallback): bool
     {
-        $generatorIterator = new TransferGeneratorFacade()->getTransferGenerator();
+        $generatorFiber =  new TransferGeneratorFacade()->getTransferGeneratorFiber();
 
-        foreach ($generatorIterator as $generatorTransfer) {
+        $generatorTransfer = $generatorFiber->start();
+        if ($generatorTransfer !== null) {
             $postGenerateItemCallback($generatorTransfer);
         }
 
-        return $generatorIterator->getReturn();
+        while (!$generatorFiber->isTerminated()) {
+            $generatorTransfer = $generatorFiber->resume();
+            if ($generatorTransfer !== null) {
+                $postGenerateItemCallback($generatorTransfer);
+            }
+        }
+
+        return $generatorFiber->getReturn();
     }
 
     /**
