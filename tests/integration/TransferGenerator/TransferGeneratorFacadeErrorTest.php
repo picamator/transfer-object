@@ -9,6 +9,8 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
+use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
+use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 
 class TransferGeneratorFacadeErrorTest extends TestCase
 {
@@ -23,10 +25,9 @@ class TransferGeneratorFacadeErrorTest extends TestCase
     ): void {
         // Arrange
         $configPath = $this->getConfigPath($configCaseName);
-        $this->assertLoadConfigSuccess($configPath);
 
-        $callback = function (?TransferGeneratorTransfer $generatorTransfer) use ($expectedMessage): void {
-            if ($generatorTransfer === null) {
+        $callback = function (TransferGeneratorTransfer $generatorTransfer) use ($expectedMessage): void {
+            if ($generatorTransfer->validator->isValid) {
                 return;
             }
 
@@ -39,7 +40,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         };
 
         // Act
-        $actual = $this->generateTransfers($callback);
+        $actual = $this->generateTransfers($configPath, $callback);
 
         // Assert
         $this->assertFalse($actual);
@@ -51,10 +52,9 @@ class TransferGeneratorFacadeErrorTest extends TestCase
 
         // Arrange
         $configPath = $this->getConfigPath($configCaseName);
-        $this->assertLoadConfigSuccess($configPath);
 
-        $callback = function (?TransferGeneratorTransfer $generatorTransfer): void {
-            if ($generatorTransfer === null || $generatorTransfer->validator->isValid) {
+        $callback = function (TransferGeneratorTransfer $generatorTransfer): void {
+            if ($generatorTransfer->validator->isValid) {
                 return;
             }
 
@@ -67,7 +67,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         };
 
         // Act
-        $actual = $this->generateTransfers($callback);
+        $actual = $this->generateTransfers($configPath, $callback);
 
         // Assert
         $this->assertFalse($actual);
@@ -132,6 +132,17 @@ class TransferGeneratorFacadeErrorTest extends TestCase
             'configCaseName' => 'empty-definition-directory',
             'expectedMessage' => 'Missed Transfer Object definitions.',
         ];
+    }
+
+    public function testBulkTransferGeneratorShouldFailOnError(): void
+    {
+        // Arrange
+        $configPath = $this->getConfigPath('invalid-class-name');
+
+        $this->expectException(TransferGeneratorException::class);
+
+        // Act
+        new TransferGeneratorFacade()->generateTransfers($configPath);
     }
 
     private function getConfigPath(string $configCaseName): string

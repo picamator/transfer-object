@@ -9,5 +9,5 @@ interface BulkTransferGeneratorInterface
     /**
      * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException
      */
-    public function generateTransfers(): void;
+    public function generateTransfers(string $configPath): void;
 }

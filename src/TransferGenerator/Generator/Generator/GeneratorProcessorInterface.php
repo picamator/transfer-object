@@ -9,9 +9,11 @@ use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 
 interface GeneratorProcessorInterface
 {
-    public function preGenerateTransfer(): void;
+    public function preProcess(): TransferGeneratorTransfer;
 
-    public function postGenerateTransfer(bool $isSuccess): void;
+    public function postProcessSuccess(): TransferGeneratorTransfer;
 
-    public function generateTransfer(DefinitionTransfer $definitionTransfer): TransferGeneratorTransfer;
+    public function postProcessError(): TransferGeneratorTransfer;
+
+    public function process(DefinitionTransfer $definitionTransfer): TransferGeneratorTransfer;
 }

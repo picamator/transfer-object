@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Filesystem;
 
 use Generator;
 use Picamator\TransferObject\Dependency\Finder\FinderInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Container\ConfigInterface;
+use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorDefinitionException;
 
 readonly class DefinitionFinder implements DefinitionFinderInterface

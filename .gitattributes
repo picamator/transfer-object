@@ -1,5 +1,6 @@
 * eol=lf
 * text=auto
+*.php diff=php
 
 /.github                export-ignore
 /doc/                   export-ignore
@@ -9,6 +10,7 @@
 /.gitattributes         export-ignore
 /.gitignore             export-ignore
 /captainhook.json       export-ignore
+/CONTRIBUTING.md        export-ignore
 /docker-compose.yml     export-ignore
 /phpcs.xml              export-ignore
 /phpstan.neon           export-ignore

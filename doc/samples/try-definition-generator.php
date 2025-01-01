@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Picamator\Doc\Samples\TransferObject\Generated\DefinitionGenerator\ProductTransfer;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
+use Picamator\TransferObject\Exception\TransferExceptionInterface;
 use Picamator\TransferObject\Generated\DefinitionGeneratorContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
@@ -86,14 +87,14 @@ echo <<<'STORY'
 ======================================================
 
 STORY;
-$transferGeneratorFacade = new TransferGeneratorFacade();
-
-// ----- Load Configuration
 $configPath = __DIR__ . '/config/definition-generator/generator.config.yml';
-$configTransfer = $transferGeneratorFacade->loadConfig($configPath);
 
-// ----- Generate Transfer Objects
-$transferGeneratorFacade->generateTransfers();
+try {
+    new TransferGeneratorFacade()->generateTransfers($configPath);
+} catch (TransferExceptionInterface $e) {
+    echo $e->getMessage();
+    exit(1);
+}
 
 echo <<<'STORY'
 ======================================================

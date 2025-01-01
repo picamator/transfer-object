@@ -20,13 +20,15 @@ readonly class BulkTransferGenerator implements BulkTransferGeneratorInterface
     /**
      * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
      */
-    public function generateTransfers(): void
+    public function generateTransfers(string $configPath): void
     {
-        foreach ($this->generator->getTransferGenerator() as $generatorTransfer) {
+        $transferGenerator = $this->generator->getTransferGenerator($configPath);
+        foreach ($transferGenerator as $generatorTransfer) {
             if ($generatorTransfer->validator?->isValid === true) {
                 continue;
             }
 
+            $transferGenerator->throw(new TransferGeneratorException());
             $this->throwError($generatorTransfer);
         }
     }

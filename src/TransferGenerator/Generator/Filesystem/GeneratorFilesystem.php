@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Filesystem;
 
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Dependency\Finder\FinderInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Container\ConfigInterface;
+use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
 
 readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
@@ -64,8 +64,9 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
     }
 
     /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
+     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
+     * @throws \Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException
      */
     private function deleteOldFiles(): void
     {
@@ -79,8 +80,9 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
     }
 
     /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
+     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
+     * @throws \Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException
      */
     private function copyTempFiles(): void
     {

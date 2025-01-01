@@ -42,11 +42,7 @@ readonly class ConfigReader implements ConfigReaderInterface
         }
 
         $contentTransfer = $this->parser->parseConfig($configPath);
-
         $validatorTransfer = $this->validator->validateContent($contentTransfer);
-        if (!$validatorTransfer->isValid) {
-            return $this->createConfigTransfer($validatorTransfer);
-        }
 
         $configTransfer = $this->createConfigTransfer($validatorTransfer);
         $configTransfer->content = $contentTransfer;

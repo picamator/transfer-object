@@ -1,0 +1,4 @@
+generator:
+  transferNamespace: "Picamator\\Tests\\Integration\\TransferObject\\DefinitionGenerator\\Generated\\GoogleShoppingContent"
+  transferPath: "${PROJECT_ROOT}/tests/integration/DefinitionGenerator/Generated/GoogleShoppingContent"
+  definitionPath: "${PROJECT_ROOT}/tests/integration/DefinitionGenerator/data/config/google-shopping-content/definition"

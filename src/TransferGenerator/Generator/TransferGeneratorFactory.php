@@ -42,7 +42,7 @@ readonly class TransferGeneratorFactory
     use DependencyFactoryTrait;
 
     /**
-     * @return \Fiber<null,null,bool,TransferGeneratorTransfer>
+     * @return \Fiber<string,null,bool,TransferGeneratorTransfer>
      */
     public function createTransferGeneratorFiber(): Fiber
     {
@@ -57,6 +57,7 @@ readonly class TransferGeneratorFactory
     public function createTransferGenerator(): TransferGeneratorInterface
     {
         return new TransferGenerator(
+            $this->createConfigLoader(),
             $this->createDefinitionReader(),
             $this->createGeneratorProcessor(),
         );
@@ -65,11 +66,6 @@ readonly class TransferGeneratorFactory
     public function createBulkTransferGenerator(): BulkTransferGeneratorInterface
     {
         return new BulkTransferGenerator($this->createTransferGenerator());
-    }
-
-    public function createConfigLoader(): ConfigLoaderInterface
-    {
-        return new ConfigFactory()->createConfigLoader();
     }
 
     protected function createGeneratorProcessor(): GeneratorProcessorInterface
@@ -145,6 +141,11 @@ readonly class TransferGeneratorFactory
     protected function createFinder(): FinderInterface
     {
         return $this->getDependency(DependencyContainer::FINDER);
+    }
+
+    protected function createConfigLoader(): ConfigLoaderInterface
+    {
+        return new ConfigFactory()->createConfigLoader();
     }
 
     protected function createDefinitionReader(): DefinitionReaderInterface

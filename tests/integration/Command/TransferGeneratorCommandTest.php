@@ -56,7 +56,7 @@ class TransferGeneratorCommandTest extends TestCase
 
         // Assert
         $this->commandTester->assertCommandIsSuccessful();
-        $this->assertStringContainsString('Transfer Objects successfully generated.', $output);
+        $this->assertStringContainsString('Transfer Objects were generated successfully.', $output);
     }
 
     public function testRunCommandWithValidConfigurationButInvalidDefinitionShouldShowErrorMessage(): void

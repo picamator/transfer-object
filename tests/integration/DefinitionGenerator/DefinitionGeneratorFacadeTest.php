@@ -8,6 +8,7 @@ use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
+use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\GoogleShoppingContent\ProductTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\NasaNeo\AsteroidTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\OpenWeather\ForecastTransfer;
 use Picamator\Tests\Integration\TransferObject\Helper\DefinitionGeneratorHelperTrait;
@@ -76,6 +77,12 @@ class DefinitionGeneratorFacadeTest extends TestCase
             'sampleFileName' => 'open-weather.json',
             'definitionFileName' => 'forecast.transfer.yml',
         ];
+
+        yield 'Google Shopping Content' => [
+            'className' => 'Product',
+            'sampleFileName' => 'google-shopping-content.json',
+            'definitionFileName' => 'product.transfer.yml',
+        ];
     }
 
     #[DataProvider('configPathDataProvider')]
@@ -87,10 +94,8 @@ class DefinitionGeneratorFacadeTest extends TestCase
         $pathPlaceholder = pathinfo($sampleFileName, PATHINFO_FILENAME);
         $configPath = sprintf(self::CONFIG_PATH_TEMPLATE, $pathPlaceholder);
 
-        $this->assertLoadConfigSuccess($configPath);
-
         // Act
-        $actual = $this->generateTransfers($this->assertGeneratorSuccess(...));
+        $actual = $this->generateTransfers($configPath, $this->assertGeneratorSuccess(...));
 
         // Assert
         $this->assertTrue($actual);
@@ -107,6 +112,10 @@ class DefinitionGeneratorFacadeTest extends TestCase
 
         yield 'Open Weather Response' => [
             'open-weather.json',
+        ];
+
+        yield 'Google Shopping Content' => [
+            'google-shopping-content.json',
         ];
     }
 
@@ -146,6 +155,11 @@ class DefinitionGeneratorFacadeTest extends TestCase
         yield 'Open Weather Response' => [
             ForecastTransfer::class,
             'open-weather.json',
+        ];
+
+        yield 'Google Shopping Content' => [
+            ProductTransfer::class,
+            'google-shopping-content.json',
         ];
     }
 }
