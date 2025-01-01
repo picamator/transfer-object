@@ -1,6 +1,7 @@
 * eol=lf
 * text=auto
 *.php diff=php
+*.jpg binary
 
 /.github                export-ignore
 /doc/                   export-ignore
@@ -15,3 +16,8 @@
 /phpcs.xml              export-ignore
 /phpstan.neon           export-ignore
 /phpunit.xml            export-ignore
+
+/src/Generated          linguist-generated=true
+/doc/samples/Generated  linguist-generated=true
+/tests/**/Generated     linguist-generated=true
+/tests/**/*.json        linguist-generated=true
