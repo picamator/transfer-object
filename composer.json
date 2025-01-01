@@ -15,8 +15,7 @@
   "autoload": {
     "psr-4": {
       "Picamator\\TransferObject\\": "src/"
-    },
-    "exclude-from-classmap": ["/tests/", "/doc/"]
+    }
   },
   "autoload-dev": {
     "psr-4": {
@@ -45,6 +44,7 @@
   "config": {
     "sort-packages": true
   },
+  "prefer-stable": true,
   "scripts": {
     "phpunit": "./vendor/bin/phpunit",
     "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon",
