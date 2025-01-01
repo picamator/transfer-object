@@ -6,5 +6,5 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 
 interface FiberTransferGeneratorInterface
 {
-    public function getTransferFiberCallback(): bool;
+    public function getTransferFiberCallback(string $configPath): bool;
 }

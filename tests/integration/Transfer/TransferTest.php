@@ -22,11 +22,8 @@ class TransferTest extends TestCase
 
     public function testGenerateTransferShouldSucceed(): void
     {
-        // Arrange
-        $this->assertLoadConfigSuccess(self::GENERATOR_CONFIG_PATH);
-
         // Act
-        $actual = $this->generateTransfers($this->assertGeneratorSuccess(...));
+        $actual = $this->generateTransfers(self::GENERATOR_CONFIG_PATH, $this->assertGeneratorSuccess(...));
 
         // Assert
         $this->assertTrue($actual);

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 
 use Picamator\TransferObject\Dependency\Exception\FilesystemException;
+use Picamator\TransferObject\Dependency\Exception\FinderException;
 use Picamator\TransferObject\Generated\DefinitionTransfer;
 use Picamator\TransferObject\Generated\DefinitionValidatorTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
@@ -17,24 +18,42 @@ use Throwable;
 readonly class GeneratorProcessor implements GeneratorProcessorInterface
 {
     public function __construct(
-        private TemplateRenderInterface $renderer,
+        private TemplateRenderInterface $render,
         private GeneratorFilesystemInterface $filesystem,
     ) {
     }
 
-    public function preProcess(): void
+    public function preProcess(): TransferGeneratorTransfer
     {
-        $this->filesystem->createTempDir();
+        try {
+            $this->filesystem->createTempDir();
+        } catch (FilesystemException $e) {
+            return $this->createErrorGeneratorTransfer($e);
+        }
+
+        return $this->createSuccessGeneratorTransfer();
     }
 
-    public function postProcessSuccess(): void
+    public function postProcessSuccess(): TransferGeneratorTransfer
     {
-        $this->filesystem->rotateTempDir();
+        try {
+            $this->filesystem->rotateTempDir();
+        } catch (FilesystemException | FinderException $e) {
+            return $this->createErrorGeneratorTransfer($e);
+        }
+
+        return $this->createSuccessGeneratorTransfer();
     }
 
-    public function postProcessError(): void
+    public function postProcessError(): TransferGeneratorTransfer
     {
-        $this->filesystem->deleteTempDir();
+        try {
+            $this->filesystem->deleteTempDir();
+        } catch (FilesystemException $e) {
+            return $this->createErrorGeneratorTransfer($e);
+        }
+
+        return $this->createSuccessGeneratorTransfer();
     }
 
     public function process(DefinitionTransfer $definitionTransfer): TransferGeneratorTransfer
@@ -44,7 +63,7 @@ readonly class GeneratorProcessor implements GeneratorProcessorInterface
         }
 
         try {
-            $content = $this->renderer->renderTemplate($definitionTransfer->content);
+            $content = $this->render->renderTemplate($definitionTransfer->content);
             $this->filesystem->writeFile($definitionTransfer->content->className, $content);
 
             return $this->createGeneratorTransfer($definitionTransfer);
@@ -55,12 +74,12 @@ readonly class GeneratorProcessor implements GeneratorProcessorInterface
 
     private function createErrorGeneratorTransfer(
         Throwable $e,
-        DefinitionTransfer $definitionTransfer,
+        ?DefinitionTransfer $definitionTransfer = null,
     ): TransferGeneratorTransfer {
         $generatorTransfer = new TransferGeneratorTransfer();
 
-        $generatorTransfer->className = $definitionTransfer->content?->className;
-        $generatorTransfer->fileName = $definitionTransfer->fileName;
+        $generatorTransfer->className = $definitionTransfer?->content?->className;
+        $generatorTransfer->fileName = $definitionTransfer?->fileName;
 
         $generatorTransfer->validator = new DefinitionValidatorTransfer();
         $generatorTransfer->validator->isValid = false;
@@ -69,6 +88,16 @@ readonly class GeneratorProcessor implements GeneratorProcessorInterface
                 ValidatorMessageTransfer::IS_VALID => false,
                 ValidatorMessageTransfer::ERROR_MESSAGE => $e->getMessage(),
             ]);
+
+        return $generatorTransfer;
+    }
+
+    private function createSuccessGeneratorTransfer(): TransferGeneratorTransfer
+    {
+        $generatorTransfer = new TransferGeneratorTransfer();
+
+        $generatorTransfer->validator = new DefinitionValidatorTransfer();
+        $generatorTransfer->validator->isValid = true;
 
         return $generatorTransfer;
     }

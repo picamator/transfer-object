@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator;
 
 use Fiber;
-use Picamator\TransferObject\Generated\ConfigTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\Generator\TransferGeneratorFactory;
 
@@ -14,7 +13,7 @@ class TransferGeneratorFacade implements TransferGeneratorFacadeInterface
     private static TransferGeneratorFactory $factory;
 
     /**
-     * @return \Fiber<null,null,bool,TransferGeneratorTransfer>
+     * @return \Fiber<string,null,bool,TransferGeneratorTransfer>
      */
     public function getTransferGeneratorFiber(): Fiber
     {
@@ -22,18 +21,11 @@ class TransferGeneratorFacade implements TransferGeneratorFacadeInterface
             ->createTransferGeneratorFiber();
     }
 
-    public function generateTransfers(): void
+    public function generateTransfers(string $configPath): void
     {
         $this->getFactory()
             ->createBulkTransferGenerator()
-            ->generateTransfers();
-    }
-
-    public function loadConfig(string $configPath): ConfigTransfer
-    {
-        return $this->getFactory()
-            ->createConfigLoader()
-            ->loadConfig($configPath);
+            ->generateTransfers($configPath);
     }
 
     private function getFactory(): TransferGeneratorFactory

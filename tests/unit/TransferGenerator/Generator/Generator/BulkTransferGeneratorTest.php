@@ -29,16 +29,18 @@ class BulkTransferGeneratorTest extends TestCase
     public function testGeneratorIteratesInvalidItemShouldRiseException(): void
     {
         // Arrange
+        $configPath = 'some-config-path.yml';
+
         $generatorTransfer = $this->createErrorGeneratorTransfer();
 
-        $this->generatorMock->expects($this->exactly(2))
+        $this->generatorMock->expects($this->once())
             ->method('getTransferGenerator')
             ->willReturnCallback(fn() => yield $generatorTransfer);
 
         $this->expectException(TransferGeneratorException::class);
 
         // Act
-        $this->bulkGenerator->generateTransfers();
+        $this->bulkGenerator->generateTransfers($configPath);
     }
 
     private function createErrorGeneratorTransfer(): TransferGeneratorTransfer

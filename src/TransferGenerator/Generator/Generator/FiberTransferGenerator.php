@@ -10,13 +10,13 @@ use Throwable;
 readonly class FiberTransferGenerator implements FiberTransferGeneratorInterface
 {
     public function __construct(
-        private TransferGeneratorInterface $generator,
+        private TransferGeneratorInterface $transferGenerator,
     ) {
     }
 
-    public function getTransferFiberCallback(): bool
+    public function getTransferFiberCallback(string $configPath): bool
     {
-        $transferGenerator = $this->generator->getTransferGenerator();
+        $transferGenerator = $this->transferGenerator->getTransferGenerator($configPath);
         foreach ($transferGenerator as $generatorTransfer) {
             try {
                 Fiber::suspend($generatorTransfer);

@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Picamator\Tests\Integration\TransferObject\TransferGenerator;
+namespace Picamator\Tests\Integration\TransferObject\TransferGenerator\Config\Loader;
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
-use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacadeInterface;
+use Picamator\TransferObject\TransferGenerator\Config\ConfigFactory;
+use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoaderInterface;
 
 class ConfigLoaderTest extends TestCase
 {
-    private const string CONFIG_PATH = __DIR__ . '/data/config/error/';
+    private const string CONFIG_PATH = __DIR__ . '/../../data/config/error/';
 
-    private TransferGeneratorFacadeInterface $generatorFacade;
+    private ConfigLoaderInterface $configLoader;
 
     protected function setUp(): void
     {
-        $this->generatorFacade = new TransferGeneratorFacade();
+        $this->configLoader = new ConfigFactory()->createConfigLoader();
     }
 
     #[DataProvider('invalidConfigDataProvider')]
@@ -28,7 +28,7 @@ class ConfigLoaderTest extends TestCase
         $configPath = self::CONFIG_PATH . $configName;
 
         // Act
-        $actual = $this->generatorFacade->loadConfig($configPath);
+        $actual = $this->configLoader->loadConfig($configPath);
 
         // Assert
         $this->assertFalse($actual->validator->isValid);
@@ -52,6 +52,6 @@ class ConfigLoaderTest extends TestCase
 
         yield 'empty config file' => ['empty.config.yml'];
 
-        yield 'generator root kee is boolean' => ['generator-key-bool.config.yml'];
+        yield 'invalid definition root key' => ['invalid-definition-root-key.config.yml'];
     }
 }

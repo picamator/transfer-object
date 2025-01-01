@@ -59,17 +59,18 @@ final class TransferGeneratorCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $configPath = $input->getOption(self::OPTION_NAME_CONFIGURATION) ?: '';
-
         $styleOutput = new SymfonyStyle($input, $output);
         $styleOutput->section(self::START_SECTION_NAME);
 
-        $isSuccess = $this->loadConfig($configPath, $styleOutput);
-        if (!$isSuccess) {
+        $configPath = $input->getOption(self::OPTION_NAME_CONFIGURATION) ?: '';
+        if ($configPath === '') {
+            $styleOutput->error(self::ERROR_MESSAGE);
+            $styleOutput->error(self::ERROR_MISSED_OPTION_CONFIG_MESSAGE);
+
             return Command::FAILURE;
         }
 
-        $isSuccess = $this->generateTransfers($styleOutput);
+        $isSuccess = $this->generateTransfers($configPath, $styleOutput);
         if ($isSuccess) {
             $styleOutput->success(self::SUCCESS_MESSAGE);
 
@@ -79,24 +80,24 @@ final class TransferGeneratorCommand extends Command
         return Command::FAILURE;
     }
 
-    private function generateTransfers(SymfonyStyle $styleOutput): bool
+    private function generateTransfers(string $configPath, SymfonyStyle $styleOutput): bool
     {
         $generatorFiber = $this->generatorFacade->getTransferGeneratorFiber();
 
-        $generatorTransfer = $generatorFiber->start();
-        if ($generatorTransfer !== null && $generatorTransfer->validator?->isValid === false) {
+        $generatorTransfer = $generatorFiber->start($configPath);
+        if ($generatorTransfer === null || $generatorTransfer->validator?->isValid === false) {
             $this->writelnGeneratorError($generatorTransfer, $styleOutput);
             $generatorFiber->throw(new CommandException());
+
+            return $generatorFiber->getReturn();
         }
 
         while (!$generatorFiber->isTerminated()) {
             $generatorTransfer = $generatorFiber->resume();
-            if ($generatorTransfer === null || $generatorTransfer->validator?->isValid === true) {
-                continue;
+            if ($generatorTransfer !== null && $generatorTransfer->validator?->isValid === false) {
+                $this->writelnGeneratorError($generatorTransfer, $styleOutput);
+                $generatorFiber->throw(new CommandException());
             }
-
-            $this->writelnGeneratorError($generatorTransfer, $styleOutput);
-            $generatorFiber->throw(new CommandException());
         }
 
         return $generatorFiber->getReturn();
@@ -116,34 +117,7 @@ final class TransferGeneratorCommand extends Command
             $styleOutput->error(sprintf(self::DEFINITION_MESSAGE_TEMPLATE, $generatorTransfer->fileName));
         }
 
-        $this->writelnValidatorErrorMessages($generatorTransfer->validator->errorMessages, $styleOutput);
-    }
-
-    private function loadConfig(string $configPath, SymfonyStyle $styleOutput): bool
-    {
-        if ($configPath === '') {
-            $styleOutput->error(self::ERROR_MESSAGE);
-            $styleOutput->error(self::ERROR_MISSED_OPTION_CONFIG_MESSAGE);
-
-            return false;
-        }
-
-        $configTransfer = $this->generatorFacade->loadConfig($configPath);
-        if (!$configTransfer->validator->isValid) {
-            $this->writelnValidatorErrorMessages($configTransfer->validator->errorMessages, $styleOutput);
-
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * @param \ArrayObject<int, ValidatorMessageTransfer> $errorMessages
-     */
-    private function writelnValidatorErrorMessages(ArrayObject $errorMessages, SymfonyStyle $styleOutput): void
-    {
-        foreach ($errorMessages as $errorMessage) {
+        foreach ($generatorTransfer->validator->errorMessages as $errorMessage) {
             $styleOutput->error($errorMessage->errorMessage);
         }
     }

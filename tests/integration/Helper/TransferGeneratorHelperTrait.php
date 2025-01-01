@@ -13,11 +13,11 @@ trait TransferGeneratorHelperTrait
     /**
      * @throws \Throwable
      */
-    protected function generateTransfers(callable $postGenerateItemCallback): bool
+    protected function generateTransfers(string $configPath, callable $postGenerateItemCallback): bool
     {
-        $generatorFiber =  new TransferGeneratorFacade()->getTransferGeneratorFiber();
+        $generatorFiber = new TransferGeneratorFacade()->getTransferGeneratorFiber();
 
-        $generatorTransfer = $generatorFiber->start();
+        $generatorTransfer = $generatorFiber->start($configPath);
         if ($generatorTransfer !== null) {
             $postGenerateItemCallback($generatorTransfer);
         }
@@ -32,23 +32,8 @@ trait TransferGeneratorHelperTrait
         return $generatorFiber->getReturn();
     }
 
-    /**
-     * @throws \Throwable
-     */
-    protected function assertLoadConfigSuccess(string $configPath): void
+    protected function assertGeneratorSuccess(TransferGeneratorTransfer $generatorTransfer): void
     {
-        $configTransfer = new TransferGeneratorFacade()->loadConfig($configPath);
-        $message = $this->groupValidatorMessages($configTransfer->validator->errorMessages);
-
-        $this->assertTrue($configTransfer->validator->isValid, $message);
-    }
-
-    protected function assertGeneratorSuccess(?TransferGeneratorTransfer $generatorTransfer): void
-    {
-        if ($generatorTransfer === null) {
-            return;
-        }
-
         $message = $this->groupValidatorMessages($generatorTransfer->validator->errorMessages);
 
         $this->assertTrue($generatorTransfer->validator->isValid, $message);

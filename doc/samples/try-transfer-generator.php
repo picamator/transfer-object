@@ -6,6 +6,7 @@ use Picamator\Doc\Samples\TransferObject\Enum\CountryEnum;
 use Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator\AgentTransfer;
 use Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator\CustomerTransfer;
 use Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator\MerchantTransfer;
+use Picamator\TransferObject\Exception\TransferExceptionInterface;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
@@ -13,18 +14,17 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 echo <<<'STORY'
 ======================================================
            Generate Transfer Objects
-        Note: for demo error handles were skipped
 ======================================================
 
 STORY;
-$transferGeneratorFacade = new TransferGeneratorFacade();
-
-// ----- Load Configuration
 $configPath = __DIR__ . '/config/transfer-generator/generator.config.yml';
-$configTransfer = $transferGeneratorFacade->loadConfig($configPath);
 
-// ----- Generate Transfer Objects
-$transferGeneratorFacade->generateTransfers();
+try {
+    new TransferGeneratorFacade()->generateTransfers($configPath);
+} catch (TransferExceptionInterface $e) {
+    echo $e->getMessage();
+    exit(1);
+}
 
 echo <<<'STORY'
 ======================================================
