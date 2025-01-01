@@ -8,7 +8,7 @@
 Transfer Object Generator
 ==========================
 
-Would you like to build Transfer Objects (TO) effortlessly?
+Would you like to build Transfer Objects (TO) easily?
 You're in the right place!
 
 Build TOs Using an Array as Blueprint
@@ -45,7 +45,7 @@ Check out how it works:
 Installation
 ------------
 
-Easily install via Composer:
+Install via Composer:
 
 ```bash
 composer require-dev picamator/transfer-object
