@@ -24,7 +24,7 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
 
       - name: Install dependencies (if needed)
-        run: composer install --prefer-dist --no-progress --no-suggest --ansi
+        run: composer install --no-ansi --no-interaction --no-progress
         if: steps.cache-vendor.outputs.cache-hit != 'true'
 
       - name: Validate composer.json
@@ -36,7 +36,7 @@ jobs:
         run: composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
 
   phpstan:
-    name: PHPStan - PHP Static Analysis Tool
+    name: PHPStan
     needs: setup
     runs-on: ubuntu-latest
     steps:
@@ -82,7 +82,7 @@ jobs:
         run: composer phpcs
 
   phpunit:
-    name: PHPUnit tests
+    name: PHPUnit Tests
     needs: setup
     runs-on: ubuntu-latest
     steps:
