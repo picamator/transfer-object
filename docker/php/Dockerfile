@@ -1,44 +1,36 @@
 FROM php:8.4
 
-# user
+# create a user and group
 RUN groupadd -g 1000 generator && \
     useradd -m -u 1000 -g generator transfer
 
-# switch user
+# switch to the new user
 USER transfer
 
-# volume
+# create and set volume and workdir
 RUN mkdir /home/transfer/transfer-object
 VOLUME /home/transfer/transfer-object
-
-# workdir
 WORKDIR /home/transfer/transfer-object
 
-# environemnt
+# set environment variable
 ENV PROJECT_ROOT=/home/transfer/transfer-object
 
-# switch user
+# switch back to root for system installations
 USER root
 
-# update apt cache
-RUN apt-get --allow-unauthenticated --allow-insecure-repositories update
+# update apt cache and install system requirements in a single RUN command
+RUN apt-get --allow-unauthenticated --allow-insecure-repositories update && \
+    apt-get -y install git zip libzip-dev curl libcurl4-openssl-dev
 
-# install system requirements
-RUN apt-get -y install git
-RUN apt-get install -y zip libzip-dev
-RUN apt-get -y install curl
-RUN apt-get -y install libcurl4-openssl-dev
-
-# composer
+# copy composer from composer/composer:latest-bin
 COPY --from=composer/composer:latest-bin /composer /usr/local/bin/composer
 
-# php extensions
-RUN docker-php-ext-configure zip
-RUN docker-php-ext-install zip
-RUN docker-php-ext-install curl
-RUN pecl install xdebug
+# install PHP extensions and PECL packages in a single RUN command
+RUN docker-php-ext-configure zip && \
+    docker-php-ext-install zip curl && \
+    pecl install xdebug
 
-# xdebug
+# configure Xdebug if enabled
 ARG ENABLE_XDEBUG=0
 RUN if [ "$ENABLE_XDEBUG" = "1" ]; then \
     docker-php-ext-enable xdebug && \
@@ -50,7 +42,7 @@ RUN if [ "$ENABLE_XDEBUG" = "1" ]; then \
     echo "xdebug.output_dir=/tmp/xdebug" >> /usr/local/etc/php/conf.d/99-xdebug.ini; \
     fi
 
-# switch user
+# switch back to the new user
 USER transfer
 
 # workaround to keep container running
