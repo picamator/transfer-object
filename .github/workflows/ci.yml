@@ -3,9 +3,35 @@ name: CI
 on: [push]
 
 jobs:
-  CI:
+  setup:
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
+      - name: Set up PHP and Install dependencies
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache Composer Dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest --ansi
+
+  generate:
+    needs: setup
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -15,11 +41,6 @@ jobs:
         with:
           php-version: '8.4'
 
-      - name: Install dependencies
-        uses: php-actions/composer@v6
-        with:
-          php_version: "8.4"
-
       - name: Generate Internal Transfer Object
         env:
           PROJECT_ROOT: ${{ github.workspace }}
@@ -27,17 +48,53 @@ jobs:
           echo "Generate Internal Transfer Objects"
           composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml --ansi
 
+  phpstan:
+    needs: generate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+
       - name: Run PHPStan
         uses: php-actions/phpstan@v3
         with:
           php_version: "8.4"
           configuration: phpstan.neon
 
+  phpcs:
+    needs: generate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+
       - name: Run PHP CodeSniffer
         uses: php-actions/phpcs@v1
         with:
           php_version: "8.4"
           standard: phpcs.xml
+
+  phpunit:
+    needs: generate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
 
       - name: Run PHPUnit
         uses: php-actions/phpunit@v4
