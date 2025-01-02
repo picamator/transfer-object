@@ -134,7 +134,7 @@ final class ForecastTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $rain {
-        get => $this->getData(self::RAIN_DATA_INDEX);
+        get => $this->getRequiredData(self::RAIN_DATA_INDEX);
         set => $this->setData(self::RAIN_DATA_INDEX, $value);
     }
 
@@ -177,7 +177,7 @@ final class ForecastTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,WeatherTransfer> */
     public ArrayObject $weather {
-        get => $this->getData(self::WEATHER_DATA_INDEX);
+        get => $this->getRequiredData(self::WEATHER_DATA_INDEX);
         set => $this->setData(self::WEATHER_DATA_INDEX, $value);
     }
 

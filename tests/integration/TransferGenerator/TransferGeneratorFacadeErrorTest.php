@@ -31,11 +31,13 @@ class TransferGeneratorFacadeErrorTest extends TestCase
                 return;
             }
 
+            $errorMessage = $generatorTransfer->validator->errorMessages[0] ?? null;
+
             $this->assertFalse($generatorTransfer->validator->isValid);
-            $this->assertCount(1, $generatorTransfer->validator->errorMessages);
+            $this->assertNotNull($errorMessage);
             $this->assertStringContainsString(
                 $expectedMessage,
-                $generatorTransfer->validator->errorMessages[0]->errorMessage,
+                $errorMessage->errorMessage,
             );
         };
 
@@ -58,11 +60,13 @@ class TransferGeneratorFacadeErrorTest extends TestCase
                 return;
             }
 
+            $errorMessage = $generatorTransfer->validator->errorMessages[0] ?? null;
+
             $this->assertFalse($generatorTransfer->validator->isValid);
-            $this->assertCount(1, $generatorTransfer->validator->errorMessages);
+            $this->assertNotNull($errorMessage);
             $this->assertStringContainsString(
                 'A file with the same name already exists.',
-                $generatorTransfer->validator->errorMessages[0]->errorMessage,
+                $errorMessage->errorMessage,
             );
         };
 

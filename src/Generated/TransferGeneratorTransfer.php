@@ -55,8 +55,8 @@ final class TransferGeneratorTransfer extends AbstractTransfer
     protected const string VALIDATOR_DATA_NAME = 'VALIDATOR';
     protected const int VALIDATOR_DATA_INDEX = 2;
 
-    public ?DefinitionValidatorTransfer $validator {
-        get => $this->getData(self::VALIDATOR_DATA_INDEX);
+    public DefinitionValidatorTransfer $validator {
+        get => $this->getRequiredData(self::VALIDATOR_DATA_INDEX);
         set => $this->setData(self::VALIDATOR_DATA_INDEX, $value);
     }
 }

@@ -15,8 +15,21 @@ readonly class TemplateHelper implements TemplateHelperInterface
         ':value',
     ];
 
+    private const string EMPTY_STRING = '';
+    private const string NULLABLE_SIGN = '?';
+    private const string REQUIRED_METHOD_NAME = 'Required';
+
     public function __construct(private TemplateTransfer $templateTransfer)
     {
+    }
+
+    public static function getDefaultTemplateTransfer(): TemplateTransfer
+    {
+        return  new TemplateTransfer()->fromArray([
+            TemplateTransfer::CLASS_NAMESPACE => '',
+            TemplateTransfer::CLASS_NAME => '',
+            TemplateTransfer::PROPERTIES_COUNT => 0,
+        ]);
     }
 
     public function renderKeyValue(iterable $data, string $template): string
@@ -37,7 +50,7 @@ readonly class TemplateHelper implements TemplateHelperInterface
     {
         $attribute = $this->templateTransfer->attributes[$property] ?? null;
         if ($attribute === null) {
-            return '';
+            return self::EMPTY_STRING;
         }
 
         return PHP_EOL . self::PADDING_LEFT . $attribute;
@@ -47,7 +60,7 @@ readonly class TemplateHelper implements TemplateHelperInterface
     {
         $dockBlock = $this->templateTransfer->dockBlocks[$property] ?? null;
         if ($dockBlock === null) {
-            return '';
+            return self::EMPTY_STRING;
         }
 
         return PHP_EOL . self::PADDING_LEFT . $dockBlock;
@@ -55,6 +68,11 @@ readonly class TemplateHelper implements TemplateHelperInterface
 
     public function getNullable(string $property): string
     {
-        return $this->templateTransfer->nullables[$property] ? '?' : '';
+        return $this->templateTransfer->nullables[$property] ? self::NULLABLE_SIGN : self::EMPTY_STRING;
+    }
+
+    public function getRequired(string $property): string
+    {
+        return $this->templateTransfer->nullables[$property] ? self::EMPTY_STRING : self::REQUIRED_METHOD_NAME;
     }
 }

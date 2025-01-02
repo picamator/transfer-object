@@ -1,40 +1,51 @@
 Config:
   content:
     type: ConfigContent
+    required:
   validator:
     type: ConfigValidator
+    required:
 
 ConfigValidator:
   isValid:
     type: bool
+    required:
   errorMessages:
     collectionType: ValidatorMessage
 
 ConfigContent:
   transferNamespace:
     type: string
+    required:
   transferPath:
     type: string
+    required:
   definitionPath:
     type: string
+    required:
 
 Definition:
   fileName:
     type: string
+    required:
   content:
     type: DefinitionContent
+    required:
   validator:
     type: DefinitionValidator
+    required:
 
 DefinitionContent:
   className:
     type: string
+    required:
   properties:
     collectionType: DefinitionProperty
 
 DefinitionProperty:
   propertyName:
     type: string
+    required:
   buildInType:
     enumType: '\Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum'
   transferType:
@@ -43,10 +54,14 @@ DefinitionProperty:
     type: string
   enumType:
     type: string
+  isNullable:
+    type: bool
+    required:
 
 DefinitionValidator:
   isValid:
     type: bool
+    required:
   errorMessages:
     collectionType: ValidatorMessage
 
@@ -57,3 +72,4 @@ TransferGenerator:
     type: string
   validator:
     type: DefinitionValidator
+    required:

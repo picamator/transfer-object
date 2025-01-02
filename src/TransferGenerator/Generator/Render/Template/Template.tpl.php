@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Picamator\TransferObject\Generated\TemplateTransfer;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelper;
 
-$templateTransfer ??= new TemplateTransfer();
+$templateTransfer ??= TemplateHelper::getDefaultTemplateTransfer();
 $helper = new TemplateHelper($templateTransfer);
 
 echo <<<TEMPLATE
@@ -48,7 +48,7 @@ foreach ($templateTransfer->metaConstants as $constant => $property) {
     protected const int {$constant}_DATA_INDEX = $i;
 {$helper->getDockBlock($property)}
     public {$helper->getNullable($property)}{$templateTransfer->properties[$property]} \$$property {
-        get => \$this->getData(self::{$constant}_DATA_INDEX);
+        get => \$this->get{$helper->getRequired($property)}Data(self::{$constant}_DATA_INDEX);
         set => \$this->setData(self::{$constant}_DATA_INDEX, \$value);
     }
 

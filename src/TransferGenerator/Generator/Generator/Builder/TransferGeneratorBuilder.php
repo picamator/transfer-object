@@ -47,7 +47,7 @@ class TransferGeneratorBuilder implements TransferGeneratorBuilderInterface
     {
         $generatorTransfer = new TransferGeneratorTransfer();
 
-        $generatorTransfer->className = $definitionTransfer->content?->className;
+        $generatorTransfer->className = $definitionTransfer->content->className;
         $generatorTransfer->fileName = $definitionTransfer->fileName;
         $generatorTransfer->validator = $definitionTransfer->validator;
 

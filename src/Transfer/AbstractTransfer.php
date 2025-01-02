@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Transfer;
 
+use Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException;
 use SplFixedArray;
 
 abstract class AbstractTransfer implements TransferInterface
@@ -68,6 +69,22 @@ abstract class AbstractTransfer implements TransferInterface
     final protected function getData(int $index): mixed
     {
         return $this->data[$index];
+    }
+
+    /**
+     * @throws PropertyTypeTransferException
+     */
+    final protected function getRequiredData(int $index): mixed
+    {
+        return $this->data[$index] !== null
+            ? $this->data[$index]
+            : throw new PropertyTypeTransferException(
+                sprintf(
+                    'Typed property "%s::%s" must not be accessed before initialization.',
+                    static::class,
+                    debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]['function'],
+                ),
+            );
     }
 
     final protected function setData(int $index, mixed $value): mixed

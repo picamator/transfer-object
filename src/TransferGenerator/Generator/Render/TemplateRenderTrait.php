@@ -26,7 +26,10 @@ trait TemplateRenderTrait
 
     protected function getMetaConstant(string $propertyName): string
     {
-        return strtoupper(preg_replace('/([A-Z])/', '_$0', $propertyName));
+        /** @var string $propertyName */
+        $propertyName = preg_replace('/([A-Z])/', '_$0', $propertyName);
+
+        return strtoupper($propertyName);
     }
 
     protected function getTransferName(string $propertyType): string

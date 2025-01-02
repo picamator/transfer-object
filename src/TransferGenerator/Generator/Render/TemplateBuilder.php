@@ -35,7 +35,7 @@ readonly class TemplateBuilder implements TemplateBuilderInterface
 
         foreach ($contentTransfer->properties as $propertyTransfer) {
             $propertyName = $propertyTransfer->propertyName;
-            $templateTransfer->metaConstants[$this->getMetaConstant($propertyName)] = $propertyTransfer->propertyName;
+            $templateTransfer->metaConstants[$this->getMetaConstant($propertyName)] = $propertyName;
 
             $this->handleTemplateExpanders($propertyTransfer, $templateTransfer);
         }

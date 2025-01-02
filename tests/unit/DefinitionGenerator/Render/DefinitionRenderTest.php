@@ -92,7 +92,12 @@ DEFINITION,
         // Arrange
         $contentTransfer = new DefinitionContentTransfer();
         $contentTransfer->className = self::TEST_CLASS_NAME;
-        $contentTransfer->properties[] = new DefinitionPropertyTransfer();
+
+        $propertyTransfer = new DefinitionPropertyTransfer();
+        $propertyTransfer->propertyName = '';
+        $propertyTransfer->isNullable = true;
+
+        $contentTransfer->properties[] = $propertyTransfer;
 
         $this->expectException(DefinitionGeneratorException::class);
 

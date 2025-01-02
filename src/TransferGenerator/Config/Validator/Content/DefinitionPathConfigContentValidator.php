@@ -22,7 +22,7 @@ readonly class DefinitionPathConfigContentValidator implements ConfigContentVali
 
     public function validate(ConfigContentTransfer $configContentTransfer): ValidatorMessageTransfer
     {
-        $definitionPath = $configContentTransfer->definitionPath ?? '';
+        $definitionPath = $configContentTransfer->definitionPath;
         $isExists = $this->filesystem->exists($definitionPath);
 
         if (!$isExists) {

@@ -33,8 +33,8 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
     protected const string CONTENT_DATA_NAME = 'CONTENT';
     protected const int CONTENT_DATA_INDEX = 0;
 
-    public ?string $content {
-        get => $this->getData(self::CONTENT_DATA_INDEX);
+    public string $content {
+        get => $this->getRequiredData(self::CONTENT_DATA_INDEX);
         set => $this->setData(self::CONTENT_DATA_INDEX, $value);
     }
 
@@ -43,8 +43,8 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
     protected const string DEFINITION_PATH_DATA_NAME = 'DEFINITION_PATH';
     protected const int DEFINITION_PATH_DATA_INDEX = 1;
 
-    public ?string $definitionPath {
-        get => $this->getData(self::DEFINITION_PATH_DATA_INDEX);
+    public string $definitionPath {
+        get => $this->getRequiredData(self::DEFINITION_PATH_DATA_INDEX);
         set => $this->setData(self::DEFINITION_PATH_DATA_INDEX, $value);
     }
 
@@ -53,8 +53,8 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
     protected const string FILE_NAME_DATA_NAME = 'FILE_NAME';
     protected const int FILE_NAME_DATA_INDEX = 2;
 
-    public ?string $fileName {
-        get => $this->getData(self::FILE_NAME_DATA_INDEX);
+    public string $fileName {
+        get => $this->getRequiredData(self::FILE_NAME_DATA_INDEX);
         set => $this->setData(self::FILE_NAME_DATA_INDEX, $value);
     }
 }

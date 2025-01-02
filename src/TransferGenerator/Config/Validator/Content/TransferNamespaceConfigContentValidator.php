@@ -18,7 +18,7 @@ readonly class TransferNamespaceConfigContentValidator implements ConfigContentV
 
     public function validate(ConfigContentTransfer $configContentTransfer): ValidatorMessageTransfer
     {
-        $namespace = $configContentTransfer->transferNamespace ?? '';
+        $namespace = $configContentTransfer->transferNamespace;
         if (preg_match(self::NAMESPACE_REGEX, $namespace) !== 1) {
             $errorMessage = $this->getErrorMessage($namespace);
 

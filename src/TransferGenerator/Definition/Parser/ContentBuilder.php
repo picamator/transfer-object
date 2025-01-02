@@ -49,13 +49,14 @@ readonly class ContentBuilder implements ContentBuilderInterface
             }
 
             $propertyExpander->expandPropertyTransfer($propertyType, $propertyTransfer);
-
-            return;
+            if (!$propertyExpander->isNextAllowed()) {
+                break;
+            }
         }
     }
 
     private function propertyTypeFilter(mixed $typeItem): bool
     {
-        return is_string($typeItem) || is_bool($typeItem);
+        return is_string($typeItem) || is_bool($typeItem) || is_null($typeItem);
     }
 }

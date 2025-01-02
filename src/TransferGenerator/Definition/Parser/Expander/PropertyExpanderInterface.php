@@ -13,6 +13,8 @@ interface PropertyExpanderInterface
      */
     public function isApplicable(array $propertyType): bool;
 
+    public function isNextAllowed(): bool;
+
     /**
      * @param array<string,string|bool> $propertyType
      */

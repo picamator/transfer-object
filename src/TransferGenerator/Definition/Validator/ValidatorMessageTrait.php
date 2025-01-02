@@ -21,6 +21,7 @@ trait ValidatorMessageTrait
     {
         $messageTransfer = new ValidatorMessageTransfer();
         $messageTransfer->isValid = true;
+        $messageTransfer->errorMessage = '';
 
         return $messageTransfer;
     }

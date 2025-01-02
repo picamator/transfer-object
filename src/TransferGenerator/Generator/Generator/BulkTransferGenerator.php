@@ -27,7 +27,7 @@ readonly class BulkTransferGenerator implements BulkTransferGeneratorInterface
     {
         $transferGenerator = $this->generator->getTransferGenerator($configPath);
         foreach ($transferGenerator as $generatorTransfer) {
-            if ($generatorTransfer->validator?->isValid === true) {
+            if ($generatorTransfer->validator->isValid === true) {
                 continue;
             }
 

@@ -12,6 +12,12 @@ readonly class ConfigContentBuilder implements ConfigContentBuilderInterface
 {
     private const string CONFIG_SECTION_KEY = 'generator';
 
+    private const array DEFAULT_CONTENT_DATA = [
+        ConfigContentTransfer::TRANSFER_NAMESPACE => '',
+        ConfigContentTransfer::TRANSFER_PATH => '',
+        ConfigContentTransfer::DEFINITION_PATH => '',
+    ];
+
     public function __construct(
         private ConfigEnvironmentRenderInterface $environmentRender,
     ) {
@@ -29,7 +35,7 @@ readonly class ConfigContentBuilder implements ConfigContentBuilderInterface
     {
         foreach (ConfigKeyEnum::getPathKeys() as $key) {
             $contentTransfer->{$key->value} = $this->environmentRender->renderProjectRoot(
-                $contentTransfer->{$key->value} ?? '',
+                $contentTransfer->{$key->value},
             );
         }
 
@@ -48,6 +54,8 @@ readonly class ConfigContentBuilder implements ConfigContentBuilderInterface
 
         $filteredData = array_intersect_key($sectionData, ConfigKeyEnum::getValueName());
 
-        return array_filter($filteredData, fn(mixed $item): bool => is_string($item));
+        $filteredData = array_filter($filteredData, fn(mixed $item): bool => is_string($item));
+
+        return array_merge(self::DEFAULT_CONTENT_DATA, $filteredData);
     }
 }

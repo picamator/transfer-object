@@ -26,16 +26,16 @@ readonly class BuildInTypeTemplateExpander implements TemplateExpanderInterface
         TemplateTransfer $templateTransfer,
     ): void {
         $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->properties[$propertyName] = $propertyTransfer->buildInType->value;
-        $templateTransfer->nullables[$propertyName] = true;
+        $templateTransfer->properties[$propertyName] = $propertyTransfer->buildInType?->value;
+        $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
 
-        if ($propertyTransfer->buildInType->isArrayObject()) {
+        if ($propertyTransfer->buildInType?->isArrayObject()) {
             $this->expandArrayObjectType($propertyTransfer, $templateTransfer);
 
             return;
         }
 
-        if ($propertyTransfer->buildInType->isArray()) {
+        if ($propertyTransfer->buildInType?->isArray()) {
             $this->expandArrayType($propertyTransfer, $templateTransfer);
         }
     }

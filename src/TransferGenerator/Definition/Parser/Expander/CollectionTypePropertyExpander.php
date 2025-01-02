@@ -15,6 +15,11 @@ readonly class CollectionTypePropertyExpander implements PropertyExpanderInterfa
         return $this->getCollectionType($propertyType) !== null;
     }
 
+    public function isNextAllowed(): false
+    {
+        return false;
+    }
+
     public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
         $propertyTransfer->collectionType = $this->getCollectionType($propertyType);

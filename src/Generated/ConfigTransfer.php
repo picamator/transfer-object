@@ -34,8 +34,8 @@ final class ConfigTransfer extends AbstractTransfer
     protected const string CONTENT_DATA_NAME = 'CONTENT';
     protected const int CONTENT_DATA_INDEX = 0;
 
-    public ?ConfigContentTransfer $content {
-        get => $this->getData(self::CONTENT_DATA_INDEX);
+    public ConfigContentTransfer $content {
+        get => $this->getRequiredData(self::CONTENT_DATA_INDEX);
         set => $this->setData(self::CONTENT_DATA_INDEX, $value);
     }
 
@@ -45,8 +45,8 @@ final class ConfigTransfer extends AbstractTransfer
     protected const string VALIDATOR_DATA_NAME = 'VALIDATOR';
     protected const int VALIDATOR_DATA_INDEX = 1;
 
-    public ?ConfigValidatorTransfer $validator {
-        get => $this->getData(self::VALIDATOR_DATA_INDEX);
+    public ConfigValidatorTransfer $validator {
+        get => $this->getRequiredData(self::VALIDATOR_DATA_INDEX);
         set => $this->setData(self::VALIDATOR_DATA_INDEX, $value);
     }
 }

@@ -43,7 +43,7 @@ final class AddressBookTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,AddressTransfer> */
     public ArrayObject $addresses {
-        get => $this->getData(self::ADDRESSES_DATA_INDEX);
+        get => $this->getRequiredData(self::ADDRESSES_DATA_INDEX);
         set => $this->setData(self::ADDRESSES_DATA_INDEX, $value);
     }
 
@@ -55,7 +55,7 @@ final class AddressBookTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $categories {
-        get => $this->getData(self::CATEGORIES_DATA_INDEX);
+        get => $this->getRequiredData(self::CATEGORIES_DATA_INDEX);
         set => $this->setData(self::CATEGORIES_DATA_INDEX, $value);
     }
 

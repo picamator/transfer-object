@@ -75,7 +75,7 @@ final class AddressTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,CountryTransfer> */
     public ArrayObject $country {
-        get => $this->getData(self::COUNTRY_DATA_INDEX);
+        get => $this->getRequiredData(self::COUNTRY_DATA_INDEX);
         set => $this->setData(self::COUNTRY_DATA_INDEX, $value);
     }
 

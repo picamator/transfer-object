@@ -29,7 +29,7 @@ readonly class TransferGenerator implements TransferGeneratorInterface
         $definitionGenerator = $this->definitionReader->getDefinitions();
         foreach ($definitionGenerator as $definitionTransfer) {
             $generatorTransfer = $this->processor->process($definitionTransfer);
-            $failedCount += (int)!$generatorTransfer->validator?->isValid;
+            $failedCount += (int)!$generatorTransfer->validator->isValid;
 
             yield $generatorTransfer;
         }

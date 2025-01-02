@@ -23,7 +23,7 @@ readonly class EnumTypeTemplateExpander implements TemplateExpanderInterface
         $templateTransfer->imports[AttributeEnum::ENUM_TYPE_ATTRIBUTE->value]
             ??= AttributeEnum::ENUM_TYPE_ATTRIBUTE->value;
 
-        $importEnum = ltrim($propertyTransfer->enumType, '\\');
+        $importEnum = ltrim($propertyTransfer->enumType ?: '', '\\');
         $templateTransfer->imports[$importEnum] ??= $importEnum;
 
         $propertyName = $propertyTransfer->propertyName;
@@ -35,7 +35,7 @@ readonly class EnumTypeTemplateExpander implements TemplateExpanderInterface
             $enumClassName,
         );
 
-        $templateTransfer->nullables[$propertyName] = true;
+        $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
     }
 
     private function getEnumName(DefinitionPropertyTransfer $propertyTransfer): string

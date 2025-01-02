@@ -23,7 +23,7 @@ try {
     new TransferGeneratorFacade()->generateTransfers($configPath);
 } catch (TransferExceptionInterface $e) {
     echo $e->getMessage();
-    exit(1);
+    return;
 }
 
 echo <<<'STORY'

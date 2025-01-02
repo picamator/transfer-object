@@ -50,7 +50,7 @@ final class ProductTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,AvailabilitiesTransfer> */
     public ArrayObject $availabilities {
-        get => $this->getData(self::AVAILABILITIES_DATA_INDEX);
+        get => $this->getRequiredData(self::AVAILABILITIES_DATA_INDEX);
         set => $this->setData(self::AVAILABILITIES_DATA_INDEX, $value);
     }
 
@@ -72,7 +72,7 @@ final class ProductTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,DeliveryOptionsTransfer> */
     public ArrayObject $deliveryOptions {
-        get => $this->getData(self::DELIVERY_OPTIONS_DATA_INDEX);
+        get => $this->getRequiredData(self::DELIVERY_OPTIONS_DATA_INDEX);
         set => $this->setData(self::DELIVERY_OPTIONS_DATA_INDEX, $value);
     }
 
@@ -105,7 +105,7 @@ final class ProductTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $labels {
-        get => $this->getData(self::LABELS_DATA_INDEX);
+        get => $this->getRequiredData(self::LABELS_DATA_INDEX);
         set => $this->setData(self::LABELS_DATA_INDEX, $value);
     }
 
@@ -168,7 +168,7 @@ final class ProductTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $stores {
-        get => $this->getData(self::STORES_DATA_INDEX);
+        get => $this->getRequiredData(self::STORES_DATA_INDEX);
         set => $this->setData(self::STORES_DATA_INDEX, $value);
     }
 }

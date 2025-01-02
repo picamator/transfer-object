@@ -58,7 +58,7 @@ final class AsteroidTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,CloseApproachDataTransfer> */
     public ArrayObject $close_approach_data {
-        get => $this->getData(self::CLOSE_APPROACH_DATA_DATA_INDEX);
+        get => $this->getRequiredData(self::CLOSE_APPROACH_DATA_DATA_INDEX);
         set => $this->setData(self::CLOSE_APPROACH_DATA_DATA_INDEX, $value);
     }
 

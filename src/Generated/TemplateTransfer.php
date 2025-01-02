@@ -44,7 +44,7 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $attributes {
-        get => $this->getData(self::ATTRIBUTES_DATA_INDEX);
+        get => $this->getRequiredData(self::ATTRIBUTES_DATA_INDEX);
         set => $this->setData(self::ATTRIBUTES_DATA_INDEX, $value);
     }
 
@@ -53,8 +53,8 @@ final class TemplateTransfer extends AbstractTransfer
     protected const string CLASS_NAME_DATA_NAME = 'CLASS_NAME';
     protected const int CLASS_NAME_DATA_INDEX = 1;
 
-    public ?string $className {
-        get => $this->getData(self::CLASS_NAME_DATA_INDEX);
+    public string $className {
+        get => $this->getRequiredData(self::CLASS_NAME_DATA_INDEX);
         set => $this->setData(self::CLASS_NAME_DATA_INDEX, $value);
     }
 
@@ -63,8 +63,8 @@ final class TemplateTransfer extends AbstractTransfer
     protected const string CLASS_NAMESPACE_DATA_NAME = 'CLASS_NAMESPACE';
     protected const int CLASS_NAMESPACE_DATA_INDEX = 2;
 
-    public ?string $classNamespace {
-        get => $this->getData(self::CLASS_NAMESPACE_DATA_INDEX);
+    public string $classNamespace {
+        get => $this->getRequiredData(self::CLASS_NAMESPACE_DATA_INDEX);
         set => $this->setData(self::CLASS_NAMESPACE_DATA_INDEX, $value);
     }
 
@@ -76,7 +76,7 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $dockBlocks {
-        get => $this->getData(self::DOCK_BLOCKS_DATA_INDEX);
+        get => $this->getRequiredData(self::DOCK_BLOCKS_DATA_INDEX);
         set => $this->setData(self::DOCK_BLOCKS_DATA_INDEX, $value);
     }
 
@@ -88,7 +88,7 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $imports {
-        get => $this->getData(self::IMPORTS_DATA_INDEX);
+        get => $this->getRequiredData(self::IMPORTS_DATA_INDEX);
         set => $this->setData(self::IMPORTS_DATA_INDEX, $value);
     }
 
@@ -100,7 +100,7 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $metaConstants {
-        get => $this->getData(self::META_CONSTANTS_DATA_INDEX);
+        get => $this->getRequiredData(self::META_CONSTANTS_DATA_INDEX);
         set => $this->setData(self::META_CONSTANTS_DATA_INDEX, $value);
     }
 
@@ -112,7 +112,7 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $nullables {
-        get => $this->getData(self::NULLABLES_DATA_INDEX);
+        get => $this->getRequiredData(self::NULLABLES_DATA_INDEX);
         set => $this->setData(self::NULLABLES_DATA_INDEX, $value);
     }
 
@@ -124,7 +124,7 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $properties {
-        get => $this->getData(self::PROPERTIES_DATA_INDEX);
+        get => $this->getRequiredData(self::PROPERTIES_DATA_INDEX);
         set => $this->setData(self::PROPERTIES_DATA_INDEX, $value);
     }
 
@@ -133,8 +133,8 @@ final class TemplateTransfer extends AbstractTransfer
     protected const string PROPERTIES_COUNT_DATA_NAME = 'PROPERTIES_COUNT';
     protected const int PROPERTIES_COUNT_DATA_INDEX = 8;
 
-    public ?int $propertiesCount {
-        get => $this->getData(self::PROPERTIES_COUNT_DATA_INDEX);
+    public int $propertiesCount {
+        get => $this->getRequiredData(self::PROPERTIES_COUNT_DATA_INDEX);
         set => $this->setData(self::PROPERTIES_COUNT_DATA_INDEX, $value);
     }
 }

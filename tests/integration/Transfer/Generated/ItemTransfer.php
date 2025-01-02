@@ -48,7 +48,7 @@ final class ItemTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $data {
-        get => $this->getData(self::DATA_DATA_INDEX);
+        get => $this->getRequiredData(self::DATA_DATA_INDEX);
         set => $this->setData(self::DATA_DATA_INDEX, $value);
     }
 
@@ -60,7 +60,7 @@ final class ItemTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $iAmArray {
-        get => $this->getData(self::I_AM_ARRAY_DATA_INDEX);
+        get => $this->getRequiredData(self::I_AM_ARRAY_DATA_INDEX);
         set => $this->setData(self::I_AM_ARRAY_DATA_INDEX, $value);
     }
 
@@ -72,7 +72,7 @@ final class ItemTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $iAmArrayObject {
-        get => $this->getData(self::I_AM_ARRAY_OBJECT_DATA_INDEX);
+        get => $this->getRequiredData(self::I_AM_ARRAY_OBJECT_DATA_INDEX);
         set => $this->setData(self::I_AM_ARRAY_OBJECT_DATA_INDEX, $value);
     }
 

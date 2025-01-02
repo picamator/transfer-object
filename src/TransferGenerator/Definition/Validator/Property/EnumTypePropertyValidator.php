@@ -23,7 +23,7 @@ readonly class EnumTypePropertyValidator implements PropertyValidatorInterface
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
-        if (is_subclass_of($propertyTransfer->enumType, BackedEnum::class)) {
+        if (is_subclass_of($propertyTransfer->enumType ?: '', BackedEnum::class)) {
             return $this->createSuccessMessageTransfer();
         }
 

@@ -49,7 +49,7 @@ final class AgentTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,MerchantTransfer> */
     public ArrayObject $merchants {
-        get => $this->getData(self::MERCHANTS_DATA_INDEX);
+        get => $this->getRequiredData(self::MERCHANTS_DATA_INDEX);
         set => $this->setData(self::MERCHANTS_DATA_INDEX, $value);
     }
 }

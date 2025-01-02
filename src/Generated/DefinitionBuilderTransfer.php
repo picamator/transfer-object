@@ -36,8 +36,8 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
     protected const string DEFINITION_CONTENT_DATA_NAME = 'DEFINITION_CONTENT';
     protected const int DEFINITION_CONTENT_DATA_INDEX = 0;
 
-    public ?DefinitionContentTransfer $definitionContent {
-        get => $this->getData(self::DEFINITION_CONTENT_DATA_INDEX);
+    public DefinitionContentTransfer $definitionContent {
+        get => $this->getRequiredData(self::DEFINITION_CONTENT_DATA_INDEX);
         set => $this->setData(self::DEFINITION_CONTENT_DATA_INDEX, $value);
     }
 
@@ -49,7 +49,7 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,DefinitionGeneratorContentTransfer> */
     public ArrayObject $generatorContents {
-        get => $this->getData(self::GENERATOR_CONTENTS_DATA_INDEX);
+        get => $this->getRequiredData(self::GENERATOR_CONTENTS_DATA_INDEX);
         set => $this->setData(self::GENERATOR_CONTENTS_DATA_INDEX, $value);
     }
 }

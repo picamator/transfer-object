@@ -66,7 +66,7 @@ readonly class GeneratorProcessor implements GeneratorProcessorInterface
 
     public function process(DefinitionTransfer $definitionTransfer): TransferGeneratorTransfer
     {
-        if (!$definitionTransfer->validator?->isValid) {
+        if (!$definitionTransfer->validator->isValid) {
             return $this->builder->createGeneratorTransfer($definitionTransfer);
         }
 

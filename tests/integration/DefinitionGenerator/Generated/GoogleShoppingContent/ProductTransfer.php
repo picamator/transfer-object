@@ -271,7 +271,7 @@ final class ProductTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $sizes {
-        get => $this->getData(self::SIZES_DATA_INDEX);
+        get => $this->getRequiredData(self::SIZES_DATA_INDEX);
         set => $this->setData(self::SIZES_DATA_INDEX, $value);
     }
 
