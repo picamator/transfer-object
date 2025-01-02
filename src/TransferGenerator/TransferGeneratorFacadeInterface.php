@@ -15,11 +15,11 @@ interface TransferGeneratorFacadeInterface
      * - Starts fiber with `$configPath`
      * - First fiber suspend after configuration load
      * - Next fiber suspends after generating Transfer Object passing `TransferGeneratorTransfer` back
-     * - Throw fiber exception terminates process and return `false`
      * - Transfer object `TransferGeneratorTransfer` might contain error messages if any occur
-     * - Returns `true` when whole process is successful, `false` otherwise
+     * - Returns `true` when process is successful, `false` otherwise
      *
      * @throws \FiberError
+     * @throws \Throwable
      * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
      *
      * @return \Fiber<string,null,bool,TransferGeneratorTransfer>

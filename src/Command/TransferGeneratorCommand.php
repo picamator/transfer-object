@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Command;
 
-use ArrayObject;
-use Picamator\TransferObject\Command\Exception\CommandException;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
-use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacadeInterface;
 use Symfony\Component\Console\Command\Command;
@@ -85,19 +82,11 @@ final class TransferGeneratorCommand extends Command
         $generatorFiber = $this->generatorFacade->getTransferGeneratorFiber();
 
         $generatorTransfer = $generatorFiber->start($configPath);
-        if ($generatorTransfer === null || $generatorTransfer->validator?->isValid === false) {
-            $this->writelnGeneratorError($generatorTransfer, $styleOutput);
-            $generatorFiber->throw(new CommandException());
-
-            return $generatorFiber->getReturn();
-        }
+        $this->writelnGeneratorError($generatorTransfer, $styleOutput);
 
         while (!$generatorFiber->isTerminated()) {
             $generatorTransfer = $generatorFiber->resume();
-            if ($generatorTransfer !== null && $generatorTransfer->validator?->isValid === false) {
-                $this->writelnGeneratorError($generatorTransfer, $styleOutput);
-                $generatorFiber->throw(new CommandException());
-            }
+            $this->writelnGeneratorError($generatorTransfer, $styleOutput);
         }
 
         return $generatorFiber->getReturn();
@@ -107,6 +96,10 @@ final class TransferGeneratorCommand extends Command
         ?TransferGeneratorTransfer $generatorTransfer,
         SymfonyStyle $styleOutput,
     ): void {
+        if ($generatorTransfer === null || $generatorTransfer->validator->isValid === true) {
+            return;
+        }
+
         $styleOutput->error(self::ERROR_MESSAGE);
 
         if ($generatorTransfer->className !== null) {

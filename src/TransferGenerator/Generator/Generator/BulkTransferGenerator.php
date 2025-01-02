@@ -9,8 +9,11 @@ use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorExcept
 
 readonly class BulkTransferGenerator implements BulkTransferGeneratorInterface
 {
-    private const string ERROR_MESSAGE_TEMPLATE
-        = 'Failed generating Transfer Object "%s" based on definition file "%s". Error: "%s".';
+    private const string ERROR_MESSAGE = 'Failed to generate Transfer Objects.';
+    private const string ERROR_MESSAGE_TEMPLATE = 'Error: "%s".';
+
+    private const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Transfer Object: "%s".';
+    private const string DEFINITION_MESSAGE_TEMPLATE = 'Definition file: "%s".';
 
     public function __construct(
         private TransferGeneratorInterface $generator,
@@ -28,7 +31,6 @@ readonly class BulkTransferGenerator implements BulkTransferGeneratorInterface
                 continue;
             }
 
-            $transferGenerator->throw(new TransferGeneratorException());
             $this->throwError($generatorTransfer);
         }
     }
@@ -38,14 +40,20 @@ readonly class BulkTransferGenerator implements BulkTransferGeneratorInterface
      */
     private function throwError(TransferGeneratorTransfer $generatorTransfer): never
     {
-        $errorMessage = $generatorTransfer->validator?->errorMessages[0] ?? null;
-        throw new TransferGeneratorException(
-            sprintf(
-                self::ERROR_MESSAGE_TEMPLATE,
-                $generatorTransfer->className ?: '',
-                $generatorTransfer->fileName ?: '',
-                $errorMessage?->errorMessage ?: '',
-            ),
-        );
+        $messageParts = [self::ERROR_MESSAGE];
+        if ($generatorTransfer->className !== null) {
+            $messageParts[] = sprintf(self::TRANSFER_OBJECT_MESSAGE_TEMPLATE, $generatorTransfer->className);
+        }
+
+        if ($generatorTransfer->fileName !== null) {
+            $messageParts[] = sprintf(self::DEFINITION_MESSAGE_TEMPLATE, $generatorTransfer->fileName);
+        }
+
+        $validatorMessage = $generatorTransfer->validator?->errorMessages[0] ?? null;
+        if ($validatorMessage?->errorMessage !== null) {
+            $messageParts[] = sprintf(self::ERROR_MESSAGE_TEMPLATE, $validatorMessage->errorMessage);
+        }
+
+        throw new TransferGeneratorException(implode(' ', $messageParts));
     }
 }
