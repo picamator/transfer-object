@@ -6,7 +6,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      cache-hit: ${{ steps.cache-composer.outputs.cache-hit }}
+      cache-key: ${{ steps.cache-composer.outputs.cache-key }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -42,12 +42,11 @@ jobs:
         with:
           php-version: '8.4'
 
-      - name: Cache Composer Dependencies
-        id: cache-composer
+      - name: Restore Composer Cache
         uses: actions/cache@v4
         with:
           path: vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ needs.setup.outputs.cache-key }}
           restore-keys: |
             ${{ runner.os }}-composer-
 
@@ -74,12 +73,11 @@ jobs:
         with:
           php-version: '8.4'
 
-      - name: Cache Composer Dependencies
-        id: cache-composer
+      - name: Restore Composer Cache
         uses: actions/cache@v4
         with:
           path: vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ needs.setup.outputs.cache-key }}
           restore-keys: |
             ${{ runner.os }}-composer-
 
@@ -101,12 +99,11 @@ jobs:
         with:
           php-version: '8.4'
 
-      - name: Cache Composer Dependencies
-        id: cache-composer
+      - name: Restore Composer Cache
         uses: actions/cache@v4
         with:
           path: vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ needs.setup.outputs.cache-key }}
           restore-keys: |
             ${{ runner.os }}-composer-
 
@@ -128,12 +125,11 @@ jobs:
         with:
           php-version: '8.4'
 
-      - name: Cache Composer Dependencies
-        id: cache-composer
+      - name: Restore Composer Cache
         uses: actions/cache@v4
         with:
           path: vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ needs.setup.outputs.cache-key }}
           restore-keys: |
             ${{ runner.os }}-composer-
 
