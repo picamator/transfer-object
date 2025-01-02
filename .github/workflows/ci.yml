@@ -4,18 +4,19 @@ on: [push]
 
 jobs:
   setup:
+    name: Project Setup
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up PHP
+      - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
           coverage: none
 
-      - name: Cache vendor
+      - name: Cache vendor directory
         id: cache-vendor
         uses: actions/cache@v4
         with:
@@ -29,46 +30,26 @@ jobs:
       - name: Validate composer.json
         run: composer validate --no-ansi --strict composer.json
 
-  generate:
+      - name: Generate Transfer Objects
+        env:
+          PROJECT_ROOT: ${{ github.workspace }}
+        run: composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
+
+  phpstan:
+    name: PHPStan - PHP Static Analysis Tool
     needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up PHP
+      - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
           coverage: none
 
-      - name: Restore vendor from cache
-        uses: actions/cache@v4
-        with:
-          path: ./vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-
-      - name: Generate Internal Transfer Objects
-        env:
-          PROJECT_ROOT: ${{ github.workspace }}
-        run: |
-          echo "Generate Internal Transfer Objects"
-          composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
-
-  phpstan:
-    needs: generate
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-          coverage: none
-
-      - name: Restore vendor from cache
+      - name: Restore vendor directory from cache
         uses: actions/cache@v4
         with:
           path: ./vendor
@@ -78,19 +59,20 @@ jobs:
         run: composer phpstan
 
   phpcs:
-    needs: generate
+    name: PHP CodeSniffer
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up PHP
+      - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
           coverage: none
 
-      - name: Restore vendor from cache
+      - name: Restore vendor directory from cache
         uses: actions/cache@v4
         with:
           path: ./vendor
@@ -100,19 +82,20 @@ jobs:
         run: composer phpcs
 
   phpunit:
-    needs: generate
+    name: PHPUnit tests
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up PHP
+      - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
           coverage: none
 
-      - name: Restore vendor from cache
+      - name: Restore vendor directory from cache
         uses: actions/cache@v4
         with:
           path: ./vendor
