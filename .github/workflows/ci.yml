@@ -31,6 +31,9 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Restore vendor from cache
         uses: actions/cache@v4
         with:
@@ -45,9 +48,12 @@ jobs:
           composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
 
   phpstan:
-    needs: setup
+    needs: generate
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Restore vendor from cache
         uses: actions/cache@v4
         with:
@@ -61,9 +67,12 @@ jobs:
           configuration: phpstan.neon
 
   phpcs:
-    needs: setup
+    needs: generate
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Restore vendor from cache
         uses: actions/cache@v4
         with:
@@ -77,9 +86,12 @@ jobs:
           standard: phpcs.xml
 
   phpunit:
-    needs: setup
+    needs: generate
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Restore vendor from cache
         uses: actions/cache@v4
         with:
