@@ -10,11 +10,9 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
- * Class generated from a definition file.
- *
  * Specification:
- * - This class is automatically generated based on a definition file.
- * - To modify this class, update the definition file and run the generator again.
+ * - Class is automatically generated based on a definition file.
+ * - To modify it, please update corresponding definition file and run generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
