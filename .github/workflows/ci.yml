@@ -19,7 +19,7 @@ jobs:
           coverage: none
 
       - name: Create cache vendor directory key
-        name: cache-vendor-key
+        id: cache-vendor-key
         run: |
           echo "key=$(${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }})" >> $GITHUB_OUTPUT"
 
