@@ -22,7 +22,7 @@ $data = [
 ];
 ```
 
-then facade method converts array into `YML` file:
+then facade method converts array into `YML` definition file:
 ```yml
 Customer:
   firstName:
@@ -38,14 +38,14 @@ $customerTransfer->firstName = 'Jan';
 $customerTransfer->lastName = 'Kowalski';
 ```
 
-Here how it works in action:
+How it works in action can be found on Wiki:
  - [Try Sample with Array](/doc/samples/try-definition-generator.php)
  - [Try Sample with YML Definition](/doc/samples/try-transfer-generator.php)
 
 Installation
 ------------
 
-Simple installation via Composer:
+Composer installation:
 
 ```shell
 $ composer require-dev picamator/transfer-object
