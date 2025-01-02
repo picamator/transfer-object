@@ -18,7 +18,7 @@ jobs:
           php-version: '8.4'
           coverage: none
 
-      - name: Create cache vendor directory key
+      - name: Create vendor directory cache key
         id: cache-vendor-key
         run: |
           echo "key=${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}" >> $GITHUB_OUTPUT
@@ -58,7 +58,7 @@ jobs:
           php-version: '8.4'
           coverage: none
 
-      - name: Restore vendor directory from cache
+      - name: Restore vendor directory from the cache
         uses: actions/cache/restore@v4
         with:
           path: ./vendor
@@ -82,7 +82,7 @@ jobs:
           php-version: '8.4'
           coverage: none
 
-      - name: Restore vendor directory from cache
+      - name: Restore vendor directory from the cache
         uses: actions/cache/restore@v4
         with:
           path: ./vendor
@@ -106,7 +106,7 @@ jobs:
           php-version: '8.4'
           coverage: none
 
-      - name: Restore vendor directory from cache
+      - name: Restore vendor directory from the cache
         uses: actions/cache/restore@v4
         with:
           path: ./vendor
