@@ -7,7 +7,7 @@ jobs:
     name: Project Setup
     runs-on: ubuntu-latest
     outputs:
-      cache-vendor-primary-key: ${{ steps.cache-vendor.outputs.cache-primary-key }}
+      cache-vendor-key: ${{ steps.cache-vendor.outputs.cache-key }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -57,7 +57,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: ./vendor
-          key: ${{ needs.setup.outputs.cache-vendor-primary-key }}
+          key: ${{ needs.setup.outputs.cache-vendor-key }}
           fail-on-cache-miss: true
 
       - name: Run PHPStan
@@ -81,7 +81,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: ./vendor
-          key: ${{ needs.setup.outputs.cache-vendor-primary-key }}
+          key: ${{ needs.setup.outputs.cache-vendor-key }}
           fail-on-cache-miss: true
 
       - name: Run PHP CodeSniffer
@@ -105,7 +105,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: ./vendor
-          key: ${{ needs.setup.outputs.cache-vendor-primary-key }}
+          key: ${{ needs.setup.outputs.cache-vendor-key }}
           fail-on-cache-miss: true
 
       - name: Run PHPUnit
