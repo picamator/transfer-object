@@ -6,7 +6,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      composer-cache-hit: ${{ steps.cache-composer.outputs.cache-hit }}
+      cache-hit: ${{ steps.cache-composer.outputs.cache-hit }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -43,10 +43,13 @@ jobs:
           php-version: '8.4'
 
       - name: Cache Composer Dependencies
+        id: cache-composer
         uses: actions/cache@v4
         with:
           path: vendor
-          key: ${{ needs.setup.outputs.composer-cache-hit }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
 
       - name: Install dependencies (if needed)
         run: composer install --prefer-dist --no-progress --no-suggest --ansi
@@ -72,10 +75,13 @@ jobs:
           php-version: '8.4'
 
       - name: Cache Composer Dependencies
+        id: cache-composer
         uses: actions/cache@v4
         with:
           path: vendor
-          key: ${{ needs.setup.outputs.composer-cache-hit }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
 
       - name: Run PHPStan
         uses: php-actions/phpstan@v3
@@ -96,10 +102,13 @@ jobs:
           php-version: '8.4'
 
       - name: Cache Composer Dependencies
+        id: cache-composer
         uses: actions/cache@v4
         with:
           path: vendor
-          key: ${{ needs.setup.outputs.composer-cache-hit }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
 
       - name: Run PHP CodeSniffer
         uses: php-actions/phpcs@v1
@@ -120,10 +129,13 @@ jobs:
           php-version: '8.4'
 
       - name: Cache Composer Dependencies
+        id: cache-composer
         uses: actions/cache@v4
         with:
           path: vendor
-          key: ${{ needs.setup.outputs.composer-cache-hit }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
 
       - name: Run PHPUnit
         uses: php-actions/phpunit@v4
