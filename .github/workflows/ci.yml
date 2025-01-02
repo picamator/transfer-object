@@ -6,6 +6,8 @@ jobs:
   setup:
     name: Project Setup
     runs-on: ubuntu-latest
+    outputs:
+      cache-vendor-primary-key: ${{ steps.cache-vendor.outputs.cache-primary-key }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,6 +24,8 @@ jobs:
         with:
           path: ./vendor
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
 
       - name: Install dependencies (if needed)
         run: composer install --no-ansi --no-interaction --no-progress
@@ -50,10 +54,11 @@ jobs:
           coverage: none
 
       - name: Restore vendor directory from cache
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: ./vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ needs.setup.outputs.cache-vendor-primary-key }}
+          fail-on-cache-miss: true
 
       - name: Run PHPStan
         run: composer phpstan
@@ -73,10 +78,11 @@ jobs:
           coverage: none
 
       - name: Restore vendor directory from cache
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: ./vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ needs.setup.outputs.cache-vendor-primary-key }}
+          fail-on-cache-miss: true
 
       - name: Run PHP CodeSniffer
         run: composer phpcs
@@ -96,10 +102,11 @@ jobs:
           coverage: none
 
       - name: Restore vendor directory from cache
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: ./vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ needs.setup.outputs.cache-vendor-primary-key }}
+          fail-on-cache-miss: true
 
       - name: Run PHPUnit
         env:
