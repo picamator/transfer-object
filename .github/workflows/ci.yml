@@ -7,7 +7,7 @@ jobs:
     name: Project Setup
     runs-on: ubuntu-latest
     outputs:
-      cache-vendor-key: ${{ steps.cache-vendor.outputs.cache-key }}
+      cache-vendor-key: ${{ steps.cache-vendor-key.outputs.key }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -18,12 +18,17 @@ jobs:
           php-version: '8.4'
           coverage: none
 
+      - name: Create cache vendor directory key
+        name: cache-vendor-key
+        run: |
+          echo "key=$(${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }})" >> $GITHUB_OUTPUT"
+
       - name: Cache vendor directory
         id: cache-vendor
         uses: actions/cache@v4
         with:
           path: ./vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: steps.cache-vendor-key.outputs.key
           restore-keys: |
             ${{ runner.os }}-composer-
 
