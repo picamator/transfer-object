@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Definition\Validator\Property;
 
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\ValidatorMessageTrait;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\VariableValidatorTrait;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\VariableValidatorTrait;
+use Picamator\TransferObject\TransferGenerator\Validator\ValidatorMessageTrait;
 
 readonly class NamePropertyValidator implements PropertyValidatorInterface
 {

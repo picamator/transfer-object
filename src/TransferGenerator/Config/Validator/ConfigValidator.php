@@ -10,6 +10,7 @@ use Picamator\TransferObject\Generated\ConfigValidatorTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\ConfigContentValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\File\ConfigFileValidatorInterface;
+use Picamator\TransferObject\TransferGenerator\Validator\ValidatorMessageTrait;
 
 readonly class ConfigValidator implements ConfigValidatorInterface
 {

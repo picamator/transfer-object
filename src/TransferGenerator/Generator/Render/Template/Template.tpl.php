@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Picamator\TransferObject\Generated\TemplateTransfer;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelper;
 
 $templateTransfer ??= TemplateHelper::getDefaultTemplateTransfer();

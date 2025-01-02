@@ -7,7 +7,7 @@ namespace Picamator\TransferObject\TransferGenerator\Config\Validator\Content;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\TransferGenerator\Config\Validator\ValidatorMessageTrait;
+use Picamator\TransferObject\TransferGenerator\Validator\ValidatorMessageTrait;
 
 readonly class DefinitionPathConfigContentValidator implements ConfigContentValidatorInterface
 {

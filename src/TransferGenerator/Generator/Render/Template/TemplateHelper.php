@@ -9,13 +9,12 @@ use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransferEnum;
 
 readonly class TemplateHelper implements TemplateHelperInterface
 {
-    private const string PADDING_LEFT = '    ';
-
     private const array KEY_VALUE_SEARCH = [
         ':key',
         ':value',
     ];
 
+    private const string PADDING_LEFT = '    ';
     private const string EMPTY_STRING = '';
     private const string NULLABLE_SIGN = '?';
     private const string REQUIRED_METHOD_NAME = 'Required';
