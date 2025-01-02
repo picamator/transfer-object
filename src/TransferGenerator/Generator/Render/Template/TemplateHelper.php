@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Template;
 
 use Picamator\TransferObject\Generated\TemplateTransfer;
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransferEnum;
 
 readonly class TemplateHelper implements TemplateHelperInterface
 {
@@ -25,10 +26,14 @@ readonly class TemplateHelper implements TemplateHelperInterface
 
     public static function getDefaultTemplateTransfer(): TemplateTransfer
     {
-        return  new TemplateTransfer()->fromArray([
-            TemplateTransfer::CLASS_NAMESPACE => '',
-            TemplateTransfer::CLASS_NAME => '',
+        return new TemplateTransfer()->fromArray([
+            TemplateTransfer::CLASS_NAMESPACE => '\Default',
+            TemplateTransfer::CLASS_NAME => 'DefaultTransfer',
             TemplateTransfer::PROPERTIES_COUNT => 0,
+            TemplateTransfer::IMPORTS => [
+                TransferEnum::ABSTRACT_CLASS->value,
+                TransferEnum::TRAIT->value,
+            ],
         ]);
     }
 

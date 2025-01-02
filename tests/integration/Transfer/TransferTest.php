@@ -15,6 +15,8 @@ use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBasicEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemCollectionTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer;
+use Picamator\Tests\Integration\TransferObject\Transfer\Generated\RequiredTransfer;
+use Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException;
 use TypeError;
 
 class TransferTest extends TestCase
@@ -244,5 +246,17 @@ class TransferTest extends TestCase
         $itemTransfer->fromArray([
             ItemTransfer::I_AM_STRING => new ArrayObject(),
         ]);
+    }
+
+    #[Depends('testGenerateTransferShouldSucceed')]
+    public function testAccessRequiredPropertyBeforeInitialisingShouldRiseException(): void
+    {
+        // Arrange
+        $requiredTransfer = new RequiredTransfer();
+
+        $this->expectException(PropertyTypeTransferException::class);
+
+        // Act
+        $requiredTransfer->toArray();
     }
 }
