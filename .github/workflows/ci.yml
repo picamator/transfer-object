@@ -3,10 +3,9 @@ name: CI
 on: [push]
 
 jobs:
-  setup:
+  CI:
     runs-on: ubuntu-latest
-    outputs:
-      cache-key: ${{ steps.cache-composer.outputs.cache-key }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -15,71 +14,24 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
-          tools: composer
 
-      - name: Cache Composer Dependencies
-        id: cache-composer
+      - name: Cache Composer dependencies
         uses: actions/cache@v4
         with:
-          path: vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
+          path: /tmp/composer-cache
+          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest --ansi
-        if: steps.cache-composer.outputs.cache-hit != 'true'
-
-  generate:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
+        uses: php-actions/composer@v6
         with:
-          php-version: '8.4'
+          php_version: "8.4"
 
-      - name: Restore Composer Cache
-        uses: actions/cache@v4
-        with:
-          path: vendor
-          key: ${{ needs.setup.outputs.cache-key }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
-
-      - name: Install dependencies (if needed)
-        run: composer install --prefer-dist --no-progress --no-suggest --ansi
-        if: steps.cache-composer.outputs.cache-hit != 'true'
-
-      - name: Generate Internal Transfer Object
+      - name: Generate Internal Transfer Objects
         env:
           PROJECT_ROOT: ${{ github.workspace }}
         run: |
           echo "Generate Internal Transfer Objects"
-          composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml --ansi
-
-  phpstan:
-    needs: generate
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-
-      - name: Restore Composer Cache
-        uses: actions/cache@v4
-        with:
-          path: vendor
-          key: ${{ needs.setup.outputs.cache-key }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
+          composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
 
       - name: Run PHPStan
         uses: php-actions/phpstan@v3
@@ -87,51 +39,11 @@ jobs:
           php_version: "8.4"
           configuration: phpstan.neon
 
-  phpcs:
-    needs: generate
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-
-      - name: Restore Composer Cache
-        uses: actions/cache@v4
-        with:
-          path: vendor
-          key: ${{ needs.setup.outputs.cache-key }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
-
       - name: Run PHP CodeSniffer
         uses: php-actions/phpcs@v1
         with:
           php_version: "8.4"
           standard: phpcs.xml
-
-  phpunit:
-    needs: generate
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-
-      - name: Restore Composer Cache
-        uses: actions/cache@v4
-        with:
-          path: vendor
-          key: ${{ needs.setup.outputs.cache-key }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
 
       - name: Run PHPUnit
         uses: php-actions/phpunit@v4
