@@ -22,7 +22,7 @@ $data = [
 ];
 ```
 
-Definition generator converts array into `YML` file:
+then facade method converts array into `YML` file:
 ```yml
 Customer:
   firstName:
@@ -31,7 +31,7 @@ Customer:
     type: string
 ```
 
-Console command generates TO:
+finally console command generates TO:
 ```php
 $customerTransfer = new CustomerTransfer();
 $customerTransfer->firstName = 'Jan';
