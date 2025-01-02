@@ -17,7 +17,7 @@
 /phpstan.neon           export-ignore
 /phpunit.xml            export-ignore
 
-/src/Generated          linguist-generated=true
-/doc/samples/Generated  linguist-generated=true
-/tests/**/Generated     linguist-generated=true
-/tests/**/*.json        linguist-generated=true
+/src/Generated/**           linguist-generated=true
+/doc/samples/Generated/**   linguist-generated=true
+/tests/**/Generated/**      linguist-generated=true
+/tests/**/*.json            linguist-generated=true
