@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Integration\TransferObject\Transfer;
 
+use ArrayObject;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
+use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBasicEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemCollectionTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer;
+use TypeError;
 
 class TransferTest extends TestCase
 {
@@ -226,5 +229,20 @@ class TransferTest extends TestCase
 
         // Assert
         $this->assertEquals($itemCollectionTransfer->toArray(), $actual);
+    }
+
+    #[Depends('testGenerateTransferShouldSucceed')]
+    #[WithoutErrorHandler]
+    public function testTypeMismatchFromArrayShouldFailedWithError(): void
+    {
+        // Arrange
+        $itemTransfer = new ItemTransfer();
+
+        $this->expectException(TypeError::class);
+
+        // Act
+        $itemTransfer->fromArray([
+            ItemTransfer::I_AM_STRING => new ArrayObject(),
+        ]);
     }
 }

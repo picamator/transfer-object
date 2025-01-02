@@ -7,6 +7,7 @@ namespace Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator;
 use Picamator\Doc\Samples\TransferObject\Enum\CountryEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Class generated from a definition file.
@@ -19,6 +20,8 @@ use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
  */
 final class MerchantTransfer extends AbstractTransfer
 {
+    use TransferTrait;
+
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [

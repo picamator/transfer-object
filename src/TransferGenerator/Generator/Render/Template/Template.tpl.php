@@ -28,6 +28,8 @@ namespace $templateTransfer->classNamespace;
  */
 final class $templateTransfer->className extends AbstractTransfer
 {
+    use TransferTrait;
+
     protected const int META_DATA_SIZE = $templateTransfer->propertiesCount;
 
     protected const array META_DATA = [

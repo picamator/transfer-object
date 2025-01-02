@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\OpenWeather;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
+use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Class generated from a definition file.
@@ -17,6 +18,8 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  */
 final class WindTransfer extends AbstractTransfer
 {
+    use TransferTrait;
+
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [

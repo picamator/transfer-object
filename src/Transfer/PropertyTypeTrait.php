@@ -10,14 +10,14 @@ use ReflectionClassConstant;
 
 trait PropertyTypeTrait
 {
-    protected function getConstantAttribute(string $constantName): ?PropertyTypeAttributeInterface
+    final protected function getConstantAttribute(string $constantName): ?PropertyTypeAttributeInterface
     {
         $attributeReflection = $this->getConstantAttributeReflection($constantName);
 
         return $attributeReflection?->newInstance();
     }
 
-    protected function hasConstantAttribute(string $constantName): bool
+    final protected function hasConstantAttribute(string $constantName): bool
     {
         $attributeReflection = $this->getConstantAttributeReflection($constantName);
 

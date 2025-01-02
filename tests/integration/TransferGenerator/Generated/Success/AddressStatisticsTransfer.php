@@ -7,6 +7,7 @@ namespace Picamator\Tests\Integration\TransferObject\TransferGenerator\Generated
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\ArrayObjectPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Class generated from a definition file.
@@ -19,6 +20,8 @@ use Picamator\TransferObject\Transfer\Attribute\ArrayObjectPropertyTypeAttribute
  */
 final class AddressStatisticsTransfer extends AbstractTransfer
 {
+    use TransferTrait;
+
     protected const int META_DATA_SIZE = 7;
 
     protected const array META_DATA = [

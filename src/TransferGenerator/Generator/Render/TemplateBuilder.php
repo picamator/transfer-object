@@ -31,6 +31,7 @@ readonly class TemplateBuilder implements TemplateBuilderInterface
         $templateTransfer->classNamespace = $this->config->getTransferNamespace();
         $templateTransfer->className = $this->getTransferName($contentTransfer->className);
         $templateTransfer->imports[TransferEnum::ABSTRACT_CLASS->value] = TransferEnum::ABSTRACT_CLASS->value;
+        $templateTransfer->imports[TransferEnum::TRAIT->value] = TransferEnum::TRAIT->value;
 
         foreach ($contentTransfer->properties as $propertyTransfer) {
             $propertyName = $propertyTransfer->propertyName;

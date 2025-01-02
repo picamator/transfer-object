@@ -7,6 +7,7 @@ namespace Picamator\TransferObject\Generated;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Class generated from a definition file.
@@ -19,6 +20,8 @@ use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
  */
 final class DefinitionPropertyTransfer extends AbstractTransfer
 {
+    use TransferTrait;
+
     protected const int META_DATA_SIZE = 5;
 
     protected const array META_DATA = [

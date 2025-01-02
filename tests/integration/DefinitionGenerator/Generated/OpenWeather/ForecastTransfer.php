@@ -9,6 +9,7 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Class generated from a definition file.
@@ -21,6 +22,8 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
  */
 final class ForecastTransfer extends AbstractTransfer
 {
+    use TransferTrait;
+
     protected const int META_DATA_SIZE = 14;
 
     protected const array META_DATA = [

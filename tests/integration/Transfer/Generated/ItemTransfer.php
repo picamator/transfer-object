@@ -10,6 +10,7 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\ArrayObjectPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Class generated from a definition file.
@@ -22,6 +23,8 @@ use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
  */
 final class ItemTransfer extends AbstractTransfer
 {
+    use TransferTrait;
+
     protected const int META_DATA_SIZE = 10;
 
     protected const array META_DATA = [
