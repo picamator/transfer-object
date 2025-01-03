@@ -89,7 +89,7 @@ If you find this project useful, please add a star to the repository. Follow the
 If you have suggestions for improvements or new features, feel free to create an issue or submit a pull request.
 Here is a [Contribution Guide](CONTRIBUTING.md).
 
-Please note that this project is released with a [Contributor Code of Conduct](http://contributor-covenant.org/version/2/1/).
+Please note that this project is released with a [Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in this project and its community, you agree to abide by those terms.
 
 License

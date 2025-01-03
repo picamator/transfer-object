@@ -1,5 +1,5 @@
-Contributing to Transfer Object Generator
-=========================================
+Contributing
+============
 
 How to Contribute
 -----------------
@@ -16,19 +16,12 @@ Coding Standards
 -----------------
 
 - Follow the existing code style.
-- Run PHPStan, PHP_CodeSniffer.
+- Run `PHPStan`, `PHP_CodeSniffer`, and `phpUnit`. Install CaptainHook to run them automatically.
 - Write unit or/and integration tests.
 - Write clear and concise commit messages.
-- Add comments where necessary.
 
 Reporting Issues
 ----------------
 
 Please use the [issue tracker](https://github.com/picamator/transfer-object/issues) to report bugs or request features.
 Provide as much detail as possible to help us understand and resolve the issue.
-
-Code of Conduct
----------------
-
-Please note that this project is released with a [Contributor Code of Conduct](http://contributor-covenant.org/version/2/1/).
-By participating in this project and its community, you agree to abide by those terms.
