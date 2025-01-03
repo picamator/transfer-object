@@ -1,5 +1,5 @@
 Agent:
   customer:
-    type: "Picamator\\Doc\\Samples\\TransferObject\\Generated\\TransferGenerator\\CustomerTransfer as CustomerAlias"
+    type: Customer
   merchants:
     collectionType: Merchant
