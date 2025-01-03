@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator;
 
 use ArrayObject;
+use Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator\CustomerTransfer as CustomerAlias;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
@@ -29,12 +30,12 @@ final class AgentTransfer extends AbstractTransfer
     ];
 
     // customer
-    #[PropertyTypeAttribute(CustomerTransfer::class)]
+    #[PropertyTypeAttribute(CustomerAlias::class)]
     public const string CUSTOMER = 'customer';
     protected const string CUSTOMER_DATA_NAME = 'CUSTOMER';
     protected const int CUSTOMER_DATA_INDEX = 0;
 
-    public ?CustomerTransfer $customer {
+    public ?CustomerAlias $customer {
         get => $this->getData(self::CUSTOMER_DATA_INDEX);
         set => $this->setData(self::CUSTOMER_DATA_INDEX, $value);
     }
