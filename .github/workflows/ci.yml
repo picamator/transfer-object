@@ -39,11 +39,6 @@ jobs:
       - name: Validate composer.json
         run: composer validate --no-ansi --strict composer.json
 
-      - name: Generate Transfer Objects
-        env:
-          PROJECT_ROOT: ${{ github.workspace }}
-        run: composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
-
   phpstan:
     name: PHPStan
     needs: setup
@@ -112,6 +107,11 @@ jobs:
           path: ./vendor
           key: ${{ needs.setup.outputs.cache-vendor-key }}
           fail-on-cache-miss: true
+
+      - name: Generate Transfer Objects
+        env:
+          PROJECT_ROOT: ${{ github.workspace }}
+        run: composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
 
       - name: Run PHPUnit
         env:
