@@ -29,7 +29,7 @@ readonly class CollectionTypeTemplateExpander implements TemplateExpanderInterfa
         $templateTransfer->imports[AttributeEnum::COLLECTION_TYPE_ATTRIBUTE->value]
             ??= AttributeEnum::COLLECTION_TYPE_ATTRIBUTE->value;
 
-        $transferName = $this->getTransferName($propertyTransfer->collectionType ?: '');
+        $transferName = $propertyTransfer->collectionType ?: '';
 
         $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->properties[$propertyName] = BuildInTypeEnum::ARRAY_OBJECT->value;

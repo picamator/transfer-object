@@ -57,6 +57,8 @@ DefinitionProperty:
   isNullable:
     type: bool
     required:
+  namespace:
+    type: string
 
 DefinitionValidator:
   isValid:

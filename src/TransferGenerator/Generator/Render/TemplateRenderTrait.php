@@ -8,8 +8,6 @@ use Picamator\TransferObject\Generated\TemplateTransfer;
 
 trait TemplateRenderTrait
 {
-    private const string FILE_NAME_SUFFIX = 'Transfer';
-
     private const string META_CONSTANT_REGEX = '#(?<!^)[A-Z]#';
 
     protected function sortTemplate(TemplateTransfer $templateTransfer): void
@@ -24,10 +22,5 @@ trait TemplateRenderTrait
         $propertyName = preg_replace(self::META_CONSTANT_REGEX, '_$0', $propertyName);
 
         return strtoupper($propertyName);
-    }
-
-    protected function getTransferName(string $propertyType): string
-    {
-        return $propertyType . self::FILE_NAME_SUFFIX;
     }
 }

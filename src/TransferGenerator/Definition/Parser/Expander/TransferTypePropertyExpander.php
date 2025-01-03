@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander;
 
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
+use Picamator\TransferObject\TransferGenerator\Definition\Enum\TypePrefixEnum;
 
 readonly class TransferTypePropertyExpander implements PropertyExpanderInterface
 {
+    use NamespacePropertyExpanderTrait;
+
     private const string TYPE_KEY = 'type';
 
     public function isApplicable(array $propertyType): bool
@@ -22,7 +25,15 @@ readonly class TransferTypePropertyExpander implements PropertyExpanderInterface
 
     public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
-        $propertyTransfer->transferType = $this->getTransferType($propertyType);
+        $transferType = $this->getTransferType($propertyType) ?: '';
+        if (!$this->isNamespace($transferType)) {
+            $propertyTransfer->transferType = $transferType . TypePrefixEnum::TRANSFER->value;
+
+            return;
+        }
+
+        $propertyTransfer->namespace = $transferType;
+        $propertyTransfer->transferType = $this->getClassName($transferType);
     }
 
     /**
