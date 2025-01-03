@@ -1,0 +1,5 @@
+AddressStatistics:
+  addressBookUuid:
+    type: "00Picamator\\Tests\\Integration\\TransferObject\\TransferGenerator\\Generated\\Success\\AddressTransfer as AliasAddress"
+  addressUuid:
+    type: string

@@ -20,13 +20,14 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 {
     use TransferTrait;
 
-    protected const int META_DATA_SIZE = 6;
+    protected const int META_DATA_SIZE = 7;
 
     protected const array META_DATA = [
         self::BUILD_IN_TYPE => self::BUILD_IN_TYPE_DATA_NAME,
         self::COLLECTION_TYPE => self::COLLECTION_TYPE_DATA_NAME,
         self::ENUM_TYPE => self::ENUM_TYPE_DATA_NAME,
         self::IS_NULLABLE => self::IS_NULLABLE_DATA_NAME,
+        self::NAMESPACE => self::NAMESPACE_DATA_NAME,
         self::PROPERTY_NAME => self::PROPERTY_NAME_DATA_NAME,
         self::TRANSFER_TYPE => self::TRANSFER_TYPE_DATA_NAME,
     ];
@@ -72,10 +73,20 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
         set => $this->setData(self::IS_NULLABLE_DATA_INDEX, $value);
     }
 
+    // namespace
+    public const string NAMESPACE = 'namespace';
+    protected const string NAMESPACE_DATA_NAME = 'NAMESPACE';
+    protected const int NAMESPACE_DATA_INDEX = 4;
+
+    public ?string $namespace {
+        get => $this->getData(self::NAMESPACE_DATA_INDEX);
+        set => $this->setData(self::NAMESPACE_DATA_INDEX, $value);
+    }
+
     // propertyName
     public const string PROPERTY_NAME = 'propertyName';
     protected const string PROPERTY_NAME_DATA_NAME = 'PROPERTY_NAME';
-    protected const int PROPERTY_NAME_DATA_INDEX = 4;
+    protected const int PROPERTY_NAME_DATA_INDEX = 5;
 
     public string $propertyName {
         get => $this->getRequiredData(self::PROPERTY_NAME_DATA_INDEX);
@@ -85,7 +96,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     // transferType
     public const string TRANSFER_TYPE = 'transferType';
     protected const string TRANSFER_TYPE_DATA_NAME = 'TRANSFER_TYPE';
-    protected const int TRANSFER_TYPE_DATA_INDEX = 5;
+    protected const int TRANSFER_TYPE_DATA_INDEX = 6;
 
     public ?string $transferType {
         get => $this->getData(self::TRANSFER_TYPE_DATA_INDEX);

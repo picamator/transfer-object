@@ -36,6 +36,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\Bui
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\CollectionTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\EnumTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\NamePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\NamespacePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\RequiredTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\TransferTypePropertyValidator;
@@ -90,7 +91,13 @@ readonly class DefinitionFactory
             $this->createTransferTypePropertyValidator(),
             $this->createCollectionTypePropertyValidator(),
             $this->createEnumTypePropertyValidator(),
+            $this->createNamespacePropertyValidator(),
         ]);
+    }
+
+    protected function createNamespacePropertyValidator(): PropertyValidatorInterface
+    {
+        return new NamespacePropertyValidator();
     }
 
     protected function createEnumTypePropertyValidator(): PropertyValidatorInterface

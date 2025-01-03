@@ -4,11 +4,10 @@ Security Policy
 Reporting a Vulnerability
 -------------------------
 
-When you found an security vulnerability on Transfer Object Generator,
-please report it by private message to one of project's maintainer using
-any publicly available maintainer GitHub profile.
+If you discover a security vulnerability in the Transfer Object Generator, please report it privately to one of the project's maintainers.
+You can reach them through their GitHub profiles contact data.
 
 ### Important note
 
-Please don't report security issues in publicly available way neither via GitHub issues
-nor discussions or pull requests.
+Please do not report security issues through public channels such as GitHub issues, discussions, or pull requests.
+This ensures that security vulnerabilities are addressed quicky and do not pose a risk to users.

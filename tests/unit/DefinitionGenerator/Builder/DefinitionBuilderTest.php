@@ -8,13 +8,13 @@ use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionBuilderTrait;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 
-class DefinitionBuilderTraitTest extends TestCase
+class DefinitionBuilderTest extends TestCase
 {
-    private DefinitionBuilderTraitInterface $builderTrait;
+    private DefinitionBuilderInterface $builder;
 
     protected function setUp(): void
     {
-        $this->builderTrait = new class () implements DefinitionBuilderTraitInterface
+        $this->builder = new class () implements DefinitionBuilderInterface
         {
             use DefinitionBuilderTrait {
                 createBuilderContent as public;
@@ -31,6 +31,6 @@ class DefinitionBuilderTraitTest extends TestCase
         $this->expectException(DefinitionGeneratorException::class);
 
         // Act
-        $this->builderTrait->createBuilderContent($propertyName, $propertyValue);
+        $this->builder->createBuilderContent($propertyName, $propertyValue);
     }
 }

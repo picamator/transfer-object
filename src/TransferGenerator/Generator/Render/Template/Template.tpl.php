@@ -23,7 +23,7 @@ namespace $templateTransfer->classNamespace;
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
-final class $templateTransfer->className extends AbstractTransfer
+final class {$templateTransfer->className}Transfer extends AbstractTransfer
 {
     use TransferTrait;
 

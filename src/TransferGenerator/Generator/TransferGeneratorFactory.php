@@ -29,6 +29,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGener
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\BuildInTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\CollectionTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\EnumTypeTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\NamespaceTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TemplateExpanderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TransferTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateBuilder;
@@ -113,7 +114,13 @@ readonly class TransferGeneratorFactory
             $this->createTransferTypeTemplateExpander(),
             $this->createBuildInTypeTemplateExpander(),
             $this->createEnumTypeTemplateExpander(),
+            $this->createNamespaceTemplateExpander(),
         ]);
+    }
+
+    protected function createNamespaceTemplateExpander(): TemplateExpanderInterface
+    {
+        return new NamespaceTemplateExpander();
     }
 
     protected function createEnumTypeTemplateExpander(): TemplateExpanderInterface

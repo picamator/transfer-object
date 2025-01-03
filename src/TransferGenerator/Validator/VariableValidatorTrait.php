@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Definition\Validator;
+namespace Picamator\TransferObject\TransferGenerator\Validator;
 
 trait VariableValidatorTrait
 {
@@ -14,6 +14,6 @@ trait VariableValidatorTrait
 
     protected function isValidVariable(?string $variableName): bool
     {
-        return $variableName !== null && preg_match(self::VARIABLE_NAME_PATTERN, $variableName) >= 1;
+        return $variableName !== null && preg_match(self::VARIABLE_NAME_PATTERN, $variableName) === 1;
     }
 }
