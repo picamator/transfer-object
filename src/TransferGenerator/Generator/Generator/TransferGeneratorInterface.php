@@ -11,5 +11,5 @@ interface TransferGeneratorInterface
     /**
      * @return \Generator<int,\Picamator\TransferObject\Generated\TransferGeneratorTransfer>
      */
-    public function getTransferGenerator(string $configPath): Generator;
+    public function generateTransfers(string $configPath): Generator;
 }

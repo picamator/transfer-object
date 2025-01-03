@@ -7,7 +7,7 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
 
-readonly class BulkTransferGenerator implements BulkTransferGeneratorInterface
+readonly class TransferGeneratorService implements TransferGeneratorServiceInterface
 {
     private const string ERROR_MESSAGE = 'Failed to generate Transfer Objects.';
     private const string ERROR_MESSAGE_TEMPLATE = 'Error: "%s".';
@@ -23,10 +23,10 @@ readonly class BulkTransferGenerator implements BulkTransferGeneratorInterface
     /**
      * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
      */
-    public function generateTransfers(string $configPath): void
+    public function generateTransfersOrFail(string $configPath): void
     {
-        $transferGenerator = $this->generator->getTransferGenerator($configPath);
-        foreach ($transferGenerator as $generatorTransfer) {
+        $generator = $this->generator->generateTransfers($configPath);
+        foreach ($generator as $generatorTransfer) {
             if ($generatorTransfer->validator->isValid === true) {
                 continue;
             }

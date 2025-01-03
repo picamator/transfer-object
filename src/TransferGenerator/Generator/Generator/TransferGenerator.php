@@ -16,7 +16,7 @@ readonly class TransferGenerator implements TransferGeneratorInterface
     ) {
     }
 
-    public function getTransferGenerator(string $configPath): Generator
+    public function generateTransfers(string $configPath): Generator
     {
         $generatorTransfer = $this->processor->preProcess($configPath);
         if (!$generatorTransfer->validator->isValid) {

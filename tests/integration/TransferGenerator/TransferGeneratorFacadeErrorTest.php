@@ -146,7 +146,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         $this->expectException(TransferGeneratorException::class);
 
         // Act
-        new TransferGeneratorFacade()->generateTransfers($configPath);
+        new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
     }
 
     private function getConfigPath(string $configCaseName): string

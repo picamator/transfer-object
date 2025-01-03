@@ -34,5 +34,5 @@ interface TransferGeneratorFacadeInterface
      *
      * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
      */
-    public function generateTransfers(string $configPath): void;
+    public function generateTransfersOrFail(string $configPath): void;
 }

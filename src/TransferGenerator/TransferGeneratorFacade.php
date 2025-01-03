@@ -18,14 +18,15 @@ class TransferGeneratorFacade implements TransferGeneratorFacadeInterface
     public function getTransferGeneratorFiber(): Fiber
     {
         return $this->getFactory()
-            ->createTransferGeneratorFiber();
+            ->createTransferGeneratorFiber()
+            ->getTransferGeneratorFiber();
     }
 
-    public function generateTransfers(string $configPath): void
+    public function generateTransfersOrFail(string $configPath): void
     {
         $this->getFactory()
-            ->createBulkTransferGenerator()
-            ->generateTransfers($configPath);
+            ->createTransferGeneratorService()
+            ->generateTransfersOrFail($configPath);
     }
 
     private function getFactory(): TransferGeneratorFactory
