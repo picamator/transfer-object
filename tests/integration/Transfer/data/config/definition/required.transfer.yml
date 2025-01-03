@@ -1,0 +1,4 @@
+Required:
+  iAmRequired:
+    type: string
+    required:

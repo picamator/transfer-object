@@ -1,7 +1,7 @@
 {
   "name": "picamator/transfer-object",
   "description": "Transfer Object Generator based on property hooks and FixedArray.",
-  "keywords": ["generator", "code generator", "transfer object", "data transfer object", "dto", "dev"],
+  "keywords": ["generator", "code generator", "data transfer object", "dto", "dev"],
   "license": "MIT",
   "authors": [
     {
@@ -47,8 +47,8 @@
   },
   "prefer-stable": true,
   "scripts": {
-    "phpunit": "./vendor/bin/phpunit",
-    "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon",
+    "phpunit": "./vendor/bin/phpunit --no-progress",
+    "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon --no-progress",
     "generate-transfer": "php ./bin/generate-transfer",
     "captainhook": "./vendor/bin/captainhook",
     "phpcs": "./vendor/bin/phpcs",

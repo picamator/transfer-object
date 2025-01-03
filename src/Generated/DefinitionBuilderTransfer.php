@@ -8,18 +8,19 @@ use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
- * Class generated from a definition file.
- *
  * Specification:
- * - This class is automatically generated based on a definition file.
- * - To modify this class, update the definition file and run the generator again.
+ * - Class is automatically generated based on a definition file.
+ * - To modify it, please update corresponding definition file and run generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
 final class DefinitionBuilderTransfer extends AbstractTransfer
 {
+    use TransferTrait;
+
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
@@ -33,8 +34,8 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
     protected const string DEFINITION_CONTENT_DATA_NAME = 'DEFINITION_CONTENT';
     protected const int DEFINITION_CONTENT_DATA_INDEX = 0;
 
-    public ?DefinitionContentTransfer $definitionContent {
-        get => $this->getData(self::DEFINITION_CONTENT_DATA_INDEX);
+    public DefinitionContentTransfer $definitionContent {
+        get => $this->getRequiredData(self::DEFINITION_CONTENT_DATA_INDEX);
         set => $this->setData(self::DEFINITION_CONTENT_DATA_INDEX, $value);
     }
 
@@ -46,7 +47,7 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,DefinitionGeneratorContentTransfer> */
     public ArrayObject $generatorContents {
-        get => $this->getData(self::GENERATOR_CONTENTS_DATA_INDEX);
+        get => $this->getRequiredData(self::GENERATOR_CONTENTS_DATA_INDEX);
         set => $this->setData(self::GENERATOR_CONTENTS_DATA_INDEX, $value);
     }
 }

@@ -6,18 +6,19 @@ namespace Picamator\TransferObject\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
- * Class generated from a definition file.
- *
  * Specification:
- * - This class is automatically generated based on a definition file.
- * - To modify this class, update the definition file and run the generator again.
+ * - Class is automatically generated based on a definition file.
+ * - To modify it, please update corresponding definition file and run generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
 final class DefinitionGeneratorTransfer extends AbstractTransfer
 {
+    use TransferTrait;
+
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
@@ -31,8 +32,8 @@ final class DefinitionGeneratorTransfer extends AbstractTransfer
     protected const string CONTENT_DATA_NAME = 'CONTENT';
     protected const int CONTENT_DATA_INDEX = 0;
 
-    public ?DefinitionGeneratorContentTransfer $content {
-        get => $this->getData(self::CONTENT_DATA_INDEX);
+    public DefinitionGeneratorContentTransfer $content {
+        get => $this->getRequiredData(self::CONTENT_DATA_INDEX);
         set => $this->setData(self::CONTENT_DATA_INDEX, $value);
     }
 
@@ -41,8 +42,8 @@ final class DefinitionGeneratorTransfer extends AbstractTransfer
     protected const string DEFINITION_PATH_DATA_NAME = 'DEFINITION_PATH';
     protected const int DEFINITION_PATH_DATA_INDEX = 1;
 
-    public ?string $definitionPath {
-        get => $this->getData(self::DEFINITION_PATH_DATA_INDEX);
+    public string $definitionPath {
+        get => $this->getRequiredData(self::DEFINITION_PATH_DATA_INDEX);
         set => $this->setData(self::DEFINITION_PATH_DATA_INDEX, $value);
     }
 }

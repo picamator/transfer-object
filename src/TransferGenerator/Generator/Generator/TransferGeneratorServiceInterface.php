@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 
-interface BulkTransferGeneratorInterface
+interface TransferGeneratorServiceInterface
 {
     /**
      * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException
      */
-    public function generateTransfers(string $configPath): void;
+    public function generateTransfersOrFail(string $configPath): void;
 }

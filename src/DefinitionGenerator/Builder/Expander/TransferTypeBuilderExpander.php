@@ -32,7 +32,7 @@ readonly class TransferTypeBuilderExpander implements BuilderExpanderInterface
         $builderTransfer->definitionContent->properties[] = $propertyTransfer;
 
         $builderTransfer->generatorContents[] = $this->createGeneratorContentTransfer(
-            $propertyTransfer->transferType,
+            $propertyTransfer->transferType ?: '',
             $content->getPropertyValue(),
         );
     }

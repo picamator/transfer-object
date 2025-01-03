@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-use Picamator\TransferObject\Generated\TemplateTransfer;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelper;
 
-$templateTransfer ??= new TemplateTransfer();
+$templateTransfer ??= TemplateHelper::getDefaultTemplateTransfer();
 $helper = new TemplateHelper($templateTransfer);
 
 echo <<<TEMPLATE
@@ -18,16 +17,16 @@ namespace $templateTransfer->classNamespace;
 {$helper->renderKeyValue($templateTransfer->imports, 'use :value;')}
 
 /**
- * Class generated from a definition file.
- *
  * Specification:
- * - This class is automatically generated based on a definition file.
- * - To modify this class, update the definition file and run the generator again.
+ * - Class is automatically generated based on a definition file.
+ * - To modify it, please update corresponding definition file and run generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
 final class $templateTransfer->className extends AbstractTransfer
 {
+    use TransferTrait;
+
     protected const int META_DATA_SIZE = $templateTransfer->propertiesCount;
 
     protected const array META_DATA = [
@@ -46,7 +45,7 @@ foreach ($templateTransfer->metaConstants as $constant => $property) {
     protected const int {$constant}_DATA_INDEX = $i;
 {$helper->getDockBlock($property)}
     public {$helper->getNullable($property)}{$templateTransfer->properties[$property]} \$$property {
-        get => \$this->getData(self::{$constant}_DATA_INDEX);
+        get => \$this->get{$helper->getRequired($property)}Data(self::{$constant}_DATA_INDEX);
         set => \$this->setData(self::{$constant}_DATA_INDEX, \$value);
     }
 

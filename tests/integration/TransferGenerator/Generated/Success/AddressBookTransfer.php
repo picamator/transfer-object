@@ -10,18 +10,19 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
- * Class generated from a definition file.
- *
  * Specification:
- * - This class is automatically generated based on a definition file.
- * - To modify this class, update the definition file and run the generator again.
+ * - Class is automatically generated based on a definition file.
+ * - To modify it, please update corresponding definition file and run generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
 final class AddressBookTransfer extends AbstractTransfer
 {
+    use TransferTrait;
+
     protected const int META_DATA_SIZE = 5;
 
     protected const array META_DATA = [
@@ -40,7 +41,7 @@ final class AddressBookTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,AddressTransfer> */
     public ArrayObject $addresses {
-        get => $this->getData(self::ADDRESSES_DATA_INDEX);
+        get => $this->getRequiredData(self::ADDRESSES_DATA_INDEX);
         set => $this->setData(self::ADDRESSES_DATA_INDEX, $value);
     }
 
@@ -52,7 +53,7 @@ final class AddressBookTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $categories {
-        get => $this->getData(self::CATEGORIES_DATA_INDEX);
+        get => $this->getRequiredData(self::CATEGORIES_DATA_INDEX);
         set => $this->setData(self::CATEGORIES_DATA_INDEX, $value);
     }
 

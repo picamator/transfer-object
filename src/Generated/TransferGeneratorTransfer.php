@@ -6,18 +6,19 @@ namespace Picamator\TransferObject\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
- * Class generated from a definition file.
- *
  * Specification:
- * - This class is automatically generated based on a definition file.
- * - To modify this class, update the definition file and run the generator again.
+ * - Class is automatically generated based on a definition file.
+ * - To modify it, please update corresponding definition file and run generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
 final class TransferGeneratorTransfer extends AbstractTransfer
 {
+    use TransferTrait;
+
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
@@ -52,8 +53,8 @@ final class TransferGeneratorTransfer extends AbstractTransfer
     protected const string VALIDATOR_DATA_NAME = 'VALIDATOR';
     protected const int VALIDATOR_DATA_INDEX = 2;
 
-    public ?DefinitionValidatorTransfer $validator {
-        get => $this->getData(self::VALIDATOR_DATA_INDEX);
+    public DefinitionValidatorTransfer $validator {
+        get => $this->getRequiredData(self::VALIDATOR_DATA_INDEX);
         set => $this->setData(self::VALIDATOR_DATA_INDEX, $value);
     }
 }

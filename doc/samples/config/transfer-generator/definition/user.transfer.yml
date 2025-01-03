@@ -1,5 +1,0 @@
-User:
-  firstName:
-    type: string
-  lastName:
-    type: string

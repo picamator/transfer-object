@@ -3,45 +3,117 @@ name: CI
 on: [push]
 
 jobs:
-  CI:
+  setup:
+    name: Project Setup
     runs-on: ubuntu-latest
-
+    outputs:
+      cache-vendor-key: ${{ steps.cache-vendor-key.outputs.key }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up PHP
+      - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
+          coverage: none
 
-      - name: Install dependencies
-        uses: php-actions/composer@v6
-        with:
-          php_version: "8.4"
-
-      - name: Generate Internal Transfer Object
-        env:
-          PROJECT_ROOT: ${{ github.workspace }}
+      - name: Create vendor directory cache key
+        id: cache-vendor-key
         run: |
-          echo "Generate Internal Transfer Objects"
-          composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml --ansi
+          echo "key=${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}" >> $GITHUB_OUTPUT
+
+      - name: Cache vendor directory
+        id: cache-vendor
+        uses: actions/cache@v4
+        with:
+          path: ./vendor
+          key: steps.cache-vendor-key.outputs.key
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies (if needed)
+        run: composer install --no-ansi --no-interaction --no-progress
+        if: steps.cache-vendor.outputs.cache-hit != 'true'
+
+      - name: Validate composer.json
+        run: composer validate --no-ansi --strict composer.json
+
+  phpstan:
+    name: PHPStan
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+
+      - name: Restore vendor directory from the cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ./vendor
+          key: ${{ needs.setup.outputs.cache-vendor-key }}
+          fail-on-cache-miss: true
 
       - name: Run PHPStan
-        uses: php-actions/phpstan@v3
+        run: composer phpstan
+
+  phpcs:
+    name: PHP CodeSniffer
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
         with:
-          php_version: "8.4"
-          configuration: phpstan.neon
+          php-version: '8.4'
+          coverage: none
+
+      - name: Restore vendor directory from the cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ./vendor
+          key: ${{ needs.setup.outputs.cache-vendor-key }}
+          fail-on-cache-miss: true
 
       - name: Run PHP CodeSniffer
-        uses: php-actions/phpcs@v1
+        run: composer phpcs
+
+  phpunit:
+    name: PHPUnit Tests
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
         with:
-          php_version: "8.4"
-          standard: phpcs.xml
+          php-version: '8.4'
+          coverage: none
+
+      - name: Restore vendor directory from the cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ./vendor
+          key: ${{ needs.setup.outputs.cache-vendor-key }}
+          fail-on-cache-miss: true
+
+      - name: Generate Transfer Objects
+        env:
+          PROJECT_ROOT: ${{ github.workspace }}
+        run: composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
 
       - name: Run PHPUnit
-        uses: php-actions/phpunit@v4
         env:
-          PROJECT_ROOT: "/app"
-        with:
-          php_version: "8.4"
+          PROJECT_ROOT: ${{ github.workspace }}
+        run: composer phpunit

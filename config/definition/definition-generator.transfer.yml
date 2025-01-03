@@ -1,25 +1,33 @@
 DefinitionGenerator:
   definitionPath:
     type: string
+    required:
   content:
     type: DefinitionGeneratorContent
+    required:
 
 DefinitionGeneratorContent:
   className:
     type: string
+    required:
   content:
     type: array
+    required:
 
 DefinitionBuilder:
   definitionContent:
     type: DefinitionContent
+    required:
   generatorContents:
     collectionType: DefinitionGeneratorContent
 
 DefinitionFilesystem:
   fileName:
     type: string
+    required:
   definitionPath:
     type: string
+    required:
   content:
     type: string
+    required:

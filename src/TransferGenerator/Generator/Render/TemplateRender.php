@@ -27,6 +27,9 @@ readonly class TemplateRender implements TemplateRenderInterface
         return $this->handleOutput($output);
     }
 
+    /**
+     * @throws TransferGeneratorException
+     */
     private function handleOutput(false|string $output): string
     {
         $lastError = error_get_last();

@@ -7,18 +7,19 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
- * Class generated from a definition file.
- *
  * Specification:
- * - This class is automatically generated based on a definition file.
- * - To modify this class, update the definition file and run the generator again.
+ * - Class is automatically generated based on a definition file.
+ * - To modify it, please update corresponding definition file and run generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
 final class ProductTransfer extends AbstractTransfer
 {
+    use TransferTrait;
+
     protected const int META_DATA_SIZE = 25;
 
     protected const array META_DATA = [
@@ -268,7 +269,7 @@ final class ProductTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $sizes {
-        get => $this->getData(self::SIZES_DATA_INDEX);
+        get => $this->getRequiredData(self::SIZES_DATA_INDEX);
         set => $this->setData(self::SIZES_DATA_INDEX, $value);
     }
 

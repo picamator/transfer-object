@@ -90,10 +90,10 @@ STORY;
 $configPath = __DIR__ . '/config/definition-generator/generator.config.yml';
 
 try {
-    new TransferGeneratorFacade()->generateTransfers($configPath);
+    new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
 } catch (TransferExceptionInterface $e) {
     echo $e->getMessage();
-    exit(1);
+    return;
 }
 
 echo <<<'STORY'

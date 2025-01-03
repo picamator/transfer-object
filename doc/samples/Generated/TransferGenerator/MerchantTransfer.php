@@ -7,18 +7,19 @@ namespace Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator;
 use Picamator\Doc\Samples\TransferObject\Enum\CountryEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
- * Class generated from a definition file.
- *
  * Specification:
- * - This class is automatically generated based on a definition file.
- * - To modify this class, update the definition file and run the generator again.
+ * - Class is automatically generated based on a definition file.
+ * - To modify it, please update corresponding definition file and run generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
 final class MerchantTransfer extends AbstractTransfer
 {
+    use TransferTrait;
+
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
@@ -33,8 +34,8 @@ final class MerchantTransfer extends AbstractTransfer
     protected const string COUNTRY_DATA_NAME = 'COUNTRY';
     protected const int COUNTRY_DATA_INDEX = 0;
 
-    public ?CountryEnum $country {
-        get => $this->getData(self::COUNTRY_DATA_INDEX);
+    public CountryEnum $country {
+        get => $this->getRequiredData(self::COUNTRY_DATA_INDEX);
         set => $this->setData(self::COUNTRY_DATA_INDEX, $value);
     }
 
@@ -43,8 +44,8 @@ final class MerchantTransfer extends AbstractTransfer
     protected const string IS_ACTIVE_DATA_NAME = 'IS_ACTIVE';
     protected const int IS_ACTIVE_DATA_INDEX = 1;
 
-    public ?bool $isActive {
-        get => $this->getData(self::IS_ACTIVE_DATA_INDEX);
+    public bool $isActive {
+        get => $this->getRequiredData(self::IS_ACTIVE_DATA_INDEX);
         set => $this->setData(self::IS_ACTIVE_DATA_INDEX, $value);
     }
 
@@ -53,8 +54,8 @@ final class MerchantTransfer extends AbstractTransfer
     protected const string MERCHANT_REFERENCE_DATA_NAME = 'MERCHANT_REFERENCE';
     protected const int MERCHANT_REFERENCE_DATA_INDEX = 2;
 
-    public ?string $merchantReference {
-        get => $this->getData(self::MERCHANT_REFERENCE_DATA_INDEX);
+    public string $merchantReference {
+        get => $this->getRequiredData(self::MERCHANT_REFERENCE_DATA_INDEX);
         set => $this->setData(self::MERCHANT_REFERENCE_DATA_INDEX, $value);
     }
 }

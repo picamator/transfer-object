@@ -7,6 +7,7 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Reader;
 use Generator;
 use Picamator\TransferObject\Dependency\Exception\FinderException;
 use Picamator\TransferObject\Dependency\Exception\YmlParserException;
+use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionTransfer;
 use Picamator\TransferObject\Generated\DefinitionValidatorTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
@@ -67,10 +68,12 @@ readonly class DefinitionReader implements DefinitionReaderInterface
         return $contentGenerator->getReturn();
     }
 
-    private function createErrorDefinitionTransfer(Throwable $e, ?string $fileName = null): DefinitionTransfer
+    private function createErrorDefinitionTransfer(Throwable $e, string $fileName = ''): DefinitionTransfer
     {
         $definitionTransfer = new DefinitionTransfer();
         $definitionTransfer->fileName = $fileName;
+        $definitionTransfer->content = new DefinitionContentTransfer();
+        $definitionTransfer->content->className = '';
 
         $definitionTransfer->validator = new DefinitionValidatorTransfer();
         $definitionTransfer->validator->isValid = false;

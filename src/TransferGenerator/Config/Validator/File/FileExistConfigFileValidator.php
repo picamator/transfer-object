@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Config\Validator\File;
 
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\TransferGenerator\Config\Validator\ValidatorMessageTrait;
+use Picamator\TransferObject\TransferGenerator\Validator\ValidatorMessageTrait;
 
 readonly class FileExistConfigFileValidator implements ConfigFileValidatorInterface
 {

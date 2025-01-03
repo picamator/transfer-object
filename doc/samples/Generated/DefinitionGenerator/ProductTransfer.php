@@ -10,18 +10,19 @@ use Picamator\TransferObject\Transfer\Attribute\ArrayObjectPropertyTypeAttribute
 use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
- * Class generated from a definition file.
- *
  * Specification:
- * - This class is automatically generated based on a definition file.
- * - To modify this class, update the definition file and run the generator again.
+ * - Class is automatically generated based on a definition file.
+ * - To modify it, please update corresponding definition file and run generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
 final class ProductTransfer extends AbstractTransfer
 {
+    use TransferTrait;
+
     protected const int META_DATA_SIZE = 12;
 
     protected const array META_DATA = [
@@ -47,7 +48,7 @@ final class ProductTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,AvailabilitiesTransfer> */
     public ArrayObject $availabilities {
-        get => $this->getData(self::AVAILABILITIES_DATA_INDEX);
+        get => $this->getRequiredData(self::AVAILABILITIES_DATA_INDEX);
         set => $this->setData(self::AVAILABILITIES_DATA_INDEX, $value);
     }
 
@@ -69,7 +70,7 @@ final class ProductTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,DeliveryOptionsTransfer> */
     public ArrayObject $deliveryOptions {
-        get => $this->getData(self::DELIVERY_OPTIONS_DATA_INDEX);
+        get => $this->getRequiredData(self::DELIVERY_OPTIONS_DATA_INDEX);
         set => $this->setData(self::DELIVERY_OPTIONS_DATA_INDEX, $value);
     }
 
@@ -102,7 +103,7 @@ final class ProductTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $labels {
-        get => $this->getData(self::LABELS_DATA_INDEX);
+        get => $this->getRequiredData(self::LABELS_DATA_INDEX);
         set => $this->setData(self::LABELS_DATA_INDEX, $value);
     }
 
@@ -165,7 +166,7 @@ final class ProductTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $stores {
-        get => $this->getData(self::STORES_DATA_INDEX);
+        get => $this->getRequiredData(self::STORES_DATA_INDEX);
         set => $this->setData(self::STORES_DATA_INDEX, $value);
     }
 }

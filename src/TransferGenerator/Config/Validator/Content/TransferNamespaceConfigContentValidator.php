@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Config\Validator\Content;
 
 use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\TransferGenerator\Config\Validator\ValidatorMessageTrait;
+use Picamator\TransferObject\TransferGenerator\Validator\ValidatorMessageTrait;
 
 readonly class TransferNamespaceConfigContentValidator implements ConfigContentValidatorInterface
 {
@@ -18,7 +18,7 @@ readonly class TransferNamespaceConfigContentValidator implements ConfigContentV
 
     public function validate(ConfigContentTransfer $configContentTransfer): ValidatorMessageTransfer
     {
-        $namespace = $configContentTransfer->transferNamespace ?? '';
+        $namespace = $configContentTransfer->transferNamespace;
         if (preg_match(self::NAMESPACE_REGEX, $namespace) !== 1) {
             $errorMessage = $this->getErrorMessage($namespace);
 

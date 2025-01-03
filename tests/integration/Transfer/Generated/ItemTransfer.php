@@ -10,18 +10,19 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\ArrayObjectPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
- * Class generated from a definition file.
- *
  * Specification:
- * - This class is automatically generated based on a definition file.
- * - To modify this class, update the definition file and run the generator again.
+ * - Class is automatically generated based on a definition file.
+ * - To modify it, please update corresponding definition file and run generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
 final class ItemTransfer extends AbstractTransfer
 {
+    use TransferTrait;
+
     protected const int META_DATA_SIZE = 10;
 
     protected const array META_DATA = [
@@ -45,7 +46,7 @@ final class ItemTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $data {
-        get => $this->getData(self::DATA_DATA_INDEX);
+        get => $this->getRequiredData(self::DATA_DATA_INDEX);
         set => $this->setData(self::DATA_DATA_INDEX, $value);
     }
 
@@ -57,7 +58,7 @@ final class ItemTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $iAmArray {
-        get => $this->getData(self::I_AM_ARRAY_DATA_INDEX);
+        get => $this->getRequiredData(self::I_AM_ARRAY_DATA_INDEX);
         set => $this->setData(self::I_AM_ARRAY_DATA_INDEX, $value);
     }
 
@@ -69,7 +70,7 @@ final class ItemTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $iAmArrayObject {
-        get => $this->getData(self::I_AM_ARRAY_OBJECT_DATA_INDEX);
+        get => $this->getRequiredData(self::I_AM_ARRAY_OBJECT_DATA_INDEX);
         set => $this->setData(self::I_AM_ARRAY_OBJECT_DATA_INDEX, $value);
     }
 

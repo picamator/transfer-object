@@ -34,7 +34,7 @@ readonly class CollectionTypeBuilderExpander implements BuilderExpanderInterface
         $firstCollectionItem = current((array)$content->getPropertyValue()) ?: [];
 
         $builderTransfer->generatorContents[] = $this->createGeneratorContentTransfer(
-            $propertyTransfer->collectionType,
+            $propertyTransfer->collectionType ?: '',
             $firstCollectionItem,
         );
     }

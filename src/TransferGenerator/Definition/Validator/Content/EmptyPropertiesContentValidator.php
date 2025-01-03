@@ -6,12 +6,10 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Validator\Conten
 
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\ValidatorMessageTrait;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\VariableValidatorTrait;
+use Picamator\TransferObject\TransferGenerator\Validator\ValidatorMessageTrait;
 
 readonly class EmptyPropertiesContentValidator implements ContentValidatorInterface
 {
-    use VariableValidatorTrait;
     use ValidatorMessageTrait;
 
     private const string PROPERTY_ERROR_MESSAGE_TEMPLATE = 'Class "%s" properties were not defined.';

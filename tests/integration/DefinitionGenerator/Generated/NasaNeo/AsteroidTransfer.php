@@ -8,18 +8,19 @@ use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
- * Class generated from a definition file.
- *
  * Specification:
- * - This class is automatically generated based on a definition file.
- * - To modify this class, update the definition file and run the generator again.
+ * - Class is automatically generated based on a definition file.
+ * - To modify it, please update corresponding definition file and run generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
 final class AsteroidTransfer extends AbstractTransfer
 {
+    use TransferTrait;
+
     protected const int META_DATA_SIZE = 12;
 
     protected const array META_DATA = [
@@ -55,7 +56,7 @@ final class AsteroidTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,CloseApproachDataTransfer> */
     public ArrayObject $close_approach_data {
-        get => $this->getData(self::CLOSE_APPROACH_DATA_DATA_INDEX);
+        get => $this->getRequiredData(self::CLOSE_APPROACH_DATA_DATA_INDEX);
         set => $this->setData(self::CLOSE_APPROACH_DATA_DATA_INDEX, $value);
     }
 

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Definition\Validator\Property;
 
 use BackedEnum;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\ValidatorMessageTrait;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
+use Picamator\TransferObject\TransferGenerator\Validator\ValidatorMessageTrait;
 
 readonly class EnumTypePropertyValidator implements PropertyValidatorInterface
 {
@@ -23,7 +23,7 @@ readonly class EnumTypePropertyValidator implements PropertyValidatorInterface
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
-        if (is_subclass_of($propertyTransfer->enumType, BackedEnum::class)) {
+        if (is_subclass_of($propertyTransfer->enumType ?: '', BackedEnum::class)) {
             return $this->createSuccessMessageTransfer();
         }
 

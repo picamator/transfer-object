@@ -1,14 +1,17 @@
 Template:
   className:
     type: string
+    required:
   classNamespace:
     type: string
+    required:
   imports:
     type: ArrayObject
   properties:
     type: ArrayObject
   propertiesCount:
     type: int
+    required:
   metaConstants:
     type: ArrayObject
   attributes:

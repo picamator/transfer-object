@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Config\Validator;
+namespace Picamator\TransferObject\TransferGenerator\Validator;
 
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 
@@ -21,6 +21,7 @@ trait ValidatorMessageTrait
     {
         $messageTransfer = new ValidatorMessageTransfer();
         $messageTransfer->isValid = true;
+        $messageTransfer->errorMessage = '';
 
         return $messageTransfer;
     }

@@ -14,7 +14,7 @@ You're in the right place!
 Build TOs Using an Array as Blueprint
 ------------------------------------
 
-Imagine you have an array like this:
+Imagine you have an array:
 ```php
 $data = [
     'firstName' => 'Jan',
@@ -22,7 +22,7 @@ $data = [
 ];
 ```
 
-Firslty definition generator converts it to the `YML` file:
+then facade method converts array into `YML` definition file:
 ```yml
 Customer:
   firstName:
@@ -31,21 +31,21 @@ Customer:
     type: string
 ```
 
-Then, console command generates TO:
+finally console command generates TO:
 ```php
 $customerTransfer = new CustomerTransfer();
 $customerTransfer->firstName = 'Jan';
 $customerTransfer->lastName = 'Kowalski';
 ```
 
-Check out how it works:
+How it works in action can be found on Wiki:
  - [Try Sample with Array](/doc/samples/try-definition-generator.php)
  - [Try Sample with YML Definition](/doc/samples/try-transfer-generator.php)
 
 Installation
 ------------
 
-Install via Composer:
+Composer installation:
 
 ```shell
 $ composer require-dev picamator/transfer-object
@@ -58,29 +58,29 @@ Transfer Object (TO) generator can be used in two ways:
 
 ### I. Via Terminal
 
-Run following command, specifying your configuration file:
+Run command bellow, specifying your configuration file:
 
 ```shell
 $ ./vendor/bin/generate-transfer [-c|--configuration CONFIGURATION]
 ```
 
-For more details are in Wiki:
+Please check Wiki for more details:
 - [Command Configuration](https://github.com/picamator/transfer-object/wiki/Command-Configuration)
 - [Definition File](https://github.com/picamator/transfer-object/wiki/Definition-File)
 
 ### II. Via Facade Interface
 
-You can also directly call facade interface `TransferGeneratorFacadeInterface`, `DefinitionGeneratorFacadeInterface` methods.
+Directly call facade interfaces `TransferGeneratorFacadeInterface`, `DefinitionGeneratorFacadeInterface`.
 
-For more details are in Wiki:
+Please check Wiki for more details:
 - [Facade Interfaces](https://github.com/picamator/transfer-object/wiki/Facade-Interfaces)
 - [Visualizing Diagrams](https://github.com/picamator/transfer-object/wiki/Visualising-Diagrams)
 
 Acknowledgment
 --------------
 
-Many thanks to everyone who inspired me to write this project.
-Special thanks to the contributors, readers, and developers who share the same joy as I do in writing code!
+Many thanks to everyone for you contribution, supports and feedback!
+Have fun with using Transfer Object generator!
 
 Contribution
 ------------
@@ -89,7 +89,7 @@ If you find this project useful, please add a star to the repository. Follow the
 If you have suggestions for improvements or new features, feel free to create an issue or submit a pull request.
 Here is a [Contribution Guide](CONTRIBUTING.md).
 
-Please note that this project is released with a [Contributor Code of Conduct](http://contributor-covenant.org/version/2/1/).
+Please note that this project is released with a [Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in this project and its community, you agree to abide by those terms.
 
 License

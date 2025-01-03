@@ -9,13 +9,13 @@ use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\DefinitionValidatorTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
-use Picamator\TransferObject\TransferGenerator\Generator\Generator\BulkTransferGenerator;
-use Picamator\TransferObject\TransferGenerator\Generator\Generator\BulkTransferGeneratorInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorService;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorServiceInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorInterface;
 
 class BulkTransferGeneratorTest extends TestCase
 {
-    private BulkTransferGeneratorInterface $bulkGenerator;
+    private TransferGeneratorServiceInterface $bulkGenerator;
 
     private TransferGeneratorInterface&MockObject $generatorMock;
 
@@ -23,7 +23,7 @@ class BulkTransferGeneratorTest extends TestCase
     {
         $this->generatorMock = $this->createMock(TransferGeneratorInterface::class);
 
-        $this->bulkGenerator = new BulkTransferGenerator($this->generatorMock);
+        $this->bulkGenerator = new TransferGeneratorService($this->generatorMock);
     }
 
     public function testGeneratorIteratesInvalidItemShouldRiseException(): void
@@ -34,13 +34,13 @@ class BulkTransferGeneratorTest extends TestCase
         $generatorTransfer = $this->createErrorGeneratorTransfer();
 
         $this->generatorMock->expects($this->once())
-            ->method('getTransferGenerator')
+            ->method('generateTransfers')
             ->willReturnCallback(fn() => yield $generatorTransfer);
 
         $this->expectException(TransferGeneratorException::class);
 
         // Act
-        $this->bulkGenerator->generateTransfers($configPath);
+        $this->bulkGenerator->generateTransfersOrFail($configPath);
     }
 
     private function createErrorGeneratorTransfer(): TransferGeneratorTransfer
