@@ -79,7 +79,7 @@ Please check Wiki for more details:
 Acknowledgment
 --------------
 
-Many thanks to everyone for you contibution, supports and feadback!
+Many thanks to everyone for you contribution, supports and feedback!
 Have fun with using Transfer Object generator!
 
 Contribution
