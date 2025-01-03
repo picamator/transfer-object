@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander;
 
 trait NamespacePropertyExpanderTrait
 {
-    private const string NAMESPACE_ALIAS_SUBSTRING = ' as ';
+    private const string NAMESPACE_ALIAS_SEPARATOR = ' as ';
 
     protected function isNamespace(string $propertyName): bool
     {
@@ -28,12 +28,12 @@ trait NamespacePropertyExpanderTrait
 
     private function getNamespaceAlias(string $namespace): ?string
     {
-        if (!str_contains($namespace, self::NAMESPACE_ALIAS_SUBSTRING)) {
+        if (!str_contains($namespace, self::NAMESPACE_ALIAS_SEPARATOR)) {
             return null;
         }
 
         /** @var string $alias */
-        $alias = strrchr($namespace, self::NAMESPACE_ALIAS_SUBSTRING);
+        $alias = strrchr($namespace, self::NAMESPACE_ALIAS_SEPARATOR);
 
         return trim($alias);
     }

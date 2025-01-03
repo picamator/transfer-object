@@ -14,7 +14,7 @@ readonly class NamePropertyValidator implements PropertyValidatorInterface
     use VariableValidatorTrait;
     use ValidatorMessageTrait;
 
-    private const string INVALID_PROPERTY_NAME_ERROR_MESSAGE_TEMPLATE = 'Invalid property name "%s".';
+    private const string INVALID_NAME_ERROR_MESSAGE_TEMPLATE = 'Invalid property name "%s".';
 
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): true
     {
@@ -35,7 +35,7 @@ readonly class NamePropertyValidator implements PropertyValidatorInterface
     private function getErrorMessage(DefinitionPropertyTransfer $propertyTransfer): string
     {
         return sprintf(
-            self::INVALID_PROPERTY_NAME_ERROR_MESSAGE_TEMPLATE,
+            self::INVALID_NAME_ERROR_MESSAGE_TEMPLATE,
             $propertyTransfer->propertyName,
         );
     }

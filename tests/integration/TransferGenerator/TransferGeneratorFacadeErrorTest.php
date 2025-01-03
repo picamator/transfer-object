@@ -136,6 +136,16 @@ class TransferGeneratorFacadeErrorTest extends TestCase
             'configCaseName' => 'empty-definition-directory',
             'expectedMessage' => 'Missed Transfer Object definitions.',
         ];
+
+        yield 'invalid type namespace' => [
+            'configCaseName' => 'invalid-type-namespace',
+            'expectedMessage' => 'Invalid property namespace',
+        ];
+
+        yield 'invalid type namespace with alias' => [
+            'configCaseName' => 'invalid-type-namespace-with-alias',
+            'expectedMessage' => 'Invalid property namespace',
+        ];
     }
 
     public function testBulkTransferGeneratorShouldFailOnError(): void
