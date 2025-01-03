@@ -13,7 +13,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGener
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorServiceInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorInterface;
 
-class BulkTransferGeneratorTest extends TestCase
+class ServiceTransferGeneratorTest extends TestCase
 {
     private TransferGeneratorServiceInterface $bulkGenerator;
 

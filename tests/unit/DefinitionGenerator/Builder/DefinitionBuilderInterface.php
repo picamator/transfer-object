@@ -6,7 +6,7 @@ namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Builder;
 
 use Picamator\TransferObject\DefinitionGenerator\Builder\BuilderContentInterface;
 
-interface DefinitionBuilderTraitInterface
+interface DefinitionBuilderInterface
 {
     public function createBuilderContent(string $propertyName, mixed $propertyValue): BuilderContentInterface;
 }
