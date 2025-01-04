@@ -13,7 +13,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 {
     private const string TEMPORARY_DIR = '_tmp';
 
-    private const string FILE_NAME_TEMPLATE = '%sTransfer.php';
+    private const string FILE_EXTENSION = '.php';
     private const string FILE_NAME_PATTERN = '*Transfer.php';
 
     public function __construct(
@@ -51,9 +51,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 
     public function writeFile(string $className, string $content): void
     {
-        $filePath = $this->getTemporaryPath()
-            . DIRECTORY_SEPARATOR
-            . sprintf(self::FILE_NAME_TEMPLATE, $className);
+        $filePath = $this->getTemporaryPath() . DIRECTORY_SEPARATOR . $className . self::FILE_EXTENSION;
         if ($this->filesystem->exists($filePath)) {
             throw new TransferGeneratorException(
                 sprintf('Cannot save file "%s". A file with the same name already exists.', $filePath),
