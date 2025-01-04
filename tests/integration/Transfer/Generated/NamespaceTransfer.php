@@ -10,6 +10,7 @@ use Picamator\Tests\Integration\TransferObject\Transfer\Generated\RequiredTransf
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\TransferInterface;
 use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
@@ -36,7 +37,7 @@ final class NamespaceTransfer extends AbstractTransfer
     protected const string ITEMS_DATA_NAME = 'ITEMS';
     protected const int ITEMS_DATA_INDEX = 0;
 
-    /** @var \ArrayObject<int,ItemTransfer> */
+    /** @var \ArrayObject<int,TransferInterface&ItemTransfer> */
     public ArrayObject $items {
         get => $this->getRequiredData(self::ITEMS_DATA_INDEX);
         set => $this->setData(self::ITEMS_DATA_INDEX, $value);
@@ -48,7 +49,7 @@ final class NamespaceTransfer extends AbstractTransfer
     protected const string REQUIRED_DATA_NAME = 'REQUIRED';
     protected const int REQUIRED_DATA_INDEX = 1;
 
-    public ?RequiredAlias $required {
+    public TransferInterface&RequiredAlias $required {
         get => $this->getData(self::REQUIRED_DATA_INDEX);
         set => $this->setData(self::REQUIRED_DATA_INDEX, $value);
     }

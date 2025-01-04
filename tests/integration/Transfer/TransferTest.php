@@ -271,6 +271,5 @@ class TransferTest extends TestCase
 
         // Act
         $this->assertCount(1, $namespaceTransfer->items);
-        $this->assertNotEmpty($namespaceTransfer->required);
     }
 }

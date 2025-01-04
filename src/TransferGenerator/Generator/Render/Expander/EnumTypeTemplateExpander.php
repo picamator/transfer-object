@@ -30,12 +30,13 @@ readonly class EnumTypeTemplateExpander implements TemplateExpanderInterface
         $enumClassName = $this->getEnumName($propertyTransfer);
 
         $templateTransfer->properties[$propertyName] = $enumClassName;
-        $templateTransfer->attributes[$propertyName] = sprintf(
-            AttributeTemplateEnum::ENUM_TYPE_ATTRIBUTE->value,
-            $enumClassName,
-        );
-
+        $templateTransfer->attributes[$propertyName] = $this->getPropertyAttribute($enumClassName);
         $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
+    }
+
+    private function getPropertyAttribute(string $enumClassName): string
+    {
+        return sprintf(AttributeTemplateEnum::ENUM_TYPE_ATTRIBUTE->value, $enumClassName);
     }
 
     private function getEnumName(DefinitionPropertyTransfer $propertyTransfer): string

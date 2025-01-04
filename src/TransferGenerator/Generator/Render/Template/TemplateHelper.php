@@ -16,7 +16,8 @@ readonly class TemplateHelper implements TemplateHelperInterface
 
     private const string PADDING_LEFT = '    ';
     private const string EMPTY_STRING = '';
-    private const string NULLABLE_SIGN = '?';
+    private const string NULLABLE_QUESTION_SIGN = '?';
+    private const string NULLABLE_NULL_SIGN = 'null|';
     private const string REQUIRED_METHOD_NAME = 'Required';
 
     public function __construct(private TemplateTransfer $templateTransfer)
@@ -72,7 +73,16 @@ readonly class TemplateHelper implements TemplateHelperInterface
 
     public function getNullable(string $property): string
     {
-        return $this->templateTransfer->nullables[$property] ? self::NULLABLE_SIGN : self::EMPTY_STRING;
+        $propertyType = $this->templateTransfer->properties[$property];
+        if (!$this->templateTransfer->nullables[$property] || str_contains($propertyType, '&')) {
+            return self::EMPTY_STRING;
+        }
+
+        if (str_contains($propertyType, '|')) {
+            return self::NULLABLE_NULL_SIGN;
+        }
+
+        return self::NULLABLE_QUESTION_SIGN;
     }
 
     public function getRequired(string $property): string

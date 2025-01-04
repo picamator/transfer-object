@@ -23,4 +23,9 @@ trait TemplateRenderTrait
 
         return strtoupper($propertyName);
     }
+
+    protected function enforceTransferInterface(string $propertyType): string
+    {
+        return 'TransferInterface&' . $propertyType;
+    }
 }

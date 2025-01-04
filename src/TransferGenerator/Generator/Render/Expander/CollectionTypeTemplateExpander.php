@@ -29,16 +29,27 @@ readonly class CollectionTypeTemplateExpander implements TemplateExpanderInterfa
         $templateTransfer->imports[AttributeEnum::COLLECTION_TYPE_ATTRIBUTE->value]
             ??= AttributeEnum::COLLECTION_TYPE_ATTRIBUTE->value;
 
-        $transferName = $propertyTransfer->collectionType ?: '';
-
         $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->properties[$propertyName] = BuildInTypeEnum::ARRAY_OBJECT->value;
-        $templateTransfer->attributes[$propertyName] = sprintf(
-            AttributeTemplateEnum::COLLECTION_TYPE_ATTRIBUTE->value,
-            $transferName,
-        );
-        $templateTransfer->dockBlocks[$propertyName] = sprintf(DockBlockTemplateEnum::COLLECTION->value, $transferName);
-
+        $templateTransfer->attributes[$propertyName] = $this->getPropertyAttribute($propertyTransfer);
+        $templateTransfer->dockBlocks[$propertyName] = $this->getPropertyDockBlock($propertyTransfer);
         $templateTransfer->nullables[$propertyName] = false;
+    }
+
+    private function getPropertyDockBlock(DefinitionPropertyTransfer $propertyTransfer): string
+    {
+        $propertyType = $propertyTransfer->collectionType ?: '';
+        if ($propertyTransfer->namespace !== null) {
+            $propertyType = $this->enforceTransferInterface($propertyType);
+        }
+
+        return sprintf(DockBlockTemplateEnum::COLLECTION->value, $propertyType);
+    }
+
+    private function getPropertyAttribute(DefinitionPropertyTransfer $propertyTransfer): string
+    {
+        $transferType = $propertyTransfer->collectionType ?: '';
+
+        return sprintf(AttributeTemplateEnum::COLLECTION_TYPE_ATTRIBUTE->value, $transferType);
     }
 }
