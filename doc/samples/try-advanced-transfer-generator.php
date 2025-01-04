@@ -11,7 +11,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 echo <<<'STORY'
 =========================================================
-         How to Plugin custom Transfer Object
+       How to use custom Data Transfer Object
                         &
       apply Transfer Object cross modules link
 =========================================================
@@ -30,9 +30,9 @@ $customerTransfer->lastName = 'Kowalski';
 
 echo <<<'STORY'
 ============================================================================
-         Lets take CredentialsData form Advanced
-                           &
-     It implements TransferInterface with a dummy logic
+            Lets take CredentialsData form Advanced
+                             &
+       implements TransferInterface using DummyTransferAdapterTrait
 ============================================================================
 
 STORY;
@@ -56,9 +56,9 @@ Iterated: [$iteratedCredentialsData]
 DEBUG;
 
 echo <<<'STORY'
-=============================================================
-           Create a definition to combine both objects
-=============================================================
+===================================================================
+           Create a Definition file combining both objects
+===================================================================
 
 AdvancedCustomer:
   customer:
