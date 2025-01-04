@@ -8,7 +8,7 @@
 Transfer Object Generator
 ==========================
 
-Would you like to build Transfer Objects (TO) easily?
+Would you like to build lightweight Transfer Objects (TO) easily?
 You're in the right place!
 
 Build TOs Using an Array as Blueprint
@@ -39,8 +39,19 @@ $customerTransfer->lastName = 'Kowalski';
 ```
 
 How it works in action can be found on Wiki:
- - [Try Sample with Array](/doc/samples/try-definition-generator.php)
- - [Try Sample with YML Definition](/doc/samples/try-transfer-generator.php)
+ - [Try Sample to generate Definition files](/doc/samples/try-definition-generator.php)
+ - [Try Sample to generate TOs](/doc/samples/try-transfer-generator.php)
+ - [Try Advanced Sample to generate TOs](/doc/samples/try-advanced-transfer-generator.php)
+
+Key Features
+------------
+
+* **Interface methods:** implements `fromArray()`, `toArray()`
+* **Standard interfaces:** implements `IteratorAggregate`, `JsonSerializable`, and `Countable`
+* **Lightweight:** TO includes only data without any business logic
+* **Nullable:** supports both attribute types nullable and not nullable (`required:`)
+* **BackedEnum:** supports `BackedEnum`
+* **Adaptable:** compatible with custom Data Transfer Object (DTO) implementation
 
 Installation
 ------------
@@ -54,11 +65,9 @@ $ composer require picamator/transfer-object
 Usage
 -----
 
-Transfer Object (TO) generator can be used in two ways:
+### Terminal
 
-### I. Via Terminal
-
-Run command bellow, specifying your configuration file:
+Run command bellow to generate Transfer Objects:
 
 ```shell
 $ ./vendor/bin/generate-transfer [-c|--configuration CONFIGURATION]
@@ -68,9 +77,10 @@ Please check Wiki for more details:
 - [Command Configuration](https://github.com/picamator/transfer-object/wiki/Command-Configuration)
 - [Definition File](https://github.com/picamator/transfer-object/wiki/Definition-File)
 
-### II. Via Facade Interface
+### Facade Interface
 
-Directly call facade interfaces `TransferGeneratorFacadeInterface`, `DefinitionGeneratorFacadeInterface`.
+Facade interface `DefinitionGeneratorFacadeInterface` is used to generate `YML` definition file
+based on array.
 
 Please check Wiki for more details:
 - [Facade Interfaces](https://github.com/picamator/transfer-object/wiki/Facade-Interfaces)
@@ -79,8 +89,7 @@ Please check Wiki for more details:
 Acknowledgment
 --------------
 
-Many thanks to everyone for you contribution, supports and feedback!
-Have fun with using Transfer Object generator!
+Many thanks for your contribution, supports, feedback and simply using Transfer Object Generator!
 
 Contribution
 ------------
