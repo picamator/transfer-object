@@ -15,6 +15,7 @@ use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBasicEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemCollectionTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer;
+use Picamator\Tests\Integration\TransferObject\Transfer\Generated\NamespaceTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\RequiredTransfer;
 use Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException;
 use TypeError;
@@ -258,5 +259,17 @@ class TransferTest extends TestCase
 
         // Act
         $requiredTransfer->toArray();
+    }
+
+    #[Depends('testGenerateTransferShouldSucceed')]
+    public function testTypeWithNamespaceShouldSucceed(): void
+    {
+        // Arrange
+        $namespaceTransfer = new NamespaceTransfer();
+        $namespaceTransfer->items[] = new ItemTransfer();
+        $namespaceTransfer->required = new RequiredTransfer();
+
+        // Act
+        $this->assertCount(1, $namespaceTransfer->items);
     }
 }

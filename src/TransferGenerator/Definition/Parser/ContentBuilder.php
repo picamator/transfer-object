@@ -7,6 +7,7 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Parser;
 use ArrayObject;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
+use Picamator\TransferObject\TransferGenerator\Definition\Enum\TypePrefixEnum;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\PropertyExpanderInterface;
 
 readonly class ContentBuilder implements ContentBuilderInterface
@@ -22,7 +23,7 @@ readonly class ContentBuilder implements ContentBuilderInterface
     public function createContentTransfer(string $className, array $properties): DefinitionContentTransfer
     {
         $contentTransfer = new DefinitionContentTransfer();
-        $contentTransfer->className = $className;
+        $contentTransfer->className = $className . TypePrefixEnum::TRANSFER->value;
 
         foreach ($properties as $propertyName => $propertyType) {
             $propertyType = is_array($propertyType) ? $propertyType : [];

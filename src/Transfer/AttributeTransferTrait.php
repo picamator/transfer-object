@@ -8,7 +8,7 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttributeInterface;
 use ReflectionAttribute;
 use ReflectionClassConstant;
 
-trait PropertyTypeTrait
+trait AttributeTransferTrait
 {
     final protected function getConstantAttribute(string $constantName): ?PropertyTypeAttributeInterface
     {

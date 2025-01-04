@@ -25,15 +25,26 @@ readonly class TransferTypeTemplateExpander implements TemplateExpanderInterface
     ): void {
         $templateTransfer->imports[AttributeEnum::TYPE_ATTRIBUTE->value] ??= AttributeEnum::TYPE_ATTRIBUTE->value;
 
-        $transferName = $this->getTransferName($propertyTransfer->transferType ?: '');
         $propertyName = $propertyTransfer->propertyName;
-
-        $templateTransfer->properties[$propertyName] = $transferName;
-        $templateTransfer->attributes[$propertyName] = sprintf(
-            AttributeTemplateEnum::TYPE_ATTRIBUTE->value,
-            $transferName,
-        );
-
+        $templateTransfer->properties[$propertyName] = $this->getPropertyType($propertyTransfer);
+        $templateTransfer->attributes[$propertyName] = $this->getPropertyAttribute($propertyTransfer);
         $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
+    }
+
+    private function getPropertyAttribute(DefinitionPropertyTransfer $propertyTransfer): string
+    {
+        $transferType = $propertyTransfer->transferType ?: '';
+
+        return sprintf(AttributeTemplateEnum::TYPE_ATTRIBUTE->value, $transferType);
+    }
+
+    private function getPropertyType(DefinitionPropertyTransfer $propertyTransfer): string
+    {
+        $transferType = $propertyTransfer->transferType ?: '';
+        if ($propertyTransfer->namespace === null) {
+            return $transferType;
+        }
+
+        return $this->enforceTransferInterface($transferType);
     }
 }

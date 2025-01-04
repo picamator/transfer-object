@@ -9,7 +9,7 @@ use SplFixedArray;
 
 abstract class AbstractTransfer implements TransferInterface
 {
-    use PropertyTypeTrait;
+    use AttributeTransferTrait;
 
     protected const int META_DATA_SIZE = 0;
 

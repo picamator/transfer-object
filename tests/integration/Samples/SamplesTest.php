@@ -44,5 +44,9 @@ class SamplesTest extends TestCase
         yield 'try-transfer-generator' => [
             'sampleName' => 'try-transfer-generator.php',
         ];
+
+        yield 'try-advanced-transfer-generator' => [
+            'sampleName' => 'try-advanced-transfer-generator.php',
+        ];
     }
 }
