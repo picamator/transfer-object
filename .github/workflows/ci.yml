@@ -9,14 +9,13 @@ on:
       - development
       - main
 
-  permissions:
-    contents: read
-    actions: read
-
 jobs:
   setup:
     name: Project Setup
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -47,6 +46,9 @@ jobs:
     name: PHPStan
     needs: setup
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -77,6 +79,9 @@ jobs:
     name: PHP CodeSniffer
     needs: setup
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -107,6 +112,9 @@ jobs:
     name: PHPUnit Tests
     needs: setup
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
