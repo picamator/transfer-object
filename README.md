@@ -48,7 +48,7 @@ Installation
 Composer installation:
 
 ```shell
-$ composer require-dev picamator/transfer-object
+$ composer require picamator/transfer-object
 ```
 
 Usage

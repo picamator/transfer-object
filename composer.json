@@ -1,7 +1,7 @@
 {
   "name": "picamator/transfer-object",
   "description": "Transfer Object Generator based on property hooks and FixedArray.",
-  "keywords": ["generator", "code generator", "data transfer object", "dto", "dev"],
+  "keywords": ["generator", "code generator", "data transfer object", "dto"],
   "license": "MIT",
   "authors": [
     {
