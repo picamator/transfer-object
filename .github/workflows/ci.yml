@@ -9,6 +9,10 @@ on:
       - development
       - main
 
+  permissions:
+    contents: read
+    actions: read
+
 jobs:
   setup:
     name: Project Setup
