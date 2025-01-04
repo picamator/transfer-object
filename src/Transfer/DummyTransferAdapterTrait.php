@@ -45,4 +45,19 @@ trait DummyTransferAdapterTrait
     {
         return [];
     }
+
+    /**
+     * @return array<string,mixed>
+     */
+    final public function __serialize(): array
+    {
+        return [];
+    }
+
+    /**
+     * @param array<string,mixed> $data
+     */
+    final public function __unserialize(array $data): void
+    {
+    }
 }

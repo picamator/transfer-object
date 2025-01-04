@@ -40,6 +40,21 @@ $credentialsData = new CredentialsData();
 $credentialsData->login = 'jan.kowalski';
 $credentialsData->token = 'some-random-token';
 
+$encodedCredentialsData = json_encode($credentialsData);
+
+$serializedCredentialsData = serialize($credentialsData);
+$unserializedCredentialsData = unserialize($serializedCredentialsData);
+
+$iteratedCredentialsData = implode(', ', iterator_to_array($credentialsData->getIterator()));
+
+echo <<<DEBUG
+Count: {$credentialsData->count()}
+JSON encode: $encodedCredentialsData
+Serialized: $serializedCredentialsData
+Iterated: [$iteratedCredentialsData]
+
+DEBUG;
+
 echo <<<'STORY'
 =============================================================
            Create a definition to combine both objects
