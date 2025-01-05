@@ -20,7 +20,7 @@ final class TemplateTransfer extends AbstractTransfer
 {
     use TransferTrait;
 
-    protected const int META_DATA_SIZE = 9;
+    protected const int META_DATA_SIZE = 8;
 
     protected const array META_DATA = [
         self::ATTRIBUTES => self::ATTRIBUTES_DATA_NAME,
@@ -31,7 +31,6 @@ final class TemplateTransfer extends AbstractTransfer
         self::META_CONSTANTS => self::META_CONSTANTS_DATA_NAME,
         self::NULLABLES => self::NULLABLES_DATA_NAME,
         self::PROPERTIES => self::PROPERTIES_DATA_NAME,
-        self::PROPERTIES_COUNT => self::PROPERTIES_COUNT_DATA_NAME,
     ];
 
     // attributes
@@ -124,15 +123,5 @@ final class TemplateTransfer extends AbstractTransfer
     public ArrayObject $properties {
         get => $this->getRequiredData(self::PROPERTIES_DATA_INDEX);
         set => $this->setData(self::PROPERTIES_DATA_INDEX, $value);
-    }
-
-    // propertiesCount
-    public const string PROPERTIES_COUNT = 'propertiesCount';
-    protected const string PROPERTIES_COUNT_DATA_NAME = 'PROPERTIES_COUNT';
-    protected const int PROPERTIES_COUNT_DATA_INDEX = 8;
-
-    public int $propertiesCount {
-        get => $this->getRequiredData(self::PROPERTIES_COUNT_DATA_INDEX);
-        set => $this->setData(self::PROPERTIES_COUNT_DATA_INDEX, $value);
     }
 }

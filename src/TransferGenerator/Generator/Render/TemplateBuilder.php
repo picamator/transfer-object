@@ -40,7 +40,6 @@ readonly class TemplateBuilder implements TemplateBuilderInterface
             $this->handleTemplateExpanders($propertyTransfer, $templateTransfer);
         }
 
-        $templateTransfer->propertiesCount = $templateTransfer->properties->count();
         $this->sortTemplate($templateTransfer);
 
         return $templateTransfer;

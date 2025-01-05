@@ -27,7 +27,7 @@ final class $templateTransfer->className extends AbstractTransfer
 {
     use TransferTrait;
 
-    protected const int META_DATA_SIZE = $templateTransfer->propertiesCount;
+    protected const int META_DATA_SIZE = {$templateTransfer->properties->count()};
 
     protected const array META_DATA = [
 {$helper->renderKeyValue($templateTransfer->metaConstants, '        self:::key => self:::key_DATA_NAME,')}

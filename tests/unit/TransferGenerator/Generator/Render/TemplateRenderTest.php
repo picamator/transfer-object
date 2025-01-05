@@ -35,7 +35,6 @@ class TemplateRenderTest extends TestCase
         $contentTransfer = new DefinitionContentTransfer();
 
         $templateTransfer = $this->createTemplateTransfer();
-        $templateTransfer->propertiesCount = 1;
         $templateTransfer->metaConstants['TEST_PROPERTY'] = 'testProperty';
 
         // Expect
