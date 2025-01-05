@@ -8,19 +8,18 @@ use Picamator\TransferObject\Generated\DefinitionTransfer;
 use Picamator\TransferObject\Generated\DefinitionValidatorTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Throwable;
 
-class TransferGeneratorBuilder implements TransferGeneratorBuilderInterface
+readonly class TransferGeneratorBuilder implements TransferGeneratorBuilderInterface
 {
-    public function createExceptionGeneratorTransfer(
-        Throwable $e,
-        ?DefinitionTransfer $definitionTransfer = null
+    public function createErrorWithDefinitionGeneratorTransfer(
+        string $errorMessage,
+        DefinitionTransfer $definitionTransfer,
     ): TransferGeneratorTransfer {
         $generatorTransfer = new TransferGeneratorTransfer();
 
-        $generatorTransfer->className = $definitionTransfer?->content?->className;
-        $generatorTransfer->fileName = $definitionTransfer?->fileName;
-        $generatorTransfer->validator = $this->createErrorValidatorTransfer($e->getMessage());
+        $generatorTransfer->className = $definitionTransfer->content->className;
+        $generatorTransfer->fileName = $definitionTransfer->fileName;
+        $generatorTransfer->validator = $this->createErrorValidatorTransfer($errorMessage);
 
         return $generatorTransfer;
     }

@@ -16,7 +16,7 @@ readonly class DefinitionPathConfigContentValidator implements ConfigContentVali
     private const string ERROR_MESSAGE_TEMPLATE = 'Definition path "%s" does not exist.';
 
     public function __construct(
-        private FilesystemInterface $filesystem
+        private FilesystemInterface $filesystem,
     ) {
     }
 
