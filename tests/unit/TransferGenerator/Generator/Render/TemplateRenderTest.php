@@ -38,6 +38,7 @@ class TemplateRenderTest extends TestCase
         $templateTransfer->propertiesCount = 1;
         $templateTransfer->metaConstants['TEST_PROPERTY'] = 'testProperty';
 
+        // Expect
         $this->builderMock->expects($this->once())
             ->method('createTemplateTransfer')
             ->willReturn($templateTransfer);
@@ -54,6 +55,7 @@ class TemplateRenderTest extends TestCase
         $contentTransfer = new DefinitionContentTransfer();
         $templateTransfer = $this->createTemplateTransfer();
 
+        // Expect
         $this->builderMock->expects($this->once())
             ->method('createTemplateTransfer')
             ->willReturn($templateTransfer);

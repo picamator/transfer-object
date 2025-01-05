@@ -153,6 +153,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         // Arrange
         $configPath = $this->getConfigPath('invalid-class-name');
 
+        // Expect
         $this->expectException(TransferGeneratorException::class);
 
         // Act

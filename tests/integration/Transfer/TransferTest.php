@@ -241,6 +241,7 @@ class TransferTest extends TestCase
         // Arrange
         $itemTransfer = new ItemTransfer();
 
+        // Expect
         $this->expectException(TypeError::class);
 
         // Act
@@ -255,6 +256,7 @@ class TransferTest extends TestCase
         // Arrange
         $requiredTransfer = new RequiredTransfer();
 
+        // Expect
         $this->expectException(PropertyTypeTransferException::class);
 
         // Act

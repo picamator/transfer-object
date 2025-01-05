@@ -39,6 +39,7 @@ class ConfigReaderTest extends TestCase
         // Arrange
         $configPath = 'some-config-path.yml';
 
+        // Expect
         $this->validatorMock->expects($this->once())
             ->method('validateFile')
             ->willThrowException(new FilesystemException());
@@ -58,6 +59,7 @@ class ConfigReaderTest extends TestCase
         $validatorTransfer = new ConfigValidatorTransfer();
         $validatorTransfer->isValid = true;
 
+        // Expect
         $this->validatorMock->expects($this->once())
             ->method('validateFile')
             ->willReturn($validatorTransfer);

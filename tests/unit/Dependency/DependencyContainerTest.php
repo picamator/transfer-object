@@ -23,6 +23,7 @@ class DependencyContainerTest extends TestCase
         // Arrange
         $id = 'TEST_SERVICE';
 
+        // Expect
         $this->expectException(DependencyNotFoundException::class);
 
         // Act

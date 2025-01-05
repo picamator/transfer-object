@@ -33,6 +33,7 @@ class ServiceTransferGeneratorTest extends TestCase
 
         $generatorTransfer = $this->createErrorGeneratorTransfer();
 
+        // Expect
         $this->generatorMock->expects($this->once())
             ->method('generateTransfers')
             ->willReturnCallback(fn() => yield $generatorTransfer);
