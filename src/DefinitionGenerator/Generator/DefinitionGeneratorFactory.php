@@ -13,8 +13,8 @@ use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\CollectionType
 use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\TransferTypeBuilderExpander;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Filesystem\DefinitionFilesystem;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Filesystem\DefinitionFilesystemInterface;
-use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\DefinitionGeneratorService;
-use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\DefinitionGeneratorServiceInterface;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\DefinitionGenerator;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\DefinitionGeneratorInterface;
 use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRender;
 use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRenderInterface;
 use Picamator\TransferObject\Dependency\DependencyContainer;
@@ -25,9 +25,9 @@ readonly class DefinitionGeneratorFactory
 {
     use DependencyFactoryTrait;
 
-    public function createDefinitionGeneratorService(): DefinitionGeneratorServiceInterface
+    public function createDefinitionGenerator(): DefinitionGeneratorInterface
     {
-        return new DefinitionGeneratorService(
+        return new DefinitionGenerator(
             $this->createDefinitionBuilder(),
             $this->createDefinitionRender(),
             $this->createDefinitionFilesystem(),
