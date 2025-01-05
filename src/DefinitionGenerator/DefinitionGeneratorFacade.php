@@ -14,7 +14,7 @@ class DefinitionGeneratorFacade implements DefinitionGeneratorFacadeInterface
     public function generateDefinitions(DefinitionGeneratorTransfer $generatorTransfer): int
     {
         return $this->getFactory()
-            ->createDefinitionGenerator()
+            ->createDefinitionGeneratorService()
             ->generateDefinitions($generatorTransfer);
     }
 

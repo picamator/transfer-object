@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\DefinitionGenerator\Generator\Generator;
 
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 
-interface DefinitionGeneratorInterface
+interface DefinitionGeneratorServiceInterface
 {
     /**
      * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
