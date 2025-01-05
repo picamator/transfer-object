@@ -10,7 +10,8 @@
   ],
   "support": {
     "issues": "https://github.com/picamator/transfer-object/issues",
-    "wiki": "https://github.com/picamator/transfer-object/wiki"
+    "wiki": "https://github.com/picamator/transfer-object/wiki",
+    "security": "https://github.com/picamator/transfer-object/tree/development?tab=security-ov-file#readme"
   },
   "autoload": {
     "psr-4": {
