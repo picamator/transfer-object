@@ -32,7 +32,7 @@ class CollectionTypeBuilderExpanderTest extends TestCase
     #[DataProvider('applicableCollectionTypeDataProvider')]
     public function testApplicableCollectionType(GetTypeEnum $type, array $propertyValue, bool $expected): void
     {
-        // Arrange
+        // Expect
         $this->builderContentMock->expects($this->once())
             ->method('getType')
             ->willReturn($type);

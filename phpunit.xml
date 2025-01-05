@@ -10,9 +10,11 @@
          displayDetailsOnTestsThatTriggerErrors="true"
          displayDetailsOnTestsThatTriggerNotices="true"
          displayDetailsOnTestsThatTriggerWarnings="true">
+
     <php>
         <ini name="error_reporting" value="-1" />
     </php>
+
     <testsuites>
         <testsuite name="UnitTests">
             <directory>tests/unit</directory>
@@ -22,10 +24,12 @@
             <directory>tests/integration</directory>
         </testsuite>
     </testsuites>
+
     <source>
         <include>
             <directory suffix=".php">src</directory>
             <directory suffix=".php">doc/samples</directory>
         </include>
     </source>
+
 </phpunit>

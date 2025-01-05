@@ -9,9 +9,6 @@ Template:
     type: ArrayObject
   properties:
     type: ArrayObject
-  propertiesCount:
-    type: int
-    required:
   metaConstants:
     type: ArrayObject
   attributes:

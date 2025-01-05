@@ -159,7 +159,7 @@ readonly class DefinitionFactory
     }
 
     /**
-     * @return \ArrayObject<int,PropertyExpanderInterface> $propertyExpanders
+     * @return \ArrayObject<int,PropertyExpanderInterface>
      */
     protected function createPropertyExpanders(): ArrayObject
     {

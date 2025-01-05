@@ -6,13 +6,12 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder
 
 use Picamator\TransferObject\Generated\DefinitionTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
-use Throwable;
 
 interface TransferGeneratorBuilderInterface
 {
-    public function createExceptionGeneratorTransfer(
-        Throwable $e,
-        ?DefinitionTransfer $definitionTransfer = null,
+    public function createErrorWithDefinitionGeneratorTransfer(
+        string $errorMessage,
+        DefinitionTransfer $definitionTransfer,
     ): TransferGeneratorTransfer;
 
     public function createErrorGeneratorTransfer(string $errorMessage): TransferGeneratorTransfer;

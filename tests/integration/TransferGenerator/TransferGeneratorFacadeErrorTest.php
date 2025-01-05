@@ -42,7 +42,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         };
 
         // Act
-        $actual = $this->generateTransfers($configPath, $callback);
+        $actual = $this->generateTransfersCallback($configPath, $callback);
 
         // Assert
         $this->assertFalse($actual);
@@ -71,7 +71,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         };
 
         // Act
-        $actual = $this->generateTransfers($configPath, $callback);
+        $actual = $this->generateTransfersCallback($configPath, $callback);
 
         // Assert
         $this->assertFalse($actual);
@@ -148,11 +148,12 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         ];
     }
 
-    public function testBulkTransferGeneratorShouldFailOnError(): void
+    public function testGenerateTransfersOrFailTransferGeneratorShouldFailOnError(): void
     {
         // Arrange
         $configPath = $this->getConfigPath('invalid-class-name');
 
+        // Expect
         $this->expectException(TransferGeneratorException::class);
 
         // Act

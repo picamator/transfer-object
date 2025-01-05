@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use Picamator\Doc\Samples\TransferObject\Generated\DefinitionGenerator\ProductTransfer;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
-use Picamator\TransferObject\Exception\TransferExceptionInterface;
 use Picamator\TransferObject\Generated\DefinitionGeneratorContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
@@ -14,9 +13,9 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 $projectRoot = getenv('PROJECT_ROOT') ?: '';
 
 echo <<<'STORY'
-==============================================
-            Imagine there is a Product
-==============================================
+=======================================================
+              Imagine there is a Product
+=======================================================
 
 STORY;
 $productData = [
@@ -61,9 +60,9 @@ $productData = [
 ];
 
 echo <<<'STORY'
-======================================
-        Generate Definition
-======================================
+=======================================================
+              Generate Definition file
+=======================================================
 
 STORY;
 $generatorTransfer = new DefinitionGeneratorTransfer()
@@ -81,20 +80,22 @@ $generatedDefinitions = new DefinitionGeneratorFacade()->generateDefinitions($ge
 echo "Definitions $generatedDefinitions were successfully generated.\n";
 
 echo <<<'STORY'
-======================================================
-           Generate Transfer Objects
-       Note: for demo error handles were skipped
-======================================================
+=======================================================
+        Generate Transfer Objects
+               with notice
+   for demonstration exception handling was skipped
+=======================================================
 
 STORY;
 $configPath = __DIR__ . '/config/definition-generator/generator.config.yml';
 new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
 
 echo <<<'STORY'
-======================================================
+=======================================================
         Try newly Generated Transfer Objects
-          Validate that $productData fits TO
-======================================================
+                        &
+          Validate $productData fits TO
+=======================================================
 
 STORY;
 

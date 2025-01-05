@@ -36,6 +36,7 @@ class BuildInTypeBuilderExpanderTest extends TestCase
 
         $builderTransfer = new DefinitionBuilderTransfer();
 
+        // Expect
         $this->builderContentMock->expects($this->atLeastOnce())
             ->method('getType')
             ->willReturn($getTypeEnum);

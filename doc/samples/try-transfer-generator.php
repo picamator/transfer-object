@@ -6,15 +6,16 @@ use Picamator\Doc\Samples\TransferObject\Enum\CountryEnum;
 use Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator\AgentTransfer;
 use Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator\CustomerTransfer;
 use Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator\MerchantTransfer;
-use Picamator\TransferObject\Exception\TransferExceptionInterface;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 echo <<<'STORY'
-======================================================
+==============================================================
            Generate Transfer Objects
-======================================================
+                  with notice
+     for demonstration exception handling was skipped
+==============================================================
 
 STORY;
 $configPath = __DIR__ . '/config/transfer-generator/generator.config.yml';
@@ -45,7 +46,7 @@ var_dump($merchantTransfer->toArray());
 
 echo <<<'STORY'
 ======================================================
-             Try how fromArray works
+             Try how fromArray() works
 ======================================================
 
 STORY;

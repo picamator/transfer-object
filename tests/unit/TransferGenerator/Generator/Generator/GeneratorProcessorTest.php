@@ -51,6 +51,7 @@ class GeneratorProcessorTest extends TestCase
         $configTransfer->validator = new ConfigValidatorTransfer();
         $configTransfer->validator->isValid = true;
 
+        // Expect
         $this->configLoaderMock->expects($this->once())
             ->method('loadConfig')
             ->with($configPath)
@@ -69,7 +70,7 @@ class GeneratorProcessorTest extends TestCase
 
     public function testFilesystemExceptionShouldBeHandledOnPostProcessSuccess(): void
     {
-        // Arrange
+        // Expect
         $this->filesystemMock->expects($this->once())
             ->method('rotateTempDir')
             ->willThrowException(new FilesystemException());
@@ -83,7 +84,7 @@ class GeneratorProcessorTest extends TestCase
 
     public function testFilesystemExceptionShouldBeHandledOnPostProcessError(): void
     {
-        // Arrange
+        // Expect
         $this->filesystemMock->expects($this->once())
             ->method('deleteTempDir')
             ->willThrowException(new FilesystemException());

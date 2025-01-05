@@ -42,6 +42,7 @@ class GeneratorFilesystemTest extends TestCase
 
         $transferPath = 'some-path';
 
+        // Expect
         $this->configMock->expects($this->once())
             ->method('getTransferPath')
             ->willReturn($transferPath);

@@ -32,7 +32,7 @@ class TransferTypeBuilderExpanderTest extends TestCase
     #[DataProvider('applicableTransferTypeDataProvider')]
     public function testApplicableTransferType(GetTypeEnum $type, array $propertyValue, bool $expected): void
     {
-        // Arrange
+        // Expect
         $this->builderContentMock->expects($this->once())
             ->method('getType')
             ->willReturn($type);

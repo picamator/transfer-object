@@ -2,6 +2,7 @@
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="./vendor/squizlabs/php_codesniffer/phpcs.xsd"
          name="TransferObject">
+
     <description>
         Transfer Object Generator Coding Standard.
     </description>
@@ -15,10 +16,9 @@
         <exclude name="PSR2.Classes.PropertyDeclaration"/>
     </rule>
 
+    <file>bin</file>
+    <file>doc</file>
     <file>src</file>
     <file>tests</file>
-    <file>doc</file>
-    <file>bin</file>
 
-    <exclude-pattern>*/tests/*/data/*</exclude-pattern>
 </ruleset>

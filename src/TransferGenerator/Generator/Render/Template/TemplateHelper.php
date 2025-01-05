@@ -29,7 +29,6 @@ readonly class TemplateHelper implements TemplateHelperInterface
         return new TemplateTransfer()->fromArray([
             TemplateTransfer::CLASS_NAMESPACE => '\Default',
             TemplateTransfer::CLASS_NAME => 'DefaultTransfer',
-            TemplateTransfer::PROPERTIES_COUNT => 0,
             TemplateTransfer::IMPORTS => [
                 TransferEnum::ABSTRACT_CLASS->value,
                 TransferEnum::TRAIT->value,

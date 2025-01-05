@@ -28,6 +28,7 @@ class DefinitionBuilderTest extends TestCase
         $propertyName = 'file';
         $propertyValue = tmpfile();
 
+        // Expect
         $this->expectException(DefinitionGeneratorException::class);
 
         // Act

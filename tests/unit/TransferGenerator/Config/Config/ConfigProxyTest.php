@@ -20,7 +20,7 @@ class ConfigProxyTest extends TestCase
 
     public function testGetTransferNamespaceWithoutLoadingConfigFirstShouldRiseException(): void
     {
-        // Arrange
+        // Expect
         $this->expectException(ConfigNotFoundException::class);
 
         // Act

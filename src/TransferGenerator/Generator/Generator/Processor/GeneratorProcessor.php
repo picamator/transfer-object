@@ -36,7 +36,7 @@ readonly class GeneratorProcessor implements GeneratorProcessorInterface
         try {
             $this->filesystem->createTempDir();
         } catch (FilesystemException $e) {
-            return $this->builder->createExceptionGeneratorTransfer($e);
+            return $this->builder->createErrorGeneratorTransfer($e->getMessage());
         }
 
         return $this->builder->createSuccessGeneratorTransfer();
@@ -47,7 +47,7 @@ readonly class GeneratorProcessor implements GeneratorProcessorInterface
         try {
             $this->filesystem->rotateTempDir();
         } catch (FilesystemException | FinderException $e) {
-            return $this->builder->createExceptionGeneratorTransfer($e);
+            return $this->builder->createErrorGeneratorTransfer($e->getMessage());
         }
 
         return $this->builder->createSuccessGeneratorTransfer();
@@ -58,7 +58,7 @@ readonly class GeneratorProcessor implements GeneratorProcessorInterface
         try {
             $this->filesystem->deleteTempDir();
         } catch (FilesystemException $e) {
-            return $this->builder->createExceptionGeneratorTransfer($e);
+            return $this->builder->createErrorGeneratorTransfer($e->getMessage());
         }
 
         return $this->builder->createSuccessGeneratorTransfer();
@@ -76,7 +76,7 @@ readonly class GeneratorProcessor implements GeneratorProcessorInterface
 
             return $this->builder->createGeneratorTransfer($definitionTransfer);
         } catch (FilesystemException | TransferGeneratorException $e) {
-            return $this->builder->createExceptionGeneratorTransfer($e, $definitionTransfer);
+            return $this->builder->createErrorWithDefinitionGeneratorTransfer($e->getMessage(), $definitionTransfer);
         }
     }
 }

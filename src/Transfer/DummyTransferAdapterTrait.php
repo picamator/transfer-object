@@ -49,7 +49,7 @@ trait DummyTransferAdapterTrait
     /**
      * @return array<string,mixed>
      */
-    final public function __serialize(): array
+    public function __serialize(): array
     {
         return [];
     }
@@ -57,7 +57,7 @@ trait DummyTransferAdapterTrait
     /**
      * @param array<string,mixed> $data
      */
-    final public function __unserialize(array $data): void
+    public function __unserialize(array $data): void
     {
     }
 }
