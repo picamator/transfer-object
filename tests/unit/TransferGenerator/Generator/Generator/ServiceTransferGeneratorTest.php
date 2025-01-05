@@ -15,7 +15,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGener
 
 class ServiceTransferGeneratorTest extends TestCase
 {
-    private TransferGeneratorServiceInterface $bulkGenerator;
+    private TransferGeneratorServiceInterface $serviceGenerator;
 
     private TransferGeneratorInterface&MockObject $generatorMock;
 
@@ -23,7 +23,7 @@ class ServiceTransferGeneratorTest extends TestCase
     {
         $this->generatorMock = $this->createMock(TransferGeneratorInterface::class);
 
-        $this->bulkGenerator = new TransferGeneratorService($this->generatorMock);
+        $this->serviceGenerator = new TransferGeneratorService($this->generatorMock);
     }
 
     public function testGeneratorIteratesInvalidItemShouldRiseException(): void
@@ -41,7 +41,7 @@ class ServiceTransferGeneratorTest extends TestCase
         $this->expectException(TransferGeneratorException::class);
 
         // Act
-        $this->bulkGenerator->generateTransfersOrFail($configPath);
+        $this->serviceGenerator->generateTransfersOrFail($configPath);
     }
 
     private function createErrorGeneratorTransfer(): TransferGeneratorTransfer
