@@ -10,18 +10,20 @@ use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 echo <<<'STORY'
-=========================================================
+=======================================================
        How to use custom Data Transfer Object
                         &
-      apply Transfer Object cross modules link
-=========================================================
+        Apply Transfer Object across modules
+=======================================================
 
 STORY;
 
 echo <<<'STORY'
-============================================================================
-         Lets take CustomerTransfer form Generated\TransferGenerator
-============================================================================
+=======================================================
+         Let's take CustomerTransfer
+                form
+        Generated\TransferGenerator
+=======================================================
 
 STORY;
 $customerTransfer = new CustomerTransfer();
@@ -29,11 +31,11 @@ $customerTransfer->firstName = 'Jan';
 $customerTransfer->lastName = 'Kowalski';
 
 echo <<<'STORY'
-============================================================================
-            Lets take CredentialsData form Advanced
-                             &
-       implements TransferInterface using DummyTransferAdapterTrait
-============================================================================
+=======================================================
+            Let's take CredentialsData
+                        form
+          Advanced implementing TransferInterface
+=======================================================
 
 STORY;
 $credentialsData = new CredentialsData();
@@ -56,9 +58,9 @@ Iterated: [$iteratedCredentialsData]
 DEBUG;
 
 echo <<<'STORY'
-===================================================================
-           Create a Definition file combining both objects
-===================================================================
+=======================================================
+    Create a Definition file combining both objects
+=======================================================
 
 AdvancedCustomer:
   customer:
@@ -70,20 +72,22 @@ AdvancedCustomer:
 STORY;
 
 echo <<<'STORY'
-======================================================
-           Generate Transfer Objects
-======================================================
+=======================================================
+         Generate Transfer Object
+                with notice
+   for demonstration exception handling was skipped
+=======================================================
 
 STORY;
 $configPath = __DIR__ . '/config/advanced-transfer-generator/generator.config.yml';
 new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
 
 echo <<<'STORY'
-======================================================
+=======================================================
         Try newly Generated Transfer Object
                     &
                   Debug
-======================================================
+=======================================================
 
 STORY;
 
@@ -94,9 +98,9 @@ $advancedCustomerTransfer->credentials = $credentialsData;
 var_dump($advancedCustomerTransfer->toArray());
 
 echo <<<'STORY'
-======================================================
-                Convert fromArray
-======================================================
+=======================================================
+              Try how fromArray() works
+=======================================================
 
 STORY;
 $advancedCustomerTransfer = new AdvancedCustomerTransfer()->fromArray([
