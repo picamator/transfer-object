@@ -24,7 +24,7 @@ class TransferGeneratorFacadeSuccessTest extends TestCase
     public function testGenerateTransferObjectByValidDefinitionShouldSucceed(): void
     {
         // Act
-        $actual = $this->generateTransfers(self::GENERATOR_CONFIG_PATH, $this->assertGeneratorSuccess(...));
+        $actual = $this->generateTransfersCallback(self::GENERATOR_CONFIG_PATH, $this->assertGeneratorSuccess(...));
 
         // Assert
         $this->assertTrue($actual);

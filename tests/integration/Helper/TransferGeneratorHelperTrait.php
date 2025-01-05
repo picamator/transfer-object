@@ -13,7 +13,15 @@ trait TransferGeneratorHelperTrait
     /**
      * @throws \Throwable
      */
-    protected function generateTransfers(string $configPath, callable $postGenerateItemCallback): bool
+    protected static function generateTransfersOrFail(string $configPath): void
+    {
+        new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
+    }
+
+    /**
+     * @throws \Throwable
+     */
+    protected function generateTransfersCallback(string $configPath, callable $postGenerateItemCallback): bool
     {
         $generatorFiber = new TransferGeneratorFacade()->getTransferGeneratorFiber();
 

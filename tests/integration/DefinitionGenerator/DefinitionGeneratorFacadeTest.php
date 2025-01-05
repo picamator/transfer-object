@@ -95,7 +95,7 @@ class DefinitionGeneratorFacadeTest extends TestCase
         $configPath = sprintf(self::CONFIG_PATH_TEMPLATE, $pathPlaceholder);
 
         // Act
-        $actual = $this->generateTransfers($configPath, $this->assertGeneratorSuccess(...));
+        $actual = $this->generateTransfersCallback($configPath, $this->assertGeneratorSuccess(...));
 
         // Assert
         $this->assertTrue($actual);

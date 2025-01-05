@@ -7,7 +7,6 @@ namespace Picamator\Tests\Integration\TransferObject\Transfer;
 use ArrayObject;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
@@ -26,13 +25,9 @@ class TransferTest extends TestCase
 
     private const string GENERATOR_CONFIG_PATH = __DIR__ . '/data/config/generator.config.yml';
 
-    public function testGenerateTransferShouldSucceed(): void
+    public static function setUpBeforeClass(): void
     {
-        // Act
-        $actual = $this->generateTransfers(self::GENERATOR_CONFIG_PATH, $this->assertGeneratorSuccess(...));
-
-        // Assert
-        $this->assertTrue($actual);
+        static::generateTransfersOrFail(self::GENERATOR_CONFIG_PATH);
     }
 
     /**
@@ -40,7 +35,6 @@ class TransferTest extends TestCase
      * @param array<string,mixed> $expected
      */
     #[DataProvider('fromToArrayDataProvider')]
-    #[Depends('testGenerateTransferShouldSucceed')]
     public function testFromToArrayTransformation(array $data, array $expected): void
     {
         // Arrange
@@ -174,7 +168,6 @@ class TransferTest extends TestCase
         ];
     }
 
-    #[Depends('testGenerateTransferShouldSucceed')]
     public function testSerialize(): void
     {
         // Arrange
@@ -190,7 +183,6 @@ class TransferTest extends TestCase
         $this->assertEquals($itemCollectionTransfer->toArray(), $unserialized->toArray());
     }
 
-    #[Depends('testGenerateTransferShouldSucceed')]
     public function testJsonSerialize(): void
     {
         // Arrange
@@ -205,7 +197,6 @@ class TransferTest extends TestCase
         $this->assertEquals($itemCollectionTransfer->toArray(), $decoded);
     }
 
-    #[Depends('testGenerateTransferShouldSucceed')]
     public function testCount(): void
     {
         // Arrange
@@ -220,7 +211,6 @@ class TransferTest extends TestCase
         $this->assertCount(1, $itemCollectionTransfer);
     }
 
-    #[Depends('testGenerateTransferShouldSucceed')]
     public function testDebugInfo(): void
     {
         // Arrange
@@ -234,7 +224,6 @@ class TransferTest extends TestCase
         $this->assertEquals($itemCollectionTransfer->toArray(), $actual);
     }
 
-    #[Depends('testGenerateTransferShouldSucceed')]
     #[WithoutErrorHandler]
     public function testTypeMismatchFromArrayShouldFailedWithError(): void
     {
@@ -250,7 +239,6 @@ class TransferTest extends TestCase
         ]);
     }
 
-    #[Depends('testGenerateTransferShouldSucceed')]
     public function testAccessRequiredPropertyBeforeInitialisingShouldRiseException(): void
     {
         // Arrange
@@ -263,7 +251,6 @@ class TransferTest extends TestCase
         $requiredTransfer->toArray();
     }
 
-    #[Depends('testGenerateTransferShouldSucceed')]
     public function testTypeWithNamespaceShouldSucceed(): void
     {
         // Arrange

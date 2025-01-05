@@ -42,7 +42,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         };
 
         // Act
-        $actual = $this->generateTransfers($configPath, $callback);
+        $actual = $this->generateTransfersCallback($configPath, $callback);
 
         // Assert
         $this->assertFalse($actual);
@@ -71,7 +71,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         };
 
         // Act
-        $actual = $this->generateTransfers($configPath, $callback);
+        $actual = $this->generateTransfersCallback($configPath, $callback);
 
         // Assert
         $this->assertFalse($actual);
