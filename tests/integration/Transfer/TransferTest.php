@@ -45,6 +45,7 @@ class TransferTest extends TestCase
         $actual = $itemCollectionTransfer->toArray();
 
         // Assert
+        $this->assertContainsOnlyInstancesOf(ItemTransfer::class, $itemCollectionTransfer->items);
         $this->assertEquals($expected, $actual);
     }
 
