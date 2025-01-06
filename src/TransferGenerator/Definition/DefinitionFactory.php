@@ -16,13 +16,12 @@ use Picamator\TransferObject\TransferGenerator\Definition\Parser\ContentBuilder;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\ContentBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParser;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParserInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\BuildInTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\CollectionTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\EnumTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\NamespacePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\NullablePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\PropertyExpanderInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\TransferTypePropertyExpander;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\TypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReader;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\ClassNameValidator;
@@ -168,8 +167,7 @@ readonly class DefinitionFactory
             $this->createNamespacePropertyExpander(),
             $this->createNullablePropertyExpander(),
             $this->createCollectionTypePropertyExpander(),
-            $this->createBuildInTypePropertyExpander(),
-            $this->createTransferTypePropertyExpander(),
+            $this->createTypePropertyExpander(),
             $this->createEnumTypePropertyExpander(),
         ]);
     }
@@ -179,14 +177,9 @@ readonly class DefinitionFactory
         return new EnumTypePropertyExpander();
     }
 
-    protected function createTransferTypePropertyExpander(): PropertyExpanderInterface
+    protected function createTypePropertyExpander(): PropertyExpanderInterface
     {
-        return new TransferTypePropertyExpander();
-    }
-
-    protected function createBuildInTypePropertyExpander(): PropertyExpanderInterface
-    {
-        return new BuildInTypePropertyExpander();
+        return new TypePropertyExpander();
     }
 
     protected function createCollectionTypePropertyExpander(): PropertyExpanderInterface
