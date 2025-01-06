@@ -73,6 +73,8 @@ readonly class NamespacePropertyExpander implements PropertyExpanderInterface
     {
         $namespace = $propertyType[self::TYPE_KEY] ?? $propertyType[self::COLLECTION_TYPE_KEY] ?? null;
 
-        return !is_string($namespace) ? null : $namespace;
+        return is_string($namespace)
+            ? str_ireplace(self::NAMESPACE_ALIAS_SEPARATOR, self::NAMESPACE_ALIAS_SEPARATOR, $namespace)
+            : null;
     }
 }
