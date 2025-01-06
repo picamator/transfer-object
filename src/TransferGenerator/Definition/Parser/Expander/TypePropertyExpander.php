@@ -35,8 +35,8 @@ readonly class TypePropertyExpander implements PropertyExpanderInterface
             return;
         }
 
-        $propertyTransfer->transferType = $propertyTransfer->namespace->alias
-            ?: $propertyTransfer->namespace->baseName;
+        $propertyTransfer->transferType
+            = $propertyTransfer->namespace->alias ?: $propertyTransfer->namespace->baseName;
     }
 
     private function expandBuildInType(string|bool $type, DefinitionPropertyTransfer $propertyTransfer): void

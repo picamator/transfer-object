@@ -25,8 +25,8 @@ readonly class CollectionTypePropertyExpander implements PropertyExpanderInterfa
             return;
         }
 
-        $propertyTransfer->collectionType = $propertyTransfer->namespace->alias
-            ?: $propertyTransfer->namespace->baseName;
+        $propertyTransfer->collectionType =
+            $propertyTransfer->namespace->alias ?: $propertyTransfer->namespace->baseName;
     }
 
     /**
