@@ -18,7 +18,7 @@ Imagine you have an array:
 ```php
 $data = [
     'firstName' => 'Jan',
-    'lastName' => 'Kowalski',
+    'lastName' => 'Kowalski'
 ];
 ```
 
