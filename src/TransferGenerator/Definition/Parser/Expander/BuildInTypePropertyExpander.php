@@ -16,13 +16,12 @@ readonly class BuildInTypePropertyExpander implements PropertyExpanderInterface
         return $this->getBuildInType($propertyType) !== null;
     }
 
-    public function isNextAllowed(): false
-    {
-        return false;
-    }
-
     public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
+        if ($propertyTransfer->transferType !== null) {
+            return;
+        }
+
         $propertyTransfer->buildInType = $this->getBuildInType($propertyType);
     }
 

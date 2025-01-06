@@ -20,11 +20,6 @@ readonly class NullablePropertyExpander implements PropertyExpanderInterface
         $propertyTransfer->isNullable = !$this->getIsRequired($propertyType);
     }
 
-    public function isNextAllowed(): true
-    {
-        return true;
-    }
-
     /**
      * @param array<string,string|bool> $propertyType
      */

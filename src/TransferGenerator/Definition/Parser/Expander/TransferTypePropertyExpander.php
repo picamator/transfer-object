@@ -18,13 +18,12 @@ readonly class TransferTypePropertyExpander implements PropertyExpanderInterface
         return $this->getTransferType($propertyType) !== null;
     }
 
-    public function isNextAllowed(): false
-    {
-        return false;
-    }
-
     public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
+        if ($propertyTransfer->buildInType !== null) {
+            return;
+        }
+
         $transferType = $this->getTransferType($propertyType) ?: '';
         if (!$this->isNamespace($transferType)) {
             $propertyTransfer->transferType = $transferType . TypePrefixEnum::TRANSFER->value;

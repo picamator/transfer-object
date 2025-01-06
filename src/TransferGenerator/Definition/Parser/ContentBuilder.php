@@ -50,9 +50,6 @@ readonly class ContentBuilder implements ContentBuilderInterface
             }
 
             $propertyExpander->expandPropertyTransfer($propertyType, $propertyTransfer);
-            if (!$propertyExpander->isNextAllowed()) {
-                break;
-            }
         }
     }
 

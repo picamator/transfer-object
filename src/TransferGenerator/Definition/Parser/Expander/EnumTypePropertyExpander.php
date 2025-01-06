@@ -15,11 +15,6 @@ readonly class EnumTypePropertyExpander implements PropertyExpanderInterface
         return $this->getEnumType($propertyType) !== null;
     }
 
-    public function isNextAllowed(): false
-    {
-        return false;
-    }
-
     public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
         $propertyTransfer->enumType = $this->getEnumType($propertyType);
