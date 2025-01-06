@@ -7,6 +7,7 @@ namespace Picamator\TransferObject\Generated;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
@@ -74,11 +75,12 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     }
 
     // namespace
+    #[PropertyTypeAttribute(DefinitionPropertyNamespaceTransfer::class)]
     public const string NAMESPACE = 'namespace';
     protected const string NAMESPACE_DATA_NAME = 'NAMESPACE';
     protected const int NAMESPACE_DATA_INDEX = 4;
 
-    public ?string $namespace {
+    public ?DefinitionPropertyNamespaceTransfer $namespace {
         get => $this->getData(self::NAMESPACE_DATA_INDEX);
         set => $this->setData(self::NAMESPACE_DATA_INDEX, $value);
     }

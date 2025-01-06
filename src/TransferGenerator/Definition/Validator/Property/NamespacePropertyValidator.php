@@ -14,8 +14,6 @@ readonly class NamespacePropertyValidator implements PropertyValidatorInterface
     use ValidatorMessageTrait;
     use NamespaceValidatorTrait;
 
-    private const string NAMESPACE_ALIAS_SEPARATOR = ' as ';
-
     private const string INVALID_NAMESPACE_ERROR_MESSAGE_TEMPLATE = 'Invalid property namespace "%s".';
 
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
@@ -25,7 +23,7 @@ readonly class NamespacePropertyValidator implements PropertyValidatorInterface
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
-        $namespace = $this->getNamespaceWithoutAlias($propertyTransfer);
+        $namespace = $propertyTransfer->namespace?->withoutAlias ?: '';
         if ($this->isValidNamespace($namespace)) {
             return $this->createSuccessMessageTransfer();
         }
@@ -39,20 +37,7 @@ readonly class NamespacePropertyValidator implements PropertyValidatorInterface
     {
         return sprintf(
             self::INVALID_NAMESPACE_ERROR_MESSAGE_TEMPLATE,
-            $propertyTransfer->namespace ?: '',
+            $propertyTransfer->namespace?->withoutAlias ?: '',
         );
-    }
-
-    private function getNamespaceWithoutAlias(DefinitionPropertyTransfer $propertyTransfer): string
-    {
-        $namespace = $propertyTransfer->namespace ?: '';
-        if (!str_contains($namespace, self::NAMESPACE_ALIAS_SEPARATOR)) {
-            return $namespace;
-        }
-
-        /** @var string $namespace */
-        $namespace = strstr($namespace, self::NAMESPACE_ALIAS_SEPARATOR, true);
-
-        return trim($namespace);
     }
 }

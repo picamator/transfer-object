@@ -9,8 +9,6 @@ use Picamator\TransferObject\TransferGenerator\Definition\Enum\TypePrefixEnum;
 
 readonly class TransferTypePropertyExpander implements PropertyExpanderInterface
 {
-    use NamespacePropertyExpanderTrait;
-
     private const string TYPE_KEY = 'type';
 
     public function isApplicable(array $propertyType): bool
@@ -25,14 +23,14 @@ readonly class TransferTypePropertyExpander implements PropertyExpanderInterface
         }
 
         $transferType = $this->getTransferType($propertyType) ?: '';
-        if (!$this->isNamespace($transferType)) {
+        if ($propertyTransfer->namespace === null) {
             $propertyTransfer->transferType = $transferType . TypePrefixEnum::TRANSFER->value;
 
             return;
         }
 
-        $propertyTransfer->namespace = $transferType;
-        $propertyTransfer->transferType = $this->getClassName($transferType);
+        $propertyTransfer->transferType = $propertyTransfer->namespace->alias
+            ?: $propertyTransfer->namespace->baseName;
     }
 
     /**

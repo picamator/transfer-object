@@ -9,8 +9,6 @@ use Picamator\TransferObject\TransferGenerator\Definition\Enum\TypePrefixEnum;
 
 readonly class CollectionTypePropertyExpander implements PropertyExpanderInterface
 {
-    use NamespacePropertyExpanderTrait;
-
     private const string COLLECTION_TYPE_KEY = 'collectionType';
 
     public function isApplicable(array $propertyType): bool
@@ -21,14 +19,14 @@ readonly class CollectionTypePropertyExpander implements PropertyExpanderInterfa
     public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
         $collectionType = $this->getCollectionType($propertyType) ?: '';
-        if (!$this->isNamespace($collectionType)) {
+        if ($propertyTransfer->namespace === null) {
             $propertyTransfer->collectionType = $collectionType . TypePrefixEnum::TRANSFER->value;
 
             return;
         }
 
-        $propertyTransfer->namespace = $collectionType;
-        $propertyTransfer->collectionType = $this->getClassName($collectionType);
+        $propertyTransfer->collectionType = $propertyTransfer->namespace->alias
+            ?: $propertyTransfer->namespace->baseName;
     }
 
     /**

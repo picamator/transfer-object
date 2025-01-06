@@ -19,6 +19,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParse
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\BuildInTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\CollectionTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\EnumTypePropertyExpander;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\NamespacePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\NullablePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\PropertyExpanderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\TransferTypePropertyExpander;
@@ -164,6 +165,7 @@ readonly class DefinitionFactory
     protected function createPropertyExpanders(): ArrayObject
     {
         return new ArrayObject([
+            $this->createNamespacePropertyExpander(),
             $this->createNullablePropertyExpander(),
             $this->createCollectionTypePropertyExpander(),
             $this->createBuildInTypePropertyExpander(),
@@ -195,6 +197,11 @@ readonly class DefinitionFactory
     protected function createNullablePropertyExpander(): PropertyExpanderInterface
     {
         return new NullablePropertyExpander();
+    }
+
+    protected function createNamespacePropertyExpander(): PropertyExpanderInterface
+    {
+        return new NamespacePropertyExpander();
     }
 
     protected function createYmlParser(): YmlParserInterface

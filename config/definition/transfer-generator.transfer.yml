@@ -58,6 +58,19 @@ DefinitionProperty:
     type: bool
     required:
   namespace:
+    type: DefinitionPropertyNamespace
+
+DefinitionPropertyNamespace:
+  fullName:
+    type: string
+    required:
+  withoutAlias:
+    type: string
+    required:
+  baseName:
+    type: string
+    required:
+  alias:
     type: string
 
 DefinitionValidator:

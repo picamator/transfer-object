@@ -22,7 +22,9 @@ readonly class NamespaceTemplateExpander implements TemplateExpanderInterface
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $templateTransfer->imports[$propertyTransfer->namespace] ??= $propertyTransfer->namespace;
+        $namespace = $propertyTransfer->namespace?->fullName ?: '';
+
+        $templateTransfer->imports[$namespace] ??= $namespace;
         $templateTransfer->imports[TransferEnum::INTERFACE->value] ??= TransferEnum::INTERFACE->value;
     }
 }
