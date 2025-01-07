@@ -24,8 +24,6 @@ use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Proper
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\TransferTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReader;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\ClassNameValidator;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\ClassNameValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\ClassNameContentValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\ContentValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\EmptyPropertiesContentValidator;
@@ -36,10 +34,13 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\Bui
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\CollectionTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\EnumTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\NamePropertyValidator;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\NamespacePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\RequiredTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\TransferTypePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Validator\ClassNameValidator;
+use Picamator\TransferObject\TransferGenerator\Validator\ClassNameValidatorInterface;
+use Picamator\TransferObject\TransferGenerator\Validator\NamespaceValidator;
+use Picamator\TransferObject\TransferGenerator\Validator\NamespaceValidatorInterface;
 
 readonly class DefinitionFactory
 {
@@ -91,13 +92,7 @@ readonly class DefinitionFactory
             $this->createTransferTypePropertyValidator(),
             $this->createCollectionTypePropertyValidator(),
             $this->createEnumTypePropertyValidator(),
-            $this->createNamespacePropertyValidator(),
         ]);
-    }
-
-    protected function createNamespacePropertyValidator(): PropertyValidatorInterface
-    {
-        return new NamespacePropertyValidator();
     }
 
     protected function createEnumTypePropertyValidator(): PropertyValidatorInterface
@@ -107,12 +102,23 @@ readonly class DefinitionFactory
 
     protected function createCollectionTypePropertyValidator(): PropertyValidatorInterface
     {
-        return new CollectionTypePropertyValidator($this->createClassNameValidator());
+        return new CollectionTypePropertyValidator(
+            $this->createClassNameValidator(),
+            $this->createNamespaceValidator(),
+        );
+    }
+
+    protected function createNamespaceValidator(): NamespaceValidatorInterface
+    {
+        return new NamespaceValidator();
     }
 
     protected function createTransferTypePropertyValidator(): PropertyValidatorInterface
     {
-        return new TransferTypePropertyValidator($this->createClassNameValidator());
+        return new TransferTypePropertyValidator(
+            $this->createClassNameValidator(),
+            $this->createNamespaceValidator(),
+        );
     }
 
     protected function createBuildInTypePropertyValidator(): PropertyValidatorInterface

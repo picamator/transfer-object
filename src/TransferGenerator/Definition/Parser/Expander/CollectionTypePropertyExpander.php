@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander;
 
+use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\TypePrefixEnum;
 
@@ -18,26 +19,27 @@ readonly class CollectionTypePropertyExpander implements PropertyExpanderInterfa
         return $this->getCollectionType($propertyType) !== null;
     }
 
-    public function isNextAllowed(): false
-    {
-        return false;
-    }
-
     public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
         $collectionType = $this->getCollectionType($propertyType) ?: '';
+
+        $typeTransfer = new DefinitionEmbeddedTypeTransfer();
+        $propertyTransfer->collectionType = $typeTransfer;
+
         if (!$this->isNamespace($collectionType)) {
-            $propertyTransfer->collectionType = $collectionType . TypePrefixEnum::TRANSFER->value;
+            $typeTransfer->name = $collectionType . TypePrefixEnum::TRANSFER->value;
 
             return;
         }
 
-        $propertyTransfer->namespace = $collectionType;
-        $propertyTransfer->collectionType = $this->getClassName($collectionType);
+        $namespaceTransfer = $this->createDefinitionNamespaceTransfer($collectionType);
+
+        $typeTransfer->name = $namespaceTransfer->alias ?: $namespaceTransfer->baseName;
+        $typeTransfer->namespace = $namespaceTransfer;
     }
 
     /**
-     * @param array<string,string|bool> $propertyType
+     * @param array<string,string|null> $propertyType
      */
     private function getCollectionType(array $propertyType): ?string
     {

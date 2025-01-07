@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander;
 
+use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
+use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\TypePrefixEnum;
 
 readonly class TransferTypePropertyExpander implements PropertyExpanderInterface
@@ -15,31 +17,34 @@ readonly class TransferTypePropertyExpander implements PropertyExpanderInterface
 
     public function isApplicable(array $propertyType): bool
     {
-        return $this->getTransferType($propertyType) !== null;
-    }
+        $type = $this->getType($propertyType);
 
-    public function isNextAllowed(): false
-    {
-        return false;
+        return $type !== null && BuildInTypeEnum::tryFrom($type) === null;
     }
 
     public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
-        $transferType = $this->getTransferType($propertyType) ?: '';
-        if (!$this->isNamespace($transferType)) {
-            $propertyTransfer->transferType = $transferType . TypePrefixEnum::TRANSFER->value;
+        $type = $this->getType($propertyType) ?? '';
+
+        $typeTransfer = new DefinitionEmbeddedTypeTransfer();
+        $propertyTransfer->transferType = $typeTransfer;
+
+        if (!$this->isNamespace($type)) {
+            $typeTransfer->name = $type . TypePrefixEnum::TRANSFER->value;
 
             return;
         }
 
-        $propertyTransfer->namespace = $transferType;
-        $propertyTransfer->transferType = $this->getClassName($transferType);
+        $namespaceTransfer = $this->createDefinitionNamespaceTransfer($type);
+
+        $typeTransfer->name = $namespaceTransfer->alias ?: $namespaceTransfer->baseName;
+        $typeTransfer->namespace = $namespaceTransfer;
     }
 
     /**
-     * @param array<string,string|bool> $propertyType
+     * @param array<string,string|null> $propertyType
      */
-    private function getTransferType(array $propertyType): ?string
+    private function getType(array $propertyType): string|null
     {
         $type = $propertyType[self::TYPE_KEY] ?? null;
 

@@ -104,7 +104,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
 
         yield 'missed property type should return error' => [
             'configCaseName' => 'missed-type',
-            'expectedMessage' => 'Property "addressUuid" type definition is missing.',
+            'expectedMessage' => 'Property "addressUuid" type definition is missing or set multiple times.',
         ];
 
         yield 'unsupported type should return error' => [
@@ -114,7 +114,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
 
         yield 'property type defined with array yml structure should fail to recognize type and return error' => [
             'configCaseName' => 'invalid-type-definition',
-            'expectedMessage' => 'Property "addressBookUuid" type definition is missing.',
+            'expectedMessage' => 'Property "addressBookUuid" type definition is missing or set multiple times.',
         ];
 
         yield 'basic enum type is not supported should return error' => [
@@ -139,12 +139,12 @@ class TransferGeneratorFacadeErrorTest extends TestCase
 
         yield 'invalid type namespace' => [
             'configCaseName' => 'invalid-type-namespace',
-            'expectedMessage' => 'Invalid property namespace',
+            'expectedMessage' => 'Invalid namespace',
         ];
 
         yield 'invalid type namespace with alias' => [
             'configCaseName' => 'invalid-type-namespace-with-alias',
-            'expectedMessage' => 'Invalid property namespace',
+            'expectedMessage' => 'Invalid namespace',
         ];
     }
 

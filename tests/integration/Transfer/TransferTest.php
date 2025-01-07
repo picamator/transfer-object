@@ -7,6 +7,7 @@ namespace Picamator\Tests\Integration\TransferObject\Transfer;
 use ArrayObject;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
@@ -86,41 +87,7 @@ class TransferTest extends TestCase
                         ItemTransfer::DATA => [1, 2, 3],
                     ]
                 ],
-            ],
-        ];
-
-        yield 'all transfer object properties are set backed enum has basic enum should resolve as null' => [
-            [
-                ItemCollectionTransfer::ITEMS => [
-                    [
-                        ItemTransfer::I_AM_BOOL => true,
-                        ItemTransfer::I_AM_TRUE => true,
-                        ItemTransfer::I_AM_FALSE => false,
-                        ItemTransfer::I_AM_INT => 1,
-                        ItemTransfer::I_AM_FLOAT => 0.1,
-                        ItemTransfer::I_AM_STRING => 'test string',
-                        ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
-                        ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
-                        ItemTransfer::I_AM_ENUM => ImBasicEnum::SOMETHING,
-                        ItemTransfer::DATA => [1, 2, 3],
-                    ]
-                ],
-            ],
-            [
-                ItemCollectionTransfer::ITEMS => [
-                    [
-                        ItemTransfer::I_AM_BOOL => true,
-                        ItemTransfer::I_AM_TRUE => true,
-                        ItemTransfer::I_AM_FALSE => false,
-                        ItemTransfer::I_AM_INT => 1,
-                        ItemTransfer::I_AM_FLOAT => 0.1,
-                        ItemTransfer::I_AM_STRING => 'test string',
-                        ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
-                        ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
-                        ItemTransfer::I_AM_ENUM => null,
-                        ItemTransfer::DATA => [1, 2, 3],
-                    ]
-                ],
+                ItemCollectionTransfer::ITEM => null,
             ],
         ];
 
@@ -138,7 +105,7 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ARRAY_OBJECT => null,
                         ItemTransfer::I_AM_ENUM => null,
                         ItemTransfer::DATA => null,
-                    ]
+                    ],
                 ],
             ],
             [
@@ -154,8 +121,9 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ARRAY_OBJECT => [],
                         ItemTransfer::I_AM_ENUM => null,
                         ItemTransfer::DATA => [],
-                    ]
+                    ],
                 ],
+                ItemCollectionTransfer::ITEM => null,
             ],
         ];
 
@@ -165,6 +133,7 @@ class TransferTest extends TestCase
             ],
             [
                 ItemCollectionTransfer::ITEMS => [],
+                ItemCollectionTransfer::ITEM => null,
             ],
         ];
     }
@@ -208,8 +177,8 @@ class TransferTest extends TestCase
         $actual = $itemCollectionTransfer->count();
 
         // Assert
-        $this->assertEquals(1, $actual);
-        $this->assertCount(1, $itemCollectionTransfer);
+        $this->assertEquals(2, $actual);
+        $this->assertCount(2, $itemCollectionTransfer);
     }
 
     public function testDebugInfo(): void
@@ -250,6 +219,57 @@ class TransferTest extends TestCase
 
         // Act
         $requiredTransfer->toArray();
+    }
+
+    /**
+     * @param array<string,mixed> $data
+     */
+    #[TestWith([[ItemTransfer::I_AM_ARRAY => true]])]
+    #[TestWith([[ItemTransfer::I_AM_ARRAY_OBJECT => true]])]
+    #[TestWith([[ItemTransfer::I_AM_ENUM => true]])]
+    public function testItemTransferAttributeTypeMismatchFromArrayShouldRiseException(array $data): void
+    {
+        // Arrange
+        $itemTransfer = new ItemTransfer();
+
+        // Expect
+        $this->expectException(PropertyTypeTransferException::class);
+
+        // Act
+        $itemTransfer->fromArray($data);
+    }
+
+    /**
+     * @param array<string,mixed> $data
+     */
+    #[TestWith([[ItemTransfer::I_AM_INT => []]])]
+    public function testItemTransferPropertyTypeMismatchFromArrayShouldRiseException(array $data): void
+    {
+        // Arrange
+        $itemTransfer = new ItemTransfer();
+
+        // Expect
+        $this->expectException(TypeError::class);
+
+        // Act
+        $itemTransfer->fromArray($data);
+    }
+
+    /**
+     * @param array<string,mixed> $data
+     */
+    #[TestWith([[ItemCollectionTransfer::ITEMS => true]])]
+    #[TestWith([[ItemCollectionTransfer::ITEM => true]])]
+    public function testItemCollectionTransferAttributeTypeMismatchFromArrayShouldRiseException(array $data): void
+    {
+        // Arrange
+        $itemCollectionTransfer = new ItemCollectionTransfer();
+
+        // Expect
+        $this->expectException(PropertyTypeTransferException::class);
+
+        // Act
+        $itemCollectionTransfer->fromArray($data);
     }
 
     public function testTypeWithNamespaceShouldSucceed(): void

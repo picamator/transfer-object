@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Transfer\Attribute;
 
 use Attribute;
+use Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException;
 use Picamator\TransferObject\Transfer\TransferInterface;
 
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
@@ -14,11 +15,17 @@ final readonly class PropertyTypeAttribute implements PropertyTypeAttributeInter
     {
     }
 
-    /**
-     * @param array<string,mixed> $data
-     */
     public function fromArray(mixed $data): TransferInterface
     {
+        if (!is_array($data)) {
+            throw new PropertyTypeTransferException(
+                sprintf(
+                    'Data must be of type array, "%s" given."',
+                    gettype($data)
+                ),
+            );
+        }
+
         return $this->createTransfer($data);
     }
 

@@ -11,7 +11,7 @@
   "support": {
     "issues": "https://github.com/picamator/transfer-object/issues",
     "wiki": "https://github.com/picamator/transfer-object/wiki",
-    "security": "https://github.com/picamator/transfer-object/tree/development?tab=security-ov-file#readme"
+    "security": "https://github.com/picamator/transfer-object/security/policy"
   },
   "autoload": {
     "psr-4": {

@@ -1,4 +1,4 @@
-![Transfer Object Generator](.github/img/transfer-object-generator.jpg)
+![Transfer Object Generator](doc/img/transfer-object-generator.jpg)
 
 [![CI workflow](https://github.com/picamator/transfer-object/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/picamator/transfer-object/actions)
 [![License](https://poser.pugx.org/picamator/transfer-object/license)](https://packagist.org/packages/picamator/transfer-object)
@@ -18,7 +18,7 @@ Imagine you have an array:
 ```php
 $data = [
     'firstName' => 'Jan',
-    'lastName' => 'Kowalski',
+    'lastName' => 'Kowalski'
 ];
 ```
 

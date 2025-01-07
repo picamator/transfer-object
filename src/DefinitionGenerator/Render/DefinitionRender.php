@@ -32,10 +32,13 @@ START;
                     => $this->renderType($propertyTransfer->propertyName, $propertyTransfer->buildInType->value),
 
                 $propertyTransfer->transferType !== null
-                    => $this->renderType($propertyTransfer->propertyName, $propertyTransfer->transferType),
+                    => $this->renderType($propertyTransfer->propertyName, $propertyTransfer->transferType->name),
 
                 $propertyTransfer->collectionType !== null
-                    => $this->renderCollectionType($propertyTransfer->propertyName, $propertyTransfer->collectionType),
+                    => $this->renderCollectionType(
+                        $propertyTransfer->propertyName,
+                        $propertyTransfer->collectionType->name,
+                    ),
 
                 default => throw new DefinitionGeneratorException(
                     sprintf(

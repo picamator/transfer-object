@@ -13,31 +13,24 @@ readonly class BuildInTypePropertyExpander implements PropertyExpanderInterface
 
     public function isApplicable(array $propertyType): bool
     {
-        return $this->getBuildInType($propertyType) !== null;
-    }
-
-    public function isNextAllowed(): false
-    {
-        return false;
+        return $this->getType($propertyType) !== null;
     }
 
     public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
-        $propertyTransfer->buildInType = $this->getBuildInType($propertyType);
+        $propertyTransfer->buildInType = $this->getType($propertyType);
     }
 
     /**
-     * @param array<string,string|bool> $propertyType
+     * @param array<string,string|null> $propertyType
      */
-    private function getBuildInType(array $propertyType): ?BuildInTypeEnum
+    private function getType(array $propertyType): ?BuildInTypeEnum
     {
         $type = $propertyType[self::TYPE_KEY] ?? null;
         if ($type === null) {
             return null;
         }
 
-        return is_bool($type)
-            ? BuildInTypeEnum::getTrueFalse($type)
-            : BuildInTypeEnum::tryFrom($type);
+        return BuildInTypeEnum::tryFrom($type);
     }
 }

@@ -1,3 +1,5 @@
 ItemCollection:
   items:
     collectionType: Item
+  item:
+    type: Item

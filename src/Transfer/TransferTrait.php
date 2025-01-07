@@ -8,14 +8,19 @@ use Traversable;
 
 trait TransferTrait
 {
-    public function getIterator(): Traversable
+    use AttributeTransferTrait {
+        hasConstantAttribute as private;
+        getConstantAttribute as private;
+    }
+
+    final public function getIterator(): Traversable
     {
         foreach (static::META_DATA as $metaKey => $metaName) {
             yield $metaKey => $this->{$metaKey};
         }
     }
 
-    public function toArray(): array
+    final public function toArray(): array
     {
         $data = [];
         foreach (static::META_DATA as $metaKey => $metaName) {
@@ -28,7 +33,7 @@ trait TransferTrait
         return $data;
     }
 
-    public function fromArray(array $data): static
+    final public function fromArray(array $data): static
     {
         $this->initData();
         $data = array_intersect_key($data, static::META_DATA);

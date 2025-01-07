@@ -6,7 +6,8 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Validator\Proper
 
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\ClassNameValidatorInterface;
+use Picamator\TransferObject\TransferGenerator\Validator\ClassNameValidatorInterface;
+use Picamator\TransferObject\TransferGenerator\Validator\NamespaceValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Validator\ValidatorMessageTrait;
 
 readonly class CollectionTypePropertyValidator implements PropertyValidatorInterface
@@ -15,6 +16,7 @@ readonly class CollectionTypePropertyValidator implements PropertyValidatorInter
 
     public function __construct(
         private ClassNameValidatorInterface $classNameValidator,
+        private NamespaceValidatorInterface $namespaceValidator,
     ) {
     }
 
@@ -25,6 +27,11 @@ readonly class CollectionTypePropertyValidator implements PropertyValidatorInter
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
-        return $this->classNameValidator->validate($propertyTransfer->collectionType);
+        $namespaceTransfer = $propertyTransfer->collectionType?->namespace;
+        if ($namespaceTransfer === null) {
+            return $this->classNameValidator->validate($propertyTransfer->collectionType?->name);
+        }
+
+        return $this->namespaceValidator->validate($namespaceTransfer->withoutAlias);
     }
 }

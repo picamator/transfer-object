@@ -10,14 +10,14 @@ use ReflectionClassConstant;
 
 trait AttributeTransferTrait
 {
-    final protected function getConstantAttribute(string $constantName): ?PropertyTypeAttributeInterface
+    protected function getConstantAttribute(string $constantName): ?PropertyTypeAttributeInterface
     {
         $attributeReflection = $this->getConstantAttributeReflection($constantName);
 
         return $attributeReflection?->newInstance();
     }
 
-    final protected function hasConstantAttribute(string $constantName): bool
+    protected function hasConstantAttribute(string $constantName): bool
     {
         $attributeReflection = $this->getConstantAttributeReflection($constantName);
 

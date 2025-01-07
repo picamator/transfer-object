@@ -6,6 +6,9 @@ namespace Picamator\TransferObject\Transfer\Attribute;
 
 interface PropertyTypeAttributeInterface
 {
+    /**
+     * @throws \Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException
+     */
     public function fromArray(mixed $data): mixed;
 
     public function toArray(mixed $data): mixed;
