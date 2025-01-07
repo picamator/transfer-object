@@ -9,9 +9,19 @@ use Picamator\TransferObject\Generated\DefinitionNamespaceTransfer;
 trait NamespacePropertyExpanderTrait
 {
     private const string NAMESPACE_ALIAS_SEPARATOR = ' as ';
+    private const string SPACE_REGEX = '#\s+#';
 
     protected function createDefinitionNamespaceTransfer(string $namespace): DefinitionNamespaceTransfer
     {
+        $namespace = str_ireplace(
+            self::NAMESPACE_ALIAS_SEPARATOR,
+            self::NAMESPACE_ALIAS_SEPARATOR,
+            $namespace,
+        );
+
+        /** @var string $namespace */
+        $namespace = preg_replace(self::SPACE_REGEX, ' ', $namespace);
+
         $namespaceTransfer = new DefinitionNamespaceTransfer();
         $namespaceTransfer->fullName = $namespace;
         $namespaceTransfer->withoutAlias = $this->getWithoutAlias($namespace);
