@@ -6,33 +6,36 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander;
 
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
+use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\TypePrefixEnum;
 
-readonly class CollectionTypePropertyExpander implements PropertyExpanderInterface
+readonly class TransferTypePropertyExpander implements PropertyExpanderInterface
 {
     use NamespacePropertyExpanderTrait;
 
-    private const string COLLECTION_TYPE_KEY = 'collectionType';
+    private const string TYPE_KEY = 'type';
 
     public function isApplicable(array $propertyType): bool
     {
-        return $this->getCollectionType($propertyType) !== null;
+        $type = $this->getType($propertyType);
+
+        return $type !== null && BuildInTypeEnum::tryFrom($type) === null;
     }
 
     public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
-        $collectionType = $this->getCollectionType($propertyType) ?: '';
+        $type = $this->getType($propertyType) ?? '';
 
         $typeTransfer = new DefinitionEmbeddedTypeTransfer();
-        $propertyTransfer->collectionType = $typeTransfer;
+        $propertyTransfer->transferType = $typeTransfer;
 
-        if (!$this->isNamespace($collectionType)) {
-            $typeTransfer->name = $collectionType . TypePrefixEnum::TRANSFER->value;
+        if (!$this->isNamespace($type)) {
+            $typeTransfer->name = $type . TypePrefixEnum::TRANSFER->value;
 
             return;
         }
 
-        $namespaceTransfer = $this->createDefinitionNamespaceTransfer($collectionType);
+        $namespaceTransfer = $this->createDefinitionNamespaceTransfer($type);
 
         $typeTransfer->name = $namespaceTransfer->alias ?: $namespaceTransfer->baseName;
         $typeTransfer->namespace = $namespaceTransfer;
@@ -41,10 +44,10 @@ readonly class CollectionTypePropertyExpander implements PropertyExpanderInterfa
     /**
      * @param array<string,string|null> $propertyType
      */
-    private function getCollectionType(array $propertyType): ?string
+    private function getType(array $propertyType): string|null
     {
-        $collectionType = $propertyType[self::COLLECTION_TYPE_KEY] ?? null;
+        $type = $propertyType[self::TYPE_KEY] ?? null;
 
-        return is_string($collectionType) ? $collectionType : null;
+        return is_string($type) ? $type : null;
     }
 }

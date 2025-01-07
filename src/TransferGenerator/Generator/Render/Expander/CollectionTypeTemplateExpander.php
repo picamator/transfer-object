@@ -38,8 +38,10 @@ readonly class CollectionTypeTemplateExpander implements TemplateExpanderInterfa
 
     private function getPropertyDockBlock(DefinitionPropertyTransfer $propertyTransfer): string
     {
-        $propertyType = $propertyTransfer->collectionType ?: '';
-        if ($propertyTransfer->namespace !== null) {
+        $propertyType = $propertyTransfer->collectionType?->name ?: '';
+        $namespaceTransfer = $propertyTransfer->collectionType?->namespace;
+
+        if ($namespaceTransfer !== null) {
             $propertyType = $this->enforceTransferInterface($propertyType);
         }
 
@@ -48,7 +50,7 @@ readonly class CollectionTypeTemplateExpander implements TemplateExpanderInterfa
 
     private function getPropertyAttribute(DefinitionPropertyTransfer $propertyTransfer): string
     {
-        $transferType = $propertyTransfer->collectionType ?: '';
+        $transferType = $propertyTransfer->collectionType?->name ?: '';
 
         return sprintf(AttributeTemplateEnum::COLLECTION_TYPE_ATTRIBUTE->value, $transferType);
     }

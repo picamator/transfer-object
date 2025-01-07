@@ -14,7 +14,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
-final class DefinitionPropertyNamespaceTransfer extends AbstractTransfer
+final class DefinitionNamespaceTransfer extends AbstractTransfer
 {
     use TransferTrait;
 

@@ -6,6 +6,7 @@ namespace Picamator\TransferObject\DefinitionGenerator\Builder\Expander;
 
 use Picamator\TransferObject\DefinitionGenerator\Builder\BuilderContentInterface;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
+use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 
 readonly class TransferTypeBuilderExpander implements BuilderExpanderInterface
@@ -32,16 +33,19 @@ readonly class TransferTypeBuilderExpander implements BuilderExpanderInterface
         $builderTransfer->definitionContent->properties[] = $propertyTransfer;
 
         $builderTransfer->generatorContents[] = $this->createGeneratorContentTransfer(
-            $propertyTransfer->transferType ?: '',
+            $propertyTransfer->transferType?->name ?: '',
             $content->getPropertyValue(),
         );
     }
 
     private function createPropertyTransfer(string $propertyName): DefinitionPropertyTransfer
     {
+        $typeTransfer = new DefinitionEmbeddedTypeTransfer();
+        $typeTransfer->name = $this->getClassName($propertyName);
+
         $propertyTransfer = new DefinitionPropertyTransfer();
         $propertyTransfer->propertyName = $propertyName;
-        $propertyTransfer->transferType = $this->getClassName($propertyName);
+        $propertyTransfer->transferType = $typeTransfer;
 
         return $propertyTransfer;
     }

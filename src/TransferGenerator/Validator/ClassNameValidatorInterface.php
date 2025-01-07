@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Definition\Validator;
+namespace Picamator\TransferObject\TransferGenerator\Validator;
 
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 

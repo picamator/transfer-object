@@ -33,18 +33,20 @@ readonly class TransferTypeTemplateExpander implements TemplateExpanderInterface
 
     private function getPropertyAttribute(DefinitionPropertyTransfer $propertyTransfer): string
     {
-        $transferType = $propertyTransfer->transferType ?: '';
+        $transferType = $propertyTransfer->transferType?->name ?: '';
 
         return sprintf(AttributeTemplateEnum::TYPE_ATTRIBUTE->value, $transferType);
     }
 
     private function getPropertyType(DefinitionPropertyTransfer $propertyTransfer): string
     {
-        $transferType = $propertyTransfer->transferType ?: '';
-        if ($propertyTransfer->namespace === null) {
-            return $transferType;
+        $propertyType = $propertyTransfer->transferType?->name ?: '';
+        $namespaceTransfer = $propertyTransfer->transferType?->namespace;
+
+        if ($namespaceTransfer === null) {
+            return $propertyType;
         }
 
-        return $this->enforceTransferInterface($transferType);
+        return $this->enforceTransferInterface($propertyType);
     }
 }

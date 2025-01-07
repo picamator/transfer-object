@@ -47,20 +47,25 @@ DefinitionProperty:
     type: string
     required:
   buildInType:
-    enumType: '\Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum'
+    enumType: "\\Picamator\\TransferObject\\TransferGenerator\\Definition\\Enum\\BuildInTypeEnum"
   transferType:
-    type: string
+    type: DefinitionEmbeddedType
   collectionType:
-    type: string
+    type: DefinitionEmbeddedType
   enumType:
     type: string
   isNullable:
     type: bool
     required:
-  namespace:
-    type: DefinitionPropertyNamespace
 
-DefinitionPropertyNamespace:
+DefinitionEmbeddedType:
+  name:
+    type: string
+    required:
+  namespace:
+    type: DefinitionNamespace
+
+DefinitionNamespace:
   fullName:
     type: string
     required:

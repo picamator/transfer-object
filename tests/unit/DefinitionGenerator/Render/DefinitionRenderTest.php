@@ -11,6 +11,7 @@ use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorEx
 use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRender;
 use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRenderInterface;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
+use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 
 class DefinitionRenderTest extends TestCase
@@ -61,7 +62,9 @@ DEFINITION,
         yield 'transfer object with transfer property type' => [
             'propertyData' => [
                 DefinitionPropertyTransfer::PROPERTY_NAME => 'testProperty',
-                DefinitionPropertyTransfer::TRANSFER_TYPE => 'TestItem',
+                DefinitionPropertyTransfer::TRANSFER_TYPE => [
+                    DefinitionEmbeddedTypeTransfer::NAME => 'TestItem',
+                ],
             ],
             'expected' => <<<'DEFINITION'
 TestClass:
@@ -75,7 +78,9 @@ DEFINITION,
         yield 'transfer object with collection property type' => [
             'propertyData' => [
                 DefinitionPropertyTransfer::PROPERTY_NAME => 'testProperty',
-                DefinitionPropertyTransfer::COLLECTION_TYPE => 'TestItem',
+                DefinitionPropertyTransfer::COLLECTION_TYPE => [
+                    DefinitionEmbeddedTypeTransfer::NAME => 'TestItem',
+                ],
             ],
             'expected' => <<<'DEFINITION'
 TestClass:

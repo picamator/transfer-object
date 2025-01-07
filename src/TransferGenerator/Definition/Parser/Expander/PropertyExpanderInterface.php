@@ -9,12 +9,12 @@ use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 interface PropertyExpanderInterface
 {
     /**
-     * @param array<string,string|bool> $propertyType
+     * @param array<string,string|null> $propertyType
      */
     public function isApplicable(array $propertyType): bool;
 
     /**
-     * @param array<string,string|bool> $propertyType
+     * @param array<string,string|null> $propertyType
      */
     public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void;
 }

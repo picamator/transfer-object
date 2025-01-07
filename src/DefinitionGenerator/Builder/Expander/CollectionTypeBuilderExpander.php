@@ -6,6 +6,7 @@ namespace Picamator\TransferObject\DefinitionGenerator\Builder\Expander;
 
 use Picamator\TransferObject\DefinitionGenerator\Builder\BuilderContentInterface;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
+use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 
 readonly class CollectionTypeBuilderExpander implements BuilderExpanderInterface
@@ -34,16 +35,19 @@ readonly class CollectionTypeBuilderExpander implements BuilderExpanderInterface
         $firstCollectionItem = current((array)$content->getPropertyValue()) ?: [];
 
         $builderTransfer->generatorContents[] = $this->createGeneratorContentTransfer(
-            $propertyTransfer->collectionType ?: '',
+            $propertyTransfer->collectionType?->name ?: '',
             $firstCollectionItem,
         );
     }
 
     private function createPropertyTransfer(string $propertyName): DefinitionPropertyTransfer
     {
+        $typeTransfer = new DefinitionEmbeddedTypeTransfer();
+        $typeTransfer->name = $this->getClassName($propertyName);
+
         $propertyTransfer = new DefinitionPropertyTransfer();
         $propertyTransfer->propertyName = $propertyName;
-        $propertyTransfer->collectionType = $this->getClassName($propertyName);
+        $propertyTransfer->collectionType = $typeTransfer;
 
         return $propertyTransfer;
     }

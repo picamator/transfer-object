@@ -16,16 +16,14 @@ use Picamator\TransferObject\TransferGenerator\Definition\Parser\ContentBuilder;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\ContentBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParser;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParserInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\BuildInTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\CollectionTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\EnumTypePropertyExpander;
-use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\NamespacePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\NullablePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\PropertyExpanderInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\TypePropertyExpander;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\TransferTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReader;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\ClassNameValidator;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\ClassNameValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\ClassNameContentValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\ContentValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\EmptyPropertiesContentValidator;
@@ -36,10 +34,13 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\Bui
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\CollectionTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\EnumTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\NamePropertyValidator;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\NamespacePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\RequiredTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\TransferTypePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Validator\ClassNameValidator;
+use Picamator\TransferObject\TransferGenerator\Validator\ClassNameValidatorInterface;
+use Picamator\TransferObject\TransferGenerator\Validator\NamespaceValidator;
+use Picamator\TransferObject\TransferGenerator\Validator\NamespaceValidatorInterface;
 
 readonly class DefinitionFactory
 {
@@ -91,13 +92,7 @@ readonly class DefinitionFactory
             $this->createTransferTypePropertyValidator(),
             $this->createCollectionTypePropertyValidator(),
             $this->createEnumTypePropertyValidator(),
-            $this->createNamespacePropertyValidator(),
         ]);
-    }
-
-    protected function createNamespacePropertyValidator(): PropertyValidatorInterface
-    {
-        return new NamespacePropertyValidator();
     }
 
     protected function createEnumTypePropertyValidator(): PropertyValidatorInterface
@@ -107,12 +102,23 @@ readonly class DefinitionFactory
 
     protected function createCollectionTypePropertyValidator(): PropertyValidatorInterface
     {
-        return new CollectionTypePropertyValidator($this->createClassNameValidator());
+        return new CollectionTypePropertyValidator(
+            $this->createClassNameValidator(),
+            $this->createNamespaceValidator(),
+        );
+    }
+
+    protected function createNamespaceValidator(): NamespaceValidatorInterface
+    {
+        return new NamespaceValidator();
     }
 
     protected function createTransferTypePropertyValidator(): PropertyValidatorInterface
     {
-        return new TransferTypePropertyValidator($this->createClassNameValidator());
+        return new TransferTypePropertyValidator(
+            $this->createClassNameValidator(),
+            $this->createNamespaceValidator(),
+        );
     }
 
     protected function createBuildInTypePropertyValidator(): PropertyValidatorInterface
@@ -164,10 +170,10 @@ readonly class DefinitionFactory
     protected function createPropertyExpanders(): ArrayObject
     {
         return new ArrayObject([
-            $this->createNamespacePropertyExpander(),
             $this->createNullablePropertyExpander(),
             $this->createCollectionTypePropertyExpander(),
-            $this->createTypePropertyExpander(),
+            $this->createBuildInTypePropertyExpander(),
+            $this->createTransferTypePropertyExpander(),
             $this->createEnumTypePropertyExpander(),
         ]);
     }
@@ -177,9 +183,14 @@ readonly class DefinitionFactory
         return new EnumTypePropertyExpander();
     }
 
-    protected function createTypePropertyExpander(): PropertyExpanderInterface
+    protected function createTransferTypePropertyExpander(): PropertyExpanderInterface
     {
-        return new TypePropertyExpander();
+        return new TransferTypePropertyExpander();
+    }
+
+    protected function createBuildInTypePropertyExpander(): PropertyExpanderInterface
+    {
+        return new BuildInTypePropertyExpander();
     }
 
     protected function createCollectionTypePropertyExpander(): PropertyExpanderInterface
@@ -190,11 +201,6 @@ readonly class DefinitionFactory
     protected function createNullablePropertyExpander(): PropertyExpanderInterface
     {
         return new NullablePropertyExpander();
-    }
-
-    protected function createNamespacePropertyExpander(): PropertyExpanderInterface
-    {
-        return new NamespacePropertyExpander();
     }
 
     protected function createYmlParser(): YmlParserInterface

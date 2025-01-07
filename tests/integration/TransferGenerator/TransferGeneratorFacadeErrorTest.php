@@ -139,12 +139,12 @@ class TransferGeneratorFacadeErrorTest extends TestCase
 
         yield 'invalid type namespace' => [
             'configCaseName' => 'invalid-type-namespace',
-            'expectedMessage' => 'Invalid property namespace',
+            'expectedMessage' => 'Invalid namespace',
         ];
 
         yield 'invalid type namespace with alias' => [
             'configCaseName' => 'invalid-type-namespace-with-alias',
-            'expectedMessage' => 'Invalid property namespace',
+            'expectedMessage' => 'Invalid namespace',
         ];
     }
 

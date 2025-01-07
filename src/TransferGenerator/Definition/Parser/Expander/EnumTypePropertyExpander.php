@@ -21,7 +21,7 @@ readonly class EnumTypePropertyExpander implements PropertyExpanderInterface
     }
 
     /**
-     * @param array<string,string|bool> $propertyType
+     * @param array<string,string|null> $propertyType
      */
     private function getEnumType(array $propertyType): ?string
     {
