@@ -9,13 +9,16 @@ use SplFixedArray;
 
 abstract class AbstractTransfer implements TransferInterface
 {
-    use AttributeTransferTrait;
+    use AttributeTransferTrait {
+        hasConstantAttribute as private;
+        getConstantAttribute as private;
+    }
 
     protected const int META_DATA_SIZE = 0;
 
     protected const array META_DATA = [];
 
-    private const string DATA_INDEX = '_DATA_INDEX';
+    private const string DATA_INDEX_SUFFIX = '_DATA_INDEX';
 
     /**
      * @var SplFixedArray<mixed>
@@ -97,7 +100,7 @@ abstract class AbstractTransfer implements TransferInterface
         $this->data = new SplFixedArray(static::META_DATA_SIZE);
 
         foreach (static::META_DATA as $metaName) {
-            $metaIndex = $metaName . self::DATA_INDEX;
+            $metaIndex = $metaName . self::DATA_INDEX_SUFFIX;
             $initialValue = $this->hasConstantAttribute($metaName)
                 ? $this->getConstantAttribute($metaName)?->getInitialValue()
                 : null;
