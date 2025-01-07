@@ -6,21 +6,24 @@ namespace Picamator\TransferObject\Transfer\Attribute;
 
 use Attribute;
 use BackedEnum;
+use Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException;
 
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
 final readonly class EnumPropertyTypeAttribute implements PropertyTypeAttributeInterface
 {
-    public function __construct(private string $typeName)
+    public function __construct(private BackedEnum|string $typeName)
     {
     }
 
-    /**
-     * @param string|int $data
-     */
     public function fromArray(mixed $data): ?BackedEnum
     {
-        if (!is_string($data) || !is_subclass_of($this->typeName, BackedEnum::class)) {
-            return null;
+        if (!is_string($data) && !is_int($data)) {
+            throw new PropertyTypeTransferException(
+                sprintf(
+                    'Data must be of type string or integer, "%s" given."',
+                    gettype($data)
+                ),
+            );
         }
 
         return $this->typeName::tryFrom($data);

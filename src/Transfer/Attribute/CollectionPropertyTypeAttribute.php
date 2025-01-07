@@ -6,6 +6,7 @@ namespace Picamator\TransferObject\Transfer\Attribute;
 
 use ArrayObject;
 use Attribute;
+use Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException;
 use Picamator\TransferObject\Transfer\TransferInterface;
 
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
@@ -16,12 +17,19 @@ final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttr
     }
 
     /**
-     * @param array<string|int,mixed> $data
-     *
      * @return \ArrayObject<string|int,\Picamator\TransferObject\Transfer\TransferInterface>
      */
     public function fromArray(mixed $data): ArrayObject
     {
+        if (!is_array($data)) {
+            throw new PropertyTypeTransferException(
+                sprintf(
+                    'Data must be of type array, "%s" given."',
+                    gettype($data)
+                ),
+            );
+        }
+
         $collectionData = array_map($this->createTransfer(...), $data);
 
         return new ArrayObject($collectionData);
