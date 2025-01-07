@@ -20,9 +20,9 @@ STORY;
 
 echo <<<'STORY'
 =======================================================
-         Let's take CustomerTransfer
-                form
-        Generated\TransferGenerator
+            Let's take CustomerTransfer
+                      form
+            Generated\TransferGenerator
 =======================================================
 
 STORY;
