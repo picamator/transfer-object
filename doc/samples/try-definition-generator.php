@@ -34,9 +34,9 @@ $productData = [
         'isRegional' => true,
     ],
     'stores' => ['DE', 'AT'],
-    'labels' => new ArrayObject([
+    'labels' => [
        'sale' => 'Sale',
-    ]),
+    ],
     'availabilities' => [
         '2024-12-25' => [
             'total' => 100,
@@ -101,6 +101,4 @@ STORY;
 
 $productTransfer = new ProductTransfer()->fromArray($productData);
 
-// ----- convert ArrayObject to string before comparison
-$productData['labels'] = $productData['labels']->getArrayCopy();
 var_dump($productData == $productTransfer->toArray());

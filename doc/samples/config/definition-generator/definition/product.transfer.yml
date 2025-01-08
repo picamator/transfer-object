@@ -18,7 +18,7 @@ Product:
   stores:
     type: array
   labels:
-    type: ArrayObject
+    type: Labels
   availabilities:
     collectionType: Availabilities
   measurementUnit:
@@ -33,6 +33,10 @@ Details:
     type: string
   isRegional:
     type: bool
+
+Labels:
+  sale:
+    type: string
 
 Availabilities:
   total:
