@@ -4,24 +4,17 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render;
 
-use ArrayObject;
+use Picamator\TransferObject\Generated\DefinitionContentTransfer;
+use Picamator\TransferObject\Generated\TemplateTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransferEnum;
-use Picamator\TransferObject\Generated\DefinitionContentTransfer;
-use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
-use Picamator\TransferObject\Generated\TemplateTransfer;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TemplateExpanderInterface;
 
 readonly class TemplateBuilder implements TemplateBuilderInterface
 {
-    use TemplateRenderTrait;
-
-    /**
-     * @param \ArrayObject<int,TemplateExpanderInterface> $templateExpanders
-     */
     public function __construct(
         private ConfigInterface $config,
-        private ArrayObject $templateExpanders,
+        private TemplateExpanderInterface $templateExpander,
     ) {
     }
 
@@ -34,10 +27,7 @@ readonly class TemplateBuilder implements TemplateBuilderInterface
         $templateTransfer->imports[TransferEnum::TRAIT->value] = TransferEnum::TRAIT->value;
 
         foreach ($contentTransfer->properties as $propertyTransfer) {
-            $propertyName = $propertyTransfer->propertyName;
-            $templateTransfer->metaConstants[$this->getMetaConstant($propertyName)] = $propertyName;
-
-            $this->handleTemplateExpanders($propertyTransfer, $templateTransfer);
+            $this->templateExpander->expandTemplateTransfer($propertyTransfer, $templateTransfer);
         }
 
         $this->sortTemplate($templateTransfer);
@@ -45,16 +35,9 @@ readonly class TemplateBuilder implements TemplateBuilderInterface
         return $templateTransfer;
     }
 
-    private function handleTemplateExpanders(
-        DefinitionPropertyTransfer $propertyTransfer,
-        TemplateTransfer $templateTransfer,
-    ): void {
-        foreach ($this->templateExpanders as $expander) {
-            if (!$expander->isApplicable($propertyTransfer)) {
-                continue;
-            }
-
-            $expander->expandTemplateTransfer($propertyTransfer, $templateTransfer);
-        }
+    private function sortTemplate(TemplateTransfer $templateTransfer): void
+    {
+        $templateTransfer->imports->natsort();
+        $templateTransfer->metaConstants->natsort();
     }
 }

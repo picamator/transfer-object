@@ -11,14 +11,14 @@ use Picamator\TransferObject\TransferGenerator\Generator\Enum\DockBlockTemplateE
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 
-readonly class BuildInTypeTemplateExpander implements TemplateExpanderInterface
+final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
 {
-    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
+    protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
         return $propertyTransfer->buildInType !== null;
     }
 
-    public function expandTemplateTransfer(
+    protected function handleExpander(
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {

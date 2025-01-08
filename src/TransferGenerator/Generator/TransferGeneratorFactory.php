@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator;
 
-use ArrayObject;
 use Picamator\TransferObject\Dependency\DependencyContainer;
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
@@ -29,6 +28,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGener
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\BuildInTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\CollectionTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\EnumTypeTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\MetaConstantsTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\NamespaceTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TemplateExpanderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TransferTypeTemplateExpander;
@@ -100,22 +100,27 @@ readonly class TransferGeneratorFactory
     {
         return new TemplateBuilder(
             $this->getConfig(),
-            $this->createTemplateExpanders(),
+            $this->createTemplateExpanderChain(),
         );
     }
 
-    /**
-     * @return ArrayObject<int,\Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TemplateExpanderInterface>
-     */
-    protected function createTemplateExpanders(): ArrayObject
+    protected function createTemplateExpanderChain(): TemplateExpanderInterface
     {
-        return new ArrayObject([
-            $this->createCollectionTypeTemplateExpander(),
-            $this->createTransferTypeTemplateExpander(),
-            $this->createBuildInTypeTemplateExpander(),
-            $this->createEnumTypeTemplateExpander(),
-            $this->createNamespaceTemplateExpander(),
-        ]);
+        $templateExpander = $this->createCollectionTypeTemplateExpander();
+
+        $templateExpander
+            ->setNextExpander($this->createTransferTypeTemplateExpander())
+            ->setNextExpander($this->createBuildInTypeTemplateExpander())
+            ->setNextExpander($this->createEnumTypeTemplateExpander())
+            ->setNextExpander($this->createNamespaceTemplateExpander())
+            ->setNextExpander($this->createMetaConstantsTemplateExpander());
+
+        return $templateExpander;
+    }
+
+    protected function createMetaConstantsTemplateExpander(): TemplateExpanderInterface
+    {
+        return new MetaConstantsTemplateExpander();
     }
 
     protected function createNamespaceTemplateExpander(): TemplateExpanderInterface

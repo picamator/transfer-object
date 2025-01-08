@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\TemplateTransfer;
 
 interface TemplateExpanderInterface
 {
-    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool;
+    public function setNextExpander(TemplateExpanderInterface $expander): TemplateExpanderInterface;
 
     public function expandTemplateTransfer(
         DefinitionPropertyTransfer $propertyTransfer,
