@@ -100,11 +100,11 @@ readonly class TransferGeneratorFactory
     {
         return new TemplateBuilder(
             $this->getConfig(),
-            $this->createTemplateExpanderChain(),
+            $this->createTemplateExpander(),
         );
     }
 
-    protected function createTemplateExpanderChain(): TemplateExpanderInterface
+    protected function createTemplateExpander(): TemplateExpanderInterface
     {
         $templateExpander = $this->createCollectionTypeTemplateExpander();
 

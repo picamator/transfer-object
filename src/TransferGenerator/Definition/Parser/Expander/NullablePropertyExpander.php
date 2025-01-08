@@ -6,16 +6,16 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander;
 
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 
-readonly class NullablePropertyExpander implements PropertyExpanderInterface
+final class NullablePropertyExpander extends AbstractPropertyExpander
 {
     private const string REQUIRED_KEY = 'required';
 
-    public function isApplicable(array $propertyType): true
+    protected function isApplicable(array $propertyType): true
     {
         return true;
     }
 
-    public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
+    protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
         $propertyTransfer->isNullable = !$this->getIsRequired($propertyType);
     }

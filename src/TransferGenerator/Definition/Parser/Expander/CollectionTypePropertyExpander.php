@@ -8,18 +8,18 @@ use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\TypePrefixEnum;
 
-readonly class CollectionTypePropertyExpander implements PropertyExpanderInterface
+final class CollectionTypePropertyExpander extends AbstractPropertyExpander
 {
     use NamespacePropertyExpanderTrait;
 
     private const string COLLECTION_TYPE_KEY = 'collectionType';
 
-    public function isApplicable(array $propertyType): bool
+    protected function isApplicable(array $propertyType): bool
     {
         return $this->getCollectionType($propertyType) !== null;
     }
 
-    public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
+    protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
         $collectionType = $this->getCollectionType($propertyType) ?: '';
 

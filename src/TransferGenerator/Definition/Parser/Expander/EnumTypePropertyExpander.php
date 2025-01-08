@@ -6,16 +6,16 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander;
 
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 
-readonly class EnumTypePropertyExpander implements PropertyExpanderInterface
+final class EnumTypePropertyExpander extends AbstractPropertyExpander
 {
     private const string ENUM_TYPE_KEY = 'enumType';
 
-    public function isApplicable(array $propertyType): bool
+    protected function isApplicable(array $propertyType): bool
     {
         return $this->getEnumType($propertyType) !== null;
     }
 
-    public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
+    protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
         $propertyTransfer->enumType = $this->getEnumType($propertyType);
     }

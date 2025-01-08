@@ -9,20 +9,20 @@ use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\TypePrefixEnum;
 
-readonly class TransferTypePropertyExpander implements PropertyExpanderInterface
+final class TransferTypePropertyExpander extends AbstractPropertyExpander
 {
     use NamespacePropertyExpanderTrait;
 
     private const string TYPE_KEY = 'type';
 
-    public function isApplicable(array $propertyType): bool
+    protected function isApplicable(array $propertyType): bool
     {
         $type = $this->getType($propertyType);
 
         return $type !== null && BuildInTypeEnum::tryFrom($type) === null;
     }
 
-    public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
+    protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
         $type = $this->getType($propertyType) ?? '';
 
