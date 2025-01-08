@@ -34,7 +34,7 @@ readonly class DefinitionParser implements DefinitionParserInterface
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\YmlParserException
      *
-     * @return array<string,mixed>
+     * @return array<string|int,mixed>
      */
     private function parseFile(string $filePath): array
     {
