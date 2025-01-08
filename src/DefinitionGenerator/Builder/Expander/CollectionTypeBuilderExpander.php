@@ -9,11 +9,11 @@ use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 
-readonly class CollectionTypeBuilderExpander implements BuilderExpanderInterface
+final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
 {
     use BuilderExpanderTrait;
 
-    public function isApplicable(BuilderContentInterface $content): bool
+    protected function isApplicable(BuilderContentInterface $content): bool
     {
         if (!$content->getType()->isArray() || empty($content->getPropertyValue())) {
             return false;
@@ -25,7 +25,7 @@ readonly class CollectionTypeBuilderExpander implements BuilderExpanderInterface
         return $countArrayItems === count($propertyValue);
     }
 
-    public function expandBuilderTransfer(
+    protected function handleExpander(
         BuilderContentInterface $content,
         DefinitionBuilderTransfer $builderTransfer,
     ): void {

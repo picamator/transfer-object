@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 
 interface BuilderExpanderInterface
 {
-    public function isApplicable(BuilderContentInterface $content): bool;
+    public function setNextExpander(BuilderExpanderInterface $expander): BuilderExpanderInterface;
 
     /**
      * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException

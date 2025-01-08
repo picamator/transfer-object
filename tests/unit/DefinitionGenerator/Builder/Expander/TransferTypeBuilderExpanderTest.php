@@ -12,10 +12,13 @@ use Picamator\TransferObject\DefinitionGenerator\Builder\BuilderContentInterface
 use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\GetTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuilderExpanderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\TransferTypeBuilderExpander;
+use ReflectionMethod;
 
 class TransferTypeBuilderExpanderTest extends TestCase
 {
     private BuilderExpanderInterface $expander;
+
+    private ReflectionMethod $isApplicableReflection;
 
     private BuilderContentInterface&MockObject $builderContentMock;
 
@@ -24,6 +27,12 @@ class TransferTypeBuilderExpanderTest extends TestCase
         $this->builderContentMock = $this->createMock(BuilderContentInterface::class);
 
         $this->expander = new TransferTypeBuilderExpander();
+
+        $this->isApplicableReflection = new ReflectionMethod(
+            TransferTypeBuilderExpander::class,
+            'isApplicable',
+        );
+        $this->isApplicableReflection->setAccessible(true);
     }
 
     /**
@@ -42,7 +51,7 @@ class TransferTypeBuilderExpanderTest extends TestCase
             ->willReturn($propertyValue);
 
         // Act
-        $actual = $this->expander->isApplicable($this->builderContentMock);
+        $actual = $this->isApplicableReflection->invoke($this->expander, $this->builderContentMock);
 
         // Assert
         $this->assertSame($expected, $actual);
