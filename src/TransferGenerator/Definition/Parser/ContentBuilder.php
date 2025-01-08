@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Definition\Parser;
 
-use ArrayObject;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
@@ -13,11 +12,8 @@ use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Proper
 
 readonly class ContentBuilder implements ContentBuilderInterface
 {
-    /**
-     * @param \ArrayObject<int,PropertyExpanderInterface> $propertyExpanders
-     */
     public function __construct(
-        private ArrayObject $propertyExpanders,
+        private PropertyExpanderInterface $propertyExpander,
     ) {
     }
 
@@ -31,26 +27,13 @@ readonly class ContentBuilder implements ContentBuilderInterface
 
             $propertyTransfer = new DefinitionPropertyTransfer();
             $propertyTransfer->propertyName = (string)$propertyName;
-            $this->handlePropertyExpanders($propertyType, $propertyTransfer);
+
+            $this->propertyExpander->expandPropertyTransfer($propertyType, $propertyTransfer);
 
             $contentTransfer->properties[] = $propertyTransfer;
         }
 
         return $contentTransfer;
-    }
-
-    /**
-     * @param array<string,string|null> $propertyType
-     */
-    private function handlePropertyExpanders(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
-    {
-        foreach ($this->propertyExpanders as $propertyExpander) {
-            if (!$propertyExpander->isApplicable($propertyType)) {
-                continue;
-            }
-
-            $propertyExpander->expandPropertyTransfer($propertyType, $propertyTransfer);
-        }
     }
 
     /**

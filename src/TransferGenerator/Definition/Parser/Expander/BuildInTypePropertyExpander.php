@@ -7,16 +7,16 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 
-readonly class BuildInTypePropertyExpander implements PropertyExpanderInterface
+final class BuildInTypePropertyExpander extends AbstractPropertyExpander
 {
     private const string TYPE_KEY = 'type';
 
-    public function isApplicable(array $propertyType): bool
+    protected function isApplicable(array $propertyType): bool
     {
         return $this->getType($propertyType) !== null;
     }
 
-    public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
+    protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
         $propertyTransfer->buildInType = $this->getType($propertyType);
     }

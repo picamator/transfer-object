@@ -18,12 +18,10 @@ readonly class DefinitionParser implements DefinitionParserInterface
     public function parseDefinition(string $filePath): Generator
     {
         $count = 0;
-        $definition = $this->parser->parseFile($filePath);
-        $definition = is_array($definition) ? $definition : [];
-
-        foreach ($definition as $className => $properties) {
+        foreach ($this->parseFile($filePath) as $className => $properties) {
             $count++;
             $properties = is_array($properties) ? $properties : [];
+
             yield $this->contentBuilder->createContentTransfer(
                 className: (string)$className,
                 properties: $properties,
@@ -31,5 +29,17 @@ readonly class DefinitionParser implements DefinitionParserInterface
         }
 
         return $count;
+    }
+
+    /**
+     * @throws \Picamator\TransferObject\Dependency\Exception\YmlParserException
+     *
+     * @return array<string|int,mixed>
+     */
+    private function parseFile(string $filePath): array
+    {
+        $definition = $this->parser->parseFile($filePath);
+
+        return is_array($definition) ? $definition : [];
     }
 }

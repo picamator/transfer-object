@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator\Generator;
 
-use ArrayObject;
 use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionBuilder;
 use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionBuilderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuilderExpanderInterface;
@@ -51,19 +50,18 @@ readonly class DefinitionGeneratorFactory
 
     protected function createDefinitionBuilder(): DefinitionBuilderInterface
     {
-        return new DefinitionBuilder($this->createBuilderExpanders());
+        return new DefinitionBuilder($this->createBuilderExpander());
     }
 
-    /**
-     * @return ArrayObject<int,\Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuilderExpanderInterface>
-     */
-    protected function createBuilderExpanders(): ArrayObject
+    protected function createBuilderExpander(): BuilderExpanderInterface
     {
-        return new ArrayObject([
-            $this->createTransferTypeBuilderExpander(),
-            $this->createCollectionTypeBuilderExpander(),
-            $this->createBuildInTypeBuilderExpander(),
-        ]);
+        $builderExpander = $this->createTransferTypeBuilderExpander();
+
+        $builderExpander
+            ->setNextExpander($this->createCollectionTypeBuilderExpander())
+            ->setNextExpander($this->createBuildInTypeBuilderExpander());
+
+        return $builderExpander;
     }
 
     protected function createBuildInTypeBuilderExpander(): BuilderExpanderInterface

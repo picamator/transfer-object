@@ -161,21 +161,20 @@ readonly class DefinitionFactory
 
     protected function createContentBuilder(): ContentBuilderInterface
     {
-        return new ContentBuilder($this->createPropertyExpanders());
+        return new ContentBuilder($this->createPropertyExpander());
     }
 
-    /**
-     * @return \ArrayObject<int,PropertyExpanderInterface>
-     */
-    protected function createPropertyExpanders(): ArrayObject
+    protected function createPropertyExpander(): PropertyExpanderInterface
     {
-        return new ArrayObject([
-            $this->createNullablePropertyExpander(),
-            $this->createCollectionTypePropertyExpander(),
-            $this->createBuildInTypePropertyExpander(),
-            $this->createTransferTypePropertyExpander(),
-            $this->createEnumTypePropertyExpander(),
-        ]);
+        $propertyExpander = $this->createNullablePropertyExpander();
+
+        $propertyExpander
+            ->setNextExpander($this->createCollectionTypePropertyExpander())
+            ->setNextExpander($this->createBuildInTypePropertyExpander())
+            ->setNextExpander($this->createTransferTypePropertyExpander())
+            ->setNextExpander($this->createEnumTypePropertyExpander());
+
+        return $propertyExpander;
     }
 
     protected function createEnumTypePropertyExpander(): PropertyExpanderInterface

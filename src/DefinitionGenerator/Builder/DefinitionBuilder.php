@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator\Builder;
 
-use ArrayObject;
 use Generator;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuilderExpanderInterface;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
@@ -15,11 +14,8 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
 {
     use DefinitionBuilderTrait;
 
-    /**
-     * @param \ArrayObject<int,BuilderExpanderInterface> $builderExpanders
-     */
     public function __construct(
-        private ArrayObject $builderExpanders,
+        private BuilderExpanderInterface $builderExpander,
     ) {
     }
 
@@ -39,25 +35,10 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
         $builderTransfer = $this->createDefinitionBuilderTransfer($generatorContentTransfer->className);
         foreach ($generatorContentTransfer->content as $propertyName => $propertyValue) {
             $builderContent = $this->createBuilderContent((string)$propertyName, $propertyValue);
-            $this->handlerBuilderExpanders($builderContent, $builderTransfer);
+            $this->builderExpander->expandBuilderTransfer($builderContent, $builderTransfer);
         }
 
         return $builderTransfer;
-    }
-
-    private function handlerBuilderExpanders(
-        BuilderContentInterface $content,
-        DefinitionBuilderTransfer $builderTransfer,
-    ): void {
-        foreach ($this->builderExpanders as $builderExpander) {
-            if (!$builderExpander->isApplicable($content)) {
-                continue;
-            }
-
-            $builderExpander->expandBuilderTransfer($content, $builderTransfer);
-
-            return;
-        }
     }
 
     private function createDefinitionBuilderTransfer(string $className): DefinitionBuilderTransfer

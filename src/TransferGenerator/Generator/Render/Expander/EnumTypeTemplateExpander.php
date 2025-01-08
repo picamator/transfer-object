@@ -9,14 +9,14 @@ use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeTemplateE
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 
-readonly class EnumTypeTemplateExpander implements TemplateExpanderInterface
+final class EnumTypeTemplateExpander extends AbstractTemplateExpander
 {
-    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
+    protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
         return $propertyTransfer->enumType !== null;
     }
 
-    public function expandTemplateTransfer(
+    protected function handleExpander(
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {

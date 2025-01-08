@@ -6,7 +6,6 @@ namespace Picamator\Doc\Samples\TransferObject\Generated\DefinitionGenerator;
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\ArrayObjectPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
@@ -96,14 +95,13 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // labels
-    #[ArrayObjectPropertyTypeAttribute]
+    #[PropertyTypeAttribute(LabelsTransfer::class)]
     public const string LABELS = 'labels';
     protected const string LABELS_DATA_NAME = 'LABELS';
     protected const int LABELS_DATA_INDEX = 5;
 
-    /** @var \ArrayObject<string|int,mixed> */
-    public ArrayObject $labels {
-        get => $this->getRequiredData(self::LABELS_DATA_INDEX);
+    public ?LabelsTransfer $labels {
+        get => $this->getData(self::LABELS_DATA_INDEX);
         set => $this->setData(self::LABELS_DATA_INDEX, $value);
     }
 

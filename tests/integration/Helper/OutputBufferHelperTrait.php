@@ -8,11 +8,9 @@ trait OutputBufferHelperTrait
 {
     protected function getOutputBuffer(string $scriptPath): bool|string
     {
-        try {
-            ob_start();
-            include $scriptPath;
-        } finally {
-            return ob_get_clean();
-        }
+        ob_start();
+        include $scriptPath;
+
+        return ob_get_clean();
     }
 }

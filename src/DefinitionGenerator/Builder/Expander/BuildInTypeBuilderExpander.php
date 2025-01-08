@@ -13,16 +13,16 @@ use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 
-readonly class BuildInTypeBuilderExpander implements BuilderExpanderInterface
+final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
 {
     use BuilderExpanderTrait;
 
-    public function isApplicable(BuilderContentInterface $content): true
+    protected function isApplicable(BuilderContentInterface $content): true
     {
         return true;
     }
 
-    public function expandBuilderTransfer(
+    protected function handleExpander(
         BuilderContentInterface $content,
         DefinitionBuilderTransfer $builderTransfer,
     ): void {

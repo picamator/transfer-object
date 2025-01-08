@@ -9,11 +9,11 @@ use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 
-readonly class TransferTypeBuilderExpander implements BuilderExpanderInterface
+final class TransferTypeBuilderExpander extends AbstractBuilderExpander
 {
     use BuilderExpanderTrait;
 
-    public function isApplicable(BuilderContentInterface $content): bool
+    protected function isApplicable(BuilderContentInterface $content): bool
     {
         if (!$content->getType()->isArray() || empty($content->getPropertyValue())) {
             return false;
@@ -25,7 +25,7 @@ readonly class TransferTypeBuilderExpander implements BuilderExpanderInterface
         return is_string($key) && $this->isValidVariable($key);
     }
 
-    public function expandBuilderTransfer(
+    protected function handleExpander(
         BuilderContentInterface $content,
         DefinitionBuilderTransfer $builderTransfer,
     ): void {

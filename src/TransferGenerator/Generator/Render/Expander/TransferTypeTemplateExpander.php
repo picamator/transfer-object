@@ -4,22 +4,21 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEnum;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeTemplateEnum;
-use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderTrait;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEnum;
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeTemplateEnum;
 
-readonly class TransferTypeTemplateExpander implements TemplateExpanderInterface
+final class TransferTypeTemplateExpander extends AbstractTemplateExpander
 {
-    use TemplateRenderTrait;
+    use TemplateExpanderTrait;
 
-    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
+    protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
         return $propertyTransfer->transferType !== null;
     }
 
-    public function expandTemplateTransfer(
+    protected function handleExpander(
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
