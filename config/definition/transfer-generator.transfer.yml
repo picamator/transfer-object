@@ -19,7 +19,7 @@ ValidatorMessage:
     required:
   errorMessage:
     type: string
-    required:d
+    required:
 
 ConfigContent:
   transferNamespace:
