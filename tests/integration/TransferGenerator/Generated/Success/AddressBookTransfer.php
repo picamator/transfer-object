@@ -6,6 +6,7 @@ namespace Picamator\Tests\Integration\TransferObject\TransferGenerator\Generated
 
 use ArrayObject;
 use Picamator\Tests\Integration\TransferObject\TransferGenerator\Enum\AddressLabelEnum;
+use Picamator\Tests\Integration\TransferObject\TransferGenerator\Enum\Alias\AddressLabelEnum as AliasAddressLabelEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
@@ -23,12 +24,13 @@ final class AddressBookTransfer extends AbstractTransfer
 {
     use TransferTrait;
 
-    protected const int META_DATA_SIZE = 5;
+    protected const int META_DATA_SIZE = 6;
 
     protected const array META_DATA = [
         self::ADDRESSES => self::ADDRESSES_DATA_NAME,
         self::CATEGORIES => self::CATEGORIES_DATA_NAME,
         self::LABEL => self::LABEL_DATA_NAME,
+        self::LABEL_ALIAS => self::LABEL_ALIAS_DATA_NAME,
         self::NAME => self::NAME_DATA_NAME,
         self::UUID => self::UUID_DATA_NAME,
     ];
@@ -68,10 +70,21 @@ final class AddressBookTransfer extends AbstractTransfer
         set => $this->setData(self::LABEL_DATA_INDEX, $value);
     }
 
+    // labelAlias
+    #[EnumPropertyTypeAttribute(AliasAddressLabelEnum::class)]
+    public const string LABEL_ALIAS = 'labelAlias';
+    protected const string LABEL_ALIAS_DATA_NAME = 'LABEL_ALIAS';
+    protected const int LABEL_ALIAS_DATA_INDEX = 3;
+
+    public ?AliasAddressLabelEnum $labelAlias {
+        get => $this->getData(self::LABEL_ALIAS_DATA_INDEX);
+        set => $this->setData(self::LABEL_ALIAS_DATA_INDEX, $value);
+    }
+
     // name
     public const string NAME = 'name';
     protected const string NAME_DATA_NAME = 'NAME';
-    protected const int NAME_DATA_INDEX = 3;
+    protected const int NAME_DATA_INDEX = 4;
 
     public ?string $name {
         get => $this->getData(self::NAME_DATA_INDEX);
@@ -81,7 +94,7 @@ final class AddressBookTransfer extends AbstractTransfer
     // uuid
     public const string UUID = 'uuid';
     protected const string UUID_DATA_NAME = 'UUID';
-    protected const int UUID_DATA_INDEX = 4;
+    protected const int UUID_DATA_INDEX = 5;
 
     public ?string $uuid {
         get => $this->getData(self::UUID_DATA_INDEX);

@@ -14,7 +14,7 @@ readonly class EnumTypePropertyValidator implements PropertyValidatorInterface
     use ValidatorMessageTrait;
 
     private const string INVALID_ENUM_TYPE_ERROR_MESSAGE_TEMPLATE
-        = 'Property "%s" type "%s" is not a BakedEnum or Enum is not exist.';
+        = 'Property "%s" type "%s" is not a BakedEnum.';
 
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
@@ -23,7 +23,8 @@ readonly class EnumTypePropertyValidator implements PropertyValidatorInterface
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
-        if (is_subclass_of($propertyTransfer->enumType ?: '', BackedEnum::class)) {
+        $enumClassName = $propertyTransfer->enumType?->namespace?->withoutAlias ?: '';
+        if (is_subclass_of($enumClassName, BackedEnum::class)) {
             return $this->createSuccessMessageTransfer();
         }
 
@@ -37,7 +38,7 @@ readonly class EnumTypePropertyValidator implements PropertyValidatorInterface
         return sprintf(
             self::INVALID_ENUM_TYPE_ERROR_MESSAGE_TEMPLATE,
             $propertyTransfer->propertyName,
-            $propertyTransfer->enumType ?? '',
+            $propertyTransfer->enumType?->namespace->withoutAlias ?? '',
         );
     }
 }

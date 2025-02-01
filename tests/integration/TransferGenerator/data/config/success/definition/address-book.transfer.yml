@@ -8,4 +8,6 @@ AddressBook:
   categories:
     type: array
   label:
-    enumType: "\\Picamator\\Tests\\Integration\\TransferObject\\TransferGenerator\\Enum\\AddressLabelEnum"
+    enumType: "Picamator\\Tests\\Integration\\TransferObject\\TransferGenerator\\Enum\\AddressLabelEnum"
+  labelAlias:
+    enumType: "Picamator\\Tests\\Integration\\TransferObject\\TransferGenerator\\Enum\\Alias\\AddressLabelEnum as AliasAddressLabelEnum"

@@ -13,6 +13,14 @@ ConfigValidator:
   errorMessages:
     collectionType: ValidatorMessage
 
+ValidatorMessage:
+  isValid:
+    type: bool
+    required:
+  errorMessage:
+    type: string
+    required:
+
 ConfigContent:
   transferNamespace:
     type: string
@@ -47,13 +55,13 @@ DefinitionProperty:
     type: string
     required:
   buildInType:
-    enumType: "\\Picamator\\TransferObject\\TransferGenerator\\Definition\\Enum\\BuildInTypeEnum"
+    enumType: "Picamator\\TransferObject\\TransferGenerator\\Definition\\Enum\\BuildInTypeEnum"
   transferType:
     type: DefinitionEmbeddedType
   collectionType:
     type: DefinitionEmbeddedType
   enumType:
-    type: string
+    type: DefinitionEmbeddedType
   isNullable:
     type: bool
     required:
