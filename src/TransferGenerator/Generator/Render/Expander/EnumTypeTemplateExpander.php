@@ -23,11 +23,11 @@ final class EnumTypeTemplateExpander extends AbstractTemplateExpander
         $templateTransfer->imports[AttributeEnum::ENUM_TYPE_ATTRIBUTE->value]
             ??= AttributeEnum::ENUM_TYPE_ATTRIBUTE->value;
 
-        $importEnum = ltrim($propertyTransfer->enumType ?: '', '\\');
+        $importEnum = $propertyTransfer->enumType?->namespace?->fullName ?: '';
         $templateTransfer->imports[$importEnum] ??= $importEnum;
 
         $propertyName = $propertyTransfer->propertyName;
-        $enumClassName = $this->getEnumName($propertyTransfer);
+        $enumClassName = $propertyTransfer->enumType?->name ?: '';
 
         $templateTransfer->properties[$propertyName] = $enumClassName;
         $templateTransfer->attributes[$propertyName] = $this->getPropertyAttribute($enumClassName);
@@ -37,12 +37,5 @@ final class EnumTypeTemplateExpander extends AbstractTemplateExpander
     private function getPropertyAttribute(string $enumClassName): string
     {
         return sprintf(AttributeTemplateEnum::ENUM_TYPE_ATTRIBUTE->value, $enumClassName);
-    }
-
-    private function getEnumName(DefinitionPropertyTransfer $propertyTransfer): string
-    {
-        $enumName = $propertyTransfer->enumType ?? '';
-
-        return basename(str_replace('\\', '/', $enumName));
     }
 }

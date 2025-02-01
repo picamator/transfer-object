@@ -3,7 +3,7 @@ Merchant:
     type: string
     required:
   country:
-    enumType: "\\Picamator\\Doc\\Samples\\TransferObject\\Enum\\CountryEnum"
+    enumType: "Picamator\\Doc\\Samples\\TransferObject\\Enum\\CountryEnum"
     required:
   isActive:
     type: bool

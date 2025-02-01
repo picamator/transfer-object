@@ -55,11 +55,12 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     }
 
     // enumType
+    #[PropertyTypeAttribute(DefinitionEmbeddedTypeTransfer::class)]
     public const string ENUM_TYPE = 'enumType';
     protected const string ENUM_TYPE_DATA_NAME = 'ENUM_TYPE';
     protected const int ENUM_TYPE_DATA_INDEX = 2;
 
-    public ?string $enumType {
+    public ?DefinitionEmbeddedTypeTransfer $enumType {
         get => $this->getData(self::ENUM_TYPE_DATA_INDEX);
         set => $this->setData(self::ENUM_TYPE_DATA_INDEX, $value);
     }

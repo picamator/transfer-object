@@ -55,13 +55,13 @@ DefinitionProperty:
     type: string
     required:
   buildInType:
-    enumType: "\\Picamator\\TransferObject\\TransferGenerator\\Definition\\Enum\\BuildInTypeEnum"
+    enumType: "Picamator\\TransferObject\\TransferGenerator\\Definition\\Enum\\BuildInTypeEnum"
   transferType:
     type: DefinitionEmbeddedType
   collectionType:
     type: DefinitionEmbeddedType
   enumType:
-    type: string
+    type: DefinitionEmbeddedType
   isNullable:
     type: bool
     required:
