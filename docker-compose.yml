@@ -4,6 +4,7 @@ services:
       context: docker/php
       args:
         ENABLE_XDEBUG: ${ENABLE_XDEBUG:-0}
+        ENABLE_XDEBUG_PROFILER: ${ENABLE_XDEBUG_PROFILER:-0}
     container_name: transfer-object-php
     extra_hosts:
       - "host.docker.internal:host-gateway"

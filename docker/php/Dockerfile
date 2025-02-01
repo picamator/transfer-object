@@ -32,14 +32,19 @@ RUN docker-php-ext-configure zip && \
 
 # configure Xdebug if enabled
 ARG ENABLE_XDEBUG=0
+ARG ENABLE_XDEBUG_PROFILER=0
 RUN if [ "$ENABLE_XDEBUG" = "1" ]; then \
     docker-php-ext-enable xdebug && \
     echo "xdebug.max_nesting_level=1000" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
-    echo "xdebug.mode=debug,coverage" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
     echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
     echo "xdebug.client_port=9003" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
     echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
-    echo "xdebug.output_dir=/tmp/xdebug" >> /usr/local/etc/php/conf.d/99-xdebug.ini; \
+    echo "xdebug.output_dir=/home/transfer/transfer-object" >> /usr/local/etc/php/conf.d/99-xdebug.ini; \
+    if [ "$ENABLE_XDEBUG_PROFILER" = "1" ]; then \
+        echo "xdebug.mode=debug,coverage,profile" >> /usr/local/etc/php/conf.d/99-xdebug.ini; \
+    else \
+        echo "xdebug.mode=debug,coverage" >> /usr/local/etc/php/conf.d/99-xdebug.ini; \
+    fi; \
     fi
 
 # switch back to the new user

@@ -16,6 +16,7 @@ nbproject/
 vendor/
 .phpunit.result.cache
 .cs-check.json
+cachegrind.out.*.gz
 
 # project
 src/**/_tmp
