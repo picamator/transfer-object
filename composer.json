@@ -49,7 +49,7 @@
   "prefer-stable": true,
   "scripts": {
     "phpunit": "./vendor/bin/phpunit --no-progress",
-    "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon --no-progress",
+    "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon --no-progress --memory-limit=512M",
     "generate-transfer": "php ./bin/generate-transfer",
     "captainhook": "./vendor/bin/captainhook",
     "phpcs": "./vendor/bin/phpcs",

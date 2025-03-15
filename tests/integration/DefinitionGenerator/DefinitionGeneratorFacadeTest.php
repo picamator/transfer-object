@@ -83,6 +83,12 @@ class DefinitionGeneratorFacadeTest extends TestCase
             'sampleFileName' => 'google-shopping-content.json',
             'definitionFileName' => 'product.transfer.yml',
         ];
+
+        yield 'Frankfurter dev' => [
+            'className' => 'ExchangeRate',
+            'sampleFileName' => 'frankfurter-dev-v1.json',
+            'definitionFileName' => 'exchangeRate.transfer.yml',
+        ];
     }
 
     #[DataProvider('configPathDataProvider')]
@@ -116,6 +122,10 @@ class DefinitionGeneratorFacadeTest extends TestCase
 
         yield 'Google Shopping Content' => [
             'google-shopping-content.json',
+        ];
+
+        yield 'Frankfurter dev' => [
+            'frankfurter-dev-v1.json',
         ];
     }
 

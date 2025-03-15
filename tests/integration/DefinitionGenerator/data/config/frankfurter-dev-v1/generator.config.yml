@@ -1,0 +1,4 @@
+generator:
+  transferNamespace: "Picamator\\Tests\\Integration\\TransferObject\\DefinitionGenerator\\Generated\\FrankfurterDev"
+  transferPath: "${PROJECT_ROOT}/tests/integration/DefinitionGenerator/Generated/FrankfurterDev"
+  definitionPath: "${PROJECT_ROOT}/tests/integration/DefinitionGenerator/data/config/frankfurter-dev-v1/definition"

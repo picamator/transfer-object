@@ -11,6 +11,7 @@ trait DefinitionBuilderTrait
 {
     protected function createBuilderContent(string $propertyName, mixed $propertyValue): BuilderContentInterface
     {
+        $propertyName = preg_match('#^[A-Z]+$#', $propertyName) ? strtolower($propertyName) : $propertyName;
         $typeEnum = $this->getTypeEnum($propertyName, $propertyValue);
 
         return new readonly class ($typeEnum, $propertyName, $propertyValue) implements BuilderContentInterface
