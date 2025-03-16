@@ -9,11 +9,11 @@ This ensures that your report is handled confidentially and promptly.
 
 To report a vulnerability, follow these steps:
 
-1. Go to the [Security tab](https://github.com/picamator/transfer-object/security) of the repository.
+1. Go to the repository's [Security tab](https://github.com/picamator/transfer-object/security).
 2. Click on the "Report a vulnerability" button.
 3. Fill out the necessary details about the vulnerability and submit the report.
 
 ### Important note
 
 Please do not report security issues through public channels such as GitHub issues, discussions, or pull requests.
-This ensures that security vulnerabilities are addressed quicky and do not pose a risk to users.
+This ensures that security vulnerabilities are addressed quickly and do not pose a risk to users.
