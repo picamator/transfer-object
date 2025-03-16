@@ -14,11 +14,22 @@ nbproject/
 
 # tooling
 vendor/
-.phpunit.result.cache
-.cs-check.json
-cachegrind.out.*.gz
+
+# log
+log/*
+
+!log/xdebug-profile
+log/xdebug-profile/*
+!log/xdebug-profile/.keep
+
+!log/cache
+log/cache/*
+!log/cache/.keep
 
 # project
 src/**/_tmp
 doc/samples/**/_tmp
 tests/**/_tmp
+
+# environment
+.env

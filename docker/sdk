@@ -6,8 +6,8 @@ function show_usage() {
   echo "==================================="
   echo "Usage: $0 [-x | -xp] <argument>"
   echo "Arguments:"
-  echo "  -x                         Enable Xdebug during build"
-  echo "  -xp                        Enable Xdebug and profiler during build"
+  echo "  -x                         Enable Xdebug with coverage and debug mode on start"
+  echo "  -p                         Enable Xdebug with profiler mode on start"
   echo "  build                      Build Docker containers"
   echo "  start                      Start Docker containers"
   echo "  stop                       Stop Docker containers"
@@ -29,17 +29,15 @@ PROJECT_ROOT="/home/transfer/transfer-object"
 DOCKER_EXEC="docker exec -it ${DOCKER_CONTAINER_NAME}"
 
 # options
-ENABLE_XDEBUG=0
-ENABLE_XDEBUG_PROFILER=0
+XDEBUG_MODE=''
 
 while getopts ":xp" opt; do
   case ${opt} in
     x )
-      ENABLE_XDEBUG=1
+      XDEBUG_MODE="debug,coverage"
       ;;
     p )
-      ENABLE_XDEBUG=1
-      ENABLE_XDEBUG_PROFILER=1
+      XDEBUG_MODE="profile"
       ;;
     \? )
       show_usage
@@ -52,16 +50,14 @@ shift $((OPTIND -1))
 # arguments
 case $1 in
   build)
-    if [ "$ENABLE_XDEBUG" -eq 1 ] && [ "$ENABLE_XDEBUG_PROFILER" -eq 1 ]; then
-      ENABLE_XDEBUG=1 ENABLE_XDEBUG_PROFILER=1 docker compose build
-    elif [ "$ENABLE_XDEBUG" -eq 1 ]; then
-      ENABLE_XDEBUG=1 docker compose build
-    else
-      docker compose build
-    fi
+    docker compose build
     ;;
   start)
-    docker compose up -d --remove-orphans
+    if [ "$XDEBUG_MODE" == "" ]; then
+      docker compose up -d --remove-orphans
+    else
+      XDEBUG_MODE={$XDEBUG_MODE} docker compose up -d --remove-orphans
+    fi
     ;;
   stop)
     docker compose stop
