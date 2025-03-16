@@ -55,7 +55,6 @@ TestClass:
   testProperty:
     type: string
 
-
 DEFINITION,
         ];
 
@@ -71,7 +70,6 @@ TestClass:
   testProperty:
     type: TestItem
 
-
 DEFINITION,
         ];
 
@@ -86,7 +84,6 @@ DEFINITION,
 TestClass:
   testProperty:
     collectionType: TestItem
-
 
 DEFINITION,
         ];

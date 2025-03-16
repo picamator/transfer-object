@@ -23,42 +23,34 @@ Product:
     collectionType: Availabilities
   measurementUnit:
     type: MeasurementUnit
-
 DeliveryOptions:
   name:
     type: string
-
 Details:
   description:
     type: string
   isRegional:
     type: bool
-
 Labels:
   sale:
     type: string
-
 Availabilities:
   total:
     type: int
   buffer:
     type: int
-
 MeasurementUnit:
   palette:
     type: Palette
   box:
     type: Box
-
 Palette:
   type:
     type: string
   items:
     type: int
-
 Box:
   type:
     type: string
   items:
     type: int
-

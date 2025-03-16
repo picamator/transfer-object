@@ -46,10 +46,12 @@ START;
                         var_export($contentTransfer, true),
                     ),
                 ),
-            } . PHP_EOL;
+            };
+
+            $content .= PHP_EOL;
         }
 
-        return $content . PHP_EOL;
+        return $content;
     }
 
     private function renderCollectionType(string $propertyName, string $typeName): string

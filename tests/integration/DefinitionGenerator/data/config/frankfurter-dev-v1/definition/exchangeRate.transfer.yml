@@ -7,7 +7,6 @@ ExchangeRate:
     type: string
   rates:
     type: Rates
-
 Rates:
   AUD:
     type: float
@@ -69,4 +68,3 @@ Rates:
     type: float
   ZAR:
     type: float
-
