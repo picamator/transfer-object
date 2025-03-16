@@ -53,302 +53,302 @@ final class RatesTransfer extends AbstractTransfer
         self::ZAR => self::ZAR_DATA_NAME,
     ];
 
-    // aud
-    public const string AUD = 'aud';
+    // AUD
+    public const string AUD = 'AUD';
     protected const string AUD_DATA_NAME = 'AUD';
     protected const int AUD_DATA_INDEX = 0;
 
-    public ?float $aud {
+    public ?float $AUD {
         get => $this->getData(self::AUD_DATA_INDEX);
         set => $this->setData(self::AUD_DATA_INDEX, $value);
     }
 
-    // bgn
-    public const string BGN = 'bgn';
+    // BGN
+    public const string BGN = 'BGN';
     protected const string BGN_DATA_NAME = 'BGN';
     protected const int BGN_DATA_INDEX = 1;
 
-    public ?float $bgn {
+    public ?float $BGN {
         get => $this->getData(self::BGN_DATA_INDEX);
         set => $this->setData(self::BGN_DATA_INDEX, $value);
     }
 
-    // brl
-    public const string BRL = 'brl';
+    // BRL
+    public const string BRL = 'BRL';
     protected const string BRL_DATA_NAME = 'BRL';
     protected const int BRL_DATA_INDEX = 2;
 
-    public ?float $brl {
+    public ?float $BRL {
         get => $this->getData(self::BRL_DATA_INDEX);
         set => $this->setData(self::BRL_DATA_INDEX, $value);
     }
 
-    // cad
-    public const string CAD = 'cad';
+    // CAD
+    public const string CAD = 'CAD';
     protected const string CAD_DATA_NAME = 'CAD';
     protected const int CAD_DATA_INDEX = 3;
 
-    public ?float $cad {
+    public ?float $CAD {
         get => $this->getData(self::CAD_DATA_INDEX);
         set => $this->setData(self::CAD_DATA_INDEX, $value);
     }
 
-    // chf
-    public const string CHF = 'chf';
+    // CHF
+    public const string CHF = 'CHF';
     protected const string CHF_DATA_NAME = 'CHF';
     protected const int CHF_DATA_INDEX = 4;
 
-    public ?float $chf {
+    public ?float $CHF {
         get => $this->getData(self::CHF_DATA_INDEX);
         set => $this->setData(self::CHF_DATA_INDEX, $value);
     }
 
-    // cny
-    public const string CNY = 'cny';
+    // CNY
+    public const string CNY = 'CNY';
     protected const string CNY_DATA_NAME = 'CNY';
     protected const int CNY_DATA_INDEX = 5;
 
-    public ?float $cny {
+    public ?float $CNY {
         get => $this->getData(self::CNY_DATA_INDEX);
         set => $this->setData(self::CNY_DATA_INDEX, $value);
     }
 
-    // czk
-    public const string CZK = 'czk';
+    // CZK
+    public const string CZK = 'CZK';
     protected const string CZK_DATA_NAME = 'CZK';
     protected const int CZK_DATA_INDEX = 6;
 
-    public ?float $czk {
+    public ?float $CZK {
         get => $this->getData(self::CZK_DATA_INDEX);
         set => $this->setData(self::CZK_DATA_INDEX, $value);
     }
 
-    // dkk
-    public const string DKK = 'dkk';
+    // DKK
+    public const string DKK = 'DKK';
     protected const string DKK_DATA_NAME = 'DKK';
     protected const int DKK_DATA_INDEX = 7;
 
-    public ?float $dkk {
+    public ?float $DKK {
         get => $this->getData(self::DKK_DATA_INDEX);
         set => $this->setData(self::DKK_DATA_INDEX, $value);
     }
 
-    // gbp
-    public const string GBP = 'gbp';
+    // GBP
+    public const string GBP = 'GBP';
     protected const string GBP_DATA_NAME = 'GBP';
     protected const int GBP_DATA_INDEX = 8;
 
-    public ?float $gbp {
+    public ?float $GBP {
         get => $this->getData(self::GBP_DATA_INDEX);
         set => $this->setData(self::GBP_DATA_INDEX, $value);
     }
 
-    // hkd
-    public const string HKD = 'hkd';
+    // HKD
+    public const string HKD = 'HKD';
     protected const string HKD_DATA_NAME = 'HKD';
     protected const int HKD_DATA_INDEX = 9;
 
-    public ?float $hkd {
+    public ?float $HKD {
         get => $this->getData(self::HKD_DATA_INDEX);
         set => $this->setData(self::HKD_DATA_INDEX, $value);
     }
 
-    // huf
-    public const string HUF = 'huf';
+    // HUF
+    public const string HUF = 'HUF';
     protected const string HUF_DATA_NAME = 'HUF';
     protected const int HUF_DATA_INDEX = 10;
 
-    public ?float $huf {
+    public ?float $HUF {
         get => $this->getData(self::HUF_DATA_INDEX);
         set => $this->setData(self::HUF_DATA_INDEX, $value);
     }
 
-    // idr
-    public const string IDR = 'idr';
+    // IDR
+    public const string IDR = 'IDR';
     protected const string IDR_DATA_NAME = 'IDR';
     protected const int IDR_DATA_INDEX = 11;
 
-    public ?int $idr {
+    public ?int $IDR {
         get => $this->getData(self::IDR_DATA_INDEX);
         set => $this->setData(self::IDR_DATA_INDEX, $value);
     }
 
-    // ils
-    public const string ILS = 'ils';
+    // ILS
+    public const string ILS = 'ILS';
     protected const string ILS_DATA_NAME = 'ILS';
     protected const int ILS_DATA_INDEX = 12;
 
-    public ?float $ils {
+    public ?float $ILS {
         get => $this->getData(self::ILS_DATA_INDEX);
         set => $this->setData(self::ILS_DATA_INDEX, $value);
     }
 
-    // inr
-    public const string INR = 'inr';
+    // INR
+    public const string INR = 'INR';
     protected const string INR_DATA_NAME = 'INR';
     protected const int INR_DATA_INDEX = 13;
 
-    public ?float $inr {
+    public ?float $INR {
         get => $this->getData(self::INR_DATA_INDEX);
         set => $this->setData(self::INR_DATA_INDEX, $value);
     }
 
-    // isk
-    public const string ISK = 'isk';
+    // ISK
+    public const string ISK = 'ISK';
     protected const string ISK_DATA_NAME = 'ISK';
     protected const int ISK_DATA_INDEX = 14;
 
-    public ?float $isk {
+    public ?float $ISK {
         get => $this->getData(self::ISK_DATA_INDEX);
         set => $this->setData(self::ISK_DATA_INDEX, $value);
     }
 
-    // jpy
-    public const string JPY = 'jpy';
+    // JPY
+    public const string JPY = 'JPY';
     protected const string JPY_DATA_NAME = 'JPY';
     protected const int JPY_DATA_INDEX = 15;
 
-    public ?float $jpy {
+    public ?float $JPY {
         get => $this->getData(self::JPY_DATA_INDEX);
         set => $this->setData(self::JPY_DATA_INDEX, $value);
     }
 
-    // krw
-    public const string KRW = 'krw';
+    // KRW
+    public const string KRW = 'KRW';
     protected const string KRW_DATA_NAME = 'KRW';
     protected const int KRW_DATA_INDEX = 16;
 
-    public ?float $krw {
+    public ?float $KRW {
         get => $this->getData(self::KRW_DATA_INDEX);
         set => $this->setData(self::KRW_DATA_INDEX, $value);
     }
 
-    // mxn
-    public const string MXN = 'mxn';
+    // MXN
+    public const string MXN = 'MXN';
     protected const string MXN_DATA_NAME = 'MXN';
     protected const int MXN_DATA_INDEX = 17;
 
-    public ?float $mxn {
+    public ?float $MXN {
         get => $this->getData(self::MXN_DATA_INDEX);
         set => $this->setData(self::MXN_DATA_INDEX, $value);
     }
 
-    // myr
-    public const string MYR = 'myr';
+    // MYR
+    public const string MYR = 'MYR';
     protected const string MYR_DATA_NAME = 'MYR';
     protected const int MYR_DATA_INDEX = 18;
 
-    public ?float $myr {
+    public ?float $MYR {
         get => $this->getData(self::MYR_DATA_INDEX);
         set => $this->setData(self::MYR_DATA_INDEX, $value);
     }
 
-    // nok
-    public const string NOK = 'nok';
+    // NOK
+    public const string NOK = 'NOK';
     protected const string NOK_DATA_NAME = 'NOK';
     protected const int NOK_DATA_INDEX = 19;
 
-    public ?float $nok {
+    public ?float $NOK {
         get => $this->getData(self::NOK_DATA_INDEX);
         set => $this->setData(self::NOK_DATA_INDEX, $value);
     }
 
-    // nzd
-    public const string NZD = 'nzd';
+    // NZD
+    public const string NZD = 'NZD';
     protected const string NZD_DATA_NAME = 'NZD';
     protected const int NZD_DATA_INDEX = 20;
 
-    public ?float $nzd {
+    public ?float $NZD {
         get => $this->getData(self::NZD_DATA_INDEX);
         set => $this->setData(self::NZD_DATA_INDEX, $value);
     }
 
-    // php
-    public const string PHP = 'php';
+    // PHP
+    public const string PHP = 'PHP';
     protected const string PHP_DATA_NAME = 'PHP';
     protected const int PHP_DATA_INDEX = 21;
 
-    public ?float $php {
+    public ?float $PHP {
         get => $this->getData(self::PHP_DATA_INDEX);
         set => $this->setData(self::PHP_DATA_INDEX, $value);
     }
 
-    // pln
-    public const string PLN = 'pln';
+    // PLN
+    public const string PLN = 'PLN';
     protected const string PLN_DATA_NAME = 'PLN';
     protected const int PLN_DATA_INDEX = 22;
 
-    public ?float $pln {
+    public ?float $PLN {
         get => $this->getData(self::PLN_DATA_INDEX);
         set => $this->setData(self::PLN_DATA_INDEX, $value);
     }
 
-    // ron
-    public const string RON = 'ron';
+    // RON
+    public const string RON = 'RON';
     protected const string RON_DATA_NAME = 'RON';
     protected const int RON_DATA_INDEX = 23;
 
-    public ?float $ron {
+    public ?float $RON {
         get => $this->getData(self::RON_DATA_INDEX);
         set => $this->setData(self::RON_DATA_INDEX, $value);
     }
 
-    // sek
-    public const string SEK = 'sek';
+    // SEK
+    public const string SEK = 'SEK';
     protected const string SEK_DATA_NAME = 'SEK';
     protected const int SEK_DATA_INDEX = 24;
 
-    public ?float $sek {
+    public ?float $SEK {
         get => $this->getData(self::SEK_DATA_INDEX);
         set => $this->setData(self::SEK_DATA_INDEX, $value);
     }
 
-    // sgd
-    public const string SGD = 'sgd';
+    // SGD
+    public const string SGD = 'SGD';
     protected const string SGD_DATA_NAME = 'SGD';
     protected const int SGD_DATA_INDEX = 25;
 
-    public ?float $sgd {
+    public ?float $SGD {
         get => $this->getData(self::SGD_DATA_INDEX);
         set => $this->setData(self::SGD_DATA_INDEX, $value);
     }
 
-    // thb
-    public const string THB = 'thb';
+    // THB
+    public const string THB = 'THB';
     protected const string THB_DATA_NAME = 'THB';
     protected const int THB_DATA_INDEX = 26;
 
-    public ?float $thb {
+    public ?float $THB {
         get => $this->getData(self::THB_DATA_INDEX);
         set => $this->setData(self::THB_DATA_INDEX, $value);
     }
 
-    // try
-    public const string TRY = 'try';
+    // TRY
+    public const string TRY = 'TRY';
     protected const string TRY_DATA_NAME = 'TRY';
     protected const int TRY_DATA_INDEX = 27;
 
-    public ?float $try {
+    public ?float $TRY {
         get => $this->getData(self::TRY_DATA_INDEX);
         set => $this->setData(self::TRY_DATA_INDEX, $value);
     }
 
-    // usd
-    public const string USD = 'usd';
+    // USD
+    public const string USD = 'USD';
     protected const string USD_DATA_NAME = 'USD';
     protected const int USD_DATA_INDEX = 28;
 
-    public ?float $usd {
+    public ?float $USD {
         get => $this->getData(self::USD_DATA_INDEX);
         set => $this->setData(self::USD_DATA_INDEX, $value);
     }
 
-    // zar
-    public const string ZAR = 'zar';
+    // ZAR
+    public const string ZAR = 'ZAR';
     protected const string ZAR_DATA_NAME = 'ZAR';
     protected const int ZAR_DATA_INDEX = 29;
 
-    public ?float $zar {
+    public ?float $ZAR {
         get => $this->getData(self::ZAR_DATA_INDEX);
         set => $this->setData(self::ZAR_DATA_INDEX, $value);
     }
