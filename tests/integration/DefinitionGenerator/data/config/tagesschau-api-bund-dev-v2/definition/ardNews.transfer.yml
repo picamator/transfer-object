@@ -1,0 +1,81 @@
+ArdNews:
+  news:
+    collectionType: News
+  regional:
+    type: array
+  newStoriesCountLink:
+    type: string
+  type:
+    type: string
+  nextPage:
+    type: string
+News:
+  sophoraId:
+    type: string
+  externalId:
+    type: string
+  title:
+    type: string
+  date:
+    type: string
+  teaserImage:
+    type: TeaserImage
+  tags:
+    collectionType: Tags
+  updateCheckUrl:
+    type: string
+  tracking:
+    collectionType: Tracking
+  topline:
+    type: string
+  firstSentence:
+    type: string
+  details:
+    type: string
+  detailsweb:
+    type: string
+  shareURL:
+    type: string
+  geotags:
+    type: array
+  regionId:
+    type: int
+  regionIds:
+    type: array
+  ressort:
+    type: string
+  breakingNews:
+    type: bool
+  type:
+    type: string
+TeaserImage:
+  alttext:
+    type: string
+  imageVariants:
+    type: array
+  type:
+    type: string
+Tags:
+  tag:
+    type: string
+Tracking:
+  sid:
+    type: string
+  src:
+    type: string
+  ctp:
+    type: string
+  pdt:
+    type: string
+  otp:
+    type: string
+  cid:
+    type: string
+  pti:
+    type: string
+  bcr:
+    type: string
+  type:
+    type: string
+  av_full_show:
+    type: bool

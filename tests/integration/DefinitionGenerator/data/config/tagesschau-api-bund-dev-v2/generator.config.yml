@@ -1,0 +1,4 @@
+generator:
+  transferNamespace: "Picamator\\Tests\\Integration\\TransferObject\\DefinitionGenerator\\Generated\\Tagesschau"
+  transferPath: "${PROJECT_ROOT}/tests/integration/DefinitionGenerator/Generated/Tagesschau"
+  definitionPath: "${PROJECT_ROOT}/tests/integration/DefinitionGenerator/data/config/tagesschau-api-bund-dev-v2/definition"

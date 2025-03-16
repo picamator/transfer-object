@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\FrankfurterDev;
+namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Frankfurter;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
