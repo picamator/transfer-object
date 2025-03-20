@@ -8,9 +8,11 @@ use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
+use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Frankfurter\ExchangeRateTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\GoogleShoppingContent\ProductTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\NasaNeo\AsteroidTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\OpenWeather\ForecastTransfer;
+use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Tagesschau\ArdNewsTransfer;
 use Picamator\Tests\Integration\TransferObject\Helper\DefinitionGeneratorHelperTrait;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
@@ -83,6 +85,18 @@ class DefinitionGeneratorFacadeTest extends TestCase
             'sampleFileName' => 'google-shopping-content.json',
             'definitionFileName' => 'product.transfer.yml',
         ];
+
+        yield 'Frankfurter' => [
+            'className' => 'ExchangeRate',
+            'sampleFileName' => 'frankfurter-dev-v1.json',
+            'definitionFileName' => 'exchangeRate.transfer.yml',
+        ];
+
+        yield 'Tagesschau' => [
+            'className' => 'ArdNews',
+            'sampleFileName' => 'tagesschau-api-bund-dev-v2.json',
+            'definitionFileName' => 'ardNews.transfer.yml',
+        ];
     }
 
     #[DataProvider('configPathDataProvider')]
@@ -116,6 +130,14 @@ class DefinitionGeneratorFacadeTest extends TestCase
 
         yield 'Google Shopping Content' => [
             'google-shopping-content.json',
+        ];
+
+        yield 'Frankfurter' => [
+            'frankfurter-dev-v1.json',
+        ];
+
+        yield 'Tagesschau' => [
+            'tagesschau-api-bund-dev-v2.json',
         ];
     }
 
@@ -160,6 +182,16 @@ class DefinitionGeneratorFacadeTest extends TestCase
         yield 'Google Shopping Content' => [
             ProductTransfer::class,
             'google-shopping-content.json',
+        ];
+
+        yield 'Frankfurter' => [
+            ExchangeRateTransfer::class,
+            'frankfurter-dev-v1.json',
+        ];
+
+        yield 'Tagesschau' => [
+            ArdNewsTransfer::class,
+            'tagesschau-api-bund-dev-v2.json',
         ];
     }
 }

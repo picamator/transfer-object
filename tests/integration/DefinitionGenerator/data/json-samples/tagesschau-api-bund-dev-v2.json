@@ -1,0 +1,66 @@
+{
+    "news": [
+        {
+            "sophoraId": "tarifverhandlungen-oeffentlicher-dienst-122",
+            "externalId": "f1d43c28-9035-4fba-8870-d824174304e9",
+            "title": "Tarifeinigung oder neue Warnstreiks?",
+            "date": "2025-03-16T11:55:02.614+01:00",
+            "teaserImage": {
+                "alttext": "Ein Flughafenbeschäftigter streikt und hält eine ver.di-Fahne. (Archivbild vom 27.01.2023)",
+                "imageVariants": {
+                    "1x1-144": "https://images.tagesschau.de/image/59143271-6cdd-4633-8bb6-689e40641fe4/AAABlSnRpCY/AAABkZLnQzw/1x1-144.jpg",
+                    "1x1-256": "https://images.tagesschau.de/image/59143271-6cdd-4633-8bb6-689e40641fe4/AAABlSnRpCY/AAABkZLngyM/1x1-256.jpg",
+                    "1x1-432": "https://images.tagesschau.de/image/59143271-6cdd-4633-8bb6-689e40641fe4/AAABlSnRpCY/AAABkZLnxOE/1x1-432.jpg",
+                    "1x1-640": "https://images.tagesschau.de/image/59143271-6cdd-4633-8bb6-689e40641fe4/AAABlSnRpCY/AAABkZLoHlI/1x1-640.jpg",
+                    "1x1-840": "https://images.tagesschau.de/image/59143271-6cdd-4633-8bb6-689e40641fe4/AAABlSnRpCY/AAABkZLoaiw/1x1-840.jpg",
+                    "16x9-256": "https://images.tagesschau.de/image/59143271-6cdd-4633-8bb6-689e40641fe4/AAABlSnRpCY/AAABkZLjFsA/16x9-256.jpg",
+                    "16x9-384": "https://images.tagesschau.de/image/59143271-6cdd-4633-8bb6-689e40641fe4/AAABlSnRpCY/AAABkZLjwNU/16x9-384.jpg",
+                    "16x9-512": "https://images.tagesschau.de/image/59143271-6cdd-4633-8bb6-689e40641fe4/AAABlSnRpCY/AAABkZLkKfc/16x9-512.jpg",
+                    "16x9-640": "https://images.tagesschau.de/image/59143271-6cdd-4633-8bb6-689e40641fe4/AAABlSnRpCY/AAABkZLkm68/16x9-640.jpg",
+                    "16x9-960": "https://images.tagesschau.de/image/59143271-6cdd-4633-8bb6-689e40641fe4/AAABlSnRpCY/AAABkZLlUbs/16x9-960.jpg",
+                    "16x9-1280": "https://images.tagesschau.de/image/59143271-6cdd-4633-8bb6-689e40641fe4/AAABlSnRpCY/AAABkZLhkrw/16x9-1280.jpg",
+                    "16x9-1920": "https://images.tagesschau.de/image/59143271-6cdd-4633-8bb6-689e40641fe4/AAABlSnRpCY/AAABkZLiamM/16x9-1920.jpg"
+                },
+                "type": "image"
+            },
+            "tags": [
+                {
+                    "tag": "Tarifverhandlungen"
+                },
+                {
+                    "tag": "Öffentliche Dienst"
+                }
+            ],
+            "updateCheckUrl": "https://www.tagesschau.de/api2u/tarifverhandlungen-oeffentlicher-dienst-122.json?view=hasChanged&lastKnown=187241EB362DC1B9A1E93ACE641CAF6E",
+            "tracking": [
+                {
+                    "sid": "app.wirtschaft.tarifverhandlungen-oeffentlicher-dienst-122",
+                    "src": "tagesschau",
+                    "ctp": "nicht-definiert",
+                    "pdt": "20250316T1155",
+                    "otp": "meldung",
+                    "cid": "tarifverhandlungen-oeffentlicher-dienst-122",
+                    "pti": "Oeffentlicher_Dienst_Tarifeinigung_oder_neue_Warnstreiks",
+                    "bcr": "ja",
+                    "type": "generic",
+                    "av_full_show": false
+                }
+            ],
+            "topline": "Öffentlicher Dienst",
+            "firstSentence": "Die Tarifverhandlungen für den öffentlichen Dienst gehen in Potsdam weiter. Die Positionen im Überblick.",
+            "details": "https://www.tagesschau.de/api2u/wirtschaft/tarifverhandlungen-oeffentlicher-dienst-122.json",
+            "detailsweb": "https://www.tagesschau.de/wirtschaft/tarifverhandlungen-oeffentlicher-dienst-122.html",
+            "shareURL": "https://www.tagesschau.de/wirtschaft/tarifverhandlungen-oeffentlicher-dienst-122.html",
+            "geotags": [],
+            "regionId": 0,
+            "regionIds": [],
+            "ressort": "wirtschaft",
+            "breakingNews": false,
+            "type": "story"
+        }
+    ],
+    "regional": [],
+    "newStoriesCountLink": "",
+    "type": "news page",
+    "nextPage": "https://www.tagesschau.de/api2u/news?date=250310&ressort=wirtschaft"
+}

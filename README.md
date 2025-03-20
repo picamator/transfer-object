@@ -11,8 +11,8 @@ Transfer Object Generator
 Would you like to build lightweight Transfer Objects (TO) easily?
 You're in the right place!
 
-Build TOs Using an Array as Blueprint
-------------------------------------
+Build TOs Using an Array as a Blueprint
+---------------------------------------
 
 Imagine you have an array:
 ```php
@@ -22,7 +22,7 @@ $data = [
 ];
 ```
 
-TO facade method helps to convert array into `YML` definition file:
+TO facade method helps to convert the array into a `YML` definition file:
 ```yml
 Customer:
   firstName:
@@ -31,7 +31,7 @@ Customer:
     type: string
 ```
 
-Generator console command builds TO based on definition file:
+The generator console command builds TO based on the definition file:
 ```php
 $customerTransfer = new CustomerTransfer();
 $customerTransfer->firstName = 'Jan';
@@ -79,8 +79,8 @@ Please check Wiki for more details:
 
 ### Facade Interface
 
-Facade interface `DefinitionGeneratorFacadeInterface` is used to generate `YML` definition file
-based on array.
+Facade interface `DefinitionGeneratorFacadeInterface` is used to generate the `YML`
+definition file based on the array.
 
 Please check Wiki for more details:
 - [Facade Interfaces](https://github.com/picamator/transfer-object/wiki/Facade-Interfaces)
@@ -89,7 +89,7 @@ Please check Wiki for more details:
 Acknowledgment
 --------------
 
-Many thanks for your contribution, supports, feedback and simply using Transfer Object Generator!
+Many thanks for your contribution, support, feedback and simply using the Transfer Object Generator!
 
 Contribution
 ------------
@@ -98,7 +98,7 @@ If you find this project useful, please add a star to the repository. Follow the
 If you have suggestions for improvements or new features, feel free to create an issue or submit a pull request.
 Here is a [Contribution Guide](CONTRIBUTING.md).
 
-Please note that this project is released with a [Code of Conduct](CODE_OF_CONDUCT.md).
+This project is released with a [Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in this project and its community, you agree to abide by those terms.
 
 License

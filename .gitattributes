@@ -7,7 +7,9 @@
 /doc/                   export-ignore
 /docker/                export-ignore
 /tests/                 export-ignore
+/log/                   export-ignore
 /.editorconfig          export-ignore
+/.env.dist              export-ignore
 /.gitattributes         export-ignore
 /.gitignore             export-ignore
 /captainhook.json       export-ignore

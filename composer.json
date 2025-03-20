@@ -37,7 +37,7 @@
   "require-dev": {
     "captainhook/captainhook": "^5.24",
     "phpstan/phpstan": "^2.0",
-    "phpunit/phpunit": "^11.5",
+    "phpunit/phpunit": "^12.0",
     "squizlabs/php_codesniffer": "^3.11"
   },
   "bin": [
@@ -49,7 +49,7 @@
   "prefer-stable": true,
   "scripts": {
     "phpunit": "./vendor/bin/phpunit --no-progress",
-    "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon --no-progress",
+    "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon --no-progress --memory-limit=512M",
     "generate-transfer": "php ./bin/generate-transfer",
     "captainhook": "./vendor/bin/captainhook",
     "phpcs": "./vendor/bin/phpcs",

@@ -16,8 +16,9 @@ Coding Standards
 -----------------
 
 - Follow the existing code style.
-- Run `PHPStan`, `PHP_CodeSniffer`, and `phpUnit`. Install CaptainHook to run them automatically.
-- Write unit or/and integration tests.
+- Run `PHPStan`, `PHP_CodeSniffer`, and `phpUnit`.
+- Install CaptainHook.
+- Write unit and/or integration tests.
 - Write clear and concise commit messages.
 
 Reporting Issues

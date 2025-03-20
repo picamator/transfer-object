@@ -9,7 +9,9 @@ use Picamator\TransferObject\Generated\TemplateTransfer;
 
 final class MetaConstantsTemplateExpander extends AbstractTemplateExpander
 {
-    private const string META_CONSTANT_REGEX = '#(?<!^)[A-Z]#';
+    private const string META_CONSTANT_SNAKE_CASE_REGEX = '#(?<!^)[A-Z]#';
+
+    private const string META_CONSTANT_ONLY_UPPER_CASE_REGEX = '#^[A-Z]+$#';
 
     protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): true
     {
@@ -26,8 +28,12 @@ final class MetaConstantsTemplateExpander extends AbstractTemplateExpander
 
     private function getMetaConstant(string $propertyName): string
     {
+        if (preg_match(self::META_CONSTANT_ONLY_UPPER_CASE_REGEX, $propertyName) === 1) {
+            return $propertyName;
+        }
+
         /** @var string $propertyName */
-        $propertyName = preg_replace(self::META_CONSTANT_REGEX, '_$0', $propertyName);
+        $propertyName = preg_replace(self::META_CONSTANT_SNAKE_CASE_REGEX, '_$0', $propertyName);
 
         return strtoupper($propertyName);
     }

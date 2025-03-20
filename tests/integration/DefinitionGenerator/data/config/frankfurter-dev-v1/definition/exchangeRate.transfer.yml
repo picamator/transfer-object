@@ -1,0 +1,70 @@
+ExchangeRate:
+  amount:
+    type: int
+  base:
+    type: string
+  date:
+    type: string
+  rates:
+    type: Rates
+Rates:
+  AUD:
+    type: float
+  BGN:
+    type: float
+  BRL:
+    type: float
+  CAD:
+    type: float
+  CHF:
+    type: float
+  CNY:
+    type: float
+  CZK:
+    type: float
+  DKK:
+    type: float
+  GBP:
+    type: float
+  HKD:
+    type: float
+  HUF:
+    type: float
+  IDR:
+    type: int
+  ILS:
+    type: float
+  INR:
+    type: float
+  ISK:
+    type: float
+  JPY:
+    type: float
+  KRW:
+    type: float
+  MXN:
+    type: float
+  MYR:
+    type: float
+  NOK:
+    type: float
+  NZD:
+    type: float
+  PHP:
+    type: float
+  PLN:
+    type: float
+  RON:
+    type: float
+  SEK:
+    type: float
+  SGD:
+    type: float
+  THB:
+    type: float
+  TRY:
+    type: float
+  USD:
+    type: float
+  ZAR:
+    type: float

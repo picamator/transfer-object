@@ -49,10 +49,8 @@ Product:
     type: Price
   sizes:
     type: array
-
 Price:
   value:
     type: string
   currency:
     type: string
-
