@@ -6,7 +6,7 @@
     <description>
         Transfer Object Generator Coding Standard.
     </description>
-    <arg name="cache" value="./log/cache/.cs-check.json"/>
+    <arg name="cache" value="./var/cache/.cs-check.json"/>
     <arg name="parallel" value="5"/>
 
     <config name="php_version" value="80402"/>
