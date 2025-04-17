@@ -11,5 +11,5 @@ services:
       - 9003
     volumes:
       - ./:/home/transfer/transfer-object
-      - ./log/xdebug-profile:/tmp/xdebug-profile
+      - ./var/xdebug-profile:/tmp/xdebug-profile
     tty: true
