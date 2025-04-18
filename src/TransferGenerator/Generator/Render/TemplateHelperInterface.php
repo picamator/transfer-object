@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Template;
+namespace Picamator\TransferObject\TransferGenerator\Generator\Render;
 
 use Picamator\TransferObject\Generated\TemplateTransfer;
 
 interface TemplateHelperInterface
 {
-    public static function getDefaultTemplateTransfer(): TemplateTransfer;
+    public function setTemplateTransfer(TemplateTransfer $templateTransfer): self;
 
     /**
-     * @param iterable<string,string> $data
+     * @param iterable<string|int,string> $data
      */
     public function renderKeyValue(iterable $data, string $template): string;
 

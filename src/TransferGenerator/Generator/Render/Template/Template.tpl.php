@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelper;
-
-$templateTransfer ??= TemplateHelper::getDefaultTemplateTransfer();
-$helper = new TemplateHelper($templateTransfer);
+/**
+ * @var \Picamator\TransferObject\Generated\TemplateTransfer $templateTransfer
+ * @var \Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateHelperInterface $helper
+ */
 
 echo <<<TEMPLATE
 <?php

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Render\Template;
+namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Render;
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\TemplateTransfer;
-use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelper;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateHelper;
 
 class TemplateHelperTest extends TestCase
 {
@@ -20,7 +20,7 @@ class TemplateHelperTest extends TestCase
     {
         // Arrange
         $templateTransfer = new TemplateTransfer()->fromArray($templateData);
-        $templateHelper = new TemplateHelper($templateTransfer);
+        $templateHelper = new TemplateHelper()->setTemplateTransfer($templateTransfer);
 
         // Act
         $actual = $templateHelper->getNullable($property);
