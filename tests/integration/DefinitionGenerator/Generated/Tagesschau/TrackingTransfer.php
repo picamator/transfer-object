@@ -39,7 +39,7 @@ final class TrackingTransfer extends AbstractTransfer
     protected const int AV_FULL_SHOW_DATA_INDEX = 0;
 
     public ?bool $av_full_show {
-        get => $this->getData(self::AV_FULL_SHOW_DATA_INDEX);
+        get => $this->getData(self::AV_FULL_SHOW_DATA_INDEX, false);
         set => $this->setData(self::AV_FULL_SHOW_DATA_INDEX, $value);
     }
 
@@ -49,7 +49,7 @@ final class TrackingTransfer extends AbstractTransfer
     protected const int BCR_DATA_INDEX = 1;
 
     public ?string $bcr {
-        get => $this->getData(self::BCR_DATA_INDEX);
+        get => $this->getData(self::BCR_DATA_INDEX, false);
         set => $this->setData(self::BCR_DATA_INDEX, $value);
     }
 
@@ -59,7 +59,7 @@ final class TrackingTransfer extends AbstractTransfer
     protected const int CID_DATA_INDEX = 2;
 
     public ?string $cid {
-        get => $this->getData(self::CID_DATA_INDEX);
+        get => $this->getData(self::CID_DATA_INDEX, false);
         set => $this->setData(self::CID_DATA_INDEX, $value);
     }
 
@@ -69,7 +69,7 @@ final class TrackingTransfer extends AbstractTransfer
     protected const int CTP_DATA_INDEX = 3;
 
     public ?string $ctp {
-        get => $this->getData(self::CTP_DATA_INDEX);
+        get => $this->getData(self::CTP_DATA_INDEX, false);
         set => $this->setData(self::CTP_DATA_INDEX, $value);
     }
 
@@ -79,7 +79,7 @@ final class TrackingTransfer extends AbstractTransfer
     protected const int OTP_DATA_INDEX = 4;
 
     public ?string $otp {
-        get => $this->getData(self::OTP_DATA_INDEX);
+        get => $this->getData(self::OTP_DATA_INDEX, false);
         set => $this->setData(self::OTP_DATA_INDEX, $value);
     }
 
@@ -89,7 +89,7 @@ final class TrackingTransfer extends AbstractTransfer
     protected const int PDT_DATA_INDEX = 5;
 
     public ?string $pdt {
-        get => $this->getData(self::PDT_DATA_INDEX);
+        get => $this->getData(self::PDT_DATA_INDEX, false);
         set => $this->setData(self::PDT_DATA_INDEX, $value);
     }
 
@@ -99,7 +99,7 @@ final class TrackingTransfer extends AbstractTransfer
     protected const int PTI_DATA_INDEX = 6;
 
     public ?string $pti {
-        get => $this->getData(self::PTI_DATA_INDEX);
+        get => $this->getData(self::PTI_DATA_INDEX, false);
         set => $this->setData(self::PTI_DATA_INDEX, $value);
     }
 
@@ -109,7 +109,7 @@ final class TrackingTransfer extends AbstractTransfer
     protected const int SID_DATA_INDEX = 7;
 
     public ?string $sid {
-        get => $this->getData(self::SID_DATA_INDEX);
+        get => $this->getData(self::SID_DATA_INDEX, false);
         set => $this->setData(self::SID_DATA_INDEX, $value);
     }
 
@@ -119,7 +119,7 @@ final class TrackingTransfer extends AbstractTransfer
     protected const int SRC_DATA_INDEX = 8;
 
     public ?string $src {
-        get => $this->getData(self::SRC_DATA_INDEX);
+        get => $this->getData(self::SRC_DATA_INDEX, false);
         set => $this->setData(self::SRC_DATA_INDEX, $value);
     }
 
@@ -129,7 +129,7 @@ final class TrackingTransfer extends AbstractTransfer
     protected const int TYPE_DATA_INDEX = 9;
 
     public ?string $type {
-        get => $this->getData(self::TYPE_DATA_INDEX);
+        get => $this->getData(self::TYPE_DATA_INDEX, false);
         set => $this->setData(self::TYPE_DATA_INDEX, $value);
     }
 }

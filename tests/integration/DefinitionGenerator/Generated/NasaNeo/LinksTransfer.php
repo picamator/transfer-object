@@ -30,7 +30,7 @@ final class LinksTransfer extends AbstractTransfer
     protected const int SELF_DATA_INDEX = 0;
 
     public ?string $self {
-        get => $this->getData(self::SELF_DATA_INDEX);
+        get => $this->getData(self::SELF_DATA_INDEX, false);
         set => $this->setData(self::SELF_DATA_INDEX, $value);
     }
 }

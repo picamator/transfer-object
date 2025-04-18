@@ -30,7 +30,7 @@ final class LabelsTransfer extends AbstractTransfer
     protected const int SALE_DATA_INDEX = 0;
 
     public ?string $sale {
-        get => $this->getData(self::SALE_DATA_INDEX);
+        get => $this->getData(self::SALE_DATA_INDEX, false);
         set => $this->setData(self::SALE_DATA_INDEX, $value);
     }
 }

@@ -33,7 +33,7 @@ final class MeasurementUnitTransfer extends AbstractTransfer
     protected const int BOX_DATA_INDEX = 0;
 
     public ?BoxTransfer $box {
-        get => $this->getData(self::BOX_DATA_INDEX);
+        get => $this->getData(self::BOX_DATA_INDEX, false);
         set => $this->setData(self::BOX_DATA_INDEX, $value);
     }
 
@@ -44,7 +44,7 @@ final class MeasurementUnitTransfer extends AbstractTransfer
     protected const int PALETTE_DATA_INDEX = 1;
 
     public ?PaletteTransfer $palette {
-        get => $this->getData(self::PALETTE_DATA_INDEX);
+        get => $this->getData(self::PALETTE_DATA_INDEX, false);
         set => $this->setData(self::PALETTE_DATA_INDEX, $value);
     }
 }

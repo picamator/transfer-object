@@ -31,7 +31,7 @@ final class CustomerTransfer extends AbstractTransfer
     protected const int FIRST_NAME_DATA_INDEX = 0;
 
     public ?string $firstName {
-        get => $this->getData(self::FIRST_NAME_DATA_INDEX);
+        get => $this->getData(self::FIRST_NAME_DATA_INDEX, false);
         set => $this->setData(self::FIRST_NAME_DATA_INDEX, $value);
     }
 
@@ -41,7 +41,7 @@ final class CustomerTransfer extends AbstractTransfer
     protected const int LAST_NAME_DATA_INDEX = 1;
 
     public ?string $lastName {
-        get => $this->getData(self::LAST_NAME_DATA_INDEX);
+        get => $this->getData(self::LAST_NAME_DATA_INDEX, false);
         set => $this->setData(self::LAST_NAME_DATA_INDEX, $value);
     }
 }

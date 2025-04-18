@@ -33,7 +33,7 @@ final class TransferGeneratorTransfer extends AbstractTransfer
     protected const int CLASS_NAME_DATA_INDEX = 0;
 
     public ?string $className {
-        get => $this->getData(self::CLASS_NAME_DATA_INDEX);
+        get => $this->getData(self::CLASS_NAME_DATA_INDEX, false);
         set => $this->setData(self::CLASS_NAME_DATA_INDEX, $value);
     }
 
@@ -43,7 +43,7 @@ final class TransferGeneratorTransfer extends AbstractTransfer
     protected const int FILE_NAME_DATA_INDEX = 1;
 
     public ?string $fileName {
-        get => $this->getData(self::FILE_NAME_DATA_INDEX);
+        get => $this->getData(self::FILE_NAME_DATA_INDEX, false);
         set => $this->setData(self::FILE_NAME_DATA_INDEX, $value);
     }
 
@@ -54,7 +54,7 @@ final class TransferGeneratorTransfer extends AbstractTransfer
     protected const int VALIDATOR_DATA_INDEX = 2;
 
     public DefinitionValidatorTransfer $validator {
-        get => $this->getRequiredData(self::VALIDATOR_DATA_INDEX);
+        get => $this->getData(self::VALIDATOR_DATA_INDEX, true);
         set => $this->setData(self::VALIDATOR_DATA_INDEX, $value);
     }
 }

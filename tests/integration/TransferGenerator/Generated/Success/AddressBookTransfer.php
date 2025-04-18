@@ -43,7 +43,7 @@ final class AddressBookTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,AddressTransfer> */
     public ArrayObject $addresses {
-        get => $this->getRequiredData(self::ADDRESSES_DATA_INDEX);
+        get => $this->getData(self::ADDRESSES_DATA_INDEX, true);
         set => $this->setData(self::ADDRESSES_DATA_INDEX, $value);
     }
 
@@ -55,7 +55,7 @@ final class AddressBookTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $categories {
-        get => $this->getRequiredData(self::CATEGORIES_DATA_INDEX);
+        get => $this->getData(self::CATEGORIES_DATA_INDEX, true);
         set => $this->setData(self::CATEGORIES_DATA_INDEX, $value);
     }
 
@@ -66,7 +66,7 @@ final class AddressBookTransfer extends AbstractTransfer
     protected const int LABEL_DATA_INDEX = 2;
 
     public ?AddressLabelEnum $label {
-        get => $this->getData(self::LABEL_DATA_INDEX);
+        get => $this->getData(self::LABEL_DATA_INDEX, false);
         set => $this->setData(self::LABEL_DATA_INDEX, $value);
     }
 
@@ -77,7 +77,7 @@ final class AddressBookTransfer extends AbstractTransfer
     protected const int LABEL_ALIAS_DATA_INDEX = 3;
 
     public ?AliasAddressLabelEnum $labelAlias {
-        get => $this->getData(self::LABEL_ALIAS_DATA_INDEX);
+        get => $this->getData(self::LABEL_ALIAS_DATA_INDEX, false);
         set => $this->setData(self::LABEL_ALIAS_DATA_INDEX, $value);
     }
 
@@ -87,7 +87,7 @@ final class AddressBookTransfer extends AbstractTransfer
     protected const int NAME_DATA_INDEX = 4;
 
     public ?string $name {
-        get => $this->getData(self::NAME_DATA_INDEX);
+        get => $this->getData(self::NAME_DATA_INDEX, false);
         set => $this->setData(self::NAME_DATA_INDEX, $value);
     }
 
@@ -97,7 +97,7 @@ final class AddressBookTransfer extends AbstractTransfer
     protected const int UUID_DATA_INDEX = 5;
 
     public ?string $uuid {
-        get => $this->getData(self::UUID_DATA_INDEX);
+        get => $this->getData(self::UUID_DATA_INDEX, false);
         set => $this->setData(self::UUID_DATA_INDEX, $value);
     }
 }

@@ -31,7 +31,7 @@ final class PaletteTransfer extends AbstractTransfer
     protected const int ITEMS_DATA_INDEX = 0;
 
     public ?int $items {
-        get => $this->getData(self::ITEMS_DATA_INDEX);
+        get => $this->getData(self::ITEMS_DATA_INDEX, false);
         set => $this->setData(self::ITEMS_DATA_INDEX, $value);
     }
 
@@ -41,7 +41,7 @@ final class PaletteTransfer extends AbstractTransfer
     protected const int TYPE_DATA_INDEX = 1;
 
     public ?string $type {
-        get => $this->getData(self::TYPE_DATA_INDEX);
+        get => $this->getData(self::TYPE_DATA_INDEX, false);
         set => $this->setData(self::TYPE_DATA_INDEX, $value);
     }
 }

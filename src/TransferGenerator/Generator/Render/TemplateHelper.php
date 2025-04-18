@@ -19,7 +19,8 @@ class TemplateHelper implements TemplateHelperInterface
     private const string EMPTY_STRING = '';
     private const string NULLABLE_TYPE = '?';
     private const string NULLABLE_UNION = 'null|';
-    private const string REQUIRED_METHOD_NAME = 'Required';
+    private const string BOOL_TRUE = 'true';
+    private const string BOOL_FALSE = 'false';
 
     public function setTemplateTransfer(TemplateTransfer $templateTransfer): self
     {
@@ -76,8 +77,8 @@ class TemplateHelper implements TemplateHelperInterface
         return self::NULLABLE_TYPE;
     }
 
-    public function getRequired(string $property): string
+    public function isRequired(string $property): string
     {
-        return $this->templateTransfer->nullables[$property] ? self::EMPTY_STRING : self::REQUIRED_METHOD_NAME;
+        return $this->templateTransfer->nullables[$property] ? self::BOOL_FALSE : self::BOOL_TRUE;
     }
 }

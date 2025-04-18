@@ -30,7 +30,7 @@ final class CommandTransfer extends AbstractTransfer
     protected const int RUN_DATA_INDEX = 0;
 
     public ?true $run {
-        get => $this->getData(self::RUN_DATA_INDEX);
+        get => $this->getData(self::RUN_DATA_INDEX, false);
         set => $this->setData(self::RUN_DATA_INDEX, $value);
     }
 }

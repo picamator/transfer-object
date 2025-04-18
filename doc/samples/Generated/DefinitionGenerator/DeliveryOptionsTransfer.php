@@ -30,7 +30,7 @@ final class DeliveryOptionsTransfer extends AbstractTransfer
     protected const int NAME_DATA_INDEX = 0;
 
     public ?string $name {
-        get => $this->getData(self::NAME_DATA_INDEX);
+        get => $this->getData(self::NAME_DATA_INDEX, false);
         set => $this->setData(self::NAME_DATA_INDEX, $value);
     }
 }

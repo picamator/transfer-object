@@ -34,7 +34,7 @@ final class SysTransfer extends AbstractTransfer
     protected const int COUNTRY_DATA_INDEX = 0;
 
     public ?string $country {
-        get => $this->getData(self::COUNTRY_DATA_INDEX);
+        get => $this->getData(self::COUNTRY_DATA_INDEX, false);
         set => $this->setData(self::COUNTRY_DATA_INDEX, $value);
     }
 
@@ -44,7 +44,7 @@ final class SysTransfer extends AbstractTransfer
     protected const int ID_DATA_INDEX = 1;
 
     public ?int $id {
-        get => $this->getData(self::ID_DATA_INDEX);
+        get => $this->getData(self::ID_DATA_INDEX, false);
         set => $this->setData(self::ID_DATA_INDEX, $value);
     }
 
@@ -54,7 +54,7 @@ final class SysTransfer extends AbstractTransfer
     protected const int SUNRISE_DATA_INDEX = 2;
 
     public ?int $sunrise {
-        get => $this->getData(self::SUNRISE_DATA_INDEX);
+        get => $this->getData(self::SUNRISE_DATA_INDEX, false);
         set => $this->setData(self::SUNRISE_DATA_INDEX, $value);
     }
 
@@ -64,7 +64,7 @@ final class SysTransfer extends AbstractTransfer
     protected const int SUNSET_DATA_INDEX = 3;
 
     public ?int $sunset {
-        get => $this->getData(self::SUNSET_DATA_INDEX);
+        get => $this->getData(self::SUNSET_DATA_INDEX, false);
         set => $this->setData(self::SUNSET_DATA_INDEX, $value);
     }
 
@@ -74,7 +74,7 @@ final class SysTransfer extends AbstractTransfer
     protected const int TYPE_DATA_INDEX = 4;
 
     public ?int $type {
-        get => $this->getData(self::TYPE_DATA_INDEX);
+        get => $this->getData(self::TYPE_DATA_INDEX, false);
         set => $this->setData(self::TYPE_DATA_INDEX, $value);
     }
 }

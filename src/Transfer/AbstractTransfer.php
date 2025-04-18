@@ -69,25 +69,27 @@ abstract class AbstractTransfer implements TransferInterface
         return $this->toArray();
     }
 
-    final protected function getData(int $index): mixed
-    {
-        return $this->data[$index];
-    }
-
     /**
      * @throws PropertyTypeTransferException
      */
-    final protected function getRequiredData(int $index): mixed
+    final protected function getData(int $index, bool $isRequired): mixed
     {
-        return $this->data[$index] !== null
-            ? $this->data[$index]
-            : throw new PropertyTypeTransferException(
-                sprintf(
-                    'Typed property "%s::%s" must not be accessed before initialization.',
-                    static::class,
-                    debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]['function'],
-                ),
-            );
+        if (!$isRequired) {
+            return $this->data[$index];
+        }
+
+        $data = $this->data[$index];
+        if ($data !== null) {
+            return $data;
+        }
+
+        throw new PropertyTypeTransferException(
+            sprintf(
+                'Typed property "%s::%s" must not be accessed before initialization.',
+                static::class,
+                debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]['function'],
+            ),
+        );
     }
 
     final protected function setData(int $index, mixed $value): mixed

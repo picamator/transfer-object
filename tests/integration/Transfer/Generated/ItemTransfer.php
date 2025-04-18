@@ -46,7 +46,7 @@ final class ItemTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $data {
-        get => $this->getRequiredData(self::DATA_DATA_INDEX);
+        get => $this->getData(self::DATA_DATA_INDEX, true);
         set => $this->setData(self::DATA_DATA_INDEX, $value);
     }
 
@@ -58,7 +58,7 @@ final class ItemTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $iAmArray {
-        get => $this->getRequiredData(self::I_AM_ARRAY_DATA_INDEX);
+        get => $this->getData(self::I_AM_ARRAY_DATA_INDEX, true);
         set => $this->setData(self::I_AM_ARRAY_DATA_INDEX, $value);
     }
 
@@ -70,7 +70,7 @@ final class ItemTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $iAmArrayObject {
-        get => $this->getRequiredData(self::I_AM_ARRAY_OBJECT_DATA_INDEX);
+        get => $this->getData(self::I_AM_ARRAY_OBJECT_DATA_INDEX, true);
         set => $this->setData(self::I_AM_ARRAY_OBJECT_DATA_INDEX, $value);
     }
 
@@ -80,7 +80,7 @@ final class ItemTransfer extends AbstractTransfer
     protected const int I_AM_BOOL_DATA_INDEX = 3;
 
     public ?bool $iAmBool {
-        get => $this->getData(self::I_AM_BOOL_DATA_INDEX);
+        get => $this->getData(self::I_AM_BOOL_DATA_INDEX, false);
         set => $this->setData(self::I_AM_BOOL_DATA_INDEX, $value);
     }
 
@@ -91,7 +91,7 @@ final class ItemTransfer extends AbstractTransfer
     protected const int I_AM_ENUM_DATA_INDEX = 4;
 
     public ?ImBackedEnum $iAmEnum {
-        get => $this->getData(self::I_AM_ENUM_DATA_INDEX);
+        get => $this->getData(self::I_AM_ENUM_DATA_INDEX, false);
         set => $this->setData(self::I_AM_ENUM_DATA_INDEX, $value);
     }
 
@@ -101,7 +101,7 @@ final class ItemTransfer extends AbstractTransfer
     protected const int I_AM_FALSE_DATA_INDEX = 5;
 
     public ?false $iAmFalse {
-        get => $this->getData(self::I_AM_FALSE_DATA_INDEX);
+        get => $this->getData(self::I_AM_FALSE_DATA_INDEX, false);
         set => $this->setData(self::I_AM_FALSE_DATA_INDEX, $value);
     }
 
@@ -111,7 +111,7 @@ final class ItemTransfer extends AbstractTransfer
     protected const int I_AM_FLOAT_DATA_INDEX = 6;
 
     public ?float $iAmFloat {
-        get => $this->getData(self::I_AM_FLOAT_DATA_INDEX);
+        get => $this->getData(self::I_AM_FLOAT_DATA_INDEX, false);
         set => $this->setData(self::I_AM_FLOAT_DATA_INDEX, $value);
     }
 
@@ -121,7 +121,7 @@ final class ItemTransfer extends AbstractTransfer
     protected const int I_AM_INT_DATA_INDEX = 7;
 
     public ?int $iAmInt {
-        get => $this->getData(self::I_AM_INT_DATA_INDEX);
+        get => $this->getData(self::I_AM_INT_DATA_INDEX, false);
         set => $this->setData(self::I_AM_INT_DATA_INDEX, $value);
     }
 
@@ -131,7 +131,7 @@ final class ItemTransfer extends AbstractTransfer
     protected const int I_AM_STRING_DATA_INDEX = 8;
 
     public ?string $iAmString {
-        get => $this->getData(self::I_AM_STRING_DATA_INDEX);
+        get => $this->getData(self::I_AM_STRING_DATA_INDEX, false);
         set => $this->setData(self::I_AM_STRING_DATA_INDEX, $value);
     }
 
@@ -141,7 +141,7 @@ final class ItemTransfer extends AbstractTransfer
     protected const int I_AM_TRUE_DATA_INDEX = 9;
 
     public ?true $iAmTrue {
-        get => $this->getData(self::I_AM_TRUE_DATA_INDEX);
+        get => $this->getData(self::I_AM_TRUE_DATA_INDEX, false);
         set => $this->setData(self::I_AM_TRUE_DATA_INDEX, $value);
     }
 }

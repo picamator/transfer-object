@@ -33,7 +33,7 @@ final class TeaserImageTransfer extends AbstractTransfer
     protected const int ALTTEXT_DATA_INDEX = 0;
 
     public ?string $alttext {
-        get => $this->getData(self::ALTTEXT_DATA_INDEX);
+        get => $this->getData(self::ALTTEXT_DATA_INDEX, false);
         set => $this->setData(self::ALTTEXT_DATA_INDEX, $value);
     }
 
@@ -45,7 +45,7 @@ final class TeaserImageTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $imageVariants {
-        get => $this->getRequiredData(self::IMAGE_VARIANTS_DATA_INDEX);
+        get => $this->getData(self::IMAGE_VARIANTS_DATA_INDEX, true);
         set => $this->setData(self::IMAGE_VARIANTS_DATA_INDEX, $value);
     }
 
@@ -55,7 +55,7 @@ final class TeaserImageTransfer extends AbstractTransfer
     protected const int TYPE_DATA_INDEX = 2;
 
     public ?string $type {
-        get => $this->getData(self::TYPE_DATA_INDEX);
+        get => $this->getData(self::TYPE_DATA_INDEX, false);
         set => $this->setData(self::TYPE_DATA_INDEX, $value);
     }
 }

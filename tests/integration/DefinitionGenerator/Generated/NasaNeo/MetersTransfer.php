@@ -31,7 +31,7 @@ final class MetersTransfer extends AbstractTransfer
     protected const int ESTIMATED_DIAMETER_MAX_DATA_INDEX = 0;
 
     public ?float $estimated_diameter_max {
-        get => $this->getData(self::ESTIMATED_DIAMETER_MAX_DATA_INDEX);
+        get => $this->getData(self::ESTIMATED_DIAMETER_MAX_DATA_INDEX, false);
         set => $this->setData(self::ESTIMATED_DIAMETER_MAX_DATA_INDEX, $value);
     }
 
@@ -41,7 +41,7 @@ final class MetersTransfer extends AbstractTransfer
     protected const int ESTIMATED_DIAMETER_MIN_DATA_INDEX = 1;
 
     public ?float $estimated_diameter_min {
-        get => $this->getData(self::ESTIMATED_DIAMETER_MIN_DATA_INDEX);
+        get => $this->getData(self::ESTIMATED_DIAMETER_MIN_DATA_INDEX, false);
         set => $this->setData(self::ESTIMATED_DIAMETER_MIN_DATA_INDEX, $value);
     }
 }

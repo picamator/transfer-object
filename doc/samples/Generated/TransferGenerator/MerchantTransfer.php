@@ -35,7 +35,7 @@ final class MerchantTransfer extends AbstractTransfer
     protected const int COUNTRY_DATA_INDEX = 0;
 
     public CountryEnum $country {
-        get => $this->getRequiredData(self::COUNTRY_DATA_INDEX);
+        get => $this->getData(self::COUNTRY_DATA_INDEX, true);
         set => $this->setData(self::COUNTRY_DATA_INDEX, $value);
     }
 
@@ -45,7 +45,7 @@ final class MerchantTransfer extends AbstractTransfer
     protected const int IS_ACTIVE_DATA_INDEX = 1;
 
     public bool $isActive {
-        get => $this->getRequiredData(self::IS_ACTIVE_DATA_INDEX);
+        get => $this->getData(self::IS_ACTIVE_DATA_INDEX, true);
         set => $this->setData(self::IS_ACTIVE_DATA_INDEX, $value);
     }
 
@@ -55,7 +55,7 @@ final class MerchantTransfer extends AbstractTransfer
     protected const int MERCHANT_REFERENCE_DATA_INDEX = 2;
 
     public string $merchantReference {
-        get => $this->getRequiredData(self::MERCHANT_REFERENCE_DATA_INDEX);
+        get => $this->getData(self::MERCHANT_REFERENCE_DATA_INDEX, true);
         set => $this->setData(self::MERCHANT_REFERENCE_DATA_INDEX, $value);
     }
 }

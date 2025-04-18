@@ -21,5 +21,5 @@ interface TemplateHelperInterface
 
     public function getNullable(string $property): string;
 
-    public function getRequired(string $property): string;
+    public function isRequired(string $property): string;
 }
