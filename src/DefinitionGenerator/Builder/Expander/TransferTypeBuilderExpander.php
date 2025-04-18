@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\DefinitionGenerator\Builder\Expander;
 
 use Picamator\TransferObject\DefinitionGenerator\Builder\BuilderContentInterface;
+use Picamator\TransferObject\DefinitionGenerator\Validator\VariableValidatorTrait;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
@@ -12,6 +13,7 @@ use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 final class TransferTypeBuilderExpander extends AbstractBuilderExpander
 {
     use BuilderExpanderTrait;
+    use VariableValidatorTrait;
 
     protected function isApplicable(BuilderContentInterface $content): bool
     {

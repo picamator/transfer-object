@@ -20,7 +20,7 @@ class ConfigEnvironmentRender implements ConfigEnvironmentRenderInterface
 
     private function getProjectRoot(): string
     {
-        self::$projectRoot = getenv(self::PROJECT_ROOT_ENV) ?: '';
+        self::$projectRoot = (string)getenv(self::PROJECT_ROOT_ENV);
 
         return self::$projectRoot;
     }

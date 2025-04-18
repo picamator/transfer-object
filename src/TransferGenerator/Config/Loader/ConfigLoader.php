@@ -19,11 +19,18 @@ readonly class ConfigLoader implements ConfigLoaderInterface
     public function loadConfig(string $configPath): ConfigTransfer
     {
         $configTransfer = $this->reader->getConfig($configPath);
-        if ($configTransfer->validator->isValid) {
-            $config = new Config($configTransfer->content);
-            ConfigProxy::loadConfig($config);
-        }
+        $this->handleLoadConfig($configTransfer);
 
         return $configTransfer;
+    }
+
+    private function handleLoadConfig(ConfigTransfer $configTransfer): void
+    {
+        if (!$configTransfer->validator->isValid) {
+            return;
+        }
+
+        $config = new Config($configTransfer->content);
+        ConfigProxy::loadConfig($config);
     }
 }
