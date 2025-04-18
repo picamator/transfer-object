@@ -22,21 +22,26 @@ readonly class DefinitionGenerator implements DefinitionGeneratorInterface
     public function generateDefinitions(DefinitionGeneratorTransfer $generatorTransfer): int
     {
         $count = 0;
-        $filesystemTransfer = new DefinitionFilesystemTransfer();
-        $filesystemTransfer->fileName = lcfirst($generatorTransfer->content->className);
-        $filesystemTransfer->definitionPath = $generatorTransfer->definitionPath;
-
+        $filesystemTransfer = $this->createFilesystemTransfer($generatorTransfer);
         $this->filesystem->deleteFile($filesystemTransfer);
 
         foreach ($this->builder->createDefinitionContents($generatorTransfer->content) as $contentTransfer) {
-            $content = $this->render->renderDefinitionContent($contentTransfer);
-
-            $filesystemTransfer->content = $content;
+            $filesystemTransfer->content = $this->render->renderDefinitionContent($contentTransfer);
             $this->filesystem->appendFile($filesystemTransfer);
 
             $count++;
         }
 
         return $count;
+    }
+
+    private function createFilesystemTransfer(
+        DefinitionGeneratorTransfer $generatorTransfer,
+    ): DefinitionFilesystemTransfer {
+        $filesystemTransfer = new DefinitionFilesystemTransfer();
+        $filesystemTransfer->fileName = lcfirst($generatorTransfer->content->className);
+        $filesystemTransfer->definitionPath = $generatorTransfer->definitionPath;
+
+        return $filesystemTransfer;
     }
 }

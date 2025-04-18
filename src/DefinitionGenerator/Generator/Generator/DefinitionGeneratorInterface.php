@@ -10,6 +10,7 @@ interface DefinitionGeneratorInterface
 {
     /**
      * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
+     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      */
     public function generateDefinitions(DefinitionGeneratorTransfer $generatorTransfer): int;
 }
