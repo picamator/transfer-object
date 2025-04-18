@@ -10,21 +10,21 @@ body:
   - type: textarea
     id: feature-description
     attributes:
-      label: Feature Description
+      label: Feature description
       description: Please provide a clear and concise description of the feature or enhancement you’d like to see.
     validations:
       required: true
   - type: textarea
     id: motivation
     attributes:
-      label: Motivation and Use Case
+      label: Motivation and use case
       description: Explain why this feature is important and how it will be used. What problem does it solve?
     validations:
       required: true
   - type: textarea
     id: alternatives
     attributes:
-      label: Alternatives Considered
+      label: Alternatives considered
       description: |
         Optional: Have you considered any alternative solutions or features? Please describe them.
     validations:
@@ -32,7 +32,7 @@ body:
   - type: textarea
     id: additional-context
     attributes:
-      label: Additional Context
+      label: Additional context
       description: |
         Optional: Provide any other context, screenshots, or code examples related to the feature request.
     validations:
