@@ -5,21 +5,17 @@ declare(strict_types=1);
 namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Builder;
 
 use PHPUnit\Framework\TestCase;
-use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionBuilderTrait;
+use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionContentBuilder;
+use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionContentBuilderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 
-class DefinitionBuilderTest extends TestCase
+class DefinitionContentBuilderTest extends TestCase
 {
-    private DefinitionBuilderInterface $builder;
+    private DefinitionContentBuilderInterface $builder;
 
     protected function setUp(): void
     {
-        $this->builder = new class () implements DefinitionBuilderInterface
-        {
-            use DefinitionBuilderTrait {
-                createBuilderContent as public;
-            }
-        };
+        $this->builder = new DefinitionContentBuilder();
     }
 
     public function testUnsupportedTypeShouldThrowException(): void

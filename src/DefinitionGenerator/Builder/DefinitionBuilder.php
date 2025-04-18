@@ -12,9 +12,8 @@ use Picamator\TransferObject\Generated\DefinitionGeneratorContentTransfer;
 
 readonly class DefinitionBuilder implements DefinitionBuilderInterface
 {
-    use DefinitionBuilderTrait;
-
     public function __construct(
+        private DefinitionContentBuilderInterface $contentBuilder,
         private BuilderExpanderInterface $builderExpander,
     ) {
     }
@@ -29,12 +28,15 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
         }
     }
 
+    /**
+     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
+     */
     private function getBuilderTransfer(
         DefinitionGeneratorContentTransfer $generatorContentTransfer
     ): DefinitionBuilderTransfer {
         $builderTransfer = $this->createDefinitionBuilderTransfer($generatorContentTransfer->className);
         foreach ($generatorContentTransfer->content as $propertyName => $propertyValue) {
-            $builderContent = $this->createBuilderContent((string)$propertyName, $propertyValue);
+            $builderContent = $this->contentBuilder->createBuilderContent((string)$propertyName, $propertyValue);
             $this->builderExpander->expandBuilderTransfer($builderContent, $builderTransfer);
         }
 
@@ -45,7 +47,6 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
     {
         $contentTransfer = new DefinitionContentTransfer();
         $contentTransfer->className = $className;
-
 
         $builderTransfer = new DefinitionBuilderTransfer();
         $builderTransfer->definitionContent = $contentTransfer;

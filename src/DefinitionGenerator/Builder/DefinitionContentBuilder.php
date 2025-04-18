@@ -7,9 +7,9 @@ namespace Picamator\TransferObject\DefinitionGenerator\Builder;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\GetTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 
-trait DefinitionBuilderTrait
+readonly class DefinitionContentBuilder implements DefinitionContentBuilderInterface
 {
-    protected function createBuilderContent(string $propertyName, mixed $propertyValue): BuilderContentInterface
+    public function createBuilderContent(string $propertyName, mixed $propertyValue): BuilderContentInterface
     {
         $typeEnum = $this->getTypeEnum($propertyName, $propertyValue);
 

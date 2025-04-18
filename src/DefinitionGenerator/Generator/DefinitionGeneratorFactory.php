@@ -6,6 +6,8 @@ namespace Picamator\TransferObject\DefinitionGenerator\Generator;
 
 use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionBuilder;
 use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionBuilderInterface;
+use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionContentBuilder;
+use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionContentBuilderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuilderExpanderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuildInTypeBuilderExpander;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\CollectionTypeBuilderExpander;
@@ -50,7 +52,15 @@ readonly class DefinitionGeneratorFactory
 
     protected function createDefinitionBuilder(): DefinitionBuilderInterface
     {
-        return new DefinitionBuilder($this->createBuilderExpander());
+        return new DefinitionBuilder(
+            $this->createDefinitionContentBuilder(),
+            $this->createBuilderExpander(),
+        );
+    }
+
+    protected function createDefinitionContentBuilder(): DefinitionContentBuilderInterface
+    {
+        return new DefinitionContentBuilder();
     }
 
     protected function createBuilderExpander(): BuilderExpanderInterface
