@@ -19,8 +19,7 @@ function show_usage() {
   echo "  phpcbf                     Run PHP Code Beautifier and Fixer"
   echo "  hook-install               Install CaptainHook"
   echo "  hook <command>             Run CaptainHook command"
-  echo "  to-in-generate             Generate internal transfer objects"
-  echo "  to-generate <config path>  Generate transfer objects by configuration"
+  echo "  to-generate                Generate internal transfer objects"
 }
 
 # vars
@@ -86,11 +85,8 @@ case $1 in
   hook)
     $DOCKER_EXEC composer captainhook $2
     ;;
-  to-in-generate)
-     $DOCKER_EXEC composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
-    ;;
   to-generate)
-     $DOCKER_EXEC composer generate-transfer -- -c ${PROJECT_ROOT}/$2
+     $DOCKER_EXEC composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
     ;;
   *)
     show_usage
