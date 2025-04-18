@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 
 use Generator;
+use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\GeneratorProcessorInterface;
 
@@ -18,8 +19,8 @@ readonly class TransferGenerator implements TransferGeneratorInterface
 
     public function generateTransfers(string $configPath): Generator
     {
-        $generatorTransfer = $this->processor->preProcess($configPath);
-        if (!$generatorTransfer->validator->isValid) {
+        $generatorTransfer = $this->handlePreProcess($configPath);
+        if ($generatorTransfer !== null) {
             yield $generatorTransfer;
 
             return false;
@@ -29,14 +30,36 @@ readonly class TransferGenerator implements TransferGeneratorInterface
         $definitionGenerator = $this->definitionReader->getDefinitions();
         foreach ($definitionGenerator as $definitionTransfer) {
             $generatorTransfer = $this->processor->process($definitionTransfer);
-            $failedCount += (int)!$generatorTransfer->validator->isValid;
+            if (!$generatorTransfer->validator->isValid) {
+                $failedCount++;
+            }
 
             yield $generatorTransfer;
         }
 
         $isSuccess = $definitionGenerator->getReturn() > 0 && $failedCount === 0;
-        yield $isSuccess ? $this->processor->postProcessSuccess() : $this->processor->postProcessError();
+
+        yield $this->handlePostProcess($isSuccess);
 
         return $isSuccess;
+    }
+
+    private function handlePostProcess(bool $isSuccess): TransferGeneratorTransfer
+    {
+        if ($isSuccess) {
+            return $this->processor->postProcessSuccess();
+        }
+
+        return $this->processor->postProcessError();
+    }
+
+    private function handlePreProcess(string $configPath): ?TransferGeneratorTransfer
+    {
+        $generatorTransfer = $this->processor->preProcess($configPath);
+        if ($generatorTransfer->validator->isValid) {
+            return null;
+        }
+
+        return $generatorTransfer;
     }
 }
