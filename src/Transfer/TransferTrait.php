@@ -6,6 +6,9 @@ namespace Picamator\TransferObject\Transfer;
 
 use Traversable;
 
+/**
+ * @phpstan-ignore trait.unused
+ */
 trait TransferTrait
 {
     use AttributeTransferTrait {
