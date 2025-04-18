@@ -1,5 +1,5 @@
 name: Bug Report
-description: File a bug report.
+description: NEVER report security issues, read https://github.com/picamator/transfer-object/blob/main/SECURITY.md instead.
 title: "[Bug]: "
 labels: ["bug"]
 body:
@@ -8,10 +8,11 @@ body:
       value: |
         Thanks for taking the time to fill out this bug report!
   - type: input
-    id: version
+    id: affected-version
     attributes:
-      label: Version
+      label: Affected version
       description: What version is used?
+      placeholder: x.y.z
     validations:
       required: true
   - type: textarea
