@@ -1,6 +1,5 @@
 name: Bug Report
-description: |
-  Important: For reporting security issues please read [security](https://github.com/picamator/transfer-object/blob/main/SECURITY.md).
+description:  File a bug report.
 title: "[Bug]: "
 labels: ["bug"]
 body:
@@ -8,6 +7,7 @@ body:
     attributes:
       value: |
         Thanks for taking the time to fill out this bug report!
+        For reporting security issues please read [security](https://github.com/picamator/transfer-object/blob/main/SECURITY.md).
   - type: input
     id: affected-version
     attributes:
