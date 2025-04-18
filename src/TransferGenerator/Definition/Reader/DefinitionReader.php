@@ -37,41 +37,39 @@ readonly class DefinitionReader implements DefinitionReaderInterface
 
                 $count += $contentGenerator->getReturn();
             }
-        } catch (FinderException | TransferGeneratorDefinitionException $e) {
-            yield $this->createErrorDefinitionTransfer($e);
+        } catch (FinderException | TransferGeneratorDefinitionException | YmlParserException $e) {
+            yield $this->createErrorDefinitionTransfer($e, fileName: $fileName ?? '');
         }
 
         return $count;
     }
 
     /**
+     * @throws \Picamator\TransferObject\Dependency\Exception\YmlParserException
+     *
      * @return \Generator<int, \Picamator\TransferObject\Generated\DefinitionTransfer>
      */
     private function getContentGenerator(string $fileName, string $filePath): Generator
     {
-        try {
-            $contentGenerator = $this->parser->parseDefinition($filePath);
-            foreach ($contentGenerator as $contentTransfer) {
-                $definitionTransfer = new DefinitionTransfer();
-                $definitionTransfer->fileName = $fileName;
-                $definitionTransfer->content = $contentTransfer;
-                $definitionTransfer->validator = $this->validator->validate($contentTransfer);
+        $contentGenerator = $this->parser->parseDefinition($filePath);
+        foreach ($contentGenerator as $contentTransfer) {
+            $definitionTransfer = new DefinitionTransfer();
+            $definitionTransfer->fileName = $fileName;
+            $definitionTransfer->content = $contentTransfer;
+            $definitionTransfer->validator = $this->validator->validate($contentTransfer);
 
-                yield $definitionTransfer;
-            }
-        } catch (YmlParserException $e) {
-            yield $this->createErrorDefinitionTransfer($e, $fileName);
-
-            return 0;
+            yield $definitionTransfer;
         }
 
         return $contentGenerator->getReturn();
     }
 
-    private function createErrorDefinitionTransfer(Throwable $e, string $fileName = ''): DefinitionTransfer
+    private function createErrorDefinitionTransfer(Throwable $e, string $fileName): DefinitionTransfer
     {
         $definitionTransfer = new DefinitionTransfer();
+
         $definitionTransfer->fileName = $fileName;
+
         $definitionTransfer->content = new DefinitionContentTransfer();
         $definitionTransfer->content->className = '';
 
