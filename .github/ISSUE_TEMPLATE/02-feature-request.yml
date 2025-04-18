@@ -2,8 +2,6 @@ name: Feature Request
 description: Suggest a new feature or enhancement.
 title: "[Feature Request]: "
 labels: ["feature"]
-assignees:
-  - picamator
 body:
   - type: markdown
     attributes:
