@@ -15,8 +15,6 @@ use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 
 final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
 {
-    use BuilderExpanderTrait;
-
     protected function isApplicable(BuilderContentInterface $content): true
     {
         return true;

@@ -14,7 +14,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -36,7 +36,7 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
     protected const int CREDENTIALS_DATA_INDEX = 0;
 
     public TransferInterface&CredentialsData $credentials {
-        get => $this->getData(self::CREDENTIALS_DATA_INDEX);
+        get => $this->getData(self::CREDENTIALS_DATA_INDEX, false);
         set => $this->setData(self::CREDENTIALS_DATA_INDEX, $value);
     }
 
@@ -47,7 +47,7 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
     protected const int CUSTOMER_DATA_INDEX = 1;
 
     public TransferInterface&CustomerTransfer $customer {
-        get => $this->getData(self::CUSTOMER_DATA_INDEX);
+        get => $this->getData(self::CUSTOMER_DATA_INDEX, false);
         set => $this->setData(self::CUSTOMER_DATA_INDEX, $value);
     }
 }

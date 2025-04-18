@@ -13,7 +13,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -35,7 +35,7 @@ final class AgentTransfer extends AbstractTransfer
     protected const int CUSTOMER_DATA_INDEX = 0;
 
     public ?CustomerTransfer $customer {
-        get => $this->getData(self::CUSTOMER_DATA_INDEX);
+        get => $this->getData(self::CUSTOMER_DATA_INDEX, false);
         set => $this->setData(self::CUSTOMER_DATA_INDEX, $value);
     }
 
@@ -47,7 +47,7 @@ final class AgentTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,MerchantTransfer> */
     public ArrayObject $merchants {
-        get => $this->getRequiredData(self::MERCHANTS_DATA_INDEX);
+        get => $this->getData(self::MERCHANTS_DATA_INDEX, true);
         set => $this->setData(self::MERCHANTS_DATA_INDEX, $value);
     }
 }

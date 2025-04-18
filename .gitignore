@@ -15,16 +15,16 @@ nbproject/
 # tooling
 vendor/
 
-# log
-log/*
+# var
+var/*
 
-!log/xdebug-profile
-log/xdebug-profile/*
-!log/xdebug-profile/.keep
+!var/xdebug-profile
+var/xdebug-profile/*
+!var/xdebug-profile/.keep
 
-!log/cache
-log/cache/*
-!log/cache/.keep
+!var/cache
+var/cache/*
+!var/cache/.keep
 
 # project
 src/**/_tmp

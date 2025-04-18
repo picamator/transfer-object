@@ -30,14 +30,17 @@ final class ConfigProxy implements ConfigInterface
         self::$config = $config;
     }
 
+    /**
+     * @throws \Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException
+     */
     private function getConfig(): ConfigInterface
     {
-        if (!isset(self::$config)) {
-            throw new ConfigNotFoundException(
-                'Transfer Object generator configuration not found. Please load configuration first.'
-            );
+        if (isset(self::$config)) {
+            return self::$config;
         }
 
-        return self::$config;
+        throw new ConfigNotFoundException(
+            'Transfer Object generator configuration not found. Please load configuration first.'
+        );
     }
 }

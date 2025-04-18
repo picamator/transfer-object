@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Definition\Filesystem;
 
+use Countable;
 use Generator;
+use IteratorAggregate;
 use Picamator\TransferObject\Dependency\Finder\FinderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorDefinitionException;
@@ -23,19 +25,33 @@ readonly class DefinitionFinder implements DefinitionFinderInterface
 
     public function getDefinitionFiles(): Generator
     {
-        $definitionFinder =  $this->finder->findFilesInDirectory(
-            filePattern: self::FILE_NAME_PATTERN,
-            dirName: $this->config->getDefinitionPath(),
-        );
-
+        $definitionFinder = $this->findDefinitionFiles();
         foreach ($definitionFinder as $file) {
             yield $file->getFilename() => $file->getRealPath();
         }
 
-        if ($definitionFinder->count() === 0) {
+        return  $definitionFinder->count();
+    }
+
+    /**
+     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
+     * @throws \Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorDefinitionException
+     *
+     * @return Countable&IteratorAggregate<string,\Picamator\TransferObject\Dependency\Finder\SplFileInfoBridge>
+     */
+    private function findDefinitionFiles(): IteratorAggregate&Countable
+    {
+        $definitionFinder = $this->finder->findFilesInDirectory(
+            filePattern: self::FILE_NAME_PATTERN,
+            dirName: $this->config->getDefinitionPath(),
+        );
+
+        $fileCount = $definitionFinder->count();
+        if ($fileCount === 0) {
             throw new TransferGeneratorDefinitionException(self::DEFINITIONS_NOT_FOUND_ERROR_MESSAGE);
         }
 
-        return $definitionFinder->count();
+        return $definitionFinder;
     }
 }

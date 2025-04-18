@@ -11,7 +11,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -33,7 +33,7 @@ final class MeasurementUnitTransfer extends AbstractTransfer
     protected const int BOX_DATA_INDEX = 0;
 
     public ?BoxTransfer $box {
-        get => $this->getData(self::BOX_DATA_INDEX);
+        get => $this->getData(self::BOX_DATA_INDEX, false);
         set => $this->setData(self::BOX_DATA_INDEX, $value);
     }
 
@@ -44,7 +44,7 @@ final class MeasurementUnitTransfer extends AbstractTransfer
     protected const int PALETTE_DATA_INDEX = 1;
 
     public ?PaletteTransfer $palette {
-        get => $this->getData(self::PALETTE_DATA_INDEX);
+        get => $this->getData(self::PALETTE_DATA_INDEX, false);
         set => $this->setData(self::PALETTE_DATA_INDEX, $value);
     }
 }

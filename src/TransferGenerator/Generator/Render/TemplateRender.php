@@ -13,12 +13,14 @@ readonly class TemplateRender implements TemplateRenderInterface
 
     public function __construct(
         private TemplateBuilderInterface $templateBuilder,
+        private TemplateHelperInterface $templateHelper,
     ) {
     }
 
     public function renderTemplate(DefinitionContentTransfer $contentTransfer): string
     {
         $templateTransfer = $this->templateBuilder->createTemplateTransfer($contentTransfer);
+        $helper = $this->templateHelper->setTemplateTransfer($templateTransfer);
 
         ob_start();
         include self::TEMPLATE_PATH;

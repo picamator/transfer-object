@@ -10,7 +10,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -32,7 +32,7 @@ final class OrbitClassTransfer extends AbstractTransfer
     protected const int ORBIT_CLASS_DESCRIPTION_DATA_INDEX = 0;
 
     public ?string $orbit_class_description {
-        get => $this->getData(self::ORBIT_CLASS_DESCRIPTION_DATA_INDEX);
+        get => $this->getData(self::ORBIT_CLASS_DESCRIPTION_DATA_INDEX, false);
         set => $this->setData(self::ORBIT_CLASS_DESCRIPTION_DATA_INDEX, $value);
     }
 
@@ -42,7 +42,7 @@ final class OrbitClassTransfer extends AbstractTransfer
     protected const int ORBIT_CLASS_RANGE_DATA_INDEX = 1;
 
     public ?string $orbit_class_range {
-        get => $this->getData(self::ORBIT_CLASS_RANGE_DATA_INDEX);
+        get => $this->getData(self::ORBIT_CLASS_RANGE_DATA_INDEX, false);
         set => $this->setData(self::ORBIT_CLASS_RANGE_DATA_INDEX, $value);
     }
 
@@ -52,7 +52,7 @@ final class OrbitClassTransfer extends AbstractTransfer
     protected const int ORBIT_CLASS_TYPE_DATA_INDEX = 2;
 
     public ?string $orbit_class_type {
-        get => $this->getData(self::ORBIT_CLASS_TYPE_DATA_INDEX);
+        get => $this->getData(self::ORBIT_CLASS_TYPE_DATA_INDEX, false);
         set => $this->setData(self::ORBIT_CLASS_TYPE_DATA_INDEX, $value);
     }
 }

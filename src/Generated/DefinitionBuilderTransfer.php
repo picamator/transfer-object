@@ -13,7 +13,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -35,7 +35,7 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
     protected const int DEFINITION_CONTENT_DATA_INDEX = 0;
 
     public DefinitionContentTransfer $definitionContent {
-        get => $this->getRequiredData(self::DEFINITION_CONTENT_DATA_INDEX);
+        get => $this->getData(self::DEFINITION_CONTENT_DATA_INDEX, true);
         set => $this->setData(self::DEFINITION_CONTENT_DATA_INDEX, $value);
     }
 
@@ -47,7 +47,7 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,DefinitionGeneratorContentTransfer> */
     public ArrayObject $generatorContents {
-        get => $this->getRequiredData(self::GENERATOR_CONTENTS_DATA_INDEX);
+        get => $this->getData(self::GENERATOR_CONTENTS_DATA_INDEX, true);
         set => $this->setData(self::GENERATOR_CONTENTS_DATA_INDEX, $value);
     }
 }

@@ -11,6 +11,7 @@ interface DefinitionFinderInterface
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
      * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorDefinitionException
+     * @throws \Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException
      *
      * @return Generator<string,string>
      */

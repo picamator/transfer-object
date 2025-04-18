@@ -10,7 +10,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -31,7 +31,7 @@ final class ValidatorMessageTransfer extends AbstractTransfer
     protected const int ERROR_MESSAGE_DATA_INDEX = 0;
 
     public string $errorMessage {
-        get => $this->getRequiredData(self::ERROR_MESSAGE_DATA_INDEX);
+        get => $this->getData(self::ERROR_MESSAGE_DATA_INDEX, true);
         set => $this->setData(self::ERROR_MESSAGE_DATA_INDEX, $value);
     }
 
@@ -41,7 +41,7 @@ final class ValidatorMessageTransfer extends AbstractTransfer
     protected const int IS_VALID_DATA_INDEX = 1;
 
     public bool $isValid {
-        get => $this->getRequiredData(self::IS_VALID_DATA_INDEX);
+        get => $this->getData(self::IS_VALID_DATA_INDEX, true);
         set => $this->setData(self::IS_VALID_DATA_INDEX, $value);
     }
 }

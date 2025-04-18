@@ -10,7 +10,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -32,7 +32,7 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
     protected const int CONTENT_DATA_INDEX = 0;
 
     public string $content {
-        get => $this->getRequiredData(self::CONTENT_DATA_INDEX);
+        get => $this->getData(self::CONTENT_DATA_INDEX, true);
         set => $this->setData(self::CONTENT_DATA_INDEX, $value);
     }
 
@@ -42,7 +42,7 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
     protected const int DEFINITION_PATH_DATA_INDEX = 1;
 
     public string $definitionPath {
-        get => $this->getRequiredData(self::DEFINITION_PATH_DATA_INDEX);
+        get => $this->getData(self::DEFINITION_PATH_DATA_INDEX, true);
         set => $this->setData(self::DEFINITION_PATH_DATA_INDEX, $value);
     }
 
@@ -52,7 +52,7 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
     protected const int FILE_NAME_DATA_INDEX = 2;
 
     public string $fileName {
-        get => $this->getRequiredData(self::FILE_NAME_DATA_INDEX);
+        get => $this->getData(self::FILE_NAME_DATA_INDEX, true);
         set => $this->setData(self::FILE_NAME_DATA_INDEX, $value);
     }
 }

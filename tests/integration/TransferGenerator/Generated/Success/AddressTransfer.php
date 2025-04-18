@@ -12,7 +12,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -41,7 +41,7 @@ final class AddressTransfer extends AbstractTransfer
     protected const int ADDRESS1_DATA_INDEX = 0;
 
     public ?string $address1 {
-        get => $this->getData(self::ADDRESS1_DATA_INDEX);
+        get => $this->getData(self::ADDRESS1_DATA_INDEX, false);
         set => $this->setData(self::ADDRESS1_DATA_INDEX, $value);
     }
 
@@ -51,7 +51,7 @@ final class AddressTransfer extends AbstractTransfer
     protected const int ADDRESS2_DATA_INDEX = 1;
 
     public ?string $address2 {
-        get => $this->getData(self::ADDRESS2_DATA_INDEX);
+        get => $this->getData(self::ADDRESS2_DATA_INDEX, false);
         set => $this->setData(self::ADDRESS2_DATA_INDEX, $value);
     }
 
@@ -61,7 +61,7 @@ final class AddressTransfer extends AbstractTransfer
     protected const int ADDRESS3_DATA_INDEX = 2;
 
     public ?string $address3 {
-        get => $this->getData(self::ADDRESS3_DATA_INDEX);
+        get => $this->getData(self::ADDRESS3_DATA_INDEX, false);
         set => $this->setData(self::ADDRESS3_DATA_INDEX, $value);
     }
 
@@ -73,7 +73,7 @@ final class AddressTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,CountryTransfer> */
     public ArrayObject $country {
-        get => $this->getRequiredData(self::COUNTRY_DATA_INDEX);
+        get => $this->getData(self::COUNTRY_DATA_INDEX, true);
         set => $this->setData(self::COUNTRY_DATA_INDEX, $value);
     }
 
@@ -83,7 +83,7 @@ final class AddressTransfer extends AbstractTransfer
     protected const int FIRST_NAME_DATA_INDEX = 4;
 
     public ?string $firstName {
-        get => $this->getData(self::FIRST_NAME_DATA_INDEX);
+        get => $this->getData(self::FIRST_NAME_DATA_INDEX, false);
         set => $this->setData(self::FIRST_NAME_DATA_INDEX, $value);
     }
 
@@ -93,7 +93,7 @@ final class AddressTransfer extends AbstractTransfer
     protected const int IS_ACTIVE_DATA_INDEX = 5;
 
     public ?bool $isActive {
-        get => $this->getData(self::IS_ACTIVE_DATA_INDEX);
+        get => $this->getData(self::IS_ACTIVE_DATA_INDEX, false);
         set => $this->setData(self::IS_ACTIVE_DATA_INDEX, $value);
     }
 
@@ -103,7 +103,7 @@ final class AddressTransfer extends AbstractTransfer
     protected const int LAST_NAME_DATA_INDEX = 6;
 
     public ?string $lastName {
-        get => $this->getData(self::LAST_NAME_DATA_INDEX);
+        get => $this->getData(self::LAST_NAME_DATA_INDEX, false);
         set => $this->setData(self::LAST_NAME_DATA_INDEX, $value);
     }
 
@@ -113,7 +113,7 @@ final class AddressTransfer extends AbstractTransfer
     protected const int PHONE_DATA_INDEX = 7;
 
     public ?string $phone {
-        get => $this->getData(self::PHONE_DATA_INDEX);
+        get => $this->getData(self::PHONE_DATA_INDEX, false);
         set => $this->setData(self::PHONE_DATA_INDEX, $value);
     }
 
@@ -123,7 +123,7 @@ final class AddressTransfer extends AbstractTransfer
     protected const int UUID_DATA_INDEX = 8;
 
     public ?string $uuid {
-        get => $this->getData(self::UUID_DATA_INDEX);
+        get => $this->getData(self::UUID_DATA_INDEX, false);
         set => $this->setData(self::UUID_DATA_INDEX, $value);
     }
 
@@ -133,7 +133,7 @@ final class AddressTransfer extends AbstractTransfer
     protected const int ZIP_CODE_DATA_INDEX = 9;
 
     public ?string $zipCode {
-        get => $this->getData(self::ZIP_CODE_DATA_INDEX);
+        get => $this->getData(self::ZIP_CODE_DATA_INDEX, false);
         set => $this->setData(self::ZIP_CODE_DATA_INDEX, $value);
     }
 }

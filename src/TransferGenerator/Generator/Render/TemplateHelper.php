@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Template;
+namespace Picamator\TransferObject\TransferGenerator\Generator\Render;
 
 use Picamator\TransferObject\Generated\TemplateTransfer;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransferEnum;
 
-readonly class TemplateHelper implements TemplateHelperInterface
+class TemplateHelper implements TemplateHelperInterface
 {
+    private TemplateTransfer $templateTransfer;
+
     private const array KEY_VALUE_SEARCH = [
         ':key',
         ':value',
@@ -18,22 +19,14 @@ readonly class TemplateHelper implements TemplateHelperInterface
     private const string EMPTY_STRING = '';
     private const string NULLABLE_TYPE = '?';
     private const string NULLABLE_UNION = 'null|';
-    private const string REQUIRED_METHOD_NAME = 'Required';
+    private const string BOOL_TRUE = 'true';
+    private const string BOOL_FALSE = 'false';
 
-    public function __construct(private TemplateTransfer $templateTransfer)
+    public function setTemplateTransfer(TemplateTransfer $templateTransfer): self
     {
-    }
+        $this->templateTransfer = $templateTransfer;
 
-    public static function getDefaultTemplateTransfer(): TemplateTransfer
-    {
-        return new TemplateTransfer()->fromArray([
-            TemplateTransfer::CLASS_NAMESPACE => '\Default',
-            TemplateTransfer::CLASS_NAME => 'DefaultTransfer',
-            TemplateTransfer::IMPORTS => [
-                TransferEnum::ABSTRACT_CLASS->value,
-                TransferEnum::TRAIT->value,
-            ],
-        ]);
+        return $this;
     }
 
     public function renderKeyValue(iterable $data, string $template): string
@@ -42,7 +35,7 @@ readonly class TemplateHelper implements TemplateHelperInterface
         foreach ($data as $key => $value) {
             $iterateResult[] = str_replace(
                 self::KEY_VALUE_SEARCH,
-                [$key, $value],
+                [(string)$key, $value],
                 $template,
             );
         }
@@ -84,8 +77,8 @@ readonly class TemplateHelper implements TemplateHelperInterface
         return self::NULLABLE_TYPE;
     }
 
-    public function getRequired(string $property): string
+    public function isRequired(string $property): string
     {
-        return $this->templateTransfer->nullables[$property] ? self::EMPTY_STRING : self::REQUIRED_METHOD_NAME;
+        return $this->templateTransfer->nullables[$property] ? self::BOOL_FALSE : self::BOOL_TRUE;
     }
 }

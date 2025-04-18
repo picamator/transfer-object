@@ -14,7 +14,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -47,7 +47,7 @@ final class ProductTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,AvailabilitiesTransfer> */
     public ArrayObject $availabilities {
-        get => $this->getRequiredData(self::AVAILABILITIES_DATA_INDEX);
+        get => $this->getData(self::AVAILABILITIES_DATA_INDEX, true);
         set => $this->setData(self::AVAILABILITIES_DATA_INDEX, $value);
     }
 
@@ -57,7 +57,7 @@ final class ProductTransfer extends AbstractTransfer
     protected const int CURRENCY_DATA_INDEX = 1;
 
     public ?string $currency {
-        get => $this->getData(self::CURRENCY_DATA_INDEX);
+        get => $this->getData(self::CURRENCY_DATA_INDEX, false);
         set => $this->setData(self::CURRENCY_DATA_INDEX, $value);
     }
 
@@ -69,7 +69,7 @@ final class ProductTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,DeliveryOptionsTransfer> */
     public ArrayObject $deliveryOptions {
-        get => $this->getRequiredData(self::DELIVERY_OPTIONS_DATA_INDEX);
+        get => $this->getData(self::DELIVERY_OPTIONS_DATA_INDEX, true);
         set => $this->setData(self::DELIVERY_OPTIONS_DATA_INDEX, $value);
     }
 
@@ -80,7 +80,7 @@ final class ProductTransfer extends AbstractTransfer
     protected const int DETAILS_DATA_INDEX = 3;
 
     public ?DetailsTransfer $details {
-        get => $this->getData(self::DETAILS_DATA_INDEX);
+        get => $this->getData(self::DETAILS_DATA_INDEX, false);
         set => $this->setData(self::DETAILS_DATA_INDEX, $value);
     }
 
@@ -90,7 +90,7 @@ final class ProductTransfer extends AbstractTransfer
     protected const int IS_DISCOUNTED_DATA_INDEX = 4;
 
     public ?bool $isDiscounted {
-        get => $this->getData(self::IS_DISCOUNTED_DATA_INDEX);
+        get => $this->getData(self::IS_DISCOUNTED_DATA_INDEX, false);
         set => $this->setData(self::IS_DISCOUNTED_DATA_INDEX, $value);
     }
 
@@ -101,7 +101,7 @@ final class ProductTransfer extends AbstractTransfer
     protected const int LABELS_DATA_INDEX = 5;
 
     public ?LabelsTransfer $labels {
-        get => $this->getData(self::LABELS_DATA_INDEX);
+        get => $this->getData(self::LABELS_DATA_INDEX, false);
         set => $this->setData(self::LABELS_DATA_INDEX, $value);
     }
 
@@ -112,7 +112,7 @@ final class ProductTransfer extends AbstractTransfer
     protected const int MEASUREMENT_UNIT_DATA_INDEX = 6;
 
     public ?MeasurementUnitTransfer $measurementUnit {
-        get => $this->getData(self::MEASUREMENT_UNIT_DATA_INDEX);
+        get => $this->getData(self::MEASUREMENT_UNIT_DATA_INDEX, false);
         set => $this->setData(self::MEASUREMENT_UNIT_DATA_INDEX, $value);
     }
 
@@ -122,7 +122,7 @@ final class ProductTransfer extends AbstractTransfer
     protected const int NAME_DATA_INDEX = 7;
 
     public ?string $name {
-        get => $this->getData(self::NAME_DATA_INDEX);
+        get => $this->getData(self::NAME_DATA_INDEX, false);
         set => $this->setData(self::NAME_DATA_INDEX, $value);
     }
 
@@ -132,7 +132,7 @@ final class ProductTransfer extends AbstractTransfer
     protected const int PRICE_DATA_INDEX = 8;
 
     public ?float $price {
-        get => $this->getData(self::PRICE_DATA_INDEX);
+        get => $this->getData(self::PRICE_DATA_INDEX, false);
         set => $this->setData(self::PRICE_DATA_INDEX, $value);
     }
 
@@ -142,7 +142,7 @@ final class ProductTransfer extends AbstractTransfer
     protected const int SKU_DATA_INDEX = 9;
 
     public ?string $sku {
-        get => $this->getData(self::SKU_DATA_INDEX);
+        get => $this->getData(self::SKU_DATA_INDEX, false);
         set => $this->setData(self::SKU_DATA_INDEX, $value);
     }
 
@@ -152,7 +152,7 @@ final class ProductTransfer extends AbstractTransfer
     protected const int STOCK_DATA_INDEX = 10;
 
     public ?int $stock {
-        get => $this->getData(self::STOCK_DATA_INDEX);
+        get => $this->getData(self::STOCK_DATA_INDEX, false);
         set => $this->setData(self::STOCK_DATA_INDEX, $value);
     }
 
@@ -164,7 +164,7 @@ final class ProductTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $stores {
-        get => $this->getRequiredData(self::STORES_DATA_INDEX);
+        get => $this->getData(self::STORES_DATA_INDEX, true);
         set => $this->setData(self::STORES_DATA_INDEX, $value);
     }
 }

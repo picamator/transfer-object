@@ -10,7 +10,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -30,7 +30,7 @@ final class RequiredTransfer extends AbstractTransfer
     protected const int I_AM_REQUIRED_DATA_INDEX = 0;
 
     public string $iAmRequired {
-        get => $this->getRequiredData(self::I_AM_REQUIRED_DATA_INDEX);
+        get => $this->getData(self::I_AM_REQUIRED_DATA_INDEX, true);
         set => $this->setData(self::I_AM_REQUIRED_DATA_INDEX, $value);
     }
 }

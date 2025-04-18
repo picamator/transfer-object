@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelper;
-
-$templateTransfer ??= TemplateHelper::getDefaultTemplateTransfer();
-$helper = new TemplateHelper($templateTransfer);
+/**
+ * @var \Picamator\TransferObject\Generated\TemplateTransfer $templateTransfer
+ * @var \Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateHelperInterface $helper
+ */
 
 echo <<<TEMPLATE
 <?php
@@ -19,7 +19,7 @@ namespace $templateTransfer->classNamespace;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -45,7 +45,7 @@ foreach ($templateTransfer->metaConstants as $constant => $property) {
     protected const int {$constant}_DATA_INDEX = $i;
 {$helper->getDockBlock($property)}
     public {$helper->getNullable($property)}{$templateTransfer->properties[$property]} \$$property {
-        get => \$this->get{$helper->getRequired($property)}Data(self::{$constant}_DATA_INDEX);
+        get => \$this->getData(self::{$constant}_DATA_INDEX, {$helper->isRequired($property)});
         set => \$this->setData(self::{$constant}_DATA_INDEX, \$value);
     }
 

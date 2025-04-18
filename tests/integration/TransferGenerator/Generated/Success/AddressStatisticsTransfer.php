@@ -12,7 +12,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -38,7 +38,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     protected const int ADDRESS_BOOK_UUID_DATA_INDEX = 0;
 
     public ?string $addressBookUuid {
-        get => $this->getData(self::ADDRESS_BOOK_UUID_DATA_INDEX);
+        get => $this->getData(self::ADDRESS_BOOK_UUID_DATA_INDEX, false);
         set => $this->setData(self::ADDRESS_BOOK_UUID_DATA_INDEX, $value);
     }
 
@@ -48,7 +48,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     protected const int ADDRESS_UUID_DATA_INDEX = 1;
 
     public ?string $addressUuid {
-        get => $this->getData(self::ADDRESS_UUID_DATA_INDEX);
+        get => $this->getData(self::ADDRESS_UUID_DATA_INDEX, false);
         set => $this->setData(self::ADDRESS_UUID_DATA_INDEX, $value);
     }
 
@@ -58,7 +58,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     protected const int IS_ACTIVE_DATA_INDEX = 2;
 
     public ?true $isActive {
-        get => $this->getData(self::IS_ACTIVE_DATA_INDEX);
+        get => $this->getData(self::IS_ACTIVE_DATA_INDEX, false);
         set => $this->setData(self::IS_ACTIVE_DATA_INDEX, $value);
     }
 
@@ -68,7 +68,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     protected const int IS_BLOCKED_DATA_INDEX = 3;
 
     public ?false $isBlocked {
-        get => $this->getData(self::IS_BLOCKED_DATA_INDEX);
+        get => $this->getData(self::IS_BLOCKED_DATA_INDEX, false);
         set => $this->setData(self::IS_BLOCKED_DATA_INDEX, $value);
     }
 
@@ -78,7 +78,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     protected const int ORDER_AVERAGE_DATA_INDEX = 4;
 
     public ?float $orderAverage {
-        get => $this->getData(self::ORDER_AVERAGE_DATA_INDEX);
+        get => $this->getData(self::ORDER_AVERAGE_DATA_INDEX, false);
         set => $this->setData(self::ORDER_AVERAGE_DATA_INDEX, $value);
     }
 
@@ -88,7 +88,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     protected const int ORDER_COUNT_DATA_INDEX = 5;
 
     public ?int $orderCount {
-        get => $this->getData(self::ORDER_COUNT_DATA_INDEX);
+        get => $this->getData(self::ORDER_COUNT_DATA_INDEX, false);
         set => $this->setData(self::ORDER_COUNT_DATA_INDEX, $value);
     }
 
@@ -100,7 +100,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $orderReferences {
-        get => $this->getRequiredData(self::ORDER_REFERENCES_DATA_INDEX);
+        get => $this->getData(self::ORDER_REFERENCES_DATA_INDEX, true);
         set => $this->setData(self::ORDER_REFERENCES_DATA_INDEX, $value);
     }
 }

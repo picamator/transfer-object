@@ -95,6 +95,9 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
         }
     }
 
+    /**
+     * @throws \Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException
+     */
     private function getTemporaryPath(): string
     {
         return $this->config->getTransferPath() . DIRECTORY_SEPARATOR . self::TEMPORARY_DIR;

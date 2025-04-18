@@ -10,7 +10,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -32,7 +32,7 @@ final class ConfigContentTransfer extends AbstractTransfer
     protected const int DEFINITION_PATH_DATA_INDEX = 0;
 
     public string $definitionPath {
-        get => $this->getRequiredData(self::DEFINITION_PATH_DATA_INDEX);
+        get => $this->getData(self::DEFINITION_PATH_DATA_INDEX, true);
         set => $this->setData(self::DEFINITION_PATH_DATA_INDEX, $value);
     }
 
@@ -42,7 +42,7 @@ final class ConfigContentTransfer extends AbstractTransfer
     protected const int TRANSFER_NAMESPACE_DATA_INDEX = 1;
 
     public string $transferNamespace {
-        get => $this->getRequiredData(self::TRANSFER_NAMESPACE_DATA_INDEX);
+        get => $this->getData(self::TRANSFER_NAMESPACE_DATA_INDEX, true);
         set => $this->setData(self::TRANSFER_NAMESPACE_DATA_INDEX, $value);
     }
 
@@ -52,7 +52,7 @@ final class ConfigContentTransfer extends AbstractTransfer
     protected const int TRANSFER_PATH_DATA_INDEX = 2;
 
     public string $transferPath {
-        get => $this->getRequiredData(self::TRANSFER_PATH_DATA_INDEX);
+        get => $this->getData(self::TRANSFER_PATH_DATA_INDEX, true);
         set => $this->setData(self::TRANSFER_PATH_DATA_INDEX, $value);
     }
 }

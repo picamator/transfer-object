@@ -10,7 +10,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -33,7 +33,7 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
     protected const int ALIAS_DATA_INDEX = 0;
 
     public ?string $alias {
-        get => $this->getData(self::ALIAS_DATA_INDEX);
+        get => $this->getData(self::ALIAS_DATA_INDEX, false);
         set => $this->setData(self::ALIAS_DATA_INDEX, $value);
     }
 
@@ -43,7 +43,7 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
     protected const int BASE_NAME_DATA_INDEX = 1;
 
     public string $baseName {
-        get => $this->getRequiredData(self::BASE_NAME_DATA_INDEX);
+        get => $this->getData(self::BASE_NAME_DATA_INDEX, true);
         set => $this->setData(self::BASE_NAME_DATA_INDEX, $value);
     }
 
@@ -53,7 +53,7 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
     protected const int FULL_NAME_DATA_INDEX = 2;
 
     public string $fullName {
-        get => $this->getRequiredData(self::FULL_NAME_DATA_INDEX);
+        get => $this->getData(self::FULL_NAME_DATA_INDEX, true);
         set => $this->setData(self::FULL_NAME_DATA_INDEX, $value);
     }
 
@@ -63,7 +63,7 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
     protected const int WITHOUT_ALIAS_DATA_INDEX = 3;
 
     public string $withoutAlias {
-        get => $this->getRequiredData(self::WITHOUT_ALIAS_DATA_INDEX);
+        get => $this->getData(self::WITHOUT_ALIAS_DATA_INDEX, true);
         set => $this->setData(self::WITHOUT_ALIAS_DATA_INDEX, $value);
     }
 }

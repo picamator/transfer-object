@@ -1,0 +1,64 @@
+name: Bug Report
+description:  File a bug report.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+        For reporting security issues please read [security](https://github.com/picamator/transfer-object/blob/main/SECURITY.md).
+  - type: input
+    id: affected-version
+    attributes:
+      label: Affected version
+      description: What version is used?
+      placeholder: x.y.z
+    validations:
+      required: true
+  - type: textarea
+    id: issue-current-behavior
+    attributes:
+      label: Current behavior
+      description: Please describe what happened.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: Please describe expected behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Please describe steps to reproduce.
+    validations:
+      required: true
+  - type: textarea
+    id: log-output
+    attributes:
+      label: Log output
+      description: |
+        Optional: Please copy and paste relevant log output. This will be automatically formatted into code.
+      render: shell
+    validations:
+      required: false
+  - type: input
+    id: proposed-solution-url
+    attributes:
+      label: Proposed solution
+      description: |
+        Optional: Provide a URL to a proposed solution, Pull Request, or code snippet.
+    validations:
+      required: false
+  - type: checkboxes
+    id: code-of-conduct
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/picamator/transfer-object/blob/main/CODE_OF_CONDUCT.md).
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

@@ -6,7 +6,7 @@ parameters:
     - doc
     - bin
   excludePaths:
+    - src/Generated
     - tests/*/data/*
-  ignoreErrors:
-    -
-      identifier: propertyGetHook.noRead
+    - tests/*/Generated/*
+    - doc/samples/Generated

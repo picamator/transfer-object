@@ -13,10 +13,10 @@ interface TransferGeneratorFacadeInterface
      * Specification:
      * - Provides Transfer Generator Fiber
      * - Starts fiber with `$configPath`
-     * - Fiber suspends after configuration load
-     * - Fiber suspends after generating Transfer Object returning back `TransferGeneratorTransfer`
+     * - Fiber suspended after configuration load
+     * - Fiber suspended after generating Transfer Object returning `TransferGeneratorTransfer`
      * - Transfer Object `TransferGeneratorTransfer` might contain error messages
-     * - Returns `true` when process is successful, `false` otherwise
+     * - Returns `true` when the process is successful, `false` otherwise
      *
      * @throws \FiberError
      * @throws \Throwable

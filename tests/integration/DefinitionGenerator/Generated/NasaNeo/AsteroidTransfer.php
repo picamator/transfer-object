@@ -13,7 +13,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -44,7 +44,7 @@ final class AsteroidTransfer extends AbstractTransfer
     protected const int ABSOLUTE_MAGNITUDE_H_DATA_INDEX = 0;
 
     public ?float $absolute_magnitude_h {
-        get => $this->getData(self::ABSOLUTE_MAGNITUDE_H_DATA_INDEX);
+        get => $this->getData(self::ABSOLUTE_MAGNITUDE_H_DATA_INDEX, false);
         set => $this->setData(self::ABSOLUTE_MAGNITUDE_H_DATA_INDEX, $value);
     }
 
@@ -56,7 +56,7 @@ final class AsteroidTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,CloseApproachDataTransfer> */
     public ArrayObject $close_approach_data {
-        get => $this->getRequiredData(self::CLOSE_APPROACH_DATA_DATA_INDEX);
+        get => $this->getData(self::CLOSE_APPROACH_DATA_DATA_INDEX, true);
         set => $this->setData(self::CLOSE_APPROACH_DATA_DATA_INDEX, $value);
     }
 
@@ -66,7 +66,7 @@ final class AsteroidTransfer extends AbstractTransfer
     protected const int DESIGNATION_DATA_INDEX = 2;
 
     public ?string $designation {
-        get => $this->getData(self::DESIGNATION_DATA_INDEX);
+        get => $this->getData(self::DESIGNATION_DATA_INDEX, false);
         set => $this->setData(self::DESIGNATION_DATA_INDEX, $value);
     }
 
@@ -77,7 +77,7 @@ final class AsteroidTransfer extends AbstractTransfer
     protected const int ESTIMATED_DIAMETER_DATA_INDEX = 3;
 
     public ?EstimatedDiameterTransfer $estimated_diameter {
-        get => $this->getData(self::ESTIMATED_DIAMETER_DATA_INDEX);
+        get => $this->getData(self::ESTIMATED_DIAMETER_DATA_INDEX, false);
         set => $this->setData(self::ESTIMATED_DIAMETER_DATA_INDEX, $value);
     }
 
@@ -87,7 +87,7 @@ final class AsteroidTransfer extends AbstractTransfer
     protected const int ID_DATA_INDEX = 4;
 
     public ?string $id {
-        get => $this->getData(self::ID_DATA_INDEX);
+        get => $this->getData(self::ID_DATA_INDEX, false);
         set => $this->setData(self::ID_DATA_INDEX, $value);
     }
 
@@ -97,7 +97,7 @@ final class AsteroidTransfer extends AbstractTransfer
     protected const int IS_POTENTIALLY_HAZARDOUS_ASTEROID_DATA_INDEX = 5;
 
     public ?bool $is_potentially_hazardous_asteroid {
-        get => $this->getData(self::IS_POTENTIALLY_HAZARDOUS_ASTEROID_DATA_INDEX);
+        get => $this->getData(self::IS_POTENTIALLY_HAZARDOUS_ASTEROID_DATA_INDEX, false);
         set => $this->setData(self::IS_POTENTIALLY_HAZARDOUS_ASTEROID_DATA_INDEX, $value);
     }
 
@@ -107,7 +107,7 @@ final class AsteroidTransfer extends AbstractTransfer
     protected const int IS_SENTRY_OBJECT_DATA_INDEX = 6;
 
     public ?bool $is_sentry_object {
-        get => $this->getData(self::IS_SENTRY_OBJECT_DATA_INDEX);
+        get => $this->getData(self::IS_SENTRY_OBJECT_DATA_INDEX, false);
         set => $this->setData(self::IS_SENTRY_OBJECT_DATA_INDEX, $value);
     }
 
@@ -118,7 +118,7 @@ final class AsteroidTransfer extends AbstractTransfer
     protected const int LINKS_DATA_INDEX = 7;
 
     public ?LinksTransfer $links {
-        get => $this->getData(self::LINKS_DATA_INDEX);
+        get => $this->getData(self::LINKS_DATA_INDEX, false);
         set => $this->setData(self::LINKS_DATA_INDEX, $value);
     }
 
@@ -128,7 +128,7 @@ final class AsteroidTransfer extends AbstractTransfer
     protected const int NAME_DATA_INDEX = 8;
 
     public ?string $name {
-        get => $this->getData(self::NAME_DATA_INDEX);
+        get => $this->getData(self::NAME_DATA_INDEX, false);
         set => $this->setData(self::NAME_DATA_INDEX, $value);
     }
 
@@ -138,7 +138,7 @@ final class AsteroidTransfer extends AbstractTransfer
     protected const int NASA_JPL_URL_DATA_INDEX = 9;
 
     public ?string $nasa_jpl_url {
-        get => $this->getData(self::NASA_JPL_URL_DATA_INDEX);
+        get => $this->getData(self::NASA_JPL_URL_DATA_INDEX, false);
         set => $this->setData(self::NASA_JPL_URL_DATA_INDEX, $value);
     }
 
@@ -148,7 +148,7 @@ final class AsteroidTransfer extends AbstractTransfer
     protected const int NEO_REFERENCE_ID_DATA_INDEX = 10;
 
     public ?string $neo_reference_id {
-        get => $this->getData(self::NEO_REFERENCE_ID_DATA_INDEX);
+        get => $this->getData(self::NEO_REFERENCE_ID_DATA_INDEX, false);
         set => $this->setData(self::NEO_REFERENCE_ID_DATA_INDEX, $value);
     }
 
@@ -159,7 +159,7 @@ final class AsteroidTransfer extends AbstractTransfer
     protected const int ORBITAL_DATA_DATA_INDEX = 11;
 
     public ?OrbitalDataTransfer $orbital_data {
-        get => $this->getData(self::ORBITAL_DATA_DATA_INDEX);
+        get => $this->getData(self::ORBITAL_DATA_DATA_INDEX, false);
         set => $this->setData(self::ORBITAL_DATA_DATA_INDEX, $value);
     }
 }

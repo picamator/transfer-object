@@ -11,7 +11,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -33,7 +33,7 @@ final class ConfigTransfer extends AbstractTransfer
     protected const int CONTENT_DATA_INDEX = 0;
 
     public ConfigContentTransfer $content {
-        get => $this->getRequiredData(self::CONTENT_DATA_INDEX);
+        get => $this->getData(self::CONTENT_DATA_INDEX, true);
         set => $this->setData(self::CONTENT_DATA_INDEX, $value);
     }
 
@@ -44,7 +44,7 @@ final class ConfigTransfer extends AbstractTransfer
     protected const int VALIDATOR_DATA_INDEX = 1;
 
     public ConfigValidatorTransfer $validator {
-        get => $this->getRequiredData(self::VALIDATOR_DATA_INDEX);
+        get => $this->getData(self::VALIDATOR_DATA_INDEX, true);
         set => $this->setData(self::VALIDATOR_DATA_INDEX, $value);
     }
 }

@@ -115,6 +115,9 @@ jobs:
     permissions:
       contents: read
       actions: read
+    strategy:
+      matrix:
+        php-version: [8.4, 8.5]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -122,7 +125,7 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4'
+          php-version: ${{ matrix.php-version }}
           coverage: none
 
       - name: Cache vendor directory
@@ -130,9 +133,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ./vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-composer-${{ matrix.php-version }}-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
-            ${{ runner.os }}-composer-
+            ${{ runner.os }}-composer-${{ matrix.php-version }}-
 
       - name: Install dependencies (if needed)
         run: composer install --no-ansi --no-interaction --no-progress

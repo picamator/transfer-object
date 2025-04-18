@@ -57,11 +57,11 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
      */
     private function countArrayItems(array $propertyValue): int
     {
-        $countArrayItem = 0;
+        $count = 0;
         foreach ($propertyValue as $item) {
-            $countArrayItem += is_array($item) ? 1 : 0;
+            $count += is_array($item) ? 1 : 0;
         }
 
-        return $countArrayItem;
+        return $count;
     }
 }

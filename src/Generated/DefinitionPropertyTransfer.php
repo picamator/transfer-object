@@ -13,7 +13,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -39,7 +39,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     protected const int BUILD_IN_TYPE_DATA_INDEX = 0;
 
     public ?BuildInTypeEnum $buildInType {
-        get => $this->getData(self::BUILD_IN_TYPE_DATA_INDEX);
+        get => $this->getData(self::BUILD_IN_TYPE_DATA_INDEX, false);
         set => $this->setData(self::BUILD_IN_TYPE_DATA_INDEX, $value);
     }
 
@@ -50,7 +50,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     protected const int COLLECTION_TYPE_DATA_INDEX = 1;
 
     public ?DefinitionEmbeddedTypeTransfer $collectionType {
-        get => $this->getData(self::COLLECTION_TYPE_DATA_INDEX);
+        get => $this->getData(self::COLLECTION_TYPE_DATA_INDEX, false);
         set => $this->setData(self::COLLECTION_TYPE_DATA_INDEX, $value);
     }
 
@@ -61,7 +61,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     protected const int ENUM_TYPE_DATA_INDEX = 2;
 
     public ?DefinitionEmbeddedTypeTransfer $enumType {
-        get => $this->getData(self::ENUM_TYPE_DATA_INDEX);
+        get => $this->getData(self::ENUM_TYPE_DATA_INDEX, false);
         set => $this->setData(self::ENUM_TYPE_DATA_INDEX, $value);
     }
 
@@ -71,7 +71,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     protected const int IS_NULLABLE_DATA_INDEX = 3;
 
     public bool $isNullable {
-        get => $this->getRequiredData(self::IS_NULLABLE_DATA_INDEX);
+        get => $this->getData(self::IS_NULLABLE_DATA_INDEX, true);
         set => $this->setData(self::IS_NULLABLE_DATA_INDEX, $value);
     }
 
@@ -81,7 +81,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     protected const int PROPERTY_NAME_DATA_INDEX = 4;
 
     public string $propertyName {
-        get => $this->getRequiredData(self::PROPERTY_NAME_DATA_INDEX);
+        get => $this->getData(self::PROPERTY_NAME_DATA_INDEX, true);
         set => $this->setData(self::PROPERTY_NAME_DATA_INDEX, $value);
     }
 
@@ -92,7 +92,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     protected const int TRANSFER_TYPE_DATA_INDEX = 5;
 
     public ?DefinitionEmbeddedTypeTransfer $transferType {
-        get => $this->getData(self::TRANSFER_TYPE_DATA_INDEX);
+        get => $this->getData(self::TRANSFER_TYPE_DATA_INDEX, false);
         set => $this->setData(self::TRANSFER_TYPE_DATA_INDEX, $value);
     }
 }

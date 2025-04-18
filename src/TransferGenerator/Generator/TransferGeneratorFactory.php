@@ -34,6 +34,8 @@ use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\Templat
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TransferTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateBuilder;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateBuilderInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateHelper;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateHelperInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRender;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderInterface;
 
@@ -93,7 +95,13 @@ readonly class TransferGeneratorFactory
     {
         return new TemplateRender(
             $this->createTemplateBuilder(),
+            $this->createTemplateHelper(),
         );
+    }
+
+    protected function createTemplateHelper(): TemplateHelperInterface
+    {
+        return new TemplateHelper();
     }
 
     protected function createTemplateBuilder(): TemplateBuilderInterface

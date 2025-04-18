@@ -10,7 +10,7 @@ use Picamator\TransferObject\Transfer\TransferTrait;
 /**
  * Specification:
  * - Class is automatically generated based on a definition file.
- * - To modify it, please update corresponding definition file and run generator again.
+ * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
@@ -31,7 +31,7 @@ final class PriceTransfer extends AbstractTransfer
     protected const int CURRENCY_DATA_INDEX = 0;
 
     public ?string $currency {
-        get => $this->getData(self::CURRENCY_DATA_INDEX);
+        get => $this->getData(self::CURRENCY_DATA_INDEX, false);
         set => $this->setData(self::CURRENCY_DATA_INDEX, $value);
     }
 
@@ -41,7 +41,7 @@ final class PriceTransfer extends AbstractTransfer
     protected const int VALUE_DATA_INDEX = 1;
 
     public ?string $value {
-        get => $this->getData(self::VALUE_DATA_INDEX);
+        get => $this->getData(self::VALUE_DATA_INDEX, false);
         set => $this->setData(self::VALUE_DATA_INDEX, $value);
     }
 }

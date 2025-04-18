@@ -19,6 +19,9 @@ readonly class FileExistConfigFileValidator implements ConfigFileValidatorInterf
     ) {
     }
 
+    /**
+     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
+     */
     public function validate(string $filePath): ValidatorMessageTransfer
     {
         if ($this->filesystem->exists($filePath)) {

@@ -10,7 +10,7 @@
          displayDetailsOnTestsThatTriggerErrors="true"
          displayDetailsOnTestsThatTriggerNotices="true"
          displayDetailsOnTestsThatTriggerWarnings="true"
-         cacheDirectory="./log/cache">
+         cacheDirectory="./var/cache">
 
     <php>
         <ini name="error_reporting" value="-1" />
