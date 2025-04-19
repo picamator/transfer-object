@@ -10,9 +10,9 @@ interface DefinitionGeneratorFacadeInterface
 {
     /**
      * Specification:
-     * - Generates definitions by content data
-     * - Saves definitions as yml file
-     * - Returns number of generated definitions
+     * - Generates transfer object definition files based on the provided content data.
+     * - Saves the generated definitions as YAML files.
+     * - Returns the number of successfully generated definitions.
      *
      * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
      */

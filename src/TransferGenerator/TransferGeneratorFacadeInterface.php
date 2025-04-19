@@ -11,16 +11,16 @@ interface TransferGeneratorFacadeInterface
 {
     /**
      * Specification:
-     * - Provides Transfer Generator Fiber
-     * - Starts fiber with `$configPath`
-     * - Fiber suspended after configuration load
-     * - Fiber suspended after generating Transfer Object returning `TransferGeneratorTransfer`
-     * - Transfer Object `TransferGeneratorTransfer` might contain error messages
-     * - Returns `true` when the process is successful, `false` otherwise
+     * - Provides a transfer object generator fiber.
+     * - Starts the fiber with the provided `$configPath`.
+     * - Suspends the fiber after loading the configuration.
+     * - Suspends the fiber again after generating the transfer object, returning a `TransferGeneratorTransfer`.
+     * - The `TransferGeneratorTransfer` object may contain error messages if issues occur during generation.
+     * - Returns `true` when the process is successful, or `false` otherwise.
      *
-     * @throws \FiberError
      * @throws \Throwable
      * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
+     * @throws \FiberError
      *
      * @return \Fiber<string,null,bool,TransferGeneratorTransfer>
      */
@@ -28,9 +28,9 @@ interface TransferGeneratorFacadeInterface
 
     /**
      * Specification:
-     * - Loads configuration
-     * - Generates Transfer Objects
-     * - Throws exception on errors
+     * - Loads the configuration from the specified path.
+     * - Generates transfer objects based on the loaded configuration.
+     * - Throws an exception if an error occurs during configuration loading or transfer object generation.
      *
      * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
      */
