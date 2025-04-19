@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\Doc\Samples\TransferObject\Generated\DefinitionGenerator;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -16,8 +15,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class BoxTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
@@ -31,8 +28,8 @@ final class BoxTransfer extends AbstractTransfer
     protected const int ITEMS_DATA_INDEX = 0;
 
     public ?int $items {
-        get => $this->getData(self::ITEMS_DATA_INDEX, false);
-        set => $this->setData(self::ITEMS_DATA_INDEX, $value);
+        get => $this->_data[self::ITEMS_DATA_INDEX];
+        set => $this->_data[self::ITEMS_DATA_INDEX] = $value;
     }
 
     // type
@@ -41,7 +38,7 @@ final class BoxTransfer extends AbstractTransfer
     protected const int TYPE_DATA_INDEX = 1;
 
     public ?string $type {
-        get => $this->getData(self::TYPE_DATA_INDEX, false);
-        set => $this->setData(self::TYPE_DATA_INDEX, $value);
+        get => $this->_data[self::TYPE_DATA_INDEX];
+        set => $this->_data[self::TYPE_DATA_INDEX] = $value;
     }
 }

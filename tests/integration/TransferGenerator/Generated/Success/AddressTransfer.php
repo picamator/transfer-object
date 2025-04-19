@@ -7,7 +7,6 @@ namespace Picamator\Tests\Integration\TransferObject\TransferGenerator\Generated
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -18,8 +17,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class AddressTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 10;
 
     protected const array META_DATA = [
@@ -41,8 +38,8 @@ final class AddressTransfer extends AbstractTransfer
     protected const int ADDRESS1_DATA_INDEX = 0;
 
     public ?string $address1 {
-        get => $this->getData(self::ADDRESS1_DATA_INDEX, false);
-        set => $this->setData(self::ADDRESS1_DATA_INDEX, $value);
+        get => $this->_data[self::ADDRESS1_DATA_INDEX];
+        set => $this->_data[self::ADDRESS1_DATA_INDEX] = $value;
     }
 
     // address2
@@ -51,8 +48,8 @@ final class AddressTransfer extends AbstractTransfer
     protected const int ADDRESS2_DATA_INDEX = 1;
 
     public ?string $address2 {
-        get => $this->getData(self::ADDRESS2_DATA_INDEX, false);
-        set => $this->setData(self::ADDRESS2_DATA_INDEX, $value);
+        get => $this->_data[self::ADDRESS2_DATA_INDEX];
+        set => $this->_data[self::ADDRESS2_DATA_INDEX] = $value;
     }
 
     // address3
@@ -61,8 +58,8 @@ final class AddressTransfer extends AbstractTransfer
     protected const int ADDRESS3_DATA_INDEX = 2;
 
     public ?string $address3 {
-        get => $this->getData(self::ADDRESS3_DATA_INDEX, false);
-        set => $this->setData(self::ADDRESS3_DATA_INDEX, $value);
+        get => $this->_data[self::ADDRESS3_DATA_INDEX];
+        set => $this->_data[self::ADDRESS3_DATA_INDEX] = $value;
     }
 
     // country
@@ -73,8 +70,8 @@ final class AddressTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,CountryTransfer> */
     public ArrayObject $country {
-        get => $this->getData(self::COUNTRY_DATA_INDEX, true);
-        set => $this->setData(self::COUNTRY_DATA_INDEX, $value);
+        get => $this->_data[self::COUNTRY_DATA_INDEX];
+        set => $this->_data[self::COUNTRY_DATA_INDEX] = $value;
     }
 
     // firstName
@@ -83,8 +80,8 @@ final class AddressTransfer extends AbstractTransfer
     protected const int FIRST_NAME_DATA_INDEX = 4;
 
     public ?string $firstName {
-        get => $this->getData(self::FIRST_NAME_DATA_INDEX, false);
-        set => $this->setData(self::FIRST_NAME_DATA_INDEX, $value);
+        get => $this->_data[self::FIRST_NAME_DATA_INDEX];
+        set => $this->_data[self::FIRST_NAME_DATA_INDEX] = $value;
     }
 
     // isActive
@@ -93,8 +90,8 @@ final class AddressTransfer extends AbstractTransfer
     protected const int IS_ACTIVE_DATA_INDEX = 5;
 
     public ?bool $isActive {
-        get => $this->getData(self::IS_ACTIVE_DATA_INDEX, false);
-        set => $this->setData(self::IS_ACTIVE_DATA_INDEX, $value);
+        get => $this->_data[self::IS_ACTIVE_DATA_INDEX];
+        set => $this->_data[self::IS_ACTIVE_DATA_INDEX] = $value;
     }
 
     // lastName
@@ -103,8 +100,8 @@ final class AddressTransfer extends AbstractTransfer
     protected const int LAST_NAME_DATA_INDEX = 6;
 
     public ?string $lastName {
-        get => $this->getData(self::LAST_NAME_DATA_INDEX, false);
-        set => $this->setData(self::LAST_NAME_DATA_INDEX, $value);
+        get => $this->_data[self::LAST_NAME_DATA_INDEX];
+        set => $this->_data[self::LAST_NAME_DATA_INDEX] = $value;
     }
 
     // phone
@@ -113,8 +110,8 @@ final class AddressTransfer extends AbstractTransfer
     protected const int PHONE_DATA_INDEX = 7;
 
     public ?string $phone {
-        get => $this->getData(self::PHONE_DATA_INDEX, false);
-        set => $this->setData(self::PHONE_DATA_INDEX, $value);
+        get => $this->_data[self::PHONE_DATA_INDEX];
+        set => $this->_data[self::PHONE_DATA_INDEX] = $value;
     }
 
     // uuid
@@ -123,8 +120,8 @@ final class AddressTransfer extends AbstractTransfer
     protected const int UUID_DATA_INDEX = 8;
 
     public ?string $uuid {
-        get => $this->getData(self::UUID_DATA_INDEX, false);
-        set => $this->setData(self::UUID_DATA_INDEX, $value);
+        get => $this->_data[self::UUID_DATA_INDEX];
+        set => $this->_data[self::UUID_DATA_INDEX] = $value;
     }
 
     // zipCode
@@ -133,7 +130,7 @@ final class AddressTransfer extends AbstractTransfer
     protected const int ZIP_CODE_DATA_INDEX = 9;
 
     public ?string $zipCode {
-        get => $this->getData(self::ZIP_CODE_DATA_INDEX, false);
-        set => $this->setData(self::ZIP_CODE_DATA_INDEX, $value);
+        get => $this->_data[self::ZIP_CODE_DATA_INDEX];
+        set => $this->_data[self::ZIP_CODE_DATA_INDEX] = $value;
     }
 }

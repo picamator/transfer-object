@@ -6,7 +6,6 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -17,8 +16,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class EstimatedDiameterTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
@@ -35,8 +32,8 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     protected const int FEET_DATA_INDEX = 0;
 
     public ?FeetTransfer $feet {
-        get => $this->getData(self::FEET_DATA_INDEX, false);
-        set => $this->setData(self::FEET_DATA_INDEX, $value);
+        get => $this->_data[self::FEET_DATA_INDEX];
+        set => $this->_data[self::FEET_DATA_INDEX] = $value;
     }
 
     // kilometers
@@ -46,8 +43,8 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     protected const int KILOMETERS_DATA_INDEX = 1;
 
     public ?KilometersTransfer $kilometers {
-        get => $this->getData(self::KILOMETERS_DATA_INDEX, false);
-        set => $this->setData(self::KILOMETERS_DATA_INDEX, $value);
+        get => $this->_data[self::KILOMETERS_DATA_INDEX];
+        set => $this->_data[self::KILOMETERS_DATA_INDEX] = $value;
     }
 
     // meters
@@ -57,8 +54,8 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     protected const int METERS_DATA_INDEX = 2;
 
     public ?MetersTransfer $meters {
-        get => $this->getData(self::METERS_DATA_INDEX, false);
-        set => $this->setData(self::METERS_DATA_INDEX, $value);
+        get => $this->_data[self::METERS_DATA_INDEX];
+        set => $this->_data[self::METERS_DATA_INDEX] = $value;
     }
 
     // miles
@@ -68,7 +65,7 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     protected const int MILES_DATA_INDEX = 3;
 
     public ?MilesTransfer $miles {
-        get => $this->getData(self::MILES_DATA_INDEX, false);
-        set => $this->setData(self::MILES_DATA_INDEX, $value);
+        get => $this->_data[self::MILES_DATA_INDEX];
+        set => $this->_data[self::MILES_DATA_INDEX] = $value;
     }
 }

@@ -19,8 +19,6 @@ class TemplateHelper implements TemplateHelperInterface
     private const string EMPTY_STRING = '';
     private const string NULLABLE_TYPE = '?';
     private const string NULLABLE_UNION = 'null|';
-    private const string BOOL_TRUE = 'true';
-    private const string BOOL_FALSE = 'false';
 
     public function setTemplateTransfer(TemplateTransfer $templateTransfer): self
     {
@@ -75,10 +73,5 @@ class TemplateHelper implements TemplateHelperInterface
         }
 
         return self::NULLABLE_TYPE;
-    }
-
-    public function isRequired(string $property): string
-    {
-        return $this->templateTransfer->nullables[$property] ? self::BOOL_FALSE : self::BOOL_TRUE;
     }
 }

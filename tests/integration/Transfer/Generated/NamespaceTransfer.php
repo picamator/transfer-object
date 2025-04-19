@@ -11,7 +11,6 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\TransferInterface;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -22,8 +21,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class NamespaceTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
@@ -39,8 +36,8 @@ final class NamespaceTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,TransferInterface&ItemTransfer> */
     public ArrayObject $items {
-        get => $this->getData(self::ITEMS_DATA_INDEX, true);
-        set => $this->setData(self::ITEMS_DATA_INDEX, $value);
+        get => $this->_data[self::ITEMS_DATA_INDEX];
+        set => $this->_data[self::ITEMS_DATA_INDEX] = $value;
     }
 
     // required
@@ -50,7 +47,7 @@ final class NamespaceTransfer extends AbstractTransfer
     protected const int REQUIRED_DATA_INDEX = 1;
 
     public TransferInterface&RequiredAlias $required {
-        get => $this->getData(self::REQUIRED_DATA_INDEX, false);
-        set => $this->setData(self::REQUIRED_DATA_INDEX, $value);
+        get => $this->_data[self::REQUIRED_DATA_INDEX];
+        set => $this->_data[self::REQUIRED_DATA_INDEX] = $value;
     }
 }

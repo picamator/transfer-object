@@ -11,6 +11,8 @@ use Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException;
 final readonly class ArrayPropertyTypeAttribute implements PropertyTypeAttributeInterface
 {
     /**
+     * @inheritDoc
+     *
      * @return array<string|int,mixed>
      */
     public function fromArray(mixed $data): array

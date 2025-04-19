@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\OpenWeather;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -16,8 +15,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class WindTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
@@ -32,8 +29,8 @@ final class WindTransfer extends AbstractTransfer
     protected const int DEG_DATA_INDEX = 0;
 
     public ?int $deg {
-        get => $this->getData(self::DEG_DATA_INDEX, false);
-        set => $this->setData(self::DEG_DATA_INDEX, $value);
+        get => $this->_data[self::DEG_DATA_INDEX];
+        set => $this->_data[self::DEG_DATA_INDEX] = $value;
     }
 
     // gust
@@ -42,8 +39,8 @@ final class WindTransfer extends AbstractTransfer
     protected const int GUST_DATA_INDEX = 1;
 
     public ?float $gust {
-        get => $this->getData(self::GUST_DATA_INDEX, false);
-        set => $this->setData(self::GUST_DATA_INDEX, $value);
+        get => $this->_data[self::GUST_DATA_INDEX];
+        set => $this->_data[self::GUST_DATA_INDEX] = $value;
     }
 
     // speed
@@ -52,7 +49,7 @@ final class WindTransfer extends AbstractTransfer
     protected const int SPEED_DATA_INDEX = 2;
 
     public ?float $speed {
-        get => $this->getData(self::SPEED_DATA_INDEX, false);
-        set => $this->setData(self::SPEED_DATA_INDEX, $value);
+        get => $this->_data[self::SPEED_DATA_INDEX];
+        set => $this->_data[self::SPEED_DATA_INDEX] = $value;
     }
 }

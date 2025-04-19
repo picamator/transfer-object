@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\Doc\Samples\TransferObject\Generated\DefinitionGenerator;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -16,8 +15,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class DetailsTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
@@ -31,8 +28,8 @@ final class DetailsTransfer extends AbstractTransfer
     protected const int DESCRIPTION_DATA_INDEX = 0;
 
     public ?string $description {
-        get => $this->getData(self::DESCRIPTION_DATA_INDEX, false);
-        set => $this->setData(self::DESCRIPTION_DATA_INDEX, $value);
+        get => $this->_data[self::DESCRIPTION_DATA_INDEX];
+        set => $this->_data[self::DESCRIPTION_DATA_INDEX] = $value;
     }
 
     // isRegional
@@ -41,7 +38,7 @@ final class DetailsTransfer extends AbstractTransfer
     protected const int IS_REGIONAL_DATA_INDEX = 1;
 
     public ?bool $isRegional {
-        get => $this->getData(self::IS_REGIONAL_DATA_INDEX, false);
-        set => $this->setData(self::IS_REGIONAL_DATA_INDEX, $value);
+        get => $this->_data[self::IS_REGIONAL_DATA_INDEX];
+        set => $this->_data[self::IS_REGIONAL_DATA_INDEX] = $value;
     }
 }

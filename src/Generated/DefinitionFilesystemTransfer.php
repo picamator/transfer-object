@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -16,8 +15,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class DefinitionFilesystemTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
@@ -32,8 +29,8 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
     protected const int CONTENT_DATA_INDEX = 0;
 
     public string $content {
-        get => $this->getData(self::CONTENT_DATA_INDEX, true);
-        set => $this->setData(self::CONTENT_DATA_INDEX, $value);
+        get => $this->_data[self::CONTENT_DATA_INDEX];
+        set => $this->_data[self::CONTENT_DATA_INDEX] = $value;
     }
 
     // definitionPath
@@ -42,8 +39,8 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
     protected const int DEFINITION_PATH_DATA_INDEX = 1;
 
     public string $definitionPath {
-        get => $this->getData(self::DEFINITION_PATH_DATA_INDEX, true);
-        set => $this->setData(self::DEFINITION_PATH_DATA_INDEX, $value);
+        get => $this->_data[self::DEFINITION_PATH_DATA_INDEX];
+        set => $this->_data[self::DEFINITION_PATH_DATA_INDEX] = $value;
     }
 
     // fileName
@@ -52,7 +49,7 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
     protected const int FILE_NAME_DATA_INDEX = 2;
 
     public string $fileName {
-        get => $this->getData(self::FILE_NAME_DATA_INDEX, true);
-        set => $this->setData(self::FILE_NAME_DATA_INDEX, $value);
+        get => $this->_data[self::FILE_NAME_DATA_INDEX];
+        set => $this->_data[self::FILE_NAME_DATA_INDEX] = $value;
     }
 }

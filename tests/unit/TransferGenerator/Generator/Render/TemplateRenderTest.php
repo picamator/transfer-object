@@ -76,7 +76,6 @@ class TemplateRenderTest extends TestCase
             TemplateTransfer::CLASS_NAME => 'DefaultTransfer',
             TemplateTransfer::IMPORTS => [
                 TransferEnum::ABSTRACT_CLASS->value,
-                TransferEnum::TRAIT->value,
             ],
         ]);
     }

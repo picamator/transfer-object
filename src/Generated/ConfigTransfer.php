@@ -6,7 +6,6 @@ namespace Picamator\TransferObject\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -17,8 +16,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class ConfigTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
@@ -33,8 +30,8 @@ final class ConfigTransfer extends AbstractTransfer
     protected const int CONTENT_DATA_INDEX = 0;
 
     public ConfigContentTransfer $content {
-        get => $this->getData(self::CONTENT_DATA_INDEX, true);
-        set => $this->setData(self::CONTENT_DATA_INDEX, $value);
+        get => $this->_data[self::CONTENT_DATA_INDEX];
+        set => $this->_data[self::CONTENT_DATA_INDEX] = $value;
     }
 
     // validator
@@ -44,7 +41,7 @@ final class ConfigTransfer extends AbstractTransfer
     protected const int VALIDATOR_DATA_INDEX = 1;
 
     public ConfigValidatorTransfer $validator {
-        get => $this->getData(self::VALIDATOR_DATA_INDEX, true);
-        set => $this->setData(self::VALIDATOR_DATA_INDEX, $value);
+        get => $this->_data[self::VALIDATOR_DATA_INDEX];
+        set => $this->_data[self::VALIDATOR_DATA_INDEX] = $value;
     }
 }

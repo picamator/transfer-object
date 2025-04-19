@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Tagesschau;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -16,8 +15,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class TagsTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
@@ -30,7 +27,7 @@ final class TagsTransfer extends AbstractTransfer
     protected const int TAG_DATA_INDEX = 0;
 
     public ?string $tag {
-        get => $this->getData(self::TAG_DATA_INDEX, false);
-        set => $this->setData(self::TAG_DATA_INDEX, $value);
+        get => $this->_data[self::TAG_DATA_INDEX];
+        set => $this->_data[self::TAG_DATA_INDEX] = $value;
     }
 }

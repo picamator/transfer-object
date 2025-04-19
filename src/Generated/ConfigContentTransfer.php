@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -16,8 +15,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class ConfigContentTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
@@ -32,8 +29,8 @@ final class ConfigContentTransfer extends AbstractTransfer
     protected const int DEFINITION_PATH_DATA_INDEX = 0;
 
     public string $definitionPath {
-        get => $this->getData(self::DEFINITION_PATH_DATA_INDEX, true);
-        set => $this->setData(self::DEFINITION_PATH_DATA_INDEX, $value);
+        get => $this->_data[self::DEFINITION_PATH_DATA_INDEX];
+        set => $this->_data[self::DEFINITION_PATH_DATA_INDEX] = $value;
     }
 
     // transferNamespace
@@ -42,8 +39,8 @@ final class ConfigContentTransfer extends AbstractTransfer
     protected const int TRANSFER_NAMESPACE_DATA_INDEX = 1;
 
     public string $transferNamespace {
-        get => $this->getData(self::TRANSFER_NAMESPACE_DATA_INDEX, true);
-        set => $this->setData(self::TRANSFER_NAMESPACE_DATA_INDEX, $value);
+        get => $this->_data[self::TRANSFER_NAMESPACE_DATA_INDEX];
+        set => $this->_data[self::TRANSFER_NAMESPACE_DATA_INDEX] = $value;
     }
 
     // transferPath
@@ -52,7 +49,7 @@ final class ConfigContentTransfer extends AbstractTransfer
     protected const int TRANSFER_PATH_DATA_INDEX = 2;
 
     public string $transferPath {
-        get => $this->getData(self::TRANSFER_PATH_DATA_INDEX, true);
-        set => $this->setData(self::TRANSFER_PATH_DATA_INDEX, $value);
+        get => $this->_data[self::TRANSFER_PATH_DATA_INDEX];
+        set => $this->_data[self::TRANSFER_PATH_DATA_INDEX] = $value;
     }
 }

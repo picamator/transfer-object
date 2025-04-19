@@ -6,7 +6,6 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -17,8 +16,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class TeaserImageTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
@@ -33,8 +30,8 @@ final class TeaserImageTransfer extends AbstractTransfer
     protected const int ALTTEXT_DATA_INDEX = 0;
 
     public ?string $alttext {
-        get => $this->getData(self::ALTTEXT_DATA_INDEX, false);
-        set => $this->setData(self::ALTTEXT_DATA_INDEX, $value);
+        get => $this->_data[self::ALTTEXT_DATA_INDEX];
+        set => $this->_data[self::ALTTEXT_DATA_INDEX] = $value;
     }
 
     // imageVariants
@@ -45,8 +42,8 @@ final class TeaserImageTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $imageVariants {
-        get => $this->getData(self::IMAGE_VARIANTS_DATA_INDEX, true);
-        set => $this->setData(self::IMAGE_VARIANTS_DATA_INDEX, $value);
+        get => $this->_data[self::IMAGE_VARIANTS_DATA_INDEX];
+        set => $this->_data[self::IMAGE_VARIANTS_DATA_INDEX] = $value;
     }
 
     // type
@@ -55,7 +52,7 @@ final class TeaserImageTransfer extends AbstractTransfer
     protected const int TYPE_DATA_INDEX = 2;
 
     public ?string $type {
-        get => $this->getData(self::TYPE_DATA_INDEX, false);
-        set => $this->setData(self::TYPE_DATA_INDEX, $value);
+        get => $this->_data[self::TYPE_DATA_INDEX];
+        set => $this->_data[self::TYPE_DATA_INDEX] = $value;
     }
 }

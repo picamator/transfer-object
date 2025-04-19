@@ -6,7 +6,6 @@ namespace Picamator\Doc\Samples\TransferObject\Generated\DefinitionGenerator;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -17,8 +16,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class MeasurementUnitTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
@@ -33,8 +30,8 @@ final class MeasurementUnitTransfer extends AbstractTransfer
     protected const int BOX_DATA_INDEX = 0;
 
     public ?BoxTransfer $box {
-        get => $this->getData(self::BOX_DATA_INDEX, false);
-        set => $this->setData(self::BOX_DATA_INDEX, $value);
+        get => $this->_data[self::BOX_DATA_INDEX];
+        set => $this->_data[self::BOX_DATA_INDEX] = $value;
     }
 
     // palette
@@ -44,7 +41,7 @@ final class MeasurementUnitTransfer extends AbstractTransfer
     protected const int PALETTE_DATA_INDEX = 1;
 
     public ?PaletteTransfer $palette {
-        get => $this->getData(self::PALETTE_DATA_INDEX, false);
-        set => $this->setData(self::PALETTE_DATA_INDEX, $value);
+        get => $this->_data[self::PALETTE_DATA_INDEX];
+        set => $this->_data[self::PALETTE_DATA_INDEX] = $value;
     }
 }

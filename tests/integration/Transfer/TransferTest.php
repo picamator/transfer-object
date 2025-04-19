@@ -12,7 +12,6 @@ use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
-use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBasicEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemCollectionTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\NamespaceTransfer;
@@ -68,7 +67,6 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
                         ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
                         ItemTransfer::I_AM_ENUM => ImBackedEnum::SOME_CASE->value,
-                        ItemTransfer::DATA => [1, 2, 3],
                     ]
                 ],
             ],
@@ -84,7 +82,6 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
                         ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
                         ItemTransfer::I_AM_ENUM => ImBackedEnum::SOME_CASE->value,
-                        ItemTransfer::DATA => [1, 2, 3],
                     ]
                 ],
                 ItemCollectionTransfer::ITEM => null,
@@ -104,7 +101,6 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ARRAY => null,
                         ItemTransfer::I_AM_ARRAY_OBJECT => null,
                         ItemTransfer::I_AM_ENUM => null,
-                        ItemTransfer::DATA => null,
                     ],
                 ],
             ],
@@ -120,7 +116,6 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ARRAY => [],
                         ItemTransfer::I_AM_ARRAY_OBJECT => [],
                         ItemTransfer::I_AM_ENUM => null,
-                        ItemTransfer::DATA => [],
                     ],
                 ],
                 ItemCollectionTransfer::ITEM => null,
@@ -215,7 +210,7 @@ class TransferTest extends TestCase
         $requiredTransfer = new RequiredTransfer();
 
         // Expect
-        $this->expectException(PropertyTypeTransferException::class);
+        $this->expectException(TypeError::class);
 
         // Act
         $requiredTransfer->toArray();

@@ -6,7 +6,6 @@ namespace Picamator\TransferObject\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -17,8 +16,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class TransferGeneratorTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
@@ -33,8 +30,8 @@ final class TransferGeneratorTransfer extends AbstractTransfer
     protected const int CLASS_NAME_DATA_INDEX = 0;
 
     public ?string $className {
-        get => $this->getData(self::CLASS_NAME_DATA_INDEX, false);
-        set => $this->setData(self::CLASS_NAME_DATA_INDEX, $value);
+        get => $this->_data[self::CLASS_NAME_DATA_INDEX];
+        set => $this->_data[self::CLASS_NAME_DATA_INDEX] = $value;
     }
 
     // fileName
@@ -43,8 +40,8 @@ final class TransferGeneratorTransfer extends AbstractTransfer
     protected const int FILE_NAME_DATA_INDEX = 1;
 
     public ?string $fileName {
-        get => $this->getData(self::FILE_NAME_DATA_INDEX, false);
-        set => $this->setData(self::FILE_NAME_DATA_INDEX, $value);
+        get => $this->_data[self::FILE_NAME_DATA_INDEX];
+        set => $this->_data[self::FILE_NAME_DATA_INDEX] = $value;
     }
 
     // validator
@@ -54,7 +51,7 @@ final class TransferGeneratorTransfer extends AbstractTransfer
     protected const int VALIDATOR_DATA_INDEX = 2;
 
     public DefinitionValidatorTransfer $validator {
-        get => $this->getData(self::VALIDATOR_DATA_INDEX, true);
-        set => $this->setData(self::VALIDATOR_DATA_INDEX, $value);
+        get => $this->_data[self::VALIDATOR_DATA_INDEX];
+        set => $this->_data[self::VALIDATOR_DATA_INDEX] = $value;
     }
 }

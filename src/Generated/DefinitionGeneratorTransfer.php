@@ -6,7 +6,6 @@ namespace Picamator\TransferObject\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -17,8 +16,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class DefinitionGeneratorTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
@@ -33,8 +30,8 @@ final class DefinitionGeneratorTransfer extends AbstractTransfer
     protected const int CONTENT_DATA_INDEX = 0;
 
     public DefinitionGeneratorContentTransfer $content {
-        get => $this->getData(self::CONTENT_DATA_INDEX, true);
-        set => $this->setData(self::CONTENT_DATA_INDEX, $value);
+        get => $this->_data[self::CONTENT_DATA_INDEX];
+        set => $this->_data[self::CONTENT_DATA_INDEX] = $value;
     }
 
     // definitionPath
@@ -43,7 +40,7 @@ final class DefinitionGeneratorTransfer extends AbstractTransfer
     protected const int DEFINITION_PATH_DATA_INDEX = 1;
 
     public string $definitionPath {
-        get => $this->getData(self::DEFINITION_PATH_DATA_INDEX, true);
-        set => $this->setData(self::DEFINITION_PATH_DATA_INDEX, $value);
+        get => $this->_data[self::DEFINITION_PATH_DATA_INDEX];
+        set => $this->_data[self::DEFINITION_PATH_DATA_INDEX] = $value;
     }
 }

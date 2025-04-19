@@ -6,7 +6,6 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -17,8 +16,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class ExchangeRateTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
@@ -34,8 +31,8 @@ final class ExchangeRateTransfer extends AbstractTransfer
     protected const int AMOUNT_DATA_INDEX = 0;
 
     public ?int $amount {
-        get => $this->getData(self::AMOUNT_DATA_INDEX, false);
-        set => $this->setData(self::AMOUNT_DATA_INDEX, $value);
+        get => $this->_data[self::AMOUNT_DATA_INDEX];
+        set => $this->_data[self::AMOUNT_DATA_INDEX] = $value;
     }
 
     // base
@@ -44,8 +41,8 @@ final class ExchangeRateTransfer extends AbstractTransfer
     protected const int BASE_DATA_INDEX = 1;
 
     public ?string $base {
-        get => $this->getData(self::BASE_DATA_INDEX, false);
-        set => $this->setData(self::BASE_DATA_INDEX, $value);
+        get => $this->_data[self::BASE_DATA_INDEX];
+        set => $this->_data[self::BASE_DATA_INDEX] = $value;
     }
 
     // date
@@ -54,8 +51,8 @@ final class ExchangeRateTransfer extends AbstractTransfer
     protected const int DATE_DATA_INDEX = 2;
 
     public ?string $date {
-        get => $this->getData(self::DATE_DATA_INDEX, false);
-        set => $this->setData(self::DATE_DATA_INDEX, $value);
+        get => $this->_data[self::DATE_DATA_INDEX];
+        set => $this->_data[self::DATE_DATA_INDEX] = $value;
     }
 
     // rates
@@ -65,7 +62,7 @@ final class ExchangeRateTransfer extends AbstractTransfer
     protected const int RATES_DATA_INDEX = 3;
 
     public ?RatesTransfer $rates {
-        get => $this->getData(self::RATES_DATA_INDEX, false);
-        set => $this->setData(self::RATES_DATA_INDEX, $value);
+        get => $this->_data[self::RATES_DATA_INDEX];
+        set => $this->_data[self::RATES_DATA_INDEX] = $value;
     }
 }

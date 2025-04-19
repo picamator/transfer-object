@@ -20,6 +20,4 @@ interface TemplateHelperInterface
     public function getDockBlock(string $property): string;
 
     public function getNullable(string $property): string;
-
-    public function isRequired(string $property): string;
 }

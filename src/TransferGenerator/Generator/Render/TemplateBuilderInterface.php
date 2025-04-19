@@ -9,5 +9,8 @@ use Picamator\TransferObject\Generated\TemplateTransfer;
 
 interface TemplateBuilderInterface
 {
+    /**
+     * @throws \Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException
+     */
     public function createTemplateTransfer(DefinitionContentTransfer $contentTransfer): TemplateTransfer;
 }
