@@ -16,6 +16,9 @@ abstract class AbstractTransfer implements TransferInterface
 
     protected const int META_DATA_SIZE = 0;
 
+    /**
+     * @var array<string,string>
+     */
     protected const array META_DATA = [];
 
     private const string DATA_INDEX_SUFFIX = '_DATA_INDEX';
@@ -110,6 +113,7 @@ abstract class AbstractTransfer implements TransferInterface
 
         foreach (static::META_DATA as $metaName) {
             $metaIndex = $metaName . self::DATA_INDEX_SUFFIX;
+            // @phpstan-ignore offsetAssign.dimType
             $this->_data[static::{$metaIndex}] = $this->hasConstantAttribute($metaName)
                 ? $this->getConstantAttribute($metaName)?->getInitialValue()
                 : null;

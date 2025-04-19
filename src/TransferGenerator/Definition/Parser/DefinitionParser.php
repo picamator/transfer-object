@@ -20,6 +20,8 @@ readonly class DefinitionParser implements DefinitionParserInterface
         $count = 0;
         foreach ($this->parseFile($filePath) as $className => $properties) {
             $count++;
+
+            /** @var array<string, mixed> $properties */
             $properties = is_array($properties) ? $properties : [];
 
             yield $this->contentBuilder->createContentTransfer(
