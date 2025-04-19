@@ -49,7 +49,7 @@ abstract class AbstractTransfer implements TransferInterface
     }
 
     /**
-     * @param array<string,mixed> $data
+     * @param array<string,\SplFixedArray<mixed>> $data
      */
     final public function __unserialize(array $data): void
     {

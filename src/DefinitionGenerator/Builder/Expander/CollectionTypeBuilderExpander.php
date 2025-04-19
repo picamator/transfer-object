@@ -19,6 +19,7 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
             return false;
         }
 
+        /** @var array<string, mixed> $propertyValue */
         $propertyValue = (array)$content->getPropertyValue();
         $countArrayItems = $this->countArrayItems($propertyValue);
 
@@ -32,6 +33,7 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
         $propertyTransfer = $this->createPropertyTransfer($content->getPropertyName());
         $builderTransfer->definitionContent->properties[] = $propertyTransfer;
 
+        /** @var array<int|string, mixed> $firstCollectionItem */
         $firstCollectionItem = current((array)$content->getPropertyValue()) ?: [];
 
         $builderTransfer->generatorContents[] = $this->createGeneratorContentTransfer(

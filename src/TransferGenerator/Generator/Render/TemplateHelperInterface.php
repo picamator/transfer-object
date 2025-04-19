@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render;
 
+use ArrayObject;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 
 interface TemplateHelperInterface
@@ -11,9 +12,9 @@ interface TemplateHelperInterface
     public function setTemplateTransfer(TemplateTransfer $templateTransfer): self;
 
     /**
-     * @param iterable<string|int,string> $data
+     * @param \ArrayObject<string, string> $data
      */
-    public function renderKeyValue(iterable $data, string $template): string;
+    public function renderKeyValue(ArrayObject $data, string $template): string;
 
     public function getAttribute(string $property): string;
 

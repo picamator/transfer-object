@@ -32,6 +32,7 @@ final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttr
             );
         }
 
+        /** @phpstan-ignore argument.type */
         $collectionData = array_map($this->createTransfer(...), $data);
 
         return new ArrayObject($collectionData);

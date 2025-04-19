@@ -36,11 +36,14 @@ trait DefinitionGeneratorHelperTrait
      */
     protected function getSampleContent(string $sampleJsonPath): array
     {
-        $sampleContent = file_get_contents($sampleJsonPath);
-        if ($sampleContent === false) {
+        $content = file_get_contents($sampleJsonPath);
+        if ($content === false) {
             return [];
         }
 
-        return json_decode($sampleContent, true, flags: JSON_THROW_ON_ERROR);
+        /** @var array<string,mixed> $decodedContent */
+        $decodedContent = json_decode($content, true, flags: JSON_THROW_ON_ERROR);
+
+        return $decodedContent;
     }
 }

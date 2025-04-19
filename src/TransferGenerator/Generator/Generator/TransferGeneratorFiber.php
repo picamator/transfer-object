@@ -15,7 +15,10 @@ readonly class TransferGeneratorFiber implements TransferGeneratorFiberInterface
 
     public function getTransferGeneratorFiber(): Fiber
     {
-        return new Fiber($this->getTransferFiberCallback(...));
+        /** @var \Fiber<string,null,bool,\Picamator\TransferObject\Generated\TransferGeneratorTransfer> $fiber */
+        $fiber = new Fiber($this->getTransferFiberCallback(...));
+
+        return $fiber;
     }
 
     private function getTransferFiberCallback(string $configPath): bool
@@ -25,6 +28,9 @@ readonly class TransferGeneratorFiber implements TransferGeneratorFiberInterface
             Fiber::suspend($generatorTransfer);
         }
 
-        return $generator->getReturn();
+        /** @var bool $generatorReturn */
+        $generatorReturn = $generator->getReturn();
+
+        return $generatorReturn;
     }
 }

@@ -64,7 +64,7 @@ HELP;
         $styleOutput->section(self::START_SECTION_NAME);
 
         $configPath = $input->getOption(self::OPTION_NAME_CONFIGURATION) ?: '';
-        if ($configPath === '') {
+        if ($configPath === '' || !is_string($configPath)) {
             $styleOutput->error(self::ERROR_MESSAGE);
             $styleOutput->error(self::ERROR_MISSED_OPTION_CONFIG_MESSAGE);
 

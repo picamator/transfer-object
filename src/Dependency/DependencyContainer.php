@@ -34,10 +34,6 @@ class DependencyContainer implements ContainerInterface
 
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException
-     *
-     * @uses createFinder()
-     * @uses createYmlParser()
-     * @uses createFileSystem()
      */
     public function get(string $id): mixed
     {
@@ -55,21 +51,21 @@ class DependencyContainer implements ContainerInterface
         return array_key_exists($id, static::DEPENDENCIES);
     }
 
-    protected static function createYmlParser(): YmlParserInterface
+    protected static function createYmlParser(): mixed
     {
         static::$container[static::YML_PARSER] ??= new YmlParserBridge(new Parser());
 
         return static::$container[static::YML_PARSER];
     }
 
-    protected static function createFinder(): FinderInterface
+    protected static function createFinder(): mixed
     {
         static::$container[static::FINDER] ??= new FinderBridge();
 
         return static::$container[static::FINDER];
     }
 
-    protected static function createFileSystem(): FilesystemInterface
+    protected static function createFileSystem(): mixed
     {
         static::$container[static::FILESYSTEM] ??= new FilesystemBridge(new Filesystem());
 

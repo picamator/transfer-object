@@ -26,6 +26,7 @@ final readonly class PropertyTypeAttribute implements PropertyTypeAttributeInter
             );
         }
 
+        /** @var array<string, mixed> $data */
         return $this->createTransfer($data);
     }
 

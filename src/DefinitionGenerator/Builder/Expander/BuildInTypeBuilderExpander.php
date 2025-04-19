@@ -33,9 +33,8 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
 
             $content->getType()->isObject() => throw new DefinitionGeneratorException(
                 sprintf(
-                    'Property "%s" with type "%s" is not supported.',
+                    'Property "%s" with object type is not supported.',
                     $content->getPropertyName(),
-                    get_class($content->getPropertyValue()),
                 ),
             ),
 
