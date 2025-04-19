@@ -31,6 +31,14 @@ trait DummyTransferAdapterTrait
     }
 
     /**
+     * @return array<string,mixed>
+     */
+    public function toFilterArray(?callable $callback = null): array
+    {
+        return [];
+    }
+
+    /**
      * @param array<string,mixed> $data
      */
     public function fromArray(array $data): static
