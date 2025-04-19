@@ -10,8 +10,10 @@ use Throwable;
 
 readonly final class FilesystemBridge implements FilesystemInterface
 {
-    public function __construct(private Filesystem $filesystem)
-    {
+    public function __construct(
+        private Filesystem $filesystem,
+        private FileAppenderInterface $fileAppender,
+    ) {
     }
 
     public function copy(string $originFile, string $targetFile): void
@@ -93,19 +95,7 @@ readonly final class FilesystemBridge implements FilesystemInterface
 
     public function appendToFile(string $filename, string $content): void
     {
-        try {
-            $this->filesystem->appendToFile($filename, $content);
-        } catch (Throwable $e) {
-            throw new FilesystemException(
-                sprintf(
-                    'Failed to append content to file "%s". Content: "%s". Error: "%s".',
-                    $content,
-                    $filename,
-                    $e->getMessage(),
-                ),
-                previous: $e,
-            );
-        }
+        $this->fileAppender->appendToFile($filename, $content);
     }
 
     public function readFile(string $filename): string
