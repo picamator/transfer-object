@@ -7,6 +7,12 @@ namespace Picamator\TransferObject\Transfer;
 use EmptyIterator;
 use Traversable;
 
+/**
+ * Specifications:
+ * - Provides default (dummy) implementations for methods in transfer object interfaces.
+ * - Simplifies integration with external transfer objects by removing the need to implement all interface methods.
+ * - Intended for use as a placeholder in cases where full method functionality is not required.
+ */
 trait DummyTransferAdapterTrait
 {
     /**
