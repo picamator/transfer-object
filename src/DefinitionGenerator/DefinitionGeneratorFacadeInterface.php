@@ -16,6 +16,8 @@ interface DefinitionGeneratorFacadeInterface
      *
      * @api
      *
+     * @example ./doc/samples/try-definition-generator.php
+     *
      * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
      */
     public function generateDefinitions(DefinitionGeneratorTransfer $generatorTransfer): int;

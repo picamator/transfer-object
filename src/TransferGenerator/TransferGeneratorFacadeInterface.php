@@ -24,6 +24,8 @@ interface TransferGeneratorFacadeInterface
      *
      * @api
      *
+     * @example ./src/Command/TransferGeneratorCommand.php
+     *
      * @return \Fiber<string,null,bool,TransferGeneratorTransfer>
      */
     public function getTransferGeneratorFiber(): Fiber;
@@ -37,6 +39,9 @@ interface TransferGeneratorFacadeInterface
      * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
      *
      * @api
+     *
+     * @example ./doc/samples/try-transfer-generator.php
+     * @example ./doc/samples/try-advanced-transfer-generator.php
      */
     public function generateTransfersOrFail(string $configPath): void;
 }
