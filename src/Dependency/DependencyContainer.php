@@ -34,6 +34,10 @@ class DependencyContainer implements ContainerInterface
     protected static array $container = [];
 
     /**
+     * @uses static::createYmlParser()
+     * @uses static::createFinder()
+     * @uses static::createFileSystem()
+     *
      * @throws \Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException
      */
     public function get(string $id): mixed
