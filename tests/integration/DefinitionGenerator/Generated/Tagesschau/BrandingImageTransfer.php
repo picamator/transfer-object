@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Tagesschau;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
 
 /**
  * Specification:
@@ -14,7 +14,7 @@ use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
-final class TeaserImageTransfer extends AbstractTransfer
+final class BrandingImageTransfer extends AbstractTransfer
 {
     protected const int META_DATA_SIZE = 5;
 
@@ -47,13 +47,12 @@ final class TeaserImageTransfer extends AbstractTransfer
     }
 
     // imageVariants
-    #[ArrayPropertyTypeAttribute]
+    #[PropertyTypeAttribute(ImageVariantsTransfer::class)]
     public const string IMAGE_VARIANTS = 'imageVariants';
     protected const string IMAGE_VARIANTS_DATA_NAME = 'IMAGE_VARIANTS';
     protected const int IMAGE_VARIANTS_DATA_INDEX = 2;
 
-    /** @var array<int|string,mixed> */
-    public array $imageVariants {
+    public ?ImageVariantsTransfer $imageVariants {
         get => $this->_data[self::IMAGE_VARIANTS_DATA_INDEX];
         set => $this->_data[self::IMAGE_VARIANTS_DATA_INDEX] = $value;
     }

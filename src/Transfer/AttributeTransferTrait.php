@@ -26,6 +26,7 @@ trait AttributeTransferTrait
 
     /**
      * @param string $constantName
+     *
      * @return ReflectionAttribute<\Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttributeInterface>|null
      */
     private function getConstantAttributeReflection(string $constantName): ?ReflectionAttribute

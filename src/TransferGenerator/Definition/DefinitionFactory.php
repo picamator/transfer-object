@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Definition;
 
 use ArrayObject;
-use Picamator\TransferObject\Dependency\DependencyContainer;
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
-use Picamator\TransferObject\Dependency\Finder\FinderInterface;
-use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinder;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinderInterface;
@@ -36,6 +33,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\Enu
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\NamePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\RequiredTypePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\ReservedNamePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\TransferTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Validator\ClassNameValidator;
 use Picamator\TransferObject\TransferGenerator\Validator\ClassNameValidatorInterface;
@@ -86,6 +84,7 @@ readonly class DefinitionFactory
     protected function createPropertyValidators(): ArrayObject
     {
         return new ArrayObject([
+            $this->createReservedNamePropertyValidator(),
             $this->createNamePropertyValidator(),
             $this->createRequiredTypePropertyValidator(),
             $this->createBuildInTypePropertyValidator(),
@@ -134,6 +133,11 @@ readonly class DefinitionFactory
     protected function createNamePropertyValidator(): PropertyValidatorInterface
     {
         return new NamePropertyValidator();
+    }
+
+    protected function createReservedNamePropertyValidator(): PropertyValidatorInterface
+    {
+        return new ReservedNamePropertyValidator();
     }
 
     protected function createEmptyPropertiesContentValidator(): ContentValidatorInterface
@@ -202,21 +206,11 @@ readonly class DefinitionFactory
         return new NullablePropertyExpander();
     }
 
-    protected function createYmlParser(): YmlParserInterface
-    {
-        return $this->getDependency(DependencyContainer::YML_PARSER);
-    }
-
     protected function createDefinitionFinder(): DefinitionFinderInterface
     {
         return new DefinitionFinder(
             $this->createFinder(),
             $this->getConfig(),
         );
-    }
-
-    protected function createFinder(): FinderInterface
-    {
-        return $this->getDependency(DependencyContainer::FINDER);
     }
 }

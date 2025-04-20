@@ -17,6 +17,7 @@ readonly class RequiredConfigContentValidator implements ConfigContentValidatorI
     public function validate(ConfigContentTransfer $configContentTransfer): ValidatorMessageTransfer
     {
         $configContent = $configContentTransfer->toArray();
+        /** @var array<string, string> $missedConfig */
         $missedConfig = array_diff_key($configContent, array_filter($configContent));
 
         if (count($missedConfig) > 0) {

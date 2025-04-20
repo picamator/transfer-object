@@ -17,6 +17,8 @@ final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttr
     }
 
     /**
+     * @inheritDoc
+     *
      * @return \ArrayObject<string|int,\Picamator\TransferObject\Transfer\TransferInterface>
      */
     public function fromArray(mixed $data): ArrayObject
@@ -30,6 +32,7 @@ final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttr
             );
         }
 
+        /** @phpstan-ignore argument.type */
         $collectionData = array_map($this->createTransfer(...), $data);
 
         return new ArrayObject($collectionData);

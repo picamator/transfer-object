@@ -1,5 +1,5 @@
 parameters:
-  level: 8
+  level: 10
   paths:
     - src
     - tests
@@ -10,3 +10,10 @@ parameters:
     - tests/*/data/*
     - tests/*/Generated/*
     - doc/samples/Generated
+  ignoreErrors:
+    -
+        identifier: argument.type
+        path: src/TransferGenerator/Generator/Render/Template/Template.tpl.php
+    -
+        identifier: encapsedStringPart.nonString
+        path: src/TransferGenerator/Generator/Render/Template/Template.tpl.php

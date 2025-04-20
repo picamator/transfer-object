@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\Transfer\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -16,8 +15,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class RequiredTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
@@ -30,7 +27,7 @@ final class RequiredTransfer extends AbstractTransfer
     protected const int I_AM_REQUIRED_DATA_INDEX = 0;
 
     public string $iAmRequired {
-        get => $this->getData(self::I_AM_REQUIRED_DATA_INDEX, true);
-        set => $this->setData(self::I_AM_REQUIRED_DATA_INDEX, $value);
+        get => $this->_data[self::I_AM_REQUIRED_DATA_INDEX];
+        set => $this->_data[self::I_AM_REQUIRED_DATA_INDEX] = $value;
     }
 }

@@ -17,5 +17,3 @@ Item:
     type: ArrayObject
   iAmEnum:
     enumType: "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Enum\\ImBackedEnum"
-  data: # property name exist in the `AbstractTransfer`, testing collision with custom defined property
-    type: array

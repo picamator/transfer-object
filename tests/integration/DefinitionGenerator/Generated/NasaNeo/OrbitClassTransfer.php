@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\NasaNeo;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -16,8 +15,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class OrbitClassTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
@@ -32,8 +29,8 @@ final class OrbitClassTransfer extends AbstractTransfer
     protected const int ORBIT_CLASS_DESCRIPTION_DATA_INDEX = 0;
 
     public ?string $orbit_class_description {
-        get => $this->getData(self::ORBIT_CLASS_DESCRIPTION_DATA_INDEX, false);
-        set => $this->setData(self::ORBIT_CLASS_DESCRIPTION_DATA_INDEX, $value);
+        get => $this->_data[self::ORBIT_CLASS_DESCRIPTION_DATA_INDEX];
+        set => $this->_data[self::ORBIT_CLASS_DESCRIPTION_DATA_INDEX] = $value;
     }
 
     // orbit_class_range
@@ -42,8 +39,8 @@ final class OrbitClassTransfer extends AbstractTransfer
     protected const int ORBIT_CLASS_RANGE_DATA_INDEX = 1;
 
     public ?string $orbit_class_range {
-        get => $this->getData(self::ORBIT_CLASS_RANGE_DATA_INDEX, false);
-        set => $this->setData(self::ORBIT_CLASS_RANGE_DATA_INDEX, $value);
+        get => $this->_data[self::ORBIT_CLASS_RANGE_DATA_INDEX];
+        set => $this->_data[self::ORBIT_CLASS_RANGE_DATA_INDEX] = $value;
     }
 
     // orbit_class_type
@@ -52,7 +49,7 @@ final class OrbitClassTransfer extends AbstractTransfer
     protected const int ORBIT_CLASS_TYPE_DATA_INDEX = 2;
 
     public ?string $orbit_class_type {
-        get => $this->getData(self::ORBIT_CLASS_TYPE_DATA_INDEX, false);
-        set => $this->setData(self::ORBIT_CLASS_TYPE_DATA_INDEX, $value);
+        get => $this->_data[self::ORBIT_CLASS_TYPE_DATA_INDEX];
+        set => $this->_data[self::ORBIT_CLASS_TYPE_DATA_INDEX] = $value;
     }
 }

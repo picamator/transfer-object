@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\NasaNeo;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -16,8 +15,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class MetersTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
@@ -31,8 +28,8 @@ final class MetersTransfer extends AbstractTransfer
     protected const int ESTIMATED_DIAMETER_MAX_DATA_INDEX = 0;
 
     public ?float $estimated_diameter_max {
-        get => $this->getData(self::ESTIMATED_DIAMETER_MAX_DATA_INDEX, false);
-        set => $this->setData(self::ESTIMATED_DIAMETER_MAX_DATA_INDEX, $value);
+        get => $this->_data[self::ESTIMATED_DIAMETER_MAX_DATA_INDEX];
+        set => $this->_data[self::ESTIMATED_DIAMETER_MAX_DATA_INDEX] = $value;
     }
 
     // estimated_diameter_min
@@ -41,7 +38,7 @@ final class MetersTransfer extends AbstractTransfer
     protected const int ESTIMATED_DIAMETER_MIN_DATA_INDEX = 1;
 
     public ?float $estimated_diameter_min {
-        get => $this->getData(self::ESTIMATED_DIAMETER_MIN_DATA_INDEX, false);
-        set => $this->setData(self::ESTIMATED_DIAMETER_MIN_DATA_INDEX, $value);
+        get => $this->_data[self::ESTIMATED_DIAMETER_MIN_DATA_INDEX];
+        set => $this->_data[self::ESTIMATED_DIAMETER_MIN_DATA_INDEX] = $value;
     }
 }

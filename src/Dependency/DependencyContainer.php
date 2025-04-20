@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Dependency;
 
 use Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException;
+use Picamator\TransferObject\Dependency\Filesystem\FileAppender;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemBridge;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Dependency\Finder\FinderBridge;
@@ -33,11 +34,11 @@ class DependencyContainer implements ContainerInterface
     protected static array $container = [];
 
     /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException
+     * @uses static::createYmlParser()
+     * @uses static::createFinder()
+     * @uses static::createFileSystem()
      *
-     * @uses createFinder()
-     * @uses createYmlParser()
-     * @uses createFileSystem()
+     * @throws \Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException
      */
     public function get(string $id): mixed
     {
@@ -55,24 +56,32 @@ class DependencyContainer implements ContainerInterface
         return array_key_exists($id, static::DEPENDENCIES);
     }
 
-    protected static function createYmlParser(): YmlParserInterface
+    protected static function createYmlParser(): mixed
     {
         static::$container[static::YML_PARSER] ??= new YmlParserBridge(new Parser());
 
         return static::$container[static::YML_PARSER];
     }
 
-    protected static function createFinder(): FinderInterface
+    protected static function createFinder(): mixed
     {
         static::$container[static::FINDER] ??= new FinderBridge();
 
         return static::$container[static::FINDER];
     }
 
-    protected static function createFileSystem(): FilesystemInterface
+    protected static function createFileSystem(): mixed
     {
-        static::$container[static::FILESYSTEM] ??= new FilesystemBridge(new Filesystem());
+        static::$container[static::FILESYSTEM] ??= new FilesystemBridge(
+            new Filesystem(),
+            static::createFileAppender(),
+        );
 
         return static::$container[static::FILESYSTEM];
+    }
+
+    protected static function createFileAppender(): FileAppender
+    {
+        return new FileAppender();
     }
 }

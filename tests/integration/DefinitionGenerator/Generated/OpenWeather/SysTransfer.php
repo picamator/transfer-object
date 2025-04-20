@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\OpenWeather;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -16,8 +15,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class SysTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 5;
 
     protected const array META_DATA = [
@@ -34,8 +31,8 @@ final class SysTransfer extends AbstractTransfer
     protected const int COUNTRY_DATA_INDEX = 0;
 
     public ?string $country {
-        get => $this->getData(self::COUNTRY_DATA_INDEX, false);
-        set => $this->setData(self::COUNTRY_DATA_INDEX, $value);
+        get => $this->_data[self::COUNTRY_DATA_INDEX];
+        set => $this->_data[self::COUNTRY_DATA_INDEX] = $value;
     }
 
     // id
@@ -44,8 +41,8 @@ final class SysTransfer extends AbstractTransfer
     protected const int ID_DATA_INDEX = 1;
 
     public ?int $id {
-        get => $this->getData(self::ID_DATA_INDEX, false);
-        set => $this->setData(self::ID_DATA_INDEX, $value);
+        get => $this->_data[self::ID_DATA_INDEX];
+        set => $this->_data[self::ID_DATA_INDEX] = $value;
     }
 
     // sunrise
@@ -54,8 +51,8 @@ final class SysTransfer extends AbstractTransfer
     protected const int SUNRISE_DATA_INDEX = 2;
 
     public ?int $sunrise {
-        get => $this->getData(self::SUNRISE_DATA_INDEX, false);
-        set => $this->setData(self::SUNRISE_DATA_INDEX, $value);
+        get => $this->_data[self::SUNRISE_DATA_INDEX];
+        set => $this->_data[self::SUNRISE_DATA_INDEX] = $value;
     }
 
     // sunset
@@ -64,8 +61,8 @@ final class SysTransfer extends AbstractTransfer
     protected const int SUNSET_DATA_INDEX = 3;
 
     public ?int $sunset {
-        get => $this->getData(self::SUNSET_DATA_INDEX, false);
-        set => $this->setData(self::SUNSET_DATA_INDEX, $value);
+        get => $this->_data[self::SUNSET_DATA_INDEX];
+        set => $this->_data[self::SUNSET_DATA_INDEX] = $value;
     }
 
     // type
@@ -74,7 +71,7 @@ final class SysTransfer extends AbstractTransfer
     protected const int TYPE_DATA_INDEX = 4;
 
     public ?int $type {
-        get => $this->getData(self::TYPE_DATA_INDEX, false);
-        set => $this->setData(self::TYPE_DATA_INDEX, $value);
+        get => $this->_data[self::TYPE_DATA_INDEX];
+        set => $this->_data[self::TYPE_DATA_INDEX] = $value;
     }
 }

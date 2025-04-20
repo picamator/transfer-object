@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator;
 
-use Picamator\TransferObject\Dependency\DependencyContainer;
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
-use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
-use Picamator\TransferObject\Dependency\Finder\FinderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactory;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoaderInterface;
@@ -81,11 +78,6 @@ readonly class TransferGeneratorFactory
         );
     }
 
-    protected function createFilesystem(): FilesystemInterface
-    {
-        return $this->getDependency(DependencyContainer::FILESYSTEM);
-    }
-
     protected function createTransferGeneratorBuilder(): TransferGeneratorBuilderInterface
     {
         return new TransferGeneratorBuilder();
@@ -154,11 +146,6 @@ readonly class TransferGeneratorFactory
     protected function createCollectionTypeTemplateExpander(): TemplateExpanderInterface
     {
         return new CollectionTypeTemplateExpander();
-    }
-
-    protected function createFinder(): FinderInterface
-    {
-        return $this->getDependency(DependencyContainer::FINDER);
     }
 
     protected function createConfigLoader(): ConfigLoaderInterface

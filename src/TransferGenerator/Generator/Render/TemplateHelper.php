@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render;
 
+use ArrayObject;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 
 class TemplateHelper implements TemplateHelperInterface
@@ -19,8 +20,6 @@ class TemplateHelper implements TemplateHelperInterface
     private const string EMPTY_STRING = '';
     private const string NULLABLE_TYPE = '?';
     private const string NULLABLE_UNION = 'null|';
-    private const string BOOL_TRUE = 'true';
-    private const string BOOL_FALSE = 'false';
 
     public function setTemplateTransfer(TemplateTransfer $templateTransfer): self
     {
@@ -29,13 +28,13 @@ class TemplateHelper implements TemplateHelperInterface
         return $this;
     }
 
-    public function renderKeyValue(iterable $data, string $template): string
+    public function renderKeyValue(ArrayObject $data, string $template): string
     {
         $iterateResult = [];
         foreach ($data as $key => $value) {
             $iterateResult[] = str_replace(
                 self::KEY_VALUE_SEARCH,
-                [(string)$key, $value],
+                [$key, $value],
                 $template,
             );
         }
@@ -45,6 +44,7 @@ class TemplateHelper implements TemplateHelperInterface
 
     public function getAttribute(string $property): string
     {
+        /** @var string|null $attribute */
         $attribute = $this->templateTransfer->attributes[$property] ?? null;
         if ($attribute === null) {
             return self::EMPTY_STRING;
@@ -55,6 +55,7 @@ class TemplateHelper implements TemplateHelperInterface
 
     public function getDockBlock(string $property): string
     {
+        /** @var string|null $dockBlock */
         $dockBlock = $this->templateTransfer->dockBlocks[$property] ?? null;
         if ($dockBlock === null) {
             return self::EMPTY_STRING;
@@ -65,6 +66,7 @@ class TemplateHelper implements TemplateHelperInterface
 
     public function getNullable(string $property): string
     {
+        /** @var string $propertyType */
         $propertyType = $this->templateTransfer->properties[$property];
         if (!$this->templateTransfer->nullables[$property] || str_contains($propertyType, '&')) {
             return self::EMPTY_STRING;
@@ -75,10 +77,5 @@ class TemplateHelper implements TemplateHelperInterface
         }
 
         return self::NULLABLE_TYPE;
-    }
-
-    public function isRequired(string $property): string
-    {
-        return $this->templateTransfer->nullables[$property] ? self::BOOL_FALSE : self::BOOL_TRUE;
     }
 }

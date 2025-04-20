@@ -34,9 +34,12 @@ final class TransferTypeBuilderExpander extends AbstractBuilderExpander
         $propertyTransfer = $this->createPropertyTransfer($content->getPropertyName());
         $builderTransfer->definitionContent->properties[] = $propertyTransfer;
 
+        /** @var array<int|string, mixed> $propertyValue */
+        $propertyValue = $content->getPropertyValue();
+
         $builderTransfer->generatorContents[] = $this->createGeneratorContentTransfer(
             $propertyTransfer->transferType?->name ?: '',
-            $content->getPropertyValue(),
+            $propertyValue,
         );
     }
 

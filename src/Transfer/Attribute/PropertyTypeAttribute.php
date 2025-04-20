@@ -26,6 +26,7 @@ final readonly class PropertyTypeAttribute implements PropertyTypeAttributeInter
             );
         }
 
+        /** @var array<string, mixed> $data */
         return $this->createTransfer($data);
     }
 
@@ -46,6 +47,8 @@ final readonly class PropertyTypeAttribute implements PropertyTypeAttributeInter
 
     /**
      * @param array<string,mixed> $data
+     *
+     * @throws \Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException
      */
     private function createTransfer(array $data): TransferInterface
     {

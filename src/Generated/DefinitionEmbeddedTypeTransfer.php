@@ -6,7 +6,6 @@ namespace Picamator\TransferObject\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -17,8 +16,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class DefinitionEmbeddedTypeTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
@@ -32,8 +29,8 @@ final class DefinitionEmbeddedTypeTransfer extends AbstractTransfer
     protected const int NAME_DATA_INDEX = 0;
 
     public string $name {
-        get => $this->getData(self::NAME_DATA_INDEX, true);
-        set => $this->setData(self::NAME_DATA_INDEX, $value);
+        get => $this->_data[self::NAME_DATA_INDEX];
+        set => $this->_data[self::NAME_DATA_INDEX] = $value;
     }
 
     // namespace
@@ -43,7 +40,7 @@ final class DefinitionEmbeddedTypeTransfer extends AbstractTransfer
     protected const int NAMESPACE_DATA_INDEX = 1;
 
     public ?DefinitionNamespaceTransfer $namespace {
-        get => $this->getData(self::NAMESPACE_DATA_INDEX, false);
-        set => $this->setData(self::NAMESPACE_DATA_INDEX, $value);
+        get => $this->_data[self::NAMESPACE_DATA_INDEX];
+        set => $this->_data[self::NAMESPACE_DATA_INDEX] = $value;
     }
 }

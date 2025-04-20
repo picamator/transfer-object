@@ -18,7 +18,8 @@ final class TransferGeneratorCommand extends Command
     private const string NAME = 'generate:transfer';
     private const string DESCRIPTION = 'Generates Transfer Objects based on definitions template.';
     private const string HELP = <<<'HELP'
-Configuration option includes path to definition directory, transfer object namespace, and path to generated objects.
+Configuration option includes path to definition directory, transfer object namespace,
+and the path to generated objects.
 HELP;
     private const string USAGE = '-c ${PROJECT_ROOT}/config/generator.config.yml';
 
@@ -64,7 +65,7 @@ HELP;
         $styleOutput->section(self::START_SECTION_NAME);
 
         $configPath = $input->getOption(self::OPTION_NAME_CONFIGURATION) ?: '';
-        if ($configPath === '') {
+        if ($configPath === '' || !is_string($configPath)) {
             $styleOutput->error(self::ERROR_MESSAGE);
             $styleOutput->error(self::ERROR_MISSED_OPTION_CONFIG_MESSAGE);
 

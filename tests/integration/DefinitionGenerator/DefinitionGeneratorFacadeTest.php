@@ -188,7 +188,36 @@ class DefinitionGeneratorFacadeTest extends TestCase
             ExchangeRateTransfer::class,
             'frankfurter-dev-v1.json',
         ];
+    }
 
+    #[DataProvider('matchFilteredDefinitionDataProvider')]
+    #[Depends('testGenerateTransferBasedOnDefinitionShouldSuccessfullyGenerateTransferObjects')]
+    public function testCompareFilteredSampleDataWithTransferObjectShouldSuccessfullyMatch(
+        string $classFullName,
+        string $sampleFileName,
+    ): void {
+        // Arrange
+        $this->assertTrue(class_exists($classFullName), sprintf('Class %s does not exist.', $classFullName));
+
+        /** @var \Picamator\TransferObject\Transfer\TransferInterface $transfer */
+        $transfer = new $classFullName();
+
+        $sampleJsonPath = self::SAMPLE_JSON_PATH . $sampleFileName;
+        $sampleContent = $this->getSampleContent($sampleJsonPath);
+
+        // Act
+        $transfer->fromArray($sampleContent);
+        $actual = $transfer->toFilterArray(fn (mixed $item): bool => $item !== null);
+
+        // Assert
+        $this->assertEquals($sampleContent, $actual);
+    }
+
+    /**
+     * @return Generator<string,mixed>
+     */
+    public static function matchFilteredDefinitionDataProvider(): Generator
+    {
         yield 'Tagesschau' => [
             ArdNewsTransfer::class,
             'tagesschau-api-bund-dev-v2.json',

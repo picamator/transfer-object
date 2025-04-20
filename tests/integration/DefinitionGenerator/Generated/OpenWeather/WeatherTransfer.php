@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\OpenWeather;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -16,8 +15,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class WeatherTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
@@ -33,8 +30,8 @@ final class WeatherTransfer extends AbstractTransfer
     protected const int DESCRIPTION_DATA_INDEX = 0;
 
     public ?string $description {
-        get => $this->getData(self::DESCRIPTION_DATA_INDEX, false);
-        set => $this->setData(self::DESCRIPTION_DATA_INDEX, $value);
+        get => $this->_data[self::DESCRIPTION_DATA_INDEX];
+        set => $this->_data[self::DESCRIPTION_DATA_INDEX] = $value;
     }
 
     // icon
@@ -43,8 +40,8 @@ final class WeatherTransfer extends AbstractTransfer
     protected const int ICON_DATA_INDEX = 1;
 
     public ?string $icon {
-        get => $this->getData(self::ICON_DATA_INDEX, false);
-        set => $this->setData(self::ICON_DATA_INDEX, $value);
+        get => $this->_data[self::ICON_DATA_INDEX];
+        set => $this->_data[self::ICON_DATA_INDEX] = $value;
     }
 
     // id
@@ -53,8 +50,8 @@ final class WeatherTransfer extends AbstractTransfer
     protected const int ID_DATA_INDEX = 2;
 
     public ?int $id {
-        get => $this->getData(self::ID_DATA_INDEX, false);
-        set => $this->setData(self::ID_DATA_INDEX, $value);
+        get => $this->_data[self::ID_DATA_INDEX];
+        set => $this->_data[self::ID_DATA_INDEX] = $value;
     }
 
     // main
@@ -63,7 +60,7 @@ final class WeatherTransfer extends AbstractTransfer
     protected const int MAIN_DATA_INDEX = 3;
 
     public ?string $main {
-        get => $this->getData(self::MAIN_DATA_INDEX, false);
-        set => $this->setData(self::MAIN_DATA_INDEX, $value);
+        get => $this->_data[self::MAIN_DATA_INDEX];
+        set => $this->_data[self::MAIN_DATA_INDEX] = $value;
     }
 }

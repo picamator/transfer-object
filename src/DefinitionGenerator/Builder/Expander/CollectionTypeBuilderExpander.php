@@ -19,6 +19,7 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
             return false;
         }
 
+        /** @var array<string, mixed> $propertyValue */
         $propertyValue = (array)$content->getPropertyValue();
         $countArrayItems = $this->countArrayItems($propertyValue);
 
@@ -32,12 +33,39 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
         $propertyTransfer = $this->createPropertyTransfer($content->getPropertyName());
         $builderTransfer->definitionContent->properties[] = $propertyTransfer;
 
-        $firstCollectionItem = current((array)$content->getPropertyValue()) ?: [];
+        $content = (array)$content->getPropertyValue() ?: [];
+        $mergedContent = $this->mergeContent($content);
 
-        $builderTransfer->generatorContents[] = $this->createGeneratorContentTransfer(
-            $propertyTransfer->collectionType?->name ?: '',
-            $firstCollectionItem,
-        );
+        $className = $propertyTransfer->collectionType?->name ?: '';
+
+        $builderTransfer->generatorContents[] = $this->createGeneratorContentTransfer($className, $mergedContent);
+    }
+
+    /**
+     * @param array<int|string, mixed> $content
+     *
+     * @return array<int|string, mixed>
+     */
+    private function mergeContent(array $content): array
+    {
+        $mergedContent = [];
+
+        /** @var array<string, mixed> $contentItem */
+        foreach ($content as $contentItem) {
+            foreach ($contentItem as $contentKey => $contentValue) {
+                if (!is_array($contentValue)) {
+                    $mergedContent[$contentKey] ??= $contentValue;
+
+                    continue;
+                }
+
+                $mergedContent[$contentKey] ??= [];
+                //  @phpstan-ignore argument.type
+                $mergedContent[$contentKey] = array_merge($mergedContent[$contentKey], $contentValue);
+            }
+        }
+
+        return $mergedContent;
     }
 
     private function createPropertyTransfer(string $propertyName): DefinitionPropertyTransfer

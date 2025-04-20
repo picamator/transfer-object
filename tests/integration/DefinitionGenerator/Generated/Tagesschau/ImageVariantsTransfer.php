@@ -13,21 +13,21 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  */
-final class TagsTransfer extends AbstractTransfer
+final class ImageVariantsTransfer extends AbstractTransfer
 {
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::TAG => self::TAG_DATA_NAME,
+        self::ORIGINAL => self::ORIGINAL_DATA_NAME,
     ];
 
-    // tag
-    public const string TAG = 'tag';
-    protected const string TAG_DATA_NAME = 'TAG';
-    protected const int TAG_DATA_INDEX = 0;
+    // original
+    public const string ORIGINAL = 'original';
+    protected const string ORIGINAL_DATA_NAME = 'ORIGINAL';
+    protected const int ORIGINAL_DATA_INDEX = 0;
 
-    public ?string $tag {
-        get => $this->_data[self::TAG_DATA_INDEX];
-        set => $this->_data[self::TAG_DATA_INDEX] = $value;
+    public ?string $original {
+        get => $this->_data[self::ORIGINAL_DATA_INDEX];
+        set => $this->_data[self::ORIGINAL_DATA_INDEX] = $value;
     }
 }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\GoogleShoppingContent;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -16,8 +15,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class PriceTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
@@ -31,8 +28,8 @@ final class PriceTransfer extends AbstractTransfer
     protected const int CURRENCY_DATA_INDEX = 0;
 
     public ?string $currency {
-        get => $this->getData(self::CURRENCY_DATA_INDEX, false);
-        set => $this->setData(self::CURRENCY_DATA_INDEX, $value);
+        get => $this->_data[self::CURRENCY_DATA_INDEX];
+        set => $this->_data[self::CURRENCY_DATA_INDEX] = $value;
     }
 
     // value
@@ -41,7 +38,7 @@ final class PriceTransfer extends AbstractTransfer
     protected const int VALUE_DATA_INDEX = 1;
 
     public ?string $value {
-        get => $this->getData(self::VALUE_DATA_INDEX, false);
-        set => $this->setData(self::VALUE_DATA_INDEX, $value);
+        get => $this->_data[self::VALUE_DATA_INDEX];
+        set => $this->_data[self::VALUE_DATA_INDEX] = $value;
     }
 }

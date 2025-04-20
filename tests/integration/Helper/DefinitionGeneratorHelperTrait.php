@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Integration\TransferObject\Helper;
 
+use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
 use Picamator\TransferObject\Generated\DefinitionGeneratorContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 
 trait DefinitionGeneratorHelperTrait
 {
+    use DependencyFactoryTrait;
+
     /**
      * @throws \JsonException
      */
@@ -36,11 +39,11 @@ trait DefinitionGeneratorHelperTrait
      */
     protected function getSampleContent(string $sampleJsonPath): array
     {
-        $sampleContent = file_get_contents($sampleJsonPath);
-        if ($sampleContent === false) {
-            return [];
-        }
+        $content = $this->createFilesystem()->readFile($sampleJsonPath);
 
-        return json_decode($sampleContent, true, flags: JSON_THROW_ON_ERROR);
+        /** @var array<string,mixed> $decodedContent */
+        $decodedContent = json_decode($content, true, flags: JSON_THROW_ON_ERROR);
+
+        return $decodedContent;
     }
 }

@@ -87,6 +87,11 @@ class TransferGeneratorFacadeErrorTest extends TestCase
             'expectedMessage' => 'Invalid class name',
         ];
 
+        yield 'reserved property name should return error' => [
+            'configCaseName' => 'reserved-property-name',
+            'expectedMessage' => 'Reserved property name',
+        ];
+
         yield 'invalid property name should return error' => [
             'configCaseName' => 'invalid-property-name',
             'expectedMessage' => 'Invalid property name',

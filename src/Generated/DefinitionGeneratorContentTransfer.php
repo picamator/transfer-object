@@ -6,7 +6,6 @@ namespace Picamator\TransferObject\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -17,8 +16,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class DefinitionGeneratorContentTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
@@ -32,8 +29,8 @@ final class DefinitionGeneratorContentTransfer extends AbstractTransfer
     protected const int CLASS_NAME_DATA_INDEX = 0;
 
     public string $className {
-        get => $this->getData(self::CLASS_NAME_DATA_INDEX, true);
-        set => $this->setData(self::CLASS_NAME_DATA_INDEX, $value);
+        get => $this->_data[self::CLASS_NAME_DATA_INDEX];
+        set => $this->_data[self::CLASS_NAME_DATA_INDEX] = $value;
     }
 
     // content
@@ -44,7 +41,7 @@ final class DefinitionGeneratorContentTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $content {
-        get => $this->getData(self::CONTENT_DATA_INDEX, true);
-        set => $this->setData(self::CONTENT_DATA_INDEX, $value);
+        get => $this->_data[self::CONTENT_DATA_INDEX];
+        set => $this->_data[self::CONTENT_DATA_INDEX] = $value;
     }
 }

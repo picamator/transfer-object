@@ -31,6 +31,7 @@ $customerTransfer = new CustomerTransfer();
 $customerTransfer->firstName = 'Jan';
 $customerTransfer->lastName = 'Kowalski';
 
+/** @var string $value */
 foreach ($customerTransfer as $key => $value) {
     echo "key: $key, value: $value\n";
 }

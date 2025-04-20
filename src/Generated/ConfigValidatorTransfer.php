@@ -7,7 +7,6 @@ namespace Picamator\TransferObject\Generated;
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -18,8 +17,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class ConfigValidatorTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
@@ -35,8 +32,8 @@ final class ConfigValidatorTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,ValidatorMessageTransfer> */
     public ArrayObject $errorMessages {
-        get => $this->getData(self::ERROR_MESSAGES_DATA_INDEX, true);
-        set => $this->setData(self::ERROR_MESSAGES_DATA_INDEX, $value);
+        get => $this->_data[self::ERROR_MESSAGES_DATA_INDEX];
+        set => $this->_data[self::ERROR_MESSAGES_DATA_INDEX] = $value;
     }
 
     // isValid
@@ -45,7 +42,7 @@ final class ConfigValidatorTransfer extends AbstractTransfer
     protected const int IS_VALID_DATA_INDEX = 1;
 
     public bool $isValid {
-        get => $this->getData(self::IS_VALID_DATA_INDEX, true);
-        set => $this->setData(self::IS_VALID_DATA_INDEX, $value);
+        get => $this->_data[self::IS_VALID_DATA_INDEX];
+        set => $this->_data[self::IS_VALID_DATA_INDEX] = $value;
     }
 }

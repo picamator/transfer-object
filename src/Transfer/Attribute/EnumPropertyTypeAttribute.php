@@ -26,7 +26,10 @@ final readonly class EnumPropertyTypeAttribute implements PropertyTypeAttributeI
             );
         }
 
-        return $this->typeName::tryFrom($data);
+        /** @var BackedEnum|null $backedEnum */
+        $backedEnum = $this->typeName::tryFrom($data);
+
+        return $backedEnum;
     }
 
     /**

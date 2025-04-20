@@ -7,7 +7,6 @@ namespace Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator;
 use Picamator\Doc\Samples\TransferObject\Enum\CountryEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -18,8 +17,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class MerchantTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
@@ -35,8 +32,8 @@ final class MerchantTransfer extends AbstractTransfer
     protected const int COUNTRY_DATA_INDEX = 0;
 
     public CountryEnum $country {
-        get => $this->getData(self::COUNTRY_DATA_INDEX, true);
-        set => $this->setData(self::COUNTRY_DATA_INDEX, $value);
+        get => $this->_data[self::COUNTRY_DATA_INDEX];
+        set => $this->_data[self::COUNTRY_DATA_INDEX] = $value;
     }
 
     // isActive
@@ -45,8 +42,8 @@ final class MerchantTransfer extends AbstractTransfer
     protected const int IS_ACTIVE_DATA_INDEX = 1;
 
     public bool $isActive {
-        get => $this->getData(self::IS_ACTIVE_DATA_INDEX, true);
-        set => $this->setData(self::IS_ACTIVE_DATA_INDEX, $value);
+        get => $this->_data[self::IS_ACTIVE_DATA_INDEX];
+        set => $this->_data[self::IS_ACTIVE_DATA_INDEX] = $value;
     }
 
     // merchantReference
@@ -55,7 +52,7 @@ final class MerchantTransfer extends AbstractTransfer
     protected const int MERCHANT_REFERENCE_DATA_INDEX = 2;
 
     public string $merchantReference {
-        get => $this->getData(self::MERCHANT_REFERENCE_DATA_INDEX, true);
-        set => $this->setData(self::MERCHANT_REFERENCE_DATA_INDEX, $value);
+        get => $this->_data[self::MERCHANT_REFERENCE_DATA_INDEX];
+        set => $this->_data[self::MERCHANT_REFERENCE_DATA_INDEX] = $value;
     }
 }

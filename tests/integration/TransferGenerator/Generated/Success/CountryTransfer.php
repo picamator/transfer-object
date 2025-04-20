@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\TransferGenerator\Generated\Success;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -16,8 +15,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class CountryTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
@@ -31,8 +28,8 @@ final class CountryTransfer extends AbstractTransfer
     protected const int ISO2_CODE_DATA_INDEX = 0;
 
     public ?string $iso2Code {
-        get => $this->getData(self::ISO2_CODE_DATA_INDEX, false);
-        set => $this->setData(self::ISO2_CODE_DATA_INDEX, $value);
+        get => $this->_data[self::ISO2_CODE_DATA_INDEX];
+        set => $this->_data[self::ISO2_CODE_DATA_INDEX] = $value;
     }
 
     // name
@@ -41,7 +38,7 @@ final class CountryTransfer extends AbstractTransfer
     protected const int NAME_DATA_INDEX = 1;
 
     public ?string $name {
-        get => $this->getData(self::NAME_DATA_INDEX, false);
-        set => $this->setData(self::NAME_DATA_INDEX, $value);
+        get => $this->_data[self::NAME_DATA_INDEX];
+        set => $this->_data[self::NAME_DATA_INDEX] = $value;
     }
 }

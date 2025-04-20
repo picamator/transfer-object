@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Transfer;
 
-use Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException;
 use SplFixedArray;
+use Traversable;
 
 abstract class AbstractTransfer implements TransferInterface
 {
@@ -16,14 +16,17 @@ abstract class AbstractTransfer implements TransferInterface
 
     protected const int META_DATA_SIZE = 0;
 
+    /**
+     * @var array<string,string>
+     */
     protected const array META_DATA = [];
 
     private const string DATA_INDEX_SUFFIX = '_DATA_INDEX';
 
     /**
-     * @var SplFixedArray<mixed>
+     * @var \SplFixedArray<mixed>
      */
-    private SplFixedArray $data;
+    protected SplFixedArray $_data;
 
     final public function __construct()
     {
@@ -44,16 +47,16 @@ abstract class AbstractTransfer implements TransferInterface
     final public function __serialize(): array
     {
         return [
-            'data' => $this->data,
+            '_data' => $this->_data,
         ];
     }
 
     /**
-     * @param array<string,mixed> $data
+     * @param array<string,\SplFixedArray<mixed>> $data
      */
     final public function __unserialize(array $data): void
     {
-        $this->data = $data['data'];
+        $this->_data = $data['_data'];
     }
 
     /**
@@ -69,45 +72,81 @@ abstract class AbstractTransfer implements TransferInterface
         return $this->toArray();
     }
 
-    /**
-     * @throws PropertyTypeTransferException
-     */
-    final protected function getData(int $index, bool $isRequired): mixed
+    final public function getIterator(): Traversable
     {
-        if (!$isRequired) {
-            return $this->data[$index];
+        foreach (static::META_DATA as $metaKey => $metaName) {
+            yield $metaKey => $this->{$metaKey};
         }
-
-        $data = $this->data[$index];
-        if ($data !== null) {
-            return $data;
-        }
-
-        throw new PropertyTypeTransferException(
-            sprintf(
-                'Typed property "%s::%s" must not be accessed before initialization.',
-                static::class,
-                debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2)[1]['function'],
-            ),
-        );
     }
 
-    final protected function setData(int $index, mixed $value): mixed
+    final public function toArray(): array
     {
-        return $this->data[$index] = $value;
+        $data = [];
+        foreach (static::META_DATA as $metaKey => $metaName) {
+            $dataItem = $this->{$metaKey};
+            $data[$metaKey] = $this->hasConstantAttribute($metaName)
+                ? $this->getConstantAttribute($metaName)?->toArray($dataItem)
+                : $dataItem;
+        }
+
+        return $data;
+    }
+
+    final public function toFilterArray(?callable $callback = null): array
+    {
+        $data = $this->toArray();
+
+        return $this->filterArrayRecursive($data, $callback);
+    }
+
+    /**
+     * @param array<string,mixed> $data
+     *
+     * @return array<string,mixed>
+     */
+    private function filterArrayRecursive(array $data, ?callable $callback = null): array
+    {
+        /** @var array<string,mixed> $filteredData */
+        $filteredData = array_filter($data, $callback);
+        foreach ($filteredData as $key => $item) {
+            if (is_array($item)) {
+                /** @var array<string,mixed> $item */
+                $filteredData[$key] = $this->filterArrayRecursive($item, $callback);
+
+                continue;
+            }
+
+            $filteredData[$key] = $item;
+        }
+
+        return $filteredData;
+    }
+
+    final public function fromArray(array $data): static
+    {
+        $this->initData();
+
+        $data = array_intersect_key($data, static::META_DATA);
+        $data = array_filter($data, fn(mixed $item): bool => $item !== null);
+        foreach ($data as $key => $value) {
+            $this->{$key} = $this->hasConstantAttribute(static::META_DATA[$key])
+                ? $this->getConstantAttribute(static::META_DATA[$key])?->fromArray($value)
+                : $value;
+        }
+
+        return $this;
     }
 
     final protected function initData(): void
     {
-        $this->data = new SplFixedArray(static::META_DATA_SIZE);
+        $this->_data = new SplFixedArray(static::META_DATA_SIZE);
 
         foreach (static::META_DATA as $metaName) {
             $metaIndex = $metaName . self::DATA_INDEX_SUFFIX;
-            $initialValue = $this->hasConstantAttribute($metaName)
+            // @phpstan-ignore offsetAssign.dimType
+            $this->_data[static::{$metaIndex}] = $this->hasConstantAttribute($metaName)
                 ? $this->getConstantAttribute($metaName)?->getInitialValue()
                 : null;
-
-            $this->setData(static::{$metaIndex}, $initialValue);
         }
     }
 }

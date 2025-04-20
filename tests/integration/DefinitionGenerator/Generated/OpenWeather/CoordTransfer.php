@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\OpenWeather;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\TransferTrait;
 
 /**
  * Specification:
@@ -16,8 +15,6 @@ use Picamator\TransferObject\Transfer\TransferTrait;
  */
 final class CoordTransfer extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
@@ -31,8 +28,8 @@ final class CoordTransfer extends AbstractTransfer
     protected const int LAT_DATA_INDEX = 0;
 
     public ?float $lat {
-        get => $this->getData(self::LAT_DATA_INDEX, false);
-        set => $this->setData(self::LAT_DATA_INDEX, $value);
+        get => $this->_data[self::LAT_DATA_INDEX];
+        set => $this->_data[self::LAT_DATA_INDEX] = $value;
     }
 
     // lon
@@ -41,7 +38,7 @@ final class CoordTransfer extends AbstractTransfer
     protected const int LON_DATA_INDEX = 1;
 
     public ?float $lon {
-        get => $this->getData(self::LON_DATA_INDEX, false);
-        set => $this->setData(self::LON_DATA_INDEX, $value);
+        get => $this->_data[self::LON_DATA_INDEX];
+        set => $this->_data[self::LON_DATA_INDEX] = $value;
     }
 }

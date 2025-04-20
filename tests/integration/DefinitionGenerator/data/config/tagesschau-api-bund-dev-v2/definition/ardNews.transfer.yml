@@ -36,6 +36,8 @@ News:
     type: string
   shareURL:
     type: string
+  comments:
+    type: string
   geotags:
     type: array
   regionId:
@@ -48,12 +50,18 @@ News:
     type: bool
   type:
     type: string
+  brandingImage:
+    type: BrandingImage
 TeaserImage:
   alttext:
     type: string
   imageVariants:
     type: array
   type:
+    type: string
+  copyright:
+    type: string
+  title:
     type: string
 Tags:
   tag:
@@ -79,3 +87,17 @@ Tracking:
     type: string
   av_full_show:
     type: bool
+BrandingImage:
+  title:
+    type: string
+  copyright:
+    type: string
+  alttext:
+    type: string
+  imageVariants:
+    type: ImageVariants
+  type:
+    type: string
+ImageVariants:
+  original:
+    type: string

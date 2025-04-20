@@ -25,8 +25,6 @@ namespace $templateTransfer->classNamespace;
  */
 final class $templateTransfer->className extends AbstractTransfer
 {
-    use TransferTrait;
-
     protected const int META_DATA_SIZE = {$templateTransfer->properties->count()};
 
     protected const array META_DATA = [
@@ -45,8 +43,8 @@ foreach ($templateTransfer->metaConstants as $constant => $property) {
     protected const int {$constant}_DATA_INDEX = $i;
 {$helper->getDockBlock($property)}
     public {$helper->getNullable($property)}{$templateTransfer->properties[$property]} \$$property {
-        get => \$this->getData(self::{$constant}_DATA_INDEX, {$helper->isRequired($property)});
-        set => \$this->setData(self::{$constant}_DATA_INDEX, \$value);
+        get => \$this->_data[self::{$constant}_DATA_INDEX];
+        set => \$this->_data[self::{$constant}_DATA_INDEX] = \$value;
     }
 
 TEMPLATE;

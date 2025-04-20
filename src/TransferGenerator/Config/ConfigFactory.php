@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Config;
 
 use ArrayObject;
-use Picamator\TransferObject\Dependency\DependencyContainer;
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
-use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
-use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRender;
 use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRenderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoader;
@@ -87,11 +84,6 @@ readonly class ConfigFactory
         return new FileExistConfigFileValidator($this->createFilesystem());
     }
 
-    protected function createFilesystem(): FilesystemInterface
-    {
-        return $this->getDependency(DependencyContainer::FILESYSTEM);
-    }
-
     protected function createConfigParser(): ConfigParserInterface
     {
         return new ConfigParser(
@@ -108,10 +100,5 @@ readonly class ConfigFactory
     protected function createConfigEnvironmentRender(): ConfigEnvironmentRenderInterface
     {
         return new ConfigEnvironmentRender();
-    }
-
-    protected function createYmlParser(): YmlParserInterface
-    {
-        return $this->getDependency(DependencyContainer::YML_PARSER);
     }
 }
