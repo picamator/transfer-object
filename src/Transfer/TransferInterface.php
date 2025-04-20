@@ -18,6 +18,8 @@ interface TransferInterface extends IteratorAggregate, JsonSerializable, Countab
      * - Recursively converts the transfer object and its nested properties to an associative array.
      * - Preserves the structure of the transfer object while converting it to an array format.
      *
+     * @api
+     *
      * @return array<string,mixed>
      */
     public function toArray(): array;
@@ -32,6 +34,8 @@ interface TransferInterface extends IteratorAggregate, JsonSerializable, Countab
      * @see https://www.php.net/manual/en/function.array-filter.php
      * @see https://www.php.net/manual/en/function.empty.php
      *
+     * @api
+     *
      * @param callable|null $callback Optional. A callback function to apply to each property.
      *                                If null, empty entries will be removed.
      * @return array<string,mixed>
@@ -42,6 +46,8 @@ interface TransferInterface extends IteratorAggregate, JsonSerializable, Countab
      * Specification:
      * - Converts an array to a transfer object.
      * - Skips data items that do not exist in the transfer object definition.
+     *
+     * @api
      *
      * @param array<string,mixed> $data
      *

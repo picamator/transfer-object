@@ -22,6 +22,8 @@ interface TransferGeneratorFacadeInterface
      * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
      * @throws \FiberError
      *
+     * @api
+     *
      * @return \Fiber<string,null,bool,TransferGeneratorTransfer>
      */
     public function getTransferGeneratorFiber(): Fiber;
@@ -33,6 +35,8 @@ interface TransferGeneratorFacadeInterface
      * - Throws an exception if an error occurs during configuration loading or transfer object generation.
      *
      * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
+     *
+     * @api
      */
     public function generateTransfersOrFail(string $configPath): void;
 }

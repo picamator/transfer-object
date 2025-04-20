@@ -14,6 +14,8 @@ interface DefinitionGeneratorFacadeInterface
      * - Saves the generated definitions as YAML files.
      * - Returns the number of successfully generated definitions.
      *
+     * @api
+     *
      * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
      */
     public function generateDefinitions(DefinitionGeneratorTransfer $generatorTransfer): int;
