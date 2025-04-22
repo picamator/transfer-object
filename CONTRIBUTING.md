@@ -10,7 +10,7 @@ How to Contribute
 4. Make your changes.
 5. Ensure that your code follows our coding standards.
 6. Run tests to ensure everything is working.
-7Submit a pull request to the `development` branch.
+7. Submit a pull request to the `development` branch.
 
 Coding Standards
 -----------------
