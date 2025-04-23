@@ -13,7 +13,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-final class TransferGeneratorCommand extends Command
+class TransferGeneratorCommand extends Command
 {
     private const string NAME = 'generate:transfer';
     private const string DESCRIPTION = 'Generates Transfer Objects based on definitions template.';
