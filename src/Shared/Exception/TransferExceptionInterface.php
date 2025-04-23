@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\Exception;
+namespace Picamator\TransferObject\Shared\Exception;
 
 use Throwable;
 

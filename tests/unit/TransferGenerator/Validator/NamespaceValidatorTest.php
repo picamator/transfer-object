@@ -7,7 +7,7 @@ namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Validator;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Picamator\TransferObject\TransferGenerator\Validator\NamespaceValidatorTrait;
+use Picamator\TransferObject\Shared\Validator\NamespaceValidatorTrait;
 
 class NamespaceValidatorTest extends TestCase
 {

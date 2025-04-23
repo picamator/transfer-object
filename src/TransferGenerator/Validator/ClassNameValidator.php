@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Validator;
 
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
+use Picamator\TransferObject\Shared\Validator\VariableValidatorTrait;
 
 readonly class ClassNameValidator implements ClassNameValidatorInterface
 {

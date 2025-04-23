@@ -21,7 +21,7 @@ readonly class TransferGeneratorService implements TransferGeneratorServiceInter
     }
 
     /**
-     * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
+     * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
      */
     public function generateTransfersOrFail(string $configPath): void
     {

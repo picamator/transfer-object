@@ -14,11 +14,11 @@ interface DefinitionGeneratorFacadeInterface
      * - Saves the generated definitions as YAML files.
      * - Returns the number of successfully generated definitions.
      *
+     * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
+     *@example ./doc/samples/try-definition-generator.php
+     *
      * @api
      *
-     * @example ./doc/samples/try-definition-generator.php
-     *
-     * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
      */
     public function generateDefinitions(DefinitionGeneratorTransfer $generatorTransfer): int;
 }

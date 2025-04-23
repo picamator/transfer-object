@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Validator;
+namespace Picamator\TransferObject\Shared\Validator;
 
 trait VariableValidatorTrait
 {
