@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\DefinitionFilesystemTransfer;
 interface DefinitionFilesystemInterface
 {
     /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
+     * @throws \Picamator\TransferObject\Shared\Exception\FileAppenderException
      */
     public function appendFile(DefinitionFilesystemTransfer $filesystemTransfer): void;
 

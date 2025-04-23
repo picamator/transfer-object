@@ -12,7 +12,6 @@ readonly final class FilesystemBridge implements FilesystemInterface
 {
     public function __construct(
         private Filesystem $filesystem,
-        private FileAppenderInterface $fileAppender,
     ) {
     }
 
@@ -91,11 +90,6 @@ readonly final class FilesystemBridge implements FilesystemInterface
                 previous: $e,
             );
         }
-    }
-
-    public function appendToFile(string $filename, string $content): void
-    {
-        $this->fileAppender->appendToFile($filename, $content);
     }
 
     public function readFile(string $filename): string

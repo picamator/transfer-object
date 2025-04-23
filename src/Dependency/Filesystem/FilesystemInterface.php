@@ -36,10 +36,5 @@ interface FilesystemInterface
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      */
-    public function appendToFile(string $filename, string $content): void;
-
-    /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
-     */
     public function readFile(string $filename): string;
 }

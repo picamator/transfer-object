@@ -5,13 +5,9 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Dependency;
 
 use Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException;
-use Picamator\TransferObject\Dependency\Filesystem\FileAppender;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemBridge;
-use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Dependency\Finder\FinderBridge;
-use Picamator\TransferObject\Dependency\Finder\FinderInterface;
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserBridge;
-use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Parser;
@@ -72,16 +68,8 @@ class DependencyContainer implements ContainerInterface
 
     protected static function createFileSystem(): mixed
     {
-        static::$container[static::FILESYSTEM] ??= new FilesystemBridge(
-            new Filesystem(),
-            static::createFileAppender(),
-        );
+        static::$container[static::FILESYSTEM] ??= new FilesystemBridge(new Filesystem());
 
         return static::$container[static::FILESYSTEM];
-    }
-
-    protected static function createFileAppender(): FileAppender
-    {
-        return new FileAppender();
     }
 }

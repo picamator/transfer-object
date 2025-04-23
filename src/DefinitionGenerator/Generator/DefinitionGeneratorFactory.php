@@ -19,6 +19,8 @@ use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\DefinitionG
 use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRender;
 use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRenderInterface;
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
+use Picamator\TransferObject\Shared\Filesystem\FileAppender;
+use Picamator\TransferObject\Shared\Filesystem\FileAppenderInterface;
 
 readonly class DefinitionGeneratorFactory
 {
@@ -35,7 +37,15 @@ readonly class DefinitionGeneratorFactory
 
     protected function createDefinitionFilesystem(): DefinitionFilesystemInterface
     {
-        return new DefinitionFilesystem($this->createFilesystem());
+        return new DefinitionFilesystem(
+            $this->createFilesystem(),
+            $this->createFileAppender(),
+        );
+    }
+
+    protected function createFileAppender(): FileAppenderInterface
+    {
+        return new FileAppender();
     }
 
     protected function createDefinitionRender(): DefinitionRenderInterface
