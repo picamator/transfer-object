@@ -11,11 +11,11 @@ class DefinitionGeneratorFacade implements DefinitionGeneratorFacadeInterface
 {
     private static DefinitionGeneratorFactory $factory;
 
-    public function generateDefinitions(DefinitionGeneratorTransfer $generatorTransfer): int
+    public function generateDefinitionsOrFail(DefinitionGeneratorTransfer $generatorTransfer): int
     {
         return $this->getFactory()
-            ->createDefinitionGenerator()
-            ->generateDefinitions($generatorTransfer);
+            ->createDefinitionGeneratorService()
+            ->generateDefinitionsOrFail($generatorTransfer);
     }
 
     private function getFactory(): DefinitionGeneratorFactory

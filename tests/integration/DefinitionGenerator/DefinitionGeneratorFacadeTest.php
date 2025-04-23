@@ -56,7 +56,7 @@ class DefinitionGeneratorFacadeTest extends TestCase
         );
 
         // Act
-        $actual = $this->definitionGeneratorFacade->generateDefinitions($generatorTransfer);
+        $actual = $this->definitionGeneratorFacade->generateDefinitionsOrFail($generatorTransfer);
 
         // Assert
         $this->assertGreaterThan(0, $actual);

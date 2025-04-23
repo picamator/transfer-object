@@ -35,6 +35,7 @@ interface TransferGeneratorFacadeInterface
      * - Loads the configuration from the specified path.
      * - Generates transfer objects based on the loaded configuration.
      * - Throws an exception if an error occurs during configuration loading or transfer object generation.
+     * - Returns the number of successfully generated transfer objects.
      *
      * @api
      *
@@ -43,5 +44,5 @@ interface TransferGeneratorFacadeInterface
      *
      * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
      */
-    public function generateTransfersOrFail(string $configPath): void;
+    public function generateTransfersOrFail(string $configPath): int;
 }

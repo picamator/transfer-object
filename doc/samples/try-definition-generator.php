@@ -75,7 +75,7 @@ $generatorTransfer = new DefinitionGeneratorTransfer()
         ],
     ]);
 
-$generatedDefinitions = new DefinitionGeneratorFacade()->generateDefinitions($generatorTransfer);
+$generatedDefinitions = new DefinitionGeneratorFacade()->generateDefinitionsOrFail($generatorTransfer);
 
 echo "Definitions $generatedDefinitions were successfully generated.\n";
 

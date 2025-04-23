@@ -22,9 +22,9 @@ class TransferGeneratorFacade implements TransferGeneratorFacadeInterface
             ->getTransferGeneratorFiber();
     }
 
-    public function generateTransfersOrFail(string $configPath): void
+    public function generateTransfersOrFail(string $configPath): int
     {
-        $this->getFactory()
+        return $this->getFactory()
             ->createTransferGeneratorService()
             ->generateTransfersOrFail($configPath);
     }

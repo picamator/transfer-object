@@ -20,5 +20,5 @@ interface DefinitionGeneratorFacadeInterface
      *
      * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
      */
-    public function generateDefinitions(DefinitionGeneratorTransfer $generatorTransfer): int;
+    public function generateDefinitionsOrFail(DefinitionGeneratorTransfer $generatorTransfer): int;
 }

@@ -10,7 +10,7 @@ use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRenderInterfac
 use Picamator\TransferObject\Generated\DefinitionFilesystemTransfer;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 
-readonly class DefinitionGenerator implements DefinitionGeneratorInterface
+readonly class DefinitionGeneratorService implements DefinitionGeneratorServiceInterface
 {
     public function __construct(
         private DefinitionBuilderInterface $builder,
@@ -19,7 +19,7 @@ readonly class DefinitionGenerator implements DefinitionGeneratorInterface
     ) {
     }
 
-    public function generateDefinitions(DefinitionGeneratorTransfer $generatorTransfer): int
+    public function generateDefinitionsOrFail(DefinitionGeneratorTransfer $generatorTransfer): int
     {
         $count = 0;
         $filesystemTransfer = $this->createFilesystemTransfer($generatorTransfer);

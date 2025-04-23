@@ -23,16 +23,21 @@ readonly class TransferGeneratorService implements TransferGeneratorServiceInter
     /**
      * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
      */
-    public function generateTransfersOrFail(string $configPath): void
+    public function generateTransfersOrFail(string $configPath): int
     {
+        $count = 0;
         $generator = $this->generator->generateTransfers($configPath);
         foreach ($generator as $generatorTransfer) {
             if ($generatorTransfer->validator->isValid === true) {
+                $count++;
+
                 continue;
             }
 
             $this->throwError($generatorTransfer);
         }
+
+        return $count;
     }
 
     /**
