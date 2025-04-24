@@ -62,7 +62,7 @@ case $1 in
     docker compose stop
     ;;
   cli)
-    $DOCKER_EXEC sh
+    $DOCKER_EXEC bash
     ;;
   composer)
     $DOCKER_EXEC composer $2
