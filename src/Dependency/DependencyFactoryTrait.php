@@ -21,7 +21,7 @@ trait DependencyFactoryTrait
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException
      */
-    final protected function createFilesystem(): FilesystemInterface
+    final protected function getFilesystem(): FilesystemInterface
     {
         /** @var \Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface $fileSystem */
         $fileSystem = $this->getDependency(DependencyContainer::FILESYSTEM);
@@ -32,7 +32,7 @@ trait DependencyFactoryTrait
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException
      */
-    final protected function createFinder(): FinderInterface
+    final protected function getFinder(): FinderInterface
     {
         /** @var \Picamator\TransferObject\Dependency\Finder\FinderInterface $finder */
         $finder = $this->getDependency(DependencyContainer::FINDER);
@@ -43,7 +43,7 @@ trait DependencyFactoryTrait
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException
      */
-    final protected function createYmlParser(): YmlParserInterface
+    final protected function getYmlParser(): YmlParserInterface
     {
         /** @var \Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface $ymlParser */
         $ymlParser = $this->getDependency(DependencyContainer::YML_PARSER);

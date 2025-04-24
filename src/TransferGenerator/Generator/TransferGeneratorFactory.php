@@ -72,8 +72,8 @@ readonly class TransferGeneratorFactory
     protected function createGeneratorFilesystem(): GeneratorFilesystemInterface
     {
         return new GeneratorFilesystem(
-            $this->createFilesystem(),
-            $this->createFinder(),
+            $this->getFilesystem(),
+            $this->getFinder(),
             $this->getConfig(),
         );
     }

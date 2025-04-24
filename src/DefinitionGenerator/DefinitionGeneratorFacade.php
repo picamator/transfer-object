@@ -18,6 +18,13 @@ class DefinitionGeneratorFacade implements DefinitionGeneratorFacadeInterface
             ->generateDefinitionsOrFail($generatorTransfer);
     }
 
+    public function getJsonContent(string $path): array
+    {
+        return $this->getFactory()
+            ->createJsonReader()
+            ->getJsonContent($path);
+    }
+
     private function getFactory(): DefinitionGeneratorFactory
     {
         return self::$factory ??= new DefinitionGeneratorFactory();

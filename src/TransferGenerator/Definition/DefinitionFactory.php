@@ -158,7 +158,7 @@ readonly class DefinitionFactory
     protected function createDefinitionParser(): DefinitionParserInterface
     {
         return new DefinitionParser(
-            $this->createYmlParser(),
+            $this->getYmlParser(),
             $this->createContentBuilder(),
         );
     }
@@ -209,7 +209,7 @@ readonly class DefinitionFactory
     protected function createDefinitionFinder(): DefinitionFinderInterface
     {
         return new DefinitionFinder(
-            $this->createFinder(),
+            $this->getFinder(),
             $this->getConfig(),
         );
     }

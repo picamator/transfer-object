@@ -21,4 +21,17 @@ interface DefinitionGeneratorFacadeInterface
      * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
      */
     public function generateDefinitionsOrFail(DefinitionGeneratorTransfer $generatorTransfer): int;
+
+    /**
+     * Specification:
+     * - Reads file content and decode from JSON.
+     * - Throws exception on error.
+     *
+     * @internal
+     *
+     * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
+     *
+     * @return array<string,mixed>
+     */
+    public function getJsonContent(string $path): array;
 }

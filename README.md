@@ -70,7 +70,7 @@ Usage
 Run command bellow to generate Transfer Objects:
 
 ```shell
-$ PROJECT_ROOT={path-to-the-project-root} ./vendor/bin/generate-transfer [-c|--configuration CONFIGURATION]
+$ ./vendor/bin/transfer-generate [-c|--configuration CONFIGURATION]
 ```
 
 Please check Wiki for more details:

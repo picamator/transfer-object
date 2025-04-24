@@ -86,7 +86,7 @@ case $1 in
     $DOCKER_EXEC composer captainhook $2
     ;;
   to-generate)
-     $DOCKER_EXEC composer generate-transfer -- -c ${PROJECT_ROOT}/config/generator.config.yml
+     $DOCKER_EXEC composer transfer-generate -- -c ${PROJECT_ROOT}/config/generator.config.yml
     ;;
   *)
     show_usage

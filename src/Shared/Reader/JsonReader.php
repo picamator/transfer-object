@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Picamator\TransferObject\Shared\Reader;
+
+use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
+use Picamator\TransferObject\Shared\Exception\JsonReaderException;
+use Throwable;
+
+readonly class JsonReader implements JsonReaderInterface
+{
+    public function __construct(
+        private FilesystemInterface $filesystem,
+    ) {
+    }
+
+    public function getJsonContent(string $path): array
+    {
+        $content = $this->filesystem->readFile($path);
+
+        try {
+            /** @var array<string,mixed> $jsonContent */
+            $jsonContent = json_decode($content, true, flags: JSON_THROW_ON_ERROR);
+
+            return $jsonContent;
+        } catch (Throwable $e) {
+            throw new JsonReaderException($e->getMessage(), previous: $e);
+        }
+    }
+}

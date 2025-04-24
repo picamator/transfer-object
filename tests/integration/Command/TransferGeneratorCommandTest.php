@@ -30,7 +30,7 @@ class TransferGeneratorCommandTest extends TestCase
 
         // Assert
         $this->assertSame(1, $this->commandTester->getStatusCode());
-        $this->assertStringContainsString('Command option -c is not set', $output);
+        $this->assertStringContainsString('Missed required command option "configuration"', $output);
     }
 
     public function testRunCommandWithInvalidConfigurationPathShouldShowErrorMessage(): void
@@ -43,7 +43,10 @@ class TransferGeneratorCommandTest extends TestCase
 
         // Assert
         $this->assertSame(1, $this->commandTester->getStatusCode());
-        $this->assertStringContainsString('Configuration file "some-invalid-path.config.yml" does not exist.', $output);
+        $this->assertStringContainsString(
+            'Configuration file "some-invalid-path.config.yml" does not exist.',
+            $output,
+        );
     }
 
     public function testRunCommandWithValidConfigurationShouldShowSuccessMessage(): void
@@ -69,6 +72,9 @@ class TransferGeneratorCommandTest extends TestCase
 
         // Assert
         $this->assertSame(1, $this->commandTester->getStatusCode());
-        $this->assertStringContainsString('Failed to generate Transfer Objects.', $output);
+        $this->assertStringContainsString(
+            '[ERROR] Property "run" type definition is missing or set multiple times.',
+            $output,
+        );
     }
 }

@@ -39,7 +39,7 @@ trait DefinitionGeneratorHelperTrait
      */
     protected function getSampleContent(string $sampleJsonPath): array
     {
-        $content = $this->createFilesystem()->readFile($sampleJsonPath);
+        $content = $this->getFilesystem()->readFile($sampleJsonPath);
 
         /** @var array<string,mixed> $decodedContent */
         $decodedContent = json_decode($content, true, flags: JSON_THROW_ON_ERROR);

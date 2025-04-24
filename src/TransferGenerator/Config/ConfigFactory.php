@@ -71,7 +71,7 @@ readonly class ConfigFactory
 
     protected function createDefinitionPathConfigContentValidator(): ConfigContentValidatorInterface
     {
-        return new DefinitionPathConfigContentValidator($this->createFilesystem());
+        return new DefinitionPathConfigContentValidator($this->getFilesystem());
     }
 
     protected function createRequiredConfigContentValidator(): ConfigContentValidatorInterface
@@ -81,13 +81,13 @@ readonly class ConfigFactory
 
     protected function createConfigFileValidator(): ConfigFileValidatorInterface
     {
-        return new FileExistConfigFileValidator($this->createFilesystem());
+        return new FileExistConfigFileValidator($this->getFilesystem());
     }
 
     protected function createConfigParser(): ConfigParserInterface
     {
         return new ConfigParser(
-            $this->createYmlParser(),
+            $this->getYmlParser(),
             $this->createConfigContentBuilder(),
         );
     }

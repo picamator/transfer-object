@@ -21,6 +21,8 @@ use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRenderInterfac
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
 use Picamator\TransferObject\Shared\Filesystem\FileAppender;
 use Picamator\TransferObject\Shared\Filesystem\FileAppenderInterface;
+use Picamator\TransferObject\Shared\Reader\JsonReader;
+use Picamator\TransferObject\Shared\Reader\JsonReaderInterface;
 
 readonly class DefinitionGeneratorFactory
 {
@@ -35,10 +37,15 @@ readonly class DefinitionGeneratorFactory
         );
     }
 
+    public function createJsonReader(): JsonReaderInterface
+    {
+        return new JsonReader($this->getFilesystem());
+    }
+
     protected function createDefinitionFilesystem(): DefinitionFilesystemInterface
     {
         return new DefinitionFilesystem(
-            $this->createFilesystem(),
+            $this->getFilesystem(),
             $this->createFileAppender(),
         );
     }
