@@ -7,7 +7,7 @@ namespace Picamator\TransferObject\TransferGenerator\Config\Validator\Content;
 use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\NamespaceValidatorTrait;
-use Picamator\TransferObject\TransferGenerator\Validator\ValidatorMessageTrait;
+use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
 readonly class TransferNamespaceConfigContentValidator implements ConfigContentValidatorInterface
 {

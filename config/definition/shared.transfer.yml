@@ -1,0 +1,7 @@
+ValidatorMessage:
+  isValid:
+    type: bool
+    required:
+  errorMessage:
+    type: string
+    required:

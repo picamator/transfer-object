@@ -30,7 +30,7 @@ class TransferGeneratorCommandTest extends TestCase
 
         // Assert
         $this->assertSame(1, $this->commandTester->getStatusCode());
-        $this->assertStringContainsString('Missed required command option "configuration"', $output);
+        $this->assertStringContainsString('Command option -c is not set.', $output);
     }
 
     public function testRunCommandWithInvalidConfigurationPathShouldShowErrorMessage(): void
@@ -44,7 +44,7 @@ class TransferGeneratorCommandTest extends TestCase
         // Assert
         $this->assertSame(1, $this->commandTester->getStatusCode());
         $this->assertStringContainsString(
-            'Configuration file "some-invalid-path.config.yml" does not exist.',
+            'Path "some-invalid-path.config.yml" does not exist.',
             $output,
         );
     }

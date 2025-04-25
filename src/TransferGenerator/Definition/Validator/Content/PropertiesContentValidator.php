@@ -8,8 +8,8 @@ use ArrayObject;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
+use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface;
-use Picamator\TransferObject\TransferGenerator\Validator\ValidatorMessageTrait;
 
 readonly class PropertiesContentValidator implements ContentValidatorInterface
 {

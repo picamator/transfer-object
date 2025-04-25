@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Validator\Conten
 
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\TransferGenerator\Validator\ValidatorMessageTrait;
+use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
 readonly class EmptyPropertiesContentValidator implements ContentValidatorInterface
 {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator;
 
+use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGeneratorBuilderInterface;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 
 interface DefinitionGeneratorFacadeInterface
@@ -24,14 +25,11 @@ interface DefinitionGeneratorFacadeInterface
 
     /**
      * Specification:
-     * - Reads file content and decode from JSON.
-     * - Throws exception on error.
-     *
-     * @internal
+     * - Creates a flow interface to build definition generator transfer.
      *
      * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
      *
-     * @return array<string,mixed>
+     * @internal
      */
-    public function getJsonContent(string $path): array;
+    public function createDefinitionGeneratorBuilder(): DefinitionGeneratorBuilderInterface;
 }

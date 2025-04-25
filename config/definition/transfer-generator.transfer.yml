@@ -13,14 +13,6 @@ ConfigValidator:
   errorMessages:
     collectionType: ValidatorMessage
 
-ValidatorMessage:
-  isValid:
-    type: bool
-    required:
-  errorMessage:
-    type: string
-    required:
-
 ConfigContent:
   transferNamespace:
     type: string

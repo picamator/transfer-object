@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Config\Validator\File;
+namespace Picamator\TransferObject\Shared\Validator;
 
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\TransferGenerator\Validator\ValidatorMessageTrait;
 
-readonly class FileExistConfigFileValidator implements ConfigFileValidatorInterface
+readonly class PathValidator implements PathValidatorInterface
 {
     use ValidatorMessageTrait;
 
-    private const string ERROR_MESSAGE_TEMPLATE = 'Configuration file "%s" does not exist.';
+    private const string ERROR_MESSAGE_TEMPLATE = 'Path "%s" does not exist.';
 
     public function __construct(
         private FilesystemInterface $filesystem,
@@ -22,13 +21,13 @@ readonly class FileExistConfigFileValidator implements ConfigFileValidatorInterf
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      */
-    public function validate(string $filePath): ValidatorMessageTransfer
+    public function validate(string $path): ValidatorMessageTransfer
     {
-        if ($this->filesystem->exists($filePath)) {
+        if ($this->filesystem->exists($path)) {
             return $this->createSuccessMessageTransfer();
         }
 
-        $errorMessage = $this->getErrorMessage($filePath);
+        $errorMessage = $this->getErrorMessage($path);
 
         return $this->createErrorMessageTransfer($errorMessage);
     }

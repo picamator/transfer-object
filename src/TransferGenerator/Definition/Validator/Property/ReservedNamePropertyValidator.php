@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Validator\Proper
 
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\TransferGenerator\Validator\ValidatorMessageTrait;
+use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
 readonly class ReservedNamePropertyValidator implements PropertyValidatorInterface
 {

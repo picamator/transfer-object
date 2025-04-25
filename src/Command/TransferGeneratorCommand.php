@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Command;
 
-use Picamator\TransferObject\Command\Helper\InputOptionTrait;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacadeInterface;
@@ -14,31 +13,32 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class TransferGeneratorCommand extends Command
+final class TransferGeneratorCommand extends Command
 {
-    use InputOptionTrait;
-
-    protected const string NAME = 'transfer:generate';
-    protected const string DESCRIPTION = 'Generates Transfer Objects based on definitions template.';
-    protected const string HELP = <<<'HELP'
+    private const string NAME = 'transfer:generate';
+    private const string DESCRIPTION = 'Generates Transfer Objects based on definitions template.';
+    private const string HELP = <<<'HELP'
 Configuration option includes path to definition directory, transfer object namespace,
 and the path to generated objects.
 HELP;
 
-    protected const string OPTION_NAME_CONFIGURATION = 'configuration';
-    protected const string OPTION_SHORTCUT_CONFIGURATION = 'c';
-    protected const string OPTION_DESCRIPTION_CONFIGURATION = 'Path to YML configuration.';
+    private const string OPTION_NAME_CONFIGURATION = 'configuration';
+    private const string OPTION_SHORTCUT_CONFIGURATION = 'c';
+    private const string OPTION_DESCRIPTION_CONFIGURATION = 'Path to YML configuration.';
 
-    protected const string START_SECTION_NAME = 'Transfer Object Generation';
+    private const string START_SECTION_NAME = 'Transfer Object Generation';
 
-    protected const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Transfer Object: "%s".';
-    protected const string DEFINITION_MESSAGE_TEMPLATE = 'Definition file: "%s".';
+    private const string ERROR_MISSED_OPTION_CONFIG_MESSAGE =
+        'Command option -c is not set. Please provide the path to the YML configuration.';
 
-    protected const string SUCCESS_MESSAGE = 'Transfer Objects were generated successfully.';
+    private const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Transfer Object: "%s".';
+    private const string DEFINITION_MESSAGE_TEMPLATE = 'Definition file: "%s".';
+
+    private const string SUCCESS_MESSAGE = 'Transfer Objects were generated successfully.';
 
     public function __construct(
         ?string $name = null,
-        protected readonly TransferGeneratorFacadeInterface $generatorFacade = new TransferGeneratorFacade(),
+        private readonly TransferGeneratorFacadeInterface $generatorFacade = new TransferGeneratorFacade(),
     ) {
         parent::__construct($name);
     }
@@ -62,21 +62,21 @@ HELP;
         $styleOutput = new SymfonyStyle($input, $output);
         $styleOutput->section(self::START_SECTION_NAME);
 
-        $configPath = $this->getInputOption(self::OPTION_NAME_CONFIGURATION, $input, $styleOutput);
+        $configPath = $this->getConfigPath($input, $styleOutput);
         if ($configPath === null) {
             return Command::FAILURE;
         }
 
-        if ($this->generateTransfers($configPath, $styleOutput)) {
-            $styleOutput->success(self::SUCCESS_MESSAGE);
-
-            return Command::SUCCESS;
+        if (!$this->generateTransfers($configPath, $styleOutput)) {
+            return Command::FAILURE;
         }
 
-        return Command::FAILURE;
+        $styleOutput->success(self::SUCCESS_MESSAGE);
+
+        return Command::SUCCESS;
     }
 
-    protected function generateTransfers(string $configPath, SymfonyStyle $styleOutput): bool
+    private function generateTransfers(string $configPath, SymfonyStyle $styleOutput): bool
     {
         $generatorFiber = $this->generatorFacade->getTransferGeneratorFiber();
 
@@ -91,7 +91,7 @@ HELP;
         return $generatorFiber->getReturn();
     }
 
-    protected function writelnGeneratorError(
+    private function writelnGeneratorError(
         ?TransferGeneratorTransfer $generatorTransfer,
         SymfonyStyle $styleOutput,
     ): void {
@@ -100,15 +100,27 @@ HELP;
         }
 
         if ($generatorTransfer->className !== null) {
-            $styleOutput->error(sprintf(self::TRANSFER_OBJECT_MESSAGE_TEMPLATE, $generatorTransfer->className));
+            $styleOutput->info(sprintf(self::TRANSFER_OBJECT_MESSAGE_TEMPLATE, $generatorTransfer->className));
         }
 
         if ($generatorTransfer->fileName !== null) {
-            $styleOutput->error(sprintf(self::DEFINITION_MESSAGE_TEMPLATE, $generatorTransfer->fileName));
+            $styleOutput->info(sprintf(self::DEFINITION_MESSAGE_TEMPLATE, $generatorTransfer->fileName));
         }
 
         foreach ($generatorTransfer->validator->errorMessages as $errorMessage) {
             $styleOutput->error($errorMessage->errorMessage);
         }
+    }
+
+    private function getConfigPath(InputInterface $input, SymfonyStyle $styleOutput): ?string
+    {
+        $configPath = $input->getOption(self::OPTION_NAME_CONFIGURATION) ?: '';
+        if ($configPath === '' || !is_string($configPath)) {
+            $styleOutput->error(self::ERROR_MISSED_OPTION_CONFIG_MESSAGE);
+
+            return null;
+        }
+
+        return $configPath;
     }
 }

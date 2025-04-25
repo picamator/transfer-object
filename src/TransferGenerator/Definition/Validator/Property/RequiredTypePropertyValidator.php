@@ -6,8 +6,8 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Validator\Proper
 
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
+use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\DefinitionTypeKeyEnum;
-use Picamator\TransferObject\TransferGenerator\Validator\ValidatorMessageTrait;
 
 readonly class RequiredTypePropertyValidator implements PropertyValidatorInterface
 {

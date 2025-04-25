@@ -12,21 +12,19 @@ use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuilderExpande
 use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuildInTypeBuilderExpander;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\CollectionTypeBuilderExpander;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\TransferTypeBuilderExpander;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGeneratorBuilder;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGeneratorBuilderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Filesystem\DefinitionFilesystem;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Filesystem\DefinitionFilesystemInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\DefinitionGeneratorService;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\DefinitionGeneratorServiceInterface;
 use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRender;
 use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRenderInterface;
-use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
-use Picamator\TransferObject\Shared\Filesystem\FileAppender;
-use Picamator\TransferObject\Shared\Filesystem\FileAppenderInterface;
-use Picamator\TransferObject\Shared\Reader\JsonReader;
-use Picamator\TransferObject\Shared\Reader\JsonReaderInterface;
+use Picamator\TransferObject\Shared\SharedFactoryTrait;
 
 readonly class DefinitionGeneratorFactory
 {
-    use DependencyFactoryTrait;
+    use SharedFactoryTrait;
 
     public function createDefinitionGeneratorService(): DefinitionGeneratorServiceInterface
     {
@@ -37,9 +35,13 @@ readonly class DefinitionGeneratorFactory
         );
     }
 
-    public function createJsonReader(): JsonReaderInterface
+    public function createDefinitionGeneratorBuilder(): DefinitionGeneratorBuilderInterface
     {
-        return new JsonReader($this->getFilesystem());
+        return new DefinitionGeneratorBuilder(
+            $this->createPathValidator(),
+            $this->createClassNameValidator(),
+            $this->createJsonReader(),
+        );
     }
 
     protected function createDefinitionFilesystem(): DefinitionFilesystemInterface
@@ -48,11 +50,6 @@ readonly class DefinitionGeneratorFactory
             $this->getFilesystem(),
             $this->createFileAppender(),
         );
-    }
-
-    protected function createFileAppender(): FileAppenderInterface
-    {
-        return new FileAppender();
     }
 
     protected function createDefinitionRender(): DefinitionRenderInterface

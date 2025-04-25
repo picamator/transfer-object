@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Validator;
+namespace Picamator\Tests\Unit\TransferObject\Shared\Validator;
 
 interface NamespaceValidatorInterface
 {

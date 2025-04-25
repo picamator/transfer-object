@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Definition;
 
 use ArrayObject;
-use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
+use Picamator\TransferObject\Shared\SharedFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinder;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinderInterface;
@@ -35,15 +35,11 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\Pro
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\RequiredTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\ReservedNamePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\TransferTypePropertyValidator;
-use Picamator\TransferObject\TransferGenerator\Validator\ClassNameValidator;
-use Picamator\TransferObject\TransferGenerator\Validator\ClassNameValidatorInterface;
-use Picamator\TransferObject\TransferGenerator\Validator\NamespaceValidator;
-use Picamator\TransferObject\TransferGenerator\Validator\NamespaceValidatorInterface;
 
 readonly class DefinitionFactory
 {
     use ConfigFactoryTrait;
-    use DependencyFactoryTrait;
+    use SharedFactoryTrait;
 
     public function createDefinitionReader(): DefinitionReaderInterface
     {
@@ -107,11 +103,6 @@ readonly class DefinitionFactory
         );
     }
 
-    protected function createNamespaceValidator(): NamespaceValidatorInterface
-    {
-        return new NamespaceValidator();
-    }
-
     protected function createTransferTypePropertyValidator(): PropertyValidatorInterface
     {
         return new TransferTypePropertyValidator(
@@ -148,11 +139,6 @@ readonly class DefinitionFactory
     protected function createClassNameContentValidator(): ContentValidatorInterface
     {
         return new ClassNameContentValidator($this->createClassNameValidator());
-    }
-
-    protected function createClassNameValidator(): ClassNameValidatorInterface
-    {
-        return new ClassNameValidator();
     }
 
     protected function createDefinitionParser(): DefinitionParserInterface

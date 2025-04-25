@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator;
 
+use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGeneratorBuilderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\DefinitionGeneratorFactory;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 
@@ -18,11 +19,10 @@ class DefinitionGeneratorFacade implements DefinitionGeneratorFacadeInterface
             ->generateDefinitionsOrFail($generatorTransfer);
     }
 
-    public function getJsonContent(string $path): array
+    public function createDefinitionGeneratorBuilder(): DefinitionGeneratorBuilderInterface
     {
         return $this->getFactory()
-            ->createJsonReader()
-            ->getJsonContent($path);
+            ->createDefinitionGeneratorBuilder();
     }
 
     private function getFactory(): DefinitionGeneratorFactory

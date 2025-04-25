@@ -4,49 +4,38 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Command;
 
-use Picamator\TransferObject\Command\Helper\InputOptionTrait;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacadeInterface;
-use Picamator\TransferObject\Generated\DefinitionGeneratorContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
 
-class DefinitionGeneratorCommand extends Command
+final class DefinitionGeneratorCommand extends Command
 {
-    use InputOptionTrait;
-
-    protected const string NAME = 'definition:generate';
-    protected const string DESCRIPTION = 'Generates Transfer Object definition files.';
-    protected const string HELP = <<<'HELP'
+    private const string NAME = 'definition:generate';
+    private const string DESCRIPTION = 'Generates Transfer Object definition files.';
+    private const string HELP = <<<'HELP'
 Based on JSON file, generates Transfer Object definition files.
 HELP;
 
-    protected const string OPTION_NAME_DEFINITION = 'definition';
-    protected const string OPTION_SHORTCUT_DEFINITION = 'd';
-    protected const string OPTION_DESCRIPTION_DEFINITION = 'Path where to save generated definition files.';
+    private const string QUESTION_DEFINITION_PATH = 'Please enter path to the Definition directory: ';
+    private const string QUESTION_DEFAULT_DEFINITION_PATH = '/config/definition';
 
-    protected const string OPTION_NAME_CLASS = 'class';
-    protected const string OPTION_SHORTCUT_CLASS = 'c';
-    protected const string OPTION_DESCRIPTION_CLASS = 'Transfer Object class name.';
+    private const string QUESTION_CLASS_NAME = 'Please enter the Transfer Object class name: ';
 
-    protected const string OPTION_NAME_JSON = 'json';
-    protected const string OPTION_SHORTCUT_JSON = 'j';
-    protected const string OPTION_DESCRIPTION_JSON = 'Path to the JSON file.';
+    private const string QUESTION_JSON_PATH = 'Please enter path to the JSON file: ';
 
-    protected const string START_SECTION_NAME = 'Definition Generation';
+    private const string START_SECTION_NAME = 'Definition Generation';
 
-    protected const string ERROR_MESSAGE_JSON_TEMPLATE = 'Fail to parse "%s" JSON file. Error: "%s".';
-
-    protected const string SUCCESS_MESSAGE_TEMPLATE = 'Definition files %d were generated successfully.';
+    private const string SUCCESS_MESSAGE_TEMPLATE = 'Definition files %d were generated successfully.';
 
     public function __construct(
         ?string $name = null,
-        protected readonly DefinitionGeneratorFacadeInterface $generatorFacade = new DefinitionGeneratorFacade(),
+        private readonly DefinitionGeneratorFacadeInterface $generatorFacade = new DefinitionGeneratorFacade(),
     ) {
         parent::__construct($name);
     }
@@ -56,27 +45,6 @@ HELP;
         $this->setName(self::NAME)
             ->setDescription(self::DESCRIPTION)
             ->setHelp(self::HELP);
-
-        $this->addOption(
-            name: self::OPTION_NAME_DEFINITION,
-            shortcut: self::OPTION_SHORTCUT_DEFINITION,
-            mode: InputOption::VALUE_REQUIRED,
-            description: self::OPTION_DESCRIPTION_DEFINITION,
-        );
-
-        $this->addOption(
-            name: self::OPTION_NAME_CLASS,
-            shortcut: self::OPTION_SHORTCUT_CLASS,
-            mode: InputOption::VALUE_REQUIRED,
-            description: self::OPTION_DESCRIPTION_CLASS,
-        );
-
-        $this->addOption(
-            name: self::OPTION_NAME_JSON,
-            shortcut: self::OPTION_SHORTCUT_JSON,
-            mode: InputOption::VALUE_REQUIRED,
-            description: self::OPTION_DESCRIPTION_JSON,
-        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -85,72 +53,71 @@ HELP;
         $styleOutput->section(self::START_SECTION_NAME);
 
         $generatorTransfer = $this->createGeneratorTransfer($input, $styleOutput);
-        if ($generatorTransfer === null) {
-            return Command::FAILURE;
-        }
 
-        return $this->generateDefinitions($generatorTransfer, $styleOutput) ?  Command::SUCCESS : Command::FAILURE;
-    }
-
-    protected function generateDefinitions(
-        DefinitionGeneratorTransfer $generatorTransfer,
-        SymfonyStyle $styleOutput,
-    ): bool {
         try {
             $generatedCount = $this->generatorFacade->generateDefinitionsOrFail($generatorTransfer);
         } catch (Throwable $e) {
             $styleOutput->error($e->getMessage());
 
-            return false;
+            return Command::FAILURE;
         }
 
         $styleOutput->success(sprintf(self::SUCCESS_MESSAGE_TEMPLATE, $generatedCount));
 
-        return true;
+        return Command::SUCCESS;
     }
 
-    protected function createGeneratorTransfer(
+    private function createGeneratorTransfer(
         InputInterface $input,
         SymfonyStyle $styleOutput,
-    ): ?DefinitionGeneratorTransfer {
-        $definitionPath = $this->getInputOption(self::OPTION_NAME_DEFINITION, $input, $styleOutput);
-        $className = $this->getInputOption(self::OPTION_NAME_CLASS, $input, $styleOutput);
-        $contentPath =  $this->getInputOption(self::OPTION_NAME_JSON, $input, $styleOutput);
+    ): DefinitionGeneratorTransfer {
+        $generatorBuilder = $this->generatorFacade->createDefinitionGeneratorBuilder();
 
-        if ($definitionPath === null || $className === null || $contentPath === null) {
-            return null;
-        }
+        /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */
+        $helper = $this->getHelper('question');
 
-        $jsonContent = $this->getJsonContent($contentPath, $styleOutput);
-        if ($jsonContent === []) {
-            return null;
-        }
+        // definition path
+        $definitionPathQuestion = new Question(
+            self::QUESTION_DEFINITION_PATH,
+            self::QUESTION_DEFAULT_DEFINITION_PATH
+        )->setValidator(function (string $answer) use ($generatorBuilder) {
+            $answer = $this->getFullPath($answer);
+            $generatorBuilder->setDefinitionPath($answer);
 
-        $generatorTransfer = new DefinitionGeneratorTransfer();
-        $generatorTransfer->definitionPath = $definitionPath;
+            return $answer;
+        });
 
-        $generatorTransfer->content = new DefinitionGeneratorContentTransfer();
-        $generatorTransfer->content->className = $className;
-        $generatorTransfer->content->content = $jsonContent;
+        $helper->ask($input, $styleOutput, $definitionPathQuestion);
 
-        return $generatorTransfer;
+        // class name
+        $classNameQuestion = new Question(self::QUESTION_CLASS_NAME)
+            ->setValidator(function (string $answer) use ($generatorBuilder) {
+                $generatorBuilder->setClassName($answer);
+
+                return $answer;
+            });
+
+        $helper->ask($input, $styleOutput, $classNameQuestion);
+
+        // JSON path
+        $jsonPathQuestion = new Question(self::QUESTION_JSON_PATH)
+            ->setValidator(function (string $answer) use ($generatorBuilder) {
+                $answer = $this->getFullPath($answer);
+                $generatorBuilder->setJsonPath($answer);
+
+                return $answer;
+            });
+
+        $helper->ask($input, $styleOutput, $jsonPathQuestion);
+
+        return $generatorBuilder->build();
     }
 
-    /**
-     * @return array<string,mixed>
-     */
-    protected function getJsonContent(string $contentPath, SymfonyStyle $styleOutput): array
+    private function getFullPath(string $path): string
     {
-        try {
-            $jsonContent = $this->generatorFacade->getJsonContent($contentPath);
-        } catch (Throwable $e) {
-            $styleOutput->error(
-                sprintf(self::ERROR_MESSAGE_JSON_TEMPLATE, $contentPath, $e->getMessage()),
-            );
+        $workingDirectory = getcwd() ?: '';
+        $path = ltrim($path, '\/');
 
-            return [];
-        }
-
-        return $jsonContent;
+        return $workingDirectory . DIRECTORY_SEPARATOR . $path;
     }
 }

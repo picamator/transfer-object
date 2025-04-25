@@ -7,7 +7,7 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Validator\Proper
 use BackedEnum;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\TransferGenerator\Validator\ValidatorMessageTrait;
+use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
 readonly class EnumTypePropertyValidator implements PropertyValidatorInterface
 {

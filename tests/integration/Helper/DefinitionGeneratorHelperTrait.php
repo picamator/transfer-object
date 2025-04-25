@@ -4,46 +4,38 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Integration\TransferObject\Helper;
 
-use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
-use Picamator\TransferObject\Generated\DefinitionGeneratorContentTransfer;
+use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
+use Picamator\TransferObject\Shared\SharedFactoryTrait;
 
 trait DefinitionGeneratorHelperTrait
 {
-    use DependencyFactoryTrait;
+    use SharedFactoryTrait;
 
     /**
-     * @throws \JsonException
+     * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
      */
     protected function createDefinitionGenerator(
         string $definitionPath,
         string $className,
         string $sampleJsonPath,
     ): DefinitionGeneratorTransfer {
-        $sampleContent = $this->getSampleContent($sampleJsonPath);
+        $builder = new DefinitionGeneratorFacade()->createDefinitionGeneratorBuilder();
 
-        return new DefinitionGeneratorTransfer()
-            ->fromArray([
-                DefinitionGeneratorTransfer::DEFINITION_PATH => $definitionPath,
-                DefinitionGeneratorTransfer::CONTENT => [
-                    DefinitionGeneratorContentTransfer::CLASS_NAME => $className,
-                    DefinitionGeneratorContentTransfer::CONTENT => $sampleContent,
-                ],
-            ]);
+        return $builder
+            ->setDefinitionPath($definitionPath)
+            ->setClassName($className)
+            ->setJsonPath($sampleJsonPath)
+            ->build();
     }
 
     /**
-     * @throws \JsonException
+     * @throws \Picamator\TransferObject\Shared\Exception\JsonReaderException
      *
      * @return array<string,mixed>
      */
     protected function getSampleContent(string $sampleJsonPath): array
     {
-        $content = $this->getFilesystem()->readFile($sampleJsonPath);
-
-        /** @var array<string,mixed> $decodedContent */
-        $decodedContent = json_decode($content, true, flags: JSON_THROW_ON_ERROR);
-
-        return $decodedContent;
+        return $this->createJsonReader()->getJsonContent($sampleJsonPath);
     }
 }
