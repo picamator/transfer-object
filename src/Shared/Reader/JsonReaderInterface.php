@@ -8,7 +8,6 @@ interface JsonReaderInterface
 {
     /**
      * @throws \Picamator\TransferObject\Shared\Exception\JsonReaderException
-     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      *
      * @return array<string,mixed>
      */
