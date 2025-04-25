@@ -15,7 +15,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class TransferGeneratorCommand extends Command
 {
-    private const string NAME = 'transfer:generate';
+    private const string NAME = 'picamator:transfer:generate';
     private const string DESCRIPTION = 'Generates Transfer Objects based on definitions template.';
     private const string HELP = <<<'HELP'
 Configuration option includes path to definition directory, transfer object namespace,

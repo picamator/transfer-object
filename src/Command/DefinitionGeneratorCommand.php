@@ -16,18 +16,15 @@ use Throwable;
 
 final class DefinitionGeneratorCommand extends Command
 {
-    private const string NAME = 'definition:generate';
+    private const string NAME = 'picamator:definition:generate';
     private const string DESCRIPTION = 'Generates Transfer Object definition files.';
     private const string HELP = <<<'HELP'
 Based on JSON file, generates Transfer Object definition files.
 HELP;
 
-    private const string QUESTION_DEFINITION_PATH = 'Please enter path to the Definition directory: ';
-    private const string QUESTION_DEFAULT_DEFINITION_PATH = '/config/definition';
-
-    private const string QUESTION_CLASS_NAME = 'Please enter the Transfer Object class name: ';
-
-    private const string QUESTION_JSON_PATH = 'Please enter path to the JSON file: ';
+    private const string QUESTION_DEFINITION_PATH = 'Definition directory path: ';
+    private const string QUESTION_CLASS_NAME = 'Transfer Object class name: ';
+    private const string QUESTION_JSON_PATH = 'JSON file path: ';
 
     private const string START_SECTION_NAME = 'Definition Generation';
 
@@ -77,15 +74,13 @@ HELP;
         $helper = $this->getHelper('question');
 
         // definition path
-        $definitionPathQuestion = new Question(
-            self::QUESTION_DEFINITION_PATH,
-            self::QUESTION_DEFAULT_DEFINITION_PATH
-        )->setValidator(function (string $answer) use ($generatorBuilder) {
-            $answer = $this->getFullPath($answer);
-            $generatorBuilder->setDefinitionPath($answer);
+        $definitionPathQuestion = new Question(self::QUESTION_DEFINITION_PATH)
+            ->setValidator(function (string $answer) use ($generatorBuilder) {
+                $answer = $this->getFullPath($answer);
+                $generatorBuilder->setDefinitionPath($answer);
 
-            return $answer;
-        });
+                return $answer;
+            });
 
         $helper->ask($input, $styleOutput, $definitionPathQuestion);
 
