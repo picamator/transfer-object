@@ -14,7 +14,7 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
 
-final class DefinitionGeneratorCommand extends Command
+class DefinitionGeneratorCommand extends Command
 {
     private const string NAME = 'picamator:definition:generate';
     private const string DESCRIPTION = 'Generates Transfer Object definition files.';
@@ -39,9 +39,12 @@ HELP;
 
     protected function configure(): void
     {
-        $this->setName(self::NAME)
-            ->setDescription(self::DESCRIPTION)
-            ->setHelp(self::HELP);
+        if ($this->getName() === null) {
+            $this->setName(name: self::NAME);
+        }
+
+        $this->setDescription(description: self::DESCRIPTION)
+            ->setHelp(help: self::HELP);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -71,10 +74,10 @@ HELP;
         $generatorBuilder = $this->generatorFacade->createDefinitionGeneratorBuilder();
 
         /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */
-        $helper = $this->getHelper('question');
+        $helper = $this->getHelper(name: 'question');
 
         // definition path
-        $definitionPathQuestion = new Question(self::QUESTION_DEFINITION_PATH)
+        $definitionPathQuestion = new Question(question: self::QUESTION_DEFINITION_PATH)
             ->setValidator(function (string $answer) use ($generatorBuilder) {
                 $answer = $this->getFullPath($answer);
                 $generatorBuilder->setDefinitionPath($answer);
@@ -85,7 +88,7 @@ HELP;
         $helper->ask($input, $styleOutput, $definitionPathQuestion);
 
         // class name
-        $classNameQuestion = new Question(self::QUESTION_CLASS_NAME)
+        $classNameQuestion = new Question(question: self::QUESTION_CLASS_NAME)
             ->setValidator(function (string $answer) use ($generatorBuilder) {
                 $generatorBuilder->setClassName($answer);
 
@@ -95,7 +98,7 @@ HELP;
         $helper->ask($input, $styleOutput, $classNameQuestion);
 
         // JSON path
-        $jsonPathQuestion = new Question(self::QUESTION_JSON_PATH)
+        $jsonPathQuestion = new Question(question: self::QUESTION_JSON_PATH)
             ->setValidator(function (string $answer) use ($generatorBuilder) {
                 $answer = $this->getFullPath($answer);
                 $generatorBuilder->setJsonPath($answer);

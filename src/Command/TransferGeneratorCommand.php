@@ -13,7 +13,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-final class TransferGeneratorCommand extends Command
+class TransferGeneratorCommand extends Command
 {
     private const string NAME = 'picamator:transfer:generate';
     private const string DESCRIPTION = 'Generates Transfer Objects based on definitions template.';
@@ -45,9 +45,12 @@ HELP;
 
     protected function configure(): void
     {
-        $this->setName(self::NAME)
-            ->setDescription(self::DESCRIPTION)
-            ->setHelp(self::HELP);
+        if ($this->getName() === null) {
+            $this->setName(name:self::NAME);
+        }
+
+        $this->setDescription(description: self::DESCRIPTION)
+            ->setHelp(help: self::HELP);
 
         $this->addOption(
             name: self::OPTION_NAME_CONFIGURATION,
@@ -114,7 +117,7 @@ HELP;
 
     private function getConfigPath(InputInterface $input, SymfonyStyle $styleOutput): ?string
     {
-        $configPath = $input->getOption(self::OPTION_NAME_CONFIGURATION) ?: '';
+        $configPath = $input->getOption(name: self::OPTION_NAME_CONFIGURATION) ?: '';
         if ($configPath === '' || !is_string($configPath)) {
             $styleOutput->error(self::ERROR_MISSED_OPTION_CONFIG_MESSAGE);
 
