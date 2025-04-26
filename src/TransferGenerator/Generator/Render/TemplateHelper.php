@@ -20,6 +20,7 @@ class TemplateHelper implements TemplateHelperInterface
     private const string EMPTY_STRING = '';
     private const string NULLABLE_TYPE = '?';
     private const string NULLABLE_UNION = 'null|';
+    private const string PROTECTED_SET = ' protected(set)';
 
     public function setTemplateTransfer(TemplateTransfer $templateTransfer): self
     {
@@ -77,5 +78,10 @@ class TemplateHelper implements TemplateHelperInterface
         }
 
         return self::NULLABLE_TYPE;
+    }
+
+    public function getProtected(string $property): string
+    {
+        return $this->templateTransfer->protects[$property] ? self::PROTECTED_SET : self::EMPTY_STRING;
     }
 }

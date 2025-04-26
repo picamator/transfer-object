@@ -27,6 +27,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\Collect
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\EnumTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\MetaConstantsTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\NamespaceTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\ProtectedTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TemplateExpanderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TransferTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateBuilder;
@@ -113,9 +114,15 @@ readonly class TransferGeneratorFactory
             ->setNextExpander($this->createBuildInTypeTemplateExpander())
             ->setNextExpander($this->createEnumTypeTemplateExpander())
             ->setNextExpander($this->createNamespaceTemplateExpander())
-            ->setNextExpander($this->createMetaConstantsTemplateExpander());
+            ->setNextExpander($this->createMetaConstantsTemplateExpander())
+            ->setNextExpander($this->createProtectedTemplateExpander());
 
         return $templateExpander;
+    }
+
+    protected function createProtectedTemplateExpander(): TemplateExpanderInterface
+    {
+        return new ProtectedTemplateExpander();
     }
 
     protected function createMetaConstantsTemplateExpander(): TemplateExpanderInterface

@@ -57,6 +57,9 @@ DefinitionProperty:
   isNullable:
     type: bool
     required:
+  isProtected:
+    type: bool
+    required:
 
 DefinitionEmbeddedType:
   name:

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Picamator\Doc\Samples\TransferObject\Enum\CountryEnum;
 use Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator\AgentTransfer;
+use Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator\CredentialsTransfer;
 use Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator\CustomerTransfer;
 use Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator\MerchantTransfer;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
@@ -72,3 +73,17 @@ $agentTransfer = new AgentTransfer()
     ]);
 
 var_dump($agentTransfer->toArray());
+
+echo <<<'STORY'
+=================================================================
+             Try protected properties (partly immutable)
+=================================================================
+
+STORY;
+$credentialsTransfer = new CredentialsTransfer([
+    CredentialsTransfer::LOGIN => 'jan.kowalski',
+    CredentialsTransfer::TOKEN => 'some-random-token',
+]);
+
+echo "Login: {$credentialsTransfer->login}\n";
+echo "Token: {$credentialsTransfer->token}\n";

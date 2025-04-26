@@ -29,7 +29,7 @@ final class ValidatorMessageTransfer extends AbstractTransfer
     protected const string ERROR_MESSAGE_DATA_NAME = 'ERROR_MESSAGE';
     protected const int ERROR_MESSAGE_DATA_INDEX = 0;
 
-    public string $errorMessage {
+    public protected(set) string $errorMessage {
         get => $this->_data[self::ERROR_MESSAGE_DATA_INDEX];
         set => $this->_data[self::ERROR_MESSAGE_DATA_INDEX] = $value;
     }
@@ -39,7 +39,7 @@ final class ValidatorMessageTransfer extends AbstractTransfer
     protected const string IS_VALID_DATA_NAME = 'IS_VALID';
     protected const int IS_VALID_DATA_INDEX = 1;
 
-    public bool $isValid {
+    public protected(set) bool $isValid {
         get => $this->_data[self::IS_VALID_DATA_INDEX];
         set => $this->_data[self::IS_VALID_DATA_INDEX] = $value;
     }

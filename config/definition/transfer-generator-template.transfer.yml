@@ -20,3 +20,5 @@ Template:
     type: ArrayObject
   nullables:
     type: ArrayObject
+  protects:
+    type: ArrayObject

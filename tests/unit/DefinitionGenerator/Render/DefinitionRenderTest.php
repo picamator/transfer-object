@@ -104,6 +104,7 @@ DEFINITION,
         $propertyTransfer = new DefinitionPropertyTransfer();
         $propertyTransfer->propertyName = '';
         $propertyTransfer->isNullable = true;
+        $propertyTransfer->isProtected = false;
 
         $contentTransfer->properties[] = $propertyTransfer;
 

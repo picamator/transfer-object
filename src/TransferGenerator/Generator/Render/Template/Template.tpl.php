@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 /**
+ * phpcs:disable Generic.Files.LineLength
+ *
  * @var \Picamator\TransferObject\Generated\TemplateTransfer $templateTransfer
  * @var \Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateHelperInterface $helper
  */
@@ -44,7 +46,7 @@ foreach ($templateTransfer->metaConstants as $constant => $property) {
     protected const string {$constant}_DATA_NAME = '$constant';
     protected const int {$constant}_DATA_INDEX = $i;
 {$helper->getDockBlock($property)}
-    public {$helper->getNullable($property)}{$templateTransfer->properties[$property]} \$$property {
+    public{$helper->getProtected($property)} {$helper->getNullable($property)}{$templateTransfer->properties[$property]} \$$property {
         get => \$this->_data[self::{$constant}_DATA_INDEX];
         set => \$this->_data[self::{$constant}_DATA_INDEX] = \$value;
     }

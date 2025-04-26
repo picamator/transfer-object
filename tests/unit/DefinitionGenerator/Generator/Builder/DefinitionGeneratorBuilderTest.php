@@ -98,10 +98,9 @@ class DefinitionGeneratorBuilderTest extends TestCase
 
     private function createInvalidMessageTransfer(): ValidatorMessageTransfer
     {
-        $messageTransfer = new ValidatorMessageTransfer();
-        $messageTransfer->isValid = false;
-        $messageTransfer->errorMessage = 'Error message';
-
-        return $messageTransfer;
+        return new ValidatorMessageTransfer([
+            ValidatorMessageTransfer::IS_VALID => false,
+            ValidatorMessageTransfer::ERROR_MESSAGE => 'Error message',
+        ]);
     }
 }

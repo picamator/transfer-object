@@ -19,7 +19,7 @@ use Picamator\TransferObject\Transfer\Attribute\ArrayObjectPropertyTypeAttribute
  */
 final class TemplateTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 9;
+    protected const int META_DATA_SIZE = 10;
 
     protected const array META_DATA = [
         self::ATTRIBUTES => self::ATTRIBUTES_DATA_NAME,
@@ -31,6 +31,7 @@ final class TemplateTransfer extends AbstractTransfer
         self::META_CONSTANTS => self::META_CONSTANTS_DATA_NAME,
         self::NULLABLES => self::NULLABLES_DATA_NAME,
         self::PROPERTIES => self::PROPERTIES_DATA_NAME,
+        self::PROTECTS => self::PROTECTS_DATA_NAME,
     ];
 
     // attributes
@@ -133,5 +134,17 @@ final class TemplateTransfer extends AbstractTransfer
     public ArrayObject $properties {
         get => $this->_data[self::PROPERTIES_DATA_INDEX];
         set => $this->_data[self::PROPERTIES_DATA_INDEX] = $value;
+    }
+
+    // protects
+    #[ArrayObjectPropertyTypeAttribute]
+    public const string PROTECTS = 'protects';
+    protected const string PROTECTS_DATA_NAME = 'PROTECTS';
+    protected const int PROTECTS_DATA_INDEX = 9;
+
+    /** @var \ArrayObject<string|int,mixed> */
+    public ArrayObject $protects {
+        get => $this->_data[self::PROTECTS_DATA_INDEX];
+        set => $this->_data[self::PROTECTS_DATA_INDEX] = $value;
     }
 }

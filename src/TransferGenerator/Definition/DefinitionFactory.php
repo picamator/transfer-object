@@ -18,6 +18,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Collec
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\EnumTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\NullablePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\PropertyExpanderInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\ProtectedPropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\TransferTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReader;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
@@ -162,9 +163,15 @@ readonly class DefinitionFactory
             ->setNextExpander($this->createCollectionTypePropertyExpander())
             ->setNextExpander($this->createBuildInTypePropertyExpander())
             ->setNextExpander($this->createTransferTypePropertyExpander())
-            ->setNextExpander($this->createEnumTypePropertyExpander());
+            ->setNextExpander($this->createEnumTypePropertyExpander())
+            ->setNextExpander($this->createProtectedPropertyExpander());
 
         return $propertyExpander;
+    }
+
+    protected function createProtectedPropertyExpander(): PropertyExpanderInterface
+    {
+        return new ProtectedPropertyExpander();
     }
 
     protected function createEnumTypePropertyExpander(): PropertyExpanderInterface

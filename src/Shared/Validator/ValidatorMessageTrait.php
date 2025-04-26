@@ -10,19 +10,17 @@ trait ValidatorMessageTrait
 {
     protected function createErrorMessageTransfer(string $errorMessage): ValidatorMessageTransfer
     {
-        $messageTransfer = new ValidatorMessageTransfer();
-        $messageTransfer->isValid = false;
-        $messageTransfer->errorMessage = $errorMessage;
-
-        return $messageTransfer;
+        return new ValidatorMessageTransfer([
+            ValidatorMessageTransfer::IS_VALID => false,
+            ValidatorMessageTransfer::ERROR_MESSAGE => $errorMessage,
+        ]);
     }
 
     protected function createSuccessMessageTransfer(): ValidatorMessageTransfer
     {
-        $messageTransfer = new ValidatorMessageTransfer();
-        $messageTransfer->isValid = true;
-        $messageTransfer->errorMessage = '';
-
-        return $messageTransfer;
+        return new ValidatorMessageTransfer([
+            ValidatorMessageTransfer::IS_VALID => true,
+            ValidatorMessageTransfer::ERROR_MESSAGE => '',
+        ]);
     }
 }
