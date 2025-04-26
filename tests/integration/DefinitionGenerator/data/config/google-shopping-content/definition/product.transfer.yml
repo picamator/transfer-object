@@ -1,3 +1,4 @@
+# Product
 Product:
   kind:
     type: string
@@ -49,8 +50,11 @@ Product:
     type: Price
   sizes:
     type: array
+
+# Price
 Price:
   value:
     type: string
   currency:
     type: string
+

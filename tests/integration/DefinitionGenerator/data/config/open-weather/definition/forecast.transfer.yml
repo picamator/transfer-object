@@ -1,3 +1,4 @@
+# Forecast
 Forecast:
   coord:
     type: Coord
@@ -27,11 +28,15 @@ Forecast:
     type: string
   cod:
     type: int
+
+# Coord
 Coord:
   lon:
     type: float
   lat:
     type: float
+
+# Weather
 Weather:
   id:
     type: int
@@ -41,6 +46,8 @@ Weather:
     type: string
   icon:
     type: string
+
+# Main
 Main:
   temp:
     type: float
@@ -58,6 +65,8 @@ Main:
     type: int
   grnd_level:
     type: int
+
+# Wind
 Wind:
   speed:
     type: float
@@ -65,9 +74,13 @@ Wind:
     type: int
   gust:
     type: float
+
+# Clouds
 Clouds:
   all:
     type: int
+
+# Sys
 Sys:
   type:
     type: int
@@ -79,3 +92,4 @@ Sys:
     type: int
   sunset:
     type: int
+

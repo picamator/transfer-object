@@ -51,9 +51,11 @@ class DefinitionRenderTest extends TestCase
                 DefinitionPropertyTransfer::BUILD_IN_TYPE => 'string',
             ],
             'expected' => <<<'DEFINITION'
+# TestClass
 TestClass:
   testProperty:
     type: string
+
 
 DEFINITION,
         ];
@@ -66,9 +68,11 @@ DEFINITION,
                 ],
             ],
             'expected' => <<<'DEFINITION'
+# TestClass
 TestClass:
   testProperty:
     type: TestItem
+
 
 DEFINITION,
         ];
@@ -81,9 +85,11 @@ DEFINITION,
                 ],
             ],
             'expected' => <<<'DEFINITION'
+# TestClass
 TestClass:
   testProperty:
     collectionType: TestItem
+
 
 DEFINITION,
         ];

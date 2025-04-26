@@ -1,5 +1,7 @@
+# Customer
 Customer:
   firstName:
     type: string
   lastname:
     type: string
+
