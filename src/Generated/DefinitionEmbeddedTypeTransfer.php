@@ -31,8 +31,8 @@ final class DefinitionEmbeddedTypeTransfer extends AbstractTransfer
     protected const int NAME_DATA_INDEX = 0;
 
     public string $name {
-        get => $this->_data[self::NAME_DATA_INDEX];
-        set => $this->_data[self::NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::NAME_DATA_INDEX);
+        set => $this->setData(self::NAME_DATA_INDEX, $value);
     }
 
     // namespace
@@ -42,7 +42,7 @@ final class DefinitionEmbeddedTypeTransfer extends AbstractTransfer
     protected const int NAMESPACE_DATA_INDEX = 1;
 
     public ?DefinitionNamespaceTransfer $namespace {
-        get => $this->_data[self::NAMESPACE_DATA_INDEX];
-        set => $this->_data[self::NAMESPACE_DATA_INDEX] = $value;
+        get => $this->getData(self::NAMESPACE_DATA_INDEX);
+        set => $this->setData(self::NAMESPACE_DATA_INDEX, $value);
     }
 }

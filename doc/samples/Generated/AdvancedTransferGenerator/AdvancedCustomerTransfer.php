@@ -35,8 +35,8 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
     protected const int CREDENTIALS_DATA_INDEX = 0;
 
     public TransferInterface&CredentialsData $credentials {
-        get => $this->_data[self::CREDENTIALS_DATA_INDEX];
-        set => $this->_data[self::CREDENTIALS_DATA_INDEX] = $value;
+        get => $this->getData(self::CREDENTIALS_DATA_INDEX);
+        set => $this->setData(self::CREDENTIALS_DATA_INDEX, $value);
     }
 
     // customer
@@ -46,7 +46,7 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
     protected const int CUSTOMER_DATA_INDEX = 1;
 
     public TransferInterface&CustomerTransfer $customer {
-        get => $this->_data[self::CUSTOMER_DATA_INDEX];
-        set => $this->_data[self::CUSTOMER_DATA_INDEX] = $value;
+        get => $this->getData(self::CUSTOMER_DATA_INDEX);
+        set => $this->setData(self::CUSTOMER_DATA_INDEX, $value);
     }
 }

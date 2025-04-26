@@ -34,8 +34,8 @@ final class ItemCollectionTransfer extends AbstractTransfer
     protected const int ITEM_DATA_INDEX = 0;
 
     public ?ItemTransfer $item {
-        get => $this->_data[self::ITEM_DATA_INDEX];
-        set => $this->_data[self::ITEM_DATA_INDEX] = $value;
+        get => $this->getData(self::ITEM_DATA_INDEX);
+        set => $this->setData(self::ITEM_DATA_INDEX, $value);
     }
 
     // items
@@ -46,7 +46,7 @@ final class ItemCollectionTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,ItemTransfer> */
     public ArrayObject $items {
-        get => $this->_data[self::ITEMS_DATA_INDEX];
-        set => $this->_data[self::ITEMS_DATA_INDEX] = $value;
+        get => $this->getData(self::ITEMS_DATA_INDEX);
+        set => $this->setData(self::ITEMS_DATA_INDEX, $value);
     }
 }

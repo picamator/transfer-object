@@ -42,8 +42,8 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $attributes {
-        get => $this->_data[self::ATTRIBUTES_DATA_INDEX];
-        set => $this->_data[self::ATTRIBUTES_DATA_INDEX] = $value;
+        get => $this->getData(self::ATTRIBUTES_DATA_INDEX);
+        set => $this->setData(self::ATTRIBUTES_DATA_INDEX, $value);
     }
 
     // className
@@ -52,8 +52,8 @@ final class TemplateTransfer extends AbstractTransfer
     protected const int CLASS_NAME_DATA_INDEX = 1;
 
     public string $className {
-        get => $this->_data[self::CLASS_NAME_DATA_INDEX];
-        set => $this->_data[self::CLASS_NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::CLASS_NAME_DATA_INDEX);
+        set => $this->setData(self::CLASS_NAME_DATA_INDEX, $value);
     }
 
     // classNamespace
@@ -62,8 +62,8 @@ final class TemplateTransfer extends AbstractTransfer
     protected const int CLASS_NAMESPACE_DATA_INDEX = 2;
 
     public string $classNamespace {
-        get => $this->_data[self::CLASS_NAMESPACE_DATA_INDEX];
-        set => $this->_data[self::CLASS_NAMESPACE_DATA_INDEX] = $value;
+        get => $this->getData(self::CLASS_NAMESPACE_DATA_INDEX);
+        set => $this->setData(self::CLASS_NAMESPACE_DATA_INDEX, $value);
     }
 
     // definitionPath
@@ -72,8 +72,8 @@ final class TemplateTransfer extends AbstractTransfer
     protected const int DEFINITION_PATH_DATA_INDEX = 3;
 
     public string $definitionPath {
-        get => $this->_data[self::DEFINITION_PATH_DATA_INDEX];
-        set => $this->_data[self::DEFINITION_PATH_DATA_INDEX] = $value;
+        get => $this->getData(self::DEFINITION_PATH_DATA_INDEX);
+        set => $this->setData(self::DEFINITION_PATH_DATA_INDEX, $value);
     }
 
     // dockBlocks
@@ -84,8 +84,8 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $dockBlocks {
-        get => $this->_data[self::DOCK_BLOCKS_DATA_INDEX];
-        set => $this->_data[self::DOCK_BLOCKS_DATA_INDEX] = $value;
+        get => $this->getData(self::DOCK_BLOCKS_DATA_INDEX);
+        set => $this->setData(self::DOCK_BLOCKS_DATA_INDEX, $value);
     }
 
     // imports
@@ -96,8 +96,8 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $imports {
-        get => $this->_data[self::IMPORTS_DATA_INDEX];
-        set => $this->_data[self::IMPORTS_DATA_INDEX] = $value;
+        get => $this->getData(self::IMPORTS_DATA_INDEX);
+        set => $this->setData(self::IMPORTS_DATA_INDEX, $value);
     }
 
     // metaConstants
@@ -108,8 +108,8 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $metaConstants {
-        get => $this->_data[self::META_CONSTANTS_DATA_INDEX];
-        set => $this->_data[self::META_CONSTANTS_DATA_INDEX] = $value;
+        get => $this->getData(self::META_CONSTANTS_DATA_INDEX);
+        set => $this->setData(self::META_CONSTANTS_DATA_INDEX, $value);
     }
 
     // nullables
@@ -120,8 +120,8 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $nullables {
-        get => $this->_data[self::NULLABLES_DATA_INDEX];
-        set => $this->_data[self::NULLABLES_DATA_INDEX] = $value;
+        get => $this->getData(self::NULLABLES_DATA_INDEX);
+        set => $this->setData(self::NULLABLES_DATA_INDEX, $value);
     }
 
     // properties
@@ -132,8 +132,8 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $properties {
-        get => $this->_data[self::PROPERTIES_DATA_INDEX];
-        set => $this->_data[self::PROPERTIES_DATA_INDEX] = $value;
+        get => $this->getData(self::PROPERTIES_DATA_INDEX);
+        set => $this->setData(self::PROPERTIES_DATA_INDEX, $value);
     }
 
     // protects
@@ -144,7 +144,7 @@ final class TemplateTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $protects {
-        get => $this->_data[self::PROTECTS_DATA_INDEX];
-        set => $this->_data[self::PROTECTS_DATA_INDEX] = $value;
+        get => $this->getData(self::PROTECTS_DATA_INDEX);
+        set => $this->setData(self::PROTECTS_DATA_INDEX, $value);
     }
 }

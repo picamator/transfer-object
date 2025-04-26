@@ -29,7 +29,7 @@ final class TagsTransfer extends AbstractTransfer
     protected const int TAG_DATA_INDEX = 0;
 
     public ?string $tag {
-        get => $this->_data[self::TAG_DATA_INDEX];
-        set => $this->_data[self::TAG_DATA_INDEX] = $value;
+        get => $this->getData(self::TAG_DATA_INDEX);
+        set => $this->setData(self::TAG_DATA_INDEX, $value);
     }
 }

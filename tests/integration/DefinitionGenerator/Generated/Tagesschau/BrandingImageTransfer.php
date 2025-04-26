@@ -34,8 +34,8 @@ final class BrandingImageTransfer extends AbstractTransfer
     protected const int ALTTEXT_DATA_INDEX = 0;
 
     public ?string $alttext {
-        get => $this->_data[self::ALTTEXT_DATA_INDEX];
-        set => $this->_data[self::ALTTEXT_DATA_INDEX] = $value;
+        get => $this->getData(self::ALTTEXT_DATA_INDEX);
+        set => $this->setData(self::ALTTEXT_DATA_INDEX, $value);
     }
 
     // copyright
@@ -44,8 +44,8 @@ final class BrandingImageTransfer extends AbstractTransfer
     protected const int COPYRIGHT_DATA_INDEX = 1;
 
     public ?string $copyright {
-        get => $this->_data[self::COPYRIGHT_DATA_INDEX];
-        set => $this->_data[self::COPYRIGHT_DATA_INDEX] = $value;
+        get => $this->getData(self::COPYRIGHT_DATA_INDEX);
+        set => $this->setData(self::COPYRIGHT_DATA_INDEX, $value);
     }
 
     // imageVariants
@@ -55,8 +55,8 @@ final class BrandingImageTransfer extends AbstractTransfer
     protected const int IMAGE_VARIANTS_DATA_INDEX = 2;
 
     public ?ImageVariantsTransfer $imageVariants {
-        get => $this->_data[self::IMAGE_VARIANTS_DATA_INDEX];
-        set => $this->_data[self::IMAGE_VARIANTS_DATA_INDEX] = $value;
+        get => $this->getData(self::IMAGE_VARIANTS_DATA_INDEX);
+        set => $this->setData(self::IMAGE_VARIANTS_DATA_INDEX, $value);
     }
 
     // title
@@ -65,8 +65,8 @@ final class BrandingImageTransfer extends AbstractTransfer
     protected const int TITLE_DATA_INDEX = 3;
 
     public ?string $title {
-        get => $this->_data[self::TITLE_DATA_INDEX];
-        set => $this->_data[self::TITLE_DATA_INDEX] = $value;
+        get => $this->getData(self::TITLE_DATA_INDEX);
+        set => $this->setData(self::TITLE_DATA_INDEX, $value);
     }
 
     // type
@@ -75,7 +75,7 @@ final class BrandingImageTransfer extends AbstractTransfer
     protected const int TYPE_DATA_INDEX = 4;
 
     public ?string $type {
-        get => $this->_data[self::TYPE_DATA_INDEX];
-        set => $this->_data[self::TYPE_DATA_INDEX] = $value;
+        get => $this->getData(self::TYPE_DATA_INDEX);
+        set => $this->setData(self::TYPE_DATA_INDEX, $value);
     }
 }

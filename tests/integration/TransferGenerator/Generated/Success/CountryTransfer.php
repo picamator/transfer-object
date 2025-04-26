@@ -30,8 +30,8 @@ final class CountryTransfer extends AbstractTransfer
     protected const int ISO2_CODE_DATA_INDEX = 0;
 
     public ?string $iso2Code {
-        get => $this->_data[self::ISO2_CODE_DATA_INDEX];
-        set => $this->_data[self::ISO2_CODE_DATA_INDEX] = $value;
+        get => $this->getData(self::ISO2_CODE_DATA_INDEX);
+        set => $this->setData(self::ISO2_CODE_DATA_INDEX, $value);
     }
 
     // name
@@ -40,7 +40,7 @@ final class CountryTransfer extends AbstractTransfer
     protected const int NAME_DATA_INDEX = 1;
 
     public ?string $name {
-        get => $this->_data[self::NAME_DATA_INDEX];
-        set => $this->_data[self::NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::NAME_DATA_INDEX);
+        set => $this->setData(self::NAME_DATA_INDEX, $value);
     }
 }

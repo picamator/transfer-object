@@ -54,8 +54,8 @@ final class NewsTransfer extends AbstractTransfer
     protected const int BRANDING_IMAGE_DATA_INDEX = 0;
 
     public ?BrandingImageTransfer $brandingImage {
-        get => $this->_data[self::BRANDING_IMAGE_DATA_INDEX];
-        set => $this->_data[self::BRANDING_IMAGE_DATA_INDEX] = $value;
+        get => $this->getData(self::BRANDING_IMAGE_DATA_INDEX);
+        set => $this->setData(self::BRANDING_IMAGE_DATA_INDEX, $value);
     }
 
     // breakingNews
@@ -64,8 +64,8 @@ final class NewsTransfer extends AbstractTransfer
     protected const int BREAKING_NEWS_DATA_INDEX = 1;
 
     public ?bool $breakingNews {
-        get => $this->_data[self::BREAKING_NEWS_DATA_INDEX];
-        set => $this->_data[self::BREAKING_NEWS_DATA_INDEX] = $value;
+        get => $this->getData(self::BREAKING_NEWS_DATA_INDEX);
+        set => $this->setData(self::BREAKING_NEWS_DATA_INDEX, $value);
     }
 
     // comments
@@ -74,8 +74,8 @@ final class NewsTransfer extends AbstractTransfer
     protected const int COMMENTS_DATA_INDEX = 2;
 
     public ?string $comments {
-        get => $this->_data[self::COMMENTS_DATA_INDEX];
-        set => $this->_data[self::COMMENTS_DATA_INDEX] = $value;
+        get => $this->getData(self::COMMENTS_DATA_INDEX);
+        set => $this->setData(self::COMMENTS_DATA_INDEX, $value);
     }
 
     // date
@@ -84,8 +84,8 @@ final class NewsTransfer extends AbstractTransfer
     protected const int DATE_DATA_INDEX = 3;
 
     public ?string $date {
-        get => $this->_data[self::DATE_DATA_INDEX];
-        set => $this->_data[self::DATE_DATA_INDEX] = $value;
+        get => $this->getData(self::DATE_DATA_INDEX);
+        set => $this->setData(self::DATE_DATA_INDEX, $value);
     }
 
     // details
@@ -94,8 +94,8 @@ final class NewsTransfer extends AbstractTransfer
     protected const int DETAILS_DATA_INDEX = 4;
 
     public ?string $details {
-        get => $this->_data[self::DETAILS_DATA_INDEX];
-        set => $this->_data[self::DETAILS_DATA_INDEX] = $value;
+        get => $this->getData(self::DETAILS_DATA_INDEX);
+        set => $this->setData(self::DETAILS_DATA_INDEX, $value);
     }
 
     // detailsweb
@@ -104,8 +104,8 @@ final class NewsTransfer extends AbstractTransfer
     protected const int DETAILSWEB_DATA_INDEX = 5;
 
     public ?string $detailsweb {
-        get => $this->_data[self::DETAILSWEB_DATA_INDEX];
-        set => $this->_data[self::DETAILSWEB_DATA_INDEX] = $value;
+        get => $this->getData(self::DETAILSWEB_DATA_INDEX);
+        set => $this->setData(self::DETAILSWEB_DATA_INDEX, $value);
     }
 
     // externalId
@@ -114,8 +114,8 @@ final class NewsTransfer extends AbstractTransfer
     protected const int EXTERNAL_ID_DATA_INDEX = 6;
 
     public ?string $externalId {
-        get => $this->_data[self::EXTERNAL_ID_DATA_INDEX];
-        set => $this->_data[self::EXTERNAL_ID_DATA_INDEX] = $value;
+        get => $this->getData(self::EXTERNAL_ID_DATA_INDEX);
+        set => $this->setData(self::EXTERNAL_ID_DATA_INDEX, $value);
     }
 
     // firstSentence
@@ -124,8 +124,8 @@ final class NewsTransfer extends AbstractTransfer
     protected const int FIRST_SENTENCE_DATA_INDEX = 7;
 
     public ?string $firstSentence {
-        get => $this->_data[self::FIRST_SENTENCE_DATA_INDEX];
-        set => $this->_data[self::FIRST_SENTENCE_DATA_INDEX] = $value;
+        get => $this->getData(self::FIRST_SENTENCE_DATA_INDEX);
+        set => $this->setData(self::FIRST_SENTENCE_DATA_INDEX, $value);
     }
 
     // geotags
@@ -136,8 +136,8 @@ final class NewsTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $geotags {
-        get => $this->_data[self::GEOTAGS_DATA_INDEX];
-        set => $this->_data[self::GEOTAGS_DATA_INDEX] = $value;
+        get => $this->getData(self::GEOTAGS_DATA_INDEX);
+        set => $this->setData(self::GEOTAGS_DATA_INDEX, $value);
     }
 
     // regionId
@@ -146,8 +146,8 @@ final class NewsTransfer extends AbstractTransfer
     protected const int REGION_ID_DATA_INDEX = 9;
 
     public ?int $regionId {
-        get => $this->_data[self::REGION_ID_DATA_INDEX];
-        set => $this->_data[self::REGION_ID_DATA_INDEX] = $value;
+        get => $this->getData(self::REGION_ID_DATA_INDEX);
+        set => $this->setData(self::REGION_ID_DATA_INDEX, $value);
     }
 
     // regionIds
@@ -158,8 +158,8 @@ final class NewsTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $regionIds {
-        get => $this->_data[self::REGION_IDS_DATA_INDEX];
-        set => $this->_data[self::REGION_IDS_DATA_INDEX] = $value;
+        get => $this->getData(self::REGION_IDS_DATA_INDEX);
+        set => $this->setData(self::REGION_IDS_DATA_INDEX, $value);
     }
 
     // ressort
@@ -168,8 +168,8 @@ final class NewsTransfer extends AbstractTransfer
     protected const int RESSORT_DATA_INDEX = 11;
 
     public ?string $ressort {
-        get => $this->_data[self::RESSORT_DATA_INDEX];
-        set => $this->_data[self::RESSORT_DATA_INDEX] = $value;
+        get => $this->getData(self::RESSORT_DATA_INDEX);
+        set => $this->setData(self::RESSORT_DATA_INDEX, $value);
     }
 
     // shareURL
@@ -178,8 +178,8 @@ final class NewsTransfer extends AbstractTransfer
     protected const int SHARE_U_R_L_DATA_INDEX = 12;
 
     public ?string $shareURL {
-        get => $this->_data[self::SHARE_U_R_L_DATA_INDEX];
-        set => $this->_data[self::SHARE_U_R_L_DATA_INDEX] = $value;
+        get => $this->getData(self::SHARE_U_R_L_DATA_INDEX);
+        set => $this->setData(self::SHARE_U_R_L_DATA_INDEX, $value);
     }
 
     // sophoraId
@@ -188,8 +188,8 @@ final class NewsTransfer extends AbstractTransfer
     protected const int SOPHORA_ID_DATA_INDEX = 13;
 
     public ?string $sophoraId {
-        get => $this->_data[self::SOPHORA_ID_DATA_INDEX];
-        set => $this->_data[self::SOPHORA_ID_DATA_INDEX] = $value;
+        get => $this->getData(self::SOPHORA_ID_DATA_INDEX);
+        set => $this->setData(self::SOPHORA_ID_DATA_INDEX, $value);
     }
 
     // tags
@@ -200,8 +200,8 @@ final class NewsTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,TagsTransfer> */
     public ArrayObject $tags {
-        get => $this->_data[self::TAGS_DATA_INDEX];
-        set => $this->_data[self::TAGS_DATA_INDEX] = $value;
+        get => $this->getData(self::TAGS_DATA_INDEX);
+        set => $this->setData(self::TAGS_DATA_INDEX, $value);
     }
 
     // teaserImage
@@ -211,8 +211,8 @@ final class NewsTransfer extends AbstractTransfer
     protected const int TEASER_IMAGE_DATA_INDEX = 15;
 
     public ?TeaserImageTransfer $teaserImage {
-        get => $this->_data[self::TEASER_IMAGE_DATA_INDEX];
-        set => $this->_data[self::TEASER_IMAGE_DATA_INDEX] = $value;
+        get => $this->getData(self::TEASER_IMAGE_DATA_INDEX);
+        set => $this->setData(self::TEASER_IMAGE_DATA_INDEX, $value);
     }
 
     // title
@@ -221,8 +221,8 @@ final class NewsTransfer extends AbstractTransfer
     protected const int TITLE_DATA_INDEX = 16;
 
     public ?string $title {
-        get => $this->_data[self::TITLE_DATA_INDEX];
-        set => $this->_data[self::TITLE_DATA_INDEX] = $value;
+        get => $this->getData(self::TITLE_DATA_INDEX);
+        set => $this->setData(self::TITLE_DATA_INDEX, $value);
     }
 
     // topline
@@ -231,8 +231,8 @@ final class NewsTransfer extends AbstractTransfer
     protected const int TOPLINE_DATA_INDEX = 17;
 
     public ?string $topline {
-        get => $this->_data[self::TOPLINE_DATA_INDEX];
-        set => $this->_data[self::TOPLINE_DATA_INDEX] = $value;
+        get => $this->getData(self::TOPLINE_DATA_INDEX);
+        set => $this->setData(self::TOPLINE_DATA_INDEX, $value);
     }
 
     // tracking
@@ -243,8 +243,8 @@ final class NewsTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,TrackingTransfer> */
     public ArrayObject $tracking {
-        get => $this->_data[self::TRACKING_DATA_INDEX];
-        set => $this->_data[self::TRACKING_DATA_INDEX] = $value;
+        get => $this->getData(self::TRACKING_DATA_INDEX);
+        set => $this->setData(self::TRACKING_DATA_INDEX, $value);
     }
 
     // type
@@ -253,8 +253,8 @@ final class NewsTransfer extends AbstractTransfer
     protected const int TYPE_DATA_INDEX = 19;
 
     public ?string $type {
-        get => $this->_data[self::TYPE_DATA_INDEX];
-        set => $this->_data[self::TYPE_DATA_INDEX] = $value;
+        get => $this->getData(self::TYPE_DATA_INDEX);
+        set => $this->setData(self::TYPE_DATA_INDEX, $value);
     }
 
     // updateCheckUrl
@@ -263,7 +263,7 @@ final class NewsTransfer extends AbstractTransfer
     protected const int UPDATE_CHECK_URL_DATA_INDEX = 20;
 
     public ?string $updateCheckUrl {
-        get => $this->_data[self::UPDATE_CHECK_URL_DATA_INDEX];
-        set => $this->_data[self::UPDATE_CHECK_URL_DATA_INDEX] = $value;
+        get => $this->getData(self::UPDATE_CHECK_URL_DATA_INDEX);
+        set => $this->setData(self::UPDATE_CHECK_URL_DATA_INDEX, $value);
     }
 }

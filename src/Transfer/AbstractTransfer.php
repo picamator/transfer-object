@@ -26,7 +26,7 @@ abstract class AbstractTransfer implements TransferInterface
     /**
      * @var \SplFixedArray<mixed>
      */
-    protected SplFixedArray $_data;
+    private SplFixedArray $_data;
 
     /**
      * @param array<string,mixed> $data
@@ -49,9 +49,7 @@ abstract class AbstractTransfer implements TransferInterface
      */
     final public function __serialize(): array
     {
-        return [
-            '_data' => $this->_data,
-        ];
+        return ['_data' => $this->_data];
     }
 
     /**
@@ -143,7 +141,7 @@ abstract class AbstractTransfer implements TransferInterface
         return $this;
     }
 
-    final protected function initData(): void
+    private function initData(): void
     {
         $this->_data = new SplFixedArray(static::META_DATA_SIZE);
 
@@ -154,5 +152,15 @@ abstract class AbstractTransfer implements TransferInterface
                 ? $this->getConstantAttribute($metaName)?->getInitialValue()
                 : null;
         }
+    }
+
+    final protected function getData(int $index): mixed
+    {
+        return $this->_data[$index];
+    }
+
+    final protected function setData(int $index, mixed $value): mixed
+    {
+        return $this->_data[$index] = $value;
     }
 }

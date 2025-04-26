@@ -29,7 +29,7 @@ final class RequiredTransfer extends AbstractTransfer
     protected const int I_AM_REQUIRED_DATA_INDEX = 0;
 
     public string $iAmRequired {
-        get => $this->_data[self::I_AM_REQUIRED_DATA_INDEX];
-        set => $this->_data[self::I_AM_REQUIRED_DATA_INDEX] = $value;
+        get => $this->getData(self::I_AM_REQUIRED_DATA_INDEX);
+        set => $this->setData(self::I_AM_REQUIRED_DATA_INDEX, $value);
     }
 }

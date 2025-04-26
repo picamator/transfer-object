@@ -31,8 +31,8 @@ final class OrbitClassTransfer extends AbstractTransfer
     protected const int ORBIT_CLASS_DESCRIPTION_DATA_INDEX = 0;
 
     public ?string $orbit_class_description {
-        get => $this->_data[self::ORBIT_CLASS_DESCRIPTION_DATA_INDEX];
-        set => $this->_data[self::ORBIT_CLASS_DESCRIPTION_DATA_INDEX] = $value;
+        get => $this->getData(self::ORBIT_CLASS_DESCRIPTION_DATA_INDEX);
+        set => $this->setData(self::ORBIT_CLASS_DESCRIPTION_DATA_INDEX, $value);
     }
 
     // orbit_class_range
@@ -41,8 +41,8 @@ final class OrbitClassTransfer extends AbstractTransfer
     protected const int ORBIT_CLASS_RANGE_DATA_INDEX = 1;
 
     public ?string $orbit_class_range {
-        get => $this->_data[self::ORBIT_CLASS_RANGE_DATA_INDEX];
-        set => $this->_data[self::ORBIT_CLASS_RANGE_DATA_INDEX] = $value;
+        get => $this->getData(self::ORBIT_CLASS_RANGE_DATA_INDEX);
+        set => $this->setData(self::ORBIT_CLASS_RANGE_DATA_INDEX, $value);
     }
 
     // orbit_class_type
@@ -51,7 +51,7 @@ final class OrbitClassTransfer extends AbstractTransfer
     protected const int ORBIT_CLASS_TYPE_DATA_INDEX = 2;
 
     public ?string $orbit_class_type {
-        get => $this->_data[self::ORBIT_CLASS_TYPE_DATA_INDEX];
-        set => $this->_data[self::ORBIT_CLASS_TYPE_DATA_INDEX] = $value;
+        get => $this->getData(self::ORBIT_CLASS_TYPE_DATA_INDEX);
+        set => $this->setData(self::ORBIT_CLASS_TYPE_DATA_INDEX, $value);
     }
 }

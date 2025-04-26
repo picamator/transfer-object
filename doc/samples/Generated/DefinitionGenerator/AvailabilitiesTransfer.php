@@ -30,8 +30,8 @@ final class AvailabilitiesTransfer extends AbstractTransfer
     protected const int BUFFER_DATA_INDEX = 0;
 
     public ?int $buffer {
-        get => $this->_data[self::BUFFER_DATA_INDEX];
-        set => $this->_data[self::BUFFER_DATA_INDEX] = $value;
+        get => $this->getData(self::BUFFER_DATA_INDEX);
+        set => $this->setData(self::BUFFER_DATA_INDEX, $value);
     }
 
     // total
@@ -40,7 +40,7 @@ final class AvailabilitiesTransfer extends AbstractTransfer
     protected const int TOTAL_DATA_INDEX = 1;
 
     public ?int $total {
-        get => $this->_data[self::TOTAL_DATA_INDEX];
-        set => $this->_data[self::TOTAL_DATA_INDEX] = $value;
+        get => $this->getData(self::TOTAL_DATA_INDEX);
+        set => $this->setData(self::TOTAL_DATA_INDEX, $value);
     }
 }

@@ -30,8 +30,8 @@ final class CredentialsTransfer extends AbstractTransfer
     protected const int LOGIN_DATA_INDEX = 0;
 
     public protected(set) string $login {
-        get => $this->_data[self::LOGIN_DATA_INDEX];
-        set => $this->_data[self::LOGIN_DATA_INDEX] = $value;
+        get => $this->getData(self::LOGIN_DATA_INDEX);
+        set => $this->setData(self::LOGIN_DATA_INDEX, $value);
     }
 
     // token
@@ -40,7 +40,7 @@ final class CredentialsTransfer extends AbstractTransfer
     protected const int TOKEN_DATA_INDEX = 1;
 
     public protected(set) string $token {
-        get => $this->_data[self::TOKEN_DATA_INDEX];
-        set => $this->_data[self::TOKEN_DATA_INDEX] = $value;
+        get => $this->getData(self::TOKEN_DATA_INDEX);
+        set => $this->setData(self::TOKEN_DATA_INDEX, $value);
     }
 }

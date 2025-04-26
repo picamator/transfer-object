@@ -36,8 +36,8 @@ final class ArdNewsTransfer extends AbstractTransfer
     protected const int NEW_STORIES_COUNT_LINK_DATA_INDEX = 0;
 
     public ?string $newStoriesCountLink {
-        get => $this->_data[self::NEW_STORIES_COUNT_LINK_DATA_INDEX];
-        set => $this->_data[self::NEW_STORIES_COUNT_LINK_DATA_INDEX] = $value;
+        get => $this->getData(self::NEW_STORIES_COUNT_LINK_DATA_INDEX);
+        set => $this->setData(self::NEW_STORIES_COUNT_LINK_DATA_INDEX, $value);
     }
 
     // news
@@ -48,8 +48,8 @@ final class ArdNewsTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,NewsTransfer> */
     public ArrayObject $news {
-        get => $this->_data[self::NEWS_DATA_INDEX];
-        set => $this->_data[self::NEWS_DATA_INDEX] = $value;
+        get => $this->getData(self::NEWS_DATA_INDEX);
+        set => $this->setData(self::NEWS_DATA_INDEX, $value);
     }
 
     // nextPage
@@ -58,8 +58,8 @@ final class ArdNewsTransfer extends AbstractTransfer
     protected const int NEXT_PAGE_DATA_INDEX = 2;
 
     public ?string $nextPage {
-        get => $this->_data[self::NEXT_PAGE_DATA_INDEX];
-        set => $this->_data[self::NEXT_PAGE_DATA_INDEX] = $value;
+        get => $this->getData(self::NEXT_PAGE_DATA_INDEX);
+        set => $this->setData(self::NEXT_PAGE_DATA_INDEX, $value);
     }
 
     // regional
@@ -70,8 +70,8 @@ final class ArdNewsTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $regional {
-        get => $this->_data[self::REGIONAL_DATA_INDEX];
-        set => $this->_data[self::REGIONAL_DATA_INDEX] = $value;
+        get => $this->getData(self::REGIONAL_DATA_INDEX);
+        set => $this->setData(self::REGIONAL_DATA_INDEX, $value);
     }
 
     // type
@@ -80,7 +80,7 @@ final class ArdNewsTransfer extends AbstractTransfer
     protected const int TYPE_DATA_INDEX = 4;
 
     public ?string $type {
-        get => $this->_data[self::TYPE_DATA_INDEX];
-        set => $this->_data[self::TYPE_DATA_INDEX] = $value;
+        get => $this->getData(self::TYPE_DATA_INDEX);
+        set => $this->setData(self::TYPE_DATA_INDEX, $value);
     }
 }

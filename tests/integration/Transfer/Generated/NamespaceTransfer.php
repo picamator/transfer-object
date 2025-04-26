@@ -38,8 +38,8 @@ final class NamespaceTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,TransferInterface&ItemTransfer> */
     public ArrayObject $items {
-        get => $this->_data[self::ITEMS_DATA_INDEX];
-        set => $this->_data[self::ITEMS_DATA_INDEX] = $value;
+        get => $this->getData(self::ITEMS_DATA_INDEX);
+        set => $this->setData(self::ITEMS_DATA_INDEX, $value);
     }
 
     // required
@@ -49,7 +49,7 @@ final class NamespaceTransfer extends AbstractTransfer
     protected const int REQUIRED_DATA_INDEX = 1;
 
     public TransferInterface&RequiredAlias $required {
-        get => $this->_data[self::REQUIRED_DATA_INDEX];
-        set => $this->_data[self::REQUIRED_DATA_INDEX] = $value;
+        get => $this->getData(self::REQUIRED_DATA_INDEX);
+        set => $this->setData(self::REQUIRED_DATA_INDEX, $value);
     }
 }
