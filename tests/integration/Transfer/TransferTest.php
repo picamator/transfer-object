@@ -280,7 +280,7 @@ class TransferTest extends TestCase
         $this->assertCount(1, $namespaceTransfer->items);
     }
 
-    public function testProtectedPropoerty(): void
+    public function testProtectedProperty(): void
     {
         // Arrange
         $reflectionProperty = new ReflectionProperty(ProtectedTransfer::class, 'iAmProtected');
