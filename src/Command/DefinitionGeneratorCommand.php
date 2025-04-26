@@ -79,11 +79,12 @@ HELP;
         // definition path
         $definitionPathQuestion = new Question(question: self::QUESTION_DEFINITION_PATH)
             ->setValidator(function (string $answer) use ($generatorBuilder) {
-                $answer = $this->getFullPath($answer);
                 $generatorBuilder->setDefinitionPath($answer);
 
                 return $answer;
-            });
+            })
+            ->setTrimmable(trimmable: true)
+            ->setNormalizer($this->normalizePath(...));
 
         $helper->ask($input, $styleOutput, $definitionPathQuestion);
 
@@ -93,29 +94,42 @@ HELP;
                 $generatorBuilder->setClassName($answer);
 
                 return $answer;
-            });
+            })
+            ->setTrimmable(trimmable: true)
+            ->setNormalizer($this->normalizeEmpty(...));
 
         $helper->ask($input, $styleOutput, $classNameQuestion);
 
         // JSON path
         $jsonPathQuestion = new Question(question: self::QUESTION_JSON_PATH)
             ->setValidator(function (string $answer) use ($generatorBuilder) {
-                $answer = $this->getFullPath($answer);
                 $generatorBuilder->setJsonPath($answer);
 
                 return $answer;
-            });
+            })
+            ->setTrimmable(trimmable: true)
+            ->setNormalizer($this->normalizePath(...));
 
         $helper->ask($input, $styleOutput, $jsonPathQuestion);
 
         return $generatorBuilder->build();
     }
 
-    private function getFullPath(string $path): string
+    private function normalizePath(?string $value): string
     {
-        $workingDirectory = getcwd() ?: '';
-        $path = ltrim($path, '\/');
+        $value = $this->normalizeEmpty($value);
+        if ($value === '') {
+            return '';
+        }
 
-        return $workingDirectory . DIRECTORY_SEPARATOR . $path;
+        $workingDirectory = getcwd() ?: '';
+        $value = ltrim($value, '\/');
+
+        return $workingDirectory . DIRECTORY_SEPARATOR . $value;
+    }
+
+    private function normalizeEmpty(?string $value): string
+    {
+        return $value ? trim($value) : '';
     }
 }
