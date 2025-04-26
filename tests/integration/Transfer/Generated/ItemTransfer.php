@@ -17,6 +17,8 @@ use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/Transfer/data/config/definition/item.transfer.yml Definition file path.
  */
 final class ItemTransfer extends AbstractTransfer
 {

@@ -1,4 +1,7 @@
 Template:
+  definitionPath:
+    type: string
+    required:
   className:
     type: string
     required:

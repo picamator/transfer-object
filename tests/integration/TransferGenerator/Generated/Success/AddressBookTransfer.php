@@ -18,6 +18,8 @@ use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/TransferGenerator/data/config/success/definition/address-book.transfer.yml Definition file path.
  */
 final class AddressBookTransfer extends AbstractTransfer
 {

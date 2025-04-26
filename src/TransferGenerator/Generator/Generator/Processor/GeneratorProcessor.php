@@ -72,7 +72,7 @@ readonly class GeneratorProcessor implements GeneratorProcessorInterface
         }
 
         try {
-            $content = $this->render->renderTemplate($definitionTransfer->content);
+            $content = $this->render->renderTemplate($definitionTransfer);
             $this->filesystem->writeFile($definitionTransfer->content->className, $content);
 
             return $this->builder->createGeneratorTransfer($definitionTransfer);

@@ -14,6 +14,8 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/DefinitionGenerator/data/config/google-shopping-content/definition/product.transfer.yml Definition file path.
  */
 final class ProductTransfer extends AbstractTransfer
 {

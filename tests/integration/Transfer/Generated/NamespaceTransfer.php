@@ -18,6 +18,8 @@ use Picamator\TransferObject\Transfer\TransferInterface;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/Transfer/data/config/definition/namespace.transfer.yml Definition file path.
  */
 final class NamespaceTransfer extends AbstractTransfer
 {

@@ -31,8 +31,8 @@ interface TransferInterface extends IteratorAggregate, JsonSerializable, Countab
      * - The callback works the same way as the PHP function `array_filter()`.
      * - When no callback is supplied, all empty entries will be removed (see PHP function `empty()`).
      *
-     * @see https://www.php.net/manual/en/function.array-filter.php
-     * @see https://www.php.net/manual/en/function.empty.php
+     * @link https://www.php.net/manual/en/function.array-filter.php
+     * @link https://www.php.net/manual/en/function.empty.php
      *
      * @api
      *

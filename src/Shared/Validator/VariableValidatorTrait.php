@@ -7,8 +7,8 @@ namespace Picamator\TransferObject\Shared\Validator;
 trait VariableValidatorTrait
 {
     /**
-     * @see https://www.php.net/manual/en/language.oop5.basic.php
-     * @see https://www.php.net/manual/en/language.variables.basics.php
+     * @link https://www.php.net/manual/en/language.oop5.basic.php
+     * @link https://www.php.net/manual/en/language.variables.basics.php
      */
     private const string VARIABLE_NAME_PATTERN = '#^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$#';
 
