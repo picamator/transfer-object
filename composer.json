@@ -1,7 +1,15 @@
 {
   "name": "picamator/transfer-object",
-  "description": "Transfer Object Generator based on property hooks and FixedArray.",
-  "keywords": ["generator", "code generator", "data transfer object", "dto"],
+  "description": "A modern Symfony-compatible Transfer Object Generator with property hooks, FixedArray, and asymmetric visibilities.",
+  "keywords": [
+      "generator",
+      "code generator",
+      "data transfer object",
+      "dto",
+      "transfer object",
+      "symfony",
+      "automation"
+  ],
   "license": "MIT",
   "authors": [
     {
