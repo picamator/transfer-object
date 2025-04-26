@@ -20,6 +20,7 @@ function show_usage() {
   echo "  hook-install               Install CaptainHook"
   echo "  hook <command>             Run CaptainHook command"
   echo "  to-generate                Generate internal transfer objects"
+  echo "  df-generate                Generate definition"
 }
 
 # vars
@@ -87,6 +88,9 @@ case $1 in
     ;;
   to-generate)
      $DOCKER_EXEC composer transfer-generate -- -c ${PROJECT_ROOT}/config/generator.config.yml
+    ;;
+  df-generate)
+     $DOCKER_EXEC composer definition-generate
     ;;
   *)
     show_usage
