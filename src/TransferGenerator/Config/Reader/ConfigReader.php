@@ -64,11 +64,10 @@ readonly class ConfigReader implements ConfigReaderInterface
         $configTransfer->validator = new ConfigValidatorTransfer();
 
         $configTransfer->validator->isValid = false;
-        $configTransfer->validator->errorMessages[] = new ValidatorMessageTransfer()
-            ->fromArray([
-                ValidatorMessageTransfer::IS_VALID => false,
-                ValidatorMessageTransfer::ERROR_MESSAGE => $e->getMessage(),
-            ]);
+        $configTransfer->validator->errorMessages[] = new ValidatorMessageTransfer([
+            ValidatorMessageTransfer::IS_VALID => false,
+            ValidatorMessageTransfer::ERROR_MESSAGE => $e->getMessage(),
+        ]);
 
         return $configTransfer;
     }

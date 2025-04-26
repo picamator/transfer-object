@@ -65,15 +65,16 @@ echo <<<'STORY'
 =======================================================
 
 STORY;
-$generatorTransfer = new DefinitionGeneratorTransfer()
-    ->fromArray([
+$generatorTransfer = new DefinitionGeneratorTransfer(
+    [
         DefinitionGeneratorTransfer::DEFINITION_PATH => $projectRoot
             . '/doc/samples/config/definition-generator/definition',
         DefinitionGeneratorTransfer::CONTENT => [
             DefinitionGeneratorContentTransfer::CLASS_NAME => 'Product',
             DefinitionGeneratorContentTransfer::CONTENT => $productData,
         ],
-    ]);
+    ]
+);
 
 $generatedDefinitions = new DefinitionGeneratorFacade()->generateDefinitionsOrFail($generatorTransfer);
 

@@ -28,9 +28,12 @@ abstract class AbstractTransfer implements TransferInterface
      */
     protected SplFixedArray $_data;
 
-    final public function __construct()
+    /**
+     * @param array<string,mixed> $data
+     */
+    final public function __construct(array $data = [])
     {
-        $this->initData();
+        $this->fromArray($data);
     }
 
     /**
@@ -125,6 +128,9 @@ abstract class AbstractTransfer implements TransferInterface
     final public function fromArray(array $data): static
     {
         $this->initData();
+        if ($data === []) {
+            return $this;
+        }
 
         $data = array_intersect_key($data, static::META_DATA);
         $data = array_filter($data, fn(mixed $item): bool => $item !== null);

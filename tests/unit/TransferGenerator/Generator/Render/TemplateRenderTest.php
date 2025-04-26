@@ -77,7 +77,7 @@ class TemplateRenderTest extends TestCase
     private function createTemplateTransfer(): TemplateTransfer
     {
 
-        return new TemplateTransfer()->fromArray([
+        return new TemplateTransfer([
             TemplateTransfer::DEFINITION_PATH => '\some\path\definition.yml',
             TemplateTransfer::CLASS_NAMESPACE => '\Default',
             TemplateTransfer::CLASS_NAME => 'DefaultTransfer',
