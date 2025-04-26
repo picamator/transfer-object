@@ -42,5 +42,9 @@ RUN docker-php-ext-enable xdebug && \
 # switch back to the new user
 USER transfer
 
+# bash
+RUN echo "echo -e \"\e[32m\nWelcome to the Transfer Object PHP Container!\n\e[0m\"" >> /home/transfer/.bashrc
+RUN echo "PS1=\"\[\e[1;34m\]\w\[\e[0m\]$ \"" >> /home/transfer/.bashrc
+
 # workaround to keep container running
 CMD ["tail", "-f", "/dev/null"]
