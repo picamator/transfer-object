@@ -85,5 +85,5 @@ $credentialsTransfer = new CredentialsTransfer([
     CredentialsTransfer::TOKEN => 'some-random-token',
 ]);
 
-echo "Login: {$credentialsTransfer->login}\n";
-echo "Token: {$credentialsTransfer->token}\n";
+echo "Login: $credentialsTransfer->login\n";
+echo "Token: $credentialsTransfer->token\n";
