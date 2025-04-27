@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # composer command autocompletion script
 _composer_autocomplete() {
     local cur prev opts
