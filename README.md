@@ -21,12 +21,12 @@ Imagine you have an JSON API Response/Payload:
     "lastname": "Kowalski"
 }
 ```
-Running console command:
+Running the following console command:
 ```shell
 $ ./vendor/bin/definition-generate
 ```
 
-creates a `YML` definition file:
+Generates a `YML` definition file:
 ```yml
 Customer:
   firstName:
@@ -35,13 +35,12 @@ Customer:
     type: string
 ```
 
-then running another console command:
-
+Then, running another console command:
 ```shell
 $ ./vendor/bin/transfer-generate [-c|--configuration CONFIGURATION]
 ```
 
-builds TO:
+Builds the TO:
 ```php
 $customerTransfer = new CustomerTransfer();
 $customerTransfer->firstName = 'Jan';
@@ -52,8 +51,8 @@ Key Features
 ------------
 
 * **Symfony-compatible commands:**
-  * consoles [TransferGeneratorCommand](/src/Command/TransferGeneratorCommand.php) and [DefinitionGeneratorCommand](/src/Command/DefinitionGeneratorCommand.php) are Symfony commands
-  * facades [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php) and [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php) can be integrated as Symfony services
+  * Includes [TransferGeneratorCommand](/src/Command/TransferGeneratorCommand.php) and [DefinitionGeneratorCommand](/src/Command/DefinitionGeneratorCommand.php) as Symfony commands
+  * [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php) and [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php) can be integrated as Symfony services
 * **Interface methods:** implements `fromArray()`, `toArray()`, `toFilterArray()`
 * **Standard interfaces:** implements `IteratorAggregate`, `JsonSerializable`, and `Countable`
 * **Lightweight:** TO includes only data without any business logic
@@ -76,32 +75,27 @@ Usage
 
 ### Terminal
 
-Run command bellow to generate Transfer Objects:
-
+Run the following command to generate Transfer Objects:
 ```shell
 $ ./vendor/bin/transfer-generate [-c|--configuration CONFIGURATION]
 ```
 
-Run command bellow to generate Definition Files:
-
+Run the following command to generate Definition files:
 ```shell
 $ ./vendor/bin/definition-generate
 ```
 
-Please check Wiki for more details:
+For more details, check the Wiki:
 - [Console Commands](https://github.com/picamator/transfer-object/wiki/Console-Commands)
 - [Definition File](https://github.com/picamator/transfer-object/wiki/Definition-File)
 
 ### Facade Interface
 
-Facade interface `DefinitionGeneratorFacadeInterface` is used to generate the `YML`
-definition file based on the array.
-
-Please check Wiki for more details:
+Please check Wiki:
 - [Facade Interfaces](https://github.com/picamator/transfer-object/wiki/Facade-Interfaces)
 - [Visualizing Diagrams](https://github.com/picamator/transfer-object/wiki/Visualising-Diagrams)
 
-To see how it works, please check samples:
+Explore usage samples:
 - [Definition Generator](/doc/samples/try-definition-generator.php)
 - [Transfer Generator](/doc/samples/try-transfer-generator.php)
 - [Advanced Transfer Generator](/doc/samples/try-advanced-transfer-generator.php)
@@ -110,7 +104,7 @@ To see how it works, please check samples:
 Usage Tests
 -----------
 
-Definition and TO generators were tested against APIs responses:
+Definition and TO generators have been tested against API responses such as:
 
 * [NASA Open Api](https://api.nasa.gov/neo/rest/v1/neo/2465633?api_key=DEMO_KEY)
 * [OpenWeather](https://openweathermap.org/current#example_JSON)
@@ -118,14 +112,14 @@ Definition and TO generators were tested against APIs responses:
 * [Frankfurter is a free, open-source currency data API](https://api.frankfurter.dev/v1/latest)
 * [Tagesschau API](https://tagesschau.api.bund.dev)
 
-The following test scenario was applied:
+### Test Scenario
 
-1. JSON response was used as a blueprint to generate Definition files and then TO
-2. Generated TO instance was created with the JSON data
-3. TO instance converted to array by running `toArray()` method
-4. Converted array is compared to decoded blueprint `JSON`
+1. JSON response is used as a blueprint to generate Definition files and then TOs.
+2. Generated TO instance is created with the `JSON` data.
+3. The TO instance is converted to an array by running the `toArray()` method.
+4. The converted array is compared to the decoded `JSON` blueprint.
 
-In all cases the compared data were 100% matched.
+In all cases the compared data were **100%** matched.
 
 More details are in the integration test [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php).
 
@@ -142,6 +136,7 @@ Contribution
 If you find this project useful, please add a star to the repository. Follow the project to stay updated with all activities.
 If you have suggestions for improvements or new features, feel free to create an issue or submit a pull request.
 Here is a [Contribution Guide](CONTRIBUTING.md).
+
 
 This project is released with a [Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in this project and its community, you agree to abide by those terms.
