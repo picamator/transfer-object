@@ -14,6 +14,8 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/DefinitionGenerator/data/config/google-shopping-content/definition/product.transfer.yml Definition file path.
  */
 final class ProductTransfer extends AbstractTransfer
 {
@@ -53,8 +55,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int AGE_GROUP_DATA_INDEX = 0;
 
     public ?string $ageGroup {
-        get => $this->_data[self::AGE_GROUP_DATA_INDEX];
-        set => $this->_data[self::AGE_GROUP_DATA_INDEX] = $value;
+        get => $this->getData(self::AGE_GROUP_DATA_INDEX);
+        set => $this->setData(self::AGE_GROUP_DATA_INDEX, $value);
     }
 
     // availability
@@ -63,8 +65,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int AVAILABILITY_DATA_INDEX = 1;
 
     public ?string $availability {
-        get => $this->_data[self::AVAILABILITY_DATA_INDEX];
-        set => $this->_data[self::AVAILABILITY_DATA_INDEX] = $value;
+        get => $this->getData(self::AVAILABILITY_DATA_INDEX);
+        set => $this->setData(self::AVAILABILITY_DATA_INDEX, $value);
     }
 
     // availabilityDate
@@ -73,8 +75,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int AVAILABILITY_DATE_DATA_INDEX = 2;
 
     public ?string $availabilityDate {
-        get => $this->_data[self::AVAILABILITY_DATE_DATA_INDEX];
-        set => $this->_data[self::AVAILABILITY_DATE_DATA_INDEX] = $value;
+        get => $this->getData(self::AVAILABILITY_DATE_DATA_INDEX);
+        set => $this->setData(self::AVAILABILITY_DATE_DATA_INDEX, $value);
     }
 
     // brand
@@ -83,8 +85,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int BRAND_DATA_INDEX = 3;
 
     public ?string $brand {
-        get => $this->_data[self::BRAND_DATA_INDEX];
-        set => $this->_data[self::BRAND_DATA_INDEX] = $value;
+        get => $this->getData(self::BRAND_DATA_INDEX);
+        set => $this->setData(self::BRAND_DATA_INDEX, $value);
     }
 
     // channel
@@ -93,8 +95,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int CHANNEL_DATA_INDEX = 4;
 
     public ?string $channel {
-        get => $this->_data[self::CHANNEL_DATA_INDEX];
-        set => $this->_data[self::CHANNEL_DATA_INDEX] = $value;
+        get => $this->getData(self::CHANNEL_DATA_INDEX);
+        set => $this->setData(self::CHANNEL_DATA_INDEX, $value);
     }
 
     // color
@@ -103,8 +105,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int COLOR_DATA_INDEX = 5;
 
     public ?string $color {
-        get => $this->_data[self::COLOR_DATA_INDEX];
-        set => $this->_data[self::COLOR_DATA_INDEX] = $value;
+        get => $this->getData(self::COLOR_DATA_INDEX);
+        set => $this->setData(self::COLOR_DATA_INDEX, $value);
     }
 
     // condition
@@ -113,8 +115,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int CONDITION_DATA_INDEX = 6;
 
     public ?string $condition {
-        get => $this->_data[self::CONDITION_DATA_INDEX];
-        set => $this->_data[self::CONDITION_DATA_INDEX] = $value;
+        get => $this->getData(self::CONDITION_DATA_INDEX);
+        set => $this->setData(self::CONDITION_DATA_INDEX, $value);
     }
 
     // contentLanguage
@@ -123,8 +125,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int CONTENT_LANGUAGE_DATA_INDEX = 7;
 
     public ?string $contentLanguage {
-        get => $this->_data[self::CONTENT_LANGUAGE_DATA_INDEX];
-        set => $this->_data[self::CONTENT_LANGUAGE_DATA_INDEX] = $value;
+        get => $this->getData(self::CONTENT_LANGUAGE_DATA_INDEX);
+        set => $this->setData(self::CONTENT_LANGUAGE_DATA_INDEX, $value);
     }
 
     // description
@@ -133,8 +135,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int DESCRIPTION_DATA_INDEX = 8;
 
     public ?string $description {
-        get => $this->_data[self::DESCRIPTION_DATA_INDEX];
-        set => $this->_data[self::DESCRIPTION_DATA_INDEX] = $value;
+        get => $this->getData(self::DESCRIPTION_DATA_INDEX);
+        set => $this->setData(self::DESCRIPTION_DATA_INDEX, $value);
     }
 
     // feedLabel
@@ -143,8 +145,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int FEED_LABEL_DATA_INDEX = 9;
 
     public ?string $feedLabel {
-        get => $this->_data[self::FEED_LABEL_DATA_INDEX];
-        set => $this->_data[self::FEED_LABEL_DATA_INDEX] = $value;
+        get => $this->getData(self::FEED_LABEL_DATA_INDEX);
+        set => $this->setData(self::FEED_LABEL_DATA_INDEX, $value);
     }
 
     // gender
@@ -153,8 +155,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int GENDER_DATA_INDEX = 10;
 
     public ?string $gender {
-        get => $this->_data[self::GENDER_DATA_INDEX];
-        set => $this->_data[self::GENDER_DATA_INDEX] = $value;
+        get => $this->getData(self::GENDER_DATA_INDEX);
+        set => $this->setData(self::GENDER_DATA_INDEX, $value);
     }
 
     // googleProductCategory
@@ -163,8 +165,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int GOOGLE_PRODUCT_CATEGORY_DATA_INDEX = 11;
 
     public ?string $googleProductCategory {
-        get => $this->_data[self::GOOGLE_PRODUCT_CATEGORY_DATA_INDEX];
-        set => $this->_data[self::GOOGLE_PRODUCT_CATEGORY_DATA_INDEX] = $value;
+        get => $this->getData(self::GOOGLE_PRODUCT_CATEGORY_DATA_INDEX);
+        set => $this->setData(self::GOOGLE_PRODUCT_CATEGORY_DATA_INDEX, $value);
     }
 
     // gtin
@@ -173,8 +175,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int GTIN_DATA_INDEX = 12;
 
     public ?string $gtin {
-        get => $this->_data[self::GTIN_DATA_INDEX];
-        set => $this->_data[self::GTIN_DATA_INDEX] = $value;
+        get => $this->getData(self::GTIN_DATA_INDEX);
+        set => $this->setData(self::GTIN_DATA_INDEX, $value);
     }
 
     // id
@@ -183,8 +185,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int ID_DATA_INDEX = 13;
 
     public ?string $id {
-        get => $this->_data[self::ID_DATA_INDEX];
-        set => $this->_data[self::ID_DATA_INDEX] = $value;
+        get => $this->getData(self::ID_DATA_INDEX);
+        set => $this->setData(self::ID_DATA_INDEX, $value);
     }
 
     // imageLink
@@ -193,8 +195,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int IMAGE_LINK_DATA_INDEX = 14;
 
     public ?string $imageLink {
-        get => $this->_data[self::IMAGE_LINK_DATA_INDEX];
-        set => $this->_data[self::IMAGE_LINK_DATA_INDEX] = $value;
+        get => $this->getData(self::IMAGE_LINK_DATA_INDEX);
+        set => $this->setData(self::IMAGE_LINK_DATA_INDEX, $value);
     }
 
     // itemGroupId
@@ -203,8 +205,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int ITEM_GROUP_ID_DATA_INDEX = 15;
 
     public ?string $itemGroupId {
-        get => $this->_data[self::ITEM_GROUP_ID_DATA_INDEX];
-        set => $this->_data[self::ITEM_GROUP_ID_DATA_INDEX] = $value;
+        get => $this->getData(self::ITEM_GROUP_ID_DATA_INDEX);
+        set => $this->setData(self::ITEM_GROUP_ID_DATA_INDEX, $value);
     }
 
     // kind
@@ -213,8 +215,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int KIND_DATA_INDEX = 16;
 
     public ?string $kind {
-        get => $this->_data[self::KIND_DATA_INDEX];
-        set => $this->_data[self::KIND_DATA_INDEX] = $value;
+        get => $this->getData(self::KIND_DATA_INDEX);
+        set => $this->setData(self::KIND_DATA_INDEX, $value);
     }
 
     // link
@@ -223,8 +225,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int LINK_DATA_INDEX = 17;
 
     public ?string $link {
-        get => $this->_data[self::LINK_DATA_INDEX];
-        set => $this->_data[self::LINK_DATA_INDEX] = $value;
+        get => $this->getData(self::LINK_DATA_INDEX);
+        set => $this->setData(self::LINK_DATA_INDEX, $value);
     }
 
     // mpn
@@ -233,8 +235,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int MPN_DATA_INDEX = 18;
 
     public ?string $mpn {
-        get => $this->_data[self::MPN_DATA_INDEX];
-        set => $this->_data[self::MPN_DATA_INDEX] = $value;
+        get => $this->getData(self::MPN_DATA_INDEX);
+        set => $this->setData(self::MPN_DATA_INDEX, $value);
     }
 
     // offerId
@@ -243,8 +245,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int OFFER_ID_DATA_INDEX = 19;
 
     public ?string $offerId {
-        get => $this->_data[self::OFFER_ID_DATA_INDEX];
-        set => $this->_data[self::OFFER_ID_DATA_INDEX] = $value;
+        get => $this->getData(self::OFFER_ID_DATA_INDEX);
+        set => $this->setData(self::OFFER_ID_DATA_INDEX, $value);
     }
 
     // price
@@ -254,8 +256,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int PRICE_DATA_INDEX = 20;
 
     public ?PriceTransfer $price {
-        get => $this->_data[self::PRICE_DATA_INDEX];
-        set => $this->_data[self::PRICE_DATA_INDEX] = $value;
+        get => $this->getData(self::PRICE_DATA_INDEX);
+        set => $this->setData(self::PRICE_DATA_INDEX, $value);
     }
 
     // sizes
@@ -266,8 +268,8 @@ final class ProductTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $sizes {
-        get => $this->_data[self::SIZES_DATA_INDEX];
-        set => $this->_data[self::SIZES_DATA_INDEX] = $value;
+        get => $this->getData(self::SIZES_DATA_INDEX);
+        set => $this->setData(self::SIZES_DATA_INDEX, $value);
     }
 
     // source
@@ -276,8 +278,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int SOURCE_DATA_INDEX = 22;
 
     public ?string $source {
-        get => $this->_data[self::SOURCE_DATA_INDEX];
-        set => $this->_data[self::SOURCE_DATA_INDEX] = $value;
+        get => $this->getData(self::SOURCE_DATA_INDEX);
+        set => $this->setData(self::SOURCE_DATA_INDEX, $value);
     }
 
     // targetCountry
@@ -286,8 +288,8 @@ final class ProductTransfer extends AbstractTransfer
     protected const int TARGET_COUNTRY_DATA_INDEX = 23;
 
     public ?string $targetCountry {
-        get => $this->_data[self::TARGET_COUNTRY_DATA_INDEX];
-        set => $this->_data[self::TARGET_COUNTRY_DATA_INDEX] = $value;
+        get => $this->getData(self::TARGET_COUNTRY_DATA_INDEX);
+        set => $this->setData(self::TARGET_COUNTRY_DATA_INDEX, $value);
     }
 
     // title
@@ -296,7 +298,7 @@ final class ProductTransfer extends AbstractTransfer
     protected const int TITLE_DATA_INDEX = 24;
 
     public ?string $title {
-        get => $this->_data[self::TITLE_DATA_INDEX];
-        set => $this->_data[self::TITLE_DATA_INDEX] = $value;
+        get => $this->getData(self::TITLE_DATA_INDEX);
+        set => $this->setData(self::TITLE_DATA_INDEX, $value);
     }
 }

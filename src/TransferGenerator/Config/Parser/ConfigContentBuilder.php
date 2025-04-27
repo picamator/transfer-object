@@ -26,7 +26,7 @@ readonly class ConfigContentBuilder implements ConfigContentBuilderInterface
     public function createContentTransfer(array $configData): ConfigContentTransfer
     {
         $configSection = $this->filterConfigData($configData);
-        $contentTransfer = new ConfigContentTransfer()->fromArray($configSection);
+        $contentTransfer = new ConfigContentTransfer($configSection);
 
         return $this->renderPathKeys($contentTransfer);
     }

@@ -12,6 +12,8 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/Command/data/config/success/definition/command.transfer.yml Definition file path.
  */
 final class CommandTransfer extends AbstractTransfer
 {
@@ -27,7 +29,7 @@ final class CommandTransfer extends AbstractTransfer
     protected const int RUN_DATA_INDEX = 0;
 
     public ?true $run {
-        get => $this->_data[self::RUN_DATA_INDEX];
-        set => $this->_data[self::RUN_DATA_INDEX] = $value;
+        get => $this->getData(self::RUN_DATA_INDEX);
+        set => $this->setData(self::RUN_DATA_INDEX, $value);
     }
 }

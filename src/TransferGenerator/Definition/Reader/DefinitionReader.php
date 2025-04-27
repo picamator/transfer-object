@@ -76,11 +76,10 @@ readonly class DefinitionReader implements DefinitionReaderInterface
 
         $definitionTransfer->validator = new DefinitionValidatorTransfer();
         $definitionTransfer->validator->isValid = false;
-        $definitionTransfer->validator->errorMessages[] = new ValidatorMessageTransfer()
-            ->fromArray([
-                ValidatorMessageTransfer::IS_VALID => false,
-                ValidatorMessageTransfer::ERROR_MESSAGE => $e->getMessage(),
-            ]);
+        $definitionTransfer->validator->errorMessages[] = new ValidatorMessageTransfer([
+            ValidatorMessageTransfer::IS_VALID => false,
+            ValidatorMessageTransfer::ERROR_MESSAGE => $e->getMessage(),
+        ]);
 
         return $definitionTransfer;
     }

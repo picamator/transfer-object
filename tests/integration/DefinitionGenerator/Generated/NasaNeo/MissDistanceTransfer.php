@@ -12,6 +12,8 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/DefinitionGenerator/data/config/nasa-neo-rest-v1-neo-2465633/definition/asteroid.transfer.yml Definition file path.
  */
 final class MissDistanceTransfer extends AbstractTransfer
 {
@@ -30,8 +32,8 @@ final class MissDistanceTransfer extends AbstractTransfer
     protected const int ASTRONOMICAL_DATA_INDEX = 0;
 
     public ?string $astronomical {
-        get => $this->_data[self::ASTRONOMICAL_DATA_INDEX];
-        set => $this->_data[self::ASTRONOMICAL_DATA_INDEX] = $value;
+        get => $this->getData(self::ASTRONOMICAL_DATA_INDEX);
+        set => $this->setData(self::ASTRONOMICAL_DATA_INDEX, $value);
     }
 
     // kilometers
@@ -40,8 +42,8 @@ final class MissDistanceTransfer extends AbstractTransfer
     protected const int KILOMETERS_DATA_INDEX = 1;
 
     public ?string $kilometers {
-        get => $this->_data[self::KILOMETERS_DATA_INDEX];
-        set => $this->_data[self::KILOMETERS_DATA_INDEX] = $value;
+        get => $this->getData(self::KILOMETERS_DATA_INDEX);
+        set => $this->setData(self::KILOMETERS_DATA_INDEX, $value);
     }
 
     // lunar
@@ -50,8 +52,8 @@ final class MissDistanceTransfer extends AbstractTransfer
     protected const int LUNAR_DATA_INDEX = 2;
 
     public ?string $lunar {
-        get => $this->_data[self::LUNAR_DATA_INDEX];
-        set => $this->_data[self::LUNAR_DATA_INDEX] = $value;
+        get => $this->getData(self::LUNAR_DATA_INDEX);
+        set => $this->setData(self::LUNAR_DATA_INDEX, $value);
     }
 
     // miles
@@ -60,7 +62,7 @@ final class MissDistanceTransfer extends AbstractTransfer
     protected const int MILES_DATA_INDEX = 3;
 
     public ?string $miles {
-        get => $this->_data[self::MILES_DATA_INDEX];
-        set => $this->_data[self::MILES_DATA_INDEX] = $value;
+        get => $this->getData(self::MILES_DATA_INDEX);
+        set => $this->setData(self::MILES_DATA_INDEX, $value);
     }
 }

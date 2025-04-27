@@ -14,6 +14,8 @@ use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /doc/samples/config/transfer-generator/definition/merchant.transfer.yml Definition file path.
  */
 final class MerchantTransfer extends AbstractTransfer
 {
@@ -32,8 +34,8 @@ final class MerchantTransfer extends AbstractTransfer
     protected const int COUNTRY_DATA_INDEX = 0;
 
     public CountryEnum $country {
-        get => $this->_data[self::COUNTRY_DATA_INDEX];
-        set => $this->_data[self::COUNTRY_DATA_INDEX] = $value;
+        get => $this->getData(self::COUNTRY_DATA_INDEX);
+        set => $this->setData(self::COUNTRY_DATA_INDEX, $value);
     }
 
     // isActive
@@ -42,8 +44,8 @@ final class MerchantTransfer extends AbstractTransfer
     protected const int IS_ACTIVE_DATA_INDEX = 1;
 
     public bool $isActive {
-        get => $this->_data[self::IS_ACTIVE_DATA_INDEX];
-        set => $this->_data[self::IS_ACTIVE_DATA_INDEX] = $value;
+        get => $this->getData(self::IS_ACTIVE_DATA_INDEX);
+        set => $this->setData(self::IS_ACTIVE_DATA_INDEX, $value);
     }
 
     // merchantReference
@@ -52,7 +54,7 @@ final class MerchantTransfer extends AbstractTransfer
     protected const int MERCHANT_REFERENCE_DATA_INDEX = 2;
 
     public string $merchantReference {
-        get => $this->_data[self::MERCHANT_REFERENCE_DATA_INDEX];
-        set => $this->_data[self::MERCHANT_REFERENCE_DATA_INDEX] = $value;
+        get => $this->getData(self::MERCHANT_REFERENCE_DATA_INDEX);
+        set => $this->setData(self::MERCHANT_REFERENCE_DATA_INDEX, $value);
     }
 }

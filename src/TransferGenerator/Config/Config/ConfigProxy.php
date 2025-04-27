@@ -8,7 +8,7 @@ use Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundEx
 
 final class ConfigProxy implements ConfigInterface
 {
-    private static ConfigInterface $config;
+    private static ?ConfigInterface $config;
 
     public function getTransferNamespace(): string
     {
@@ -28,6 +28,11 @@ final class ConfigProxy implements ConfigInterface
     public static function loadConfig(ConfigInterface $config): void
     {
         self::$config = $config;
+    }
+
+    public static function resetConfig(): void
+    {
+        self::$config = null;
     }
 
     /**

@@ -12,6 +12,8 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/DefinitionGenerator/data/config/open-weather/definition/forecast.transfer.yml Definition file path.
  */
 final class CloudsTransfer extends AbstractTransfer
 {
@@ -27,7 +29,7 @@ final class CloudsTransfer extends AbstractTransfer
     protected const int ALL_DATA_INDEX = 0;
 
     public ?int $all {
-        get => $this->_data[self::ALL_DATA_INDEX];
-        set => $this->_data[self::ALL_DATA_INDEX] = $value;
+        get => $this->getData(self::ALL_DATA_INDEX);
+        set => $this->setData(self::ALL_DATA_INDEX, $value);
     }
 }

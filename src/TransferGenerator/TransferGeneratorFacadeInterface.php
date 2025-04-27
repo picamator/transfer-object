@@ -18,13 +18,13 @@ interface TransferGeneratorFacadeInterface
      * - The `TransferGeneratorTransfer` object may contain error messages if issues occur during generation.
      * - Returns `true` when the process is successful, or `false` otherwise.
      *
-     * @throws \Throwable
-     * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
-     * @throws \FiberError
-     *
      * @api
      *
      * @example ./src/Command/TransferGeneratorCommand.php
+     *
+     * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
+     * @throws \FiberError
+     * @throws \Throwable
      *
      * @return \Fiber<string,null,bool,TransferGeneratorTransfer>
      */
@@ -35,13 +35,14 @@ interface TransferGeneratorFacadeInterface
      * - Loads the configuration from the specified path.
      * - Generates transfer objects based on the loaded configuration.
      * - Throws an exception if an error occurs during configuration loading or transfer object generation.
-     *
-     * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
+     * - Returns the number of successfully generated transfer objects.
      *
      * @api
      *
      * @example ./doc/samples/try-transfer-generator.php
      * @example ./doc/samples/try-advanced-transfer-generator.php
+     *
+     * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
      */
-    public function generateTransfersOrFail(string $configPath): void;
+    public function generateTransfersOrFail(string $configPath): int;
 }

@@ -8,9 +8,9 @@ use ArrayObject;
 use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\Generated\ConfigValidatorTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
+use Picamator\TransferObject\Shared\Validator\PathValidatorInterface;
+use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\ConfigContentValidatorInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Validator\File\ConfigFileValidatorInterface;
-use Picamator\TransferObject\TransferGenerator\Validator\ValidatorMessageTrait;
 
 readonly class ConfigValidator implements ConfigValidatorInterface
 {
@@ -20,14 +20,14 @@ readonly class ConfigValidator implements ConfigValidatorInterface
      * @param \ArrayObject<int,ConfigContentValidatorInterface> $contentValidators
      */
     public function __construct(
-        private ConfigFileValidatorInterface $fileValidator,
+        private PathValidatorInterface $pathValidator,
         private ArrayObject $contentValidators,
     ) {
     }
 
     public function validateFile(string $filePath): ConfigValidatorTransfer
     {
-        $messageTransfer = $this->fileValidator->validate($filePath);
+        $messageTransfer = $this->pathValidator->validate($filePath);
 
         return $this->createValidatorTransfer($messageTransfer);
     }

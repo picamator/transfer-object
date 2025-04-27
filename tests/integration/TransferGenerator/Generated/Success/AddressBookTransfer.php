@@ -18,6 +18,8 @@ use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/TransferGenerator/data/config/success/definition/address-book.transfer.yml Definition file path.
  */
 final class AddressBookTransfer extends AbstractTransfer
 {
@@ -40,8 +42,8 @@ final class AddressBookTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,AddressTransfer> */
     public ArrayObject $addresses {
-        get => $this->_data[self::ADDRESSES_DATA_INDEX];
-        set => $this->_data[self::ADDRESSES_DATA_INDEX] = $value;
+        get => $this->getData(self::ADDRESSES_DATA_INDEX);
+        set => $this->setData(self::ADDRESSES_DATA_INDEX, $value);
     }
 
     // categories
@@ -52,8 +54,8 @@ final class AddressBookTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $categories {
-        get => $this->_data[self::CATEGORIES_DATA_INDEX];
-        set => $this->_data[self::CATEGORIES_DATA_INDEX] = $value;
+        get => $this->getData(self::CATEGORIES_DATA_INDEX);
+        set => $this->setData(self::CATEGORIES_DATA_INDEX, $value);
     }
 
     // label
@@ -63,8 +65,8 @@ final class AddressBookTransfer extends AbstractTransfer
     protected const int LABEL_DATA_INDEX = 2;
 
     public ?AddressLabelEnum $label {
-        get => $this->_data[self::LABEL_DATA_INDEX];
-        set => $this->_data[self::LABEL_DATA_INDEX] = $value;
+        get => $this->getData(self::LABEL_DATA_INDEX);
+        set => $this->setData(self::LABEL_DATA_INDEX, $value);
     }
 
     // labelAlias
@@ -74,8 +76,8 @@ final class AddressBookTransfer extends AbstractTransfer
     protected const int LABEL_ALIAS_DATA_INDEX = 3;
 
     public ?AliasAddressLabelEnum $labelAlias {
-        get => $this->_data[self::LABEL_ALIAS_DATA_INDEX];
-        set => $this->_data[self::LABEL_ALIAS_DATA_INDEX] = $value;
+        get => $this->getData(self::LABEL_ALIAS_DATA_INDEX);
+        set => $this->setData(self::LABEL_ALIAS_DATA_INDEX, $value);
     }
 
     // name
@@ -84,8 +86,8 @@ final class AddressBookTransfer extends AbstractTransfer
     protected const int NAME_DATA_INDEX = 4;
 
     public ?string $name {
-        get => $this->_data[self::NAME_DATA_INDEX];
-        set => $this->_data[self::NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::NAME_DATA_INDEX);
+        set => $this->setData(self::NAME_DATA_INDEX, $value);
     }
 
     // uuid
@@ -94,7 +96,7 @@ final class AddressBookTransfer extends AbstractTransfer
     protected const int UUID_DATA_INDEX = 5;
 
     public ?string $uuid {
-        get => $this->_data[self::UUID_DATA_INDEX];
-        set => $this->_data[self::UUID_DATA_INDEX] = $value;
+        get => $this->getData(self::UUID_DATA_INDEX);
+        set => $this->setData(self::UUID_DATA_INDEX, $value);
     }
 }

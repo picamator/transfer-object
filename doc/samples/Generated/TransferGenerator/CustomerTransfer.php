@@ -12,6 +12,8 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /doc/samples/config/transfer-generator/definition/customer.transfer.yml Definition file path.
  */
 final class CustomerTransfer extends AbstractTransfer
 {
@@ -28,8 +30,8 @@ final class CustomerTransfer extends AbstractTransfer
     protected const int FIRST_NAME_DATA_INDEX = 0;
 
     public ?string $firstName {
-        get => $this->_data[self::FIRST_NAME_DATA_INDEX];
-        set => $this->_data[self::FIRST_NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::FIRST_NAME_DATA_INDEX);
+        set => $this->setData(self::FIRST_NAME_DATA_INDEX, $value);
     }
 
     // lastName
@@ -38,7 +40,7 @@ final class CustomerTransfer extends AbstractTransfer
     protected const int LAST_NAME_DATA_INDEX = 1;
 
     public ?string $lastName {
-        get => $this->_data[self::LAST_NAME_DATA_INDEX];
-        set => $this->_data[self::LAST_NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::LAST_NAME_DATA_INDEX);
+        set => $this->setData(self::LAST_NAME_DATA_INDEX, $value);
     }
 }

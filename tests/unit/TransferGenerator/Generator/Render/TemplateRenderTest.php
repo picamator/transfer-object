@@ -8,6 +8,7 @@ use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
+use Picamator\TransferObject\Generated\DefinitionTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransferEnum;
@@ -34,7 +35,9 @@ class TemplateRenderTest extends TestCase
     public function testTemplateTransferKeyMismatchShouldThrowException(): void
     {
         // Arrange
-        $contentTransfer = new DefinitionContentTransfer();
+        $definitionTransfer = new DefinitionTransfer();
+        $definitionTransfer->fileName = 'definition.yml';
+        $definitionTransfer->content = new DefinitionContentTransfer();
 
         $templateTransfer = $this->createTemplateTransfer();
         $templateTransfer->metaConstants['TEST_PROPERTY'] = 'testProperty';
@@ -47,13 +50,16 @@ class TemplateRenderTest extends TestCase
         $this->expectException(TransferGeneratorException::class);
 
         // Act
-        $this->render->renderTemplate($contentTransfer);
+        $this->render->renderTemplate($definitionTransfer);
     }
 
     public function testEmptyTemplateRenderingShouldSucceed(): void
     {
         // Arrange
-        $contentTransfer = new DefinitionContentTransfer();
+        $definitionTransfer = new DefinitionTransfer();
+        $definitionTransfer->fileName = 'definition.yml';
+        $definitionTransfer->content = new DefinitionContentTransfer();
+
         $templateTransfer = $this->createTemplateTransfer();
 
         // Expect
@@ -62,7 +68,7 @@ class TemplateRenderTest extends TestCase
             ->willReturn($templateTransfer);
 
         // Act
-        $actual = $this->render->renderTemplate($contentTransfer);
+        $actual = $this->render->renderTemplate($definitionTransfer);
 
         // Assert
         $this->assertStringContainsString('extends AbstractTransfer', $actual);
@@ -71,7 +77,8 @@ class TemplateRenderTest extends TestCase
     private function createTemplateTransfer(): TemplateTransfer
     {
 
-        return new TemplateTransfer()->fromArray([
+        return new TemplateTransfer([
+            TemplateTransfer::DEFINITION_PATH => '\some\path\definition.yml',
             TemplateTransfer::CLASS_NAMESPACE => '\Default',
             TemplateTransfer::CLASS_NAME => 'DefaultTransfer',
             TemplateTransfer::IMPORTS => [

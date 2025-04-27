@@ -9,5 +9,5 @@ interface TransferGeneratorServiceInterface
     /**
      * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException
      */
-    public function generateTransfersOrFail(string $configPath): void;
+    public function generateTransfersOrFail(string $configPath): int;
 }

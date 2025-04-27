@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Definition;
 
 use ArrayObject;
-use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
+use Picamator\TransferObject\Shared\SharedFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinder;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinderInterface;
@@ -18,6 +18,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Collec
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\EnumTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\NullablePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\PropertyExpanderInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\ProtectedPropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\TransferTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReader;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
@@ -35,15 +36,11 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\Pro
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\RequiredTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\ReservedNamePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\TransferTypePropertyValidator;
-use Picamator\TransferObject\TransferGenerator\Validator\ClassNameValidator;
-use Picamator\TransferObject\TransferGenerator\Validator\ClassNameValidatorInterface;
-use Picamator\TransferObject\TransferGenerator\Validator\NamespaceValidator;
-use Picamator\TransferObject\TransferGenerator\Validator\NamespaceValidatorInterface;
 
 readonly class DefinitionFactory
 {
     use ConfigFactoryTrait;
-    use DependencyFactoryTrait;
+    use SharedFactoryTrait;
 
     public function createDefinitionReader(): DefinitionReaderInterface
     {
@@ -107,11 +104,6 @@ readonly class DefinitionFactory
         );
     }
 
-    protected function createNamespaceValidator(): NamespaceValidatorInterface
-    {
-        return new NamespaceValidator();
-    }
-
     protected function createTransferTypePropertyValidator(): PropertyValidatorInterface
     {
         return new TransferTypePropertyValidator(
@@ -150,15 +142,10 @@ readonly class DefinitionFactory
         return new ClassNameContentValidator($this->createClassNameValidator());
     }
 
-    protected function createClassNameValidator(): ClassNameValidatorInterface
-    {
-        return new ClassNameValidator();
-    }
-
     protected function createDefinitionParser(): DefinitionParserInterface
     {
         return new DefinitionParser(
-            $this->createYmlParser(),
+            $this->getYmlParser(),
             $this->createContentBuilder(),
         );
     }
@@ -176,9 +163,15 @@ readonly class DefinitionFactory
             ->setNextExpander($this->createCollectionTypePropertyExpander())
             ->setNextExpander($this->createBuildInTypePropertyExpander())
             ->setNextExpander($this->createTransferTypePropertyExpander())
-            ->setNextExpander($this->createEnumTypePropertyExpander());
+            ->setNextExpander($this->createEnumTypePropertyExpander())
+            ->setNextExpander($this->createProtectedPropertyExpander());
 
         return $propertyExpander;
+    }
+
+    protected function createProtectedPropertyExpander(): PropertyExpanderInterface
+    {
+        return new ProtectedPropertyExpander();
     }
 
     protected function createEnumTypePropertyExpander(): PropertyExpanderInterface
@@ -209,7 +202,7 @@ readonly class DefinitionFactory
     protected function createDefinitionFinder(): DefinitionFinderInterface
     {
         return new DefinitionFinder(
-            $this->createFinder(),
+            $this->getFinder(),
             $this->getConfig(),
         );
     }

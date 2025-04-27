@@ -12,6 +12,8 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/DefinitionGenerator/data/config/open-weather/definition/forecast.transfer.yml Definition file path.
  */
 final class MainTransfer extends AbstractTransfer
 {
@@ -34,8 +36,8 @@ final class MainTransfer extends AbstractTransfer
     protected const int FEELS_LIKE_DATA_INDEX = 0;
 
     public ?float $feels_like {
-        get => $this->_data[self::FEELS_LIKE_DATA_INDEX];
-        set => $this->_data[self::FEELS_LIKE_DATA_INDEX] = $value;
+        get => $this->getData(self::FEELS_LIKE_DATA_INDEX);
+        set => $this->setData(self::FEELS_LIKE_DATA_INDEX, $value);
     }
 
     // grnd_level
@@ -44,8 +46,8 @@ final class MainTransfer extends AbstractTransfer
     protected const int GRND_LEVEL_DATA_INDEX = 1;
 
     public ?int $grnd_level {
-        get => $this->_data[self::GRND_LEVEL_DATA_INDEX];
-        set => $this->_data[self::GRND_LEVEL_DATA_INDEX] = $value;
+        get => $this->getData(self::GRND_LEVEL_DATA_INDEX);
+        set => $this->setData(self::GRND_LEVEL_DATA_INDEX, $value);
     }
 
     // humidity
@@ -54,8 +56,8 @@ final class MainTransfer extends AbstractTransfer
     protected const int HUMIDITY_DATA_INDEX = 2;
 
     public ?int $humidity {
-        get => $this->_data[self::HUMIDITY_DATA_INDEX];
-        set => $this->_data[self::HUMIDITY_DATA_INDEX] = $value;
+        get => $this->getData(self::HUMIDITY_DATA_INDEX);
+        set => $this->setData(self::HUMIDITY_DATA_INDEX, $value);
     }
 
     // pressure
@@ -64,8 +66,8 @@ final class MainTransfer extends AbstractTransfer
     protected const int PRESSURE_DATA_INDEX = 3;
 
     public ?int $pressure {
-        get => $this->_data[self::PRESSURE_DATA_INDEX];
-        set => $this->_data[self::PRESSURE_DATA_INDEX] = $value;
+        get => $this->getData(self::PRESSURE_DATA_INDEX);
+        set => $this->setData(self::PRESSURE_DATA_INDEX, $value);
     }
 
     // sea_level
@@ -74,8 +76,8 @@ final class MainTransfer extends AbstractTransfer
     protected const int SEA_LEVEL_DATA_INDEX = 4;
 
     public ?int $sea_level {
-        get => $this->_data[self::SEA_LEVEL_DATA_INDEX];
-        set => $this->_data[self::SEA_LEVEL_DATA_INDEX] = $value;
+        get => $this->getData(self::SEA_LEVEL_DATA_INDEX);
+        set => $this->setData(self::SEA_LEVEL_DATA_INDEX, $value);
     }
 
     // temp
@@ -84,8 +86,8 @@ final class MainTransfer extends AbstractTransfer
     protected const int TEMP_DATA_INDEX = 5;
 
     public ?float $temp {
-        get => $this->_data[self::TEMP_DATA_INDEX];
-        set => $this->_data[self::TEMP_DATA_INDEX] = $value;
+        get => $this->getData(self::TEMP_DATA_INDEX);
+        set => $this->setData(self::TEMP_DATA_INDEX, $value);
     }
 
     // temp_max
@@ -94,8 +96,8 @@ final class MainTransfer extends AbstractTransfer
     protected const int TEMP_MAX_DATA_INDEX = 6;
 
     public ?float $temp_max {
-        get => $this->_data[self::TEMP_MAX_DATA_INDEX];
-        set => $this->_data[self::TEMP_MAX_DATA_INDEX] = $value;
+        get => $this->getData(self::TEMP_MAX_DATA_INDEX);
+        set => $this->setData(self::TEMP_MAX_DATA_INDEX, $value);
     }
 
     // temp_min
@@ -104,7 +106,7 @@ final class MainTransfer extends AbstractTransfer
     protected const int TEMP_MIN_DATA_INDEX = 7;
 
     public ?float $temp_min {
-        get => $this->_data[self::TEMP_MIN_DATA_INDEX];
-        set => $this->_data[self::TEMP_MIN_DATA_INDEX] = $value;
+        get => $this->getData(self::TEMP_MIN_DATA_INDEX);
+        set => $this->setData(self::TEMP_MIN_DATA_INDEX, $value);
     }
 }

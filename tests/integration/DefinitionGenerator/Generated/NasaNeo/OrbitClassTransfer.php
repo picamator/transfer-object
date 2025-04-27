@@ -12,6 +12,8 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/DefinitionGenerator/data/config/nasa-neo-rest-v1-neo-2465633/definition/asteroid.transfer.yml Definition file path.
  */
 final class OrbitClassTransfer extends AbstractTransfer
 {
@@ -29,8 +31,8 @@ final class OrbitClassTransfer extends AbstractTransfer
     protected const int ORBIT_CLASS_DESCRIPTION_DATA_INDEX = 0;
 
     public ?string $orbit_class_description {
-        get => $this->_data[self::ORBIT_CLASS_DESCRIPTION_DATA_INDEX];
-        set => $this->_data[self::ORBIT_CLASS_DESCRIPTION_DATA_INDEX] = $value;
+        get => $this->getData(self::ORBIT_CLASS_DESCRIPTION_DATA_INDEX);
+        set => $this->setData(self::ORBIT_CLASS_DESCRIPTION_DATA_INDEX, $value);
     }
 
     // orbit_class_range
@@ -39,8 +41,8 @@ final class OrbitClassTransfer extends AbstractTransfer
     protected const int ORBIT_CLASS_RANGE_DATA_INDEX = 1;
 
     public ?string $orbit_class_range {
-        get => $this->_data[self::ORBIT_CLASS_RANGE_DATA_INDEX];
-        set => $this->_data[self::ORBIT_CLASS_RANGE_DATA_INDEX] = $value;
+        get => $this->getData(self::ORBIT_CLASS_RANGE_DATA_INDEX);
+        set => $this->setData(self::ORBIT_CLASS_RANGE_DATA_INDEX, $value);
     }
 
     // orbit_class_type
@@ -49,7 +51,7 @@ final class OrbitClassTransfer extends AbstractTransfer
     protected const int ORBIT_CLASS_TYPE_DATA_INDEX = 2;
 
     public ?string $orbit_class_type {
-        get => $this->_data[self::ORBIT_CLASS_TYPE_DATA_INDEX];
-        set => $this->_data[self::ORBIT_CLASS_TYPE_DATA_INDEX] = $value;
+        get => $this->getData(self::ORBIT_CLASS_TYPE_DATA_INDEX);
+        set => $this->setData(self::ORBIT_CLASS_TYPE_DATA_INDEX, $value);
     }
 }

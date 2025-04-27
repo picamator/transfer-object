@@ -14,6 +14,8 @@ use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /config/definition/transfer-generator.transfer.yml Definition file path.
  */
 final class DefinitionValidatorTransfer extends AbstractTransfer
 {
@@ -32,8 +34,8 @@ final class DefinitionValidatorTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,ValidatorMessageTransfer> */
     public ArrayObject $errorMessages {
-        get => $this->_data[self::ERROR_MESSAGES_DATA_INDEX];
-        set => $this->_data[self::ERROR_MESSAGES_DATA_INDEX] = $value;
+        get => $this->getData(self::ERROR_MESSAGES_DATA_INDEX);
+        set => $this->setData(self::ERROR_MESSAGES_DATA_INDEX, $value);
     }
 
     // isValid
@@ -42,7 +44,7 @@ final class DefinitionValidatorTransfer extends AbstractTransfer
     protected const int IS_VALID_DATA_INDEX = 1;
 
     public bool $isValid {
-        get => $this->_data[self::IS_VALID_DATA_INDEX];
-        set => $this->_data[self::IS_VALID_DATA_INDEX] = $value;
+        get => $this->getData(self::IS_VALID_DATA_INDEX);
+        set => $this->setData(self::IS_VALID_DATA_INDEX, $value);
     }
 }

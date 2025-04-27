@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render;
 
-use Picamator\TransferObject\Generated\DefinitionContentTransfer;
+use Picamator\TransferObject\Generated\DefinitionTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransferEnum;
@@ -18,14 +18,15 @@ readonly class TemplateBuilder implements TemplateBuilderInterface
     ) {
     }
 
-    public function createTemplateTransfer(DefinitionContentTransfer $contentTransfer): TemplateTransfer
+    public function createTemplateTransfer(DefinitionTransfer $definitionTransfer): TemplateTransfer
     {
         $templateTransfer = new TemplateTransfer();
+        $templateTransfer->definitionPath = $this->getDefinitionPath($definitionTransfer);
         $templateTransfer->classNamespace = $this->config->getTransferNamespace();
-        $templateTransfer->className = $contentTransfer->className;
+        $templateTransfer->className = $definitionTransfer->content->className;
         $templateTransfer->imports[TransferEnum::ABSTRACT_CLASS->value] = TransferEnum::ABSTRACT_CLASS->value;
 
-        foreach ($contentTransfer->properties as $propertyTransfer) {
+        foreach ($definitionTransfer->content->properties as $propertyTransfer) {
             $this->templateExpander->expandTemplateTransfer($propertyTransfer, $templateTransfer);
         }
 
@@ -38,5 +39,13 @@ readonly class TemplateBuilder implements TemplateBuilderInterface
     {
         $templateTransfer->imports->natsort();
         $templateTransfer->metaConstants->natsort();
+    }
+
+    private function getDefinitionPath(DefinitionTransfer $definitionTransfer): string
+    {
+        $workingDirectory = getcwd() ?: '';
+        $definitionPath = str_replace($workingDirectory, '', $this->config->getDefinitionPath());
+
+        return $definitionPath . DIRECTORY_SEPARATOR . $definitionTransfer->fileName;
     }
 }

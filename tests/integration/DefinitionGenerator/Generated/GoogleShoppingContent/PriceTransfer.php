@@ -12,6 +12,8 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/DefinitionGenerator/data/config/google-shopping-content/definition/product.transfer.yml Definition file path.
  */
 final class PriceTransfer extends AbstractTransfer
 {
@@ -28,8 +30,8 @@ final class PriceTransfer extends AbstractTransfer
     protected const int CURRENCY_DATA_INDEX = 0;
 
     public ?string $currency {
-        get => $this->_data[self::CURRENCY_DATA_INDEX];
-        set => $this->_data[self::CURRENCY_DATA_INDEX] = $value;
+        get => $this->getData(self::CURRENCY_DATA_INDEX);
+        set => $this->setData(self::CURRENCY_DATA_INDEX, $value);
     }
 
     // value
@@ -38,7 +40,7 @@ final class PriceTransfer extends AbstractTransfer
     protected const int VALUE_DATA_INDEX = 1;
 
     public ?string $value {
-        get => $this->_data[self::VALUE_DATA_INDEX];
-        set => $this->_data[self::VALUE_DATA_INDEX] = $value;
+        get => $this->getData(self::VALUE_DATA_INDEX);
+        set => $this->setData(self::VALUE_DATA_INDEX, $value);
     }
 }

@@ -15,16 +15,19 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /config/definition/transfer-generator.transfer.yml Definition file path.
  */
 final class DefinitionPropertyTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 6;
+    protected const int META_DATA_SIZE = 7;
 
     protected const array META_DATA = [
         self::BUILD_IN_TYPE => self::BUILD_IN_TYPE_DATA_NAME,
         self::COLLECTION_TYPE => self::COLLECTION_TYPE_DATA_NAME,
         self::ENUM_TYPE => self::ENUM_TYPE_DATA_NAME,
         self::IS_NULLABLE => self::IS_NULLABLE_DATA_NAME,
+        self::IS_PROTECTED => self::IS_PROTECTED_DATA_NAME,
         self::PROPERTY_NAME => self::PROPERTY_NAME_DATA_NAME,
         self::TRANSFER_TYPE => self::TRANSFER_TYPE_DATA_NAME,
     ];
@@ -36,8 +39,8 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     protected const int BUILD_IN_TYPE_DATA_INDEX = 0;
 
     public ?BuildInTypeEnum $buildInType {
-        get => $this->_data[self::BUILD_IN_TYPE_DATA_INDEX];
-        set => $this->_data[self::BUILD_IN_TYPE_DATA_INDEX] = $value;
+        get => $this->getData(self::BUILD_IN_TYPE_DATA_INDEX);
+        set => $this->setData(self::BUILD_IN_TYPE_DATA_INDEX, $value);
     }
 
     // collectionType
@@ -47,8 +50,8 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     protected const int COLLECTION_TYPE_DATA_INDEX = 1;
 
     public ?DefinitionEmbeddedTypeTransfer $collectionType {
-        get => $this->_data[self::COLLECTION_TYPE_DATA_INDEX];
-        set => $this->_data[self::COLLECTION_TYPE_DATA_INDEX] = $value;
+        get => $this->getData(self::COLLECTION_TYPE_DATA_INDEX);
+        set => $this->setData(self::COLLECTION_TYPE_DATA_INDEX, $value);
     }
 
     // enumType
@@ -58,8 +61,8 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     protected const int ENUM_TYPE_DATA_INDEX = 2;
 
     public ?DefinitionEmbeddedTypeTransfer $enumType {
-        get => $this->_data[self::ENUM_TYPE_DATA_INDEX];
-        set => $this->_data[self::ENUM_TYPE_DATA_INDEX] = $value;
+        get => $this->getData(self::ENUM_TYPE_DATA_INDEX);
+        set => $this->setData(self::ENUM_TYPE_DATA_INDEX, $value);
     }
 
     // isNullable
@@ -68,28 +71,38 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     protected const int IS_NULLABLE_DATA_INDEX = 3;
 
     public bool $isNullable {
-        get => $this->_data[self::IS_NULLABLE_DATA_INDEX];
-        set => $this->_data[self::IS_NULLABLE_DATA_INDEX] = $value;
+        get => $this->getData(self::IS_NULLABLE_DATA_INDEX);
+        set => $this->setData(self::IS_NULLABLE_DATA_INDEX, $value);
+    }
+
+    // isProtected
+    public const string IS_PROTECTED = 'isProtected';
+    protected const string IS_PROTECTED_DATA_NAME = 'IS_PROTECTED';
+    protected const int IS_PROTECTED_DATA_INDEX = 4;
+
+    public bool $isProtected {
+        get => $this->getData(self::IS_PROTECTED_DATA_INDEX);
+        set => $this->setData(self::IS_PROTECTED_DATA_INDEX, $value);
     }
 
     // propertyName
     public const string PROPERTY_NAME = 'propertyName';
     protected const string PROPERTY_NAME_DATA_NAME = 'PROPERTY_NAME';
-    protected const int PROPERTY_NAME_DATA_INDEX = 4;
+    protected const int PROPERTY_NAME_DATA_INDEX = 5;
 
     public string $propertyName {
-        get => $this->_data[self::PROPERTY_NAME_DATA_INDEX];
-        set => $this->_data[self::PROPERTY_NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::PROPERTY_NAME_DATA_INDEX);
+        set => $this->setData(self::PROPERTY_NAME_DATA_INDEX, $value);
     }
 
     // transferType
     #[PropertyTypeAttribute(DefinitionEmbeddedTypeTransfer::class)]
     public const string TRANSFER_TYPE = 'transferType';
     protected const string TRANSFER_TYPE_DATA_NAME = 'TRANSFER_TYPE';
-    protected const int TRANSFER_TYPE_DATA_INDEX = 5;
+    protected const int TRANSFER_TYPE_DATA_INDEX = 6;
 
     public ?DefinitionEmbeddedTypeTransfer $transferType {
-        get => $this->_data[self::TRANSFER_TYPE_DATA_INDEX];
-        set => $this->_data[self::TRANSFER_TYPE_DATA_INDEX] = $value;
+        get => $this->getData(self::TRANSFER_TYPE_DATA_INDEX);
+        set => $this->setData(self::TRANSFER_TYPE_DATA_INDEX, $value);
     }
 }

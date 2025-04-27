@@ -15,6 +15,8 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /config/definition/definition-generator.transfer.yml Definition file path.
  */
 final class DefinitionBuilderTransfer extends AbstractTransfer
 {
@@ -32,8 +34,8 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
     protected const int DEFINITION_CONTENT_DATA_INDEX = 0;
 
     public DefinitionContentTransfer $definitionContent {
-        get => $this->_data[self::DEFINITION_CONTENT_DATA_INDEX];
-        set => $this->_data[self::DEFINITION_CONTENT_DATA_INDEX] = $value;
+        get => $this->getData(self::DEFINITION_CONTENT_DATA_INDEX);
+        set => $this->setData(self::DEFINITION_CONTENT_DATA_INDEX, $value);
     }
 
     // generatorContents
@@ -44,7 +46,7 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,DefinitionGeneratorContentTransfer> */
     public ArrayObject $generatorContents {
-        get => $this->_data[self::GENERATOR_CONTENTS_DATA_INDEX];
-        set => $this->_data[self::GENERATOR_CONTENTS_DATA_INDEX] = $value;
+        get => $this->getData(self::GENERATOR_CONTENTS_DATA_INDEX);
+        set => $this->setData(self::GENERATOR_CONTENTS_DATA_INDEX, $value);
     }
 }

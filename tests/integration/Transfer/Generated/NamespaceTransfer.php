@@ -18,6 +18,8 @@ use Picamator\TransferObject\Transfer\TransferInterface;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/Transfer/data/config/definition/namespace.transfer.yml Definition file path.
  */
 final class NamespaceTransfer extends AbstractTransfer
 {
@@ -36,8 +38,8 @@ final class NamespaceTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<int,TransferInterface&ItemTransfer> */
     public ArrayObject $items {
-        get => $this->_data[self::ITEMS_DATA_INDEX];
-        set => $this->_data[self::ITEMS_DATA_INDEX] = $value;
+        get => $this->getData(self::ITEMS_DATA_INDEX);
+        set => $this->setData(self::ITEMS_DATA_INDEX, $value);
     }
 
     // required
@@ -47,7 +49,7 @@ final class NamespaceTransfer extends AbstractTransfer
     protected const int REQUIRED_DATA_INDEX = 1;
 
     public TransferInterface&RequiredAlias $required {
-        get => $this->_data[self::REQUIRED_DATA_INDEX];
-        set => $this->_data[self::REQUIRED_DATA_INDEX] = $value;
+        get => $this->getData(self::REQUIRED_DATA_INDEX);
+        set => $this->setData(self::REQUIRED_DATA_INDEX, $value);
     }
 }

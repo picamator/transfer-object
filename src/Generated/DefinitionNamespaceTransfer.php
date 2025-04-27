@@ -12,6 +12,8 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /config/definition/transfer-generator.transfer.yml Definition file path.
  */
 final class DefinitionNamespaceTransfer extends AbstractTransfer
 {
@@ -30,8 +32,8 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
     protected const int ALIAS_DATA_INDEX = 0;
 
     public ?string $alias {
-        get => $this->_data[self::ALIAS_DATA_INDEX];
-        set => $this->_data[self::ALIAS_DATA_INDEX] = $value;
+        get => $this->getData(self::ALIAS_DATA_INDEX);
+        set => $this->setData(self::ALIAS_DATA_INDEX, $value);
     }
 
     // baseName
@@ -40,8 +42,8 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
     protected const int BASE_NAME_DATA_INDEX = 1;
 
     public string $baseName {
-        get => $this->_data[self::BASE_NAME_DATA_INDEX];
-        set => $this->_data[self::BASE_NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::BASE_NAME_DATA_INDEX);
+        set => $this->setData(self::BASE_NAME_DATA_INDEX, $value);
     }
 
     // fullName
@@ -50,8 +52,8 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
     protected const int FULL_NAME_DATA_INDEX = 2;
 
     public string $fullName {
-        get => $this->_data[self::FULL_NAME_DATA_INDEX];
-        set => $this->_data[self::FULL_NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::FULL_NAME_DATA_INDEX);
+        set => $this->setData(self::FULL_NAME_DATA_INDEX, $value);
     }
 
     // withoutAlias
@@ -60,7 +62,7 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
     protected const int WITHOUT_ALIAS_DATA_INDEX = 3;
 
     public string $withoutAlias {
-        get => $this->_data[self::WITHOUT_ALIAS_DATA_INDEX];
-        set => $this->_data[self::WITHOUT_ALIAS_DATA_INDEX] = $value;
+        get => $this->getData(self::WITHOUT_ALIAS_DATA_INDEX);
+        set => $this->setData(self::WITHOUT_ALIAS_DATA_INDEX, $value);
     }
 }

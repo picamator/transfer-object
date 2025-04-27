@@ -21,7 +21,7 @@ final readonly class EnumPropertyTypeAttribute implements PropertyTypeAttributeI
             throw new PropertyTypeTransferException(
                 sprintf(
                     'Data must be of type string or integer, "%s" given."',
-                    gettype($data)
+                    get_debug_type($data)
                 ),
             );
         }

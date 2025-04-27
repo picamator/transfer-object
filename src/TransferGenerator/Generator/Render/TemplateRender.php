@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render;
 
+use Picamator\TransferObject\Generated\DefinitionTransfer;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
-use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 
 readonly class TemplateRender implements TemplateRenderInterface
 {
@@ -17,9 +17,9 @@ readonly class TemplateRender implements TemplateRenderInterface
     ) {
     }
 
-    public function renderTemplate(DefinitionContentTransfer $contentTransfer): string
+    public function renderTemplate(DefinitionTransfer $definitionTransfer): string
     {
-        $templateTransfer = $this->templateBuilder->createTemplateTransfer($contentTransfer);
+        $templateTransfer = $this->templateBuilder->createTemplateTransfer($definitionTransfer);
         $helper = $this->templateHelper->setTemplateTransfer($templateTransfer);
 
         ob_start();

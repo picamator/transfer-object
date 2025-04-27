@@ -12,6 +12,8 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/DefinitionGenerator/data/config/nasa-neo-rest-v1-neo-2465633/definition/asteroid.transfer.yml Definition file path.
  */
 final class FeetTransfer extends AbstractTransfer
 {
@@ -28,8 +30,8 @@ final class FeetTransfer extends AbstractTransfer
     protected const int ESTIMATED_DIAMETER_MAX_DATA_INDEX = 0;
 
     public ?float $estimated_diameter_max {
-        get => $this->_data[self::ESTIMATED_DIAMETER_MAX_DATA_INDEX];
-        set => $this->_data[self::ESTIMATED_DIAMETER_MAX_DATA_INDEX] = $value;
+        get => $this->getData(self::ESTIMATED_DIAMETER_MAX_DATA_INDEX);
+        set => $this->setData(self::ESTIMATED_DIAMETER_MAX_DATA_INDEX, $value);
     }
 
     // estimated_diameter_min
@@ -38,7 +40,7 @@ final class FeetTransfer extends AbstractTransfer
     protected const int ESTIMATED_DIAMETER_MIN_DATA_INDEX = 1;
 
     public ?float $estimated_diameter_min {
-        get => $this->_data[self::ESTIMATED_DIAMETER_MIN_DATA_INDEX];
-        set => $this->_data[self::ESTIMATED_DIAMETER_MIN_DATA_INDEX] = $value;
+        get => $this->getData(self::ESTIMATED_DIAMETER_MIN_DATA_INDEX);
+        set => $this->setData(self::ESTIMATED_DIAMETER_MIN_DATA_INDEX, $value);
     }
 }

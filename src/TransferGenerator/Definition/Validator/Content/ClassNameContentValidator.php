@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Validator\Conten
 
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\TransferGenerator\Validator\ClassNameValidatorInterface;
+use Picamator\TransferObject\Shared\Validator\ClassNameValidatorInterface;
 
 readonly class ClassNameContentValidator implements ContentValidatorInterface
 {

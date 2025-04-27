@@ -1,0 +1,24 @@
+Template:
+  definitionPath:
+    type: string
+    required:
+  className:
+    type: string
+    required:
+  classNamespace:
+    type: string
+    required:
+  imports:
+    type: ArrayObject
+  properties:
+    type: ArrayObject
+  metaConstants:
+    type: ArrayObject
+  attributes:
+    type: ArrayObject
+  dockBlocks:
+    type: ArrayObject
+  nullables:
+    type: ArrayObject
+  protects:
+    type: ArrayObject

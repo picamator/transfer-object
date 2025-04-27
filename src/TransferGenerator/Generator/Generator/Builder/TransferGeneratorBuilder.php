@@ -57,11 +57,10 @@ readonly class TransferGeneratorBuilder implements TransferGeneratorBuilderInter
     {
         $validatorTransfer = new DefinitionValidatorTransfer();
         $validatorTransfer->isValid = false;
-        $validatorTransfer->errorMessages[] = new ValidatorMessageTransfer()
-            ->fromArray([
-                ValidatorMessageTransfer::IS_VALID => false,
-                ValidatorMessageTransfer::ERROR_MESSAGE => $errorMessage,
-            ]);
+        $validatorTransfer->errorMessages[] = new ValidatorMessageTransfer([
+            ValidatorMessageTransfer::IS_VALID => false,
+            ValidatorMessageTransfer::ERROR_MESSAGE => $errorMessage,
+        ]);
 
         return $validatorTransfer;
     }

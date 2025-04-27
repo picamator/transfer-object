@@ -13,6 +13,8 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /config/definition/transfer-generator.transfer.yml Definition file path.
  */
 final class ConfigTransfer extends AbstractTransfer
 {
@@ -30,8 +32,8 @@ final class ConfigTransfer extends AbstractTransfer
     protected const int CONTENT_DATA_INDEX = 0;
 
     public ConfigContentTransfer $content {
-        get => $this->_data[self::CONTENT_DATA_INDEX];
-        set => $this->_data[self::CONTENT_DATA_INDEX] = $value;
+        get => $this->getData(self::CONTENT_DATA_INDEX);
+        set => $this->setData(self::CONTENT_DATA_INDEX, $value);
     }
 
     // validator
@@ -41,7 +43,7 @@ final class ConfigTransfer extends AbstractTransfer
     protected const int VALIDATOR_DATA_INDEX = 1;
 
     public ConfigValidatorTransfer $validator {
-        get => $this->_data[self::VALIDATOR_DATA_INDEX];
-        set => $this->_data[self::VALIDATOR_DATA_INDEX] = $value;
+        get => $this->getData(self::VALIDATOR_DATA_INDEX);
+        set => $this->setData(self::VALIDATOR_DATA_INDEX, $value);
     }
 }

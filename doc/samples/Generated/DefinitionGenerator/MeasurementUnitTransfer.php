@@ -13,6 +13,8 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /doc/samples/config/definition-generator/definition/product.transfer.yml Definition file path.
  */
 final class MeasurementUnitTransfer extends AbstractTransfer
 {
@@ -30,8 +32,8 @@ final class MeasurementUnitTransfer extends AbstractTransfer
     protected const int BOX_DATA_INDEX = 0;
 
     public ?BoxTransfer $box {
-        get => $this->_data[self::BOX_DATA_INDEX];
-        set => $this->_data[self::BOX_DATA_INDEX] = $value;
+        get => $this->getData(self::BOX_DATA_INDEX);
+        set => $this->setData(self::BOX_DATA_INDEX, $value);
     }
 
     // palette
@@ -41,7 +43,7 @@ final class MeasurementUnitTransfer extends AbstractTransfer
     protected const int PALETTE_DATA_INDEX = 1;
 
     public ?PaletteTransfer $palette {
-        get => $this->_data[self::PALETTE_DATA_INDEX];
-        set => $this->_data[self::PALETTE_DATA_INDEX] = $value;
+        get => $this->getData(self::PALETTE_DATA_INDEX);
+        set => $this->setData(self::PALETTE_DATA_INDEX, $value);
     }
 }

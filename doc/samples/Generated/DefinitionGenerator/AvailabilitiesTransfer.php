@@ -12,6 +12,8 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /doc/samples/config/definition-generator/definition/product.transfer.yml Definition file path.
  */
 final class AvailabilitiesTransfer extends AbstractTransfer
 {
@@ -28,8 +30,8 @@ final class AvailabilitiesTransfer extends AbstractTransfer
     protected const int BUFFER_DATA_INDEX = 0;
 
     public ?int $buffer {
-        get => $this->_data[self::BUFFER_DATA_INDEX];
-        set => $this->_data[self::BUFFER_DATA_INDEX] = $value;
+        get => $this->getData(self::BUFFER_DATA_INDEX);
+        set => $this->setData(self::BUFFER_DATA_INDEX, $value);
     }
 
     // total
@@ -38,7 +40,7 @@ final class AvailabilitiesTransfer extends AbstractTransfer
     protected const int TOTAL_DATA_INDEX = 1;
 
     public ?int $total {
-        get => $this->_data[self::TOTAL_DATA_INDEX];
-        set => $this->_data[self::TOTAL_DATA_INDEX] = $value;
+        get => $this->getData(self::TOTAL_DATA_INDEX);
+        set => $this->setData(self::TOTAL_DATA_INDEX, $value);
     }
 }

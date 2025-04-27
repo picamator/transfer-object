@@ -11,6 +11,7 @@ use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 readonly class DefinitionRender implements DefinitionRenderInterface
 {
     private const string CLASS_TEMPLATE = <<<'START'
+# %s
 %s:
 START;
 
@@ -26,11 +27,13 @@ START;
 
     public function renderDefinitionContent(DefinitionContentTransfer $contentTransfer): string
     {
-        $content = sprintf(self::CLASS_TEMPLATE, $contentTransfer->className) . PHP_EOL;
+        $content = sprintf(self::CLASS_TEMPLATE, $contentTransfer->className, $contentTransfer->className) . PHP_EOL;
         foreach ($contentTransfer->properties as $propertyTransfer) {
             $content .= $this->renderProperty($propertyTransfer);
             $content .= PHP_EOL;
         }
+
+        $content .= PHP_EOL;
 
         return $content;
     }

@@ -15,8 +15,10 @@ use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemCollectionTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\NamespaceTransfer;
+use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ProtectedTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\RequiredTransfer;
 use Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException;
+use ReflectionProperty;
 use TypeError;
 
 class TransferTest extends TestCase
@@ -276,5 +278,44 @@ class TransferTest extends TestCase
 
         // Act
         $this->assertCount(1, $namespaceTransfer->items);
+    }
+
+    public function testProtectedProperty(): void
+    {
+        // Arrange
+        $reflectionProperty = new ReflectionProperty(ProtectedTransfer::class, 'iAmProtected');
+
+        // Assert
+        $this->assertTrue($reflectionProperty->isProtectedSet());
+    }
+
+    public function testClone(): void
+    {
+        // Arrange
+        $itemCollectionTransfer = new ItemCollectionTransfer([
+            ItemCollectionTransfer::ITEMS => [
+                [
+                    ItemTransfer::I_AM_BOOL => true,
+                    ItemTransfer::I_AM_TRUE => true,
+                    ItemTransfer::I_AM_FALSE => false,
+                    ItemTransfer::I_AM_INT => 1,
+                    ItemTransfer::I_AM_FLOAT => 0.1,
+                    ItemTransfer::I_AM_STRING => 'test string',
+                    ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
+                    ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
+                    ItemTransfer::I_AM_ENUM => ImBackedEnum::SOME_CASE->value,
+                ],
+            ],
+            ItemCollectionTransfer::ITEM => [],
+        ]);
+
+        // Act
+        $clonedItemCollectionTransfer = clone $itemCollectionTransfer;
+
+        // Assert
+        $this->assertNotSame($itemCollectionTransfer, $clonedItemCollectionTransfer);
+        $this->assertNotSame($itemCollectionTransfer->item, $clonedItemCollectionTransfer->item);
+        $this->assertNotSame($itemCollectionTransfer->items, $clonedItemCollectionTransfer->items);
+        $this->assertNotSame($itemCollectionTransfer->items[0], $clonedItemCollectionTransfer->items[0]);
     }
 }

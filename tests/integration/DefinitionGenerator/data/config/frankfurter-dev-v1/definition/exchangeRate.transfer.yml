@@ -1,3 +1,4 @@
+# ExchangeRate
 ExchangeRate:
   amount:
     type: int
@@ -7,6 +8,8 @@ ExchangeRate:
     type: string
   rates:
     type: Rates
+
+# Rates
 Rates:
   AUD:
     type: float
@@ -68,3 +71,4 @@ Rates:
     type: float
   ZAR:
     type: float
+

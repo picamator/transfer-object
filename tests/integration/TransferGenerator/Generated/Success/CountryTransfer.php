@@ -12,6 +12,8 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/TransferGenerator/data/config/success/definition/country.transfer.yml Definition file path.
  */
 final class CountryTransfer extends AbstractTransfer
 {
@@ -28,8 +30,8 @@ final class CountryTransfer extends AbstractTransfer
     protected const int ISO2_CODE_DATA_INDEX = 0;
 
     public ?string $iso2Code {
-        get => $this->_data[self::ISO2_CODE_DATA_INDEX];
-        set => $this->_data[self::ISO2_CODE_DATA_INDEX] = $value;
+        get => $this->getData(self::ISO2_CODE_DATA_INDEX);
+        set => $this->setData(self::ISO2_CODE_DATA_INDEX, $value);
     }
 
     // name
@@ -38,7 +40,7 @@ final class CountryTransfer extends AbstractTransfer
     protected const int NAME_DATA_INDEX = 1;
 
     public ?string $name {
-        get => $this->_data[self::NAME_DATA_INDEX];
-        set => $this->_data[self::NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::NAME_DATA_INDEX);
+        set => $this->setData(self::NAME_DATA_INDEX, $value);
     }
 }

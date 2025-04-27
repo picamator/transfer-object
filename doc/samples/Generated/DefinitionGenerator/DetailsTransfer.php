@@ -12,6 +12,8 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /doc/samples/config/definition-generator/definition/product.transfer.yml Definition file path.
  */
 final class DetailsTransfer extends AbstractTransfer
 {
@@ -28,8 +30,8 @@ final class DetailsTransfer extends AbstractTransfer
     protected const int DESCRIPTION_DATA_INDEX = 0;
 
     public ?string $description {
-        get => $this->_data[self::DESCRIPTION_DATA_INDEX];
-        set => $this->_data[self::DESCRIPTION_DATA_INDEX] = $value;
+        get => $this->getData(self::DESCRIPTION_DATA_INDEX);
+        set => $this->setData(self::DESCRIPTION_DATA_INDEX, $value);
     }
 
     // isRegional
@@ -38,7 +40,7 @@ final class DetailsTransfer extends AbstractTransfer
     protected const int IS_REGIONAL_DATA_INDEX = 1;
 
     public ?bool $isRegional {
-        get => $this->_data[self::IS_REGIONAL_DATA_INDEX];
-        set => $this->_data[self::IS_REGIONAL_DATA_INDEX] = $value;
+        get => $this->getData(self::IS_REGIONAL_DATA_INDEX);
+        set => $this->setData(self::IS_REGIONAL_DATA_INDEX, $value);
     }
 }

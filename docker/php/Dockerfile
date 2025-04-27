@@ -31,16 +31,15 @@ RUN docker-php-ext-configure zip && \
     pecl install xdebug
 
 # configure Xdebug
-RUN docker-php-ext-enable xdebug && \
-    echo "xdebug.max_nesting_level=1000" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
-    echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
-    echo "xdebug.client_port=9003" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
-    echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
-    echo "xdebug.output_dir=/tmp/xdebug-profile" >> /usr/local/etc/php/conf.d/99-xdebug.ini; \
-    echo "xdebug.mode=debug,coverage" >> /usr/local/etc/php/conf.d/99-xdebug.ini;
+RUN docker-php-ext-enable xdebug
+COPY ./config.d/99-xdebug.ini  /usr/local/etc/php/conf.d/99-xdebug.ini
 
 # switch back to the new user
 USER transfer
+
+# bash
+COPY ./bash/composer-autocomplete.sh /home/transfer/composer-autocomplete.sh
+COPY ./bash/.bashrc /home/transfer/.bashrc
 
 # workaround to keep container running
 CMD ["tail", "-f", "/dev/null"]

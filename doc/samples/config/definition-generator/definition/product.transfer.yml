@@ -1,3 +1,4 @@
+# Product
 Product:
   sku:
     type: string
@@ -23,34 +24,49 @@ Product:
     collectionType: Availabilities
   measurementUnit:
     type: MeasurementUnit
+
+# DeliveryOptions
 DeliveryOptions:
   name:
     type: string
+
+# Details
 Details:
   description:
     type: string
   isRegional:
     type: bool
+
+# Labels
 Labels:
   sale:
     type: string
+
+# Availabilities
 Availabilities:
   total:
     type: int
   buffer:
     type: int
+
+# MeasurementUnit
 MeasurementUnit:
   palette:
     type: Palette
   box:
     type: Box
+
+# Palette
 Palette:
   type:
     type: string
   items:
     type: int
+
+# Box
 Box:
   type:
     type: string
   items:
     type: int
+

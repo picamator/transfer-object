@@ -21,4 +21,6 @@ interface TemplateHelperInterface
     public function getDockBlock(string $property): string;
 
     public function getNullable(string $property): string;
+
+    public function getProtected(string $property): string;
 }

@@ -17,6 +17,8 @@ use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/Transfer/data/config/definition/item.transfer.yml Definition file path.
  */
 final class ItemTransfer extends AbstractTransfer
 {
@@ -42,8 +44,8 @@ final class ItemTransfer extends AbstractTransfer
 
     /** @var array<int|string,mixed> */
     public array $iAmArray {
-        get => $this->_data[self::I_AM_ARRAY_DATA_INDEX];
-        set => $this->_data[self::I_AM_ARRAY_DATA_INDEX] = $value;
+        get => $this->getData(self::I_AM_ARRAY_DATA_INDEX);
+        set => $this->setData(self::I_AM_ARRAY_DATA_INDEX, $value);
     }
 
     // iAmArrayObject
@@ -54,8 +56,8 @@ final class ItemTransfer extends AbstractTransfer
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $iAmArrayObject {
-        get => $this->_data[self::I_AM_ARRAY_OBJECT_DATA_INDEX];
-        set => $this->_data[self::I_AM_ARRAY_OBJECT_DATA_INDEX] = $value;
+        get => $this->getData(self::I_AM_ARRAY_OBJECT_DATA_INDEX);
+        set => $this->setData(self::I_AM_ARRAY_OBJECT_DATA_INDEX, $value);
     }
 
     // iAmBool
@@ -64,8 +66,8 @@ final class ItemTransfer extends AbstractTransfer
     protected const int I_AM_BOOL_DATA_INDEX = 2;
 
     public ?bool $iAmBool {
-        get => $this->_data[self::I_AM_BOOL_DATA_INDEX];
-        set => $this->_data[self::I_AM_BOOL_DATA_INDEX] = $value;
+        get => $this->getData(self::I_AM_BOOL_DATA_INDEX);
+        set => $this->setData(self::I_AM_BOOL_DATA_INDEX, $value);
     }
 
     // iAmEnum
@@ -75,8 +77,8 @@ final class ItemTransfer extends AbstractTransfer
     protected const int I_AM_ENUM_DATA_INDEX = 3;
 
     public ?ImBackedEnum $iAmEnum {
-        get => $this->_data[self::I_AM_ENUM_DATA_INDEX];
-        set => $this->_data[self::I_AM_ENUM_DATA_INDEX] = $value;
+        get => $this->getData(self::I_AM_ENUM_DATA_INDEX);
+        set => $this->setData(self::I_AM_ENUM_DATA_INDEX, $value);
     }
 
     // iAmFalse
@@ -85,8 +87,8 @@ final class ItemTransfer extends AbstractTransfer
     protected const int I_AM_FALSE_DATA_INDEX = 4;
 
     public ?false $iAmFalse {
-        get => $this->_data[self::I_AM_FALSE_DATA_INDEX];
-        set => $this->_data[self::I_AM_FALSE_DATA_INDEX] = $value;
+        get => $this->getData(self::I_AM_FALSE_DATA_INDEX);
+        set => $this->setData(self::I_AM_FALSE_DATA_INDEX, $value);
     }
 
     // iAmFloat
@@ -95,8 +97,8 @@ final class ItemTransfer extends AbstractTransfer
     protected const int I_AM_FLOAT_DATA_INDEX = 5;
 
     public ?float $iAmFloat {
-        get => $this->_data[self::I_AM_FLOAT_DATA_INDEX];
-        set => $this->_data[self::I_AM_FLOAT_DATA_INDEX] = $value;
+        get => $this->getData(self::I_AM_FLOAT_DATA_INDEX);
+        set => $this->setData(self::I_AM_FLOAT_DATA_INDEX, $value);
     }
 
     // iAmInt
@@ -105,8 +107,8 @@ final class ItemTransfer extends AbstractTransfer
     protected const int I_AM_INT_DATA_INDEX = 6;
 
     public ?int $iAmInt {
-        get => $this->_data[self::I_AM_INT_DATA_INDEX];
-        set => $this->_data[self::I_AM_INT_DATA_INDEX] = $value;
+        get => $this->getData(self::I_AM_INT_DATA_INDEX);
+        set => $this->setData(self::I_AM_INT_DATA_INDEX, $value);
     }
 
     // iAmString
@@ -115,8 +117,8 @@ final class ItemTransfer extends AbstractTransfer
     protected const int I_AM_STRING_DATA_INDEX = 7;
 
     public ?string $iAmString {
-        get => $this->_data[self::I_AM_STRING_DATA_INDEX];
-        set => $this->_data[self::I_AM_STRING_DATA_INDEX] = $value;
+        get => $this->getData(self::I_AM_STRING_DATA_INDEX);
+        set => $this->setData(self::I_AM_STRING_DATA_INDEX, $value);
     }
 
     // iAmTrue
@@ -125,7 +127,7 @@ final class ItemTransfer extends AbstractTransfer
     protected const int I_AM_TRUE_DATA_INDEX = 8;
 
     public ?true $iAmTrue {
-        get => $this->_data[self::I_AM_TRUE_DATA_INDEX];
-        set => $this->_data[self::I_AM_TRUE_DATA_INDEX] = $value;
+        get => $this->getData(self::I_AM_TRUE_DATA_INDEX);
+        set => $this->setData(self::I_AM_TRUE_DATA_INDEX, $value);
     }
 }

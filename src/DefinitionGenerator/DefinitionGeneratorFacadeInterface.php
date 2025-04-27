@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator;
 
+use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGeneratorBuilderInterface;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 
 interface DefinitionGeneratorFacadeInterface
@@ -18,7 +19,17 @@ interface DefinitionGeneratorFacadeInterface
      *
      * @example ./doc/samples/try-definition-generator.php
      *
-     * @throws \Picamator\TransferObject\Exception\TransferExceptionInterface
+     * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
      */
-    public function generateDefinitions(DefinitionGeneratorTransfer $generatorTransfer): int;
+    public function generateDefinitionsOrFail(DefinitionGeneratorTransfer $generatorTransfer): int;
+
+    /**
+     * Specification:
+     * - Creates a flow interface to build definition generator transfer.
+     *
+     * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
+     *
+     * @internal
+     */
+    public function createDefinitionGeneratorBuilder(): DefinitionGeneratorBuilderInterface;
 }

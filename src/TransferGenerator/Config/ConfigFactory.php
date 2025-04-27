@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Config;
 
 use ArrayObject;
-use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
+use Picamator\TransferObject\Shared\SharedFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRender;
 use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRenderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoader;
@@ -22,12 +22,10 @@ use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\ConfigCo
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\DefinitionPathConfigContentValidator;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\RequiredConfigContentValidator;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\TransferNamespaceConfigContentValidator;
-use Picamator\TransferObject\TransferGenerator\Config\Validator\File\ConfigFileValidatorInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Validator\File\FileExistConfigFileValidator;
 
 readonly class ConfigFactory
 {
-    use DependencyFactoryTrait;
+    use SharedFactoryTrait;
 
     public function createConfigLoader(): ConfigLoaderInterface
     {
@@ -47,7 +45,7 @@ readonly class ConfigFactory
     protected function createConfigValidator(): ConfigValidatorInterface
     {
         return new ConfigValidator(
-            $this->createConfigFileValidator(),
+            $this->createPathValidator(),
             $this->createConfigContentValidators()
         );
     }
@@ -71,7 +69,7 @@ readonly class ConfigFactory
 
     protected function createDefinitionPathConfigContentValidator(): ConfigContentValidatorInterface
     {
-        return new DefinitionPathConfigContentValidator($this->createFilesystem());
+        return new DefinitionPathConfigContentValidator($this->getFilesystem());
     }
 
     protected function createRequiredConfigContentValidator(): ConfigContentValidatorInterface
@@ -79,15 +77,10 @@ readonly class ConfigFactory
         return new RequiredConfigContentValidator();
     }
 
-    protected function createConfigFileValidator(): ConfigFileValidatorInterface
-    {
-        return new FileExistConfigFileValidator($this->createFilesystem());
-    }
-
     protected function createConfigParser(): ConfigParserInterface
     {
         return new ConfigParser(
-            $this->createYmlParser(),
+            $this->getYmlParser(),
             $this->createConfigContentBuilder(),
         );
     }

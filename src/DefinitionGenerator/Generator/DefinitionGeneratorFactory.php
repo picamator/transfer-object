@@ -12,30 +12,44 @@ use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuilderExpande
 use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuildInTypeBuilderExpander;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\CollectionTypeBuilderExpander;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\TransferTypeBuilderExpander;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGeneratorBuilder;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGeneratorBuilderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Filesystem\DefinitionFilesystem;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Filesystem\DefinitionFilesystemInterface;
-use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\DefinitionGenerator;
-use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\DefinitionGeneratorInterface;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\DefinitionGeneratorService;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\DefinitionGeneratorServiceInterface;
 use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRender;
 use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRenderInterface;
-use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
+use Picamator\TransferObject\Shared\SharedFactoryTrait;
 
 readonly class DefinitionGeneratorFactory
 {
-    use DependencyFactoryTrait;
+    use SharedFactoryTrait;
 
-    public function createDefinitionGenerator(): DefinitionGeneratorInterface
+    public function createDefinitionGeneratorService(): DefinitionGeneratorServiceInterface
     {
-        return new DefinitionGenerator(
+        return new DefinitionGeneratorService(
             $this->createDefinitionBuilder(),
             $this->createDefinitionRender(),
             $this->createDefinitionFilesystem(),
         );
     }
 
+    public function createDefinitionGeneratorBuilder(): DefinitionGeneratorBuilderInterface
+    {
+        return new DefinitionGeneratorBuilder(
+            $this->createPathValidator(),
+            $this->createClassNameValidator(),
+            $this->createJsonReader(),
+        );
+    }
+
     protected function createDefinitionFilesystem(): DefinitionFilesystemInterface
     {
-        return new DefinitionFilesystem($this->createFilesystem());
+        return new DefinitionFilesystem(
+            $this->getFilesystem(),
+            $this->createFileAppender(),
+        );
     }
 
     protected function createDefinitionRender(): DefinitionRenderInterface

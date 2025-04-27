@@ -12,6 +12,8 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /doc/samples/config/definition-generator/definition/product.transfer.yml Definition file path.
  */
 final class DeliveryOptionsTransfer extends AbstractTransfer
 {
@@ -27,7 +29,7 @@ final class DeliveryOptionsTransfer extends AbstractTransfer
     protected const int NAME_DATA_INDEX = 0;
 
     public ?string $name {
-        get => $this->_data[self::NAME_DATA_INDEX];
-        set => $this->_data[self::NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::NAME_DATA_INDEX);
+        set => $this->setData(self::NAME_DATA_INDEX, $value);
     }
 }

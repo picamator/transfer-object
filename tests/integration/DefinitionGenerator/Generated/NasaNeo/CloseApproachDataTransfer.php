@@ -13,6 +13,8 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/DefinitionGenerator/data/config/nasa-neo-rest-v1-neo-2465633/definition/asteroid.transfer.yml Definition file path.
  */
 final class CloseApproachDataTransfer extends AbstractTransfer
 {
@@ -33,8 +35,8 @@ final class CloseApproachDataTransfer extends AbstractTransfer
     protected const int CLOSE_APPROACH_DATE_DATA_INDEX = 0;
 
     public ?string $close_approach_date {
-        get => $this->_data[self::CLOSE_APPROACH_DATE_DATA_INDEX];
-        set => $this->_data[self::CLOSE_APPROACH_DATE_DATA_INDEX] = $value;
+        get => $this->getData(self::CLOSE_APPROACH_DATE_DATA_INDEX);
+        set => $this->setData(self::CLOSE_APPROACH_DATE_DATA_INDEX, $value);
     }
 
     // close_approach_date_full
@@ -43,8 +45,8 @@ final class CloseApproachDataTransfer extends AbstractTransfer
     protected const int CLOSE_APPROACH_DATE_FULL_DATA_INDEX = 1;
 
     public ?string $close_approach_date_full {
-        get => $this->_data[self::CLOSE_APPROACH_DATE_FULL_DATA_INDEX];
-        set => $this->_data[self::CLOSE_APPROACH_DATE_FULL_DATA_INDEX] = $value;
+        get => $this->getData(self::CLOSE_APPROACH_DATE_FULL_DATA_INDEX);
+        set => $this->setData(self::CLOSE_APPROACH_DATE_FULL_DATA_INDEX, $value);
     }
 
     // epoch_date_close_approach
@@ -53,8 +55,8 @@ final class CloseApproachDataTransfer extends AbstractTransfer
     protected const int EPOCH_DATE_CLOSE_APPROACH_DATA_INDEX = 2;
 
     public ?int $epoch_date_close_approach {
-        get => $this->_data[self::EPOCH_DATE_CLOSE_APPROACH_DATA_INDEX];
-        set => $this->_data[self::EPOCH_DATE_CLOSE_APPROACH_DATA_INDEX] = $value;
+        get => $this->getData(self::EPOCH_DATE_CLOSE_APPROACH_DATA_INDEX);
+        set => $this->setData(self::EPOCH_DATE_CLOSE_APPROACH_DATA_INDEX, $value);
     }
 
     // miss_distance
@@ -64,8 +66,8 @@ final class CloseApproachDataTransfer extends AbstractTransfer
     protected const int MISS_DISTANCE_DATA_INDEX = 3;
 
     public ?MissDistanceTransfer $miss_distance {
-        get => $this->_data[self::MISS_DISTANCE_DATA_INDEX];
-        set => $this->_data[self::MISS_DISTANCE_DATA_INDEX] = $value;
+        get => $this->getData(self::MISS_DISTANCE_DATA_INDEX);
+        set => $this->setData(self::MISS_DISTANCE_DATA_INDEX, $value);
     }
 
     // orbiting_body
@@ -74,8 +76,8 @@ final class CloseApproachDataTransfer extends AbstractTransfer
     protected const int ORBITING_BODY_DATA_INDEX = 4;
 
     public ?string $orbiting_body {
-        get => $this->_data[self::ORBITING_BODY_DATA_INDEX];
-        set => $this->_data[self::ORBITING_BODY_DATA_INDEX] = $value;
+        get => $this->getData(self::ORBITING_BODY_DATA_INDEX);
+        set => $this->setData(self::ORBITING_BODY_DATA_INDEX, $value);
     }
 
     // relative_velocity
@@ -85,7 +87,7 @@ final class CloseApproachDataTransfer extends AbstractTransfer
     protected const int RELATIVE_VELOCITY_DATA_INDEX = 5;
 
     public ?RelativeVelocityTransfer $relative_velocity {
-        get => $this->_data[self::RELATIVE_VELOCITY_DATA_INDEX];
-        set => $this->_data[self::RELATIVE_VELOCITY_DATA_INDEX] = $value;
+        get => $this->getData(self::RELATIVE_VELOCITY_DATA_INDEX);
+        set => $this->setData(self::RELATIVE_VELOCITY_DATA_INDEX, $value);
     }
 }

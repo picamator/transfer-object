@@ -1,0 +1,4 @@
+Protected:
+  iAmProtected:
+    type: string
+    protected:

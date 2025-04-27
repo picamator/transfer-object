@@ -12,6 +12,8 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /config/definition/definition-generator.transfer.yml Definition file path.
  */
 final class DefinitionFilesystemTransfer extends AbstractTransfer
 {
@@ -29,8 +31,8 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
     protected const int CONTENT_DATA_INDEX = 0;
 
     public string $content {
-        get => $this->_data[self::CONTENT_DATA_INDEX];
-        set => $this->_data[self::CONTENT_DATA_INDEX] = $value;
+        get => $this->getData(self::CONTENT_DATA_INDEX);
+        set => $this->setData(self::CONTENT_DATA_INDEX, $value);
     }
 
     // definitionPath
@@ -39,8 +41,8 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
     protected const int DEFINITION_PATH_DATA_INDEX = 1;
 
     public string $definitionPath {
-        get => $this->_data[self::DEFINITION_PATH_DATA_INDEX];
-        set => $this->_data[self::DEFINITION_PATH_DATA_INDEX] = $value;
+        get => $this->getData(self::DEFINITION_PATH_DATA_INDEX);
+        set => $this->setData(self::DEFINITION_PATH_DATA_INDEX, $value);
     }
 
     // fileName
@@ -49,7 +51,7 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
     protected const int FILE_NAME_DATA_INDEX = 2;
 
     public string $fileName {
-        get => $this->_data[self::FILE_NAME_DATA_INDEX];
-        set => $this->_data[self::FILE_NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::FILE_NAME_DATA_INDEX);
+        set => $this->setData(self::FILE_NAME_DATA_INDEX, $value);
     }
 }

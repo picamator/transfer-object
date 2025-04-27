@@ -8,21 +8,25 @@
 Transfer Object Generator
 ==========================
 
-Would you like to build lightweight Transfer Objects (TO) easily?
+Would you like to build lightweight Symfony-compatible Transfer Objects (TO) easily?
 You're in the right place!
 
-Build TOs Using an Array as a Blueprint
----------------------------------------
+Build TOs Using JSON as a Blueprint
+------------------------------------
 
-Imagine you have an array:
-```php
-$data = [
-    'firstName' => 'Jan',
-    'lastName' => 'Kowalski'
-];
+Imagine you have an JSON API Response/Payload:
+```json
+{
+    "firstName": "Jan",
+    "lastname": "Kowalski"
+}
+```
+Running the following console command:
+```shell
+$ ./vendor/bin/definition-generate
 ```
 
-TO facade method helps to convert the array into a `YML` definition file:
+Generates a `YML` definition file:
 ```yml
 Customer:
   firstName:
@@ -31,25 +35,29 @@ Customer:
     type: string
 ```
 
-The generator console command builds TO based on the definition file:
+Then, running another console command:
+```shell
+$ ./vendor/bin/transfer-generate [-c|--configuration CONFIGURATION]
+```
+
+Builds the TO:
 ```php
 $customerTransfer = new CustomerTransfer();
 $customerTransfer->firstName = 'Jan';
 $customerTransfer->lastName = 'Kowalski';
 ```
 
-How it works in action can be found on Wiki:
- - [Try Sample to generate Definition files](/doc/samples/try-definition-generator.php)
- - [Try Sample to generate TOs](/doc/samples/try-transfer-generator.php)
- - [Try Advanced Sample to generate TOs](/doc/samples/try-advanced-transfer-generator.php)
-
 Key Features
 ------------
 
-* **Interface methods:** implements `fromArray()`, `toArray()`
+* **Symfony-compatible commands:**
+  * Includes [TransferGeneratorCommand](/src/Command/TransferGeneratorCommand.php) and [DefinitionGeneratorCommand](/src/Command/DefinitionGeneratorCommand.php) as Symfony commands
+  * [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php) and [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php) can be integrated as Symfony services
+* **Interface methods:** implements `fromArray()`, `toArray()`, `toFilterArray()`
 * **Standard interfaces:** implements `IteratorAggregate`, `JsonSerializable`, and `Countable`
 * **Lightweight:** TO includes only data without any business logic
-* **Nullable:** supports both attribute types nullable and not nullable (`required:`)
+* **Nullable:** supports nullable and not nullable property types
+* **Protected** supports asymmetric visibility for properties `set`
 * **BackedEnum:** supports `BackedEnum`
 * **Adaptable:** compatible with custom Data Transfer Object (DTO) implementation
 
@@ -67,24 +75,55 @@ Usage
 
 ### Terminal
 
-Run command bellow to generate Transfer Objects:
-
+Run the following command to generate Transfer Objects:
 ```shell
-$ ./vendor/bin/generate-transfer [-c|--configuration CONFIGURATION]
+$ ./vendor/bin/transfer-generate [-c|--configuration CONFIGURATION]
 ```
 
-Please check Wiki for more details:
-- [Command Configuration](https://github.com/picamator/transfer-object/wiki/Command-Configuration)
+Run the following command to generate Definition files:
+```shell
+$ ./vendor/bin/definition-generate
+```
+
+For more details, check the Wiki:
+- [Console Commands](https://github.com/picamator/transfer-object/wiki/Console-Commands)
 - [Definition File](https://github.com/picamator/transfer-object/wiki/Definition-File)
 
 ### Facade Interface
 
-Facade interface `DefinitionGeneratorFacadeInterface` is used to generate the `YML`
-definition file based on the array.
-
-Please check Wiki for more details:
+Please check Wiki:
 - [Facade Interfaces](https://github.com/picamator/transfer-object/wiki/Facade-Interfaces)
 - [Visualizing Diagrams](https://github.com/picamator/transfer-object/wiki/Visualising-Diagrams)
+
+Explore usage samples:
+- [Definition Generator](/doc/samples/try-definition-generator.php)
+- [Transfer Generator](/doc/samples/try-transfer-generator.php)
+- [Advanced Transfer Generator](/doc/samples/try-advanced-transfer-generator.php)
+
+
+Usage Tests
+-----------
+
+Definition and TO generators have been tested against API responses such as:
+
+* [NASA Open Api](https://api.nasa.gov/neo/rest/v1/neo/2465633?api_key=DEMO_KEY)
+* [OpenWeather](https://openweathermap.org/current#example_JSON)
+* [Content API for Shopping](https://developers.google.com/shopping-content/guides/products/products-api?hl=en)
+* [Frankfurter is a free, open-source currency data API](https://api.frankfurter.dev/v1/latest)
+* [Tagesschau API](https://tagesschau.api.bund.dev)
+
+### Test Scenario
+
+1. JSON response is used as a blueprint to generate Definition files and then TOs.
+2. Generated TO instance is created with the `JSON` data.
+3. The TO instance is converted to an array by running the `toArray()` method.
+4. The converted array is compared to the decoded `JSON` blueprint.
+
+In all cases the compared data were **100%** matched.
+
+More details are in the integration test [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php).
+
+Additionally, TO and Definition generators are using TO, therefore, checking source code helps to see TOs usage in practice.
 
 Acknowledgment
 --------------
@@ -97,6 +136,7 @@ Contribution
 If you find this project useful, please add a star to the repository. Follow the project to stay updated with all activities.
 If you have suggestions for improvements or new features, feel free to create an issue or submit a pull request.
 Here is a [Contribution Guide](CONTRIBUTING.md).
+
 
 This project is released with a [Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in this project and its community, you agree to abide by those terms.

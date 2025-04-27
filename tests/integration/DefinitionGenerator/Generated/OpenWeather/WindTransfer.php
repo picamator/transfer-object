@@ -12,6 +12,8 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /tests/integration/DefinitionGenerator/data/config/open-weather/definition/forecast.transfer.yml Definition file path.
  */
 final class WindTransfer extends AbstractTransfer
 {
@@ -29,8 +31,8 @@ final class WindTransfer extends AbstractTransfer
     protected const int DEG_DATA_INDEX = 0;
 
     public ?int $deg {
-        get => $this->_data[self::DEG_DATA_INDEX];
-        set => $this->_data[self::DEG_DATA_INDEX] = $value;
+        get => $this->getData(self::DEG_DATA_INDEX);
+        set => $this->setData(self::DEG_DATA_INDEX, $value);
     }
 
     // gust
@@ -39,8 +41,8 @@ final class WindTransfer extends AbstractTransfer
     protected const int GUST_DATA_INDEX = 1;
 
     public ?float $gust {
-        get => $this->_data[self::GUST_DATA_INDEX];
-        set => $this->_data[self::GUST_DATA_INDEX] = $value;
+        get => $this->getData(self::GUST_DATA_INDEX);
+        set => $this->setData(self::GUST_DATA_INDEX, $value);
     }
 
     // speed
@@ -49,7 +51,7 @@ final class WindTransfer extends AbstractTransfer
     protected const int SPEED_DATA_INDEX = 2;
 
     public ?float $speed {
-        get => $this->_data[self::SPEED_DATA_INDEX];
-        set => $this->_data[self::SPEED_DATA_INDEX] = $value;
+        get => $this->getData(self::SPEED_DATA_INDEX);
+        set => $this->setData(self::SPEED_DATA_INDEX, $value);
     }
 }

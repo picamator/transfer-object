@@ -103,12 +103,13 @@ echo <<<'STORY'
 =======================================================
 
 STORY;
-$advancedCustomerTransfer = new AdvancedCustomerTransfer()->fromArray([
-    AdvancedCustomerTransfer::CUSTOMER => [
-        CustomerTransfer::FIRST_NAME => 'Max',
-        CustomerTransfer::LAST_NAME => 'Mustermann',
-    ],
-    AdvancedCustomerTransfer::CREDENTIALS => [],
-]);
+$advancedCustomerTransfer = new AdvancedCustomerTransfer()
+    ->fromArray([
+        AdvancedCustomerTransfer::CUSTOMER => [
+            CustomerTransfer::FIRST_NAME => 'Max',
+            CustomerTransfer::LAST_NAME => 'Mustermann',
+        ],
+        AdvancedCustomerTransfer::CREDENTIALS => [],
+    ]);
 
 var_dump($advancedCustomerTransfer->toArray());

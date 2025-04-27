@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use Picamator\TransferObject\Command\DefinitionGeneratorCommand;
+use Symfony\Component\Console\Application;
+
+include $_composer_autoload_path ?? __DIR__ . '/../vendor/autoload.php';
+
+$application = new Application(name:'TransferObject', version:'current');
+$command = new DefinitionGeneratorCommand();
+
+$application->add($command);
+
+$application->setDefaultCommand($command->getName(), true);
+$application->run();

@@ -21,4 +21,6 @@
     <file>src</file>
     <file>tests</file>
 
+    <exclude-pattern>*/tests/integration/*/Generated/*\.php$</exclude-pattern>
+
 </ruleset>

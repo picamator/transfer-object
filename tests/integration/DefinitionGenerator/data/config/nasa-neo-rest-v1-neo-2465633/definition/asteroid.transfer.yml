@@ -1,3 +1,4 @@
+# Asteroid
 Asteroid:
   links:
     type: Links
@@ -23,9 +24,13 @@ Asteroid:
     type: OrbitalData
   is_sentry_object:
     type: bool
+
+# Links
 Links:
   self:
     type: string
+
+# EstimatedDiameter
 EstimatedDiameter:
   kilometers:
     type: Kilometers
@@ -35,26 +40,36 @@ EstimatedDiameter:
     type: Miles
   feet:
     type: Feet
+
+# Kilometers
 Kilometers:
   estimated_diameter_min:
     type: float
   estimated_diameter_max:
     type: float
+
+# Meters
 Meters:
   estimated_diameter_min:
     type: float
   estimated_diameter_max:
     type: float
+
+# Miles
 Miles:
   estimated_diameter_min:
     type: float
   estimated_diameter_max:
     type: float
+
+# Feet
 Feet:
   estimated_diameter_min:
     type: float
   estimated_diameter_max:
     type: float
+
+# CloseApproachData
 CloseApproachData:
   close_approach_date:
     type: string
@@ -68,6 +83,8 @@ CloseApproachData:
     type: MissDistance
   orbiting_body:
     type: string
+
+# RelativeVelocity
 RelativeVelocity:
   kilometers_per_second:
     type: string
@@ -75,6 +92,8 @@ RelativeVelocity:
     type: string
   miles_per_hour:
     type: string
+
+# MissDistance
 MissDistance:
   astronomical:
     type: string
@@ -84,6 +103,8 @@ MissDistance:
     type: string
   miles:
     type: string
+
+# OrbitalData
 OrbitalData:
   orbit_id:
     type: string
@@ -131,6 +152,8 @@ OrbitalData:
     type: string
   orbit_class:
     type: OrbitClass
+
+# OrbitClass
 OrbitClass:
   orbit_class_type:
     type: string
@@ -138,3 +161,4 @@ OrbitClass:
     type: string
   orbit_class_range:
     type: string
+

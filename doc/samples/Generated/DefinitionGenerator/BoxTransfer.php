@@ -12,6 +12,8 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /doc/samples/config/definition-generator/definition/product.transfer.yml Definition file path.
  */
 final class BoxTransfer extends AbstractTransfer
 {
@@ -28,8 +30,8 @@ final class BoxTransfer extends AbstractTransfer
     protected const int ITEMS_DATA_INDEX = 0;
 
     public ?int $items {
-        get => $this->_data[self::ITEMS_DATA_INDEX];
-        set => $this->_data[self::ITEMS_DATA_INDEX] = $value;
+        get => $this->getData(self::ITEMS_DATA_INDEX);
+        set => $this->setData(self::ITEMS_DATA_INDEX, $value);
     }
 
     // type
@@ -38,7 +40,7 @@ final class BoxTransfer extends AbstractTransfer
     protected const int TYPE_DATA_INDEX = 1;
 
     public ?string $type {
-        get => $this->_data[self::TYPE_DATA_INDEX];
-        set => $this->_data[self::TYPE_DATA_INDEX] = $value;
+        get => $this->getData(self::TYPE_DATA_INDEX);
+        set => $this->setData(self::TYPE_DATA_INDEX, $value);
     }
 }

@@ -1,3 +1,4 @@
+# ArdNews
 ArdNews:
   news:
     collectionType: News
@@ -9,6 +10,8 @@ ArdNews:
     type: string
   nextPage:
     type: string
+
+# News
 News:
   sophoraId:
     type: string
@@ -52,6 +55,8 @@ News:
     type: string
   brandingImage:
     type: BrandingImage
+
+# TeaserImage
 TeaserImage:
   alttext:
     type: string
@@ -63,9 +68,13 @@ TeaserImage:
     type: string
   title:
     type: string
+
+# Tags
 Tags:
   tag:
     type: string
+
+# Tracking
 Tracking:
   sid:
     type: string
@@ -87,6 +96,8 @@ Tracking:
     type: string
   av_full_show:
     type: bool
+
+# BrandingImage
 BrandingImage:
   title:
     type: string
@@ -98,6 +109,9 @@ BrandingImage:
     type: ImageVariants
   type:
     type: string
+
+# ImageVariants
 ImageVariants:
   original:
     type: string
+

@@ -13,6 +13,8 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
  * - To modify it, please update the corresponding definition file and run the generator again.
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
+ *
+ * @see /config/definition/transfer-generator.transfer.yml Definition file path.
  */
 final class TransferGeneratorTransfer extends AbstractTransfer
 {
@@ -30,8 +32,8 @@ final class TransferGeneratorTransfer extends AbstractTransfer
     protected const int CLASS_NAME_DATA_INDEX = 0;
 
     public ?string $className {
-        get => $this->_data[self::CLASS_NAME_DATA_INDEX];
-        set => $this->_data[self::CLASS_NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::CLASS_NAME_DATA_INDEX);
+        set => $this->setData(self::CLASS_NAME_DATA_INDEX, $value);
     }
 
     // fileName
@@ -40,8 +42,8 @@ final class TransferGeneratorTransfer extends AbstractTransfer
     protected const int FILE_NAME_DATA_INDEX = 1;
 
     public ?string $fileName {
-        get => $this->_data[self::FILE_NAME_DATA_INDEX];
-        set => $this->_data[self::FILE_NAME_DATA_INDEX] = $value;
+        get => $this->getData(self::FILE_NAME_DATA_INDEX);
+        set => $this->setData(self::FILE_NAME_DATA_INDEX, $value);
     }
 
     // validator
@@ -51,7 +53,7 @@ final class TransferGeneratorTransfer extends AbstractTransfer
     protected const int VALIDATOR_DATA_INDEX = 2;
 
     public DefinitionValidatorTransfer $validator {
-        get => $this->_data[self::VALIDATOR_DATA_INDEX];
-        set => $this->_data[self::VALIDATOR_DATA_INDEX] = $value;
+        get => $this->getData(self::VALIDATOR_DATA_INDEX);
+        set => $this->setData(self::VALIDATOR_DATA_INDEX, $value);
     }
 }
