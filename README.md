@@ -14,11 +14,11 @@ You're in the right place!
 Build TOs Using JSON as a Blueprint
 ------------------------------------
 
-Imagine you have an JSON API Response/Payload:
+Imagine you have a Rest API `JSON` response:
 ```json
 {
     "firstName": "Jan",
-    "lastname": "Kowalski"
+    "lastName": "Kowalski"
 }
 ```
 Running the following console command:
@@ -80,7 +80,7 @@ Run the following command to generate Transfer Objects:
 $ ./vendor/bin/transfer-generate [-c|--configuration CONFIGURATION]
 ```
 
-Run the following command to generate Definition files:
+Run the following command to generate Definition Files:
 ```shell
 $ ./vendor/bin/definition-generate
 ```
@@ -104,7 +104,7 @@ Explore usage samples:
 Usage Tests
 -----------
 
-Definition and TO generators have been tested against API responses such as:
+Definition Files and Transfer Object generators have been tested against API responses such as:
 
 * [NASA Open Api](https://api.nasa.gov/neo/rest/v1/neo/2465633?api_key=DEMO_KEY)
 * [OpenWeather](https://openweathermap.org/current#example_JSON)
@@ -114,7 +114,7 @@ Definition and TO generators have been tested against API responses such as:
 
 ### Test Scenario
 
-1. JSON response is used as a blueprint to generate Definition files and then TOs.
+1. JSON response is used as a blueprint to generate Definition Files and then TOs.
 2. Generated TO instance is created with the `JSON` data.
 3. The TO instance is converted to an array by running the `toArray()` method.
 4. The converted array is compared to the decoded `JSON` blueprint.
@@ -123,7 +123,7 @@ In all cases the compared data were **100%** matched.
 
 More details are in the integration test [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php).
 
-Additionally, TO and Definition generators are using TO, therefore, checking source code helps to see TOs usage in practice.
+Additionally, Definition Files and Transfer Object generators are using TOs.
 
 Acknowledgment
 --------------
