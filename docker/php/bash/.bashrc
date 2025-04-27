@@ -8,5 +8,10 @@ function wrap_in_green() {
   echo -e "\e[32m$1\e[0m"
 }
 
+# function to wrap text in blue
+function color_blue() {
+  echo -e "\[\e[1;34m\]$1\[\e[0m\]"
+}
+
 echo -e "$(wrap_in_green "\nWelcome to the Transfer Object PHP Container!\n")"
-PS1="\[\e[1;34m\]\w\[\e[0m\]$ "
+PS1="$(color_blue "\w")$ "
