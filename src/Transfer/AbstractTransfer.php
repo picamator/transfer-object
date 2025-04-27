@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Transfer;
 
+use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttributeInterface;
+use ReflectionAttribute;
+use ReflectionClassConstant;
 use SplFixedArray;
 use Traversable;
 
 abstract class AbstractTransfer implements TransferInterface
 {
-    use AttributeTransferTrait {
-        hasConstantAttribute as private;
-        getConstantAttribute as private;
-    }
-
     protected const int META_DATA_SIZE = 0;
 
     /**
@@ -30,6 +28,8 @@ abstract class AbstractTransfer implements TransferInterface
 
     /**
      * @param array<string,mixed> $data
+     *
+     * @throws \Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException
      */
     final public function __construct(array $data = [])
     {
@@ -80,14 +80,22 @@ abstract class AbstractTransfer implements TransferInterface
         }
     }
 
+    /**
+     * @throws \Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException
+     */
+    final public function __clone(): void
+    {
+        $this->fromArray($this->toArray());
+    }
+
     final public function toArray(): array
     {
         $data = [];
         foreach (static::META_DATA as $metaKey => $metaName) {
             $dataItem = $this->{$metaKey};
-            $data[$metaKey] = $this->hasConstantAttribute($metaName)
-                ? $this->getConstantAttribute($metaName)?->toArray($dataItem)
-                : $dataItem;
+            $attribute = $this->getConstantAttribute($metaName);
+
+            $data[$metaKey] = $attribute !== null ? $attribute->toArray($dataItem) : $dataItem;
         }
 
         return $data;
@@ -126,32 +134,20 @@ abstract class AbstractTransfer implements TransferInterface
     final public function fromArray(array $data): static
     {
         $this->initData();
+
         if ($data === []) {
             return $this;
         }
 
         $data = array_intersect_key($data, static::META_DATA);
         $data = array_filter($data, fn(mixed $item): bool => $item !== null);
+
         foreach ($data as $key => $value) {
-            $this->{$key} = $this->hasConstantAttribute(static::META_DATA[$key])
-                ? $this->getConstantAttribute(static::META_DATA[$key])?->fromArray($value)
-                : $value;
+            $attribute = $this->getConstantAttribute(static::META_DATA[$key]);
+            $this->{$key} = $attribute !== null ? $attribute->fromArray($value) : $value;
         }
 
         return $this;
-    }
-
-    private function initData(): void
-    {
-        $this->_data = new SplFixedArray(static::META_DATA_SIZE);
-
-        foreach (static::META_DATA as $metaName) {
-            $metaIndex = $metaName . self::DATA_INDEX_SUFFIX;
-            // @phpstan-ignore offsetAssign.dimType
-            $this->_data[static::{$metaIndex}] = $this->hasConstantAttribute($metaName)
-                ? $this->getConstantAttribute($metaName)?->getInitialValue()
-                : null;
-        }
     }
 
     final protected function getData(int $index): mixed
@@ -162,5 +158,29 @@ abstract class AbstractTransfer implements TransferInterface
     final protected function setData(int $index, mixed $value): mixed
     {
         return $this->_data[$index] = $value;
+    }
+
+    private function getConstantAttribute(string $constantName): ?PropertyTypeAttributeInterface
+    {
+        $reflection = new ReflectionClassConstant(static::class, $constantName);
+        $attributeReflections = $reflection->getAttributes(
+            name: PropertyTypeAttributeInterface::class,
+            flags: ReflectionAttribute::IS_INSTANCEOF
+        );
+
+        $attributeReflection = $attributeReflections[0] ?? null;
+
+        return $attributeReflection?->newInstance();
+    }
+
+    private function initData(): void
+    {
+        $this->_data = new SplFixedArray(static::META_DATA_SIZE);
+
+        foreach (static::META_DATA as $metaName) {
+            $metaIndex = $metaName . self::DATA_INDEX_SUFFIX;
+            // @phpstan-ignore offsetAssign.dimType
+            $this->_data[static::{$metaIndex}] = $this->getConstantAttribute($metaName)?->getInitialValue();
+        }
     }
 }

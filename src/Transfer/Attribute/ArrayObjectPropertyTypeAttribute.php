@@ -22,7 +22,7 @@ final readonly class ArrayObjectPropertyTypeAttribute implements PropertyTypeAtt
             throw new PropertyTypeTransferException(
                 sprintf(
                     'Data must be of type array, "%s" given."',
-                    gettype($data)
+                    get_debug_type($data)
                 ),
             );
         }
