@@ -104,7 +104,7 @@ Explore usage samples:
 Usage Tests
 -----------
 
-Definition and TO generators have been tested against API responses such as:
+Definition Files and Transfer Object generators have been tested against API responses such as:
 
 * [NASA Open Api](https://api.nasa.gov/neo/rest/v1/neo/2465633?api_key=DEMO_KEY)
 * [OpenWeather](https://openweathermap.org/current#example_JSON)
@@ -123,7 +123,7 @@ In all cases the compared data were **100%** matched.
 
 More details are in the integration test [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php).
 
-Additionally, TO and Definition generators are using TO, therefore, checking source code helps to see TOs usage in practice.
+Additionally, Definition Files and Transfer Object generators are using TOs.
 
 Acknowledgment
 --------------
