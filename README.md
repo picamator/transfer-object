@@ -14,7 +14,7 @@ You're in the right place!
 Build TOs Using JSON as a Blueprint
 ------------------------------------
 
-Imagine you have an JSON API Response/Payload:
+Imagine you have a Rest API `JSON` response:
 ```json
 {
     "firstName": "Jan",
