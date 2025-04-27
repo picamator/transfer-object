@@ -11,7 +11,7 @@ class FileAppender implements FileAppenderInterface
     /**
      * @var array<string,resource>
      */
-    private array $files;
+    private array $fileCache;
 
     public function appendToFile(string $filename, string $content): void
     {
@@ -32,8 +32,8 @@ class FileAppender implements FileAppenderInterface
      */
     private function getFile(string $filename)
     {
-        if (isset($this->files[$filename])) {
-            return $this->files[$filename];
+        if (isset($this->fileCache[$filename])) {
+            return $this->fileCache[$filename];
         }
 
         $file = $this->fopen($filename);
@@ -43,16 +43,16 @@ class FileAppender implements FileAppenderInterface
             );
         }
 
-        return $this->files[$filename] = $file;
+        return $this->fileCache[$filename] = $file;
     }
 
     public function __destruct()
     {
-        if (!isset($this->files)) {
+        if (!isset($this->fileCache)) {
             return;
         }
 
-        foreach ($this->files as $file) {
+        foreach ($this->fileCache as $file) {
             $this->fclose($file);
         }
     }
@@ -73,12 +73,11 @@ class FileAppender implements FileAppenderInterface
         return fopen($filename, 'a');
     }
 
-    protected function fclose(mixed $file): void
+    /**
+     * @param resource $file
+     */
+    protected function fclose($file): void
     {
-        if (!is_resource($file)) {
-            return;
-        }
-
         fclose($file);
     }
 }
