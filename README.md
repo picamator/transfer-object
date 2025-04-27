@@ -18,7 +18,7 @@ Imagine you have an JSON API Response/Payload:
 ```json
 {
     "firstName": "Jan",
-    "lastname": "Kowalski"
+    "lastName": "Kowalski"
 }
 ```
 Running the following console command:
@@ -80,7 +80,7 @@ Run the following command to generate Transfer Objects:
 $ ./vendor/bin/transfer-generate [-c|--configuration CONFIGURATION]
 ```
 
-Run the following command to generate Definition files:
+Run the following command to generate Definition Files:
 ```shell
 $ ./vendor/bin/definition-generate
 ```
@@ -114,7 +114,7 @@ Definition and TO generators have been tested against API responses such as:
 
 ### Test Scenario
 
-1. JSON response is used as a blueprint to generate Definition files and then TOs.
+1. JSON response is used as a blueprint to generate Definition Files and then TOs.
 2. Generated TO instance is created with the `JSON` data.
 3. The TO instance is converted to an array by running the `toArray()` method.
 4. The converted array is compared to the decoded `JSON` blueprint.
