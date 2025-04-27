@@ -31,20 +31,15 @@ RUN docker-php-ext-configure zip && \
     pecl install xdebug
 
 # configure Xdebug
-RUN docker-php-ext-enable xdebug && \
-    echo "xdebug.max_nesting_level=1000" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
-    echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
-    echo "xdebug.client_port=9003" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
-    echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/99-xdebug.ini && \
-    echo "xdebug.output_dir=/tmp/xdebug-profile" >> /usr/local/etc/php/conf.d/99-xdebug.ini; \
-    echo "xdebug.mode=debug,coverage" >> /usr/local/etc/php/conf.d/99-xdebug.ini;
+RUN docker-php-ext-enable xdebug
+COPY ./config.d/99-xdebug.ini  /usr/local/etc/php/conf.d/99-xdebug.ini
 
 # switch back to the new user
 USER transfer
 
 # bash
-RUN echo "echo -e \"\e[32m\nWelcome to the Transfer Object PHP Container!\n\e[0m\"" >> /home/transfer/.bashrc
-RUN echo "PS1=\"\[\e[1;34m\]\w\[\e[0m\]$ \"" >> /home/transfer/.bashrc
+COPY ./bash/composer-autocomplete.sh /home/transfer/composer-autocomplete.sh
+COPY ./bash/.bashrc /home/transfer/.bashrc
 
 # workaround to keep container running
 CMD ["tail", "-f", "/dev/null"]
