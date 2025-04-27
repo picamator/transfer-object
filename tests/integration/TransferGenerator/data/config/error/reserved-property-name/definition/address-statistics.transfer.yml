@@ -1,3 +1,5 @@
 AddressStatistics:
   _data:
     type: string
+  _attributeCache:
+    type: string
