@@ -17,16 +17,16 @@ use Throwable;
 class DefinitionGeneratorCommand extends Command
 {
     private const string NAME = 'picamator:definition:generate';
-    private const string DESCRIPTION = 'Generates Transfer Object definition files.';
+    private const string DESCRIPTION = 'Generates Transfer Object Definition Files based on JSON file as a blueprint.';
     private const string HELP = <<<'HELP'
-Based on JSON file, generates Transfer Object definition files.
+Answer on interactive questions to set Definition File Path, Transfer Object Class Name, and JSON File Path."
 HELP;
 
     private const string QUESTION_DEFINITION_PATH = 'Definition directory path: ';
     private const string QUESTION_CLASS_NAME = 'Transfer Object class name: ';
     private const string QUESTION_JSON_PATH = 'JSON file path: ';
 
-    private const string START_SECTION_NAME = 'Definition Generation';
+    private const string START_SECTION_NAME = 'Definition Files Generation';
 
     private const string SUCCESS_MESSAGE_TEMPLATE = 'Definition files %d were generated successfully.';
 
