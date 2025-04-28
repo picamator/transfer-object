@@ -38,9 +38,9 @@ HELP;
     private const string QUESTION_CLASS_NAME = 'Transfer Object class name: ';
     private const string QUESTION_JSON_PATH = 'JSON file path: ';
 
-    private const string START_SECTION_NAME = 'Generating Transfer Object Definitions...';
+    private const string START_SECTION_NAME = 'Generating Transfer Object Definitions 🪄';
 
-    private const string SUCCESS_MESSAGE_TEMPLATE = 'Successfully generated %d definition file(s)!';
+    private const string SUCCESS_MESSAGE_TEMPLATE = 'Successfully generated %d definition file(s)! 🎉';
 
     public function __construct(
         ?string $name = null,

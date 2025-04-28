@@ -36,7 +36,6 @@ function show_usage() {
 
 # vars
 DOCKER_CONTAINER_NAME=transfer-object-php
-PROJECT_ROOT="/home/transfer/transfer-object"
 DOCKER_EXEC="docker exec -it ${DOCKER_CONTAINER_NAME}"
 
 # options
@@ -102,7 +101,7 @@ case $1 in
     $DOCKER_EXEC composer captainhook $2
     ;;
   to-generate)
-     $DOCKER_EXEC composer transfer-generate -- -c ${PROJECT_ROOT}/config/generator.config.yml
+     $DOCKER_EXEC composer transfer-generate -- -c /config/generator.config.yml
     ;;
   df-generate)
      $DOCKER_EXEC composer definition-generate

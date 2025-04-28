@@ -113,7 +113,7 @@ Definition Files and Transfer Objects generators use [Transfer Objects](/src/Gen
 Acknowledgment
 --------------
 
-Many thanks for your contribution, support, feedback and simply using the Transfer Object Generator! 💖
+Many thanks for your contribution, support, feedback and simply using the Transfer Object Generator! ❤️
 
 Contribution
 ------------
@@ -123,8 +123,8 @@ Follow the project to stay updated with all activities.
 
 If you have suggestions for improvements or new features, feel free to:
 
-- Create an issue 🐛
-- Submit a pull request 🚀
+- Create an issue
+- Submit a pull request
 
 Here is a [Contribution Guide](CONTRIBUTING.md).
 

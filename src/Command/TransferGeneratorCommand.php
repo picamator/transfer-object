@@ -34,7 +34,7 @@ HELP;
     private const string OPTION_SHORTCUT_CONFIGURATION = 'c';
     private const string OPTION_DESCRIPTION_CONFIGURATION = 'Path to the YML configuration file.';
 
-    private const string START_SECTION_NAME = 'Generating Transfer Objects...';
+    private const string START_SECTION_NAME = 'Generating Transfer Objects ✨';
 
     private const string ERROR_MISSED_OPTION_CONFIG_MESSAGE =
         'The required -c option is missing. Please provide the path to the YML configuration file.';
@@ -42,7 +42,7 @@ HELP;
     private const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Processing Transfer Object: "%s".';
     private const string DEFINITION_MESSAGE_TEMPLATE = 'Using definition file: "%s".';
 
-    private const string SUCCESS_MESSAGE = 'All Transfer Objects were generated successfully!';
+    private const string SUCCESS_MESSAGE = 'All Transfer Objects were generated successfully! 🎉';
 
     public function __construct(
         ?string $name = null,
