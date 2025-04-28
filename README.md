@@ -10,7 +10,7 @@ Transfer Object Generator
 
 Would you like to build Symfony-compatible Transfer Objects easily?
 
-You're in the right place!
+You're in the right place! 🎉
 
 Build Transfer Object by Blueprint
 ----------------------------------
@@ -96,7 +96,7 @@ Definition Files and Transfer Object generators have been tested against API res
 4. Transfer Object is converted back to the array
 5. The converted array is compared with the API response
 
-In all cases, data **100%** are matched.
+In all cases, data **100%** are matched ✅.
 
 Please check [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php) for more details.
 
@@ -113,13 +113,19 @@ Definition Files and Transfer Objects generators use [Transfer Objects](/src/Gen
 Acknowledgment
 --------------
 
-Many thanks for your contribution, support, feedback and simply using the Transfer Object Generator!
+Many thanks for your contribution, support, feedback and simply using the Transfer Object Generator! 💖
 
 Contribution
 ------------
 
-If you find this project useful, please add a star to the repository. Follow the project to stay updated with all activities.
-If you have suggestions for improvements or new features, feel free to create an issue or submit a pull request.
+If you find this project useful, please ⭐ star the repository.
+Follow the project to stay updated with all activities.
+
+If you have suggestions for improvements or new features, feel free to:
+
+- Create an issue 🐛
+- Submit a pull request 🚀
+
 Here is a [Contribution Guide](CONTRIBUTING.md).
 
 
