@@ -29,9 +29,20 @@ class ConfigEnvironmentRender implements ConfigEnvironmentRenderInterface
             return $this->projectRootCache;
         }
 
-        $projectRoot = getenv(self::PROJECT_ROOT_ENV);
-        $projectRoot = is_string($projectRoot) ? trim($projectRoot) : '';
+        $projectRoot = $this->getEnv(self::PROJECT_ROOT_ENV) ?: $this->getCwd();
 
         return $this->projectRootCache = $projectRoot;
+    }
+
+    protected function getCwd(): string
+    {
+        return getcwd() ?: '';
+    }
+
+    protected function getEnv(string $name): string
+    {
+        $envValue = getenv($name);
+
+        return is_string($envValue) ? trim($envValue) : '';
     }
 }

@@ -36,8 +36,9 @@ HELP;
 
     private const string START_SECTION_NAME = 'Generating Transfer Objects ✨';
 
-    private const string ERROR_MISSED_OPTION_CONFIG_MESSAGE =
-        'The required -c option is missing. Please provide the path to the YML configuration file.';
+    private const string ERROR_MISSED_OPTION_CONFIG_MESSAGE = <<<'MESSAGE'
+The required -c option is missing or path does not exist. Please provide the path to the YML configuration file.
+MESSAGE;
 
     private const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Processing Transfer Object: "%s".';
     private const string DEFINITION_MESSAGE_TEMPLATE = 'Using definition file: "%s".';

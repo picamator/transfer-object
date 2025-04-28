@@ -16,7 +16,9 @@ trait InputNormalizerTrait
         $workingDirectory = getcwd() ?: '';
         $value = ltrim($value, '\/');
 
-        return $workingDirectory . DIRECTORY_SEPARATOR . $value;
+        $path = realpath($workingDirectory . DIRECTORY_SEPARATOR . $value);
+
+        return (string)$path;
     }
 
     private function normalizeEmpty(?string $value): string
