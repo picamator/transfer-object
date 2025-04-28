@@ -130,4 +130,5 @@ License
 -------
 
 Transfer Object Generator is free and open-source software licensed under the MIT License.
+
 For more details, please see the [LICENSE](LICENSE) file.
