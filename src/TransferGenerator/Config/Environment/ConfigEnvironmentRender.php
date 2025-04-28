@@ -30,10 +30,8 @@ class ConfigEnvironmentRender implements ConfigEnvironmentRenderInterface
         }
 
         $projectRoot = getenv(self::PROJECT_ROOT_ENV);
-        if (!is_string($projectRoot)) {
-            return '';
-        }
+        $projectRoot = is_string($projectRoot) ? trim($projectRoot) : '';
 
-        return $this->projectRootCache = trim($projectRoot);
+        return $this->projectRootCache = $projectRoot;
     }
 }
