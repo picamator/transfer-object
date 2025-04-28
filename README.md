@@ -58,9 +58,9 @@ Key Features
 ------------
 
 * **Symfony-compatible:**
-  * includes Symfony commands: [TransferGeneratorCommand](/src/Command/TransferGeneratorCommand.php) and [DefinitionGeneratorCommand](/src/Command/DefinitionGeneratorCommand.php)
-  * includes Symfony like services: [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php) and [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php)
-  * mappable with Symfony request query string and payload
+  * includes Symfony console commands: [TransferGeneratorCommand](/src/Command/TransferGeneratorCommand.php) and [DefinitionGeneratorCommand](/src/Command/DefinitionGeneratorCommand.php)
+  * includes Symfony services: [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php) and [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php)
+  * Transfer Objects are mappable with Symfony request
 * **Transfer Object:**
   * implements methods: `fromArray()`, `toArray()`, and `toFilterArray()`
   * implements standard interfaces: `IteratorAggregate`, `JsonSerializable`, and `Countable`
