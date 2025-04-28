@@ -10,6 +10,9 @@ use ReflectionClassConstant;
 use SplFixedArray;
 use Traversable;
 
+/**
+ * @api
+ */
 abstract class AbstractTransfer implements TransferInterface
 {
     protected const int META_DATA_SIZE = 0;

@@ -13,7 +13,9 @@ use Traversable;
  * - Simplifies integration with external transfer objects by removing the need to implement all interface methods.
  * - Intended for use as a placeholder in cases where full method functionality is not required.
  *
- * @example ./doc/samples/try-advanced-transfer-generator.php
+ * @api
+ *
+ * @example /doc/samples/try-advanced-transfer-generator.php
  */
 trait DummyTransferAdapterTrait
 {

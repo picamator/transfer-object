@@ -8,6 +8,9 @@ use Attribute;
 use Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException;
 use Picamator\TransferObject\Transfer\TransferInterface;
 
+/**
+ * @api
+ */
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
 final readonly class PropertyTypeAttribute implements PropertyTypeAttributeInterface
 {

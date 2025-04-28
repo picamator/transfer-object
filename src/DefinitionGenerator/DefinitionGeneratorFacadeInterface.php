@@ -17,8 +17,8 @@ interface DefinitionGeneratorFacadeInterface
      *
      * @api
      *
-     * @example ./doc/samples/try-definition-generator.php
-     * @example ./src/Command/DefinitionGeneratorCommand.php
+     * @example /doc/samples/try-definition-generator.php
+     * @example /src/Command/DefinitionGeneratorCommand.php
      *
      * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
      */
@@ -32,7 +32,7 @@ interface DefinitionGeneratorFacadeInterface
      *
      * @internal
      *
-     * @example ./src/Command/DefinitionGeneratorCommand.php
+     * @example /src/Command/DefinitionGeneratorCommand.php
      */
     public function createDefinitionGeneratorBuilder(): DefinitionGeneratorBuilderInterface;
 }

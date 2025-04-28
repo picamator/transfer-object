@@ -8,6 +8,9 @@ use Attribute;
 use BackedEnum;
 use Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException;
 
+/**
+ * @api
+ */
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
 final readonly class EnumPropertyTypeAttribute implements PropertyTypeAttributeInterface
 {
