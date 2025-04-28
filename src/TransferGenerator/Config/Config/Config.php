@@ -27,4 +27,9 @@ final readonly class Config implements ConfigInterface
     {
         return $this->configTransfer->definitionPath;
     }
+
+    public function getRelativeDefinitionPath(): string
+    {
+        return $this->configTransfer->relativeDefinitionPath;
+    }
 }

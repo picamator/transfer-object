@@ -12,19 +12,6 @@ enum ConfigKeyEnum: string
     case TRANSFER_PATH = ConfigContentTransfer::TRANSFER_PATH;
     case DEFINITION_PATH = ConfigContentTransfer::DEFINITION_PATH;
 
-    private const array PATH_KEYS = [
-      self::TRANSFER_PATH,
-      self::DEFINITION_PATH,
-    ];
-
-    /**
-     * @return array<int,ConfigKeyEnum>
-     */
-    public static function getPathKeys(): array
-    {
-        return self::PATH_KEYS;
-    }
-
     /**
      * @return array<string,string>
      */

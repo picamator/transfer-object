@@ -17,10 +17,11 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  */
 final class ConfigContentTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 3;
+    protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
         self::DEFINITION_PATH => self::DEFINITION_PATH_DATA_NAME,
+        self::RELATIVE_DEFINITION_PATH => self::RELATIVE_DEFINITION_PATH_DATA_NAME,
         self::TRANSFER_NAMESPACE => self::TRANSFER_NAMESPACE_DATA_NAME,
         self::TRANSFER_PATH => self::TRANSFER_PATH_DATA_NAME,
     ];
@@ -35,10 +36,20 @@ final class ConfigContentTransfer extends AbstractTransfer
         set => $this->setData(self::DEFINITION_PATH_DATA_INDEX, $value);
     }
 
+    // relativeDefinitionPath
+    public const string RELATIVE_DEFINITION_PATH = 'relativeDefinitionPath';
+    protected const string RELATIVE_DEFINITION_PATH_DATA_NAME = 'RELATIVE_DEFINITION_PATH';
+    protected const int RELATIVE_DEFINITION_PATH_DATA_INDEX = 1;
+
+    public string $relativeDefinitionPath {
+        get => $this->getData(self::RELATIVE_DEFINITION_PATH_DATA_INDEX);
+        set => $this->setData(self::RELATIVE_DEFINITION_PATH_DATA_INDEX, $value);
+    }
+
     // transferNamespace
     public const string TRANSFER_NAMESPACE = 'transferNamespace';
     protected const string TRANSFER_NAMESPACE_DATA_NAME = 'TRANSFER_NAMESPACE';
-    protected const int TRANSFER_NAMESPACE_DATA_INDEX = 1;
+    protected const int TRANSFER_NAMESPACE_DATA_INDEX = 2;
 
     public string $transferNamespace {
         get => $this->getData(self::TRANSFER_NAMESPACE_DATA_INDEX);
@@ -48,7 +59,7 @@ final class ConfigContentTransfer extends AbstractTransfer
     // transferPath
     public const string TRANSFER_PATH = 'transferPath';
     protected const string TRANSFER_PATH_DATA_NAME = 'TRANSFER_PATH';
-    protected const int TRANSFER_PATH_DATA_INDEX = 2;
+    protected const int TRANSFER_PATH_DATA_INDEX = 3;
 
     public string $transferPath {
         get => $this->getData(self::TRANSFER_PATH_DATA_INDEX);

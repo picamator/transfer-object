@@ -17,18 +17,25 @@ use Throwable;
 class DefinitionGeneratorCommand extends Command
 {
     private const string NAME = 'picamator:definition:generate';
-    private const string DESCRIPTION = 'Generates Transfer Object definition files.';
+    private const string DESCRIPTION = 'Generate Transfer Object definition files from a JSON blueprint.';
     private const string HELP = <<<'HELP'
-Based on JSON file, generates Transfer Object definition files.
+This command allows you to generate Transfer Object definition files based on a JSON file as a blueprint.
+
+You will be prompted to provide the following details:
+  - The directory path where the definition files should be saved.
+  - The class name for the Transfer Object.
+  - The path to the JSON file that serves as a blueprint.
+
+Follow the interactive prompts to complete the process.
 HELP;
 
     private const string QUESTION_DEFINITION_PATH = 'Definition directory path: ';
     private const string QUESTION_CLASS_NAME = 'Transfer Object class name: ';
     private const string QUESTION_JSON_PATH = 'JSON file path: ';
 
-    private const string START_SECTION_NAME = 'Definition Generation';
+    private const string START_SECTION_NAME = 'Generating Transfer Object Definitions...';
 
-    private const string SUCCESS_MESSAGE_TEMPLATE = 'Definition files %d were generated successfully.';
+    private const string SUCCESS_MESSAGE_TEMPLATE = 'Successfully generated %d definition file(s)!';
 
     public function __construct(
         ?string $name = null,

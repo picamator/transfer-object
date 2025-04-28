@@ -20,7 +20,7 @@ interface TransferGeneratorFacadeInterface
      *
      * @api
      *
-     * @example ./src/Command/TransferGeneratorCommand.php
+     * @example /src/Command/TransferGeneratorCommand.php
      *
      * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
      * @throws \FiberError
@@ -39,8 +39,8 @@ interface TransferGeneratorFacadeInterface
      *
      * @api
      *
-     * @example ./doc/samples/try-transfer-generator.php
-     * @example ./doc/samples/try-advanced-transfer-generator.php
+     * @example /doc/samples/try-transfer-generator.php
+     * @example /doc/samples/try-advanced-transfer-generator.php
      *
      * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
      */

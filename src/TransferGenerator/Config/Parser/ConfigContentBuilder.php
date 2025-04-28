@@ -33,11 +33,14 @@ readonly class ConfigContentBuilder implements ConfigContentBuilderInterface
 
     private function renderPathKeys(ConfigContentTransfer $contentTransfer): ConfigContentTransfer
     {
-        foreach (ConfigKeyEnum::getPathKeys() as $key) {
-            $contentTransfer->{$key->value} = $this->environmentRender->renderProjectRoot(
-                $contentTransfer->{$key->value},
-            );
-        }
+        $contentTransfer->relativeDefinitionPath =
+            $this->environmentRender->renderRelativeProjectRoot($contentTransfer->definitionPath);
+
+        $contentTransfer->definitionPath =
+            $this->environmentRender->renderProjectRoot($contentTransfer->definitionPath);
+
+        $contentTransfer->transferPath =
+            $this->environmentRender->renderProjectRoot($contentTransfer->transferPath);
 
         return $contentTransfer;
     }

@@ -43,9 +43,6 @@ readonly class TemplateBuilder implements TemplateBuilderInterface
 
     private function getDefinitionPath(DefinitionTransfer $definitionTransfer): string
     {
-        $workingDirectory = getcwd() ?: '';
-        $definitionPath = str_replace($workingDirectory, '', $this->config->getDefinitionPath());
-
-        return $definitionPath . DIRECTORY_SEPARATOR . $definitionTransfer->fileName;
+        return $this->config->getRelativeDefinitionPath() . DIRECTORY_SEPARATOR . $definitionTransfer->fileName;
     }
 }

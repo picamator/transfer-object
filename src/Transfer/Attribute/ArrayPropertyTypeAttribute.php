@@ -7,6 +7,9 @@ namespace Picamator\TransferObject\Transfer\Attribute;
 use Attribute;
 use Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException;
 
+/**
+ * @api
+ */
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
 final readonly class ArrayPropertyTypeAttribute implements PropertyTypeAttributeInterface
 {
