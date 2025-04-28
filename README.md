@@ -27,7 +27,7 @@ Running the following interactive [console command](https://github.com/picamator
 $ ./vendor/bin/definition-generate
 ```
 
-Generates an `YML` [definition file](https://github.com/picamator/transfer-object/wiki/Definition-File):
+Generates a `YML` [definition file](https://github.com/picamator/transfer-object/wiki/Definition-File):
 ```yml
 Customer:
   firstName:
@@ -88,10 +88,10 @@ Definition Files and Transfer Object generators have been tested against API res
 1. Rest API response is used as a blueprint to generate Definition Files
 2. Transfer Objects are generated based on Definition Files
 3. Transfer Object instance is created with the API response
-4. Transfer Object is converted back to array
+4. Transfer Object is converted back to the array
 5. The converted array is compared with the API response
 
-In all cases data **100%** are matched.
+In all cases, data **100%** are matched.
 
 Please check [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php) for more details.
 
