@@ -9,7 +9,7 @@ class ConfigEnvironmentRender implements ConfigEnvironmentRenderInterface
     private const string PROJECT_ROOT_PLACEHOLDER = '${PROJECT_ROOT}';
     private const string PROJECT_ROOT_ENV = 'PROJECT_ROOT';
 
-    private static string $projectRoot;
+    private string $projectRootCache;
 
     public function renderProjectRoot(string $path): string
     {
@@ -25,8 +25,15 @@ class ConfigEnvironmentRender implements ConfigEnvironmentRenderInterface
 
     private function getProjectRoot(): string
     {
-        self::$projectRoot = (string)getenv(self::PROJECT_ROOT_ENV);
+        if (isset($this->projectRootCache)) {
+            return $this->projectRootCache;
+        }
 
-        return self::$projectRoot;
+        $projectRoot = getenv(self::PROJECT_ROOT_ENV);
+        if (!is_string($projectRoot)) {
+            return '';
+        }
+
+        return $this->projectRootCache = trim($projectRoot);
     }
 }
