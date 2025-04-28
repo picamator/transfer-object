@@ -18,6 +18,11 @@ class ConfigEnvironmentRender implements ConfigEnvironmentRenderInterface
         return str_replace(self::PROJECT_ROOT_PLACEHOLDER, $projectRoot, $path);
     }
 
+    public function renderRelativeProjectRoot(string $path): string
+    {
+        return str_replace(self::PROJECT_ROOT_PLACEHOLDER, '', $path);
+    }
+
     private function getProjectRoot(): string
     {
         self::$projectRoot = (string)getenv(self::PROJECT_ROOT_ENV);

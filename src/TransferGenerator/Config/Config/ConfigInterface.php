@@ -20,4 +20,9 @@ interface ConfigInterface
      * @throws \Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException
      */
     public function getDefinitionPath(): string;
+
+    /**
+     * @throws \Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException
+     */
+    public function getRelativeDefinitionPath(): string;
 }

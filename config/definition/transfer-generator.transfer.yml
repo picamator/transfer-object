@@ -23,6 +23,9 @@ ConfigContent:
   definitionPath:
     type: string
     required:
+  relativeDefinitionPath:
+    type: string
+    required:
 
 Definition:
   fileName:
