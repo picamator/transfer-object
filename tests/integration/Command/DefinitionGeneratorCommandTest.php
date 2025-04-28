@@ -40,7 +40,7 @@ class DefinitionGeneratorCommandTest extends TestCase
         // Assert
         $this->assertSame(0, $this->commandTester->getStatusCode());
         $this->assertStringContainsString(
-            'Definition files 1 were generated successfully.',
+            'Successfully generated 1 definition file(s)!',
             $output,
         );
         $this->assertFileExists(__DIR__ . '/Generated/Definition/customer.transfer.yml');

@@ -16,25 +16,30 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class TransferGeneratorCommand extends Command
 {
     private const string NAME = 'picamator:transfer:generate';
-    private const string DESCRIPTION = 'Generates Transfer Objects based on definitions template.';
+    private const string DESCRIPTION = 'Generate Transfer Objects from definition templates.';
     private const string HELP = <<<'HELP'
-Configuration option includes path to Definition Files directory, Transfer Object namespace,
-and the path to generated objects.
+This command generates Transfer Objects based on YML definitions.
+The command requires a path to the configuration file in YML format.
+
+The configuration specifies:
+  - The directory containing the definition files.
+  - The namespace for the Transfer Objects.
+  - The output directory where the generated Transfer Objects will be saved.
 HELP;
 
     private const string OPTION_NAME_CONFIGURATION = 'configuration';
     private const string OPTION_SHORTCUT_CONFIGURATION = 'c';
-    private const string OPTION_DESCRIPTION_CONFIGURATION = 'Path to YML configuration.';
+    private const string OPTION_DESCRIPTION_CONFIGURATION = 'Path to the YML configuration file.';
 
-    private const string START_SECTION_NAME = 'Transfer Object Generation';
+    private const string START_SECTION_NAME = 'Generating Transfer Objects...';
 
     private const string ERROR_MISSED_OPTION_CONFIG_MESSAGE =
-        'Command option -c is not set. Please provide the path to the YML configuration.';
+        'The required -c option is missing. Please provide the path to the YML configuration file.';
 
-    private const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Transfer Object: "%s".';
-    private const string DEFINITION_MESSAGE_TEMPLATE = 'Definition file: "%s".';
+    private const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Processing Transfer Object: "%s".';
+    private const string DEFINITION_MESSAGE_TEMPLATE = 'Using definition file: "%s".';
 
-    private const string SUCCESS_MESSAGE = 'Transfer Objects were generated successfully.';
+    private const string SUCCESS_MESSAGE = 'All Transfer Objects were generated successfully!';
 
     public function __construct(
         ?string $name = null,
