@@ -144,7 +144,7 @@ jobs:
       - name: Generate Transfer Objects
         env:
           PROJECT_ROOT: ${{ github.workspace }}
-        run: composer transfer-generate -- -c ${PROJECT_ROOT}/config/generator.config.yml
+        run: composer transfer-generate -- -c ./config/generator.config.yml
 
       - name: Run PHPUnit
         env:
