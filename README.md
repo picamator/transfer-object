@@ -8,25 +8,26 @@
 Transfer Object Generator
 ==========================
 
-Would you like to build lightweight Symfony-compatible Transfer Objects (TO) easily?
+Would you like to build Symfony-compatible Transfer Objects easily?
 You're in the right place!
 
-Build TOs Using JSON as a Blueprint
-------------------------------------
+Build Transfer Object by Blueprint
+----------------------------------
 
-Imagine you have a Rest API `JSON` response:
+Imagine you have a Rest API response:
 ```json
 {
     "firstName": "Jan",
     "lastName": "Kowalski"
 }
 ```
-Running the following console command:
+
+Running the following interactive [console command](https://github.com/picamator/transfer-object/wiki/Console-Commands#definition-generate):
 ```shell
 $ ./vendor/bin/definition-generate
 ```
 
-Generates a `YML` definition file:
+Generates an `YML` [definition file](https://github.com/picamator/transfer-object/wiki/Definition-File):
 ```yml
 Customer:
   firstName:
@@ -35,12 +36,12 @@ Customer:
     type: string
 ```
 
-Then, running another console command:
+Then, running another [console command](https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate):
 ```shell
 $ ./vendor/bin/transfer-generate [-c|--configuration CONFIGURATION]
 ```
 
-Builds the TO:
+Builds the Transfer Object:
 ```php
 $customerTransfer = new CustomerTransfer();
 $customerTransfer->firstName = 'Jan';
@@ -50,16 +51,17 @@ $customerTransfer->lastName = 'Kowalski';
 Key Features
 ------------
 
-* **Symfony-compatible commands:**
-  * Includes [TransferGeneratorCommand](/src/Command/TransferGeneratorCommand.php) and [DefinitionGeneratorCommand](/src/Command/DefinitionGeneratorCommand.php) as Symfony commands
-  * [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php) and [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php) can be integrated as Symfony services
-* **Interface methods:** implements `fromArray()`, `toArray()`, `toFilterArray()`
-* **Standard interfaces:** implements `IteratorAggregate`, `JsonSerializable`, and `Countable`
-* **Lightweight:** TO includes only data without any business logic
-* **Nullable:** supports nullable and not nullable property types
-* **Protected** supports asymmetric visibility for properties `set`
-* **BackedEnum:** supports `BackedEnum`
-* **Adaptable:** compatible with custom Data Transfer Object (DTO) implementation
+* **Symfony-compatible:**
+  * includes Symfony commands: [TransferGeneratorCommand](/src/Command/TransferGeneratorCommand.php) and [DefinitionGeneratorCommand](/src/Command/DefinitionGeneratorCommand.php)
+  * includes Symfony like services: [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php) and [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php)
+  * mappable with Symfony request query string and payload
+* **Transfer Object:**
+  * implements methods: `fromArray()`, `toArray()`, and `toFilterArray()`
+  * implement standard interfaces: `IteratorAggregate`, `JsonSerializable`, and `Countable`
+  * supports nullable and not nullable property types
+  * supports asymmetric protected property `set` visibility
+  * supports `BackedEnum`
+  * compatible with custom Data Transfer Object (DTO) implementation
 
 Installation
 ------------
@@ -69,37 +71,6 @@ Composer installation:
 ```shell
 $ composer require picamator/transfer-object
 ```
-
-Usage
------
-
-### Terminal
-
-Run the following command to generate Transfer Objects:
-```shell
-$ ./vendor/bin/transfer-generate [-c|--configuration CONFIGURATION]
-```
-
-Run the following command to generate Definition Files:
-```shell
-$ ./vendor/bin/definition-generate
-```
-
-For more details, check the Wiki:
-- [Console Commands](https://github.com/picamator/transfer-object/wiki/Console-Commands)
-- [Definition File](https://github.com/picamator/transfer-object/wiki/Definition-File)
-
-### Facade Interface
-
-Please check Wiki:
-- [Facade Interfaces](https://github.com/picamator/transfer-object/wiki/Facade-Interfaces)
-- [Visualizing Diagrams](https://github.com/picamator/transfer-object/wiki/Visualising-Diagrams)
-
-Explore usage samples:
-- [Definition Generator](/doc/samples/try-definition-generator.php)
-- [Transfer Generator](/doc/samples/try-transfer-generator.php)
-- [Advanced Transfer Generator](/doc/samples/try-advanced-transfer-generator.php)
-
 
 Usage Tests
 -----------
@@ -114,16 +85,25 @@ Definition Files and Transfer Object generators have been tested against API res
 
 ### Test Scenario
 
-1. JSON response is used as a blueprint to generate Definition Files and then TOs.
-2. Generated TO instance is created with the `JSON` data.
-3. The TO instance is converted to an array by running the `toArray()` method.
-4. The converted array is compared to the decoded `JSON` blueprint.
+1. Rest API response is used as a blueprint to generate Definition Files
+2. Transfer Objects are generated based on Definition Files
+3. Transfer Object instance is created with the API response
+4. Transfer Object is converted back to array
+5. The converted array is compared with the API response
 
-In all cases the compared data were **100%** matched.
+In all cases data **100%** are matched.
 
-More details are in the integration test [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php).
+Please check [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php) for more details.
 
-Additionally, Definition Files and Transfer Object generators are using TOs.
+### Service Samples
+
+- [Definition Generator](/doc/samples/try-definition-generator.php)
+- [Transfer Generator](/doc/samples/try-transfer-generator.php)
+- [Advanced Transfer Generator](/doc/samples/try-advanced-transfer-generator.php)
+
+### Practice
+
+Definition Files and Transfer Objects generators use [Transfer Objects](/src/Generated).
 
 Acknowledgment
 --------------
