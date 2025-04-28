@@ -9,12 +9,14 @@ Transfer Object Generator
 ==========================
 
 Would you like to build Symfony-compatible Transfer Objects easily?
+
 You're in the right place!
 
 Build Transfer Object by Blueprint
 ----------------------------------
 
 Imagine you have a Rest API response:
+
 ```json
 {
     "firstName": "Jan",
@@ -23,11 +25,13 @@ Imagine you have a Rest API response:
 ```
 
 Running the following interactive [console command](https://github.com/picamator/transfer-object/wiki/Console-Commands#definition-generate):
-```shell
+
+```console
 $ ./vendor/bin/definition-generate
 ```
 
 Generates a `YML` [definition file](https://github.com/picamator/transfer-object/wiki/Definition-File):
+
 ```yml
 Customer:
   firstName:
@@ -37,11 +41,13 @@ Customer:
 ```
 
 Then, running another [console command](https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate):
-```shell
+
+```console
 $ ./vendor/bin/transfer-generate [-c|--configuration CONFIGURATION]
 ```
 
 Builds the Transfer Object:
+
 ```php
 $customerTransfer = new CustomerTransfer();
 $customerTransfer->firstName = 'Jan';
@@ -58,17 +64,16 @@ Key Features
 * **Transfer Object:**
   * implements methods: `fromArray()`, `toArray()`, and `toFilterArray()`
   * implements standard interfaces: `IteratorAggregate`, `JsonSerializable`, and `Countable`
-  * supports nullable and not nullable property types
-  * supports asymmetric protected property `set` visibility
-  * supports `BackedEnum`
-  * compatible with custom Data Transfer Object (DTO)
+  * supports embedded Transfer Objects, collections as well as `BackedEnum`, nullable and not nullable property types
+  * supports asymmetric property visibility
+  * supports custom Data Transfer Object (DTO)
 
 Installation
 ------------
 
 Composer installation:
 
-```shell
+```console
 $ composer require picamator/transfer-object
 ```
 
