@@ -57,11 +57,11 @@ Key Features
   * mappable with Symfony request query string and payload
 * **Transfer Object:**
   * implements methods: `fromArray()`, `toArray()`, and `toFilterArray()`
-  * implement standard interfaces: `IteratorAggregate`, `JsonSerializable`, and `Countable`
+  * implements standard interfaces: `IteratorAggregate`, `JsonSerializable`, and `Countable`
   * supports nullable and not nullable property types
   * supports asymmetric protected property `set` visibility
   * supports `BackedEnum`
-  * compatible with custom Data Transfer Object (DTO) implementation
+  * compatible with custom Data Transfer Object (DTO)
 
 Installation
 ------------
