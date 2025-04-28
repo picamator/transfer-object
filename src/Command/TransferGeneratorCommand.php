@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Command;
 
+use Picamator\TransferObject\Command\Helper\InputNormalizerTrait;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacadeInterface;
@@ -15,6 +16,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class TransferGeneratorCommand extends Command
 {
+    use InputNormalizerTrait;
+
     private const string NAME = 'picamator:transfer:generate';
     private const string DESCRIPTION = 'Generate Transfer Objects from definition templates.';
     private const string HELP = <<<'HELP'
@@ -71,7 +74,7 @@ HELP;
         $styleOutput->section(self::START_SECTION_NAME);
 
         $configPath = $this->getConfigPath($input, $styleOutput);
-        if ($configPath === null) {
+        if ($configPath === '') {
             return Command::FAILURE;
         }
 
@@ -120,13 +123,13 @@ HELP;
         }
     }
 
-    private function getConfigPath(InputInterface $input, SymfonyStyle $styleOutput): ?string
+    private function getConfigPath(InputInterface $input, SymfonyStyle $styleOutput): string
     {
-        $configPath = $input->getOption(name: self::OPTION_NAME_CONFIGURATION) ?: '';
-        if ($configPath === '' || !is_string($configPath)) {
-            $styleOutput->error(self::ERROR_MISSED_OPTION_CONFIG_MESSAGE);
+        $configPath = $input->getOption(name: self::OPTION_NAME_CONFIGURATION);
+        $configPath = is_string($configPath) ? $this->normalizePath($configPath) : '';
 
-            return null;
+        if ($configPath === '') {
+            $styleOutput->error(self::ERROR_MISSED_OPTION_CONFIG_MESSAGE);
         }
 
         return $configPath;

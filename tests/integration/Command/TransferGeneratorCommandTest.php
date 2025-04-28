@@ -10,8 +10,8 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class TransferGeneratorCommandTest extends TestCase
 {
-    private const string SUCCESS_CONFIG_PATH = __DIR__ . '/data/config/success/generator.config.yml';
-    private const string ERROR_CONFIG_PATH = __DIR__ . '/data/config/error/generator.config.yml';
+    private const string SUCCESS_CONFIG_PATH = '/tests/integration/Command/data/config/success/generator.config.yml';
+    private const string ERROR_CONFIG_PATH = '/tests/integration/Command/data/config/error/generator.config.yml';
 
     private CommandTester $commandTester;
 
@@ -36,25 +36,18 @@ class TransferGeneratorCommandTest extends TestCase
     public function testRunCommandWithInvalidConfigurationPathShouldShowErrorMessage(): void
     {
         // Act
-        $this->commandTester->execute([
-            '-c' => 'some-invalid-path.config.yml'
-        ]);
+        $this->commandTester->execute(['-c' => 'some-invalid-path.config.yml']);
         $output = $this->commandTester->getDisplay();
 
         // Assert
         $this->assertSame(1, $this->commandTester->getStatusCode());
-        $this->assertStringContainsString(
-            'Path "some-invalid-path.config.yml" does not exist.',
-            $output,
-        );
+        $this->assertStringContainsString('not exist.', $output);
     }
 
     public function testRunCommandWithValidConfigurationShouldShowSuccessMessage(): void
     {
         // Act
-        $this->commandTester->execute([
-            '-c' => self::SUCCESS_CONFIG_PATH,
-        ]);
+        $this->commandTester->execute(['-c' => self::SUCCESS_CONFIG_PATH]);
         $output = $this->commandTester->getDisplay();
 
         // Assert
@@ -65,9 +58,7 @@ class TransferGeneratorCommandTest extends TestCase
     public function testRunCommandWithValidConfigurationButInvalidDefinitionShouldShowErrorMessage(): void
     {
         // Act
-        $this->commandTester->execute([
-            '-c' => self::ERROR_CONFIG_PATH,
-        ]);
+        $this->commandTester->execute(['-c' => self::ERROR_CONFIG_PATH]);
         $output = $this->commandTester->getDisplay();
 
         // Assert

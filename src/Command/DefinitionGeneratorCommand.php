@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Command;
 
+use Picamator\TransferObject\Command\Helper\InputNormalizerTrait;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacadeInterface;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGeneratorBuilderInterface;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
@@ -16,6 +19,8 @@ use Throwable;
 
 class DefinitionGeneratorCommand extends Command
 {
+    use InputNormalizerTrait;
+
     private const string NAME = 'picamator:definition:generate';
     private const string DESCRIPTION = 'Generate Transfer Object definition files from a JSON blueprint.';
     private const string HELP = <<<'HELP'
@@ -78,65 +83,65 @@ HELP;
         InputInterface $input,
         SymfonyStyle $styleOutput,
     ): DefinitionGeneratorTransfer {
-        $generatorBuilder = $this->generatorFacade->createDefinitionGeneratorBuilder();
-
-        /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */
-        $helper = $this->getHelper(name: 'question');
+        $builder = $this->generatorFacade->createDefinitionGeneratorBuilder();
+        $helper = $this->getQuestionHelper();
 
         // definition path
-        $definitionPathQuestion = new Question(question: self::QUESTION_DEFINITION_PATH)
-            ->setValidator(function (string $answer) use ($generatorBuilder) {
-                $generatorBuilder->setDefinitionPath($answer);
+        $question = $this->createDefinitionPathQuestion($builder);
+        $helper->ask($input, $styleOutput, $question);
+
+        // class name
+        $question = $this->createClassNameQuestion($builder);
+        $helper->ask($input, $styleOutput, $question);
+
+        // JSON path
+        $question = $this->createJsonPathQuestion($builder);
+        $helper->ask($input, $styleOutput, $question);
+
+        return $builder->build();
+    }
+
+    private function createJsonPathQuestion(DefinitionGeneratorBuilderInterface $builder): Question
+    {
+        return new Question(question: self::QUESTION_JSON_PATH)
+            ->setValidator(function (string $answer) use ($builder) {
+                $builder->setJsonPath($answer);
 
                 return $answer;
             })
             ->setTrimmable(trimmable: true)
             ->setNormalizer($this->normalizePath(...));
+    }
 
-        $helper->ask($input, $styleOutput, $definitionPathQuestion);
-
-        // class name
-        $classNameQuestion = new Question(question: self::QUESTION_CLASS_NAME)
-            ->setValidator(function (string $answer) use ($generatorBuilder) {
-                $generatorBuilder->setClassName($answer);
+    private function createClassNameQuestion(DefinitionGeneratorBuilderInterface $builder): Question
+    {
+        return new Question(question: self::QUESTION_CLASS_NAME)
+            ->setValidator(function (string $answer) use ($builder) {
+                $builder->setClassName($answer);
 
                 return $answer;
             })
             ->setTrimmable(trimmable: true)
             ->setNormalizer($this->normalizeEmpty(...));
+    }
 
-        $helper->ask($input, $styleOutput, $classNameQuestion);
-
-        // JSON path
-        $jsonPathQuestion = new Question(question: self::QUESTION_JSON_PATH)
-            ->setValidator(function (string $answer) use ($generatorBuilder) {
-                $generatorBuilder->setJsonPath($answer);
+    private function createDefinitionPathQuestion(DefinitionGeneratorBuilderInterface $builder): Question
+    {
+        return new Question(question: self::QUESTION_DEFINITION_PATH)
+            ->setValidator(function (string $answer) use ($builder) {
+                $builder->setDefinitionPath($answer);
 
                 return $answer;
             })
             ->setTrimmable(trimmable: true)
             ->setNormalizer($this->normalizePath(...));
-
-        $helper->ask($input, $styleOutput, $jsonPathQuestion);
-
-        return $generatorBuilder->build();
     }
 
-    private function normalizePath(?string $value): string
+    private function getQuestionHelper(): QuestionHelper
     {
-        $value = $this->normalizeEmpty($value);
-        if ($value === '') {
-            return '';
-        }
+        /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */
+        $helper = $this->getHelper(name: 'question');
 
-        $workingDirectory = getcwd() ?: '';
-        $value = ltrim($value, '\/');
-
-        return $workingDirectory . DIRECTORY_SEPARATOR . $value;
-    }
-
-    private function normalizeEmpty(?string $value): string
-    {
-        return $value ? trim($value) : '';
+        return $helper;
     }
 }
