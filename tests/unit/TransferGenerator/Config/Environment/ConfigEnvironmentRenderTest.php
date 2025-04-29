@@ -15,7 +15,7 @@ class ConfigEnvironmentRenderTest extends TestCase
     protected function setUp(): void
     {
         $this->renderMock = $this->getMockBuilder(ConfigEnvironmentRender::class)
-            ->onlyMethods(['getCwd', 'getEnv'])
+            ->onlyMethods(['getWorkingDir', 'getEnvironment'])
             ->getMock();
     }
 
@@ -28,11 +28,11 @@ class ConfigEnvironmentRenderTest extends TestCase
 
         // Expect
         $this->renderMock->expects($this->once())
-            ->method('getEnv')
+            ->method('getEnvironment')
             ->willReturn($envProjectRoot);
 
         $this->renderMock->expects($this->never())
-            ->method('getCwd');
+            ->method('getWorkingDir');
 
         // Act
         $this->renderMock->renderProjectRoot($configPath);
@@ -51,11 +51,11 @@ class ConfigEnvironmentRenderTest extends TestCase
 
         // Expect
         $this->renderMock->expects($this->once())
-            ->method('getEnv')
+            ->method('getEnvironment')
             ->willReturn('');
 
         $this->renderMock->expects($this->once())
-            ->method('getCwd')
+            ->method('getWorkingDir')
             ->willReturn($workingDirectory);
 
         // Act
