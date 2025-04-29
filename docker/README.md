@@ -1,4 +1,4 @@
 Docker SDK
 ==========
 
-For detailed information, please visit the Wiki page: [Development Environment](https://github.com/picamator/transfer-object/wiki/Development-Environment).
+For detailed information, please follow [Development Environment](https://github.com/picamator/transfer-object/wiki/Development-Environment).
