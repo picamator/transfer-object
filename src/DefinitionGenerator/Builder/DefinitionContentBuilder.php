@@ -13,30 +13,7 @@ readonly class DefinitionContentBuilder implements DefinitionContentBuilderInter
     {
         $typeEnum = $this->getTypeEnum($propertyName, $propertyValue);
 
-        return new readonly class ($typeEnum, $propertyName, $propertyValue) implements BuilderContentInterface
-        {
-            public function __construct(
-                private GetTypeEnum $type,
-                private string $propertyName,
-                private mixed $propertyValue,
-            ) {
-            }
-
-            public function getType(): GetTypeEnum
-            {
-                return $this->type;
-            }
-
-            public function getPropertyName(): string
-            {
-                return $this->propertyName;
-            }
-
-            public function getPropertyValue(): mixed
-            {
-                return $this->propertyValue;
-            }
-        };
+        return new BuilderContent($typeEnum, $propertyName, $propertyValue);
     }
 
     /**
