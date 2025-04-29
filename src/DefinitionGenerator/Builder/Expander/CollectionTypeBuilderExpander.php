@@ -87,7 +87,9 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
     {
         $count = 0;
         foreach ($propertyValue as $item) {
-            $count += is_array($item) ? 1 : 0;
+            if (is_array($item)) {
+                $count++;
+            }
         }
 
         return $count;
