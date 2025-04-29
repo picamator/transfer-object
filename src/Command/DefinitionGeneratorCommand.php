@@ -122,7 +122,7 @@ HELP;
                 return $answer;
             })
             ->setTrimmable(trimmable: true)
-            ->setNormalizer($this->normalizeEmpty(...));
+            ->setNormalizer($this->normalizeInput(...));
     }
 
     private function createDefinitionPathQuestion(DefinitionGeneratorBuilderInterface $builder): Question

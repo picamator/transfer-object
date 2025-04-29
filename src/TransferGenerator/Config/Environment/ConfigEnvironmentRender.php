@@ -42,7 +42,12 @@ class ConfigEnvironmentRender implements ConfigEnvironmentRenderInterface
     protected function getEnv(string $name): string
     {
         $envValue = getenv($name);
+        if (!is_string($envValue)) {
+            return '';
+        }
 
-        return is_string($envValue) ? trim($envValue) : '';
+        $envValue = trim($envValue);
+
+        return rtrim($envValue, '\/');
     }
 }
