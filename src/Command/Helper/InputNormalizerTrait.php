@@ -16,9 +16,7 @@ trait InputNormalizerTrait
         $workingDirectory = getcwd() ?: '';
         $value = ltrim($value, '\/');
 
-        $path = realpath($workingDirectory . DIRECTORY_SEPARATOR . $value);
-
-        return (string)$path;
+        return $workingDirectory . DIRECTORY_SEPARATOR . $value;
     }
 
     protected function normalizeInput(?string $value): string
