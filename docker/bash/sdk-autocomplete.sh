@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# docker sdk autocompletion script
 _docker_sdk_autocomplete() {
     local cur prev opts
     COMPREPLY=()
