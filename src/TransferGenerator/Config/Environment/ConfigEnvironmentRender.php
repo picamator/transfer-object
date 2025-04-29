@@ -14,6 +14,7 @@ class ConfigEnvironmentRender implements ConfigEnvironmentRenderInterface
     public function renderProjectRoot(string $path): string
     {
         $projectRoot = $this->getProjectRoot();
+        $path = rtrim($path, '\/');
 
         return str_replace(self::PLACEHOLDER, $projectRoot, $path);
     }
