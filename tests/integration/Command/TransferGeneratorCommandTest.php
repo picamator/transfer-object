@@ -30,7 +30,7 @@ class TransferGeneratorCommandTest extends TestCase
 
         // Assert
         $this->assertSame(1, $this->commandTester->getStatusCode());
-        $this->assertStringContainsString('The required -c option is missing or path does not exist.', $output);
+        $this->assertStringContainsString('The required -c option is missing.', $output);
     }
 
     public function testRunCommandWithInvalidConfigurationPathShouldShowErrorMessage(): void

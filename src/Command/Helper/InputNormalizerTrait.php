@@ -6,9 +6,9 @@ namespace Picamator\TransferObject\Command\Helper;
 
 trait InputNormalizerTrait
 {
-    private function normalizePath(?string $value): string
+    protected function normalizePath(?string $value): string
     {
-        $value = $this->normalizeEmpty($value);
+        $value = $this->normalizeInput($value);
         if ($value === '') {
             return '';
         }
@@ -16,12 +16,10 @@ trait InputNormalizerTrait
         $workingDirectory = getcwd() ?: '';
         $value = ltrim($value, '\/');
 
-        $path = realpath($workingDirectory . DIRECTORY_SEPARATOR . $value);
-
-        return (string)$path;
+        return $workingDirectory . DIRECTORY_SEPARATOR . $value;
     }
 
-    private function normalizeEmpty(?string $value): string
+    protected function normalizeInput(?string $value): string
     {
         return $value ? trim($value) : '';
     }

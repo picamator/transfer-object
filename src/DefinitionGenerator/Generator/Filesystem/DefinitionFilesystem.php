@@ -20,19 +20,20 @@ readonly class DefinitionFilesystem implements DefinitionFilesystemInterface
 
     public function appendFile(DefinitionFilesystemTransfer $filesystemTransfer): void
     {
-        $filePath = $this->getFilepath($filesystemTransfer);
+        $filePath = $this->getFilePath($filesystemTransfer);
         $this->fileAppender->appendToFile($filePath, $filesystemTransfer->content);
     }
 
     public function deleteFile(DefinitionFilesystemTransfer $filesystemTransfer): void
     {
-        $filePath = $this->getFilepath($filesystemTransfer);
+        $filePath = $this->getFilePath($filesystemTransfer);
         $this->filesystem->remove($filePath);
     }
 
-    private function getFilepath(DefinitionFilesystemTransfer $filesystemTransfer): string
+    private function getFilePath(DefinitionFilesystemTransfer $filesystemTransfer): string
     {
         return $filesystemTransfer->definitionPath
-            . DIRECTORY_SEPARATOR . sprintf(self::FILE_NAME_PATTERN, $filesystemTransfer->fileName);
+            . DIRECTORY_SEPARATOR
+            . sprintf(self::FILE_NAME_PATTERN, $filesystemTransfer->fileName);
     }
 }

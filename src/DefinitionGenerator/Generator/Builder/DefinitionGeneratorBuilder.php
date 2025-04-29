@@ -25,6 +25,7 @@ class DefinitionGeneratorBuilder implements DefinitionGeneratorBuilderInterface
 
     public function setDefinitionPath(string $definitionPath): self
     {
+        $definitionPath = rtrim($definitionPath, '\/');
         $messageTransfer = $this->pathValidator->validate($definitionPath);
 
         if ($messageTransfer->isValid) {

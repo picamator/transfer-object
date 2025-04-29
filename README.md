@@ -98,7 +98,7 @@ Definition Files and Transfer Object generators have been tested against API res
 
 In all cases, data **100%** are matched ✅.
 
-Please check [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php) for more details.
+For detailed information, please check [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php).
 
 ### Service Samples
 
