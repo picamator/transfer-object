@@ -257,6 +257,7 @@ class TransferTest extends TestCase
      */
     #[TestWith([[ItemCollectionTransfer::ITEMS => true]])]
     #[TestWith([[ItemCollectionTransfer::ITEM => true]])]
+    #[TestWith([[ItemCollectionTransfer::ITEMS => ['some-string']]])]
     public function testItemCollectionTransferAttributeTypeMismatchFromArrayShouldRiseException(array $data): void
     {
         // Arrange

@@ -23,7 +23,7 @@ final readonly class EnumPropertyTypeAttribute implements PropertyTypeAttributeI
         if (!is_string($data) && !is_int($data)) {
             throw new PropertyTypeTransferException(
                 sprintf(
-                    'Data must be of type string or integer, "%s" given."',
+                    'Data must be of type string or integer, "%s" given.',
                     get_debug_type($data)
                 ),
             );

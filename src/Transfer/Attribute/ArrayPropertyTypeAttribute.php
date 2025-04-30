@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Transfer\Attribute;
 
 use Attribute;
-use Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException;
 
 /**
  * @api
@@ -13,6 +12,8 @@ use Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException;
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
 final readonly class ArrayPropertyTypeAttribute implements PropertyTypeAttributeInterface
 {
+    use ArrayAssertTrait;
+
     /**
      * @inheritDoc
      *
@@ -20,15 +21,9 @@ final readonly class ArrayPropertyTypeAttribute implements PropertyTypeAttribute
      */
     public function fromArray(mixed $data): array
     {
-        if (!is_array($data)) {
-            throw new PropertyTypeTransferException(
-                sprintf(
-                    'Data must be of type array, "%s" given."',
-                    get_debug_type($data)
-                ),
-            );
-        }
+        $this->assertArray($data);
 
+        /** @var array<string|int,mixed> $data */
         return $data;
     }
 
