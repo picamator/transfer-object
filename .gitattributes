@@ -4,7 +4,7 @@
 *.jpg binary
 *.png binary
 
-/.ide                   export-ignore
+/.idea                  export-ignore
 /.github                export-ignore
 /doc/                   export-ignore
 /docker/                export-ignore
