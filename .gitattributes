@@ -2,7 +2,9 @@
 * text=auto
 *.php diff=php
 *.jpg binary
+*.png binary
 
+/.ide                   export-ignore
 /.github                export-ignore
 /doc/                   export-ignore
 /docker/                export-ignore
