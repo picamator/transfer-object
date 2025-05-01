@@ -9,7 +9,7 @@ use Picamator\TransferObject\Transfer\TransferInterface;
 
 trait TransferBuilderTrait
 {
-    use ArrayAssertTrait;
+    use DataAssertTrait;
 
     /**
      * @throws \Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException
@@ -17,8 +17,6 @@ trait TransferBuilderTrait
     protected function createTransfer(string $typeName, mixed $data): TransferInterface
     {
         $this->assertArray($data);
-
-        $typeName = '\\' . $typeName;
 
         /** @var array<string, mixed> $data */
         if (is_subclass_of($typeName, AbstractTransfer::class)) {
