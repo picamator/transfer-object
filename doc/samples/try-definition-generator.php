@@ -10,8 +10,6 @@ use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$projectRoot = getenv('PROJECT_ROOT') ?: '';
-
 echo <<<'STORY'
 =======================================================
               Imagine there is a Product
@@ -30,7 +28,7 @@ $productData = [
         ['name' => 'standard'],
     ],
     'details' => [
-        'description' => 'Tomato from fields.',
+        'description' => 'Local farm Bio Tomato.',
         'isRegional' => true,
     ],
     'stores' => ['DE', 'AT'],
@@ -67,8 +65,7 @@ echo <<<'STORY'
 STORY;
 $generatorTransfer = new DefinitionGeneratorTransfer(
     [
-        DefinitionGeneratorTransfer::DEFINITION_PATH => $projectRoot
-            . '/doc/samples/config/definition-generator/definition',
+        DefinitionGeneratorTransfer::DEFINITION_PATH => __DIR__ . '/config/definition-generator/definition',
         DefinitionGeneratorTransfer::CONTENT => [
             DefinitionGeneratorContentTransfer::CLASS_NAME => 'Product',
             DefinitionGeneratorContentTransfer::CONTENT => $productData,
@@ -82,8 +79,8 @@ echo "Definitions $generatedDefinitions were successfully generated.\n";
 
 echo <<<'STORY'
 =======================================================
-        Generate Transfer Objects
-               with notice
+             Generate Transfer Objects
+                   with notice
    for demonstration exception handling was skipped
 =======================================================
 
@@ -94,8 +91,8 @@ new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
 echo <<<'STORY'
 =======================================================
         Try newly Generated Transfer Objects
-                        &
-          Validate $productData fits TO
+                       and
+      validate $productData fits Transfer Object
 =======================================================
 
 STORY;

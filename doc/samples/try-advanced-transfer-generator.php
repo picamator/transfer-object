@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Picamator\Doc\Samples\TransferObject\Advanced\AddressData;
 use Picamator\Doc\Samples\TransferObject\Advanced\CredentialsData;
 use Picamator\Doc\Samples\TransferObject\Generated\AdvancedTransferGenerator\AdvancedCustomerTransfer;
 use Picamator\Doc\Samples\TransferObject\Generated\TransferGenerator\CustomerTransfer;
@@ -12,7 +13,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 echo <<<'STORY'
 =======================================================
        How to use custom Data Transfer Object
-                        &
+                        and
         Apply Transfer Object across modules
 =======================================================
 
@@ -20,62 +21,85 @@ STORY;
 
 echo <<<'STORY'
 =======================================================
-            Let's take CustomerTransfer
-                      form
-            Generated\TransferGenerator
+Let's take Generated\TransferGenerator\CustomerTransfer
 =======================================================
 
 STORY;
 $customerTransfer = new CustomerTransfer();
-$customerTransfer->firstName = 'Jan';
-$customerTransfer->lastName = 'Kowalski';
+$customerTransfer->firstName = 'Ignacy';
+$customerTransfer->lastName = 'Rzecki';
 
 echo <<<'STORY'
 =======================================================
-            Let's take CredentialsData
-                        form
-          Advanced implementing TransferInterface
+          Let's take Advanced\CredentialsData
+                      use
+            DummyTransferAdapterTrait
 =======================================================
 
 STORY;
 $credentialsData = new CredentialsData();
-$credentialsData->login = 'jan.kowalski';
-$credentialsData->token = 'some-random-token';
+$credentialsData->login = 'ignacy.rzecki';
+$credentialsData->token = 'Lalka';
 
 $encodedCredentialsData = json_encode($credentialsData);
-
-$serializedCredentialsData = serialize($credentialsData);
-$unserializedCredentialsData = unserialize($serializedCredentialsData);
-
-$iteratedCredentialsData = implode(', ', iterator_to_array($credentialsData->getIterator()));
+$iteratedCredentialsData = implode(', ', iterator_to_array($credentialsData));
 
 echo <<<DEBUG
 Count: {$credentialsData->count()}
 JSON encode: $encodedCredentialsData
-Serialized: $serializedCredentialsData
 Iterated: [$iteratedCredentialsData]
 
 DEBUG;
 
+
 echo <<<'STORY'
 =======================================================
-    Create a Definition file combining both objects
+           Let's take Advanced\AddressData
+                     use
+             TransferAdapterTrait
+=======================================================
+
+STORY;
+$addressData = new AddressData();
+$addressData->street = 'Krakowskie Przedmieście';
+$addressData->houseNumber = '9';
+$addressData->city = 'Warszawa';
+$addressData->postCode = '00-068';
+$addressData->country = 'Polska';
+
+$encodedAddressData = json_encode($addressData);
+
+$iteratedAddressData = implode(', ', iterator_to_array($addressData));
+
+echo <<<DEBUG
+Count: {$addressData->count()}
+JSON encode: $encodedAddressData
+Iterated: [$iteratedAddressData]
+
+DEBUG;
+
+
+echo <<<'STORY'
+=======================================================
+    Create a Definition file combining all objects
 =======================================================
 
 AdvancedCustomer:
   customer:
-    type: 'Picamator\\Doc\\Samples\\TransferObject\\Generated\\TransferGenerator\\CustomerTransfer'
+    type: "Picamator\\Doc\\Samples\\TransferObject\\Generated\\TransferGenerator\\CustomerTransfer"
+  address:
+    type: "Picamator\\Doc\\Samples\\TransferObject\\Advanced\\AddressData"
   credentials:
-    type: 'Picamator\\Doc\\Samples\\TransferObject\\Advanced\\CredentialsData'
+    type: "Picamator\\Doc\\Samples\\TransferObject\\Advanced\\CredentialsData"
 
 
 STORY;
 
 echo <<<'STORY'
 =======================================================
-         Generate Transfer Object
-                with notice
-   for demonstration exception handling was skipped
+           Generate Transfer Object
+                  with notice
+    for demonstration exception handling was skipped
 =======================================================
 
 STORY;
@@ -85,14 +109,15 @@ new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
 echo <<<'STORY'
 =======================================================
         Try newly Generated Transfer Object
-                    &
-                  Debug
+                      and
+                     Debug
 =======================================================
 
 STORY;
 
 $advancedCustomerTransfer = new AdvancedCustomerTransfer();
 $advancedCustomerTransfer->customer = $customerTransfer;
+$advancedCustomerTransfer->address = $addressData;
 $advancedCustomerTransfer->credentials = $credentialsData;
 
 var_dump($advancedCustomerTransfer->toArray());
@@ -106,10 +131,20 @@ STORY;
 $advancedCustomerTransfer = new AdvancedCustomerTransfer()
     ->fromArray([
         AdvancedCustomerTransfer::CUSTOMER => [
-            CustomerTransfer::FIRST_NAME => 'Max',
-            CustomerTransfer::LAST_NAME => 'Mustermann',
+            CustomerTransfer::FIRST_NAME => 'Theodor',
+            CustomerTransfer::LAST_NAME => 'Storm'
         ],
-        AdvancedCustomerTransfer::CREDENTIALS => [],
+        AdvancedCustomerTransfer::ADDRESS => [
+            'street' => 'Wasserreihe',
+            'houseNumber' => '31',
+            'city' => 'Husum',
+            'postCode' => '25813',
+            'country' => 'Deutschland'
+        ],
+        AdvancedCustomerTransfer::CREDENTIALS => [
+            'login' => 'theodor.storm',
+            'token' => 'Der Schimmelreiter'
+        ]
     ]);
 
 var_dump($advancedCustomerTransfer->toArray());

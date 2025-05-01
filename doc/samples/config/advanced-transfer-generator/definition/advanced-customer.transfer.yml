@@ -1,5 +1,7 @@
 AdvancedCustomer:
   customer:
     type: "Picamator\\Doc\\Samples\\TransferObject\\Generated\\TransferGenerator\\CustomerTransfer"
+  address:
+    type: "Picamator\\Doc\\Samples\\TransferObject\\Advanced\\AddressData"
   credentials:
     type: "Picamator\\Doc\\Samples\\TransferObject\\Advanced\\CredentialsData"

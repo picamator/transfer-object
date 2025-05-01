@@ -15,6 +15,8 @@ use Traversable;
  */
 abstract class AbstractTransfer implements TransferInterface
 {
+    use FilterArrayTrait;
+
     protected const int META_DATA_SIZE = 0;
 
     /**
@@ -114,29 +116,6 @@ abstract class AbstractTransfer implements TransferInterface
         $data = $this->toArray();
 
         return $this->filterArrayRecursive($data, $callback);
-    }
-
-    /**
-     * @param array<string,mixed> $data
-     *
-     * @return array<string,mixed>
-     */
-    private function filterArrayRecursive(array $data, ?callable $callback = null): array
-    {
-        /** @var array<string,mixed> $filteredData */
-        $filteredData = array_filter($data, $callback);
-        foreach ($filteredData as $key => $item) {
-            if (is_array($item)) {
-                /** @var array<string,mixed> $item */
-                $filteredData[$key] = $this->filterArrayRecursive($item, $callback);
-
-                continue;
-            }
-
-            $filteredData[$key] = $item;
-        }
-
-        return $filteredData;
     }
 
     final public function fromArray(array $data): static

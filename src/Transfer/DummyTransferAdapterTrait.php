@@ -11,7 +11,7 @@ use Traversable;
  * Specifications:
  * - Provides default (fake) implementations for methods in transfer object interfaces.
  * - Simplifies integration with external transfer objects by removing the need to implement all interface methods.
- * - Intended for use as a placeholder in cases where full method functionality is not required.
+ * - Intended as a placeholder in cases where full method functionality is not required.
  *
  * @api
  *
@@ -19,6 +19,8 @@ use Traversable;
  */
 trait DummyTransferAdapterTrait
 {
+    use FilterArrayTrait;
+
     /**
      * @return Traversable<string, mixed>
      */
@@ -29,7 +31,7 @@ trait DummyTransferAdapterTrait
 
     public function count(): int
     {
-        return 0;
+        return iterator_count($this);
     }
 
     /**
@@ -45,7 +47,9 @@ trait DummyTransferAdapterTrait
      */
     public function toFilterArray(?callable $callback = null): array
     {
-        return [];
+        $data = $this->toArray();
+
+        return $this->filterArrayRecursive($data, $callback);
     }
 
     /**
@@ -61,21 +65,11 @@ trait DummyTransferAdapterTrait
      */
     public function jsonSerialize(): array
     {
-        return [];
+        return $this->toArray();
     }
 
-    /**
-     * @return array<string,mixed>
-     */
-    public function __serialize(): array
+    public function __debugInfo(): array
     {
-        return [];
-    }
-
-    /**
-     * @param array<string,mixed> $data
-     */
-    public function __unserialize(array $data): void
-    {
+        return $this->toArray();
     }
 }

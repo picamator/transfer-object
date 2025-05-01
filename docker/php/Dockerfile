@@ -27,7 +27,7 @@ COPY --from=composer/composer:latest-bin /composer /usr/local/bin/composer
 
 # install PHP extensions and PECL packages in a single RUN command
 RUN docker-php-ext-configure zip && \
-    docker-php-ext-install zip curl && \
+    docker-php-ext-install zip curl bcmath && \
     pecl install xdebug
 
 # configure Xdebug
