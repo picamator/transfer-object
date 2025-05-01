@@ -66,10 +66,11 @@ Key Features
 **Transfer Object:**
   * implements methods: `fromArray()`, `toArray()`, and `toFilterArray()`
   * implements standard interfaces: `IteratorAggregate`, `JsonSerializable`, and `Countable`
-  * supports embedded, collections and custom Transfer Objects
+  * supports embedded, collections Transfer Objects
   * supports PHP primitive data types
   * supports `BackedEnum`
   * supports asymmetric property visibility
+  * integrates external Transfer Objects
 
 Installation
 ------------
@@ -103,7 +104,7 @@ In all cases, data **100%** are matched ✅.
 
 For detailed information, please check [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php).
 
-### Service Samples
+### Samples
 
 - [Definition Generator](/doc/samples/try-definition-generator.php)
 - [Transfer Generator](/doc/samples/try-transfer-generator.php)
