@@ -1,0 +1,7 @@
+Author:
+  firstName:
+    type: string
+    required:
+  lastName:
+    type: string
+    required:

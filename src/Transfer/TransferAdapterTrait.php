@@ -19,8 +19,10 @@ use Traversable;
  * Specifications:
  * - Provides implementations for methods in transfer object interfaces.
  * - Simplifies integration with external transfer objects by removing the need to implement all interface methods.
- * - Intended for external transfer objects where data is stored in public properties.
- * - Due to unknown external data transfer objects structure some method might not work as expected.
+ * - Intended for external transfer objects where:
+ *   - data are stored in public properties.
+ *   - all properties have default initial value
+ *   - all properties are nullable
  *
  * @api
  *
@@ -64,8 +66,7 @@ trait TransferAdapterTrait
             $name = $property->getName();
             $value = $this->$name;
 
-            $data[$name] =
-            match (true) {
+            $data[$name] = match (true) {
                 $value instanceof TransferInterface => $value->toArray(),
 
                 $value instanceof ArrayObject => $value->getArrayCopy(),
@@ -101,56 +102,52 @@ trait TransferAdapterTrait
     public function fromArray(array $data): static
     {
         foreach ($this->getPublicProperties() as $property) {
-            $settableType = $property->getSettableType();
-            if ($settableType === null) {
-                continue;
-            }
-
             $name = $property->getName();
             $value = $data[$name] ?? null;
 
-            if ($value === null && !$settableType->allowsNull()) {
-                unset($this->$name);
+            $typeReflection = $property->getType();
+            if ($typeReflection === null) {
+                $this->$name = $value;
 
                 continue;
             }
 
-            $propertyType = (string)$settableType;
+            $type = str_replace('?', '', (string)$typeReflection);
 
             $isArray = is_array($value);
             $isString = is_string($value);
             $isStringOrInt = $isString || is_int($value);
 
             $this->$name = match (true) {
-                is_subclass_of($propertyType, AbstractTransfer::class) && $isArray
-                    => new $propertyType($value),
+                is_subclass_of($type, AbstractTransfer::class) && $isArray
+                    => new $type($value),
 
-                is_subclass_of($propertyType, TransferInterface::class) && $isArray
+                is_subclass_of($type, TransferInterface::class) && $isArray
                     //  @phpstan-ignore argument.type
-                    => new $propertyType()->fromArray($value),
+                    => new $type()->fromArray($value),
 
-                is_subclass_of($propertyType, ArrayObject::class) && $isArray
+                $type === ArrayObject::class && $isArray
                     //  @phpstan-ignore argument.type
                     => new ArrayObject($value),
 
-                is_subclass_of($propertyType, DateTime::class) && $isString
+                $type === DateTime::class && $isString
                     //  @phpstan-ignore argument.type
                     => new DateTime($value),
 
-                is_subclass_of($propertyType, DateTimeImmutable::class) && $isString
+                $type === DateTimeImmutable::class && $isString
                     //  @phpstan-ignore argument.type
                     => new DateTimeImmutable($value),
 
-                is_subclass_of($propertyType, Number::class) && $isStringOrInt
+                $type === Number::class && $isStringOrInt
                     //  @phpstan-ignore argument.type
                     => new Number($value),
 
-                is_subclass_of($propertyType, stdClass::class) && $isArray
+                $type === stdClass::class && $isArray
                     => (object)$value,
 
-                is_subclass_of($propertyType, BackedEnum::class) && $isStringOrInt
+                is_subclass_of($type, BackedEnum::class) && $isStringOrInt
                     //  @phpstan-ignore argument.type
-                    => $propertyType::tryFrom($value),
+                    => $type::tryFrom($value),
 
                 default => $value,
             };
