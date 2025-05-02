@@ -1,0 +1,29 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12",
+    "title": "Transfer Object Generator configuration",
+    "description": "Configuration file used for generating Transfer Object",
+    "type": "object",
+    "properties": {
+        "generator": {
+            "type": "object",
+            "properties": {
+                "transferNamespace": {
+                    "type": "string",
+                    "description": "Namespace for the generated Transfer Objects."
+                },
+                "transferPath": {
+                    "type": "string",
+                    "description": "Path where the generated Transfer Objects will be stored."
+                },
+                "definitionPath": {
+                    "type": "string",
+                    "description": "Path to the Definition Files."
+                }
+            },
+            "required": ["transferNamespace", "transferPath", "definitionPath"],
+            "additionalProperties": false
+        }
+    },
+    "required": ["generator"],
+    "additionalProperties": false
+}

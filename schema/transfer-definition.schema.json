@@ -1,0 +1,64 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Transfer Object Definition File",
+    "description": "Define Transfer Object structure",
+    "type": "object",
+    "patternProperties": {
+        ".*": {
+            "type": "object",
+            "description": "Each root-level key represents a Transfer Object name.",
+            "properties": {
+                ".*": {
+                    "type": "object",
+                    "description": "Each second-level key represents a property name.",
+                    "\"properties\"": {
+                        "\"type\"": {
+                            "type": "string",
+                            "description": "Defines the PHP built-in type or dependent TO name.",
+                            "enum": [
+                                "bool",
+                                "true",
+                                "false",
+                                "int",
+                                "float",
+                                "string",
+                                "array",
+                                "ArrayObject"
+                            ]
+                        },
+                        "collectionType": {
+                            "type": "string",
+                            "description": "Includes the Transfer Object name without the Transfer prefix."
+                        },
+                        "enumType": {
+                            "type": "string",
+                            "description": "Includes the fully qualified Enum name with namespace, optionally with alias.",
+                            "pattern": "^(\\\\?:[A-Z][a-zA-Z0-9_]*\\\\\\\\)*[A-Z][a-zA-Z0-9_]*( as [a-zA-Z_\\x80-\\xff][a-zA-Z0-9_\\x80-\\xff]*)?$"
+                        },
+                        "\"required\"": {
+                            "type": "null",
+                            "description": "Marks the property as not nullable."
+                        },
+                        "protected": {
+                            "type": "null",
+                            "description": "Marks the property as having asymmetric protected(set) visibility."
+                        }
+                    },
+                    "required": ["type"],
+                    "oneOf": [
+                        {
+                            "required": ["type"]
+                        }, {
+                            "required": ["collectionType"]
+                        }, {
+                            "required": ["enumType"]
+                        }
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}
