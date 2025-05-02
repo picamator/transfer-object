@@ -57,6 +57,8 @@ DefinitionProperty:
     type: DefinitionEmbeddedType
   enumType:
     type: DefinitionEmbeddedType
+  dateTimeType:
+    type: DefinitionEmbeddedType
   isNullable:
     type: bool
     required:

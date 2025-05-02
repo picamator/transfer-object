@@ -15,6 +15,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParse
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParserInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\BuildInTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\CollectionTypePropertyExpander;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\DateTimeTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\EnumTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\NullablePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\PropertyExpanderInterface;
@@ -30,6 +31,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\DefinitionVa
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\DefinitionValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\BuildInTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\CollectionTypePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\DateTimeTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\EnumTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\NamePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface;
@@ -88,7 +90,13 @@ readonly class DefinitionFactory
             $this->createTransferTypePropertyValidator(),
             $this->createCollectionTypePropertyValidator(),
             $this->createEnumTypePropertyValidator(),
+            $this->createDateTimeTypePropertyValidator(),
         ]);
+    }
+
+    protected function createDateTimeTypePropertyValidator(): PropertyValidatorInterface
+    {
+        return new DateTimeTypePropertyValidator();
     }
 
     protected function createEnumTypePropertyValidator(): PropertyValidatorInterface
@@ -164,9 +172,15 @@ readonly class DefinitionFactory
             ->setNextExpander($this->createBuildInTypePropertyExpander())
             ->setNextExpander($this->createTransferTypePropertyExpander())
             ->setNextExpander($this->createEnumTypePropertyExpander())
-            ->setNextExpander($this->createProtectedPropertyExpander());
+            ->setNextExpander($this->createProtectedPropertyExpander())
+            ->setNextExpander($this->createDateTimeTypePropertyExpander());
 
         return $propertyExpander;
+    }
+
+    protected function createDateTimeTypePropertyExpander(): PropertyExpanderInterface
+    {
+        return new DateTimeTypePropertyExpander();
     }
 
     protected function createProtectedPropertyExpander(): PropertyExpanderInterface

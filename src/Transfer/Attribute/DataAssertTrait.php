@@ -28,6 +28,20 @@ trait DataAssertTrait
     /**
      * @throws \Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException
      */
+    protected function assertInvalidType(mixed $data, string $expectedType): never
+    {
+        throw new PropertyTypeTransferException(
+            sprintf(
+                'Data must be of type %s, "%s" given.',
+                $expectedType,
+                get_debug_type($data)
+            ),
+        );
+    }
+
+    /**
+     * @throws \Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException
+     */
     protected function assertStringOrInt(mixed $data): void
     {
         if (is_string($data) || is_int($data)) {

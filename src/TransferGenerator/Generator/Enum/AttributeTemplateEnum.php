@@ -11,4 +11,5 @@ enum AttributeTemplateEnum: string
     case ENUM_TYPE_ATTRIBUTE = '#[EnumPropertyTypeAttribute(%s::class)]';
     case ARRAY_OBJECT_TYPE_ATTRIBUTE = '#[ArrayObjectPropertyTypeAttribute]';
     case ARRAY_TYPE_ATTRIBUTE = '#[ArrayPropertyTypeAttribute]';
+    case DATE_TIME_ATTRIBUTE = '#[DateTimePropertyTypeAttribute(%s::class)]';
 }
