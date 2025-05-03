@@ -24,7 +24,6 @@ final class DateTimeTypeTemplateExpander extends AbstractTemplateExpander
             ??= AttributeEnum::DATE_TIME_ATTRIBUTE->value;
 
         $importDateTime = $propertyTransfer->dateTimeType?->namespace?->fullName ?: '';
-        $importDateTime = ltrim($importDateTime, '\\');
 
         $templateTransfer->imports[$importDateTime] ??= $importDateTime;
 

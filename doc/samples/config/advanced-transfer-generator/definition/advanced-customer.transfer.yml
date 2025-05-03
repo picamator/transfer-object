@@ -1,3 +1,4 @@
+# $schema: ./../../../../../schema/definition.schema.json
 AdvancedCustomer:
   customer:
     type: "Picamator\\Doc\\Samples\\TransferObject\\Generated\\TransferGenerator\\CustomerTransfer"

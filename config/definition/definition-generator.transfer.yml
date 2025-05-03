@@ -1,3 +1,4 @@
+# $schema: ./../../schema/definition.schema.json
 DefinitionGenerator:
   definitionPath:
     type: string

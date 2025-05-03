@@ -1,3 +1,4 @@
+# $schema: ./../../../../../../schema/definition.schema.json
 Item:
   iAmBool:
     type: bool
