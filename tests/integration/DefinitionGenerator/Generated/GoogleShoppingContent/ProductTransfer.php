@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\GoogleShoppingContent;
 
+use DateTime;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\DateTimePropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
 
 /**
@@ -70,11 +72,12 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // availabilityDate
+    #[DateTimePropertyTypeAttribute(DateTime::class)]
     public const string AVAILABILITY_DATE = 'availabilityDate';
     protected const string AVAILABILITY_DATE_DATA_NAME = 'AVAILABILITY_DATE';
     protected const int AVAILABILITY_DATE_DATA_INDEX = 2;
 
-    public ?string $availabilityDate {
+    public ?DateTime $availabilityDate {
         get => $this->getData(self::AVAILABILITY_DATE_DATA_INDEX);
         set => $this->setData(self::AVAILABILITY_DATE_DATA_INDEX, $value);
     }

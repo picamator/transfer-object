@@ -8,4 +8,5 @@ enum ObjectTypeEnum: string
 {
     case ARRAY_OBJECT = 'ArrayObject';
     case ITERABLE = 'iterable';
+    case DATE_TIME = 'DateTime';
 }

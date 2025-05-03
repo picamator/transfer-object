@@ -29,7 +29,7 @@ Product:
   availability:
     type: string
   availabilityDate:
-    type: string
+    dateTimeType: DateTime
   brand:
     type: string
   color:

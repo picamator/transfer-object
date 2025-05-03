@@ -22,10 +22,9 @@ trait BuilderExpanderTrait
         string $className,
         array $content,
     ): DefinitionGeneratorContentTransfer {
-        $contentTransfer = new DefinitionGeneratorContentTransfer();
-        $contentTransfer->className = $className;
-        $contentTransfer->content = $content;
-
-        return $contentTransfer;
+        return new DefinitionGeneratorContentTransfer([
+            DefinitionGeneratorContentTransfer::CLASS_NAME => $className,
+            DefinitionGeneratorContentTransfer::CONTENT => $content,
+        ]);
     }
 }

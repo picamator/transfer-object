@@ -25,6 +25,12 @@ START;
     collectionType: %s
 START;
 
+
+    private const string DATE_TIME_TYPE_TEMPLATE = <<<'START'
+  %s:
+    dateTimeType: %s
+START;
+
     public function renderDefinitionContent(DefinitionContentTransfer $contentTransfer): string
     {
         $content = sprintf(self::CLASS_TEMPLATE, $contentTransfer->className, $contentTransfer->className) . PHP_EOL;
@@ -56,6 +62,12 @@ START;
                     $propertyTransfer->collectionType->name,
                 ),
 
+            $propertyTransfer->dateTimeType !== null
+                => $this->renderDateTimeType(
+                    $propertyTransfer->propertyName,
+                    $propertyTransfer->dateTimeType->name,
+                ),
+
             default => $this->renderDefault($propertyTransfer),
         };
     }
@@ -67,10 +79,15 @@ START;
     {
         throw new DefinitionGeneratorException(
             sprintf(
-                'Failed to build definition content for "%s". Unknown property type.',
-                var_export($propertyTransfer, true),
+                'Failed to build definition content for "%s". Unknown property type render.',
+                $propertyTransfer->propertyName,
             ),
         );
+    }
+
+    private function renderDateTimeType(string $propertyName, string $typeName): string
+    {
+        return sprintf(self::DATE_TIME_TYPE_TEMPLATE, $propertyName, $typeName);
     }
 
     private function renderCollectionType(string $propertyName, string $typeName): string
