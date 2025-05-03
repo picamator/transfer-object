@@ -33,7 +33,6 @@ $ ./vendor/bin/definition-generate
 Generates a `YML` [definition file](https://github.com/picamator/transfer-object/wiki/Definition-File):
 
 ```yml
-# $schema: https://raw.githubusercontent.com/picamator/transfer-object/refs/heads/main/schema/definition.schema.json
 Customer:
   firstName:
     type: string
