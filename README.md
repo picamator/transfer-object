@@ -33,6 +33,7 @@ $ ./vendor/bin/definition-generate
 Generates a `YML` [definition file](https://github.com/picamator/transfer-object/wiki/Definition-File):
 
 ```yml
+# $schema: https://raw.githubusercontent.com/picamator/transfer-object/refs/heads/main/schema/definition.schema.json
 Customer:
   firstName:
     type: string
@@ -61,14 +62,14 @@ Key Features
 
  * includes Symfony console commands: [TransferGeneratorCommand](/src/Command/TransferGeneratorCommand.php) and [DefinitionGeneratorCommand](/src/Command/DefinitionGeneratorCommand.php)
  * includes Symfony services: [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php) and [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php)
- * Transfer Objects are mappable with Symfony request
+ * supports mapping Symfony request
 
 **Transfer Object:**
   * implements methods: `fromArray()`, `toArray()`, and `toFilterArray()`
   * implements standard interfaces: `IteratorAggregate`, `JsonSerializable`, and `Countable`
   * supports embedded, collections Transfer Objects
   * supports PHP primitive data types
-  * supports `BackedEnum`
+  * supports `BackedEnum`, `DateTime`, `DateTimeImmutable`
   * supports asymmetric property visibility
   * integrates external Transfer Objects
 
