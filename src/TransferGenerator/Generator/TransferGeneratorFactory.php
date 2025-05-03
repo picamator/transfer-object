@@ -28,6 +28,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\DateTim
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\EnumTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\MetaConstantsTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\NamespaceTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\NumberTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\ProtectedTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TemplateExpanderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TransferTypeTemplateExpander;
@@ -117,9 +118,15 @@ readonly class TransferGeneratorFactory
             ->setNextExpander($this->createNamespaceTemplateExpander())
             ->setNextExpander($this->createMetaConstantsTemplateExpander())
             ->setNextExpander($this->createProtectedTemplateExpander())
-            ->setNextExpander($this->createDateTimeTypeTemplateExpander());
+            ->setNextExpander($this->createDateTimeTypeTemplateExpander())
+            ->setNextExpander($this->createNumberTypeTemplateExpander());
 
         return $templateExpander;
+    }
+
+    protected function createNumberTypeTemplateExpander(): TemplateExpanderInterface
+    {
+        return new NumberTypeTemplateExpander();
     }
 
     protected function createDateTimeTypeTemplateExpander(): TemplateExpanderInterface

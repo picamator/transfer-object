@@ -68,7 +68,7 @@ Key Features
   * implements standard interfaces: `IteratorAggregate`, `JsonSerializable`, and `Countable`
   * supports embedded, collections Transfer Objects
   * supports PHP primitive data types
-  * supports `BackedEnum`, `DateTime`, `DateTimeImmutable`
+  * supports `BackedEnum`, `DateTime`, `DateTimeImmutable`, and `BcMath\\Number`
   * supports asymmetric property visibility
   * integrates external Transfer Objects
 

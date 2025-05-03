@@ -20,7 +20,7 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
  */
 final class DefinitionPropertyTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 8;
+    protected const int META_DATA_SIZE = 9;
 
     protected const array META_DATA = [
         self::BUILD_IN_TYPE => self::BUILD_IN_TYPE_DATA_NAME,
@@ -29,6 +29,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
         self::ENUM_TYPE => self::ENUM_TYPE_DATA_NAME,
         self::IS_NULLABLE => self::IS_NULLABLE_DATA_NAME,
         self::IS_PROTECTED => self::IS_PROTECTED_DATA_NAME,
+        self::NUMBER_TYPE => self::NUMBER_TYPE_DATA_NAME,
         self::PROPERTY_NAME => self::PROPERTY_NAME_DATA_NAME,
         self::TRANSFER_TYPE => self::TRANSFER_TYPE_DATA_NAME,
     ];
@@ -97,10 +98,21 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
         set => $this->setData(self::IS_PROTECTED_DATA_INDEX, $value);
     }
 
+    // numberType
+    #[PropertyTypeAttribute(DefinitionEmbeddedTypeTransfer::class)]
+    public const string NUMBER_TYPE = 'numberType';
+    protected const string NUMBER_TYPE_DATA_NAME = 'NUMBER_TYPE';
+    protected const int NUMBER_TYPE_DATA_INDEX = 6;
+
+    public ?DefinitionEmbeddedTypeTransfer $numberType {
+        get => $this->getData(self::NUMBER_TYPE_DATA_INDEX);
+        set => $this->setData(self::NUMBER_TYPE_DATA_INDEX, $value);
+    }
+
     // propertyName
     public const string PROPERTY_NAME = 'propertyName';
     protected const string PROPERTY_NAME_DATA_NAME = 'PROPERTY_NAME';
-    protected const int PROPERTY_NAME_DATA_INDEX = 6;
+    protected const int PROPERTY_NAME_DATA_INDEX = 7;
 
     public string $propertyName {
         get => $this->getData(self::PROPERTY_NAME_DATA_INDEX);
@@ -111,7 +123,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     #[PropertyTypeAttribute(DefinitionEmbeddedTypeTransfer::class)]
     public const string TRANSFER_TYPE = 'transferType';
     protected const string TRANSFER_TYPE_DATA_NAME = 'TRANSFER_TYPE';
-    protected const int TRANSFER_TYPE_DATA_INDEX = 7;
+    protected const int TRANSFER_TYPE_DATA_INDEX = 8;
 
     public ?DefinitionEmbeddedTypeTransfer $transferType {
         get => $this->getData(self::TRANSFER_TYPE_DATA_INDEX);

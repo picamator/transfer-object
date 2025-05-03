@@ -13,4 +13,5 @@ enum DefinitionTypeKeyEnum: string
     case COLLECTION_TYPE = DefinitionPropertyTransfer::COLLECTION_TYPE;
     case ENUM_TYPE = DefinitionPropertyTransfer::ENUM_TYPE;
     case DATE_TIME_TYPE = DefinitionPropertyTransfer::DATE_TIME_TYPE;
+    case NUMBER_TYPE = DefinitionPropertyTransfer::NUMBER_TYPE;
 }

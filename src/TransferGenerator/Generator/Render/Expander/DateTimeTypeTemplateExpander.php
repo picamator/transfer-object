@@ -20,8 +20,8 @@ final class DateTimeTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $templateTransfer->imports[AttributeEnum::DATE_TIME_ATTRIBUTE->value]
-            ??= AttributeEnum::DATE_TIME_ATTRIBUTE->value;
+        $templateTransfer->imports[AttributeEnum::DATE_TIME_TYPE_ATTRIBUTE->value]
+            ??= AttributeEnum::DATE_TIME_TYPE_ATTRIBUTE->value;
 
         $importDateTime = $propertyTransfer->dateTimeType?->namespace?->fullName ?: '';
 
@@ -37,6 +37,6 @@ final class DateTimeTypeTemplateExpander extends AbstractTemplateExpander
 
     private function getPropertyAttribute(string $dateTimeClassName): string
     {
-        return sprintf(AttributeTemplateEnum::DATE_TIME_ATTRIBUTE->value, $dateTimeClassName);
+        return sprintf(AttributeTemplateEnum::DATE_TIME_TYPE_ATTRIBUTE->value, $dateTimeClassName);
     }
 }

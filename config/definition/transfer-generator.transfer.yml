@@ -60,6 +60,8 @@ DefinitionProperty:
     type: DefinitionEmbeddedType
   dateTimeType:
     type: DefinitionEmbeddedType
+  numberType:
+    type: DefinitionEmbeddedType
   isNullable:
     type: bool
     required:
