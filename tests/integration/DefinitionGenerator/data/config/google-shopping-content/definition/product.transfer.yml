@@ -1,3 +1,5 @@
+# $schema: https://raw.githubusercontent.com/picamator/transfer-object/refs/heads/main/schema/definition.schema.json
+
 # Product
 Product:
   kind:
