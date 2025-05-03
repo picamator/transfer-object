@@ -1,3 +1,5 @@
+# $schema: https://raw.githubusercontent.com/picamator/transfer-object/refs/heads/main/schema/definition.schema.json
+
 # Product
 Product:
   kind:
@@ -29,7 +31,7 @@ Product:
   availability:
     type: string
   availabilityDate:
-    type: string
+    dateTimeType: DateTime
   brand:
     type: string
   color:

@@ -15,8 +15,10 @@ use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParse
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParserInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\BuildInTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\CollectionTypePropertyExpander;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\DateTimeTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\EnumTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\NullablePropertyExpander;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\NumberTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\PropertyExpanderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\ProtectedPropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\TransferTypePropertyExpander;
@@ -30,8 +32,10 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\DefinitionVa
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\DefinitionValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\BuildInTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\CollectionTypePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\DateTimeTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\EnumTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\NamePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\NumberTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\RequiredTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\ReservedNamePropertyValidator;
@@ -88,7 +92,19 @@ readonly class DefinitionFactory
             $this->createTransferTypePropertyValidator(),
             $this->createCollectionTypePropertyValidator(),
             $this->createEnumTypePropertyValidator(),
+            $this->createDateTimeTypePropertyValidator(),
+            $this->createNumberTypePropertyValidator(),
         ]);
+    }
+
+    protected function createNumberTypePropertyValidator(): PropertyValidatorInterface
+    {
+        return new NumberTypePropertyValidator();
+    }
+
+    protected function createDateTimeTypePropertyValidator(): PropertyValidatorInterface
+    {
+        return new DateTimeTypePropertyValidator();
     }
 
     protected function createEnumTypePropertyValidator(): PropertyValidatorInterface
@@ -164,9 +180,21 @@ readonly class DefinitionFactory
             ->setNextExpander($this->createBuildInTypePropertyExpander())
             ->setNextExpander($this->createTransferTypePropertyExpander())
             ->setNextExpander($this->createEnumTypePropertyExpander())
-            ->setNextExpander($this->createProtectedPropertyExpander());
+            ->setNextExpander($this->createProtectedPropertyExpander())
+            ->setNextExpander($this->createDateTimeTypePropertyExpander())
+            ->setNextExpander($this->createNumberTypePropertyExpander());
 
         return $propertyExpander;
+    }
+
+    protected function createNumberTypePropertyExpander(): PropertyExpanderInterface
+    {
+        return new NumberTypePropertyExpander();
+    }
+
+    protected function createDateTimeTypePropertyExpander(): PropertyExpanderInterface
+    {
+        return new DateTimeTypePropertyExpander();
     }
 
     protected function createProtectedPropertyExpander(): PropertyExpanderInterface

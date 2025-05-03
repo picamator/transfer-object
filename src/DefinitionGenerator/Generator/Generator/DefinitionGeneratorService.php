@@ -25,6 +25,9 @@ readonly class DefinitionGeneratorService implements DefinitionGeneratorServiceI
         $filesystemTransfer = $this->createFilesystemTransfer($generatorTransfer);
         $this->filesystem->deleteFile($filesystemTransfer);
 
+        $filesystemTransfer->content = $this->render->renderSchema();
+        $this->filesystem->appendFile($filesystemTransfer);
+
         foreach ($this->builder->createDefinitionContents($generatorTransfer->content) as $contentTransfer) {
             $filesystemTransfer->content = $this->render->renderDefinitionContent($contentTransfer);
             $this->filesystem->appendFile($filesystemTransfer);

@@ -1,3 +1,4 @@
+# $schema: ./../../../../../../schema/definition.schema.json
 Required:
   iAmRequired:
     type: string

@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\DefinitionGenerator\Builder\Expander;
 
 use ArrayObject;
+use DateTime;
+use DateTimeInterface;
 use Picamator\TransferObject\DefinitionGenerator\Builder\BuilderContentInterface;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\GetTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\ObjectTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
+use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 
@@ -25,6 +28,11 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
         DefinitionBuilderTransfer $builderTransfer,
     ): void {
         $propertyTransfer = match (true) {
+            $content->getType()->isString()
+                //  @phpstan-ignore argument.type
+                && DateTime::createFromFormat(DateTimeInterface::ATOM, $content->getPropertyValue()) !== false
+                => $this->createDateTimePropertyTransfer($content->getPropertyName()),
+
             $content->getType()->isNull() || $content->getType()->isString()
                 => $this->createPropertyTransfer($content->getPropertyName(), GetTypeEnum::string->name),
 
@@ -43,6 +51,20 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
         };
 
         $builderTransfer->definitionContent->properties[] = $propertyTransfer;
+    }
+
+    private function createDateTimePropertyTransfer(string $propertyName): DefinitionPropertyTransfer
+    {
+        $typeTransfer = new DefinitionEmbeddedTypeTransfer();
+        $typeTransfer->name = ObjectTypeEnum::DATE_TIME->value;
+
+        $propertyTransfer = new DefinitionPropertyTransfer();
+        $propertyTransfer->propertyName = $propertyName;
+        $propertyTransfer->dateTimeType = $typeTransfer;
+        $propertyTransfer->isNullable = true;
+        $propertyTransfer->isProtected = false;
+
+        return $propertyTransfer;
     }
 
     private function createPropertyTransfer(string $propertyName, string $buildInType): DefinitionPropertyTransfer

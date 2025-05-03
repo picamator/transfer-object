@@ -57,16 +57,20 @@ $customerTransfer->lastName = 'Kowalski';
 Key Features
 ------------
 
-* **Symfony-compatible:**
-  * includes Symfony console commands: [TransferGeneratorCommand](/src/Command/TransferGeneratorCommand.php) and [DefinitionGeneratorCommand](/src/Command/DefinitionGeneratorCommand.php)
-  * includes Symfony services: [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php) and [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php)
-  * Transfer Objects are mappable with Symfony request
-* **Transfer Object:**
+**Symfony Compatability:**
+
+ * includes Symfony console commands: [TransferGeneratorCommand](/src/Command/TransferGeneratorCommand.php) and [DefinitionGeneratorCommand](/src/Command/DefinitionGeneratorCommand.php)
+ * includes Symfony services: [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php) and [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php)
+ * supports mapping Symfony request
+
+**Transfer Object:**
   * implements methods: `fromArray()`, `toArray()`, and `toFilterArray()`
   * implements standard interfaces: `IteratorAggregate`, `JsonSerializable`, and `Countable`
-  * supports embedded Transfer Objects, collections as well as `BackedEnum`, nullable and not nullable property types
+  * supports embedded, collections Transfer Objects
+  * supports PHP primitive data types
+  * supports `BackedEnum`, `DateTime`, `DateTimeImmutable`, and `BcMath\\Number`
   * supports asymmetric property visibility
-  * supports custom Data Transfer Object (DTO)
+  * integrates external Transfer Objects
 
 Installation
 ------------
@@ -100,7 +104,7 @@ In all cases, data **100%** are matched ✅.
 
 For detailed information, please check [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php).
 
-### Service Samples
+### Samples
 
 - [Definition Generator](/doc/samples/try-definition-generator.php)
 - [Transfer Generator](/doc/samples/try-transfer-generator.php)

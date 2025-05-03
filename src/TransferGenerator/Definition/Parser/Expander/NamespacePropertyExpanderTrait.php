@@ -50,8 +50,10 @@ trait NamespacePropertyExpanderTrait
 
     private function getBaseName(string $withoutAlias): string
     {
-        /** @var string $baseName */
         $baseName = strrchr($withoutAlias, '\\');
+        if ($baseName === false) {
+            return $withoutAlias;
+        }
 
         return ltrim($baseName, '\\');
     }

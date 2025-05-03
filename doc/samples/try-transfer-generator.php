@@ -83,7 +83,11 @@ STORY;
 $credentialsTransfer = new CredentialsTransfer([
     CredentialsTransfer::LOGIN => 'jan.kowalski',
     CredentialsTransfer::TOKEN => 'some-random-token',
+    CredentialsTransfer::CREATED_AT => '2025-05-02 22:58:00',
+    CredentialsTransfer::UPDATED_AT => new DateTime(),
 ]);
 
 echo "Login: $credentialsTransfer->login\n";
 echo "Token: $credentialsTransfer->token\n";
+
+var_dump($credentialsTransfer->toArray());

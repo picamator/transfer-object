@@ -1,0 +1,8 @@
+# $schema: ./../../../../../../schema/definition.schema.json
+Author:
+  firstName:
+    type: string
+    required:
+  lastName:
+    type: string
+    required:

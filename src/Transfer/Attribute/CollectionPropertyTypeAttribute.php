@@ -6,7 +6,6 @@ namespace Picamator\TransferObject\Transfer\Attribute;
 
 use ArrayObject;
 use Attribute;
-use Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException;
 use Picamator\TransferObject\Transfer\TransferInterface;
 
 /**
@@ -15,6 +14,8 @@ use Picamator\TransferObject\Transfer\TransferInterface;
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
 final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttributeInterface
 {
+    use TransferBuilderTrait;
+
     public function __construct(private string $typeName)
     {
     }
@@ -26,17 +27,16 @@ final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttr
      */
     public function fromArray(mixed $data): ArrayObject
     {
-        if (!is_array($data)) {
-            throw new PropertyTypeTransferException(
-                sprintf(
-                    'Data must be of type array, "%s" given."',
-                    get_debug_type($data)
-                ),
-            );
-        }
+        $this->assertArray($data);
 
-        /** @phpstan-ignore argument.type */
-        $collectionData = array_map($this->createTransfer(...), $data);
+        /**
+         * @var array<string|int, mixed> $data
+         * @var array<string|int,\Picamator\TransferObject\Transfer\TransferInterface> $collectionData
+         */
+        $collectionData = array_map(
+            fn (mixed $dataItem): TransferInterface => $this->createTransfer($this->typeName, $dataItem),
+            $data
+        );
 
         return new ArrayObject($collectionData);
     }
@@ -60,16 +60,5 @@ final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttr
     public function getInitialValue(): ArrayObject
     {
         return new ArrayObject();
-    }
-
-    /**
-     * @param array<string,mixed> $data
-     */
-    private function createTransfer(array $data): TransferInterface
-    {
-        /** @var \Picamator\TransferObject\Transfer\TransferInterface $transfer */
-        $transfer = new $this->typeName();
-
-        return $transfer->fromArray($data);
     }
 }

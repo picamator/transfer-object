@@ -14,13 +14,15 @@ class ConfigEnvironmentRender implements ConfigEnvironmentRenderInterface
     public function renderProjectRoot(string $path): string
     {
         $projectRoot = $this->getProjectRoot();
-        $path = rtrim($path, '\/');
+        $path = $this->rtrimPath($path);
 
         return str_replace(self::PLACEHOLDER, $projectRoot, $path);
     }
 
     public function renderRelativeProjectRoot(string $path): string
     {
+        $path = $this->rtrimPath($path);
+
         return str_replace(self::PLACEHOLDER, '', $path);
     }
 
@@ -49,6 +51,11 @@ class ConfigEnvironmentRender implements ConfigEnvironmentRenderInterface
 
         $envValue = trim($envValue);
 
-        return rtrim($envValue, '\/');
+        return $this->rtrimPath($envValue);
+    }
+
+    private function rtrimPath(string $path): string
+    {
+        return rtrim($path, '\/');
     }
 }

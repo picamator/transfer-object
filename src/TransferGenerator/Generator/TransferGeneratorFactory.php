@@ -24,9 +24,11 @@ use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGener
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\BuildInTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\CollectionTypeTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\DateTimeTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\EnumTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\MetaConstantsTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\NamespaceTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\NumberTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\ProtectedTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TemplateExpanderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TransferTypeTemplateExpander;
@@ -115,9 +117,21 @@ readonly class TransferGeneratorFactory
             ->setNextExpander($this->createEnumTypeTemplateExpander())
             ->setNextExpander($this->createNamespaceTemplateExpander())
             ->setNextExpander($this->createMetaConstantsTemplateExpander())
-            ->setNextExpander($this->createProtectedTemplateExpander());
+            ->setNextExpander($this->createProtectedTemplateExpander())
+            ->setNextExpander($this->createDateTimeTypeTemplateExpander())
+            ->setNextExpander($this->createNumberTypeTemplateExpander());
 
         return $templateExpander;
+    }
+
+    protected function createNumberTypeTemplateExpander(): TemplateExpanderInterface
+    {
+        return new NumberTypeTemplateExpander();
+    }
+
+    protected function createDateTimeTypeTemplateExpander(): TemplateExpanderInterface
+    {
+        return new DateTimeTypeTemplateExpander();
     }
 
     protected function createProtectedTemplateExpander(): TemplateExpanderInterface

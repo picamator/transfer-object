@@ -1,3 +1,4 @@
+# $schema: ./../../../../../../schema/definition.schema.json
 Item:
   iAmBool:
     type: bool
@@ -17,3 +18,9 @@ Item:
     type: ArrayObject
   iAmEnum:
     enumType: "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Enum\\ImBackedEnum"
+  iAmDateTime:
+    dateTimeType: "DateTime"
+  iAmDateTimeImmutable:
+    dateTimeType: "DateTimeImmutable"
+  iAmNumber:
+    numberType: "BcMath\\Number"

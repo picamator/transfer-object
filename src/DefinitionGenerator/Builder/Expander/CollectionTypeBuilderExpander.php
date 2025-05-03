@@ -76,6 +76,8 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
         $propertyTransfer = new DefinitionPropertyTransfer();
         $propertyTransfer->propertyName = $propertyName;
         $propertyTransfer->collectionType = $typeTransfer;
+        $propertyTransfer->isNullable = true;
+        $propertyTransfer->isProtected = false;
 
         return $propertyTransfer;
     }

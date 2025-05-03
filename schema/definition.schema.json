@@ -1,0 +1,87 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Transfer Object Definition File",
+    "description": "Define Definition File structure",
+    "type": "object",
+    "patternProperties": {
+        ".*": {
+            "type": "object",
+            "description": "Transfer Object name.",
+            "patternProperties": {
+                ".*": {
+                    "type": "object",
+                    "description": "Property name.",
+                    "properties": {
+                        "type": {
+                            "type": ["string", "boolean"],
+                            "description": "PHP built-in type or Transfer Object name without Transfer suffix or the full class path, optionally with alias.",
+                            "anyOf": [
+                                true,
+                                false,
+                                "bool",
+                                "int",
+                                "float",
+                                "string",
+                                "array",
+                                "ArrayObject",
+                                {
+                                    "pattern": ".*"
+                                }
+                            ]
+                        },
+                        "collectionType": {
+                            "type": "string",
+                            "description": "Includes the Transfer Object name without Transfer suffix or the full class path, optionally with alias."
+                        },
+                        "enumType": {
+                            "type": "string",
+                            "description": "Includes the fully qualified Enum name with namespace, optionally with alias."
+                        },
+                        "dateTimeType": {
+                            "type": "string",
+                            "description": "Includes DateTimeImmutable or DateTime or any of full sub-class path, optionally with alias.",
+                            "anyOf": [
+                                "DateTimeImmutable",
+                                "DateTime",
+                                {
+                                    "pattern": ".*"
+                                }
+                            ]
+                        },
+                        "numberType": {
+                            "type": "string",
+                            "description": "Includes BcMath\\Number.",
+                            "anyOf": [
+                                "BcMath\\Number"
+                            ]
+                        },
+                        "required": {
+                            "type": "null",
+                            "description": "Marks the property as not nullable."
+                        },
+                        "protected": {
+                            "type": "null",
+                            "description": "Marks the property as having asymmetric protected(set) visibility."
+                        }
+                    },
+                    "oneOf": [
+                        {
+                            "required": ["type"]
+                        }, {
+                            "required": ["collectionType"]
+                        }, {
+                            "required": ["enumType"]
+                        }, {
+                            "required": ["dateTimeType"]
+                        }, {
+                            "required": ["numberType"]
+                        }
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

@@ -1,3 +1,4 @@
+# $schema: ./../schema/config.schema.json
 generator:
   transferNamespace: "Picamator\\TransferObject\\Generated"
   transferPath: "${PROJECT_ROOT}/src/Generated"

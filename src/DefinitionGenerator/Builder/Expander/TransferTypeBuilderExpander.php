@@ -51,6 +51,8 @@ final class TransferTypeBuilderExpander extends AbstractBuilderExpander
         $propertyTransfer = new DefinitionPropertyTransfer();
         $propertyTransfer->propertyName = $propertyName;
         $propertyTransfer->transferType = $typeTransfer;
+        $propertyTransfer->isNullable = true;
+        $propertyTransfer->isProtected = false;
 
         return $propertyTransfer;
     }

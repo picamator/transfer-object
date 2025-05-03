@@ -1,3 +1,4 @@
+# $schema: ./../../../../../../schema/config.schema.json
 generator:
   transferNamespace: "Picamator\\Tests\\Integration\\TransferObject\\DefinitionGenerator\\Generated\\Frankfurter"
   transferPath: "${PROJECT_ROOT}/tests/integration/DefinitionGenerator/Generated/Frankfurter"

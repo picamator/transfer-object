@@ -1,3 +1,4 @@
+# $schema: ./../../../../../../schema/definition.schema.json
 Namespace:
   items:
     collectionType: "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Generated\\ItemTransfer"

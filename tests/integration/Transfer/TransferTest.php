@@ -47,6 +47,7 @@ class TransferTest extends TestCase
         $actual = $itemCollectionTransfer->toArray();
 
         // Assert
+        //  @phpstan-ignore method.alreadyNarrowedType
         $this->assertContainsOnlyInstancesOf(ItemTransfer::class, $itemCollectionTransfer->items);
         $this->assertEquals($expected, $actual);
     }
@@ -69,6 +70,9 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
                         ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
                         ItemTransfer::I_AM_ENUM => ImBackedEnum::SOME_CASE->value,
+                        ItemTransfer::I_AM_DATE_TIME => '2025-05-03T20:53:00+02:00',
+                        ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => '2025-05-03T20:53:00+02:00',
+                        ItemTransfer::I_AM_NUMBER => '12.25555985',
                     ]
                 ],
             ],
@@ -84,6 +88,9 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
                         ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
                         ItemTransfer::I_AM_ENUM => ImBackedEnum::SOME_CASE->value,
+                        ItemTransfer::I_AM_DATE_TIME => '2025-05-03T20:53:00+02:00',
+                        ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => '2025-05-03T20:53:00+02:00',
+                        ItemTransfer::I_AM_NUMBER => '12.25555985',
                     ]
                 ],
                 ItemCollectionTransfer::ITEM => null,
@@ -103,6 +110,9 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ARRAY => null,
                         ItemTransfer::I_AM_ARRAY_OBJECT => null,
                         ItemTransfer::I_AM_ENUM => null,
+                        ItemTransfer::I_AM_DATE_TIME => null,
+                        ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => null,
+                        ItemTransfer::I_AM_NUMBER => null,
                     ],
                 ],
             ],
@@ -118,6 +128,9 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ARRAY => [],
                         ItemTransfer::I_AM_ARRAY_OBJECT => [],
                         ItemTransfer::I_AM_ENUM => null,
+                        ItemTransfer::I_AM_DATE_TIME => null,
+                        ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => null,
+                        ItemTransfer::I_AM_NUMBER => null,
                     ],
                 ],
                 ItemCollectionTransfer::ITEM => null,
@@ -257,6 +270,7 @@ class TransferTest extends TestCase
      */
     #[TestWith([[ItemCollectionTransfer::ITEMS => true]])]
     #[TestWith([[ItemCollectionTransfer::ITEM => true]])]
+    #[TestWith([[ItemCollectionTransfer::ITEMS => ['some-string']]])]
     public function testItemCollectionTransferAttributeTypeMismatchFromArrayShouldRiseException(array $data): void
     {
         // Arrange

@@ -8,6 +8,8 @@ use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 
 interface DefinitionRenderInterface
 {
+    public function renderSchema(): string;
+
     /**
      * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
      */
