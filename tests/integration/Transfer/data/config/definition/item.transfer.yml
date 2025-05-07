@@ -22,5 +22,3 @@ Item:
     dateTimeType: "DateTime"
   iAmDateTimeImmutable:
     dateTimeType: "DateTimeImmutable"
-  iAmNumber:
-    numberType: "BcMath\\Number"

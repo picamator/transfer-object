@@ -1,0 +1,4 @@
+# $schema: ./../../../../../../../schema/definition.schema.json
+BcMathNumber:
+  iAmNumber:
+    numberType: "BcMath\\Number"

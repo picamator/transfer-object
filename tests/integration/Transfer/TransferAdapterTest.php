@@ -5,12 +5,16 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\Transfer;
 
 use PHPUnit\Framework\TestCase;
+use Picamator\Tests\Integration\TransferObject\Helper\ExtensionHelperTrait;
+use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BcMathBookData;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookData;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\CountryEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\AuthorTransfer;
 
 class TransferAdapterTest extends TestCase
 {
+    use ExtensionHelperTrait;
+
     public function testFromArrayToArray(): void
     {
         // Arrange
@@ -27,7 +31,6 @@ class TransferAdapterTest extends TestCase
             'labels' => ['wishlist'],
             'updatedAt' => '2025-05-01 21:39:18',
             'createdAt' => '2025-05-01 20:39:18',
-            'price' => '10.23',
             'notes' => [
                 'title' => 'wishlist',
             ],
@@ -100,7 +103,6 @@ class TransferAdapterTest extends TestCase
             'labels' => ['wishlist'],
             'updatedAt' => '2025-05-01 21:39:18',
             'createdAt' => '2025-05-01 20:39:18',
-            'price' => '10.23',
             'notes' => [
                 'title' => 'wishlist',
             ],
@@ -123,7 +125,6 @@ class TransferAdapterTest extends TestCase
         $this->assertNotSame($bookData->labels, $clonedBookData->labels);
         $this->assertNotSame($bookData->updatedAt, $clonedBookData->updatedAt);
         $this->assertNotSame($bookData->createdAt, $clonedBookData->createdAt);
-        $this->assertNotSame($bookData->price, $clonedBookData->price);
         $this->assertNotSame($bookData->notes, $clonedBookData->notes);
     }
 
@@ -149,6 +150,27 @@ class TransferAdapterTest extends TestCase
         // Act
         $actual = json_encode($bookData, flags: JSON_THROW_ON_ERROR);
         $actual = json_decode($actual, associative: true, flags: JSON_THROW_ON_ERROR);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+
+    public function testBcMathToArray(): void
+    {
+        if (!$this->isBcMathLoaded()) {
+            $this->markTestSkipped('BCMath is not loaded.');
+        }
+
+        // Arrange
+        $expected = [
+            'price' => '12.34'
+        ];
+
+        // Act
+        $bookData = new BcMathBookData()
+            ->fromArray($expected);
+
+        $actual = $bookData->toArray();
 
         // Assert
         $this->assertSame($expected, $actual);

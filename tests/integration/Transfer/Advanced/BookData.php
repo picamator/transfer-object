@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\Transfer\Advanced;
 
 use ArrayObject;
-use BcMath\Number;
 use DateTime;
 use DateTimeImmutable;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\CountryEnum;
@@ -19,7 +18,7 @@ class BookData implements TransferInterface
     use TransferAdapterTrait;
 
     /**
-     * @param ArrayObject<string,mixed> $labels
+     * @param \ArrayObject<string,mixed> $labels
      * @param string|null $reference
      */
     public function __construct(
@@ -30,7 +29,6 @@ class BookData implements TransferInterface
         public ?ArrayObject $labels = null,
         public ?DateTime $updatedAt = null,
         public ?DateTimeImmutable $createdAt = null,
-        public ?Number $price = null,
         public ?stdClass $notes = null,
         public ?int $bookmarkPage = 1,
         public $reference = null,

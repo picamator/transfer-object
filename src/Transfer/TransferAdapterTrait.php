@@ -73,7 +73,7 @@ trait TransferAdapterTrait
 
                 $value instanceof DateTimeInterface => $value->format(static::DATE_TIME_FORMAT),
 
-                $value instanceof Number => (string)$value,
+                $this->isBcMathLoaded() && $value instanceof Number => (string)$value,
 
                 $value instanceof stdClass => (array)$value,
 
@@ -119,33 +119,33 @@ trait TransferAdapterTrait
             $isStringOrInt = $isString || is_int($value);
 
             $this->$name = match (true) {
-                is_subclass_of($type, AbstractTransfer::class) && $isArray
+                $isArray && is_subclass_of($type, AbstractTransfer::class)
                     => new $type($value),
 
-                is_subclass_of($type, TransferInterface::class) && $isArray
+                $isArray && is_subclass_of($type, TransferInterface::class)
                     //  @phpstan-ignore argument.type
                     => new $type()->fromArray($value),
 
-                $type === ArrayObject::class && $isArray
+                $isArray && $type === ArrayObject::class
                     //  @phpstan-ignore argument.type
                     => new ArrayObject($value),
 
-                $type === DateTime::class && $isString
+                $isString && $type === DateTime::class
                     //  @phpstan-ignore argument.type
                     => new DateTime($value),
 
-                $type === DateTimeImmutable::class && $isString
+                $isString && $type === DateTimeImmutable::class
                     //  @phpstan-ignore argument.type
                     => new DateTimeImmutable($value),
 
-                $type === Number::class && $isStringOrInt
+                $isStringOrInt && $this->isBcMathLoaded() && $type === Number::class
                     //  @phpstan-ignore argument.type
                     => new Number($value),
 
-                $type === stdClass::class && $isArray
+                $isArray && $type === stdClass::class
                     => (object)$value,
 
-                is_subclass_of($type, BackedEnum::class) && $isStringOrInt
+                $isStringOrInt && is_subclass_of($type, BackedEnum::class)
                     //  @phpstan-ignore argument.type
                     => $type::tryFrom($value),
 
@@ -186,5 +186,10 @@ trait TransferAdapterTrait
         $reflection = new ReflectionClass($this);
 
         return $this->_propertyCache = $reflection->getProperties(ReflectionProperty::IS_PUBLIC);
+    }
+
+    private function isBcMathLoaded(): bool
+    {
+        return extension_loaded('bcmath');
     }
 }
