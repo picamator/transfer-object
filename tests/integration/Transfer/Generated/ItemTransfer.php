@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\Transfer\Generated;
 
 use ArrayObject;
-use BcMath\Number;
 use DateTime;
 use DateTimeImmutable;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
@@ -14,7 +13,6 @@ use Picamator\TransferObject\Transfer\Attribute\ArrayObjectPropertyTypeAttribute
 use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\DateTimePropertyTypeAttribute;
 use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\NumberPropertyTypeAttribute;
 
 /**
  * Specification:
@@ -27,7 +25,7 @@ use Picamator\TransferObject\Transfer\Attribute\NumberPropertyTypeAttribute;
  */
 final class ItemTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 12;
+    protected const int META_DATA_SIZE = 11;
 
     protected const array META_DATA = [
         self::I_AM_ARRAY => self::I_AM_ARRAY_DATA_NAME,
@@ -39,7 +37,6 @@ final class ItemTransfer extends AbstractTransfer
         self::I_AM_FALSE => self::I_AM_FALSE_DATA_NAME,
         self::I_AM_FLOAT => self::I_AM_FLOAT_DATA_NAME,
         self::I_AM_INT => self::I_AM_INT_DATA_NAME,
-        self::I_AM_NUMBER => self::I_AM_NUMBER_DATA_NAME,
         self::I_AM_STRING => self::I_AM_STRING_DATA_NAME,
         self::I_AM_TRUE => self::I_AM_TRUE_DATA_NAME,
     ];
@@ -141,21 +138,10 @@ final class ItemTransfer extends AbstractTransfer
         set => $this->setData(self::I_AM_INT_DATA_INDEX, $value);
     }
 
-    // iAmNumber
-    #[NumberPropertyTypeAttribute(Number::class)]
-    public const string I_AM_NUMBER = 'iAmNumber';
-    protected const string I_AM_NUMBER_DATA_NAME = 'I_AM_NUMBER';
-    protected const int I_AM_NUMBER_DATA_INDEX = 9;
-
-    public ?Number $iAmNumber {
-        get => $this->getData(self::I_AM_NUMBER_DATA_INDEX);
-        set => $this->setData(self::I_AM_NUMBER_DATA_INDEX, $value);
-    }
-
     // iAmString
     public const string I_AM_STRING = 'iAmString';
     protected const string I_AM_STRING_DATA_NAME = 'I_AM_STRING';
-    protected const int I_AM_STRING_DATA_INDEX = 10;
+    protected const int I_AM_STRING_DATA_INDEX = 9;
 
     public ?string $iAmString {
         get => $this->getData(self::I_AM_STRING_DATA_INDEX);
@@ -165,7 +151,7 @@ final class ItemTransfer extends AbstractTransfer
     // iAmTrue
     public const string I_AM_TRUE = 'iAmTrue';
     protected const string I_AM_TRUE_DATA_NAME = 'I_AM_TRUE';
-    protected const int I_AM_TRUE_DATA_INDEX = 11;
+    protected const int I_AM_TRUE_DATA_INDEX = 10;
 
     public ?true $iAmTrue {
         get => $this->getData(self::I_AM_TRUE_DATA_INDEX);

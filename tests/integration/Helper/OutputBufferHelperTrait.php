@@ -6,7 +6,7 @@ namespace Picamator\Tests\Integration\TransferObject\Helper;
 
 trait OutputBufferHelperTrait
 {
-    protected function getOutputBuffer(string $scriptPath): bool|string
+    final protected function getOutputBuffer(string $scriptPath): bool|string
     {
         ob_start();
         include $scriptPath;

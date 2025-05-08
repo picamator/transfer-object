@@ -13,7 +13,7 @@ trait TransferGeneratorHelperTrait
     /**
      * @throws \Throwable
      */
-    protected static function generateTransfersOrFail(string $configPath): void
+    final protected static function generateTransfersOrFail(string $configPath): void
     {
         new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
     }
@@ -21,7 +21,7 @@ trait TransferGeneratorHelperTrait
     /**
      * @throws \Throwable
      */
-    protected function generateTransfersCallback(string $configPath, callable $postGenerateItemCallback): bool
+    final protected function generateTransfersCallback(string $configPath, callable $postGenerateItemCallback): bool
     {
         $generatorFiber = new TransferGeneratorFacade()->getTransferGeneratorFiber();
 
@@ -40,7 +40,7 @@ trait TransferGeneratorHelperTrait
         return $generatorFiber->getReturn();
     }
 
-    protected function assertGeneratorSuccess(TransferGeneratorTransfer $generatorTransfer): void
+    final protected function assertGeneratorSuccess(TransferGeneratorTransfer $generatorTransfer): void
     {
         $message = $this->groupValidatorMessages($generatorTransfer->validator->errorMessages);
 

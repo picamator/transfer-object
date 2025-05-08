@@ -27,7 +27,7 @@ class TransferGeneratorFacadeSuccessTest extends TestCase
         $actual = $this->generateTransfersCallback(self::GENERATOR_CONFIG_PATH, $this->assertGeneratorSuccess(...));
 
         // Assert
-        $this->assertTrue($actual);
+        $this->assertTrue($actual, 'Failed to generate transfer objects.');
         foreach (self::EXPECTED_GENERATED_TRANSFER_OBJECT as $transferObjectFile) {
             $this->assertFileExists($transferObjectFile);
         }

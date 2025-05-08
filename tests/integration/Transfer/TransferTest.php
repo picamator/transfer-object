@@ -7,11 +7,13 @@ namespace Picamator\Tests\Integration\TransferObject\Transfer;
 use ArrayObject;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
+use Picamator\Tests\Integration\TransferObject\Transfer\Generated\BcMath\BcMathNumberTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemCollectionTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\NamespaceTransfer;
@@ -26,6 +28,7 @@ class TransferTest extends TestCase
     use TransferGeneratorHelperTrait;
 
     private const string GENERATOR_CONFIG_PATH = __DIR__ . '/data/config/generator.config.yml';
+    private const string GENERATOR_BC_MATH_CONFIG_PATH = __DIR__ . '/data/config/bcmath/generator.config.yml';
 
     public static function setUpBeforeClass(): void
     {
@@ -72,7 +75,6 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ENUM => ImBackedEnum::SOME_CASE->value,
                         ItemTransfer::I_AM_DATE_TIME => '2025-05-03T20:53:00+02:00',
                         ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => '2025-05-03T20:53:00+02:00',
-                        ItemTransfer::I_AM_NUMBER => '12.25555985',
                     ]
                 ],
             ],
@@ -90,7 +92,6 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ENUM => ImBackedEnum::SOME_CASE->value,
                         ItemTransfer::I_AM_DATE_TIME => '2025-05-03T20:53:00+02:00',
                         ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => '2025-05-03T20:53:00+02:00',
-                        ItemTransfer::I_AM_NUMBER => '12.25555985',
                     ]
                 ],
                 ItemCollectionTransfer::ITEM => null,
@@ -112,7 +113,6 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ENUM => null,
                         ItemTransfer::I_AM_DATE_TIME => null,
                         ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => null,
-                        ItemTransfer::I_AM_NUMBER => null,
                     ],
                 ],
             ],
@@ -130,7 +130,6 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ENUM => null,
                         ItemTransfer::I_AM_DATE_TIME => null,
                         ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => null,
-                        ItemTransfer::I_AM_NUMBER => null,
                     ],
                 ],
                 ItemCollectionTransfer::ITEM => null,
@@ -300,7 +299,7 @@ class TransferTest extends TestCase
         $reflectionProperty = new ReflectionProperty(ProtectedTransfer::class, 'iAmProtected');
 
         // Assert
-        $this->assertTrue($reflectionProperty->isProtectedSet());
+        $this->assertTrue($reflectionProperty->isProtectedSet(), 'Property is not protected for setting.');
     }
 
     public function testClone(): void
@@ -331,5 +330,25 @@ class TransferTest extends TestCase
         $this->assertNotSame($itemCollectionTransfer->item, $clonedItemCollectionTransfer->item);
         $this->assertNotSame($itemCollectionTransfer->items, $clonedItemCollectionTransfer->items);
         $this->assertNotSame($itemCollectionTransfer->items[0], $clonedItemCollectionTransfer->items[0]);
+    }
+
+    #[RequiresPhpExtension('bcmath')]
+    public function testBcMathFromToArrayTransformation(): void
+    {
+        // Arrange
+        static::generateTransfersOrFail(self::GENERATOR_BC_MATH_CONFIG_PATH);
+
+        $numberTransfer = new BcMathNumberTransfer();
+        $expected = '12.123';
+
+        // Act
+        $numberTransfer->fromArray([
+            BcMathNumberTransfer::I_AM_NUMBER => $expected,
+        ]);
+
+        $actual = $numberTransfer->toArray();
+
+        // Assert
+        $this->assertSame($expected, $actual[BcMathNumberTransfer::I_AM_NUMBER]);
     }
 }

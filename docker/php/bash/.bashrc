@@ -25,7 +25,7 @@ wrap_in_green "======================================"
 wrap_in_yellow "XDEBUG: $XDEBUG_MODE, PHP: $PHP_VERSION"
 
 # style prompt
-PS1="$(color_blue "\w")$ "
+PS1="$(color_blue "\W")$ "
 
 # function to display "Bay" when the shell is terminated
 function say_goodbye() {
