@@ -27,11 +27,6 @@ abstract class AbstractTransfer implements TransferInterface
     private const string DATA_INDEX_SUFFIX = '_DATA_INDEX';
 
     /**
-     * @var array<string, \Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttributeInterface|null>
-     */
-    private array $_attributeCache = [];
-
-    /**
      * @var \SplFixedArray<mixed>
      */
     private SplFixedArray $_data;
@@ -149,10 +144,6 @@ abstract class AbstractTransfer implements TransferInterface
 
     private function getConstantAttribute(string $constantName): ?PropertyTypeAttributeInterface
     {
-        if (array_key_exists($constantName, $this->_attributeCache)) {
-            return $this->_attributeCache[$constantName];
-        }
-
         $reflection = new ReflectionClassConstant($this, $constantName);
         $attributeReflections = $reflection->getAttributes(
             name: PropertyTypeAttributeInterface::class,
@@ -161,7 +152,7 @@ abstract class AbstractTransfer implements TransferInterface
 
         $attributeReflection = $attributeReflections[0] ?? null;
 
-        return $this->_attributeCache[$constantName] = $attributeReflection?->newInstance();
+        return $attributeReflection?->newInstance();
     }
 
     private function initData(): void
