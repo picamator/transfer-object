@@ -112,7 +112,7 @@ class DefinitionGeneratorFacadeTest extends TestCase
         $actual = $this->generateTransfersCallback($configPath, $this->assertGeneratorSuccess(...));
 
         // Assert
-        $this->assertTrue($actual);
+        $this->assertTrue($actual, 'Failed to generate transfer objects.');
     }
 
     /**
@@ -148,7 +148,7 @@ class DefinitionGeneratorFacadeTest extends TestCase
         string $sampleFileName,
     ): void {
         // Arrange
-        $this->assertTrue(class_exists($classFullName), sprintf('Class %s does not exist.', $classFullName));
+        $this->assertTrue(class_exists($classFullName), sprintf('Class "%s" does not exist.', $classFullName));
 
         /** @var \Picamator\TransferObject\Transfer\TransferInterface $transfer */
         $transfer = new $classFullName();
@@ -197,7 +197,7 @@ class DefinitionGeneratorFacadeTest extends TestCase
         string $sampleFileName,
     ): void {
         // Arrange
-        $this->assertTrue(class_exists($classFullName), sprintf('Class %s does not exist.', $classFullName));
+        $this->assertTrue(class_exists($classFullName), sprintf('Class "%s" does not exist.', $classFullName));
 
         /** @var \Picamator\TransferObject\Transfer\TransferInterface $transfer */
         $transfer = new $classFullName();

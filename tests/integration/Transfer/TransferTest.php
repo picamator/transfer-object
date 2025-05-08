@@ -299,7 +299,7 @@ class TransferTest extends TestCase
         $reflectionProperty = new ReflectionProperty(ProtectedTransfer::class, 'iAmProtected');
 
         // Assert
-        $this->assertTrue($reflectionProperty->isProtectedSet());
+        $this->assertTrue($reflectionProperty->isProtectedSet(), 'Property is not protected for setting.');
     }
 
     public function testClone(): void

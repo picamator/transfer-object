@@ -15,7 +15,7 @@ trait DefinitionGeneratorHelperTrait
     /**
      * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
      */
-    protected function createDefinitionGenerator(
+    final protected function createDefinitionGenerator(
         string $definitionPath,
         string $className,
         string $sampleJsonPath,
@@ -34,7 +34,7 @@ trait DefinitionGeneratorHelperTrait
      *
      * @return array<string,mixed>
      */
-    protected function getSampleContent(string $sampleJsonPath): array
+    final protected function getSampleContent(string $sampleJsonPath): array
     {
         return $this->createJsonReader()->getJsonContent($sampleJsonPath);
     }

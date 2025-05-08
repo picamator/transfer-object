@@ -30,7 +30,7 @@ class NamespaceValidatorTest extends TestCase
         $actual = $this->validator->isValidNamespace($namespace);
 
         // Assert
-        $this->assertTrue($actual);
+        $this->assertTrue($actual, sprintf('Invalid namespace "%s".', $namespace));
     }
 
     /**
