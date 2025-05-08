@@ -7,10 +7,10 @@ namespace Picamator\Tests\Integration\TransferObject\Transfer;
 use ArrayObject;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
-use Picamator\Tests\Integration\TransferObject\Helper\ExtensionHelperTrait;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\BcMath\BcMathNumberTransfer;
@@ -26,7 +26,6 @@ use TypeError;
 class TransferTest extends TestCase
 {
     use TransferGeneratorHelperTrait;
-    use ExtensionHelperTrait;
 
     private const string GENERATOR_CONFIG_PATH = __DIR__ . '/data/config/generator.config.yml';
     private const string GENERATOR_BC_MATH_CONFIG_PATH = __DIR__ . '/data/config/bcmath/generator.config.yml';
@@ -333,12 +332,9 @@ class TransferTest extends TestCase
         $this->assertNotSame($itemCollectionTransfer->items[0], $clonedItemCollectionTransfer->items[0]);
     }
 
+    #[RequiresPhpExtension('bcmath')]
     public function testBcMathFromToArrayTransformation(): void
     {
-        if (!$this->isBcMathLoaded()) {
-            $this->markTestSkipped('BCMath is not loaded.');
-        }
-
         // Arrange
         static::generateTransfersOrFail(self::GENERATOR_BC_MATH_CONFIG_PATH);
 
