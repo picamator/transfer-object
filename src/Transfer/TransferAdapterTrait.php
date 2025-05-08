@@ -71,13 +71,13 @@ trait TransferAdapterTrait
 
                 $value instanceof ArrayObject => $value->getArrayCopy(),
 
-                $value instanceof DateTimeInterface => $value->format(static::DATE_TIME_FORMAT),
+                $value instanceof BackedEnum => $value->value,
 
-                $this->isBcMathLoaded() && $value instanceof Number => (string)$value,
+                $value instanceof DateTimeInterface => $value->format(static::DATE_TIME_FORMAT),
 
                 $value instanceof stdClass => (array)$value,
 
-                $value instanceof BackedEnum => $value->value,
+                $this->isBcMathLoaded() && $value instanceof Number => (string)$value,
 
                 default => $value,
             };
@@ -130,6 +130,10 @@ trait TransferAdapterTrait
                     //  @phpstan-ignore argument.type
                     => new ArrayObject($value),
 
+                $isStringOrInt && is_subclass_of($type, BackedEnum::class)
+                    //  @phpstan-ignore argument.type
+                    => $type::tryFrom($value),
+
                 $isString && $type === DateTime::class
                     //  @phpstan-ignore argument.type
                     => new DateTime($value),
@@ -138,16 +142,12 @@ trait TransferAdapterTrait
                     //  @phpstan-ignore argument.type
                     => new DateTimeImmutable($value),
 
-                $isStringOrInt && $this->isBcMathLoaded() && $type === Number::class
-                    //  @phpstan-ignore argument.type
-                    => new Number($value),
-
                 $isArray && $type === stdClass::class
                     => (object)$value,
 
-                $isStringOrInt && is_subclass_of($type, BackedEnum::class)
+                $isStringOrInt && $this->isBcMathLoaded() && $type === Number::class
                     //  @phpstan-ignore argument.type
-                    => $type::tryFrom($value),
+                    => new Number($value),
 
                 default => $value,
             };
