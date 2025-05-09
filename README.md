@@ -8,7 +8,7 @@
 Transfer Object Generator
 ==========================
 
-Would you like to build Symfony-compatible Transfer Objects easily?
+Would you like to build Symfony-compatible Transfer Objects?
 
 You're in the right place! 🎉
 
@@ -64,11 +64,11 @@ Key Features
  * supports mapping Symfony request
 
 **Transfer Object:**
-  * implements methods: `fromArray()`, `toArray()`, and `toFilterArray()`
-  * implements standard interfaces: `IteratorAggregate`, `JsonSerializable`, and `Countable`
+  * implements methods: `fromArray()`, `toArray()`, `toFilterArray()`
+  * implements standard interfaces: `IteratorAggregate`, `JsonSerializable`, `Countable`
   * supports embedded, collections Transfer Objects
   * supports PHP primitive data types
-  * supports `BackedEnum`, `DateTime`, `DateTimeImmutable`, and `BcMath\Number`
+  * supports `BackedEnum`, `DateTime`, `DateTimeImmutable`, `BcMath\Number`
   * supports asymmetric property visibility
   * integrates external Transfer Objects
 
