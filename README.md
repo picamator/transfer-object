@@ -12,8 +12,8 @@ Would you like to build Symfony-compatible Transfer Objects?
 
 You're in the right place! 🎉
 
-Build Transfer Object by Blueprint
-----------------------------------
+Use Blueprint
+-------------
 
 Imagine you have a Rest API response:
 
