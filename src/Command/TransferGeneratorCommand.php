@@ -43,8 +43,10 @@ HELP;
 The required -c option is missing. Please provide the path to the YML configuration file.
 MESSAGE;
 
-    private const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Processing Transfer Object: "%s".';
-    private const string DEFINITION_MESSAGE_TEMPLATE = 'Using definition file: "%s".';
+    private const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Processing Transfer Object: <info>%s</info>.';
+    private const string DEFINITION_MESSAGE_TEMPLATE = 'Using Definition File: <comment>%s</comment>.';
+
+    private const string DEBUG_MESSAGE_TEMPLATE = '<comment>%s</comment>: <info>%s</info>';
 
     private const string SUCCESS_MESSAGE = 'All Transfer Objects were generated successfully! 🎉';
 
@@ -91,17 +93,52 @@ MESSAGE;
         $generatorFiber = $this->generatorFacade->getTransferGeneratorFiber();
 
         $generatorTransfer = $generatorFiber->start($configPath);
-        $this->writelnGeneratorError($generatorTransfer, $styleOutput);
+
+        $this->writelnErrorMessages($generatorTransfer, $styleOutput);
+        $this->writelnDebugMessages($generatorTransfer, $styleOutput);
 
         while (!$generatorFiber->isTerminated()) {
             $generatorTransfer = $generatorFiber->resume();
-            $this->writelnGeneratorError($generatorTransfer, $styleOutput);
+
+            $this->writelnErrorMessages($generatorTransfer, $styleOutput);
+            $this->writelnDebugMessages($generatorTransfer, $styleOutput);
         }
 
         return $generatorFiber->getReturn();
     }
 
-    private function writelnGeneratorError(
+    private function writelnDebugMessages(
+        ?TransferGeneratorTransfer $generatorTransfer,
+        SymfonyStyle $styleOutput,
+    ): void {
+        if (
+            !$styleOutput->isVerbose()
+            || $generatorTransfer === null
+            || $generatorTransfer->validator->isValid === false
+            || $generatorTransfer->fileName === null
+            || $generatorTransfer->className === null
+        ) {
+            return;
+        }
+
+        static $fileName = $generatorTransfer->fileName;
+
+        if ($fileName !== $generatorTransfer->fileName) {
+            $fileName = $generatorTransfer->fileName;
+
+            $styleOutput->newLine();
+        }
+
+        $styleOutput->writeln(
+            sprintf(
+                self::DEBUG_MESSAGE_TEMPLATE,
+                $generatorTransfer->fileName,
+                $generatorTransfer->className,
+            )
+        );
+    }
+
+    private function writelnErrorMessages(
         ?TransferGeneratorTransfer $generatorTransfer,
         SymfonyStyle $styleOutput,
     ): void {
@@ -109,12 +146,14 @@ MESSAGE;
             return;
         }
 
-        if ($generatorTransfer->className !== null) {
-            $styleOutput->info(sprintf(self::TRANSFER_OBJECT_MESSAGE_TEMPLATE, $generatorTransfer->className));
+        $className = $generatorTransfer->className ?? '';
+        if ($className !== '') {
+            $styleOutput->writeln(sprintf(self::TRANSFER_OBJECT_MESSAGE_TEMPLATE, $className));
         }
 
-        if ($generatorTransfer->fileName !== null) {
-            $styleOutput->info(sprintf(self::DEFINITION_MESSAGE_TEMPLATE, $generatorTransfer->fileName));
+        $fileName = $generatorTransfer->fileName ?? '';
+        if ($fileName !== '') {
+            $styleOutput->writeln(sprintf(self::DEFINITION_MESSAGE_TEMPLATE, $fileName));
         }
 
         foreach ($generatorTransfer->validator->errorMessages as $errorMessage) {

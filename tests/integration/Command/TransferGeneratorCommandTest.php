@@ -6,6 +6,7 @@ namespace Picamator\Tests\Integration\TransferObject\Command;
 
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Command\TransferGeneratorCommand;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 
 class TransferGeneratorCommandTest extends TestCase
@@ -47,11 +48,15 @@ class TransferGeneratorCommandTest extends TestCase
     public function testRunCommandWithValidConfigurationShouldShowSuccessMessage(): void
     {
         // Act
-        $this->commandTester->execute(['-c' => self::SUCCESS_CONFIG_PATH]);
+        $this->commandTester->execute(
+            ['-c' => self::SUCCESS_CONFIG_PATH],
+            ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]
+        );
         $output = $this->commandTester->getDisplay();
 
         // Assert
         $this->commandTester->assertCommandIsSuccessful();
+        $this->assertStringContainsString('command.transfer.yml: CommandTransfer', $output);
         $this->assertStringContainsString('All Transfer Objects were generated successfully!', $output);
     }
 
