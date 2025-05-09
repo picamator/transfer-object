@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Config\Config;
 
-use Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException;
+use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException;
 
 final class ConfigProxy implements ConfigInterface
 {
@@ -41,7 +41,7 @@ final class ConfigProxy implements ConfigInterface
     }
 
     /**
-     * @throws \Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
      */
     private function getConfig(): ConfigInterface
     {
@@ -49,7 +49,7 @@ final class ConfigProxy implements ConfigInterface
             return self::$config;
         }
 
-        throw new ConfigNotFoundException(
+        throw new TransferGeneratorConfigNotFoundException(
             'Transfer Object generator configuration not found. Please load configuration first.'
         );
     }

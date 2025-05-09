@@ -8,8 +8,8 @@ use Picamator\TransferObject\Dependency\Exception\FilesystemException;
 use Picamator\TransferObject\Dependency\Exception\FinderException;
 use Picamator\TransferObject\Generated\DefinitionTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
-use Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoaderInterface;
+use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilderInterface;
@@ -47,7 +47,7 @@ readonly class GeneratorProcessor implements GeneratorProcessorInterface
     {
         try {
             $this->filesystem->rotateTempDir();
-        } catch (FilesystemException | FinderException | ConfigNotFoundException $e) {
+        } catch (FilesystemException | FinderException | TransferGeneratorConfigNotFoundException $e) {
             return $this->builder->createErrorGeneratorTransfer($e->getMessage());
         }
 

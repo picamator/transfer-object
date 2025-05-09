@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Exception;
 
-use Exception;
 use Picamator\TransferObject\Shared\Exception\TransferExceptionInterface;
+use RuntimeException;
 
-class TransferGeneratorDefinitionException extends Exception implements TransferExceptionInterface
+class TransferGeneratorDefinitionException extends RuntimeException implements TransferExceptionInterface
 {
 }

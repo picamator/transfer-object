@@ -6,7 +6,7 @@ namespace Picamator\Tests\Unit\TransferObject\Dependency;
 
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Dependency\DependencyContainer;
-use Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException;
+use Picamator\TransferObject\Dependency\Exception\ServiceNotFoundException;
 use Psr\Container\ContainerInterface;
 
 class DependencyContainerTest extends TestCase
@@ -24,7 +24,7 @@ class DependencyContainerTest extends TestCase
         $id = 'TEST_SERVICE';
 
         // Expect
-        $this->expectException(DependencyNotFoundException::class);
+        $this->expectException(ServiceNotFoundException::class);
 
         // Act
         $this->container->get($id);

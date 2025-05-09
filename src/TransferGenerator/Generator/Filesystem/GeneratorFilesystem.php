@@ -64,7 +64,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
-     * @throws \Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
      */
     private function deleteOldFiles(): void
     {
@@ -80,7 +80,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
-     * @throws \Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
      */
     private function copyTempFiles(): void
     {
@@ -96,7 +96,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
     }
 
     /**
-     * @throws \Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
      */
     private function getTemporaryPath(): string
     {

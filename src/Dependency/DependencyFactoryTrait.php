@@ -11,7 +11,7 @@ use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 trait DependencyFactoryTrait
 {
     /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException
+     * @throws \Picamator\TransferObject\Dependency\Exception\ServiceNotFoundException
      */
     final protected function getDependency(string $id): mixed
     {
@@ -19,7 +19,7 @@ trait DependencyFactoryTrait
     }
 
     /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException
+     * @throws \Picamator\TransferObject\Dependency\Exception\ServiceNotFoundException
      */
     final protected function getFilesystem(): FilesystemInterface
     {
@@ -30,7 +30,7 @@ trait DependencyFactoryTrait
     }
 
     /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException
+     * @throws \Picamator\TransferObject\Dependency\Exception\ServiceNotFoundException
      */
     final protected function getFinder(): FinderInterface
     {
@@ -41,7 +41,7 @@ trait DependencyFactoryTrait
     }
 
     /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException
+     * @throws \Picamator\TransferObject\Dependency\Exception\ServiceNotFoundException
      */
     final protected function getYmlParser(): YmlParserInterface
     {

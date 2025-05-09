@@ -19,7 +19,7 @@ interface GeneratorFilesystemInterface
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
-     * @throws \Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
      */
     public function rotateTempDir(): void;
 

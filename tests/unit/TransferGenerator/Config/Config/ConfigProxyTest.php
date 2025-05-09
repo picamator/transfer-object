@@ -7,7 +7,7 @@ namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Config\Config;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigProxy;
-use Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException;
+use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException;
 
 class ConfigProxyTest extends TestCase
 {
@@ -24,7 +24,7 @@ class ConfigProxyTest extends TestCase
         ConfigProxy::resetConfig();
 
         // Expect
-        $this->expectException(ConfigNotFoundException::class);
+        $this->expectException(TransferGeneratorConfigNotFoundException::class);
 
         // Act
         $this->proxy->getTransferNamespace();
