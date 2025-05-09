@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Dependency;
 
-use Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException;
+use Picamator\TransferObject\Dependency\Exception\ServiceNotFoundException;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemBridge;
 use Picamator\TransferObject\Dependency\Finder\FinderBridge;
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserBridge;
@@ -30,16 +30,17 @@ class DependencyContainer implements ContainerInterface
     protected static array $container = [];
 
     /**
-     * @uses static::createYmlParser()
+     *
      * @uses static::createFinder()
      * @uses static::createFileSystem()
+     * @uses static::createYmlParser()
      *
-     * @throws \Picamator\TransferObject\Dependency\Exception\DependencyNotFoundException
+     * @throws \Picamator\TransferObject\Dependency\Exception\ServiceNotFoundException
      */
     public function get(string $id): mixed
     {
         if (!$this->has($id)) {
-            throw new DependencyNotFoundException(
+            throw new ServiceNotFoundException(
                 sprintf('Dependency "%s" not found.', $id),
             );
         }

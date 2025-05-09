@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Transfer\Exception;
 
-use Exception;
 use Picamator\TransferObject\Shared\Exception\TransferExceptionInterface;
+use RuntimeException;
 
-/**
- * @api
- */
-class PropertyTypeTransferException extends Exception implements TransferExceptionInterface
+class PropertyTypeTransferException extends RuntimeException implements TransferExceptionInterface
 {
 }

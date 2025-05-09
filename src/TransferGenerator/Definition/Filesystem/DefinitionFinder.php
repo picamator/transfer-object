@@ -34,11 +34,11 @@ readonly class DefinitionFinder implements DefinitionFinderInterface
     }
 
     /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
-     * @throws \Picamator\TransferObject\TransferGenerator\Config\Exception\ConfigNotFoundException
+     * @return Countable&IteratorAggregate<string,\Picamator\TransferObject\Dependency\Finder\SplFileInfoBridge>
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
      * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorDefinitionException
      *
-     * @return Countable&IteratorAggregate<string,\Picamator\TransferObject\Dependency\Finder\SplFileInfoBridge>
+     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
      */
     private function findDefinitionFiles(): IteratorAggregate&Countable
     {

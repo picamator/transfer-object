@@ -8,12 +8,9 @@
 Transfer Object Generator
 ==========================
 
-Would you like to build Symfony-compatible Transfer Objects easily?
+Would you like to build Symfony-compatible Transfer Objects?
 
 You're in the right place! 🎉
-
-Build Transfer Object by Blueprint
-----------------------------------
 
 Imagine you have a Rest API response:
 
@@ -59,18 +56,33 @@ Key Features
 
 **Symfony Compatability:**
 
- * includes Symfony console commands: [TransferGeneratorCommand](/src/Command/TransferGeneratorCommand.php) and [DefinitionGeneratorCommand](/src/Command/DefinitionGeneratorCommand.php)
- * includes Symfony services: [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php) and [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php)
- * supports mapping Symfony request
+ * includes Symfony console commands:
+   * [TransferGeneratorCommand](/src/Command/TransferGeneratorCommand.php)
+   * [DefinitionGeneratorCommand](/src/Command/DefinitionGeneratorCommand.php)
+ * includes Symfony services:
+   * [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php)
+   * [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php)
+ * supports Symfony request data mapping
 
 **Transfer Object:**
-  * implements methods: `fromArray()`, `toArray()`, and `toFilterArray()`
-  * implements standard interfaces: `IteratorAggregate`, `JsonSerializable`, and `Countable`
-  * supports embedded, collections Transfer Objects
-  * supports PHP primitive data types
-  * supports `BackedEnum`, `DateTime`, `DateTimeImmutable`, and `BcMath\Number`
-  * supports asymmetric property visibility
-  * integrates external Transfer Objects
+
+* implements methods:
+  * `fromArray()`
+  * `toArray()`
+  * `toFilterArray()`
+* implements standard interfaces:
+  * `IteratorAggregate`
+  * `JsonSerializable`
+  * `Countable`
+* supports embedded and collection Transfer Objects
+* supports PHP primitive data types
+* supports:
+  * `BackedEnum`
+  * `DateTime`
+  * `DateTimeImmutable`
+  * `BcMath\Number`
+* supports asymmetric property visibility
+* integrates external Transfer Objects
 
 Installation
 ------------
@@ -81,10 +93,17 @@ Composer installation:
 $ composer require picamator/transfer-object
 ```
 
+Samples
+-------
+
+* [Definition Generator](/doc/samples/try-definition-generator.php)
+* [Transfer Generator](/doc/samples/try-transfer-generator.php)
+* [Advanced Transfer Generator](/doc/samples/try-advanced-transfer-generator.php)
+
 Usage Tests
 -----------
 
-Definition Files and Transfer Object generators have been tested against API responses such as:
+Definition Files and Transfer Object generators have been tested against following APIs:
 
 * [NASA Open Api](https://api.nasa.gov/neo/rest/v1/neo/2465633?api_key=DEMO_KEY)
 * [OpenWeather](https://openweathermap.org/current#example_JSON)
@@ -92,7 +111,7 @@ Definition Files and Transfer Object generators have been tested against API res
 * [Frankfurter is a free, open-source currency data API](https://api.frankfurter.dev/v1/latest)
 * [Tagesschau API](https://tagesschau.api.bund.dev)
 
-### Test Scenario
+### Scenario
 
 1. Rest API response is used as a blueprint to generate Definition Files
 2. Transfer Objects are generated based on Definition Files
@@ -103,16 +122,6 @@ Definition Files and Transfer Object generators have been tested against API res
 In all cases, data **100%** are matched ✅.
 
 For detailed information, please check [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php).
-
-### Samples
-
-- [Definition Generator](/doc/samples/try-definition-generator.php)
-- [Transfer Generator](/doc/samples/try-transfer-generator.php)
-- [Advanced Transfer Generator](/doc/samples/try-advanced-transfer-generator.php)
-
-### Practice
-
-Definition Files and Transfer Objects generators use [Transfer Objects](/src/Generated).
 
 Acknowledgment
 --------------
@@ -127,8 +136,8 @@ Follow the project to stay updated with all activities.
 
 If you have suggestions for improvements or new features, feel free to:
 
-- Create an issue
-- Submit a pull request
+* Create an issue
+* Submit a pull request
 
 Here is a [Contribution Guide](CONTRIBUTING.md).
 

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Shared\Exception;
 
-use Exception;
+use RuntimeException;
 
-class FileAppenderException extends Exception implements TransferExceptionInterface
+class FileAppenderException extends RuntimeException implements TransferExceptionInterface
 {
 }
