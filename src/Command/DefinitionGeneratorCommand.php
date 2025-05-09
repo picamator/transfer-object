@@ -9,6 +9,7 @@ use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacadeInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGeneratorBuilderInterface;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,12 +18,14 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
 
+#[AsCommand(
+    name: 'picamator:definition:generate',
+    description: 'Generate Transfer Object definition files from a JSON blueprint.'
+)]
 class DefinitionGeneratorCommand extends Command
 {
     use InputNormalizerTrait;
 
-    private const string NAME = 'picamator:definition:generate';
-    private const string DESCRIPTION = 'Generate Transfer Object definition files from a JSON blueprint.';
     private const string HELP = <<<'HELP'
 This command allows you to generate Transfer Object definition files based on a JSON file as a blueprint.
 
@@ -51,12 +54,7 @@ HELP;
 
     protected function configure(): void
     {
-        if ($this->getName() === null) {
-            $this->setName(name: self::NAME);
-        }
-
-        $this->setDescription(description: self::DESCRIPTION)
-            ->setHelp(help: self::HELP);
+        $this->setHelp(help: self::HELP);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

@@ -8,18 +8,21 @@ use Picamator\TransferObject\Command\Helper\InputNormalizerTrait;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacadeInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(
+    name: 'picamator:definition:generate',
+    description: 'Generate Transfer Objects from definition templates.'
+)]
 class TransferGeneratorCommand extends Command
 {
     use InputNormalizerTrait;
 
-    private const string NAME = 'picamator:transfer:generate';
-    private const string DESCRIPTION = 'Generate Transfer Objects from definition templates.';
     private const string HELP = <<<'HELP'
 This command generates Transfer Objects based on YML definitions.
 The command requires a path to the configuration file in YML format.
@@ -54,12 +57,7 @@ MESSAGE;
 
     protected function configure(): void
     {
-        if ($this->getName() === null) {
-            $this->setName(name:self::NAME);
-        }
-
-        $this->setDescription(description: self::DESCRIPTION)
-            ->setHelp(help: self::HELP);
+        $this->setHelp(help: self::HELP);
 
         $this->addOption(
             name: self::OPTION_NAME_CONFIGURATION,
