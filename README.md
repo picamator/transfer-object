@@ -3,6 +3,8 @@
 [![CI workflow](https://github.com/picamator/transfer-object/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/picamator/transfer-object/actions)
 [![License](https://poser.pugx.org/picamator/transfer-object/license)](https://packagist.org/packages/picamator/transfer-object)
 [![PHP Version Require](https://poser.pugx.org/picamator/transfer-object/require/php)](https://packagist.org/packages/picamator/transfer-object)
+[![Symfony Compatibility](https://img.shields.io/badge/Symfony-%5E7.0-blue)](https://symfony.com)
+[![Wiki](https://img.shields.io/badge/wiki-available-brightgreen)](https://github.com/picamator/transfer-object/wiki)
 [![Latest Stable Version](https://poser.pugx.org/picamator/transfer-object/v)](https://packagist.org/packages/picamator/transfer-object)
 
 Transfer Object Generator
