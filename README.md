@@ -123,6 +123,11 @@ In all cases, data **100%** are matched ✅.
 
 For detailed information, please check [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php).
 
+Documentation
+-------------
+
+For more details, please visit project's [wiki](https://github.com/picamator/transfer-object/wiki).
+
 Acknowledgment
 --------------
 
