@@ -104,4 +104,30 @@ class FileAppenderTest extends TestCase
         $this->fileAppenderMock->appendToFile(self::FILE_NAME, self::FILE_CONTENT);
         $this->fileAppenderMock->closeFile(self::FILE_NAME);
     }
+
+    public function testFailedCloseFile(): void
+    {
+        // Arrange
+        $file = fopen('php://temp', 'r');
+
+        // Expect
+        $this->fileAppenderMock->expects($this->once())
+            ->method('fopen')
+            ->with(self::FILE_NAME)
+            ->willReturn($file);
+
+        $this->fileAppenderMock->expects($this->once())
+            ->method('fwrite')
+            ->willReturn(1);
+
+        $this->fileAppenderMock->expects($this->once())
+            ->method('fclose')
+            ->willReturn(false);
+
+        $this->expectException(FileAppenderException::class);
+
+        // Act
+        $this->fileAppenderMock->appendToFile(self::FILE_NAME, self::FILE_CONTENT);
+        $this->fileAppenderMock->closeFile(self::FILE_NAME);
+    }
 }
