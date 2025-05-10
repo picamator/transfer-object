@@ -97,20 +97,11 @@ class FileAppenderTest extends TestCase
             ->willReturn(1);
 
         $this->fileAppenderMock->expects($this->once())
-            ->method('fclose');
+            ->method('fclose')
+            ->willReturn(true);
 
         // Act
         $this->fileAppenderMock->appendToFile(self::FILE_NAME, self::FILE_CONTENT);
-        $this->fileAppenderMock->__destruct();
-    }
-
-    public function testSkipCloseFile(): void
-    {
-        // Expect
-        $this->fileAppenderMock->expects($this->never())
-            ->method('fclose');
-
-        // Act
-        $this->fileAppenderMock->__destruct();
+        $this->fileAppenderMock->closeFile(self::FILE_NAME);
     }
 }

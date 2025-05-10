@@ -21,13 +21,32 @@ readonly class DefinitionGeneratorService implements DefinitionGeneratorServiceI
 
     public function generateDefinitionsOrFail(DefinitionGeneratorTransfer $generatorTransfer): int
     {
-        $count = 0;
         $filesystemTransfer = $this->createFilesystemTransfer($generatorTransfer);
+
+        try {
+            $this->beforeGenerate($filesystemTransfer);
+            $result = $this->generate($generatorTransfer, $filesystemTransfer);
+        } finally {
+            $this->afterGenerate($filesystemTransfer);
+        }
+
+        return $result;
+    }
+
+    private function beforeGenerate(DefinitionFilesystemTransfer $filesystemTransfer): void
+    {
         $this->filesystem->deleteFile($filesystemTransfer);
+        $this->filesystem->createDir($filesystemTransfer);
 
         $filesystemTransfer->content = $this->render->renderSchema();
         $this->filesystem->appendFile($filesystemTransfer);
+    }
 
+    private function generate(
+        DefinitionGeneratorTransfer $generatorTransfer,
+        DefinitionFilesystemTransfer $filesystemTransfer
+    ): int {
+        $count = 0;
         foreach ($this->builder->createDefinitionContents($generatorTransfer->content) as $contentTransfer) {
             $filesystemTransfer->content = $this->render->renderDefinitionContent($contentTransfer);
             $this->filesystem->appendFile($filesystemTransfer);
@@ -36,6 +55,11 @@ readonly class DefinitionGeneratorService implements DefinitionGeneratorServiceI
         }
 
         return $count;
+    }
+
+    private function afterGenerate(DefinitionFilesystemTransfer $filesystemTransfer): void
+    {
+        $this->filesystem->closeFile($filesystemTransfer);
     }
 
     private function createFilesystemTransfer(
