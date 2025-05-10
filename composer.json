@@ -69,8 +69,8 @@
         "transfer-generate": "php ./bin/transfer-generate",
         "definition-generate": "php ./bin/definition-generate",
         "captainhook": "./vendor/bin/captainhook",
-        "phpcs": "./vendor/bin/phpcs",
-        "phpcbf": "./vendor/bin/phpcbf"
+        "phpcs": "./vendor/bin/phpcs -q --colors",
+        "phpcbf": "./vendor/bin/phpcbf -q --colors"
     },
     "scripts-descriptions": {
         "phpunit": "Run unit and integration tests.",
