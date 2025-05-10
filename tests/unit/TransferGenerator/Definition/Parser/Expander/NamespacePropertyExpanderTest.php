@@ -95,5 +95,15 @@ class NamespacePropertyExpanderTest extends TestCase
                 DefinitionNamespaceTransfer::ALIAS => 'GeneratedAlias',
             ],
         ];
+
+        yield 'root namespace' => [
+            'DateTime',
+            [
+                DefinitionNamespaceTransfer::FULL_NAME => 'DateTime',
+                DefinitionNamespaceTransfer::WITHOUT_ALIAS => 'DateTime',
+                DefinitionNamespaceTransfer::BASE_NAME => 'DateTime',
+                DefinitionNamespaceTransfer::ALIAS => null,
+            ],
+        ];
     }
 }
