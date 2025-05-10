@@ -39,8 +39,8 @@ interface TransferGeneratorFacadeInterface
      *
      * @api
      *
-     * @example /doc/samples/try-transfer-generator.php
-     * @example /doc/samples/try-advanced-transfer-generator.php
+     * @example /examples/try-transfer-generator.php
+     * @example /examples/try-advanced-transfer-generator.php
      *
      * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
      */

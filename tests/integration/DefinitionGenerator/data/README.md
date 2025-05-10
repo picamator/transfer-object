@@ -1,4 +1,4 @@
-JSON Samples Reference
+API Response Reference
 ======================
 
 | File                                                                                 | Source                                                                                                        |

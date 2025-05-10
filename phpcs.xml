@@ -17,7 +17,7 @@
     </rule>
 
     <file>bin</file>
-    <file>doc</file>
+    <file>examples</file>
     <file>src</file>
     <file>tests</file>
 

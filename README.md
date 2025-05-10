@@ -1,4 +1,4 @@
-![Transfer Object Generator](doc/img/transfer-object-generator.jpg)
+![Transfer Object Generator](.github/transfer-object-generator.jpg)
 
 [![CI workflow](https://github.com/picamator/transfer-object/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/picamator/transfer-object/actions)
 [![License](https://poser.pugx.org/picamator/transfer-object/license)](https://packagist.org/packages/picamator/transfer-object)
@@ -93,12 +93,12 @@ Composer installation:
 $ composer require picamator/transfer-object
 ```
 
-Samples
--------
+Examples
+---------
 
-* [Definition Generator](/doc/samples/try-definition-generator.php)
-* [Transfer Generator](/doc/samples/try-transfer-generator.php)
-* [Advanced Transfer Generator](/doc/samples/try-advanced-transfer-generator.php)
+* [Definition Generator](/examples/try-definition-generator.php)
+* [Transfer Generator](/examples/try-transfer-generator.php)
+* [Advanced Transfer Generator](/examples/try-advanced-transfer-generator.php)
 
 Usage Tests
 -----------

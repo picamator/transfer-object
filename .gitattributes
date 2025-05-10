@@ -7,8 +7,8 @@
 /.idea                  export-ignore
 /.github                export-ignore
 /config/                export-ignore
-/doc/                   export-ignore
 /docker/                export-ignore
+/examples/              export-ignore
 /tests/                 export-ignore
 /var/                   export-ignore
 /.editorconfig          export-ignore
@@ -25,6 +25,6 @@
 /SECURITY.md            export-ignore
 
 /src/Generated/**           linguist-generated=true
-/doc/samples/Generated/**   linguist-generated=true
+/examples/Generated/**      linguist-generated=true
 /tests/**/Generated/**      linguist-generated=true
 /tests/**/*.json            linguist-generated=true

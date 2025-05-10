@@ -1,0 +1,6 @@
+# $schema: ./../../../../schema/definition.schema.json
+Customer:
+  firstName:
+    type: string
+  lastName:
+    type: string

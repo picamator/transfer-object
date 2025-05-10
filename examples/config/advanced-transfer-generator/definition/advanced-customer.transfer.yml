@@ -1,0 +1,8 @@
+# $schema: ./../../../../schema/definition.schema.json
+AdvancedCustomer:
+  customer:
+    type: "Picamator\\Examples\\TransferObject\\Generated\\TransferGenerator\\CustomerTransfer"
+  address:
+    type: "Picamator\\Examples\\TransferObject\\Advanced\\AddressData"
+  credentials:
+    type: "Picamator\\Examples\\TransferObject\\Advanced\\CredentialsData"

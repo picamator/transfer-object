@@ -1,0 +1,6 @@
+# $schema: ./../../../../schema/definition.schema.json
+Agent:
+  customer:
+    type: Customer
+  merchants:
+    collectionType: Merchant
