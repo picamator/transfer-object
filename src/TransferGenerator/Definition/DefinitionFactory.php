@@ -41,14 +41,16 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\Req
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\ReservedNamePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\TransferTypePropertyValidator;
 
-readonly class DefinitionFactory
+class DefinitionFactory
 {
     use ConfigFactoryTrait;
     use SharedFactoryTrait;
 
+    private DefinitionReaderInterface $definitionReader;
+
     public function createDefinitionReader(): DefinitionReaderInterface
     {
-        return new DefinitionReader(
+        return $this->definitionReader ??= new DefinitionReader(
             $this->createDefinitionFinder(),
             $this->createDefinitionParser(),
             $this->createContentValidator(),
