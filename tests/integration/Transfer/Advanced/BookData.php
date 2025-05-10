@@ -18,7 +18,7 @@ class BookData implements TransferInterface
     use TransferAdapterTrait;
 
     /**
-     * @param \ArrayObject<string,mixed> $labels
+     * @param \ArrayObject<string,mixed>|null $labels
      * @param string|null $reference
      */
     public function __construct(
