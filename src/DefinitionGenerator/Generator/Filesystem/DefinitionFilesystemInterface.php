@@ -14,7 +14,17 @@ interface DefinitionFilesystemInterface
     public function appendFile(DefinitionFilesystemTransfer $filesystemTransfer): void;
 
     /**
+     * @throws \Picamator\TransferObject\Shared\Exception\FileAppenderException
+     */
+    public function closeFile(DefinitionFilesystemTransfer $filesystemTransfer): void;
+
+    /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      */
     public function deleteFile(DefinitionFilesystemTransfer $filesystemTransfer): void;
+
+    /**
+     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
+     */
+    public function createDir(DefinitionFilesystemTransfer $filesystemTransfer): void;
 }

@@ -31,7 +31,7 @@ class DefinitionGeneratorCommandTest extends TestCase
         $this->commandTester->setInputs([
             '/tests/integration/Command/Generated/Definition',
             'Customer',
-            '/tests/integration/Command/data/json-samples/success/customer.json',
+            '/tests/integration/Command/data/api-response/success/customer.json',
         ]);
 
         $this->commandTester->execute([]);

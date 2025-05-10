@@ -34,7 +34,7 @@
         "psr-4": {
             "Picamator\\Tests\\Unit\\TransferObject\\": "tests/unit/",
             "Picamator\\Tests\\Integration\\TransferObject\\": "tests/integration/",
-            "Picamator\\Doc\\Samples\\TransferObject\\": "doc/samples"
+            "Picamator\\Examples\\TransferObject\\": "examples/"
         }
     },
     "require": {
@@ -69,8 +69,8 @@
         "transfer-generate": "php ./bin/transfer-generate",
         "definition-generate": "php ./bin/definition-generate",
         "captainhook": "./vendor/bin/captainhook",
-        "phpcs": "./vendor/bin/phpcs",
-        "phpcbf": "./vendor/bin/phpcbf"
+        "phpcs": "./vendor/bin/phpcs -q --colors",
+        "phpcbf": "./vendor/bin/phpcbf -q --colors"
     },
     "scripts-descriptions": {
         "phpunit": "Run unit and integration tests.",

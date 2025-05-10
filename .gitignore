@@ -29,7 +29,7 @@ var/cache/*
 
 # project
 src/**/_tmp
-doc/samples/**/_tmp
+examples/**/_tmp
 tests/**/_tmp
 
 # environment

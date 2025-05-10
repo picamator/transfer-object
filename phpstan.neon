@@ -3,13 +3,13 @@ parameters:
   paths:
     - src
     - tests
-    - doc
+    - examples
     - bin
   excludePaths:
     - src/Generated
     - tests/*/data/*
     - tests/*/Generated/*
-    - doc/samples/Generated
+    - examples/Generated/*
   ignoreErrors:
     -
         identifier: argument.type

@@ -13,13 +13,10 @@ use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Exception\JsonReaderException;
 use Picamator\TransferObject\Shared\Reader\JsonReaderInterface;
 use Picamator\TransferObject\Shared\Validator\ClassNameValidatorInterface;
-use Picamator\TransferObject\Shared\Validator\PathValidatorInterface;
 
 class DefinitionGeneratorBuilderTest extends TestCase
 {
     private DefinitionGeneratorBuilderInterface $builder;
-
-    private PathValidatorInterface&MockObject $pathValidatorMock;
 
     private ClassNameValidatorInterface&MockObject $classNameValidatorMock;
 
@@ -27,34 +24,13 @@ class DefinitionGeneratorBuilderTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->pathValidatorMock = $this->createMock(PathValidatorInterface::class);
         $this->classNameValidatorMock = $this->createMock(ClassNameValidatorInterface::class);
         $this->jsonReaderMock = $this->createMock(JsonReaderInterface::class);
 
         $this->builder = new DefinitionGeneratorBuilder(
-            $this->pathValidatorMock,
             $this->classNameValidatorMock,
             $this->jsonReaderMock,
         );
-    }
-
-    public function testInvalidSetDefinitionPathShouldThrowException(): void
-    {
-        // Arrange
-        $definitionPath = 'invalid/path';
-        $messageTransfer = $this->createInvalidMessageTransfer();
-
-        // Expect
-        $this->pathValidatorMock->expects($this->once())
-            ->method('validate')
-            ->with($definitionPath)
-            ->willReturn($messageTransfer);
-
-        $this->expectException(DefinitionGeneratorException::class);
-        $this->expectExceptionMessage($messageTransfer->errorMessage);
-
-        // Act
-        $this->builder->setDefinitionPath($definitionPath);
     }
 
     public function testInvalidSetClassNameShouldThrowException(): void

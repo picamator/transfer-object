@@ -23,7 +23,7 @@ class DefinitionGeneratorFacadeTest extends TestCase
     use DefinitionGeneratorHelperTrait;
     use TransferGeneratorHelperTrait;
 
-    private const string SAMPLE_JSON_PATH = __DIR__ . '/data/json-samples/';
+    private const string SAMPLE_JSON_PATH = __DIR__ . '/data/api-response/';
 
     private const string DEFINITION_PATH_TEMPLATE = __DIR__ . '/data/config/%s/definition';
     private const string CONFIG_PATH_TEMPLATE = __DIR__ . '/data/config/%s/generator.config.yml';

@@ -23,13 +23,15 @@ use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\Definiti
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\RequiredConfigContentValidator;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\TransferNamespaceConfigContentValidator;
 
-readonly class ConfigFactory
+class ConfigFactory
 {
     use SharedFactoryTrait;
 
+    private ConfigLoaderInterface $configLoader;
+
     public function createConfigLoader(): ConfigLoaderInterface
     {
-        return new ConfigLoader(
+        return $this->configLoader ??= new ConfigLoader(
             $this->createConfigReader(),
         );
     }

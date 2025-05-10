@@ -10,4 +10,9 @@ interface FileAppenderInterface
      * @throws \Picamator\TransferObject\Shared\Exception\FileAppenderException
      */
     public function appendToFile(string $filename, string $content): void;
+
+    /**
+     * @throws \Picamator\TransferObject\Shared\Exception\FileAppenderException
+     */
+    public function closeFile(string $filename): void;
 }

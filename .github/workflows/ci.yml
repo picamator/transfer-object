@@ -141,6 +141,9 @@ jobs:
         run: composer install --no-ansi --no-interaction --no-progress
         if: steps.cache-vendor.outputs.cache-hit != 'true'
 
+      - name: Dump composer autoload
+        run: composer dump-autoload
+
       - name: Generate Transfer Objects
         env:
           PROJECT_ROOT: ${{ github.workspace }}

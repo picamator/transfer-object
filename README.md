@@ -1,8 +1,10 @@
-![Transfer Object Generator](doc/img/transfer-object-generator.jpg)
+![Transfer Object Generator](.github/transfer-object-generator.jpg)
 
 [![CI workflow](https://github.com/picamator/transfer-object/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/picamator/transfer-object/actions)
 [![License](https://poser.pugx.org/picamator/transfer-object/license)](https://packagist.org/packages/picamator/transfer-object)
 [![PHP Version Require](https://poser.pugx.org/picamator/transfer-object/require/php)](https://packagist.org/packages/picamator/transfer-object)
+[![Symfony Compatibility](https://img.shields.io/badge/Symfony-%5E7.0-blue)](https://github.com/picamator/transfer-object/tree/development?tab=readme-ov-file#key-features)
+[![Wiki](https://img.shields.io/badge/wiki-available-brightgreen)](https://github.com/picamator/transfer-object/wiki)
 [![Latest Stable Version](https://poser.pugx.org/picamator/transfer-object/v)](https://packagist.org/packages/picamator/transfer-object)
 
 Transfer Object Generator
@@ -93,12 +95,12 @@ Composer installation:
 $ composer require picamator/transfer-object
 ```
 
-Samples
--------
+Examples
+---------
 
-* [Definition Generator](/doc/samples/try-definition-generator.php)
-* [Transfer Generator](/doc/samples/try-transfer-generator.php)
-* [Advanced Transfer Generator](/doc/samples/try-advanced-transfer-generator.php)
+* [Definition Generator](/examples/try-definition-generator.php)
+* [Transfer Generator](/examples/try-transfer-generator.php)
+* [Advanced Transfer Generator](/examples/try-advanced-transfer-generator.php)
 
 Usage Tests
 -----------
@@ -122,6 +124,11 @@ Definition Files and Transfer Object generators have been tested against followi
 In all cases, data **100%** are matched ✅.
 
 For detailed information, please check [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php).
+
+Documentation
+-------------
+
+For more details, please visit [project's wiki](https://github.com/picamator/transfer-object/wiki).
 
 Acknowledgment
 --------------

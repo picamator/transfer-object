@@ -22,13 +22,17 @@ use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRender;
 use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRenderInterface;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 
-readonly class DefinitionGeneratorFactory
+class DefinitionGeneratorFactory
 {
     use SharedFactoryTrait;
 
+    private DefinitionGeneratorServiceInterface $definitionGeneratorService;
+
+    private DefinitionGeneratorBuilderInterface $definitionGeneratorBuilder;
+
     public function createDefinitionGeneratorService(): DefinitionGeneratorServiceInterface
     {
-        return new DefinitionGeneratorService(
+        return $this->definitionGeneratorService ??= new DefinitionGeneratorService(
             $this->createDefinitionBuilder(),
             $this->createDefinitionRender(),
             $this->createDefinitionFilesystem(),
@@ -37,8 +41,7 @@ readonly class DefinitionGeneratorFactory
 
     public function createDefinitionGeneratorBuilder(): DefinitionGeneratorBuilderInterface
     {
-        return new DefinitionGeneratorBuilder(
-            $this->createPathValidator(),
+        return $this->definitionGeneratorBuilder ??= new DefinitionGeneratorBuilder(
             $this->createClassNameValidator(),
             $this->createJsonReader(),
         );

@@ -17,7 +17,7 @@ interface DefinitionGeneratorFacadeInterface
      *
      * @api
      *
-     * @example /doc/samples/try-definition-generator.php
+     * @example /examples/try-definition-generator.php
      * @example /src/Command/DefinitionGeneratorCommand.php
      *
      * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface

@@ -15,7 +15,7 @@ use Traversable;
  *
  * @api
  *
- * @example /doc/samples/try-advanced-transfer-generator.php
+ * @example /examples/try-advanced-transfer-generator.php
  */
 trait DummyTransferAdapterTrait
 {

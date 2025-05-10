@@ -1,0 +1,5 @@
+# $schema: ./../../../schema/config.schema.json
+generator:
+  transferNamespace: "Picamator\\Examples\\TransferObject\\Generated\\DefinitionGenerator"
+  transferPath: "${PROJECT_ROOT}/examples/Generated/DefinitionGenerator"
+  definitionPath: "${PROJECT_ROOT}/examples/config/definition-generator/definition"

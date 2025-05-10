@@ -9,7 +9,6 @@ use Picamator\TransferObject\Generated\DefinitionGeneratorContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 use Picamator\TransferObject\Shared\Reader\JsonReaderInterface;
 use Picamator\TransferObject\Shared\Validator\ClassNameValidatorInterface;
-use Picamator\TransferObject\Shared\Validator\PathValidatorInterface;
 use Throwable;
 
 class DefinitionGeneratorBuilder implements DefinitionGeneratorBuilderInterface
@@ -17,7 +16,6 @@ class DefinitionGeneratorBuilder implements DefinitionGeneratorBuilderInterface
     private DefinitionGeneratorTransfer $generatorTransfer;
 
     public function __construct(
-        private readonly PathValidatorInterface $pathValidator,
         private readonly ClassNameValidatorInterface $classNameValidator,
         private readonly JsonReaderInterface $jsonReader,
     ) {
@@ -26,15 +24,9 @@ class DefinitionGeneratorBuilder implements DefinitionGeneratorBuilderInterface
     public function setDefinitionPath(string $definitionPath): self
     {
         $definitionPath = rtrim($definitionPath, '\/');
-        $messageTransfer = $this->pathValidator->validate($definitionPath);
+        $this->getGeneratorTransfer()->definitionPath = $definitionPath;
 
-        if ($messageTransfer->isValid) {
-            $this->getGeneratorTransfer()->definitionPath = $definitionPath;
-
-            return $this;
-        }
-
-        throw new DefinitionGeneratorException($messageTransfer->errorMessage);
+        return $this;
     }
 
     public function setClassName(string $className): self

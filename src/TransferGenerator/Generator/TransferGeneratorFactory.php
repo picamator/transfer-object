@@ -39,10 +39,14 @@ use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateHelperIn
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRender;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderInterface;
 
-readonly class TransferGeneratorFactory
+class TransferGeneratorFactory
 {
     use ConfigFactoryTrait;
     use DependencyFactoryTrait;
+
+    private TransferGeneratorInterface $transferGenerator;
+
+    private TransferGeneratorServiceInterface $transferGeneratorService;
 
     public function createTransferGeneratorFiber(): TransferGeneratorFiberInterface
     {
@@ -51,7 +55,7 @@ readonly class TransferGeneratorFactory
 
     public function createTransferGenerator(): TransferGeneratorInterface
     {
-        return new TransferGenerator(
+        return $this->transferGenerator ??= new TransferGenerator(
             $this->createDefinitionReader(),
             $this->createGeneratorProcessor(),
         );
@@ -59,7 +63,7 @@ readonly class TransferGeneratorFactory
 
     public function createTransferGeneratorService(): TransferGeneratorServiceInterface
     {
-        return new TransferGeneratorService($this->createTransferGenerator());
+        return $this->transferGeneratorService ??= new TransferGeneratorService($this->createTransferGenerator());
     }
 
     protected function createGeneratorProcessor(): GeneratorProcessorInterface

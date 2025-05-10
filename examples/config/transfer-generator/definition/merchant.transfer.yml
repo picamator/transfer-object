@@ -1,0 +1,11 @@
+# $schema: ./../../../../schema/definition.schema.json
+Merchant:
+  merchantReference:
+    type: string
+    required:
+  country:
+    enumType: "Picamator\\Examples\\TransferObject\\Enum\\CountryEnum"
+    required:
+  isActive:
+    type: bool
+    required:

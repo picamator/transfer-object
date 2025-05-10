@@ -30,7 +30,7 @@
     <source>
         <include>
             <directory>src</directory>
-            <directory>doc/samples</directory>
+            <directory>examples</directory>
         </include>
     </source>
 
