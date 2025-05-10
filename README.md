@@ -126,7 +126,7 @@ For detailed information, please check [DefinitionGeneratorFacadeTest](/tests/in
 Documentation
 -------------
 
-For more details, please visit project's [wiki](https://github.com/picamator/transfer-object/wiki).
+For more details, please visit [project's wiki](https://github.com/picamator/transfer-object/wiki).
 
 Acknowledgment
 --------------
