@@ -17,3 +17,6 @@ parameters:
     -
         identifier: encapsedStringPart.nonString
         path: src/TransferGenerator/Generator/Render/Template/Template.tpl.php
+rules:
+   - PHPStan\Rules\DisallowedConstructs\DisallowedBacktickRule
+   - PHPStan\Rules\StrictCalls\StrictFunctionCallsRule
