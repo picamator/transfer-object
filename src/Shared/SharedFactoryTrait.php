@@ -20,27 +20,27 @@ trait SharedFactoryTrait
 {
     use DependencyFactoryTrait;
 
-    protected function createFileAppender(): FileAppenderInterface
+    final protected function createFileAppender(): FileAppenderInterface
     {
         return new FileAppender();
     }
 
-    protected function createJsonReader(): JsonReaderInterface
+    final protected function createJsonReader(): JsonReaderInterface
     {
         return new JsonReader($this->getFilesystem());
     }
 
-    protected function createClassNameValidator(): ClassNameValidatorInterface
+    final protected function createClassNameValidator(): ClassNameValidatorInterface
     {
         return new ClassNameValidator();
     }
 
-    protected function createNamespaceValidator(): NamespaceValidatorInterface
+    final protected function createNamespaceValidator(): NamespaceValidatorInterface
     {
         return new NamespaceValidator();
     }
 
-    protected function createPathValidator(): PathValidatorInterface
+    final protected function createPathValidator(): PathValidatorInterface
     {
         return new PathValidator($this->getFilesystem());
     }

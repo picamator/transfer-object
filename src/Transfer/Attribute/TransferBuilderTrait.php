@@ -14,7 +14,7 @@ trait TransferBuilderTrait
     /**
      * @throws \Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException
      */
-    protected function createTransfer(string $typeName, mixed $data): TransferInterface
+    final protected function createTransfer(string $typeName, mixed $data): TransferInterface
     {
         $this->assertArray($data);
 

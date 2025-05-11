@@ -8,7 +8,7 @@ use Picamator\TransferObject\Generated\DefinitionGeneratorContentTransfer;
 
 trait BuilderExpanderTrait
 {
-    protected function getClassName(string $propertyName): string
+    final protected function getClassName(string $propertyName): string
     {
         $className = ucwords($propertyName, '_');
 
@@ -18,7 +18,7 @@ trait BuilderExpanderTrait
     /**
      * @param array<int|string,mixed> $content
      */
-    protected function createGeneratorContentTransfer(
+    final protected function createGeneratorContentTransfer(
         string $className,
         array $content,
     ): DefinitionGeneratorContentTransfer {

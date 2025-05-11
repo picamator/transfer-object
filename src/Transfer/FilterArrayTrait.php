@@ -11,7 +11,7 @@ trait FilterArrayTrait
      *
      * @return array<string,mixed>
      */
-    protected function filterArrayRecursive(array $data, ?callable $callback = null): array
+    final protected function filterArrayRecursive(array $data, ?callable $callback = null): array
     {
         /** @var array<string,mixed> $filteredData */
         $filteredData = array_filter($data, $callback);
