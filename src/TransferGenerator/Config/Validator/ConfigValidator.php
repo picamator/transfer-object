@@ -8,7 +8,7 @@ use ArrayObject;
 use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\Generated\ConfigValidatorTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\Shared\Validator\PathValidatorInterface;
+use Picamator\TransferObject\Shared\Validator\PathExistValidatorInterface;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\ConfigContentValidatorInterface;
 
@@ -20,7 +20,7 @@ readonly class ConfigValidator implements ConfigValidatorInterface
      * @param \ArrayObject<int,ConfigContentValidatorInterface> $contentValidators
      */
     public function __construct(
-        private PathValidatorInterface $pathValidator,
+        private PathExistValidatorInterface $pathValidator,
         private ArrayObject $contentValidators,
     ) {
     }

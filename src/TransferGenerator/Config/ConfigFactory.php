@@ -47,7 +47,7 @@ class ConfigFactory
     protected function createConfigValidator(): ConfigValidatorInterface
     {
         return new ConfigValidator(
-            $this->createPathValidator(),
+            $this->createPathExistValidator(),
             $this->createConfigContentValidators()
         );
     }

@@ -10,14 +10,16 @@ use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorEx
 use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGeneratorBuilder;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGeneratorBuilderInterface;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\Shared\Exception\FileLocalException;
 use Picamator\TransferObject\Shared\Exception\JsonReaderException;
 use Picamator\TransferObject\Shared\Reader\JsonReaderInterface;
 use Picamator\TransferObject\Shared\Validator\ClassNameValidatorInterface;
+use Picamator\TransferObject\Shared\Validator\PathLocalValidatorInterface;
 
 class DefinitionGeneratorBuilderTest extends TestCase
 {
     private DefinitionGeneratorBuilderInterface $builder;
+
+    private PathLocalValidatorInterface&MockObject $pathValidatorMock;
 
     private ClassNameValidatorInterface&MockObject $classNameValidatorMock;
 
@@ -25,10 +27,12 @@ class DefinitionGeneratorBuilderTest extends TestCase
 
     protected function setUp(): void
     {
+        $this->pathValidatorMock = $this->createMock(PathLocalValidatorInterface::class);
         $this->classNameValidatorMock = $this->createMock(ClassNameValidatorInterface::class);
         $this->jsonReaderMock = $this->createMock(JsonReaderInterface::class);
 
         $this->builder = new DefinitionGeneratorBuilder(
+            $this->pathValidatorMock,
             $this->classNameValidatorMock,
             $this->jsonReaderMock,
         );
@@ -38,9 +42,15 @@ class DefinitionGeneratorBuilderTest extends TestCase
     {
         // Arrange
         $definitionPath = 'https://some-domain.io/definitions';
+        $messageTransfer = $this->createInvalidMessageTransfer();
 
         // Expect
-        $this->expectException(FileLocalException::class);
+        $this->pathValidatorMock->expects($this->once())
+            ->method('validate')
+            ->with($definitionPath)
+            ->willReturn($messageTransfer);
+
+        $this->expectException(DefinitionGeneratorException::class);
 
         // Act
         $this->builder->setDefinitionPath($definitionPath);

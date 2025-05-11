@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 interface DefinitionGeneratorBuilderInterface
 {
     /**
-     * @throws \Picamator\TransferObject\Shared\Exception\FileLocalException
+     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
      */
     public function setDefinitionPath(string $definitionPath): self;
 

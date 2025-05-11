@@ -4,26 +4,17 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Shared\Validator;
 
-use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 
-readonly class PathValidator implements PathValidatorInterface
+readonly class PathLocalValidator implements PathLocalValidatorInterface
 {
     use ValidatorMessageTrait;
 
-    private const string ERROR_MESSAGE_TEMPLATE = 'Path "%s" does not exist.';
+    private const string ERROR_MESSAGE_TEMPLATE = 'Path "%s" is not a local one.';
 
-    public function __construct(
-        private FilesystemInterface $filesystem,
-    ) {
-    }
-
-    /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
-     */
     public function validate(string $path): ValidatorMessageTransfer
     {
-        if ($this->filesystem->exists($path)) {
+        if (stream_is_local($path)) {
             return $this->createSuccessMessageTransfer();
         }
 

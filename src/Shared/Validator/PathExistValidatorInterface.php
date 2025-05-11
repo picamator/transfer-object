@@ -6,7 +6,10 @@ namespace Picamator\TransferObject\Shared\Validator;
 
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 
-interface PathValidatorInterface
+interface PathExistValidatorInterface
 {
+    /**
+     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
+     */
     public function validate(string $path): ValidatorMessageTransfer;
 }

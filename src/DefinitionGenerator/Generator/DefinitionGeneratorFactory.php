@@ -42,6 +42,7 @@ class DefinitionGeneratorFactory
     public function createDefinitionGeneratorBuilder(): DefinitionGeneratorBuilderInterface
     {
         return $this->definitionGeneratorBuilder ??= new DefinitionGeneratorBuilder(
+            $this->createPathLocalValidator(),
             $this->createClassNameValidator(),
             $this->createJsonReader(),
         );

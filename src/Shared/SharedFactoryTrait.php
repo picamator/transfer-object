@@ -11,10 +11,12 @@ use Picamator\TransferObject\Shared\Reader\JsonReader;
 use Picamator\TransferObject\Shared\Reader\JsonReaderInterface;
 use Picamator\TransferObject\Shared\Validator\ClassNameValidator;
 use Picamator\TransferObject\Shared\Validator\ClassNameValidatorInterface;
+use Picamator\TransferObject\Shared\Validator\PathLocalValidator;
+use Picamator\TransferObject\Shared\Validator\PathLocalValidatorInterface;
 use Picamator\TransferObject\Shared\Validator\NamespaceValidator;
 use Picamator\TransferObject\Shared\Validator\NamespaceValidatorInterface;
-use Picamator\TransferObject\Shared\Validator\PathValidator;
-use Picamator\TransferObject\Shared\Validator\PathValidatorInterface;
+use Picamator\TransferObject\Shared\Validator\PathExistValidator;
+use Picamator\TransferObject\Shared\Validator\PathExistValidatorInterface;
 
 trait SharedFactoryTrait
 {
@@ -40,8 +42,13 @@ trait SharedFactoryTrait
         return new NamespaceValidator();
     }
 
-    final protected function createPathValidator(): PathValidatorInterface
+    final protected function createPathExistValidator(): PathExistValidatorInterface
     {
-        return new PathValidator($this->getFilesystem());
+        return new PathExistValidator($this->getFilesystem());
+    }
+
+    final protected function createPathLocalValidator(): PathLocalValidatorInterface
+    {
+        return new PathLocalValidator();
     }
 }

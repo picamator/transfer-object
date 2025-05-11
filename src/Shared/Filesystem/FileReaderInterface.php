@@ -10,7 +10,6 @@ interface FileReaderInterface
 {
     /**
      * @throws \Picamator\TransferObject\Shared\Exception\FileReaderException
-     * @throws \Picamator\TransferObject\Shared\Exception\FileLocalException
      *
      * @return \Generator<int,string>
      */

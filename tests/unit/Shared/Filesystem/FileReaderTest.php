@@ -6,7 +6,6 @@ namespace Picamator\Tests\Unit\TransferObject\Shared\Filesystem;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Picamator\TransferObject\Shared\Exception\FileLocalException;
 use Picamator\TransferObject\Shared\Exception\FileReaderException;
 use Picamator\TransferObject\Shared\Filesystem\FileReader;
 
@@ -40,18 +39,6 @@ class FileReaderTest extends TestCase
 
         fclose($this->file);
         unset($this->file);
-    }
-
-    public function testFileIsNotLocalShouldRiseException(): void
-    {
-        // Arrange
-        $filename = 'https://some-domain.io/' . self::FILE_NAME;
-
-        // Expect
-        $this->expectException(FileLocalException::class);
-
-        // Act
-        $this->fileReaderMock->readFile($filename)->current();
     }
 
     public function testFailToOpenFileShouldRiseException(): void

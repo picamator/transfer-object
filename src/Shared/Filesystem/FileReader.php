@@ -9,8 +9,6 @@ use Picamator\TransferObject\Shared\Exception\FileReaderException;
 
 class FileReader implements FileReaderInterface
 {
-    use FileLocalAssertTrait;
-
     public function readFile(string $filename): Generator
     {
         $count = 0;
@@ -68,15 +66,12 @@ class FileReader implements FileReaderInterface
     }
 
     /**
-     * @throws \Picamator\TransferObject\Shared\Exception\FileLocalException
      * @throws \Picamator\TransferObject\Shared\Exception\FileReaderException
      *
      * @return resource
      */
     private function getFile(string $filename)
     {
-        $this->assertFileLocal($filename);
-
         $file = $this->fopen($filename);
         if ($file === false) {
             throw new FileReaderException(
