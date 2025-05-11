@@ -32,14 +32,14 @@ This command allows you to generate Transfer Object definition files based on a 
 You will be prompted to provide the following details:
   - The directory path where the definition files should be saved.
   - The class name for the Transfer Object.
-  - The path to the JSON file that serves as a blueprint.
+  - The local path or url to the JSON file that serves as a blueprint.
 
 Follow the interactive prompts to complete the process.
 HELP;
 
     private const string QUESTION_DEFINITION_PATH = 'Definition directory path: ';
     private const string QUESTION_CLASS_NAME = 'Transfer Object class name: ';
-    private const string QUESTION_JSON_PATH = 'JSON file path: ';
+    private const string QUESTION_JSON_PATH = 'JSON file path or url: ';
 
     private const string START_SECTION_NAME = 'Generating Transfer Object Definitions 🪄';
 

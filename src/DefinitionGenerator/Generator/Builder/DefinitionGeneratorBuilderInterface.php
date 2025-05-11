@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 interface DefinitionGeneratorBuilderInterface
 {
     /**
-     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
+     * @throws \Picamator\TransferObject\Shared\Exception\FileLocalException
      */
     public function setDefinitionPath(string $definitionPath): self;
 
@@ -19,7 +19,7 @@ interface DefinitionGeneratorBuilderInterface
     public function setClassName(string $className): self;
 
     /**
-     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
+     * @throws \Picamator\TransferObject\Shared\Exception\JsonReaderException
      */
     public function setJsonPath(string $jsonPath): self;
 

@@ -10,6 +10,7 @@ use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorEx
 use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGeneratorBuilder;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGeneratorBuilderInterface;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
+use Picamator\TransferObject\Shared\Exception\FileLocalException;
 use Picamator\TransferObject\Shared\Exception\JsonReaderException;
 use Picamator\TransferObject\Shared\Reader\JsonReaderInterface;
 use Picamator\TransferObject\Shared\Validator\ClassNameValidatorInterface;
@@ -31,6 +32,18 @@ class DefinitionGeneratorBuilderTest extends TestCase
             $this->classNameValidatorMock,
             $this->jsonReaderMock,
         );
+    }
+
+    public function testDefinitionFileIsNotLocalShouldThrowException(): void
+    {
+        // Arrange
+        $definitionPath = 'https://some-domain.io/definitions';
+
+        // Expect
+        $this->expectException(FileLocalException::class);
+
+        // Act
+        $this->builder->setDefinitionPath($definitionPath);
     }
 
     public function testInvalidSetClassNameShouldThrowException(): void
@@ -63,9 +76,8 @@ class DefinitionGeneratorBuilderTest extends TestCase
             ->method('getJsonContent')
             ->with($jsonPath)
             ->willThrowException(new JsonReaderException($messageTransfer->errorMessage));
-        ;
 
-        $this->expectException(DefinitionGeneratorException::class);
+        $this->expectException(JsonReaderException::class);
         $this->expectExceptionMessage($messageTransfer->errorMessage);
 
         // Act

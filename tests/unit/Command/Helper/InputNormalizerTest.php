@@ -61,5 +61,10 @@ class InputNormalizerTest extends TestCase
             'path' => '  /some/path ',
             'expected' => $workingDirectory . 'some/path',
         ];
+
+        yield 'path is remote with spaces' => [
+            'path' => ' https://some-domain.io/ ',
+            'expected' => 'https://some-domain.io/',
+        ];
     }
 }

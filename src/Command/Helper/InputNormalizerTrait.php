@@ -13,6 +13,10 @@ trait InputNormalizerTrait
             return '';
         }
 
+        if (!stream_is_local($value)) {
+            return $value;
+        }
+
         $workingDirectory = getcwd() ?: '';
         $value = ltrim($value, '\/');
 
