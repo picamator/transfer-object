@@ -71,7 +71,7 @@ class ConfigFactory
 
     protected function createDefinitionPathConfigContentValidator(): ConfigContentValidatorInterface
     {
-        return new DefinitionPathConfigContentValidator($this->getFilesystem());
+        return new DefinitionPathConfigContentValidator($this->createPathExistValidator());
     }
 
     protected function createRequiredConfigContentValidator(): ConfigContentValidatorInterface
