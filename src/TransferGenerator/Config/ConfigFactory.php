@@ -22,6 +22,7 @@ use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\ConfigCo
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\DefinitionPathConfigContentValidator;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\RequiredConfigContentValidator;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\TransferNamespaceConfigContentValidator;
+use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\TransferPathConfigContentValidator;
 
 class ConfigFactory
 {
@@ -60,6 +61,7 @@ class ConfigFactory
         return new ArrayObject([
             $this->createRequiredConfigContentValidator(),
             $this->createDefinitionPathConfigContentValidator(),
+            $this->createTransferPathConfigContentValidator(),
             $this->createTransferNamespaceConfigContentValidator(),
         ]);
     }
@@ -69,9 +71,19 @@ class ConfigFactory
         return new TransferNamespaceConfigContentValidator();
     }
 
+    protected function createTransferPathConfigContentValidator(): ConfigContentValidatorInterface
+    {
+        return new TransferPathConfigContentValidator(
+            $this->createPathLocalValidator(),
+        );
+    }
+
     protected function createDefinitionPathConfigContentValidator(): ConfigContentValidatorInterface
     {
-        return new DefinitionPathConfigContentValidator($this->createPathExistValidator());
+        return new DefinitionPathConfigContentValidator(
+            $this->createPathLocalValidator(),
+            $this->createPathExistValidator(),
+        );
     }
 
     protected function createRequiredConfigContentValidator(): ConfigContentValidatorInterface

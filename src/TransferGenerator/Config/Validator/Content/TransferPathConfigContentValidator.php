@@ -6,26 +6,17 @@ namespace Picamator\TransferObject\TransferGenerator\Config\Validator\Content;
 
 use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\Shared\Validator\PathExistValidatorInterface;
 use Picamator\TransferObject\Shared\Validator\PathLocalValidatorInterface;
 
-readonly class DefinitionPathConfigContentValidator implements ConfigContentValidatorInterface
+readonly class TransferPathConfigContentValidator implements ConfigContentValidatorInterface
 {
     public function __construct(
         private PathLocalValidatorInterface $pathLocalValidator,
-        private PathExistValidatorInterface $pathValidator,
     ) {
     }
 
     public function validate(ConfigContentTransfer $configContentTransfer): ValidatorMessageTransfer
     {
-        $path = $configContentTransfer->definitionPath;
-
-        $validatorMessageTransfer = $this->pathLocalValidator->validate($path);
-        if ($validatorMessageTransfer->isValid === false) {
-            return $validatorMessageTransfer;
-        }
-
-        return $this->pathValidator->validate($path);
+        return $this->pathLocalValidator->validate($configContentTransfer->transferPath);
     }
 }

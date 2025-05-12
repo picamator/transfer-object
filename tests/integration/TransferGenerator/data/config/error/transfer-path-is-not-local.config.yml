@@ -1,0 +1,4 @@
+generator:
+  transferNamespace: "Project\\some?invalid-namespace"
+  transferPath: "https://some-domain.io/transfers"
+  definitionPath: "${PROJECT_ROOT}/tests/integration"
