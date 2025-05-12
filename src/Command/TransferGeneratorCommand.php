@@ -16,8 +16,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'picamator:definition:generate',
-    description: 'Generate Transfer Objects from definition templates.'
+    name: 'picamator:transfer:generate',
+    description: 'Generate Transfer Objects from definition templates.',
+    aliases: ['p:t:g'],
+    hidden: false,
 )]
 class TransferGeneratorCommand extends Command
 {

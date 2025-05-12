@@ -20,7 +20,9 @@ use Throwable;
 
 #[AsCommand(
     name: 'picamator:definition:generate',
-    description: 'Generate Transfer Object definition files from a JSON blueprint.'
+    description: 'Generate Transfer Object definition files from a JSON blueprint.',
+    aliases: ['p:d:g'],
+    hidden: false,
 )]
 class DefinitionGeneratorCommand extends Command
 {
