@@ -45,8 +45,8 @@ HELP;
 The required -c option is missing. Please provide the path to the YML configuration file.
 MESSAGE;
 
-    private const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Processing Transfer Object: <info>%s</info>.';
-    private const string DEFINITION_MESSAGE_TEMPLATE = 'Using Definition File: <comment>%s</comment>.';
+    private const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Transfer Object: <info>%s</info>.';
+    private const string DEFINITION_MESSAGE_TEMPLATE = 'File Path: <comment>%s</comment>.';
 
     private const string DEBUG_MESSAGE_TEMPLATE = '<comment>%s</comment>: <info>%s</info>';
 

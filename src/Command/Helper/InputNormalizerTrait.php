@@ -18,7 +18,7 @@ trait InputNormalizerTrait
         }
 
         $workingDirectory = getcwd() ?: '';
-        $value = ltrim($value, '\/');
+        $value = ltrim($value, '.\/');
 
         return $workingDirectory . DIRECTORY_SEPARATOR . $value;
     }

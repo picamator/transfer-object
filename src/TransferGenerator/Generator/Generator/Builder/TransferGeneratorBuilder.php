@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder;
 
+use Picamator\TransferObject\Generated\ConfigTransfer;
 use Picamator\TransferObject\Generated\DefinitionTransfer;
 use Picamator\TransferObject\Generated\DefinitionValidatorTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
@@ -42,13 +43,31 @@ readonly class TransferGeneratorBuilder implements TransferGeneratorBuilderInter
         return $generatorTransfer;
     }
 
-    public function createGeneratorTransfer(DefinitionTransfer $definitionTransfer): TransferGeneratorTransfer
-    {
+    public function createGeneratorTransferByDefinition(
+        DefinitionTransfer $definitionTransfer
+    ): TransferGeneratorTransfer {
         $generatorTransfer = new TransferGeneratorTransfer();
 
         $generatorTransfer->className = $definitionTransfer->content->className;
         $generatorTransfer->fileName = $definitionTransfer->fileName;
         $generatorTransfer->validator = $definitionTransfer->validator;
+
+        return $generatorTransfer;
+    }
+
+    public function createGeneratorTransferByConfig(
+        string $configPath,
+        ConfigTransfer $configTransfer
+    ): TransferGeneratorTransfer {
+        $generatorTransfer = new TransferGeneratorTransfer();
+
+        $generatorTransfer->fileName = $configPath;
+
+        $validatorTransfer = new DefinitionValidatorTransfer();
+        $validatorTransfer->isValid = $configTransfer->validator->isValid;
+        $validatorTransfer->errorMessages = $configTransfer->validator->errorMessages;
+
+        $generatorTransfer->validator = $validatorTransfer;
 
         return $generatorTransfer;
     }

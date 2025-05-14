@@ -29,9 +29,7 @@ readonly class GeneratorProcessor implements GeneratorProcessorInterface
     {
         $configTransfer = $this->configLoader->loadConfig($configPath);
         if (!$configTransfer->validator->isValid) {
-            $errorMessage = $configTransfer->validator->errorMessages[0] ?? null;
-
-            return $this->builder->createErrorGeneratorTransfer($errorMessage?->errorMessage ?: '');
+            return $this->builder->createGeneratorTransferByConfig($configPath, $configTransfer);
         }
 
         try {
@@ -68,14 +66,14 @@ readonly class GeneratorProcessor implements GeneratorProcessorInterface
     public function process(DefinitionTransfer $definitionTransfer): TransferGeneratorTransfer
     {
         if (!$definitionTransfer->validator->isValid) {
-            return $this->builder->createGeneratorTransfer($definitionTransfer);
+            return $this->builder->createGeneratorTransferByDefinition($definitionTransfer);
         }
 
         try {
             $content = $this->render->renderTemplate($definitionTransfer);
             $this->filesystem->writeFile($definitionTransfer->content->className, $content);
 
-            return $this->builder->createGeneratorTransfer($definitionTransfer);
+            return $this->builder->createGeneratorTransferByDefinition($definitionTransfer);
         } catch (FilesystemException | TransferGeneratorException $e) {
             return $this->builder->createErrorWithDefinitionGeneratorTransfer($e->getMessage(), $definitionTransfer);
         }
