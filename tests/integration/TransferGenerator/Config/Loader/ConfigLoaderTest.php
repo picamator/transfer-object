@@ -32,7 +32,6 @@ class ConfigLoaderTest extends TestCase
 
         // Assert
         $this->assertFalse($actual->validator->isValid);
-        $this->assertCount(1, $actual->validator->errorMessages);
     }
 
     /**

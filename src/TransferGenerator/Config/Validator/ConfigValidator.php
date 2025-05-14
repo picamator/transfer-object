@@ -7,7 +7,6 @@ namespace Picamator\TransferObject\TransferGenerator\Config\Validator;
 use ArrayObject;
 use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\Generated\ConfigValidatorTransfer;
-use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\PathExistValidatorInterface;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\ConfigContentValidatorInterface;
@@ -29,33 +28,51 @@ readonly class ConfigValidator implements ConfigValidatorInterface
     {
         $messageTransfer = $this->pathValidator->validate($filePath);
 
-        return $this->createValidatorTransfer($messageTransfer);
+        if ($messageTransfer->isValid) {
+            return $this->createSuccessValidatorTransfer();
+        }
+
+        $validatorTransfer = $this->createErrorValidatorTransfer();
+        $validatorTransfer->errorMessages[] = $messageTransfer;
+
+        return $validatorTransfer;
     }
 
     public function validateContent(ConfigContentTransfer $configContentTransfer): ConfigValidatorTransfer
     {
+        /** @var \ArrayObject<int,\Picamator\TransferObject\Generated\ValidatorMessageTransfer> $errorMessages */
+        $errorMessages = new ArrayObject();
         foreach ($this->contentValidators as $configValidator) {
             $messageTransfer = $configValidator->validate($configContentTransfer);
             if ($messageTransfer->isValid) {
                 continue;
             }
 
-            return $this->createValidatorTransfer($messageTransfer);
+            $errorMessages[] = $messageTransfer;
         }
 
-        $messageTransfer ??= $this->createSuccessMessageTransfer();
+        if ($errorMessages->count() === 0) {
+            return $this->createSuccessValidatorTransfer();
+        }
 
-        return $this->createValidatorTransfer($messageTransfer);
+        $validatorTransfer = $this->createErrorValidatorTransfer();
+        $validatorTransfer->errorMessages = $errorMessages;
+
+        return $validatorTransfer;
     }
 
-    private function createValidatorTransfer(ValidatorMessageTransfer $messageTransfer): ConfigValidatorTransfer
+    private function createErrorValidatorTransfer(): ConfigValidatorTransfer
     {
         $validatorTransfer = new ConfigValidatorTransfer();
-        $validatorTransfer->isValid = $messageTransfer->isValid;
+        $validatorTransfer->isValid = false;
 
-        if (!$messageTransfer->isValid) {
-            $validatorTransfer->errorMessages[] = $messageTransfer;
-        }
+        return $validatorTransfer;
+    }
+
+    private function createSuccessValidatorTransfer(): ConfigValidatorTransfer
+    {
+        $validatorTransfer = new ConfigValidatorTransfer();
+        $validatorTransfer->isValid = true;
 
         return $validatorTransfer;
     }
