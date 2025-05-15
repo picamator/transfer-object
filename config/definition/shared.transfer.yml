@@ -1,4 +1,11 @@
 # $schema: ./../../schema/definition.schema.json
+Validator:
+  isValid:
+    type: bool
+    required:
+  errorMessages:
+    collectionType: ValidatorMessage
+
 ValidatorMessage:
   isValid:
     type: bool

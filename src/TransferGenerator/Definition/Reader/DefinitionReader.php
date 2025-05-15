@@ -9,8 +9,8 @@ use Picamator\TransferObject\Dependency\Exception\FinderException;
 use Picamator\TransferObject\Dependency\Exception\YmlParserException;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionTransfer;
-use Picamator\TransferObject\Generated\DefinitionValidatorTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
+use Picamator\TransferObject\Generated\ValidatorTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParserInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\DefinitionValidatorInterface;
@@ -74,7 +74,7 @@ readonly class DefinitionReader implements DefinitionReaderInterface
         $definitionTransfer->content = new DefinitionContentTransfer();
         $definitionTransfer->content->className = '';
 
-        $definitionTransfer->validator = new DefinitionValidatorTransfer();
+        $definitionTransfer->validator = new ValidatorTransfer();
         $definitionTransfer->validator->isValid = false;
         $definitionTransfer->validator->errorMessages[] = new ValidatorMessageTransfer([
             ValidatorMessageTransfer::IS_VALID => false,

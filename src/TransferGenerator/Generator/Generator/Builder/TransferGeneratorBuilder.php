@@ -6,9 +6,9 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder
 
 use Picamator\TransferObject\Generated\ConfigTransfer;
 use Picamator\TransferObject\Generated\DefinitionTransfer;
-use Picamator\TransferObject\Generated\DefinitionValidatorTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
+use Picamator\TransferObject\Generated\ValidatorTransfer;
 
 readonly class TransferGeneratorBuilder implements TransferGeneratorBuilderInterface
 {
@@ -37,7 +37,7 @@ readonly class TransferGeneratorBuilder implements TransferGeneratorBuilderInter
     {
         $generatorTransfer = new TransferGeneratorTransfer();
 
-        $generatorTransfer->validator = new DefinitionValidatorTransfer();
+        $generatorTransfer->validator = new ValidatorTransfer();
         $generatorTransfer->validator->isValid = true;
 
         return $generatorTransfer;
@@ -63,7 +63,7 @@ readonly class TransferGeneratorBuilder implements TransferGeneratorBuilderInter
 
         $generatorTransfer->fileName = $configPath;
 
-        $validatorTransfer = new DefinitionValidatorTransfer();
+        $validatorTransfer = new ValidatorTransfer();
         $validatorTransfer->isValid = $configTransfer->validator->isValid;
         $validatorTransfer->errorMessages = $configTransfer->validator->errorMessages;
 
@@ -72,9 +72,9 @@ readonly class TransferGeneratorBuilder implements TransferGeneratorBuilderInter
         return $generatorTransfer;
     }
 
-    private function createErrorValidatorTransfer(string $errorMessage): DefinitionValidatorTransfer
+    private function createErrorValidatorTransfer(string $errorMessage): ValidatorTransfer
     {
-        $validatorTransfer = new DefinitionValidatorTransfer();
+        $validatorTransfer = new ValidatorTransfer();
         $validatorTransfer->isValid = false;
         $validatorTransfer->errorMessages[] = new ValidatorMessageTransfer([
             ValidatorMessageTransfer::IS_VALID => false,

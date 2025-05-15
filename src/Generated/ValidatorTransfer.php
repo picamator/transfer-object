@@ -15,9 +15,9 @@ use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  *
- * @see /config/definition/transfer-generator.transfer.yml Definition file path.
+ * @see /config/definition/shared.transfer.yml Definition file path.
  */
-final class ConfigValidatorTransfer extends AbstractTransfer
+final class ValidatorTransfer extends AbstractTransfer
 {
     protected const int META_DATA_SIZE = 2;
 

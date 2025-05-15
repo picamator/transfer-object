@@ -7,8 +7,8 @@ namespace Picamator\TransferObject\TransferGenerator\Config\Reader;
 use Picamator\TransferObject\Dependency\Exception\FilesystemException;
 use Picamator\TransferObject\Dependency\Exception\YmlParserException;
 use Picamator\TransferObject\Generated\ConfigTransfer;
-use Picamator\TransferObject\Generated\ConfigValidatorTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
+use Picamator\TransferObject\Generated\ValidatorTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Parser\ConfigParserInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigValidatorInterface;
 use Throwable;
@@ -50,7 +50,7 @@ readonly class ConfigReader implements ConfigReaderInterface
         return $configTransfer;
     }
 
-    private function createConfigTransfer(ConfigValidatorTransfer $validatorTransfer): ConfigTransfer
+    private function createConfigTransfer(ValidatorTransfer $validatorTransfer): ConfigTransfer
     {
         $configTransfer = new ConfigTransfer();
         $configTransfer->validator = $validatorTransfer;
@@ -61,7 +61,7 @@ readonly class ConfigReader implements ConfigReaderInterface
     private function createErrorConfigTransfer(Throwable $e): ConfigTransfer
     {
         $configTransfer = new ConfigTransfer();
-        $configTransfer->validator = new ConfigValidatorTransfer();
+        $configTransfer->validator = new ValidatorTransfer();
 
         $configTransfer->validator->isValid = false;
         $configTransfer->validator->errorMessages[] = new ValidatorMessageTransfer([

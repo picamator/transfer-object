@@ -8,7 +8,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Dependency\Exception\FilesystemException;
 use Picamator\TransferObject\Generated\ConfigTransfer;
-use Picamator\TransferObject\Generated\ConfigValidatorTransfer;
+use Picamator\TransferObject\Generated\ValidatorTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoaderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilder;
@@ -48,7 +48,7 @@ class GeneratorProcessorTest extends TestCase
         $configPath = 'some-config-path.config.yml';
 
         $configTransfer = new ConfigTransfer();
-        $configTransfer->validator = new ConfigValidatorTransfer();
+        $configTransfer->validator = new ValidatorTransfer();
         $configTransfer->validator->isValid = true;
 
         // Expect
