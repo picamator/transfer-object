@@ -45,6 +45,7 @@ HELP;
 The required -c option is missing. Please provide the path to the YML configuration file.
 MESSAGE;
 
+    private const string CONFIG_MESSAGE_TEMPLATE = 'Config: <info>%s</info>.';
     private const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Transfer Object: <info>%s</info>.';
     private const string DEFINITION_MESSAGE_TEMPLATE = 'Definition File: <comment>%s</comment>.';
 
@@ -80,6 +81,9 @@ MESSAGE;
         if ($configPath === '') {
             return Command::FAILURE;
         }
+
+        $styleOutput->writeln(sprintf(self::CONFIG_MESSAGE_TEMPLATE, $configPath));
+        $styleOutput->newLine();
 
         if (!$this->generateTransfers($configPath, $styleOutput)) {
             return Command::FAILURE;
