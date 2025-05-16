@@ -1,0 +1,4 @@
+config/generator.config.yml
+examples/config/advanced-transfer-generator/generator.config.yml
+examples/config/definition-generator/generator.config.yml
+examples/config/transfer-generator/generator.config.yml

@@ -41,13 +41,13 @@ HELP;
 
     private const string START_SECTION_NAME = 'Generating Transfer Objects ✨';
 
-    private const string ERROR_MISSED_OPTION_CONFIG_MESSAGE = <<<'MESSAGE'
+    private const string ERROR_MISSED_OPTION_CONFIGURATION_MESSAGE = <<<'MESSAGE'
 The required -c option is missing. Please provide the path to the YML configuration file.
 MESSAGE;
 
-    private const string CONFIG_MESSAGE_TEMPLATE = 'Config: <info>%s</info>.';
-    private const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Transfer Object: <info>%s</info>.';
-    private const string DEFINITION_MESSAGE_TEMPLATE = 'Definition File: <comment>%s</comment>.';
+    private const string CONFIGURATION_MESSAGE_TEMPLATE = 'Configuration: <comment>%s</comment>';
+    private const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Transfer Object: <comment>%s</comment>';
+    private const string DEFINITION_MESSAGE_TEMPLATE = 'Definition File: <comment>%s</comment>';
 
     private const string DEBUG_MESSAGE_TEMPLATE = '<comment>%s</comment>: <info>%s</info>';
 
@@ -82,7 +82,7 @@ MESSAGE;
             return Command::FAILURE;
         }
 
-        $styleOutput->writeln(sprintf(self::CONFIG_MESSAGE_TEMPLATE, $configPath));
+        $styleOutput->writeln(sprintf(self::CONFIGURATION_MESSAGE_TEMPLATE, $configPath));
         $styleOutput->newLine();
 
         if (!$this->generateTransfers($configPath, $styleOutput)) {
@@ -173,7 +173,7 @@ MESSAGE;
         $configPath = is_string($configPath) ? $this->normalizePath($configPath) : '';
 
         if ($configPath === '') {
-            $styleOutput->error(self::ERROR_MISSED_OPTION_CONFIG_MESSAGE);
+            $styleOutput->error(self::ERROR_MISSED_OPTION_CONFIGURATION_MESSAGE);
         }
 
         return $configPath;

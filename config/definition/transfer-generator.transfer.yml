@@ -90,3 +90,11 @@ TransferGenerator:
   validator:
     type: Validator
     required:
+
+TransferGeneratorBulk:
+  progress:
+    type: FileReaderProgress
+    required:
+  validator:
+    type: Validator
+    required:
