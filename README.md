@@ -60,6 +60,7 @@ Key Features
 
  * includes Symfony console commands:
    * [TransferGeneratorCommand](/src/Command/TransferGeneratorCommand.php)
+   * [TransferGeneratorBulkCommand](/src/Command/TransferGeneratorBulkCommand.php)
    * [DefinitionGeneratorCommand](/src/Command/DefinitionGeneratorCommand.php)
  * includes Symfony services:
    * [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php)
