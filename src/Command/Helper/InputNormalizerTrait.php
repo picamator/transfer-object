@@ -6,8 +6,12 @@ namespace Picamator\TransferObject\Command\Helper;
 
 trait InputNormalizerTrait
 {
-    final protected function normalizePath(?string $value): string
+    final protected function normalizePath(mixed $value): string
     {
+        if (!is_string($value)) {
+            return '';
+        }
+
         $value = $this->normalizeInput($value);
         if ($value === '') {
             return '';

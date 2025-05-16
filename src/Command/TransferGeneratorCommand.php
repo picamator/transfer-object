@@ -173,7 +173,7 @@ MESSAGE;
     private function getConfigPath(InputInterface $input, SymfonyStyle $styleOutput): string
     {
         $configPath = $input->getOption(name: self::OPTION_NAME_CONFIGURATION);
-        $configPath = is_string($configPath) ? $this->normalizePath($configPath) : '';
+        $configPath = $this->normalizePath($configPath);
 
         if ($configPath === '') {
             $styleOutput->error(self::ERROR_MISSED_OPTION_CONFIGURATION_MESSAGE);

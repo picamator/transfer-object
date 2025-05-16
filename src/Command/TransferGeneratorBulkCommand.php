@@ -166,13 +166,13 @@ MESSAGE;
 
     private function getConfigListPath(InputInterface $input, SymfonyStyle $styleOutput): string
     {
-        $configPath = $input->getOption(name: self::OPTION_NAME_BULK);
-        $configPath = is_string($configPath) ? $this->normalizePath($configPath) : '';
+        $configListPath = $input->getOption(name: self::OPTION_NAME_BULK);
+        $configListPath = $this->normalizePath($configListPath);
 
-        if ($configPath === '') {
+        if ($configListPath === '') {
             $styleOutput->error(self::ERROR_MISSED_OPTION_BULK_MESSAGE);
         }
 
-        return $configPath;
+        return $configListPath;
     }
 }
