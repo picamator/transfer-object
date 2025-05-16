@@ -99,12 +99,16 @@ MESSAGE;
         $generatorFiber = $this->generatorFacade->getTransferGeneratorFiber();
 
         $generatorTransfer = $generatorFiber->start($configPath);
-
-        $this->writelnErrorMessages($generatorTransfer, $styleOutput);
-        $this->writelnDebugMessages($generatorTransfer, $styleOutput);
+        if ($generatorTransfer !== null) {
+            $this->writelnErrorMessages($generatorTransfer, $styleOutput);
+            $this->writelnDebugMessages($generatorTransfer, $styleOutput);
+        }
 
         while (!$generatorFiber->isTerminated()) {
             $generatorTransfer = $generatorFiber->resume();
+            if ($generatorTransfer === null) {
+                continue;
+            }
 
             $this->writelnErrorMessages($generatorTransfer, $styleOutput);
             $this->writelnDebugMessages($generatorTransfer, $styleOutput);
@@ -114,12 +118,11 @@ MESSAGE;
     }
 
     private function writelnDebugMessages(
-        ?TransferGeneratorTransfer $generatorTransfer,
+        TransferGeneratorTransfer $generatorTransfer,
         SymfonyStyle $styleOutput,
     ): void {
         if (
             !$styleOutput->isVerbose()
-            || $generatorTransfer === null
             || $generatorTransfer->validator->isValid === false
             || $generatorTransfer->fileName === null
             || $generatorTransfer->className === null
@@ -145,10 +148,10 @@ MESSAGE;
     }
 
     private function writelnErrorMessages(
-        ?TransferGeneratorTransfer $generatorTransfer,
+        TransferGeneratorTransfer $generatorTransfer,
         SymfonyStyle $styleOutput,
     ): void {
-        if ($generatorTransfer === null || $generatorTransfer->validator->isValid === true) {
+        if ($generatorTransfer->validator->isValid === true) {
             return;
         }
 
