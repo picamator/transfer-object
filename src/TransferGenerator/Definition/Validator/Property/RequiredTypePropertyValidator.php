@@ -16,26 +16,31 @@ class RequiredTypePropertyValidator implements PropertyValidatorInterface
     private const string MISSED_REQUIRED_TYPE_ERROR_MESSAGE_TEMPLATE
         = 'Property "%s" type definition is missing or set multiple times.';
 
-    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): true
+    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        return true;
+        $definedTypes = $this->getDefinedTypes($propertyTransfer);
+
+        return count($definedTypes) !== 1;
     }
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
+    {
+        $errorMessage = $this->getErrorMessage($propertyTransfer);
+
+        return $this->createErrorMessageTransfer($errorMessage);
+    }
+
+    /**
+     * @return array<int,mixed>
+     */
+    private function getDefinedTypes(DefinitionPropertyTransfer $propertyTransfer): array
     {
         $definedTypes = [];
         foreach (DefinitionTypeKeyEnum::cases() as $definitionTypeKey) {
             $definedTypes[] = $propertyTransfer->{$definitionTypeKey->value};
         }
 
-        $definedTypes = array_filter($definedTypes);
-        if (count($definedTypes) === 1) {
-            return $this->createSuccessMessageTransfer();
-        }
-
-        $errorMessage = $this->getErrorMessage($propertyTransfer);
-
-        return $this->createErrorMessageTransfer($errorMessage);
+        return array_filter($definedTypes);
     }
 
     private function getErrorMessage(DefinitionPropertyTransfer $propertyTransfer): string
