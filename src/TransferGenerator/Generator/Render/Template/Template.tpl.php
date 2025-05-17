@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @var \Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateHelperInterface $helper
  */
 
-echo <<<TEMPLATE
+$fileContent = <<<TEMPLATE
 <?php
 
 declare(strict_types=1);
@@ -39,7 +39,7 @@ TEMPLATE;
 
 $i = 0;
 foreach ($templateTransfer->metaConstants as $constant => $property) {
-    echo <<<TEMPLATE
+    $fileContent .= <<<TEMPLATE
 
     // $property{$helper->getAttribute($property)}
     public const string $constant = '$property';
@@ -53,5 +53,11 @@ foreach ($templateTransfer->metaConstants as $constant => $property) {
 
 TEMPLATE;
     $i++;
-} ?>
 }
+
+$fileContent .= <<<TEMPLATE
+}
+
+TEMPLATE;
+
+return $fileContent;

@@ -11,6 +11,8 @@ readonly class TemplateRender implements TemplateRenderInterface
 {
     private const string TEMPLATE_PATH = __DIR__ . '/Template/Template.tpl.php';
 
+    private const string ERROR_MESSAGE_TEMPLATE = "Error: \"%s\".\n File: \"%s\".\n Line: \"%s\".";
+
     public function __construct(
         private TemplateBuilderInterface $templateBuilder,
         private TemplateHelperInterface $templateHelper,
@@ -22,30 +24,30 @@ readonly class TemplateRender implements TemplateRenderInterface
         $templateTransfer = $this->templateBuilder->createTemplateTransfer($definitionTransfer);
         $helper = $this->templateHelper->setTemplateTransfer($templateTransfer);
 
-        ob_start();
-        include self::TEMPLATE_PATH;
+        /** @var string $output */
+        $output = include self::TEMPLATE_PATH;
 
-        $output = ob_get_clean();
+        $this->assertLastError();
 
-        return $this->handleOutput($output);
+        return $output;
     }
 
     /**
      * @throws TransferGeneratorException
      */
-    private function handleOutput(false|string $output): string
+    private function assertLastError(): void
     {
         $lastError = error_get_last();
-        if ($lastError === null && $output !== false) {
-            return $output;
+        if ($lastError === null || $lastError['file'] !== self::TEMPLATE_PATH) {
+            return;
         }
 
         throw new TransferGeneratorException(
             sprintf(
-                "Error: \"%s\".\n File: \"%s\".\n Line: \"%s\".",
-                $lastError['message'] ?? '',
-                $lastError['file'] ?? '',
-                $lastError['line'] ?? '',
+                self::ERROR_MESSAGE_TEMPLATE,
+                $lastError['message'],
+                $lastError['file'],
+                $lastError['line'],
             ),
         );
     }
