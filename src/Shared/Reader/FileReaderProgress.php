@@ -8,19 +8,16 @@ use Generator;
 use Picamator\TransferObject\Generated\FileReaderProgressTransfer;
 use Picamator\TransferObject\Shared\Filesystem\FileReaderInterface;
 
-readonly class FileReaderProgress implements FileReaderProgressInterface
+class FileReaderProgress implements FileReaderProgressInterface
 {
-    public function __construct(private FileReaderInterface $fileReader)
+    public function __construct(private readonly FileReaderInterface $fileReader)
     {
     }
 
     public function readFile(string $filename): Generator
     {
         $contentIterator = $this->fileReader->readFile($filename);
-
-        $progressTransfer = new FileReaderProgressTransfer();
-        $progressTransfer->totalBytes = $this->filesize($filename);
-        $progressTransfer->progressBytes = 0;
+        $progressTransfer = $this->createProgressTransfer($filename);
 
         foreach ($contentIterator as $content) {
             $progressTransfer->content = $content;
@@ -30,10 +27,19 @@ readonly class FileReaderProgress implements FileReaderProgressInterface
         }
     }
 
-    protected function filesize(string $filename): int
+    private function createProgressTransfer(string $filename): FileReaderProgressTransfer
     {
-        $fileSize = filesize($filename);
+        $filesize = (int)$this->filesize($filename);
 
-        return $fileSize === false ? 0 : $fileSize;
+        $progressTransfer = new FileReaderProgressTransfer();
+        $progressTransfer->totalBytes = $filesize;
+        $progressTransfer->progressBytes = 0;
+
+        return $progressTransfer;
+    }
+
+    protected function filesize(string $filename): int|false
+    {
+        return filesize($filename);
     }
 }
