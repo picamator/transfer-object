@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\Shared\Validator;
 
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 
-readonly class PathLocalValidator implements PathLocalValidatorInterface
+class PathLocalValidator implements PathLocalValidatorInterface
 {
     use ValidatorMessageTrait;
 

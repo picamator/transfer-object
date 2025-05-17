@@ -8,7 +8,7 @@ use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
-readonly class ReservedNamePropertyValidator implements PropertyValidatorInterface
+class ReservedNamePropertyValidator implements PropertyValidatorInterface
 {
     use ValidatorMessageTrait;
 

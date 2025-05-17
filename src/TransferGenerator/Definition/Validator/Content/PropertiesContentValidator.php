@@ -11,7 +11,7 @@ use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface;
 
-readonly class PropertiesContentValidator implements ContentValidatorInterface
+class PropertiesContentValidator implements ContentValidatorInterface
 {
     use ValidatorMessageTrait;
 
@@ -19,7 +19,7 @@ readonly class PropertiesContentValidator implements ContentValidatorInterface
      * @param \ArrayObject<int,PropertyValidatorInterface> $propertyValidators
      */
     public function __construct(
-        private ArrayObject $propertyValidators,
+        private readonly ArrayObject $propertyValidators,
     ) {
     }
 

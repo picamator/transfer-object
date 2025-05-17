@@ -11,7 +11,7 @@ use Picamator\TransferObject\Shared\Validator\PathExistValidatorInterface;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\ConfigContentValidatorInterface;
 
-readonly class ConfigValidator implements ConfigValidatorInterface
+class ConfigValidator implements ConfigValidatorInterface
 {
     use ValidatorMessageTrait;
 
@@ -19,8 +19,8 @@ readonly class ConfigValidator implements ConfigValidatorInterface
      * @param \ArrayObject<int,ConfigContentValidatorInterface> $contentValidators
      */
     public function __construct(
-        private PathExistValidatorInterface $pathValidator,
-        private ArrayObject $contentValidators,
+        private readonly PathExistValidatorInterface $pathValidator,
+        private readonly ArrayObject $contentValidators,
     ) {
     }
 

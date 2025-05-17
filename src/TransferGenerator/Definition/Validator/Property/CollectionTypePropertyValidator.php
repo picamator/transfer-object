@@ -10,13 +10,13 @@ use Picamator\TransferObject\Shared\Validator\ClassNameValidatorInterface;
 use Picamator\TransferObject\Shared\Validator\NamespaceValidatorInterface;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
-readonly class CollectionTypePropertyValidator implements PropertyValidatorInterface
+class CollectionTypePropertyValidator implements PropertyValidatorInterface
 {
     use ValidatorMessageTrait;
 
     public function __construct(
-        private ClassNameValidatorInterface $classNameValidator,
-        private NamespaceValidatorInterface $namespaceValidator,
+        private readonly ClassNameValidatorInterface $classNameValidator,
+        private readonly NamespaceValidatorInterface $namespaceValidator,
     ) {
     }
 

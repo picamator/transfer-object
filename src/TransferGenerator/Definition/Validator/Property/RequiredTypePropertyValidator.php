@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\DefinitionTypeKeyEnum;
 
-readonly class RequiredTypePropertyValidator implements PropertyValidatorInterface
+class RequiredTypePropertyValidator implements PropertyValidatorInterface
 {
     use ValidatorMessageTrait;
 
