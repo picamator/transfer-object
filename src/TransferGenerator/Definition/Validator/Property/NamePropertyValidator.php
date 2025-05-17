@@ -16,17 +16,13 @@ class NamePropertyValidator implements PropertyValidatorInterface
 
     private const string INVALID_NAME_ERROR_MESSAGE_TEMPLATE = 'Invalid property name "%s".';
 
-    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): true
+    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        return true;
+        return !$this->isValidVariable($propertyTransfer->propertyName);
     }
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
-        if ($this->isValidVariable($propertyTransfer->propertyName)) {
-            return $this->createSuccessMessageTransfer();
-        }
-
         $errorMessage = $this->getErrorMessage($propertyTransfer);
 
         return $this->createErrorMessageTransfer($errorMessage);
