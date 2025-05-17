@@ -61,6 +61,7 @@ class TransferGeneratorFactory
     {
         return $this->transferGenerator ??= new TransferGenerator(
             $this->createDefinitionReader(),
+            $this->createTransferGeneratorBuilder(),
             $this->createGeneratorProcessor(),
         );
     }

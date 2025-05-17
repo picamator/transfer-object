@@ -98,11 +98,10 @@ MESSAGE;
     {
         $generatorFiber = $this->generatorFacade->getTransferGeneratorFiber();
 
+        /** @var \Picamator\TransferObject\Generated\TransferGeneratorTransfer $generatorTransfer */
         $generatorTransfer = $generatorFiber->start($configPath);
-        if ($generatorTransfer !== null) {
-            $this->writelnErrorMessages($generatorTransfer, $styleOutput);
-            $this->writelnDebugMessages($generatorTransfer, $styleOutput);
-        }
+
+        $this->writelnErrorMessages($generatorTransfer, $styleOutput);
 
         while (!$generatorFiber->isTerminated()) {
             $generatorTransfer = $generatorFiber->resume();
@@ -154,6 +153,8 @@ MESSAGE;
         if ($generatorTransfer->validator->isValid === true) {
             return;
         }
+
+        $styleOutput->newLine();
 
         $className = $generatorTransfer->className ?? '';
         if ($className !== '') {

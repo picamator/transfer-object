@@ -7,12 +7,14 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 use Generator;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\GeneratorProcessorInterface;
 
 readonly class TransferGenerator implements TransferGeneratorInterface
 {
     public function __construct(
         private DefinitionReaderInterface $definitionReader,
+        private TransferGeneratorBuilderInterface $builder,
         private GeneratorProcessorInterface $processor,
     ) {
     }
@@ -20,9 +22,10 @@ readonly class TransferGenerator implements TransferGeneratorInterface
     public function generateTransfers(string $configPath): Generator
     {
         $generatorTransfer = $this->handlePreProcess($configPath);
-        if ($generatorTransfer !== null) {
-            yield $generatorTransfer;
 
+        yield $generatorTransfer;
+
+        if ($generatorTransfer->validator->isValid === false) {
             return false;
         }
 
@@ -53,11 +56,11 @@ readonly class TransferGenerator implements TransferGeneratorInterface
         return $this->processor->postProcessError();
     }
 
-    private function handlePreProcess(string $configPath): ?TransferGeneratorTransfer
+    private function handlePreProcess(string $configPath): TransferGeneratorTransfer
     {
         $generatorTransfer = $this->processor->preProcess($configPath);
         if ($generatorTransfer->validator->isValid) {
-            return null;
+            return $this->builder->createSuccessGeneratorTransfer();
         }
 
         return $generatorTransfer;

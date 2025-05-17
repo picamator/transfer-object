@@ -93,6 +93,7 @@ MESSAGE;
     private function generateTransfers(string $configListPath, SymfonyStyle $styleOutput): bool
     {
         $generatorFiber = $this->generatorFacade->getTransferGeneratorBulkFiber();
+
         /** @var \Picamator\TransferObject\Generated\TransferGeneratorBulkTransfer $bulkTransfer */
         $bulkTransfer = $generatorFiber->start($configListPath);
 
