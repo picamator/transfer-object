@@ -40,6 +40,10 @@ class FileReaderProgress implements FileReaderProgressInterface
 
     protected function filesize(string $filename): int|false
     {
+        if (!file_exists($filename)) {
+            return false;
+        }
+
         return filesize($filename);
     }
 }

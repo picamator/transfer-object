@@ -86,6 +86,10 @@ class FileReader implements FileReaderInterface
      */
     protected function fopen(string $filename)
     {
+        if (!file_exists($filename)) {
+            return  false;
+        }
+
         return fopen($filename, 'r');
     }
 
