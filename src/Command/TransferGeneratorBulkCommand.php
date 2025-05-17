@@ -28,10 +28,10 @@ class TransferGeneratorBulkCommand extends Command
 
     private const string HELP = <<<'HELP'
 This command generates Transfer Objects based on configuration list.
-The command requires a path to the configuration list file in TXT format.
+The command requires a configuration list in TXT format
 
 The configuration list file contains:
-  - path to the Transfer Object configuration on each line.
+  - Each line in the configuration list file should contain the path to an individual Transfer Object configuration.
 HELP;
 
     private const string OPTION_NAME_BULK = 'bulk';
