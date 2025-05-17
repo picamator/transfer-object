@@ -31,6 +31,7 @@ function show_usage() {
   echo -e "  $(wrap_in_yellow "hook-install")               Install CaptainHook"
   echo -e "  $(wrap_in_yellow "hook <command>")             Run CaptainHook command"
   echo -e "  $(wrap_in_yellow "to-generate")                Generate internal transfer objects"
+  echo -e "  $(wrap_in_yellow "to-generate-bulk")           Generate bulk internal transfer objects"
   echo -e "  $(wrap_in_yellow "df-generate")                Generate definition"
 }
 
@@ -104,6 +105,9 @@ case $1 in
     ;;
   to-generate)
      $DOCKER_EXEC composer transfer-generate -- -c ./config/generator.config.yml -v
+    ;;
+  to-generate-bulk)
+     $DOCKER_EXEC composer transfer-generate-bulk -- -b ./var/config/config.list.txt
     ;;
   df-generate)
      $DOCKER_EXEC composer definition-generate
