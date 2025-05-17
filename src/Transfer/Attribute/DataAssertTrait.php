@@ -11,7 +11,7 @@ trait DataAssertTrait
     /**
      * @throws \Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException
      */
-    protected function assertArray(mixed $data): void
+    final protected function assertArray(mixed $data): void
     {
         if (is_array($data)) {
             return;
@@ -28,7 +28,7 @@ trait DataAssertTrait
     /**
      * @throws \Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException
      */
-    protected function assertInvalidType(mixed $data, string $expectedType): never
+    final protected function assertInvalidType(mixed $data, string $expectedType): never
     {
         throw new PropertyTypeTransferException(
             sprintf(
@@ -42,7 +42,7 @@ trait DataAssertTrait
     /**
      * @throws \Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException
      */
-    protected function assertStringOrInt(mixed $data): void
+    final protected function assertStringOrInt(mixed $data): void
     {
         if (is_string($data) || is_int($data)) {
             return;

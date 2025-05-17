@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder;
 
+use Picamator\TransferObject\Generated\ConfigTransfer;
 use Picamator\TransferObject\Generated\DefinitionTransfer;
-use Picamator\TransferObject\Generated\DefinitionValidatorTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
-use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
+use Picamator\TransferObject\Generated\ValidatorTransfer;
+use Picamator\TransferObject\Shared\Validator\ValidatorTrait;
 
 readonly class TransferGeneratorBuilder implements TransferGeneratorBuilderInterface
 {
+    use ValidatorTrait;
+
     public function createErrorWithDefinitionGeneratorTransfer(
         string $errorMessage,
         DefinitionTransfer $definitionTransfer,
@@ -36,14 +39,14 @@ readonly class TransferGeneratorBuilder implements TransferGeneratorBuilderInter
     {
         $generatorTransfer = new TransferGeneratorTransfer();
 
-        $generatorTransfer->validator = new DefinitionValidatorTransfer();
-        $generatorTransfer->validator->isValid = true;
+        $generatorTransfer->validator = $this->createSuccessValidatorTransfer();
 
         return $generatorTransfer;
     }
 
-    public function createGeneratorTransfer(DefinitionTransfer $definitionTransfer): TransferGeneratorTransfer
-    {
+    public function createGeneratorTransferByDefinition(
+        DefinitionTransfer $definitionTransfer
+    ): TransferGeneratorTransfer {
         $generatorTransfer = new TransferGeneratorTransfer();
 
         $generatorTransfer->className = $definitionTransfer->content->className;
@@ -53,15 +56,20 @@ readonly class TransferGeneratorBuilder implements TransferGeneratorBuilderInter
         return $generatorTransfer;
     }
 
-    private function createErrorValidatorTransfer(string $errorMessage): DefinitionValidatorTransfer
-    {
-        $validatorTransfer = new DefinitionValidatorTransfer();
-        $validatorTransfer->isValid = false;
-        $validatorTransfer->errorMessages[] = new ValidatorMessageTransfer([
-            ValidatorMessageTransfer::IS_VALID => false,
-            ValidatorMessageTransfer::ERROR_MESSAGE => $errorMessage,
-        ]);
+    public function createGeneratorTransferByConfig(
+        string $configPath,
+        ConfigTransfer $configTransfer
+    ): TransferGeneratorTransfer {
+        $generatorTransfer = new TransferGeneratorTransfer();
 
-        return $validatorTransfer;
+        $generatorTransfer->fileName = $configPath;
+
+        $validatorTransfer = new ValidatorTransfer();
+        $validatorTransfer->isValid = $configTransfer->validator->isValid;
+        $validatorTransfer->errorMessages = $configTransfer->validator->errorMessages;
+
+        $generatorTransfer->validator = $validatorTransfer;
+
+        return $generatorTransfer;
     }
 }

@@ -1,4 +1,11 @@
 # $schema: ./../../schema/definition.schema.json
+Validator:
+  isValid:
+    type: bool
+    required:
+  errorMessages:
+    collectionType: ValidatorMessage
+
 ValidatorMessage:
   isValid:
     type: bool
@@ -8,3 +15,14 @@ ValidatorMessage:
     type: string
     required:
     protected:
+
+FileReaderProgress:
+  content:
+    type: string
+    required:
+  totalBytes:
+    type: int
+    required:
+  progressBytes:
+    type: int
+    required:

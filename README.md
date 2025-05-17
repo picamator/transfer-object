@@ -58,33 +58,34 @@ Key Features
 
 **Symfony Compatability:**
 
- * includes Symfony console commands:
+ * Provides Symfony console command:
    * [TransferGeneratorCommand](/src/Command/TransferGeneratorCommand.php)
+   * [TransferGeneratorBulkCommand](/src/Command/TransferGeneratorBulkCommand.php)
    * [DefinitionGeneratorCommand](/src/Command/DefinitionGeneratorCommand.php)
- * includes Symfony services:
+ * Includes Symfony services:
    * [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php)
    * [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php)
- * supports Symfony request data mapping
+ * Enables Symfony request data mapping.
 
 **Transfer Object:**
 
-* implements methods:
+* Offers methods:
   * `fromArray()`
   * `toArray()`
   * `toFilterArray()`
-* implements standard interfaces:
+* Implements standard interfaces:
   * `IteratorAggregate`
   * `JsonSerializable`
   * `Countable`
-* supports embedded and collection Transfer Objects
-* supports PHP primitive data types
-* supports:
+* Handles embedded and collection Transfer Objects.
+* Works with PHP primitive data types.
+* Extends compatibility to advanced types:
   * `BackedEnum`
   * `DateTime`
   * `DateTimeImmutable`
   * `BcMath\Number`
-* supports asymmetric property visibility
-* integrates external Transfer Objects
+* Supports asymmetric property visibility.
+* Integrates with external Transfer Objects.
 
 Installation
 ------------

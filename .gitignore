@@ -19,6 +19,10 @@ vendor/
 # var
 var/*
 
+!var/config
+var/config/*
+!var/config/*.txt
+
 !var/xdebug-profile
 var/xdebug-profile/*
 !var/xdebug-profile/.keep

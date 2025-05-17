@@ -8,7 +8,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Dependency\Exception\FilesystemException;
 use Picamator\TransferObject\Dependency\Exception\YmlParserException;
-use Picamator\TransferObject\Generated\ConfigValidatorTransfer;
+use Picamator\TransferObject\Generated\ValidatorTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Parser\ConfigParserInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Reader\ConfigReader;
 use Picamator\TransferObject\TransferGenerator\Config\Reader\ConfigReaderInterface;
@@ -56,7 +56,7 @@ class ConfigReaderTest extends TestCase
         // Arrange
         $configPath = 'some-config-path.yml';
 
-        $validatorTransfer = new ConfigValidatorTransfer();
+        $validatorTransfer = new ValidatorTransfer();
         $validatorTransfer->isValid = true;
 
         // Expect

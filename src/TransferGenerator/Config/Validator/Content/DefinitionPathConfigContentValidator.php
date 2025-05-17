@@ -4,37 +4,28 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Config\Validator\Content;
 
-use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
+use Picamator\TransferObject\Shared\Validator\PathExistValidatorInterface;
+use Picamator\TransferObject\Shared\Validator\PathLocalValidatorInterface;
 
 readonly class DefinitionPathConfigContentValidator implements ConfigContentValidatorInterface
 {
-    use ValidatorMessageTrait;
-
-    private const string ERROR_MESSAGE_TEMPLATE = 'Definition path "%s" does not exist.';
-
     public function __construct(
-        private FilesystemInterface $filesystem,
+        private PathLocalValidatorInterface $pathLocalValidator,
+        private PathExistValidatorInterface $pathValidator,
     ) {
     }
 
     public function validate(ConfigContentTransfer $configContentTransfer): ValidatorMessageTransfer
     {
-        $definitionPath = $configContentTransfer->definitionPath;
+        $path = $configContentTransfer->definitionPath;
 
-        if ($this->filesystem->exists($definitionPath)) {
-            return $this->createSuccessMessageTransfer();
+        $validatorMessageTransfer = $this->pathLocalValidator->validate($path);
+        if ($validatorMessageTransfer->isValid === false) {
+            return $validatorMessageTransfer;
         }
 
-        $errorMessage = $this->getErrorMessage($definitionPath);
-
-        return $this->createErrorMessageTransfer($errorMessage);
-    }
-
-    private function getErrorMessage(string $definitionPath): string
-    {
-        return sprintf(self::ERROR_MESSAGE_TEMPLATE, $definitionPath);
+        return $this->pathValidator->validate($path);
     }
 }

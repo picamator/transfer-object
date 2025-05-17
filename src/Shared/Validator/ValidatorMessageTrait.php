@@ -8,7 +8,9 @@ use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 
 trait ValidatorMessageTrait
 {
-    protected function createErrorMessageTransfer(string $errorMessage): ValidatorMessageTransfer
+    private static ?ValidatorMessageTransfer $successMessageCache = null;
+
+    final protected function createErrorMessageTransfer(string $errorMessage): ValidatorMessageTransfer
     {
         return new ValidatorMessageTransfer([
             ValidatorMessageTransfer::IS_VALID => false,
@@ -16,9 +18,9 @@ trait ValidatorMessageTrait
         ]);
     }
 
-    protected function createSuccessMessageTransfer(): ValidatorMessageTransfer
+    final protected function createSuccessMessageTransfer(): ValidatorMessageTransfer
     {
-        return new ValidatorMessageTransfer([
+        return self::$successMessageCache ??= new ValidatorMessageTransfer([
             ValidatorMessageTransfer::IS_VALID => true,
             ValidatorMessageTransfer::ERROR_MESSAGE => '',
         ]);

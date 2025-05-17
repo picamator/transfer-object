@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\Shared\Validator;
 
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 
-readonly class NamespaceValidator implements NamespaceValidatorInterface
+class NamespaceValidator implements NamespaceValidatorInterface
 {
     use ValidatorMessageTrait;
     use NamespaceValidatorTrait;

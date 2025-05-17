@@ -9,13 +9,14 @@ use Picamator\TransferObject\Generated\DefinitionGeneratorContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 use Picamator\TransferObject\Shared\Reader\JsonReaderInterface;
 use Picamator\TransferObject\Shared\Validator\ClassNameValidatorInterface;
-use Throwable;
+use Picamator\TransferObject\Shared\Validator\PathLocalValidatorInterface;
 
 class DefinitionGeneratorBuilder implements DefinitionGeneratorBuilderInterface
 {
     private DefinitionGeneratorTransfer $generatorTransfer;
 
     public function __construct(
+        private readonly PathLocalValidatorInterface $pathLocalValidator,
         private readonly ClassNameValidatorInterface $classNameValidator,
         private readonly JsonReaderInterface $jsonReader,
     ) {
@@ -23,10 +24,16 @@ class DefinitionGeneratorBuilder implements DefinitionGeneratorBuilderInterface
 
     public function setDefinitionPath(string $definitionPath): self
     {
-        $definitionPath = rtrim($definitionPath, '\/');
-        $this->getGeneratorTransfer()->definitionPath = $definitionPath;
+        $messageTransfer = $this->pathLocalValidator->validate($definitionPath);
 
-        return $this;
+        if ($messageTransfer->isValid) {
+            $definitionPath = rtrim($definitionPath, '\/');
+            $this->getGeneratorTransfer()->definitionPath = $definitionPath;
+
+            return $this;
+        }
+
+        throw new DefinitionGeneratorException($messageTransfer->errorMessage);
     }
 
     public function setClassName(string $className): self
@@ -44,12 +51,8 @@ class DefinitionGeneratorBuilder implements DefinitionGeneratorBuilderInterface
 
     public function setJsonPath(string $jsonPath): self
     {
-        try {
-            $content = $this->jsonReader->getJsonContent($jsonPath);
-            $this->getGeneratorTransfer()->content->content = $content;
-        } catch (Throwable $e) {
-            throw new DefinitionGeneratorException($e->getMessage());
-        }
+        $content = $this->jsonReader->getJsonContent($jsonPath);
+        $this->getGeneratorTransfer()->content->content = $content;
 
         return $this;
     }

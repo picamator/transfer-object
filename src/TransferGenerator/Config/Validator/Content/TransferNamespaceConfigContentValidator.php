@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\NamespaceValidatorTrait;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
-readonly class TransferNamespaceConfigContentValidator implements ConfigContentValidatorInterface
+class TransferNamespaceConfigContentValidator implements ConfigContentValidatorInterface
 {
     use ValidatorMessageTrait;
     use NamespaceValidatorTrait;

@@ -1,0 +1,1 @@
+tests/integration/Command/data/config/error/generator.config.yml

@@ -6,8 +6,8 @@ namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Genera
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Picamator\TransferObject\Generated\DefinitionValidatorTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
+use Picamator\TransferObject\Generated\ValidatorTransfer;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorService;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorServiceInterface;
@@ -48,7 +48,7 @@ class ServiceTransferGeneratorTest extends TestCase
     {
         $generatorTransfer = new TransferGeneratorTransfer();
 
-        $generatorTransfer->validator = new DefinitionValidatorTransfer();
+        $generatorTransfer->validator = new ValidatorTransfer();
         $generatorTransfer->validator->isValid = false;
 
         return $generatorTransfer;

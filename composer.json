@@ -49,6 +49,7 @@
     "require-dev": {
         "captainhook/captainhook": "^5.24",
         "phpstan/phpstan": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0",
         "phpunit/phpunit": "^12.0",
         "squizlabs/php_codesniffer": "^3.11"
     },
@@ -57,6 +58,7 @@
     },
     "bin": [
         "bin/transfer-generate",
+        "bin/transfer-generate-bulk",
         "bin/definition-generate"
     ],
     "config": {
@@ -67,6 +69,7 @@
         "phpunit": "./vendor/bin/phpunit --no-progress",
         "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon --no-progress --memory-limit=512M",
         "transfer-generate": "php ./bin/transfer-generate",
+        "transfer-generate-bulk": "php ./bin/transfer-generate-bulk",
         "definition-generate": "php ./bin/definition-generate",
         "captainhook": "./vendor/bin/captainhook",
         "phpcs": "./vendor/bin/phpcs -q --colors",
@@ -76,6 +79,7 @@
         "phpunit": "Run unit and integration tests.",
         "phpstan": "Perform static code analysis using PHPStan.",
         "transfer-generate": "Generate Transfer Objects from YML definition templates.",
+        "transfer-generate-bulk": "Generate Transfer Objects based on configuration list.",
         "definition-generate": "Create Transfer Object definition files based on JSON blueprints.",
         "captainhook": "Manage and execute Git hooks.",
         "phpcs": "Analyze code style using PHP CodeSniffer.",

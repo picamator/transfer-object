@@ -10,7 +10,6 @@ use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorExcept
 readonly class TransferGeneratorService implements TransferGeneratorServiceInterface
 {
     private const string ERROR_MESSAGE = 'Failed to generate Transfer Objects.';
-    private const string ERROR_MESSAGE_TEMPLATE = 'Error: "%s".';
 
     private const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Transfer Object: "%s".';
     private const string DEFINITION_MESSAGE_TEMPLATE = 'Definition file: "%s".';
@@ -54,11 +53,15 @@ readonly class TransferGeneratorService implements TransferGeneratorServiceInter
             $messageParts[] = sprintf(self::DEFINITION_MESSAGE_TEMPLATE, $generatorTransfer->fileName);
         }
 
-        $validatorMessage = $generatorTransfer->validator?->errorMessages[0] ?? null;
-        if ($validatorMessage?->errorMessage !== null) {
-            $messageParts[] = sprintf(self::ERROR_MESSAGE_TEMPLATE, $validatorMessage->errorMessage);
+        $messageParts[] = PHP_EOL;
+
+        $validatorMessages = $generatorTransfer->validator->errorMessages;
+        foreach ($validatorMessages as $message) {
+            $messageParts[] = $message->errorMessage;
         }
 
-        throw new TransferGeneratorException(implode(' ', $messageParts));
+        $message = implode(PHP_EOL, $messageParts);
+
+        throw new TransferGeneratorException($message);
     }
 }

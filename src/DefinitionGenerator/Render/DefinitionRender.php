@@ -11,7 +11,7 @@ use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 readonly class DefinitionRender implements DefinitionRenderInterface
 {
     private const string SCHEMA = <<<'START'
-# $schema: https://raw.githubusercontent.com/picamator/transfer-object/refs/heads/main/schema/definition.schema.json
+# $schema: https://raw.githubusercontent.com/picamator/transfer-object/main/schema/definition.schema.json
 
 
 START;

@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
 trait TemplateExpanderTrait
 {
-    protected function enforceTransferInterface(string $propertyType): string
+    final protected function enforceTransferInterface(string $propertyType): string
     {
         return 'TransferInterface&' . $propertyType;
     }

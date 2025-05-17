@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
-readonly class NumberTypePropertyValidator implements PropertyValidatorInterface
+class NumberTypePropertyValidator implements PropertyValidatorInterface
 {
     use ValidatorMessageTrait;
 

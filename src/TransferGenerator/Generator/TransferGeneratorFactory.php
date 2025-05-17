@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator;
 
-use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
+use Picamator\TransferObject\Shared\SharedFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactory;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoaderInterface;
@@ -14,14 +14,18 @@ use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFil
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilder;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilderInterface;
-use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorService;
-use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorServiceInterface;
-use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorFiber;
-use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorFiberInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBulkBuilder;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBulkBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\GeneratorProcessor;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\GeneratorProcessorInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGenerator;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorBulkFiber;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorBulkFiberInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorFiber;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorFiberInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorService;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorServiceInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\BuildInTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\CollectionTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\DateTimeTypeTemplateExpander;
@@ -32,17 +36,18 @@ use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\NumberT
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\ProtectedTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TemplateExpanderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TransferTypeTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Template;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelper;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelperInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateBuilder;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateBuilderInterface;
-use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateHelper;
-use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateHelperInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRender;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderInterface;
 
 class TransferGeneratorFactory
 {
     use ConfigFactoryTrait;
-    use DependencyFactoryTrait;
+    use SharedFactoryTrait;
 
     private TransferGeneratorInterface $transferGenerator;
 
@@ -57,6 +62,7 @@ class TransferGeneratorFactory
     {
         return $this->transferGenerator ??= new TransferGenerator(
             $this->createDefinitionReader(),
+            $this->createTransferGeneratorBuilder(),
             $this->createGeneratorProcessor(),
         );
     }
@@ -64,6 +70,20 @@ class TransferGeneratorFactory
     public function createTransferGeneratorService(): TransferGeneratorServiceInterface
     {
         return $this->transferGeneratorService ??= new TransferGeneratorService($this->createTransferGenerator());
+    }
+
+    public function createTransferGeneratorBulkFiber(): TransferGeneratorBulkFiberInterface
+    {
+        return new TransferGeneratorBulkFiber(
+            $this->createFileReaderProgress(),
+            $this->createTransferGeneratorBulkBuilder(),
+            $this->createTransferGeneratorService(),
+        );
+    }
+
+    protected function createTransferGeneratorBulkBuilder(): TransferGeneratorBulkBuilderInterface
+    {
+        return new TransferGeneratorBulkBuilder();
     }
 
     protected function createGeneratorProcessor(): GeneratorProcessorInterface
@@ -94,8 +114,13 @@ class TransferGeneratorFactory
     {
         return new TemplateRender(
             $this->createTemplateBuilder(),
-            $this->createTemplateHelper(),
+            $this->createTemplate(),
         );
+    }
+
+    protected function createTemplate(): Template
+    {
+        return new Template($this->createTemplateHelper());
     }
 
     protected function createTemplateHelper(): TemplateHelperInterface

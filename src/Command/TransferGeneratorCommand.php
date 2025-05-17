@@ -16,8 +16,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'picamator:definition:generate',
-    description: 'Generate Transfer Objects from definition templates.'
+    name: 'picamator:transfer:generate',
+    description: 'Generate Transfer Objects from definition templates.',
+    aliases: ['p:t:g'],
+    hidden: false,
 )]
 class TransferGeneratorCommand extends Command
 {
@@ -39,12 +41,13 @@ HELP;
 
     private const string START_SECTION_NAME = 'Generating Transfer Objects ✨';
 
-    private const string ERROR_MISSED_OPTION_CONFIG_MESSAGE = <<<'MESSAGE'
+    private const string ERROR_MISSED_OPTION_CONFIGURATION_MESSAGE = <<<'MESSAGE'
 The required -c option is missing. Please provide the path to the YML configuration file.
 MESSAGE;
 
-    private const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Processing Transfer Object: <info>%s</info>.';
-    private const string DEFINITION_MESSAGE_TEMPLATE = 'Using Definition File: <comment>%s</comment>.';
+    private const string CONFIGURATION_MESSAGE_TEMPLATE = 'Configuration: <comment>%s</comment>';
+    private const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Transfer Object: <comment>%s</comment>';
+    private const string DEFINITION_MESSAGE_TEMPLATE = 'Definition File: <comment>%s</comment>';
 
     private const string DEBUG_MESSAGE_TEMPLATE = '<comment>%s</comment>: <info>%s</info>';
 
@@ -79,6 +82,9 @@ MESSAGE;
             return Command::FAILURE;
         }
 
+        $styleOutput->writeln(sprintf(self::CONFIGURATION_MESSAGE_TEMPLATE, $configPath));
+        $styleOutput->newLine();
+
         if (!$this->generateTransfers($configPath, $styleOutput)) {
             return Command::FAILURE;
         }
@@ -92,13 +98,16 @@ MESSAGE;
     {
         $generatorFiber = $this->generatorFacade->getTransferGeneratorFiber();
 
+        /** @var \Picamator\TransferObject\Generated\TransferGeneratorTransfer $generatorTransfer */
         $generatorTransfer = $generatorFiber->start($configPath);
 
         $this->writelnErrorMessages($generatorTransfer, $styleOutput);
-        $this->writelnDebugMessages($generatorTransfer, $styleOutput);
 
         while (!$generatorFiber->isTerminated()) {
             $generatorTransfer = $generatorFiber->resume();
+            if ($generatorTransfer === null) {
+                continue;
+            }
 
             $this->writelnErrorMessages($generatorTransfer, $styleOutput);
             $this->writelnDebugMessages($generatorTransfer, $styleOutput);
@@ -108,12 +117,11 @@ MESSAGE;
     }
 
     private function writelnDebugMessages(
-        ?TransferGeneratorTransfer $generatorTransfer,
+        TransferGeneratorTransfer $generatorTransfer,
         SymfonyStyle $styleOutput,
     ): void {
         if (
             !$styleOutput->isVerbose()
-            || $generatorTransfer === null
             || $generatorTransfer->validator->isValid === false
             || $generatorTransfer->fileName === null
             || $generatorTransfer->className === null
@@ -139,12 +147,14 @@ MESSAGE;
     }
 
     private function writelnErrorMessages(
-        ?TransferGeneratorTransfer $generatorTransfer,
+        TransferGeneratorTransfer $generatorTransfer,
         SymfonyStyle $styleOutput,
     ): void {
-        if ($generatorTransfer === null || $generatorTransfer->validator->isValid === true) {
+        if ($generatorTransfer->validator->isValid === true) {
             return;
         }
+
+        $styleOutput->newLine();
 
         $className = $generatorTransfer->className ?? '';
         if ($className !== '') {
@@ -164,10 +174,10 @@ MESSAGE;
     private function getConfigPath(InputInterface $input, SymfonyStyle $styleOutput): string
     {
         $configPath = $input->getOption(name: self::OPTION_NAME_CONFIGURATION);
-        $configPath = is_string($configPath) ? $this->normalizePath($configPath) : '';
+        $configPath = $this->normalizePath($configPath);
 
         if ($configPath === '') {
-            $styleOutput->error(self::ERROR_MISSED_OPTION_CONFIG_MESSAGE);
+            $styleOutput->error(self::ERROR_MISSED_OPTION_CONFIGURATION_MESSAGE);
         }
 
         return $configPath;

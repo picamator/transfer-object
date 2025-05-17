@@ -8,20 +8,32 @@ use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
-readonly class BuildInTypePropertyValidator implements PropertyValidatorInterface
+class BuildInTypePropertyValidator implements PropertyValidatorInterface
 {
     use ValidatorMessageTrait;
 
     private const string UNSUPPORTED_TYPE_ERROR_MESSAGE_TEMPLATE = 'Property "%s" with type "%s" is not supported.';
 
+    /**
+     * @var array<string,true>
+     */
+    private static array $successCache;
+
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        return $propertyTransfer->buildInType !== null;
+        $buildInType = $propertyTransfer->buildInType;
+
+        return $buildInType !== null && !isset(self::$successCache[$buildInType->value]);
     }
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
-        if ($propertyTransfer->buildInType?->isAllowed()) {
+        /** @var \Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum $buildInType */
+        $buildInType = $propertyTransfer->buildInType;
+
+        if ($buildInType->isAllowed()) {
+            self::$successCache[$buildInType->value] = true;
+
             return $this->createSuccessMessageTransfer();
         }
 

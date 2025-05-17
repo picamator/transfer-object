@@ -28,3 +28,4 @@
 /examples/Generated/**      linguist-generated=true
 /tests/**/Generated/**      linguist-generated=true
 /tests/**/*.json            linguist-generated=true
+/var/config/*.txt           linguist-generated=true

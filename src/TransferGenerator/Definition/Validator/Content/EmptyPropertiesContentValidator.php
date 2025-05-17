@@ -8,7 +8,7 @@ use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
-readonly class EmptyPropertiesContentValidator implements ContentValidatorInterface
+class EmptyPropertiesContentValidator implements ContentValidatorInterface
 {
     use ValidatorMessageTrait;
 

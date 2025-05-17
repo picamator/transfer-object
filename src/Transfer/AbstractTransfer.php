@@ -121,12 +121,13 @@ abstract class AbstractTransfer implements TransferInterface
             return $this;
         }
 
-        $data = array_intersect_key($data, static::META_DATA);
-        $data = array_filter($data, fn(mixed $item): bool => $item !== null);
+        foreach (static::META_DATA as $metaKey => $metaName) {
+            if (!isset($data[$metaKey])) {
+                continue;
+            }
 
-        foreach ($data as $key => $value) {
-            $attribute = $this->getConstantAttribute(static::META_DATA[$key]);
-            $this->{$key} = $attribute !== null ? $attribute->fromArray($value) : $value;
+            $attribute = $this->getConstantAttribute($metaName);
+            $this->{$metaKey} = $attribute !== null ? $attribute->fromArray($data[$metaKey]) : $data[$metaKey];
         }
 
         return $this;

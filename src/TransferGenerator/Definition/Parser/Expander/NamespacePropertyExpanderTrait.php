@@ -11,7 +11,7 @@ trait NamespacePropertyExpanderTrait
     private const string NAMESPACE_ALIAS_SEPARATOR = ' as ';
     private const string SPACE_REGEX = '#\s+#';
 
-    protected function createDefinitionNamespaceTransfer(string $namespace): DefinitionNamespaceTransfer
+    final protected function createDefinitionNamespaceTransfer(string $namespace): DefinitionNamespaceTransfer
     {
         $namespace = str_ireplace(
             self::NAMESPACE_ALIAS_SEPARATOR,
@@ -31,7 +31,7 @@ trait NamespacePropertyExpanderTrait
         return $namespaceTransfer;
     }
 
-    protected function isNamespace(string $propertyType): bool
+    final protected function isNamespace(string $propertyType): bool
     {
         return str_contains($propertyType, '\\');
     }

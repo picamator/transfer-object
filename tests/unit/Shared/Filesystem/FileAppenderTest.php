@@ -11,10 +11,15 @@ use Picamator\TransferObject\Shared\Filesystem\FileAppender;
 
 class FileAppenderTest extends TestCase
 {
-    private FileAppender&MockObject $fileAppenderMock;
-
     private const string FILE_NAME = 'test.yml';
     private const string FILE_CONTENT = 'test content';
+
+    private FileAppender&MockObject $fileAppenderMock;
+
+    /**
+     * @var false|resource|null
+     */
+    private $file;
 
     protected function setUp(): void
     {
@@ -24,6 +29,16 @@ class FileAppenderTest extends TestCase
                 'fopen',
                 'fclose',
             ])->getMock();
+    }
+
+    protected function tearDown(): void
+    {
+        if (!isset($this->file) || $this->file === false) {
+            return;
+        }
+
+        fclose($this->file);
+        unset($this->file);
     }
 
     public function testFailedOpenFileShouldRiseException(): void
@@ -42,14 +57,11 @@ class FileAppenderTest extends TestCase
 
     public function testFailedWriteFileShouldRiseException(): void
     {
-        // Arrange
-        $file = fopen('php://temp', 'r');
-
         // Expect
         $this->fileAppenderMock->expects($this->once())
             ->method('fopen')
             ->with(self::FILE_NAME)
-            ->willReturn($file);
+            ->willReturn($this->file);
 
         $this->fileAppenderMock->expects($this->once())
             ->method('fwrite')
@@ -64,7 +76,7 @@ class FileAppenderTest extends TestCase
     public function testSuccessfulWriteFile(): void
     {
         // Arrange
-        $file = fopen('php://temp', 'r');
+        $file = $this->getFile();
 
         // Expect
         $this->fileAppenderMock->expects($this->once())
@@ -84,7 +96,7 @@ class FileAppenderTest extends TestCase
     public function testCloseFile(): void
     {
         // Arrange
-        $file = fopen('php://temp', 'r');
+        $file = $this->getFile();
 
         // Expect
         $this->fileAppenderMock->expects($this->once())
@@ -108,7 +120,7 @@ class FileAppenderTest extends TestCase
     public function testFailedCloseFile(): void
     {
         // Arrange
-        $file = fopen('php://temp', 'r');
+        $file = $this->getFile();
 
         // Expect
         $this->fileAppenderMock->expects($this->once())
@@ -129,5 +141,13 @@ class FileAppenderTest extends TestCase
         // Act
         $this->fileAppenderMock->appendToFile(self::FILE_NAME, self::FILE_CONTENT);
         $this->fileAppenderMock->closeFile(self::FILE_NAME);
+    }
+
+    /**
+     * @return false|resource
+     */
+    private function getFile()
+    {
+        return $this->file ??= fopen('php://temp', 'r');
     }
 }

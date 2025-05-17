@@ -1,4 +1,5 @@
-# $schema: ./../../../../schema/definition.schema.json
+# $schema: https://raw.githubusercontent.com/picamator/transfer-object/main/schema/definition.schema.json
+
 Agent:
   customer:
     type: Customer

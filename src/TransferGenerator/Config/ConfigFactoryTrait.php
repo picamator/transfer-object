@@ -9,7 +9,7 @@ use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigProxy;
 
 trait ConfigFactoryTrait
 {
-    protected function getConfig(): ConfigInterface
+    final protected function getConfig(): ConfigInterface
     {
         return new ConfigProxy();
     }

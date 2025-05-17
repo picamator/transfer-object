@@ -13,7 +13,10 @@ parameters:
   ignoreErrors:
     -
         identifier: argument.type
-        path: src/TransferGenerator/Generator/Render/Template/Template.tpl.php
+        path: src/TransferGenerator/Generator/Render/Template/Template.php
     -
         identifier: encapsedStringPart.nonString
-        path: src/TransferGenerator/Generator/Render/Template/Template.tpl.php
+        path: src/TransferGenerator/Generator/Render/Template/Template.php
+rules:
+   - PHPStan\Rules\DisallowedConstructs\DisallowedBacktickRule
+   - PHPStan\Rules\StrictCalls\StrictFunctionCallsRule

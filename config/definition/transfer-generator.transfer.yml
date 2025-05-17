@@ -4,15 +4,8 @@ Config:
     type: ConfigContent
     required:
   validator:
-    type: ConfigValidator
+    type: Validator
     required:
-
-ConfigValidator:
-  isValid:
-    type: bool
-    required:
-  errorMessages:
-    collectionType: ValidatorMessage
 
 ConfigContent:
   transferNamespace:
@@ -36,7 +29,7 @@ Definition:
     type: DefinitionContent
     required:
   validator:
-    type: DefinitionValidator
+    type: Validator
     required:
 
 DefinitionContent:
@@ -89,18 +82,19 @@ DefinitionNamespace:
   alias:
     type: string
 
-DefinitionValidator:
-  isValid:
-    type: bool
-    required:
-  errorMessages:
-    collectionType: ValidatorMessage
-
 TransferGenerator:
   fileName:
     type: string
   className:
     type: string
   validator:
-    type: DefinitionValidator
+    type: Validator
+    required:
+
+TransferGeneratorBulk:
+  progress:
+    type: FileReaderProgress
+    required:
+  validator:
+    type: Validator
     required:

@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Validator;
 
 use ArrayObject;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
-use Picamator\TransferObject\Generated\DefinitionValidatorTransfer;
+use Picamator\TransferObject\Generated\ValidatorTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\ContentValidatorInterface;
 
 readonly class DefinitionValidator implements DefinitionValidatorInterface
@@ -19,12 +19,12 @@ readonly class DefinitionValidator implements DefinitionValidatorInterface
     ) {
     }
 
-    public function validate(DefinitionContentTransfer $contentTransfer): DefinitionValidatorTransfer
+    public function validate(DefinitionContentTransfer $contentTransfer): ValidatorTransfer
     {
         $errorMessages = $this->handleContentValidators($contentTransfer);
         $isValid = $errorMessages->count() === 0;
 
-        $validatorTransfer = new DefinitionValidatorTransfer();
+        $validatorTransfer = new ValidatorTransfer();
         $validatorTransfer->isValid = $isValid;
         $validatorTransfer->errorMessages = $errorMessages;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Generator\Render;
+namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Template;
 
 use ArrayObject;
 use Picamator\TransferObject\Generated\TemplateTransfer;

@@ -19,7 +19,7 @@ interface DefinitionGeneratorBuilderInterface
     public function setClassName(string $className): self;
 
     /**
-     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
+     * @throws \Picamator\TransferObject\Shared\Exception\JsonReaderException
      */
     public function setJsonPath(string $jsonPath): self;
 

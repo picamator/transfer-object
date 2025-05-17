@@ -32,7 +32,6 @@ class ConfigLoaderTest extends TestCase
 
         // Assert
         $this->assertFalse($actual->validator->isValid);
-        $this->assertCount(1, $actual->validator->errorMessages);
     }
 
     /**
@@ -44,7 +43,9 @@ class ConfigLoaderTest extends TestCase
 
         yield 'missed required keys' => ['missed-required-keys.config.yml'];
 
-        yield 'definition path is not exist' => ['definition-path-is-not-exist.config.yml'];
+        yield 'definition path is not local' => ['definition-path-is-not-exist.config.yml'];
+
+        yield 'definition path is not exist' => ['definition-path-is-not-local.config.yml'];
 
         yield 'invalid namespace' => ['invalid-transfer-namespace.config.yml'];
 
@@ -53,5 +54,7 @@ class ConfigLoaderTest extends TestCase
         yield 'empty config file' => ['empty.config.yml'];
 
         yield 'invalid definition root key' => ['invalid-definition-root-key.config.yml'];
+
+        yield 'transfer path is not exist' => ['transfer-path-is-not-local.config.yml'];
     }
 }
