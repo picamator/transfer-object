@@ -16,16 +16,16 @@ use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\Trans
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBulkBuilder;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBulkBuilderInterface;
-use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorBulkFiber;
-use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorBulkFiberInterface;
-use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorService;
-use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorServiceInterface;
-use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorFiber;
-use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorFiberInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\GeneratorProcessor;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\GeneratorProcessorInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGenerator;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorBulkFiber;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorBulkFiberInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorFiber;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorFiberInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorService;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorServiceInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\BuildInTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\CollectionTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\DateTimeTypeTemplateExpander;
@@ -36,10 +36,11 @@ use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\NumberT
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\ProtectedTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TemplateExpanderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TransferTypeTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Template;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelper;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelperInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateBuilder;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateBuilderInterface;
-use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateHelper;
-use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateHelperInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRender;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderInterface;
 
@@ -113,8 +114,13 @@ class TransferGeneratorFactory
     {
         return new TemplateRender(
             $this->createTemplateBuilder(),
-            $this->createTemplateHelper(),
+            $this->createTemplate(),
         );
+    }
+
+    protected function createTemplate(): Template
+    {
+        return new Template($this->createTemplateHelper());
     }
 
     protected function createTemplateHelper(): TemplateHelperInterface

@@ -10,8 +10,9 @@ use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransferEnum;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Template;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelper;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateBuilderInterface;
-use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateHelper;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRender;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderInterface;
 
@@ -25,8 +26,9 @@ class TemplateRenderTest extends TestCase
     {
         $this->builderMock = $this->createMock(TemplateBuilderInterface::class);
         $templateHelper = new TemplateHelper();
+        $template = new Template($templateHelper);
 
-        $this->render = new TemplateRender($this->builderMock, $templateHelper);
+        $this->render = new TemplateRender($this->builderMock, $template);
     }
 
     public function testEmptyTemplateRenderingShouldSucceed(): void
