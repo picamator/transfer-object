@@ -6,11 +6,13 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder
 
 use Picamator\TransferObject\Generated\FileReaderProgressTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorBulkTransfer;
-use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Generated\ValidatorTransfer;
+use Picamator\TransferObject\Shared\Validator\ValidatorTrait;
 
 readonly class TransferGeneratorBulkBuilder implements TransferGeneratorBulkBuilderInterface
 {
+    use ValidatorTrait;
+
     public function createSuccessBulkTransfer(
         FileReaderProgressTransfer $progressTransfer,
     ): TransferGeneratorBulkTransfer {
@@ -23,7 +25,7 @@ readonly class TransferGeneratorBulkBuilder implements TransferGeneratorBulkBuil
         string $errorMessage,
         ?FileReaderProgressTransfer $progressTransfer = null,
     ): TransferGeneratorBulkTransfer {
-        $validatorTransfer = $this->createFailedValidatorTransfer($errorMessage);
+        $validatorTransfer = $this->createErrorValidatorTransfer($errorMessage);
 
         return $this->createGeneratorBulkTransfer($validatorTransfer, $progressTransfer);
     }
@@ -48,26 +50,5 @@ readonly class TransferGeneratorBulkBuilder implements TransferGeneratorBulkBuil
         $bulkTransfer->validator = $validatorTransfer;
 
         return $bulkTransfer;
-    }
-
-    private function createFailedValidatorTransfer(string $errorMessage): ValidatorTransfer
-    {
-        return new ValidatorTransfer([
-            ValidatorTransfer::IS_VALID => false,
-            ValidatorTransfer::ERROR_MESSAGES => [
-                [
-                    ValidatorMessageTransfer::IS_VALID => false,
-                    ValidatorMessageTransfer::ERROR_MESSAGE => $errorMessage,
-                ]
-            ]
-        ]);
-    }
-
-    private function createSuccessValidatorTransfer(): ValidatorTransfer
-    {
-        $validatorTransfer = new ValidatorTransfer();
-        $validatorTransfer->isValid = true;
-
-        return $validatorTransfer;
     }
 }

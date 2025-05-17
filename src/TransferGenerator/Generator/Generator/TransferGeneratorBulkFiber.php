@@ -6,7 +6,6 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 
 use Fiber;
 use Generator;
-use Picamator\TransferObject\Generated\FileReaderProgressTransfer;
 use Picamator\TransferObject\Shared\Reader\FileReaderProgressInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBulkBuilderInterface;
 use Throwable;
