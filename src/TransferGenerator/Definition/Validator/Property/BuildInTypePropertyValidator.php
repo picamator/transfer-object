@@ -15,32 +15,31 @@ class BuildInTypePropertyValidator implements PropertyValidatorInterface
     private const string UNSUPPORTED_TYPE_ERROR_MESSAGE_TEMPLATE = 'Property "%s" with type "%s" is not supported.';
 
     /**
-     * @var array<string,\Picamator\TransferObject\Generated\ValidatorMessageTransfer>
+     * @var array<string,true>
      */
-    private static array $validatorCache;
+    private static array $successCache;
 
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        return $propertyTransfer->buildInType !== null;
+        $buildInType = $propertyTransfer->buildInType;
+
+        return $buildInType !== null && !isset(self::$successCache[$buildInType->value]);
     }
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
     {
         /** @var \Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum $buildInType */
         $buildInType = $propertyTransfer->buildInType;
-        $cacheKey = $buildInType->value;
-
-        if (isset(self::$validatorCache[$cacheKey])) {
-            return self::$validatorCache[$cacheKey];
-        }
 
         if ($buildInType->isAllowed()) {
-            return self::$validatorCache[$cacheKey] = $this->createSuccessMessageTransfer();
+            self::$successCache[$buildInType->value] = true;
+
+            return $this->createSuccessMessageTransfer();
         }
 
         $errorMessage = $this->getErrorMessage($propertyTransfer);
 
-        return self::$validatorCache[$cacheKey] = $this->createErrorMessageTransfer($errorMessage);
+        return $this->createErrorMessageTransfer($errorMessage);
     }
 
     private function getErrorMessage(DefinitionPropertyTransfer $propertyTransfer): string
