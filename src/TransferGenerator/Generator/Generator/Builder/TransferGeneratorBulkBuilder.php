@@ -28,6 +28,15 @@ readonly class TransferGeneratorBulkBuilder implements TransferGeneratorBulkBuil
         return $this->createGeneratorBulkTransfer($validatorTransfer, $progressTransfer);
     }
 
+    public function createDefaultProgressTransfer(): FileReaderProgressTransfer
+    {
+        return new FileReaderProgressTransfer([
+            FileReaderProgressTransfer::CONTENT => '',
+            FileReaderProgressTransfer::TOTAL_BYTES => 0,
+            FileReaderProgressTransfer::PROGRESS_BYTES => 0,
+        ]);
+    }
+
     private function createGeneratorBulkTransfer(
         ValidatorTransfer $validatorTransfer,
         ?FileReaderProgressTransfer $progressTransfer = null,
@@ -60,14 +69,5 @@ readonly class TransferGeneratorBulkBuilder implements TransferGeneratorBulkBuil
         $validatorTransfer->isValid = true;
 
         return $validatorTransfer;
-    }
-
-    private function createDefaultProgressTransfer(): FileReaderProgressTransfer
-    {
-        return new FileReaderProgressTransfer([
-            FileReaderProgressTransfer::CONTENT => '',
-            FileReaderProgressTransfer::TOTAL_BYTES => 0,
-            FileReaderProgressTransfer::PROGRESS_BYTES => 0,
-        ]);
     }
 }

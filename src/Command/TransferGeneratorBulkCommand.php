@@ -93,22 +93,19 @@ MESSAGE;
     private function generateTransfers(string $configListPath, SymfonyStyle $styleOutput): bool
     {
         $generatorFiber = $this->generatorFacade->getTransferGeneratorBulkFiber();
-
+        /** @var \Picamator\TransferObject\Generated\TransferGeneratorBulkTransfer $bulkTransfer */
         $bulkTransfer = $generatorFiber->start($configListPath);
-        if ($bulkTransfer !== null) {
-            $this->writelnErrorMessages($bulkTransfer, $styleOutput);
-        }
 
-        $progressBar = null;
+        $progressBar = $this->getProgressBar($bulkTransfer, $styleOutput);
+        $this->writelnErrorMessages($bulkTransfer, $styleOutput);
+
         while (!$generatorFiber->isTerminated()) {
             $bulkTransfer = $generatorFiber->resume();
             if ($bulkTransfer === null) {
                 continue;
             }
 
-            $progressBar ??= $this->getProgressBar($bulkTransfer, $styleOutput);
             $this->advanceProgressBar($bulkTransfer, $progressBar);
-
             $this->writelnErrorMessages($bulkTransfer, $styleOutput);
         }
 
@@ -119,7 +116,7 @@ MESSAGE;
 
     private function advanceProgressBar(
         TransferGeneratorBulkTransfer $bulkTransfer,
-        ?ProgressBar $progressBar
+        ?ProgressBar $progressBar,
     ): void {
         $step = $bulkTransfer->progress->progressBytes;
         if ($step === 0) {

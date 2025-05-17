@@ -17,4 +17,6 @@ interface TransferGeneratorBulkBuilderInterface
         string $errorMessage,
         ?FileReaderProgressTransfer $progressTransfer = null,
     ): TransferGeneratorBulkTransfer;
+
+    public function createDefaultProgressTransfer(): FileReaderProgressTransfer;
 }

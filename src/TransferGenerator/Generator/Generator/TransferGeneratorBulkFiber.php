@@ -6,6 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 
 use Fiber;
 use Generator;
+use Picamator\TransferObject\Generated\FileReaderProgressTransfer;
 use Picamator\TransferObject\Shared\Reader\FileReaderProgressInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBulkBuilderInterface;
 use Throwable;
@@ -70,7 +71,17 @@ readonly class TransferGeneratorBulkFiber implements TransferGeneratorBulkFiberI
     private function handlePreProcess(string $configListPath): Generator|false
     {
         try {
-            return $this->fileReader->readFile($configListPath);
+            $progressIterator = $this->fileReader->readFile($configListPath);
+
+            /** @var \Picamator\TransferObject\Generated\FileReaderProgressTransfer|null $progressTransfer */
+            $progressTransfer = $progressIterator->current();
+            $progressTransfer ??= $this->builder->createDefaultProgressTransfer();
+
+            $bulkTransfer = $this->builder->createSuccessBulkTransfer($progressTransfer);
+
+            Fiber::suspend($bulkTransfer);
+
+            return $progressIterator;
         } catch (Throwable $e) {
             $bulkTransfer = $this->builder->createFailedBulkTransfer($e->getMessage());
 
