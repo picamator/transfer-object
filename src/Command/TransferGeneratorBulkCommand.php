@@ -152,6 +152,8 @@ MESSAGE;
             return;
         }
 
+        $styleOutput->newLine();
+
         $configFile = $bulkTransfer->progress->content;
         if ($configFile !== '') {
             $styleOutput->writeln(sprintf(self::CONFIGURATION_MESSAGE_TEMPLATE, $configFile));
