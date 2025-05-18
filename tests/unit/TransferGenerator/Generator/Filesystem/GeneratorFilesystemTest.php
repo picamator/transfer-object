@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Filesystem;
 
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Dependency\Finder\FinderInterface;
@@ -17,20 +17,22 @@ class GeneratorFilesystemTest extends TestCase
 {
     private GeneratorFilesystemInterface $generatorFilesystem;
 
-    private FilesystemInterface&MockObject $filesystemMock;
+    private FilesystemInterface&Stub $filesystemStub;
 
-    private ConfigInterface&MockObject $configMock;
+    private ConfigInterface&Stub $configStub;
 
     protected function setUp(): void
     {
-        $this->filesystemMock = $this->createMock(FilesystemInterface::class);
-        $finderMock = $this->createMock(FinderInterface::class);
-        $this->configMock = $this->createMock(ConfigInterface::class);
+        $this->filesystemStub = $this->createStub(FilesystemInterface::class);
+
+        $finderStub = $this->createStub(FinderInterface::class);
+
+        $this->configStub = $this->createStub(ConfigInterface::class);
 
         $this->generatorFilesystem = new GeneratorFilesystem(
-            $this->filesystemMock,
-            $finderMock,
-            $this->configMock,
+            $this->filesystemStub,
+            $finderStub,
+            $this->configStub,
         );
     }
 
@@ -39,18 +41,17 @@ class GeneratorFilesystemTest extends TestCase
         // Arrange
         $className = 'TestTransfer';
         $content = 'class TestTransfer {}';
-
         $transferPath = 'some-path';
 
-        // Expect
-        $this->configMock->expects($this->once())
+        $this->configStub
             ->method('getTransferPath')
             ->willReturn($transferPath);
 
-        $this->filesystemMock->expects($this->once())
+        $this->filesystemStub
             ->method('exists')
             ->willReturn(true);
 
+        // Expect
         $this->expectException(TransferGeneratorException::class);
 
         // Act

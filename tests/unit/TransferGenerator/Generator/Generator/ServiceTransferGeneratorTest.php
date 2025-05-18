@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Generator;
 
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\Generated\ValidatorTransfer;
@@ -17,27 +17,26 @@ class ServiceTransferGeneratorTest extends TestCase
 {
     private TransferGeneratorServiceInterface $serviceGenerator;
 
-    private TransferGeneratorInterface&MockObject $generatorMock;
+    private TransferGeneratorInterface&Stub $generatorStub;
 
     protected function setUp(): void
     {
-        $this->generatorMock = $this->createMock(TransferGeneratorInterface::class);
+        $this->generatorStub = $this->createStub(TransferGeneratorInterface::class);
 
-        $this->serviceGenerator = new TransferGeneratorService($this->generatorMock);
+        $this->serviceGenerator = new TransferGeneratorService($this->generatorStub);
     }
 
     public function testGeneratorIteratesInvalidItemShouldRiseException(): void
     {
         // Arrange
         $configPath = 'some-config-path.yml';
-
         $generatorTransfer = $this->createErrorGeneratorTransfer();
 
-        // Expect
-        $this->generatorMock->expects($this->once())
+        $this->generatorStub
             ->method('generateTransfers')
             ->willReturnCallback(fn() => yield $generatorTransfer);
 
+        // Expect
         $this->expectException(TransferGeneratorException::class);
 
         // Act

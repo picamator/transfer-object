@@ -44,6 +44,9 @@ class ConfigReaderTest extends TestCase
             ->method('validateFile')
             ->willThrowException(new FilesystemException());
 
+        $this->parserMock->expects($this->never())
+            ->method('parseConfig');
+
         // Act
         $actual = $this->reader->getConfig($configPath);
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Generator;
 
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Dependency\Exception\FilesystemException;
 use Picamator\TransferObject\Generated\ConfigTransfer;
@@ -20,25 +20,25 @@ class GeneratorProcessorTest extends TestCase
 {
     private GeneratorProcessorInterface $generatorProcessor;
 
-    private ConfigLoaderInterface&MockObject $configLoaderMock;
+    private ConfigLoaderInterface&Stub $configLoaderStub;
 
-    private GeneratorFilesystemInterface&MockObject $filesystemMock;
+    private GeneratorFilesystemInterface&Stub $filesystemStub;
 
     protected function setUp(): void
     {
-        $this->configLoaderMock = $this->createMock(ConfigLoaderInterface::class);
+        $this->configLoaderStub = $this->createStub(ConfigLoaderInterface::class);
 
         $builder = new TransferGeneratorBuilder();
 
-        $renderMock = $this->createMock(TemplateRenderInterface::class);
+        $renderStub = $this->createStub(TemplateRenderInterface::class);
 
-        $this->filesystemMock = $this->createMock(GeneratorFilesystemInterface::class);
+        $this->filesystemStub = $this->createStub(GeneratorFilesystemInterface::class);
 
         $this->generatorProcessor = new GeneratorProcessor(
-            $this->configLoaderMock,
+            $this->configLoaderStub,
             $builder,
-            $renderMock,
-            $this->filesystemMock,
+            $renderStub,
+            $this->filesystemStub,
         );
     }
 
@@ -51,13 +51,12 @@ class GeneratorProcessorTest extends TestCase
         $configTransfer->validator = new ValidatorTransfer();
         $configTransfer->validator->isValid = true;
 
-        // Expect
-        $this->configLoaderMock->expects($this->once())
+        $this->configLoaderStub
             ->method('loadConfig')
             ->with($configPath)
             ->willReturn($configTransfer);
 
-        $this->filesystemMock->expects($this->once())
+        $this->filesystemStub
             ->method('createTempDir')
             ->willThrowException(new FilesystemException());
 
@@ -70,8 +69,8 @@ class GeneratorProcessorTest extends TestCase
 
     public function testFilesystemExceptionShouldBeHandledOnPostProcessSuccess(): void
     {
-        // Expect
-        $this->filesystemMock->expects($this->once())
+        // Arrange
+        $this->filesystemStub
             ->method('rotateTempDir')
             ->willThrowException(new FilesystemException());
 
@@ -84,8 +83,8 @@ class GeneratorProcessorTest extends TestCase
 
     public function testFilesystemExceptionShouldBeHandledOnPostProcessError(): void
     {
-        // Expect
-        $this->filesystemMock->expects($this->once())
+        // Arrange
+        $this->filesystemStub
             ->method('deleteTempDir')
             ->willThrowException(new FilesystemException());
 

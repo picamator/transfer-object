@@ -106,7 +106,7 @@ Examples
 Usage Tests
 -----------
 
-Definition Files and Transfer Object generators have been tested against following APIs:
+Definition Files and Transfer Object generators have been tested against the following APIs:
 
 * [NASA Open Api](https://api.nasa.gov/neo/rest/v1/neo/2465633?api_key=DEMO_KEY)
 * [OpenWeather](https://openweathermap.org/current#example_JSON)

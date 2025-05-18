@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Render;
 
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionTransfer;
@@ -20,15 +20,17 @@ class TemplateRenderTest extends TestCase
 {
     private TemplateRenderInterface $render;
 
-    private TemplateBuilderInterface&MockObject $builderMock;
+    private TemplateBuilderInterface&Stub $builderStub;
 
     protected function setUp(): void
     {
-        $this->builderMock = $this->createMock(TemplateBuilderInterface::class);
+        $this->builderStub = $this->createStub(TemplateBuilderInterface::class);
+
         $templateHelper = new TemplateHelper();
+
         $template = new Template($templateHelper);
 
-        $this->render = new TemplateRender($this->builderMock, $template);
+        $this->render = new TemplateRender($this->builderStub, $template);
     }
 
     public function testEmptyTemplateRenderingShouldSucceed(): void
@@ -40,8 +42,7 @@ class TemplateRenderTest extends TestCase
 
         $templateTransfer = $this->createTemplateTransfer();
 
-        // Expect
-        $this->builderMock->expects($this->once())
+        $this->builderStub
             ->method('createTemplateTransfer')
             ->willReturn($templateTransfer);
 
@@ -54,7 +55,6 @@ class TemplateRenderTest extends TestCase
 
     private function createTemplateTransfer(): TemplateTransfer
     {
-
         return new TemplateTransfer([
             TemplateTransfer::DEFINITION_PATH => '\some\path\definition.yml',
             TemplateTransfer::CLASS_NAMESPACE => '\Default',

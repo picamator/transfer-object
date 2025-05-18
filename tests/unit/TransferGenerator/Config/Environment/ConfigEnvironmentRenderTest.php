@@ -15,7 +15,10 @@ class ConfigEnvironmentRenderTest extends TestCase
     protected function setUp(): void
     {
         $this->renderMock = $this->getMockBuilder(ConfigEnvironmentRender::class)
-            ->onlyMethods(['getWorkingDir', 'getEnvironment'])
+            ->onlyMethods([
+                'getWorkingDir',
+                'getEnvironment',
+            ])
             ->getMock();
     }
 
