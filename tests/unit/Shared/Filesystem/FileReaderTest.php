@@ -6,19 +6,17 @@ namespace Picamator\Tests\Unit\TransferObject\Shared\Filesystem;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Picamator\Tests\Unit\TransferObject\Helper\FileStreamHelperTrait;
 use Picamator\TransferObject\Shared\Exception\FileReaderException;
 use Picamator\TransferObject\Shared\Filesystem\FileReader;
 
 class FileReaderTest extends TestCase
 {
+    use FileStreamHelperTrait;
+
     private const string FILE_NAME = 'test.yml';
 
     private FileReader&MockObject $fileReaderMock;
-
-    /**
-     * @var false|resource|null
-     */
-    private $file;
 
     protected function setUp(): void
     {
@@ -33,12 +31,7 @@ class FileReaderTest extends TestCase
 
     protected function tearDown(): void
     {
-        if (!isset($this->file) || $this->file === false) {
-            return;
-        }
-
-        fclose($this->file);
-        unset($this->file);
+        $this->closeTempFileStream();
     }
 
     public function testFailToOpenFileShouldRiseException(): void
@@ -47,6 +40,15 @@ class FileReaderTest extends TestCase
         $this->fileReaderMock->expects($this->once())
             ->method('fopen')
             ->willReturn(false);
+
+        $this->fileReaderMock->expects($this->never())
+            ->method('fgets');
+
+        $this->fileReaderMock->expects($this->never())
+            ->method('feof');
+
+        $this->fileReaderMock->expects($this->never())
+            ->method('fclose');
 
         $this->expectException(FileReaderException::class);
 
@@ -57,7 +59,7 @@ class FileReaderTest extends TestCase
     public function testFailToReadWholeFileShouldRiseException(): void
     {
         // Arrange
-        $file = $this->getFile();
+        $file = $this->getTempFileStream();
 
         // Expect
         $this->fileReaderMock->expects($this->once())
@@ -85,7 +87,7 @@ class FileReaderTest extends TestCase
     public function testFailToCloseFileShouldRiseException(): void
     {
         // Arrange
-        $file = $this->getFile();
+        $file = $this->getTempFileStream();
 
         // Expect
         $this->fileReaderMock->expects($this->once())
@@ -113,7 +115,7 @@ class FileReaderTest extends TestCase
     public function testReadFileShouldSkipEmptyLines(): void
     {
         // Arrange
-        $file = $this->getFile();
+        $file = $this->getTempFileStream();
         $expected = ['some.config.yml'];
 
         // Expect
@@ -138,13 +140,5 @@ class FileReaderTest extends TestCase
 
         // Assert
         $this->assertSame($expected, iterator_to_array($actual));
-    }
-
-    /**
-     * @return false|resource
-     */
-    private function getFile()
-    {
-        return $this->file ??= fopen('php://temp', 'r');
     }
 }

@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Builder;
 
 use PHPUnit\Framework\TestCase;
+use Picamator\Tests\Unit\TransferObject\Helper\FileStreamHelperTrait;
 use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionContentBuilder;
 use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionContentBuilderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 
 class DefinitionContentBuilderTest extends TestCase
 {
+    use FileStreamHelperTrait;
+
     private DefinitionContentBuilderInterface $builder;
 
     protected function setUp(): void
@@ -18,11 +21,16 @@ class DefinitionContentBuilderTest extends TestCase
         $this->builder = new DefinitionContentBuilder();
     }
 
+    protected function tearDown(): void
+    {
+        $this->closeTempFileStream();
+    }
+
     public function testUnsupportedTypeShouldThrowException(): void
     {
         // Arrange
-        $propertyName = 'file';
-        $propertyValue = tmpfile();
+        $propertyName = 'file.txt';
+        $propertyValue = $this->getTempFileStream();
 
         // Expect
         $this->expectException(DefinitionGeneratorException::class);

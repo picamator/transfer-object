@@ -6,7 +6,7 @@ namespace Picamator\Tests\Unit\TransferObject\Command\Helper;
 
 interface InputNormalizerInterface
 {
-    public function normalizePath(?string $value): string;
+    public function normalizePath(mixed $value): string;
 
     public function normalizeInput(?string $value): string;
 }

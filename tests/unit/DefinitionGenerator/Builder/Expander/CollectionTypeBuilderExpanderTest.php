@@ -6,7 +6,7 @@ namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Builder\Expand
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\DefinitionGenerator\Builder\BuilderContentInterface;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\GetTypeEnum;
@@ -20,11 +20,11 @@ class CollectionTypeBuilderExpanderTest extends TestCase
 
     private ReflectionMethod $isApplicableReflection;
 
-    private BuilderContentInterface&MockObject $builderContentMock;
+    private BuilderContentInterface&Stub $builderContentStub;
 
     protected function setUp(): void
     {
-        $this->builderContentMock = $this->createMock(BuilderContentInterface::class);
+        $this->builderContentStub = $this->createStub(BuilderContentInterface::class);
 
         $this->expander = new CollectionTypeBuilderExpander();
 
@@ -41,17 +41,17 @@ class CollectionTypeBuilderExpanderTest extends TestCase
     #[DataProvider('applicableCollectionTypeDataProvider')]
     public function testApplicableCollectionType(GetTypeEnum $type, array $propertyValue, bool $expected): void
     {
-        // Expect
-        $this->builderContentMock->expects($this->once())
+        // Arrange
+        $this->builderContentStub
             ->method('getType')
             ->willReturn($type);
 
-        $this->builderContentMock->expects($this->any())
+        $this->builderContentStub
             ->method('getPropertyValue')
             ->willReturn($propertyValue);
 
         // Act
-        $actual = $this->isApplicableReflection->invoke($this->expander, $this->builderContentMock);
+        $actual = $this->isApplicableReflection->invoke($this->expander, $this->builderContentStub);
 
         // Assert
         $this->assertSame($expected, $actual);

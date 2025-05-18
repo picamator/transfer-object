@@ -25,7 +25,7 @@ class InputNormalizerTest extends TestCase
     }
 
     #[DataProvider('normalizePathDataProvider')]
-    public function testNormalizePath(?string $path, string $expected): void
+    public function testNormalizePath(mixed $path, string $expected): void
     {
         // Act
         $actual = $this->inputNormalizer->normalizePath($path);
@@ -49,6 +49,11 @@ class InputNormalizerTest extends TestCase
 
         yield 'path is empty' => [
             'path' => '  ',
+            'expected' => '',
+        ];
+
+        yield 'path is bool' => [
+            'path' => true,
             'expected' => '',
         ];
 
