@@ -1,7 +1,7 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12",
-    "title": "Transfer Object Generator configuration",
-    "description": "Configuration file used for generating Transfer Object",
+    "title": "Transfer Object Generator configuration file",
+    "description": "Configuration file used for generating Transfer Objects.",
     "type": "object",
     "properties": {
         "generator": {

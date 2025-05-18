@@ -1,7 +1,7 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "title": "Transfer Object Definition File",
-    "description": "Define Definition File structure",
+    "title": "Transfer Object definition file",
+    "description": "Definition file can include one or more Transfer Object definitions.",
     "type": "object",
     "patternProperties": {
         ".*": {
