@@ -18,27 +18,33 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'picamator:transfer:generate:bulk',
-    description: 'Generate Transfer Objects by configuration list.',
+    description: 'Generates Transfer Objects based on multiple configurations and their definition files.',
     aliases: ['p:t:g:b'],
-    hidden: false,
+    hidden: false
 )]
 class TransferGeneratorBulkCommand extends Command
 {
     use InputNormalizerTrait;
 
+    /**
+     * phpcs:disable Generic.Files.LineLength
+     */
     private const string HELP = <<<'HELP'
-This command generates Transfer Objects based on configuration list.
-The command requires a configuration list in TXT format
+This command generates Transfer Objects from definition files specified by multiple configuration files listed in a TXT file..
 
-The configuration list file contains:
-  - Each line in the configuration list file should contain the path to an individual Transfer Object configuration.
+<options=bold>The configuration list specifies:</>
+  -  Each line contains the path to a configuration file in YML format.
+
+<options=bold>Documentation:</>
+For more details, please visit "<href=https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate-bulk>project's Wiki</>".
+
 HELP;
 
     private const string OPTION_NAME_BULK = 'bulk';
     private const string OPTION_SHORTCUT_BULK = 'b';
     private const string OPTION_DESCRIPTION_CONFIGURATION = 'Path to the TXT configuration list file.';
 
-    private const string START_SECTION_NAME = 'Generating Bulk Transfer Objects 📦';
+    private const string START_SECTION_NAME = 'Generating Bulk Transfer Objects ✨';
 
     private const string ERROR_MISSED_OPTION_BULK_MESSAGE = <<<'MESSAGE'
 The required -b option is missing. Please provide the path to the TXT configuration list file.

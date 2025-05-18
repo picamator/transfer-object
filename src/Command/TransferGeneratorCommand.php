@@ -17,22 +17,35 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'picamator:transfer:generate',
-    description: 'Generate Transfer Objects from definition templates.',
+    description: 'Generates Transfer Objects from definition files specified by configuration.',
     aliases: ['p:t:g'],
-    hidden: false,
+    hidden: false
 )]
 class TransferGeneratorCommand extends Command
 {
     use InputNormalizerTrait;
 
+    /**
+     * phpcs:disable Generic.Files.LineLength
+     */
     private const string HELP = <<<'HELP'
-This command generates Transfer Objects based on YML definitions.
-The command requires a path to the configuration file in YML format.
+This command generates Transfer Objects based on configuration file in YML format.
 
-The configuration specifies:
+<options=bold>The configuration specifies:</>
   - The directory containing the definition files.
   - The namespace for the Transfer Objects.
   - The output directory where the generated Transfer Objects will be saved.
+
+<options=bold>Schema:</>
+  - The configuration file should follow "<href=https://raw.githubusercontent.com/picamator/transfer-object/main/schema/config.schema.json>config.schema.json</>".
+  - The definition files should follow "<href=https://raw.githubusercontent.com/picamator/transfer-object/main/schema/definition.schema.json>definition.schema.json</>".
+
+<options=bold>Verbosity:</>
+The command supports the first verbosity level to display additional details about the generated Transfer Objects.
+
+<options=bold>Documentation:</>
+For more details, please visit "<href=https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate>project's Wiki</>".
+
 HELP;
 
     private const string OPTION_NAME_CONFIGURATION = 'configuration';

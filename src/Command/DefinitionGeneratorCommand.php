@@ -20,30 +20,35 @@ use Throwable;
 
 #[AsCommand(
     name: 'picamator:definition:generate',
-    description: 'Generate Transfer Object definition files from a JSON blueprint.',
+    description: 'Generates Transfer Object definition files from a JSON blueprint.',
     aliases: ['p:d:g'],
-    hidden: false,
+    hidden: false
 )]
 class DefinitionGeneratorCommand extends Command
 {
     use InputNormalizerTrait;
 
+    /**
+     * phpcs:disable Generic.Files.LineLength
+     */
     private const string HELP = <<<'HELP'
-This command allows you to generate Transfer Object definition files based on a JSON file as a blueprint.
+This command generates Transfer Object definition files based on a JSON file as a blueprint.
 
-You will be prompted to provide the following details:
-  - The directory path where the definition files should be saved.
-  - The class name for the Transfer Object.
-  - The local path or url to the JSON file that serves as a blueprint.
+<options=bold>Interactive prompt options:</>
+  - Specify the directory path where the definition files will be saved.
+  - Provide the class name for the Transfer Object.
+  - Enter the local path or URL to the JSON file that serves as the blueprint.
 
-Follow the interactive prompts to complete the process.
+<options=bold>Documentation:</>
+For more details, please visit "<href=https://github.com/picamator/transfer-object/wiki/Console-Commands#definition-generate>project's Wiki</>".
+
 HELP;
 
     private const string QUESTION_DEFINITION_PATH = 'Definition directory path: ';
     private const string QUESTION_CLASS_NAME = 'Transfer Object class name: ';
-    private const string QUESTION_JSON_PATH = 'JSON file path or url: ';
+    private const string QUESTION_JSON_PATH = 'JSON local path or url: ';
 
-    private const string START_SECTION_NAME = 'Generating Transfer Object Definitions 🪄';
+    private const string START_SECTION_NAME = 'Generating Transfer Object Definitions ✨';
 
     private const string SUCCESS_MESSAGE_TEMPLATE = 'Successfully generated %d definition file(s)! 🎉';
 
