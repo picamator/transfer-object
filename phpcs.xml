@@ -9,8 +9,6 @@
     <arg name="cache" value="./var/cache/.cs-check.json"/>
     <arg name="parallel" value="5"/>
 
-    <config name="php_version" value="80402"/>
-
     <rule ref="PSR12">
         <!-- Property hooks are not recognized -->
         <exclude name="PSR2.Classes.PropertyDeclaration"/>
