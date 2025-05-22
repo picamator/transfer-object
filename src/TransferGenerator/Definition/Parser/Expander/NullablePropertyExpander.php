@@ -10,6 +10,9 @@ final class NullablePropertyExpander extends AbstractPropertyExpander
 {
     private const string REQUIRED_KEY = 'required';
 
+    /**
+     * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
+     */
     protected function isApplicable(array $propertyType): true
     {
         return true;

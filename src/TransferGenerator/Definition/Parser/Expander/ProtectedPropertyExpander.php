@@ -10,6 +10,9 @@ final class ProtectedPropertyExpander extends AbstractPropertyExpander
 {
     private const string PROTECTED_KEY = 'protected';
 
+    /**
+     * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
+     */
     protected function isApplicable(array $propertyType): true
     {
         return true;

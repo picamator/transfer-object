@@ -75,7 +75,7 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ENUM => ImBackedEnum::SOME_CASE->value,
                         ItemTransfer::I_AM_DATE_TIME => '2025-05-03T20:53:00+02:00',
                         ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => '2025-05-03T20:53:00+02:00',
-                    ]
+                    ],
                 ],
             ],
             [
@@ -92,7 +92,7 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_ENUM => ImBackedEnum::SOME_CASE->value,
                         ItemTransfer::I_AM_DATE_TIME => '2025-05-03T20:53:00+02:00',
                         ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => '2025-05-03T20:53:00+02:00',
-                    ]
+                    ],
                 ],
                 ItemCollectionTransfer::ITEM => null,
             ],
@@ -138,7 +138,7 @@ class TransferTest extends TestCase
 
         yield 'collection transfer object is empty array' => [
             [
-                ItemCollectionTransfer::ITEMS => []
+                ItemCollectionTransfer::ITEMS => [],
             ],
             [
                 ItemCollectionTransfer::ITEMS => [],
@@ -169,8 +169,8 @@ class TransferTest extends TestCase
         $itemCollectionTransfer->items[] = new ItemTransfer();
 
         // Act
-        $encoded = json_encode($itemCollectionTransfer, flags:JSON_THROW_ON_ERROR);
-        $decoded = json_decode($encoded, true, flags:JSON_THROW_ON_ERROR);
+        $encoded = json_encode($itemCollectionTransfer, flags: JSON_THROW_ON_ERROR);
+        $decoded = json_decode($encoded, true, flags: JSON_THROW_ON_ERROR);
 
         // Assert
         $this->assertEquals($itemCollectionTransfer->toArray(), $decoded);

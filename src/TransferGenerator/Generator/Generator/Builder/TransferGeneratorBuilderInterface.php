@@ -20,11 +20,11 @@ interface TransferGeneratorBuilderInterface
     public function createSuccessGeneratorTransfer(): TransferGeneratorTransfer;
 
     public function createGeneratorTransferByDefinition(
-        DefinitionTransfer $definitionTransfer
+        DefinitionTransfer $definitionTransfer,
     ): TransferGeneratorTransfer;
 
     public function createGeneratorTransferByConfig(
         string $configPath,
-        ConfigTransfer $configTransfer
+        ConfigTransfer $configTransfer,
     ): TransferGeneratorTransfer;
 }

@@ -30,7 +30,7 @@ readonly class DefinitionFinder implements DefinitionFinderInterface
             yield $file->getFilename() => $file->getRealPath();
         }
 
-        return  $definitionFinder->count();
+        return $definitionFinder->count();
     }
 
     /**

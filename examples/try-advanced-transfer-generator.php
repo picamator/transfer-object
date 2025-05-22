@@ -132,19 +132,19 @@ $advancedCustomerTransfer = new AdvancedCustomerTransfer()
     ->fromArray([
         AdvancedCustomerTransfer::CUSTOMER => [
             CustomerTransfer::FIRST_NAME => 'Theodor',
-            CustomerTransfer::LAST_NAME => 'Storm'
+            CustomerTransfer::LAST_NAME => 'Storm',
         ],
         AdvancedCustomerTransfer::ADDRESS => [
             'street' => 'Wasserreihe',
             'houseNumber' => '31',
             'city' => 'Husum',
             'postCode' => '25813',
-            'country' => 'Deutschland'
+            'country' => 'Deutschland',
         ],
         AdvancedCustomerTransfer::CREDENTIALS => [
             'login' => 'theodor.storm',
-            'token' => 'Der Schimmelreiter'
-        ]
+            'token' => 'Der Schimmelreiter',
+        ],
     ]);
 
 var_dump($advancedCustomerTransfer->toArray());

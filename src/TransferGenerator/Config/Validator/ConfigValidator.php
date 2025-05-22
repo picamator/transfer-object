@@ -9,14 +9,16 @@ use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\Generated\ValidatorTransfer;
 use Picamator\TransferObject\Shared\Validator\PathExistValidatorInterface;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
-use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\ConfigContentValidatorInterface;
 
+/**
+ * phpcs:disable Generic.Files.LineLength
+ */
 class ConfigValidator implements ConfigValidatorInterface
 {
     use ValidatorMessageTrait;
 
     /**
-     * @param \ArrayObject<int,ConfigContentValidatorInterface> $contentValidators
+     * @param \ArrayObject<int,\Picamator\TransferObject\TransferGenerator\Config\Validator\Content\ConfigContentValidatorInterface> $contentValidators
      */
     public function __construct(
         private readonly PathExistValidatorInterface $pathValidator,

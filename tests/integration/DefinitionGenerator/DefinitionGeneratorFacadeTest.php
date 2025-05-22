@@ -50,7 +50,7 @@ class DefinitionGeneratorFacadeTest extends TestCase
         $sampleJsonPath = self::SAMPLE_JSON_PATH . $sampleFileName;
 
         $generatorTransfer = $this->createDefinitionGenerator(
-            definitionPath:$definitionPath,
+            definitionPath: $definitionPath,
             className: $className,
             sampleJsonPath: $sampleJsonPath,
         );

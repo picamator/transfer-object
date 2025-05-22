@@ -44,7 +44,7 @@ readonly class DefinitionGeneratorService implements DefinitionGeneratorServiceI
 
     private function generate(
         DefinitionGeneratorTransfer $generatorTransfer,
-        DefinitionFilesystemTransfer $filesystemTransfer
+        DefinitionFilesystemTransfer $filesystemTransfer,
     ): int {
         $count = 0;
         foreach ($this->builder->createDefinitionContents($generatorTransfer->content) as $contentTransfer) {

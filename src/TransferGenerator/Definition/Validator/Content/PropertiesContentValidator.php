@@ -9,14 +9,16 @@ use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface;
 
+/**
+ * phpcs:disable Generic.Files.LineLength
+ */
 class PropertiesContentValidator implements ContentValidatorInterface
 {
     use ValidatorMessageTrait;
 
     /**
-     * @param \ArrayObject<int,PropertyValidatorInterface> $propertyValidators
+     * @param \ArrayObject<int,\Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface> $propertyValidators
      */
     public function __construct(
         private readonly ArrayObject $propertyValidators,

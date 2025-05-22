@@ -9,6 +9,9 @@ use Picamator\TransferObject\Generated\TemplateTransfer;
 
 final class ProtectedTemplateExpander extends AbstractTemplateExpander
 {
+    /**
+     * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
+     */
     protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): true
     {
         return true;

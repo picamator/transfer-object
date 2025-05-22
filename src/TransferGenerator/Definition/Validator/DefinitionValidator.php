@@ -7,12 +7,14 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Validator;
 use ArrayObject;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\ValidatorTransfer;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\ContentValidatorInterface;
 
+/**
+ * phpcs:disable Generic.Files.LineLength
+ */
 readonly class DefinitionValidator implements DefinitionValidatorInterface
 {
     /**
-     * @param \ArrayObject<int,ContentValidatorInterface> $contentValidators
+     * @param \ArrayObject<int,\Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\ContentValidatorInterface> $contentValidators
      */
     public function __construct(
         private ArrayObject $contentValidators,
