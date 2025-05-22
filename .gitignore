@@ -25,11 +25,11 @@ var/config/*
 
 !var/xdebug-profile
 var/xdebug-profile/*
-!var/xdebug-profile/.keep
+!var/xdebug-profile/.gitkeep
 
 !var/cache
 var/cache/*
-!var/cache/.keep
+!var/cache/.gitkeep
 
 # project
 src/**/_tmp
