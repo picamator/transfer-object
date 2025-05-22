@@ -122,7 +122,7 @@ Definition Files and Transfer Object generators have been tested against the fol
 4. Transfer Object is converted back to the array
 5. The converted array is compared with the API response
 
-In all cases, data **100%** are matched ✅.
+✅ In all cases, data are matched.
 
 For detailed information, please check [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php).
 
@@ -139,7 +139,7 @@ Many thanks for your contribution, support, feedback and simply using the Transf
 Contribution
 ------------
 
-If you find this project useful, please ⭐ star the repository.
+If you find this project useful, please star ⭐ the repository.
 Follow the project to stay updated with all activities.
 
 If you have suggestions for improvements or new features, feel free to:
