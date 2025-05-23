@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Definition\Parser;
+namespace Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder;
 
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
@@ -23,11 +23,10 @@ readonly class ContentBuilder implements ContentBuilderInterface
         $contentTransfer->className = $className . TypePrefixEnum::TRANSFER->value;
 
         foreach ($properties as $propertyName => $propertyType) {
-            $propertyType = $this->filterPropertyType($propertyType);
-
             $propertyTransfer = new DefinitionPropertyTransfer();
             $propertyTransfer->propertyName = (string)$propertyName;
 
+            $propertyType = $this->filterPropertyType($propertyType);
             $this->propertyExpander->expandPropertyTransfer($propertyType, $propertyTransfer);
 
             $contentTransfer->properties[] = $propertyTransfer;
@@ -42,23 +41,25 @@ readonly class ContentBuilder implements ContentBuilderInterface
      */
     private function filterPropertyType(mixed $propertyType): array
     {
-        $filteredType = [];
-        $type = is_array($propertyType) ? $propertyType : [];
+        if (!is_array($propertyType)) {
+            return [];
+        }
 
-        foreach ($type as $key => $typeItem) {
+        $filteredType = [];
+        foreach ($propertyType as $key => $typeItem) {
             if (!is_string($key)) {
                 continue;
             }
 
-            $typeItem = is_bool($typeItem)
-                ? BuildInTypeEnum::getTrueFalse($typeItem)->value
-                : $typeItem;
+            if (is_bool($typeItem)) {
+                $filteredType[$key] = BuildInTypeEnum::getTrueFalse($typeItem)->value;
 
-            if (!is_string($typeItem) && !is_null($typeItem)) {
                 continue;
             }
 
-            $filteredType[$key] = $typeItem;
+            if (is_string($typeItem) || is_null($typeItem)) {
+                $filteredType[$key] = $typeItem;
+            }
         }
 
         return $filteredType;

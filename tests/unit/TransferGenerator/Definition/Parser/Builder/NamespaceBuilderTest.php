@@ -2,40 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Definition\Parser\Expander;
+namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Definition\Parser\Builder;
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\DefinitionNamespaceTransfer;
-use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\NamespacePropertyExpanderTrait;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder\NamespaceBuilder;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder\NamespaceBuilderInterface;
 
-class NamespacePropertyExpanderTest extends TestCase
+class NamespaceBuilderTest extends TestCase
 {
-    private NamespacePropertyExpanderInterface $expander;
+    private NamespaceBuilderInterface $builder;
 
     protected function setUp(): void
     {
-        $this->expander = new readonly class () implements NamespacePropertyExpanderInterface
-        {
-            use NamespacePropertyExpanderTrait {
-                createDefinitionNamespaceTransfer as public;
-                isNamespace as public;
-            }
-        };
-    }
-
-    #[TestWith(['\Picamator\TransferObject\Generated\ConfigContentTransfer', true])]
-    #[TestWith(['\ConfigContentTransfer', true])]
-    #[TestWith(['ConfigContentTransfer', false])]
-    public function testIsNamespace(string $namespace, bool $expected): void
-    {
-        // Act
-        $actual = $this->expander->isNamespace($namespace);
-
-        // Assert
-        $this->assertSame($expected, $actual);
+        $this->builder = new NamespaceBuilder();
     }
 
     /**
@@ -45,7 +27,7 @@ class NamespacePropertyExpanderTest extends TestCase
     public function testCreateDefinitionNamespaceTransfer(string $namespace, array $expected): void
     {
         // Act
-        $actual = $this->expander->createDefinitionNamespaceTransfer($namespace);
+        $actual = $this->builder->createNamespaceTransfer($namespace);
 
         // Assert
         $this->assertEquals($expected, $actual->toArray());

@@ -6,6 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Parser;
 
 use Generator;
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder\ContentBuilderInterface;
 
 readonly class DefinitionParser implements DefinitionParserInterface
 {

@@ -12,14 +12,6 @@ final class NullablePropertyExpander extends AbstractPropertyExpander
 
     protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
-        $propertyTransfer->isNullable = !$this->getIsNullable($propertyType);
-    }
-
-    /**
-     * @param array<string,string|null> $propertyType
-     */
-    private function getIsNullable(array $propertyType): bool
-    {
-        return array_key_exists(self::REQUIRED_KEY, $propertyType);
+        $propertyTransfer->isNullable = !array_key_exists(self::REQUIRED_KEY, $propertyType);
     }
 }

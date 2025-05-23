@@ -2,25 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander;
+namespace Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder;
 
 use Picamator\TransferObject\Generated\DefinitionNamespaceTransfer;
 
-trait NamespacePropertyExpanderTrait
+readonly class NamespaceBuilder implements NamespaceBuilderInterface
 {
     private const string NAMESPACE_ALIAS_SEPARATOR = ' as ';
     private const string SPACE_REGEX = '#\s+#';
 
-    final protected function createDefinitionNamespaceTransfer(string $namespace): DefinitionNamespaceTransfer
+    public function createNamespaceTransfer(string $namespace): DefinitionNamespaceTransfer
     {
-        $namespace = str_ireplace(
-            self::NAMESPACE_ALIAS_SEPARATOR,
-            self::NAMESPACE_ALIAS_SEPARATOR,
-            $namespace,
-        );
-
-        /** @var string $namespace */
-        $namespace = preg_replace(self::SPACE_REGEX, ' ', $namespace);
+        $namespace = $this->filterNamespace($namespace);
 
         $namespaceTransfer = new DefinitionNamespaceTransfer();
         $namespaceTransfer->fullName = $namespace;
@@ -29,11 +22,6 @@ trait NamespacePropertyExpanderTrait
         $namespaceTransfer->alias = $this->getAlias($namespace);
 
         return $namespaceTransfer;
-    }
-
-    final protected function isNamespace(string $propertyType): bool
-    {
-        return str_contains($propertyType, '\\');
     }
 
     private function getAlias(string $namespace): ?string
@@ -68,5 +56,19 @@ trait NamespacePropertyExpanderTrait
         $namespace = strstr($namespace, self::NAMESPACE_ALIAS_SEPARATOR, true);
 
         return trim($namespace);
+    }
+
+    private function filterNamespace(string $namespace): string
+    {
+        $namespace = str_ireplace(
+            self::NAMESPACE_ALIAS_SEPARATOR,
+            self::NAMESPACE_ALIAS_SEPARATOR,
+            $namespace,
+        );
+
+        /** @var string $namespace */
+        $namespace = preg_replace(self::SPACE_REGEX, ' ', $namespace);
+
+        return $namespace;
     }
 }

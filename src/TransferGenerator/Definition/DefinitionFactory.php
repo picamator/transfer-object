@@ -9,8 +9,12 @@ use Picamator\TransferObject\Shared\SharedFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinder;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinderInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Parser\ContentBuilder;
-use Picamator\TransferObject\TransferGenerator\Definition\Parser\ContentBuilderInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder\ContentBuilder;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder\ContentBuilderInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder\EmbeddedTypeBuilder;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder\EmbeddedTypeBuilderInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder\NamespaceBuilder;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder\NamespaceBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParser;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParserInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\BuildInTypePropertyExpander;
@@ -191,12 +195,22 @@ class DefinitionFactory
 
     protected function createNumberTypePropertyExpander(): PropertyExpanderInterface
     {
-        return new NumberTypePropertyExpander();
+        return new NumberTypePropertyExpander($this->createEmbeddedTypeBuilder());
+    }
+
+    protected function createEmbeddedTypeBuilder(): EmbeddedTypeBuilderInterface
+    {
+        return new EmbeddedTypeBuilder($this->createNamespaceBuilder());
+    }
+
+    protected function createNamespaceBuilder(): NamespaceBuilderInterface
+    {
+        return new NamespaceBuilder();
     }
 
     protected function createDateTimeTypePropertyExpander(): PropertyExpanderInterface
     {
-        return new DateTimeTypePropertyExpander();
+        return new DateTimeTypePropertyExpander($this->createEmbeddedTypeBuilder());
     }
 
     protected function createProtectedPropertyExpander(): PropertyExpanderInterface
@@ -206,12 +220,12 @@ class DefinitionFactory
 
     protected function createEnumTypePropertyExpander(): PropertyExpanderInterface
     {
-        return new EnumTypePropertyExpander();
+        return new EnumTypePropertyExpander($this->createEmbeddedTypeBuilder());
     }
 
     protected function createTransferTypePropertyExpander(): PropertyExpanderInterface
     {
-        return new TransferTypePropertyExpander();
+        return new TransferTypePropertyExpander($this->createEmbeddedTypeBuilder());
     }
 
     protected function createBuildInTypePropertyExpander(): PropertyExpanderInterface
@@ -221,7 +235,7 @@ class DefinitionFactory
 
     protected function createCollectionTypePropertyExpander(): PropertyExpanderInterface
     {
-        return new CollectionTypePropertyExpander();
+        return new CollectionTypePropertyExpander($this->createEmbeddedTypeBuilder());
     }
 
     protected function createNullablePropertyExpander(): PropertyExpanderInterface
