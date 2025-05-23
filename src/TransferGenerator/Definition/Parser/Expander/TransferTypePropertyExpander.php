@@ -15,27 +15,24 @@ final class TransferTypePropertyExpander extends AbstractPropertyExpander
 
     private const string TYPE_KEY = 'type';
 
-    protected function isApplicable(array $propertyType): bool
-    {
-        $type = $this->getType($propertyType);
-
-        return $type !== null && BuildInTypeEnum::tryFrom($type) === null;
-    }
 
     protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
-        $type = $this->getType($propertyType) ?? '';
+        $transferType = $this->getTransferType($propertyType);
+        if ($transferType === null) {
+            return;
+        }
 
         $typeTransfer = new DefinitionEmbeddedTypeTransfer();
         $propertyTransfer->transferType = $typeTransfer;
 
-        if (!$this->isNamespace($type)) {
-            $typeTransfer->name = $type . TypePrefixEnum::TRANSFER->value;
+        if (!$this->isNamespace($transferType)) {
+            $typeTransfer->name = $transferType . TypePrefixEnum::TRANSFER->value;
 
             return;
         }
 
-        $namespaceTransfer = $this->createDefinitionNamespaceTransfer($type);
+        $namespaceTransfer = $this->createDefinitionNamespaceTransfer($transferType);
 
         $typeTransfer->name = $namespaceTransfer->alias ?: $namespaceTransfer->baseName;
         $typeTransfer->namespace = $namespaceTransfer;
@@ -44,10 +41,11 @@ final class TransferTypePropertyExpander extends AbstractPropertyExpander
     /**
      * @param array<string,string|null> $propertyType
      */
-    private function getType(array $propertyType): string|null
+    private function getTransferType(array $propertyType): string|null
     {
         $type = $propertyType[self::TYPE_KEY] ?? null;
+        $type = is_string($type) ? $type : null;
 
-        return is_string($type) ? $type : null;
+        return $type !== null && BuildInTypeEnum::tryFrom($type) === null ? $type : null;
     }
 }

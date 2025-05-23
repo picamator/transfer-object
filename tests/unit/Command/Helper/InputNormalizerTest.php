@@ -15,7 +15,7 @@ class InputNormalizerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->inputNormalizer = new class () implements InputNormalizerInterface
+        $this->inputNormalizer = new readonly class () implements InputNormalizerInterface
         {
             use InputNormalizerTrait {
                 normalizePath as public;

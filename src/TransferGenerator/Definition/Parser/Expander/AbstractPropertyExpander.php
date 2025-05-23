@@ -19,17 +19,10 @@ abstract class AbstractPropertyExpander implements PropertyExpanderInterface
 
     public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
-        if ($this->isApplicable($propertyType)) {
-            $this->handleExpander($propertyType, $propertyTransfer);
-        }
+        $this->handleExpander($propertyType, $propertyTransfer);
 
         $this->nextExpander?->expandPropertyTransfer($propertyType, $propertyTransfer);
     }
-
-    /**
-     * @param array<string,string|null> $propertyType
-     */
-    abstract protected function isApplicable(array $propertyType): bool;
 
     /**
      * @param array<string,string|null> $propertyType

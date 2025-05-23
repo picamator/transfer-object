@@ -13,14 +13,13 @@ final class EnumTypePropertyExpander extends AbstractPropertyExpander
 
     private const string ENUM_TYPE_KEY = 'enumType';
 
-    protected function isApplicable(array $propertyType): bool
-    {
-        return $this->getEnumType($propertyType) !== null;
-    }
-
     protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
-        $enumType = $this->getEnumType($propertyType) ?? '';
+        $enumType = $this->getEnumType($propertyType);
+        if ($enumType === null) {
+            return;
+        }
+
         $namespaceTransfer = $this->createDefinitionNamespaceTransfer($enumType);
 
         $typeTransfer = new DefinitionEmbeddedTypeTransfer();

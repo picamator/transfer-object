@@ -17,7 +17,7 @@ class NamespacePropertyExpanderTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->expander = new class () implements NamespacePropertyExpanderInterface
+        $this->expander = new readonly class () implements NamespacePropertyExpanderInterface
         {
             use NamespacePropertyExpanderTrait {
                 createDefinitionNamespaceTransfer as public;

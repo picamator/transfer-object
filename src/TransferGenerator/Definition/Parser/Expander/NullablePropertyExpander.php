@@ -10,23 +10,15 @@ final class NullablePropertyExpander extends AbstractPropertyExpander
 {
     private const string REQUIRED_KEY = 'required';
 
-    /**
-     * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
-     */
-    protected function isApplicable(array $propertyType): true
-    {
-        return true;
-    }
-
     protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
-        $propertyTransfer->isNullable = !$this->getIsRequired($propertyType);
+        $propertyTransfer->isNullable = !$this->getIsNullable($propertyType);
     }
 
     /**
      * @param array<string,string|null> $propertyType
      */
-    private function getIsRequired(array $propertyType): bool
+    private function getIsNullable(array $propertyType): bool
     {
         return array_key_exists(self::REQUIRED_KEY, $propertyType);
     }

@@ -11,20 +11,20 @@ final class BuildInTypePropertyExpander extends AbstractPropertyExpander
 {
     private const string TYPE_KEY = 'type';
 
-    protected function isApplicable(array $propertyType): bool
-    {
-        return $this->getType($propertyType) !== null;
-    }
-
     protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
-        $propertyTransfer->buildInType = $this->getType($propertyType);
+        $buildInType = $this->getBuildInType($propertyType);
+        if ($buildInType === null) {
+            return;
+        }
+
+        $propertyTransfer->buildInType = $buildInType;
     }
 
     /**
      * @param array<string,string|null> $propertyType
      */
-    private function getType(array $propertyType): ?BuildInTypeEnum
+    private function getBuildInType(array $propertyType): ?BuildInTypeEnum
     {
         $type = $propertyType[self::TYPE_KEY] ?? null;
         if ($type === null) {

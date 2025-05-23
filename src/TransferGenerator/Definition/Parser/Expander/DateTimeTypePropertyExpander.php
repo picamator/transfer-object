@@ -13,14 +13,13 @@ final class DateTimeTypePropertyExpander extends AbstractPropertyExpander
 
     private const string DATE_TIME_TYPE_KEY = 'dateTimeType';
 
-    protected function isApplicable(array $propertyType): bool
-    {
-        return $this->getDateTimeType($propertyType) !== null;
-    }
-
     protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
-        $dateTimeType = $this->getDateTimeType($propertyType) ?? '';
+        $dateTimeType = $this->getDateTimeType($propertyType);
+        if ($dateTimeType === null) {
+            return;
+        }
+
         $namespaceTransfer = $this->createDefinitionNamespaceTransfer($dateTimeType);
 
         $typeTransfer = new DefinitionEmbeddedTypeTransfer();

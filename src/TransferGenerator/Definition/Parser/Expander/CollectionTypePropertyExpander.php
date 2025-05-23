@@ -14,14 +14,12 @@ final class CollectionTypePropertyExpander extends AbstractPropertyExpander
 
     private const string COLLECTION_TYPE_KEY = 'collectionType';
 
-    protected function isApplicable(array $propertyType): bool
-    {
-        return $this->getCollectionType($propertyType) !== null;
-    }
-
     protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
-        $collectionType = $this->getCollectionType($propertyType) ?: '';
+        $collectionType = $this->getCollectionType($propertyType);
+        if ($collectionType === null) {
+            return;
+        }
 
         $typeTransfer = new DefinitionEmbeddedTypeTransfer();
         $propertyTransfer->collectionType = $typeTransfer;

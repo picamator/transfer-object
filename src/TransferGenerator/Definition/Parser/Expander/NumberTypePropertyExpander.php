@@ -13,14 +13,13 @@ final class NumberTypePropertyExpander extends AbstractPropertyExpander
 
     private const string NUMBER_TYPE_KEY = 'numberType';
 
-    protected function isApplicable(array $propertyType): bool
-    {
-        return $this->getNumberType($propertyType) !== null;
-    }
-
     protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
-        $numberType = $this->getNumberType($propertyType) ?? '';
+        $numberType = $this->getNumberType($propertyType);
+        if ($numberType === null) {
+            return;
+        }
+
         $namespaceTransfer = $this->createDefinitionNamespaceTransfer($numberType);
 
         $typeTransfer = new DefinitionEmbeddedTypeTransfer();
