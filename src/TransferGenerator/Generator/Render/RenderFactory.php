@@ -1,0 +1,120 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Picamator\TransferObject\TransferGenerator\Generator\Render;
+
+use Picamator\TransferObject\Shared\CachedFactoryTrait;
+use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\BuildInTypeTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\CollectionTypeTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\DateTimeTypeTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\EnumTypeTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\MetaConstantsTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\NamespaceTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\NumberTypeTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\ProtectedTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TemplateExpanderInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TransferTypeTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Template;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelper;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelperInterface;
+
+class RenderFactory
+{
+    use ConfigFactoryTrait;
+    use CachedFactoryTrait;
+
+    public function createTemplateRender(): TemplateRenderInterface
+    {
+        /** @phpstan-ignore return.type */
+        return $this->getCached(
+            key: 'template-render',
+            factory: fn (): TemplateRenderInterface =>
+                new TemplateRender(
+                    $this->createTemplateBuilder(),
+                    $this->createTemplate(),
+                ),
+        );
+    }
+
+    protected function createTemplate(): Template
+    {
+        return new Template($this->createTemplateHelper());
+    }
+
+    protected function createTemplateHelper(): TemplateHelperInterface
+    {
+        return new TemplateHelper();
+    }
+
+    protected function createTemplateBuilder(): TemplateBuilderInterface
+    {
+        return new TemplateBuilder(
+            $this->getConfig(),
+            $this->createTemplateExpander(),
+        );
+    }
+
+    protected function createTemplateExpander(): TemplateExpanderInterface
+    {
+        $templateExpander = $this->createCollectionTypeTemplateExpander();
+
+        $templateExpander
+            ->setNextExpander($this->createTransferTypeTemplateExpander())
+            ->setNextExpander($this->createBuildInTypeTemplateExpander())
+            ->setNextExpander($this->createEnumTypeTemplateExpander())
+            ->setNextExpander($this->createNamespaceTemplateExpander())
+            ->setNextExpander($this->createMetaConstantsTemplateExpander())
+            ->setNextExpander($this->createProtectedTemplateExpander())
+            ->setNextExpander($this->createDateTimeTypeTemplateExpander())
+            ->setNextExpander($this->createNumberTypeTemplateExpander());
+
+        return $templateExpander;
+    }
+
+    protected function createNumberTypeTemplateExpander(): TemplateExpanderInterface
+    {
+        return new NumberTypeTemplateExpander();
+    }
+
+    protected function createDateTimeTypeTemplateExpander(): TemplateExpanderInterface
+    {
+        return new DateTimeTypeTemplateExpander();
+    }
+
+    protected function createProtectedTemplateExpander(): TemplateExpanderInterface
+    {
+        return new ProtectedTemplateExpander();
+    }
+
+    protected function createMetaConstantsTemplateExpander(): TemplateExpanderInterface
+    {
+        return new MetaConstantsTemplateExpander();
+    }
+
+    protected function createNamespaceTemplateExpander(): TemplateExpanderInterface
+    {
+        return new NamespaceTemplateExpander();
+    }
+
+    protected function createEnumTypeTemplateExpander(): TemplateExpanderInterface
+    {
+        return new EnumTypeTemplateExpander();
+    }
+
+    protected function createBuildInTypeTemplateExpander(): TemplateExpanderInterface
+    {
+        return new BuildInTypeTemplateExpander();
+    }
+
+    protected function createTransferTypeTemplateExpander(): TemplateExpanderInterface
+    {
+        return new TransferTypeTemplateExpander();
+    }
+
+    protected function createCollectionTypeTemplateExpander(): TemplateExpanderInterface
+    {
+        return new CollectionTypeTemplateExpander();
+    }
+}
