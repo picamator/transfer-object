@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Generator;
+namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Generator\Processor\Command;
 
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
@@ -12,13 +12,12 @@ use Picamator\TransferObject\Generated\ValidatorTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoaderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilder;
-use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\GeneratorProcessor;
-use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\GeneratorProcessorInterface;
-use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command\PreProcessCommand;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command\PreProcessCommandInterface;
 
-class GeneratorProcessorTest extends TestCase
+class PreProcessCommandTest extends TestCase
 {
-    private GeneratorProcessorInterface $generatorProcessor;
+    private PreProcessCommandInterface $command;
 
     private ConfigLoaderInterface&Stub $configLoaderStub;
 
@@ -30,19 +29,16 @@ class GeneratorProcessorTest extends TestCase
 
         $builder = new TransferGeneratorBuilder();
 
-        $renderStub = $this->createStub(TemplateRenderInterface::class);
-
         $this->filesystemStub = $this->createStub(GeneratorFilesystemInterface::class);
 
-        $this->generatorProcessor = new GeneratorProcessor(
+        $this->command = new PreProcessCommand(
             $this->configLoaderStub,
             $builder,
-            $renderStub,
             $this->filesystemStub,
         );
     }
 
-    public function testFilesystemExceptionShouldBeHandledOnPreProcess(): void
+    public function testFilesystemExceptionShouldBeHandledOnCommand(): void
     {
         // Arrange
         $configPath = 'some-config-path.config.yml';
@@ -61,35 +57,7 @@ class GeneratorProcessorTest extends TestCase
             ->willThrowException(new FilesystemException());
 
         // Act
-        $actual = $this->generatorProcessor->preProcess($configPath);
-
-        // Assert
-        $this->assertFalse($actual->validator->isValid);
-    }
-
-    public function testFilesystemExceptionShouldBeHandledOnPostProcessSuccess(): void
-    {
-        // Arrange
-        $this->filesystemStub
-            ->method('rotateTempDir')
-            ->willThrowException(new FilesystemException());
-
-        // Act
-        $actual = $this->generatorProcessor->postProcessSuccess();
-
-        // Assert
-        $this->assertFalse($actual->validator->isValid);
-    }
-
-    public function testFilesystemExceptionShouldBeHandledOnPostProcessError(): void
-    {
-        // Arrange
-        $this->filesystemStub
-            ->method('deleteTempDir')
-            ->willThrowException(new FilesystemException());
-
-        // Act
-        $actual = $this->generatorProcessor->postProcessError();
+        $actual = $this->command->preProcess($configPath);
 
         // Assert
         $this->assertFalse($actual->validator->isValid);

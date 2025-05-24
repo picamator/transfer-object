@@ -6,6 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Filesystem;
 
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Dependency\Finder\FinderInterface;
+use Picamator\TransferObject\Generated\TransferGeneratorContentTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
 
@@ -49,16 +50,20 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
         $this->deleteTempDir();
     }
 
-    public function writeFile(string $className, string $content): void
+    public function writeFile(TransferGeneratorContentTransfer $contentTransfer): void
     {
-        $filePath = $this->getTemporaryPath() . DIRECTORY_SEPARATOR . $className . self::FILE_EXTENSION;
+        $filePath = $this->getTemporaryPath()
+            . DIRECTORY_SEPARATOR
+            . $contentTransfer->className
+            . self::FILE_EXTENSION;
+
         if ($this->filesystem->exists($filePath)) {
             throw new TransferGeneratorException(
                 sprintf('Cannot save file "%s". A file with the same name already exists.', $filePath),
             );
         }
 
-        $this->filesystem->dumpFile($filePath, $content);
+        $this->filesystem->dumpFile($filePath, $contentTransfer->content);
     }
 
     /**

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
+namespace Picamator\TransferObject\TransferGenerator\Generator\Generator\Workflow;
 
 use Generator;
 
-interface TransferGeneratorInterface
+interface TransferGeneratorWorkflowInterface
 {
     /**
      * @return \Generator<int,\Picamator\TransferObject\Generated\TransferGeneratorTransfer>

@@ -91,6 +91,16 @@ TransferGenerator:
     type: Validator
     required:
 
+TransferGeneratorContent:
+  className:
+    type: string
+    required:
+    protected:
+  content:
+    type: string
+    required:
+    protected:
+
 TransferGeneratorBulk:
   progress:
     type: FileReaderProgress

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Filesystem;
 
+use Picamator\TransferObject\Generated\TransferGeneratorContentTransfer;
+
 interface GeneratorFilesystemInterface
 {
     /**
@@ -27,5 +29,5 @@ interface GeneratorFilesystemInterface
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException
      */
-    public function writeFile(string $className, string $content): void;
+    public function writeFile(TransferGeneratorContentTransfer $contentTransfer): void;
 }

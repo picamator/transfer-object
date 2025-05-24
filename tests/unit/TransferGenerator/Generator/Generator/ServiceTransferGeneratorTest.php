@@ -11,17 +11,17 @@ use Picamator\TransferObject\Generated\ValidatorTransfer;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorService;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorServiceInterface;
-use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\Workflow\TransferGeneratorWorkflowInterface;
 
 class ServiceTransferGeneratorTest extends TestCase
 {
     private TransferGeneratorServiceInterface $serviceGenerator;
 
-    private TransferGeneratorInterface&Stub $generatorStub;
+    private TransferGeneratorWorkflowInterface&Stub $generatorStub;
 
     protected function setUp(): void
     {
-        $this->generatorStub = $this->createStub(TransferGeneratorInterface::class);
+        $this->generatorStub = $this->createStub(TransferGeneratorWorkflowInterface::class);
 
         $this->serviceGenerator = new TransferGeneratorService($this->generatorStub);
     }

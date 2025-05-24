@@ -6,6 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\Workflow\TransferGeneratorWorkflowInterface;
 
 readonly class TransferGeneratorService implements TransferGeneratorServiceInterface
 {
@@ -15,7 +16,7 @@ readonly class TransferGeneratorService implements TransferGeneratorServiceInter
     private const string DEFINITION_MESSAGE_TEMPLATE = 'Definition file: "%s".';
 
     public function __construct(
-        private TransferGeneratorInterface $generator,
+        private TransferGeneratorWorkflowInterface $workflow,
     ) {
     }
 
@@ -25,7 +26,7 @@ readonly class TransferGeneratorService implements TransferGeneratorServiceInter
     public function generateTransfersOrFail(string $configPath): int
     {
         $count = 0;
-        $generator = $this->generator->generateTransfers($configPath);
+        $generator = $this->workflow->generateTransfers($configPath);
         foreach ($generator as $generatorTransfer) {
             if ($generatorTransfer->validator->isValid === true) {
                 $count++;
