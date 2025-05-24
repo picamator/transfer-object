@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder;
+namespace Picamator\TransferObject\TransferGenerator\Definition\Parser;
 
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 
