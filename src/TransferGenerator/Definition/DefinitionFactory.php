@@ -17,7 +17,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder\Namespa
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder\NamespaceBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParser;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParserInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\BuildInTypePropertyExpander;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\TypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\CollectionTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\DateTimeTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\EnumTypePropertyExpander;
@@ -25,7 +25,6 @@ use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Nullab
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\NumberTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\PropertyExpanderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\ProtectedPropertyExpander;
-use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\TransferTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReader;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\ClassNameContentValidator;
@@ -183,8 +182,7 @@ class DefinitionFactory
 
         $propertyExpander
             ->setNextExpander($this->createCollectionTypePropertyExpander())
-            ->setNextExpander($this->createBuildInTypePropertyExpander())
-            ->setNextExpander($this->createTransferTypePropertyExpander())
+            ->setNextExpander($this->createTypePropertyExpander())
             ->setNextExpander($this->createEnumTypePropertyExpander())
             ->setNextExpander($this->createProtectedPropertyExpander())
             ->setNextExpander($this->createDateTimeTypePropertyExpander())
@@ -223,14 +221,9 @@ class DefinitionFactory
         return new EnumTypePropertyExpander($this->createEmbeddedTypeBuilder());
     }
 
-    protected function createTransferTypePropertyExpander(): PropertyExpanderInterface
+    protected function createTypePropertyExpander(): PropertyExpanderInterface
     {
-        return new TransferTypePropertyExpander($this->createEmbeddedTypeBuilder());
-    }
-
-    protected function createBuildInTypePropertyExpander(): PropertyExpanderInterface
-    {
-        return new BuildInTypePropertyExpander();
+        return new TypePropertyExpander($this->createEmbeddedTypeBuilder());
     }
 
     protected function createCollectionTypePropertyExpander(): PropertyExpanderInterface

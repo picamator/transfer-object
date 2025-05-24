@@ -8,7 +8,7 @@ use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder\EmbeddedTypeBuilderInterface;
 
-final class TransferTypePropertyExpander extends AbstractPropertyExpander
+final class TypePropertyExpander extends AbstractPropertyExpander
 {
     private const string TYPE_KEY = 'type';
 
@@ -19,24 +19,18 @@ final class TransferTypePropertyExpander extends AbstractPropertyExpander
 
     protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
-        $transferType = $this->getTransferType($propertyType);
-        if ($transferType === null) {
+        $type = $propertyType[self::TYPE_KEY] ?? null;
+        if ($type === null) {
             return;
         }
 
-        $propertyTransfer->transferType = $this->typeBuilder->createPrefixTypeTransfer($transferType);
-    }
+        $buildInType = BuildInTypeEnum::tryFrom($type);
+        if ($buildInType !== null) {
+            $propertyTransfer->buildInType = $buildInType;
 
-    /**
-     * @param array<string,string|null> $propertyType
-     */
-    private function getTransferType(array $propertyType): string|null
-    {
-        $type = $propertyType[self::TYPE_KEY] ?? null;
-        if ($type === null) {
-            return null;
+            return;
         }
 
-        return BuildInTypeEnum::tryFrom($type) === null ? $type : null;
+        $propertyTransfer->transferType = $this->typeBuilder->createPrefixTypeTransfer($type);
     }
 }
