@@ -6,6 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Parser;
 
 use Generator;
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder\ContentBuilderInterface;
 
 readonly class DefinitionParser implements DefinitionParserInterface
@@ -24,6 +25,7 @@ readonly class DefinitionParser implements DefinitionParserInterface
 
             /** @var array<string, mixed> $properties */
             $properties = is_array($properties) ? $properties : [];
+            $properties = array_map($this->filterProperties(...), $properties);
 
             yield $this->contentBuilder->createContentTransfer(
                 className: (string)$className,
@@ -32,6 +34,36 @@ readonly class DefinitionParser implements DefinitionParserInterface
         }
 
         return $count;
+    }
+
+    /**
+     * @param mixed $propertyType
+     * @return array<string,string|null>
+     */
+    private function filterProperties(mixed $propertyType): array
+    {
+        if (!is_array($propertyType)) {
+            return [];
+        }
+
+        $filteredType = [];
+        foreach ($propertyType as $key => $typeItem) {
+            if (!is_string($key)) {
+                continue;
+            }
+
+            if (is_bool($typeItem)) {
+                $filteredType[$key] = BuildInTypeEnum::getTrueFalse($typeItem)->value;
+
+                continue;
+            }
+
+            if (is_string($typeItem) || is_null($typeItem)) {
+                $filteredType[$key] = $typeItem;
+            }
+        }
+
+        return $filteredType;
     }
 
     /**
