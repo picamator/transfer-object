@@ -15,6 +15,4 @@ interface PropertyTypeAttributeInterface
     public function fromArray(mixed $data): mixed;
 
     public function toArray(mixed $data): mixed;
-
-    public function getInitialValue(): mixed;
 }

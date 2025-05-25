@@ -38,9 +38,4 @@ final readonly class NumberPropertyTypeAttribute implements PropertyTypeAttribut
     {
         return $data?->__toString();
     }
-
-    public function getInitialValue(): null
-    {
-        return null;
-    }
 }

@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Transfer;
 
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttributeInterface;
-use ReflectionAttribute;
-use ReflectionClassConstant;
 use SplFixedArray;
 use Traversable;
 
@@ -16,6 +13,7 @@ use Traversable;
 abstract class AbstractTransfer implements TransferInterface
 {
     use FilterArrayTrait;
+    use ConstantAttributeTrait;
 
     protected const int META_DATA_SIZE = 0;
 
@@ -143,19 +141,6 @@ abstract class AbstractTransfer implements TransferInterface
         return $this->_data[$index] = $value;
     }
 
-    private function getConstantAttribute(string $constantName): ?PropertyTypeAttributeInterface
-    {
-        $reflection = new ReflectionClassConstant($this, $constantName);
-        $attributeReflections = $reflection->getAttributes(
-            name: PropertyTypeAttributeInterface::class,
-            flags: ReflectionAttribute::IS_INSTANCEOF
-        );
-
-        $attributeReflection = $attributeReflections[0] ?? null;
-
-        return $attributeReflection?->newInstance();
-    }
-
     private function initData(): void
     {
         $this->_data = new SplFixedArray(static::META_DATA_SIZE);
@@ -163,7 +148,7 @@ abstract class AbstractTransfer implements TransferInterface
         foreach (static::META_DATA as $metaName) {
             $metaIndex = $metaName . self::DATA_INDEX_SUFFIX;
             // @phpstan-ignore offsetAssign.dimType
-            $this->_data[static::{$metaIndex}] = $this->getConstantAttribute($metaName)?->getInitialValue();
+            $this->_data[static::{$metaIndex}] = $this->getConstantInitialAttribute($metaName)?->getInitialValue();
         }
     }
 }

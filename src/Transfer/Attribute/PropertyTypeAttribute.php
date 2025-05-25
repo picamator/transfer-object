@@ -33,9 +33,4 @@ final readonly class PropertyTypeAttribute implements PropertyTypeAttributeInter
     {
         return $data?->toArray();
     }
-
-    public function getInitialValue(): null
-    {
-        return null;
-    }
 }

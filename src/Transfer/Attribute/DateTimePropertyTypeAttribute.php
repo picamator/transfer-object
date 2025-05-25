@@ -40,9 +40,4 @@ final readonly class DateTimePropertyTypeAttribute implements PropertyTypeAttrib
     {
         return $data?->format(self::DATE_TIME_FORMAT);
     }
-
-    public function getInitialValue(): null
-    {
-        return null;
-    }
 }
