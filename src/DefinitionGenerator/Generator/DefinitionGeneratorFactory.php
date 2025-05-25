@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator\Generator;
 
+// phpcs:disable Generic.Files.LineLength
 use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionBuilder;
 use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionBuilderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionContentBuilder;
@@ -18,47 +19,100 @@ use Picamator\TransferObject\DefinitionGenerator\Generator\Filesystem\Definition
 use Picamator\TransferObject\DefinitionGenerator\Generator\Filesystem\DefinitionFilesystemInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\DefinitionGeneratorService;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\DefinitionGeneratorServiceInterface;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\Command\DefinitionProcessCommand;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\Command\DefinitionProcessCommandInterface;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\Command\PostDefinitionProcessCommand;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\Command\PostDefinitionProcessCommandInterface;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\Command\PreDefinitionProcessCommand;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\Command\PreDefinitionProcessCommandInterface;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\DefinitionGeneratorProcessor;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\DefinitionGeneratorProcessorInterface;
 use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRender;
 use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRenderInterface;
+use Picamator\TransferObject\Shared\CachedFactoryTrait;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 
 class DefinitionGeneratorFactory
 {
     use SharedFactoryTrait;
-
-    private DefinitionGeneratorServiceInterface $definitionGeneratorService;
-
-    private DefinitionGeneratorBuilderInterface $definitionGeneratorBuilder;
+    use CachedFactoryTrait;
 
     public function createDefinitionGeneratorService(): DefinitionGeneratorServiceInterface
     {
-        return $this->definitionGeneratorService ??= new DefinitionGeneratorService(
+        /** @phpstan-ignore return.type */
+        return $this->getCached(
+            key: 'definition-generator-service',
+            factory: fn (): DefinitionGeneratorServiceInterface => new DefinitionGeneratorService(
+                $this->createDefinitionGeneratorProcessor(),
+            ),
+        );
+    }
+
+    public function createDefinitionGeneratorBuilder(): DefinitionGeneratorBuilderInterface
+    {
+        /** @phpstan-ignore return.type */
+        return $this->getCached(
+            key: 'definition-generator-builder',
+            factory: fn (): DefinitionGeneratorBuilderInterface => new DefinitionGeneratorBuilder(
+                $this->createPathLocalValidator(),
+                $this->createClassNameValidator(),
+                $this->createJsonReader(),
+            ),
+        );
+    }
+
+    protected function createDefinitionGeneratorProcessor(): DefinitionGeneratorProcessorInterface
+    {
+        return new DefinitionGeneratorProcessor(
+            $this->createPreDefinitionProcessCommand(),
+            $this->createDefinitionProcessCommand(),
+            $this->createPostDefinitionProcessCommand(),
+        );
+    }
+
+    protected function createPostDefinitionProcessCommand(): PostDefinitionProcessCommandInterface
+    {
+        return new PostDefinitionProcessCommand(
+            $this->createDefinitionFilesystem(),
+        );
+    }
+
+    protected function createDefinitionProcessCommand(): DefinitionProcessCommandInterface
+    {
+        return new DefinitionProcessCommand(
             $this->createDefinitionBuilder(),
             $this->createDefinitionRender(),
             $this->createDefinitionFilesystem(),
         );
     }
 
-    public function createDefinitionGeneratorBuilder(): DefinitionGeneratorBuilderInterface
+    protected function createPreDefinitionProcessCommand(): PreDefinitionProcessCommandInterface
     {
-        return $this->definitionGeneratorBuilder ??= new DefinitionGeneratorBuilder(
-            $this->createPathLocalValidator(),
-            $this->createClassNameValidator(),
-            $this->createJsonReader(),
+        return new PreDefinitionProcessCommand(
+            $this->createDefinitionRender(),
+            $this->createDefinitionFilesystem(),
         );
     }
 
     protected function createDefinitionFilesystem(): DefinitionFilesystemInterface
     {
-        return new DefinitionFilesystem(
-            $this->getFilesystem(),
-            $this->createFileAppender(),
+        /** @phpstan-ignore return.type */
+        return $this->getCached(
+            key: 'definition-filesystem',
+            factory: fn (): DefinitionFilesystemInterface => new DefinitionFilesystem(
+                $this->getFilesystem(),
+                $this->createFileAppender(),
+            ),
         );
     }
 
     protected function createDefinitionRender(): DefinitionRenderInterface
     {
-        return new DefinitionRender();
+        /** @phpstan-ignore return.type */
+        return $this->getCached(
+            key: 'definition-render',
+            factory: fn (): DefinitionRenderInterface => new DefinitionRender()
+        );
     }
 
     protected function createDefinitionBuilder(): DefinitionBuilderInterface
