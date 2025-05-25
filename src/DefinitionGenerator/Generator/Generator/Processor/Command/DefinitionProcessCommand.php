@@ -7,6 +7,7 @@ namespace Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Proce
 use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionBuilderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Filesystem\DefinitionFilesystemInterface;
 use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRenderInterface;
+use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionFilesystemTransfer;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 
@@ -25,12 +26,23 @@ readonly class DefinitionProcessCommand implements DefinitionProcessCommandInter
     ): int {
         $count = 0;
         foreach ($this->builder->createDefinitionContents($generatorTransfer->content) as $contentTransfer) {
-            $filesystemTransfer->content = $this->render->renderDefinitionContent($contentTransfer);
-            $this->filesystem->appendFile($filesystemTransfer);
+            $content = $this->renderContent($contentTransfer);
+            $this->appendContent($filesystemTransfer, $content);
 
             $count++;
         }
 
         return $count;
+    }
+
+    private function appendContent(DefinitionFilesystemTransfer $filesystemTransfer, string $content): void
+    {
+        $filesystemTransfer->content = $content;
+        $this->filesystem->appendFile($filesystemTransfer);
+    }
+
+    private function renderContent(DefinitionContentTransfer $contentTransfer): string
+    {
+        return $this->render->renderDefinitionContent($contentTransfer);
     }
 }
