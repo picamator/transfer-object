@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander;
 
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
-use Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder\EmbeddedTypeBuilderInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builder\EmbeddedTypeBuilderInterface;
 
 final class CollectionTypePropertyExpander extends AbstractPropertyExpander
 {

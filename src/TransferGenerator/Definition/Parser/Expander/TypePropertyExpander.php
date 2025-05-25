@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander;
 
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
-use Picamator\TransferObject\TransferGenerator\Definition\Parser\Builder\EmbeddedTypeBuilderInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builder\EmbeddedTypeBuilderInterface;
 
 final class TypePropertyExpander extends AbstractPropertyExpander
 {

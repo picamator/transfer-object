@@ -18,7 +18,7 @@ class PropertiesContentValidator implements ContentValidatorInterface
     use ValidatorMessageTrait;
 
     /**
-     * @param \ArrayObject<int,\Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface> $propertyValidators
+     * @param \ArrayObject<int,\Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Property\PropertyValidatorInterface> $propertyValidators
      */
     public function __construct(
         private readonly ArrayObject $propertyValidators,

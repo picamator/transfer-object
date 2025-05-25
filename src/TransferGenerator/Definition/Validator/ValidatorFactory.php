@@ -11,16 +11,16 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Clas
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\ContentValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\EmptyPropertiesContentValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\PropertiesContentValidator;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\BuildInTypePropertyValidator;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\CollectionTypePropertyValidator;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\DateTimeTypePropertyValidator;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\EnumTypePropertyValidator;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\NamePropertyValidator;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\NumberTypePropertyValidator;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\PropertyValidatorInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\RequiredTypePropertyValidator;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\ReservedNamePropertyValidator;
-use Picamator\TransferObject\TransferGenerator\Definition\Validator\Property\TransferTypePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Property\BuildInTypePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Property\CollectionTypePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Property\DateTimeTypePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Property\EnumTypePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Property\NamePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Property\NumberTypePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Property\PropertyValidatorInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Property\RequiredTypePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Property\ReservedNamePropertyValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Property\TransferTypePropertyValidator;
 
 class ValidatorFactory
 {

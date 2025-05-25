@@ -6,10 +6,12 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Parser;
 
 use Generator;
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Filter\PropertyFilterTrait;
 
 readonly class DefinitionParser implements DefinitionParserInterface
 {
+    use PropertyFilterTrait;
+
     public function __construct(
         private YmlParserInterface $parser,
         private ContentBuilderInterface $contentBuilder,
@@ -22,47 +24,13 @@ readonly class DefinitionParser implements DefinitionParserInterface
         foreach ($this->parseFile($filePath) as $className => $properties) {
             $count++;
 
-            /** @var array<string, mixed> $properties */
-            $properties = is_array($properties) ? $properties : [];
-            $properties = array_map($this->filterProperties(...), $properties);
-
             yield $this->contentBuilder->createContentTransfer(
                 className: (string)$className,
-                properties: $properties,
+                properties: $this->filterProperties($properties),
             );
         }
 
         return $count;
-    }
-
-    /**
-     * @param mixed $propertyType
-     * @return array<string,string|null>
-     */
-    private function filterProperties(mixed $propertyType): array
-    {
-        if (!is_array($propertyType)) {
-            return [];
-        }
-
-        $filteredType = [];
-        foreach ($propertyType as $key => $typeItem) {
-            if (!is_string($key)) {
-                continue;
-            }
-
-            if (is_bool($typeItem)) {
-                $filteredType[$key] = BuildInTypeEnum::getTrueFalse($typeItem)->value;
-
-                continue;
-            }
-
-            if (is_string($typeItem) || is_null($typeItem)) {
-                $filteredType[$key] = $typeItem;
-            }
-        }
-
-        return $filteredType;
     }
 
     /**

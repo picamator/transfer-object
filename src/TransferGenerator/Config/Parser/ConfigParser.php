@@ -6,17 +6,12 @@ namespace Picamator\TransferObject\TransferGenerator\Config\Parser;
 
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Picamator\TransferObject\Generated\ConfigContentTransfer;
-use Picamator\TransferObject\TransferGenerator\Config\Enum\ConfigKeyEnum;
+use Picamator\TransferObject\TransferGenerator\Config\Parser\Builder\ConfigContentBuilderInterface;
+use Picamator\TransferObject\TransferGenerator\Config\Parser\Filter\ConfigFilterTrait;
 
 readonly class ConfigParser implements ConfigParserInterface
 {
-    private const string CONFIG_SECTION_KEY = 'generator';
-
-    private const array DEFAULT_CONTENT_DATA = [
-        ConfigContentTransfer::TRANSFER_NAMESPACE => '',
-        ConfigContentTransfer::TRANSFER_PATH => '',
-        ConfigContentTransfer::DEFINITION_PATH => '',
-    ];
+    use ConfigFilterTrait;
 
     public function __construct(
         private YmlParserInterface $parser,
@@ -27,28 +22,8 @@ readonly class ConfigParser implements ConfigParserInterface
     public function parseConfig(string $configPath): ConfigContentTransfer
     {
         $configData = $this->parser->parseFile($configPath);
-
-        /** @var array<string, mixed> $configData */
-        $configData = is_array($configData) ? $configData : [];
-        $filteredConfigData = $this->filterConfigData($configData);
+        $filteredConfigData = $this->filterConfig($configData);
 
         return $this->builder->createContentTransfer($filteredConfigData);
-    }
-
-    /**
-     * @param array<string,mixed> $sectionData
-     *
-     * @return array<string,string>
-     */
-    private function filterConfigData(array $sectionData): array
-    {
-        $sectionData = $sectionData[self::CONFIG_SECTION_KEY] ?? [];
-        $sectionData = is_array($sectionData) ? $sectionData : [];
-
-        $filteredData = array_intersect_key($sectionData, ConfigKeyEnum::getValueName());
-
-        $filteredData = array_filter($filteredData, fn(mixed $item): bool => is_string($item));
-
-        return array_merge(self::DEFAULT_CONTENT_DATA, $filteredData);
     }
 }
