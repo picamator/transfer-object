@@ -17,6 +17,10 @@ class DefinitionFactory
 {
     use CachedFactoryTrait;
 
+    private static ValidatorFactory $validatorFactory;
+
+    private static ParserFactory $parserFactory;
+
     public function createDefinitionReader(): DefinitionReaderInterface
     {
         /** @phpstan-ignore return.type */
@@ -33,16 +37,26 @@ class DefinitionFactory
 
     protected function createDefinitionValidator(): DefinitionValidatorInterface
     {
-        return new ValidatorFactory()->createDefinitionValidator();
+        return $this->getValidatorFactory()->createDefinitionValidator();
     }
 
     protected function createDefinitionFinder(): DefinitionFinderInterface
     {
-        return new ParserFactory()->createDefinitionFinder();
+        return $this->getParserFactory()->createDefinitionFinder();
     }
 
     protected function createDefinitionParser(): DefinitionParserInterface
     {
-        return new ParserFactory()->createDefinitionParser();
+        return $this->getParserFactory()->createDefinitionParser();
+    }
+
+    protected function getValidatorFactory(): ValidatorFactory
+    {
+        return self::$validatorFactory ??= new ValidatorFactory();
+    }
+
+    protected function getParserFactory(): ParserFactory
+    {
+        return self::$parserFactory ??= new ParserFactory();
     }
 }

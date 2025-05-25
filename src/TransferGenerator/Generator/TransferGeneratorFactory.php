@@ -23,6 +23,8 @@ class TransferGeneratorFactory
     use SharedFactoryTrait;
     use CachedFactoryTrait;
 
+    private static GeneratorFactory $generatorFactory;
+
     public function createTransferGeneratorFiber(): TransferGeneratorFiberInterface
     {
         /** @phpstan-ignore return.type */
@@ -75,11 +77,16 @@ class TransferGeneratorFactory
 
     protected function createTransferGeneratorBulkBuilder(): TransferGeneratorBulkBuilderInterface
     {
-        return new GeneratorFactory()->createTransferGeneratorBulkBuilder();
+        return $this->getGeneratorFactory()->createTransferGeneratorBulkBuilder();
     }
 
     protected function createGeneratorProcessor(): GeneratorProcessorInterface
     {
-        return new GeneratorFactory()->createGeneratorProcessor();
+        return $this->getGeneratorFactory()->createGeneratorProcessor();
+    }
+
+    protected function getGeneratorFactory(): GeneratorFactory
+    {
+        return self::$generatorFactory ??= new GeneratorFactory();
     }
 }
