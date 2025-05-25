@@ -92,7 +92,7 @@ class GeneratorFactory
     {
         /** @phpstan-ignore return.type */
         return $this->getCached(
-            key: 'filesystem',
+            key: 'generator-filesystem',
             factory: fn () => new GeneratorFilesystem(
                 $this->getFilesystem(),
                 $this->getFinder(),
