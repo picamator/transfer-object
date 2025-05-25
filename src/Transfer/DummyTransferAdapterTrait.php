@@ -53,6 +53,8 @@ trait DummyTransferAdapterTrait
     }
 
     /**
+     * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
+     *
      * @param array<string,mixed> $data
      */
     public function fromArray(array $data): static

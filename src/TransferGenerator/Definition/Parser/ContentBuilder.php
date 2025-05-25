@@ -6,8 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Parser;
 
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
-use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
-use Picamator\TransferObject\TransferGenerator\Definition\Enum\TypePrefixEnum;
+use Picamator\TransferObject\TransferGenerator\Definition\Enum\TypeSuffixEnum;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\PropertyExpanderInterface;
 
 readonly class ContentBuilder implements ContentBuilderInterface
@@ -20,47 +19,30 @@ readonly class ContentBuilder implements ContentBuilderInterface
     public function createContentTransfer(string $className, array $properties): DefinitionContentTransfer
     {
         $contentTransfer = new DefinitionContentTransfer();
-        $contentTransfer->className = $className . TypePrefixEnum::TRANSFER->value;
+        $contentTransfer->className = $this->getTransferClassName($className);
 
         foreach ($properties as $propertyName => $propertyType) {
-            $propertyType = $this->filterPropertyType($propertyType);
-
-            $propertyTransfer = new DefinitionPropertyTransfer();
-            $propertyTransfer->propertyName = (string)$propertyName;
-
-            $this->propertyExpander->expandPropertyTransfer($propertyType, $propertyTransfer);
-
-            $contentTransfer->properties[] = $propertyTransfer;
+            $contentTransfer->properties[] = $this->createPropertyTransfer((string)$propertyName, $propertyType);
         }
 
         return $contentTransfer;
     }
 
     /**
-     * @param mixed $propertyType
-     * @return array<string,string|null>
+     * @param array<string,string|null> $propertyType
      */
-    private function filterPropertyType(mixed $propertyType): array
+    private function createPropertyTransfer(string $propertyName, array $propertyType): DefinitionPropertyTransfer
     {
-        $filteredType = [];
-        $type = is_array($propertyType) ? $propertyType : [];
+        $propertyTransfer = new DefinitionPropertyTransfer();
+        $propertyTransfer->propertyName = $propertyName;
 
-        foreach ($type as $key => $typeItem) {
-            if (!is_string($key)) {
-                continue;
-            }
+        $this->propertyExpander->expandPropertyTransfer($propertyType, $propertyTransfer);
 
-            $typeItem = is_bool($typeItem)
-                ? BuildInTypeEnum::getTrueFalse($typeItem)->value
-                : $typeItem;
+        return $propertyTransfer;
+    }
 
-            if (!is_string($typeItem) && !is_null($typeItem)) {
-                continue;
-            }
-
-            $filteredType[$key] = $typeItem;
-        }
-
-        return $filteredType;
+    private function getTransferClassName(string $className): string
+    {
+        return $className . TypeSuffixEnum::TRANSFER->value;
     }
 }

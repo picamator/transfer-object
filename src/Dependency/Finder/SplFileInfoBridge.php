@@ -9,9 +9,8 @@ use Symfony\Component\Finder\SplFileInfo as SymfonySplFileInfo;
 
 final class SplFileInfoBridge extends SplFileInfo
 {
-    public function __construct(
-        private readonly SymfonySplFileInfo $fileInfo
-    ) {
+    public function __construct(private readonly SymfonySplFileInfo $fileInfo)
+    {
         parent::__construct($fileInfo->getRealPath());
     }
 

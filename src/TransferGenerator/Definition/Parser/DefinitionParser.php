@@ -6,9 +6,12 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Parser;
 
 use Generator;
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Filter\PropertyFilterTrait;
 
 readonly class DefinitionParser implements DefinitionParserInterface
 {
+    use PropertyFilterTrait;
+
     public function __construct(
         private YmlParserInterface $parser,
         private ContentBuilderInterface $contentBuilder,
@@ -21,12 +24,9 @@ readonly class DefinitionParser implements DefinitionParserInterface
         foreach ($this->parseFile($filePath) as $className => $properties) {
             $count++;
 
-            /** @var array<string, mixed> $properties */
-            $properties = is_array($properties) ? $properties : [];
-
             yield $this->contentBuilder->createContentTransfer(
                 className: (string)$className,
-                properties: $properties,
+                properties: $this->filterProperties($properties),
             );
         }
 

@@ -15,7 +15,7 @@ class NamespaceValidatorTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->validator = new class () implements NamespaceValidatorInterface
+        $this->validator = new readonly class () implements NamespaceValidatorInterface
         {
             use NamespaceValidatorTrait {
                 isValidNamespace as public;

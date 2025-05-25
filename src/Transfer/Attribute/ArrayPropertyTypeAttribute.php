@@ -10,7 +10,7 @@ use Attribute;
  * @api
  */
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
-final readonly class ArrayPropertyTypeAttribute implements PropertyTypeAttributeInterface
+final readonly class ArrayPropertyTypeAttribute implements InitialPropertyTypeAttributeInterface
 {
     use DataAssertTrait;
 

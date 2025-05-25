@@ -8,6 +8,7 @@ use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Dependency\Finder\FinderInterface;
+use Picamator\TransferObject\Generated\TransferGeneratorContentTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystem;
@@ -39,8 +40,11 @@ class GeneratorFilesystemTest extends TestCase
     public function testDuplicationFileWriteShouldRiseException(): void
     {
         // Arrange
-        $className = 'TestTransfer';
-        $content = 'class TestTransfer {}';
+        $contentTransfer = new TransferGeneratorContentTransfer([
+            TransferGeneratorContentTransfer::CLASS_NAME => 'CustomerTransfer',
+            TransferGeneratorContentTransfer::CONTENT => 'class TestTransfer {}',
+        ]);
+
         $transferPath = 'some-path';
 
         $this->configStub
@@ -55,6 +59,6 @@ class GeneratorFilesystemTest extends TestCase
         $this->expectException(TransferGeneratorException::class);
 
         // Act
-        $this->generatorFilesystem->writeFile($className, $content);
+        $this->generatorFilesystem->writeFile($contentTransfer);
     }
 }

@@ -54,7 +54,7 @@ $productData = [
             'type' => 'b',
             'items' => 10,
         ],
-    ]
+    ],
 ];
 
 echo <<<'STORY'

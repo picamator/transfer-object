@@ -12,7 +12,7 @@ use Picamator\TransferObject\Transfer\TransferInterface;
  * @api
  */
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
-final readonly class CollectionPropertyTypeAttribute implements PropertyTypeAttributeInterface
+final readonly class CollectionPropertyTypeAttribute implements InitialPropertyTypeAttributeInterface
 {
     use TransferBuilderTrait;
 

@@ -11,7 +11,7 @@ use Attribute;
  * @api
  */
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
-final readonly class ArrayObjectPropertyTypeAttribute implements PropertyTypeAttributeInterface
+final readonly class ArrayObjectPropertyTypeAttribute implements InitialPropertyTypeAttributeInterface
 {
     use DataAssertTrait;
 

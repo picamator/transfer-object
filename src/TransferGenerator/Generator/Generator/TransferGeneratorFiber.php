@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 
 use Fiber;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\Workflow\TransferGeneratorWorkflowInterface;
 
 readonly class TransferGeneratorFiber implements TransferGeneratorFiberInterface
 {
     public function __construct(
-        private TransferGeneratorInterface $transferGenerator,
+        private TransferGeneratorWorkflowInterface $workflow,
     ) {
     }
 
@@ -23,7 +24,7 @@ readonly class TransferGeneratorFiber implements TransferGeneratorFiberInterface
 
     private function getTransferFiberCallback(string $configPath): bool
     {
-        $generator = $this->transferGenerator->generateTransfers($configPath);
+        $generator = $this->workflow->generateTransfers($configPath);
         foreach ($generator as $generatorTransfer) {
             Fiber::suspend($generatorTransfer);
         }

@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator;
 
 use Fiber;
-use Picamator\TransferObject\Generated\TransferGeneratorBulkTransfer;
-use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 
 interface TransferGeneratorFacadeInterface
 {
@@ -28,7 +26,7 @@ interface TransferGeneratorFacadeInterface
      * @throws \FiberError
      * @throws \Throwable
      *
-     * @return \Fiber<string,null,bool,TransferGeneratorTransfer>
+     * @return \Fiber<string,null,bool,\Picamator\TransferObject\Generated\TransferGeneratorTransfer>
      */
     public function getTransferGeneratorFiber(): Fiber;
 
@@ -50,7 +48,7 @@ interface TransferGeneratorFacadeInterface
      * @throws \FiberError
      * @throws \Throwable
      *
-     * @return \Fiber<string,null,bool,TransferGeneratorBulkTransfer>
+     * @return \Fiber<string,null,bool,\Picamator\TransferObject\Generated\TransferGeneratorBulkTransfer>
      */
     public function getTransferGeneratorBulkFiber(): Fiber;
 

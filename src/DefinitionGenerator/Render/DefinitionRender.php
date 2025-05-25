@@ -31,7 +31,6 @@ START;
     collectionType: %s
 START;
 
-
     private const string DATE_TIME_TYPE_TEMPLATE = <<<'START'
   %s:
     dateTimeType: %s

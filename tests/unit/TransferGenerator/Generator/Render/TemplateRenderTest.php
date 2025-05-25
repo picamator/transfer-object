@@ -38,7 +38,9 @@ class TemplateRenderTest extends TestCase
         // Arrange
         $definitionTransfer = new DefinitionTransfer();
         $definitionTransfer->fileName = 'definition.yml';
-        $definitionTransfer->content = new DefinitionContentTransfer();
+        $definitionTransfer->content = new DefinitionContentTransfer([
+            DefinitionContentTransfer::CLASS_NAME => 'CustomerTransfer',
+        ]);
 
         $templateTransfer = $this->createTemplateTransfer();
 
@@ -50,7 +52,7 @@ class TemplateRenderTest extends TestCase
         $actual = $this->render->renderTemplate($definitionTransfer);
 
         // Assert
-        $this->assertStringContainsString('extends AbstractTransfer', $actual);
+        $this->assertStringContainsString('extends AbstractTransfer', $actual->content);
     }
 
     private function createTemplateTransfer(): TemplateTransfer

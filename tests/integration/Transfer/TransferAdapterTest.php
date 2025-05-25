@@ -158,7 +158,7 @@ class TransferAdapterTest extends TestCase
     {
         // Arrange
         $expected = [
-            'price' => '12.34'
+            'price' => '12.34',
         ];
 
         // Act

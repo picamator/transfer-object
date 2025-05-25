@@ -18,6 +18,9 @@ use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 
 final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
 {
+    /**
+     * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
+     */
     protected function isApplicable(BuilderContentInterface $content): true
     {
         return true;

@@ -4,39 +4,25 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander;
 
-use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builder\EmbeddedTypeBuilderInterface;
 
 final class DateTimeTypePropertyExpander extends AbstractPropertyExpander
 {
-    use NamespacePropertyExpanderTrait;
-
     private const string DATE_TIME_TYPE_KEY = 'dateTimeType';
 
-    protected function isApplicable(array $propertyType): bool
-    {
-        return $this->getDateTimeType($propertyType) !== null;
+    public function __construct(
+        private readonly EmbeddedTypeBuilderInterface $typeBuilder,
+    ) {
     }
 
     protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
-        $dateTimeType = $this->getDateTimeType($propertyType) ?? '';
-        $namespaceTransfer = $this->createDefinitionNamespaceTransfer($dateTimeType);
-
-        $typeTransfer = new DefinitionEmbeddedTypeTransfer();
-        $typeTransfer->name = $namespaceTransfer->alias ?: $namespaceTransfer->baseName;
-        $typeTransfer->namespace = $namespaceTransfer;
-
-        $propertyTransfer->dateTimeType = $typeTransfer;
-    }
-
-    /**
-     * @param array<string,string|null> $propertyType
-     */
-    private function getDateTimeType(array $propertyType): ?string
-    {
         $dateTimeType = $propertyType[self::DATE_TIME_TYPE_KEY] ?? null;
+        if ($dateTimeType === null) {
+            return;
+        }
 
-        return is_string($dateTimeType) ? $dateTimeType : null;
+        $propertyTransfer->dateTimeType = $this->typeBuilder->createTypeTransfer($dateTimeType);
     }
 }

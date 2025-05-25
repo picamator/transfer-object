@@ -32,7 +32,7 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
      * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
      */
     private function getBuilderTransfer(
-        DefinitionGeneratorContentTransfer $generatorContentTransfer
+        DefinitionGeneratorContentTransfer $generatorContentTransfer,
     ): DefinitionBuilderTransfer {
         $builderTransfer = $this->createDefinitionBuilderTransfer($generatorContentTransfer->className);
         foreach ($generatorContentTransfer->content as $propertyName => $propertyValue) {

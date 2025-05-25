@@ -45,7 +45,7 @@ readonly class TransferGeneratorBuilder implements TransferGeneratorBuilderInter
     }
 
     public function createGeneratorTransferByDefinition(
-        DefinitionTransfer $definitionTransfer
+        DefinitionTransfer $definitionTransfer,
     ): TransferGeneratorTransfer {
         $generatorTransfer = new TransferGeneratorTransfer();
 
@@ -58,7 +58,7 @@ readonly class TransferGeneratorBuilder implements TransferGeneratorBuilderInter
 
     public function createGeneratorTransferByConfig(
         string $configPath,
-        ConfigTransfer $configTransfer
+        ConfigTransfer $configTransfer,
     ): TransferGeneratorTransfer {
         $generatorTransfer = new TransferGeneratorTransfer();
 

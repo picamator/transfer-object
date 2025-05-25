@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 interface ContentBuilderInterface
 {
     /**
-     * @param array<string,mixed> $properties
+     * @param array<string,array<string,string|null>> $properties
      */
     public function createContentTransfer(string $className, array $properties): DefinitionContentTransfer;
 }

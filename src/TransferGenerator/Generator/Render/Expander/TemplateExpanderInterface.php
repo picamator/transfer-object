@@ -13,6 +13,6 @@ interface TemplateExpanderInterface
 
     public function expandTemplateTransfer(
         DefinitionPropertyTransfer $propertyTransfer,
-        TemplateTransfer $templateTransfer
+        TemplateTransfer $templateTransfer,
     ): void;
 }

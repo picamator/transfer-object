@@ -5,35 +5,44 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Config;
 
 use ArrayObject;
+use Picamator\TransferObject\Shared\CachedFactoryTrait;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRender;
 use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRenderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoader;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoaderInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Parser\ConfigContentBuilder;
-use Picamator\TransferObject\TransferGenerator\Config\Parser\ConfigContentBuilderInterface;
+use Picamator\TransferObject\TransferGenerator\Config\Parser\Builder\ConfigBuilder;
+use Picamator\TransferObject\TransferGenerator\Config\Parser\Builder\ConfigBuilderInterface;
+use Picamator\TransferObject\TransferGenerator\Config\Parser\Builder\ConfigContentBuilder;
+use Picamator\TransferObject\TransferGenerator\Config\Parser\Builder\ConfigContentBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Parser\ConfigParser;
 use Picamator\TransferObject\TransferGenerator\Config\Parser\ConfigParserInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Reader\ConfigReader;
 use Picamator\TransferObject\TransferGenerator\Config\Reader\ConfigReaderInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigValidator;
-use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigValidatorInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\ConfigContentValidatorInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\DefinitionPathConfigContentValidator;
-use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\RequiredConfigContentValidator;
-use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\TransferNamespaceConfigContentValidator;
-use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\TransferPathConfigContentValidator;
+use Picamator\TransferObject\TransferGenerator\Config\Validator\BulkContentValidator;
+use Picamator\TransferObject\TransferGenerator\Config\Validator\BulkContentValidatorInterface;
+use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigFileValidator;
+use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigFileValidatorInterface;
+use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\ContentValidatorInterface;
+use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\DefinitionPathContentValidator;
+use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\RequiredContentValidator;
+use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\TransferNamespaceContentValidator;
+use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\TransferPathContentValidator;
 
 class ConfigFactory
 {
     use SharedFactoryTrait;
-
-    private ConfigLoaderInterface $configLoader;
+    use CachedFactoryTrait;
 
     public function createConfigLoader(): ConfigLoaderInterface
     {
-        return $this->configLoader ??= new ConfigLoader(
-            $this->createConfigReader(),
+        /** @phpstan-ignore return.type */
+        return $this->getCached(
+            key: 'config-loader',
+            factory: fn(): ConfigLoaderInterface =>
+                new ConfigLoader(
+                    $this->createConfigReader(),
+                ),
         );
     }
 
@@ -41,20 +50,35 @@ class ConfigFactory
     {
         return new ConfigReader(
             $this->createConfigParser(),
-            $this->createConfigValidator(),
+            $this->createConfigFileValidator(),
+            $this->createBulkContentValidator(),
+            $this->createConfigBuilder(),
         );
     }
 
-    protected function createConfigValidator(): ConfigValidatorInterface
+    protected function createConfigBuilder(): ConfigBuilderInterface
     {
-        return new ConfigValidator(
+        return new ConfigBuilder(
+            $this->createConfigContentBuilder(),
+        );
+    }
+
+    protected function createBulkContentValidator(): BulkContentValidatorInterface
+    {
+        return new BulkContentValidator(
+            $this->createConfigContentValidators(),
+        );
+    }
+
+    protected function createConfigFileValidator(): ConfigFileValidatorInterface
+    {
+        return new ConfigFileValidator(
             $this->createPathExistValidator(),
-            $this->createConfigContentValidators()
         );
     }
 
     /**
-     * @return \ArrayObject<int,ConfigContentValidatorInterface>
+     * @return \ArrayObject<int,ContentValidatorInterface>
      */
     protected function createConfigContentValidators(): ArrayObject
     {
@@ -66,29 +90,29 @@ class ConfigFactory
         ]);
     }
 
-    protected function createTransferNamespaceConfigContentValidator(): ConfigContentValidatorInterface
+    protected function createTransferNamespaceConfigContentValidator(): ContentValidatorInterface
     {
-        return new TransferNamespaceConfigContentValidator();
+        return new TransferNamespaceContentValidator();
     }
 
-    protected function createTransferPathConfigContentValidator(): ConfigContentValidatorInterface
+    protected function createTransferPathConfigContentValidator(): ContentValidatorInterface
     {
-        return new TransferPathConfigContentValidator(
+        return new TransferPathContentValidator(
             $this->createPathLocalValidator(),
         );
     }
 
-    protected function createDefinitionPathConfigContentValidator(): ConfigContentValidatorInterface
+    protected function createDefinitionPathConfigContentValidator(): ContentValidatorInterface
     {
-        return new DefinitionPathConfigContentValidator(
+        return new DefinitionPathContentValidator(
             $this->createPathLocalValidator(),
             $this->createPathExistValidator(),
         );
     }
 
-    protected function createRequiredConfigContentValidator(): ConfigContentValidatorInterface
+    protected function createRequiredConfigContentValidator(): ContentValidatorInterface
     {
-        return new RequiredConfigContentValidator();
+        return new RequiredContentValidator();
     }
 
     protected function createConfigParser(): ConfigParserInterface
