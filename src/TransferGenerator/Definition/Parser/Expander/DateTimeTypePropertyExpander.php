@@ -16,13 +16,13 @@ final class DateTimeTypePropertyExpander extends AbstractPropertyExpander
     ) {
     }
 
-    protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
+    protected function matchType(array $propertyType): ?string
     {
-        $dateTimeType = $propertyType[self::DATE_TIME_TYPE_KEY] ?? null;
-        if ($dateTimeType === null) {
-            return;
-        }
+        return $propertyType[self::DATE_TIME_TYPE_KEY] ?? null;
+    }
 
-        $propertyTransfer->dateTimeType = $this->typeBuilder->createTypeTransfer($dateTimeType);
+    protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
+    {
+        $propertyTransfer->dateTimeType = $this->typeBuilder->createTypeTransfer($matchedType);
     }
 }

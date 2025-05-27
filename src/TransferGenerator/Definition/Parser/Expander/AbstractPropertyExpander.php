@@ -19,7 +19,10 @@ abstract class AbstractPropertyExpander implements PropertyExpanderInterface
 
     public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
     {
-        $this->handleExpander($propertyType, $propertyTransfer);
+        $matchedType = $this->matchType($propertyType);
+        if ($matchedType !== null) {
+            $this->handleExpander($matchedType, $propertyTransfer);
+        }
 
         $this->nextExpander?->expandPropertyTransfer($propertyType, $propertyTransfer);
     }
@@ -27,5 +30,7 @@ abstract class AbstractPropertyExpander implements PropertyExpanderInterface
     /**
      * @param array<string,string|null> $propertyType
      */
-    abstract protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void;
+    abstract protected function matchType(array $propertyType): ?string;
+
+    abstract protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void;
 }

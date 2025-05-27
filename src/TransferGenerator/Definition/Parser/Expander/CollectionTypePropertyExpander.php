@@ -16,13 +16,13 @@ final class CollectionTypePropertyExpander extends AbstractPropertyExpander
     ) {
     }
 
-    protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
+    protected function matchType(array $propertyType): ?string
     {
-        $collectionType = $propertyType[self::COLLECTION_TYPE_KEY] ?? null;
-        if ($collectionType === null) {
-            return;
-        }
+        return $propertyType[self::COLLECTION_TYPE_KEY] ?? null;
+    }
 
-        $propertyTransfer->collectionType = $this->typeBuilder->createPrefixTypeTransfer($collectionType);
+    protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
+    {
+        $propertyTransfer->collectionType = $this->typeBuilder->createPrefixTypeTransfer($matchedType);
     }
 }

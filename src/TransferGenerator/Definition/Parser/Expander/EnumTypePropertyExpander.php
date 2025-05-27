@@ -16,13 +16,13 @@ final class EnumTypePropertyExpander extends AbstractPropertyExpander
     ) {
     }
 
-    protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
+    protected function matchType(array $propertyType): ?string
     {
-        $enumType = $propertyType[self::ENUM_TYPE_KEY] ?? null;
-        if ($enumType === null) {
-            return;
-        }
+        return $propertyType[self::ENUM_TYPE_KEY] ?? null;
+    }
 
-        $propertyTransfer->enumType = $this->typeBuilder->createTypeTransfer($enumType);
+    protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
+    {
+        $propertyTransfer->enumType = $this->typeBuilder->createTypeTransfer($matchedType);
     }
 }
