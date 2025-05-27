@@ -122,7 +122,7 @@ Definition Files and Transfer Object generators have been tested against the fol
 4. Transfer Object is converted back to the array
 5. The converted array is compared with the API response
 
-✅ For all APIs, data are matched.
+For all APIs, data are ✅ matched.
 
 For detailed information, please check [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php).
 
