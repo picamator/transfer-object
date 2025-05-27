@@ -26,7 +26,7 @@ readonly class NamespaceBuilder implements NamespaceBuilderInterface
 
     private function getAlias(string $namespace): ?string
     {
-        if (!str_contains($namespace, self::NAMESPACE_ALIAS_SEPARATOR)) {
+        if (!$this->isNamespaceAlias($namespace)) {
             return null;
         }
 
@@ -48,7 +48,7 @@ readonly class NamespaceBuilder implements NamespaceBuilderInterface
 
     private function getWithoutAlias(string $namespace): string
     {
-        if (!str_contains($namespace, self::NAMESPACE_ALIAS_SEPARATOR)) {
+        if (!$this->isNamespaceAlias($namespace)) {
             return $namespace;
         }
 
@@ -70,5 +70,10 @@ readonly class NamespaceBuilder implements NamespaceBuilderInterface
         $namespace = preg_replace(self::SPACE_REGEX, ' ', $namespace);
 
         return $namespace;
+    }
+
+    private function isNamespaceAlias(string $namespace): bool
+    {
+        return str_contains($namespace, self::NAMESPACE_ALIAS_SEPARATOR);
     }
 }
