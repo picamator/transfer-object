@@ -9,8 +9,11 @@ use Picamator\TransferObject\TransferGenerator\Definition\Enum\TypeSuffixEnum;
 
 readonly class EmbeddedTypeBuilder implements EmbeddedTypeBuilderInterface
 {
-    public function __construct(private NamespaceBuilderInterface $namespaceBuilder)
-    {
+    private const TypeSuffixEnum CLASS_SUFFIX = TypeSuffixEnum::TRANSFER;
+
+    public function __construct(
+        private NamespaceBuilderInterface $namespaceBuilder,
+    ) {
     }
 
     public function createTypeTransfer(string $type): DefinitionEmbeddedTypeTransfer
@@ -31,7 +34,7 @@ readonly class EmbeddedTypeBuilder implements EmbeddedTypeBuilderInterface
         }
 
         $typeTransfer = new DefinitionEmbeddedTypeTransfer();
-        $typeTransfer->name = $type . TypeSuffixEnum::TRANSFER->value;
+        $typeTransfer->name = self::CLASS_SUFFIX->getClassName($type);
 
         return $typeTransfer;
     }

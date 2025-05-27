@@ -36,7 +36,6 @@ class ConfigFactory
 
     public function createConfigLoader(): ConfigLoaderInterface
     {
-        /** @phpstan-ignore return.type */
         return $this->getCached(
             key: 'config-loader',
             factory: fn(): ConfigLoaderInterface =>

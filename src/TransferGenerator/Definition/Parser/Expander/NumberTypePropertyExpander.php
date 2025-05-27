@@ -16,13 +16,13 @@ final class NumberTypePropertyExpander extends AbstractPropertyExpander
     ) {
     }
 
-    protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
+    protected function matchType(array $propertyType): ?string
     {
-        $numberType = $propertyType[self::NUMBER_TYPE_KEY] ?? null;
-        if ($numberType === null) {
-            return;
-        }
+        return $propertyType[self::NUMBER_TYPE_KEY] ?? null;
+    }
 
-        $propertyTransfer->numberType = $this->typeBuilder->createTypeTransfer($numberType);
+    protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
+    {
+        $propertyTransfer->numberType = $this->typeBuilder->createTypeTransfer($matchedType);
     }
 }

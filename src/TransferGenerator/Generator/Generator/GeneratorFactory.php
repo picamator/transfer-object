@@ -15,8 +15,6 @@ use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFil
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilder;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilderInterface;
-use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBulkBuilder;
-use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBulkBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command\BulkProcessCommand;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command\BulkProcessCommandInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command\PostProcessCommand;
@@ -35,15 +33,6 @@ class GeneratorFactory
     use SharedFactoryTrait;
     use ConfigFactoryTrait;
     use CachedFactoryTrait;
-
-    public function createTransferGeneratorBulkBuilder(): TransferGeneratorBulkBuilderInterface
-    {
-        /** @phpstan-ignore return.type */
-        return $this->getCached(
-            key: 'bulk-generator-builder',
-            factory: fn (): TransferGeneratorBulkBuilderInterface => new TransferGeneratorBulkBuilder(),
-        );
-    }
 
     public function createGeneratorProcessor(): GeneratorProcessorInterface
     {
@@ -90,7 +79,6 @@ class GeneratorFactory
 
     protected function createGeneratorFilesystem(): GeneratorFilesystemInterface
     {
-        /** @phpstan-ignore return.type */
         return $this->getCached(
             key: 'generator-filesystem',
             factory: fn () => new GeneratorFilesystem(
@@ -103,7 +91,6 @@ class GeneratorFactory
 
     protected function createTransferGeneratorBuilder(): TransferGeneratorBuilderInterface
     {
-        /** @phpstan-ignore return.type */
         return $this->getCached(
             key: 'generator-builder',
             factory: fn () => new TransferGeneratorBuilder(),

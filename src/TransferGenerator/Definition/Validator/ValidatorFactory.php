@@ -29,7 +29,6 @@ class ValidatorFactory
 
     public function createDefinitionValidator(): DefinitionValidatorInterface
     {
-        /** @phpstan-ignore return.type */
         return $this->getCached(
             key: 'definition-validator',
             factory: fn (): DefinitionValidatorInterface =>

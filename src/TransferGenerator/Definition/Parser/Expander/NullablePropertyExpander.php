@@ -10,8 +10,13 @@ final class NullablePropertyExpander extends AbstractPropertyExpander
 {
     private const string REQUIRED_KEY = 'required';
 
-    protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
+    protected function matchType(array $propertyType): string
     {
-        $propertyTransfer->isNullable = !array_key_exists(self::REQUIRED_KEY, $propertyType);
+        return array_key_exists(self::REQUIRED_KEY, $propertyType) ? '1' : '0';
+    }
+
+    protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
+    {
+        $propertyTransfer->isNullable = $matchedType === '0';
     }
 }

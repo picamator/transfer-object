@@ -27,7 +27,6 @@ class RenderFactory
 
     public function createTemplateRender(): TemplateRenderInterface
     {
-        /** @phpstan-ignore return.type */
         return $this->getCached(
             key: 'template-render',
             factory: fn (): TemplateRenderInterface =>

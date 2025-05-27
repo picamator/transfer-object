@@ -7,8 +7,6 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Parser;
 use Picamator\TransferObject\Shared\CachedFactoryTrait;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
-use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinder;
-use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builder\EmbeddedTypeBuilder;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builder\EmbeddedTypeBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builder\NamespaceBuilder;
@@ -28,22 +26,8 @@ class ParserFactory
     use SharedFactoryTrait;
     use CachedFactoryTrait;
 
-    public function createDefinitionFinder(): DefinitionFinderInterface
-    {
-        /** @phpstan-ignore return.type */
-        return $this->getCached(
-            key: 'definition-finder',
-            factory: fn (): DefinitionFinderInterface =>
-                new DefinitionFinder(
-                    $this->getFinder(),
-                    $this->getConfig(),
-                ),
-        );
-    }
-
     public function createDefinitionParser(): DefinitionParserInterface
     {
-        /** @phpstan-ignore return.type */
         return $this->getCached(
             key: 'definition-parser',
             factory: fn (): DefinitionParserInterface => new DefinitionParser(

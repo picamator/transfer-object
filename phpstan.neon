@@ -17,6 +17,9 @@ parameters:
     -
         identifier: encapsedStringPart.nonString
         path: src/TransferGenerator/Generator/Render/Template/Template.php
+    -
+        identifier: return.type
+        path: src/*/*Factory.php
 rules:
    - PHPStan\Rules\DisallowedConstructs\DisallowedBacktickRule
    - PHPStan\Rules\StrictCalls\StrictFunctionCallsRule

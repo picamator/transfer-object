@@ -7,4 +7,9 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Enum;
 enum TypeSuffixEnum: string
 {
     case TRANSFER = 'Transfer';
+
+    public function getClassName(string $className): string
+    {
+        return $className . $this->value;
+    }
 }

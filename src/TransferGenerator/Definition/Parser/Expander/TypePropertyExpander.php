@@ -17,20 +17,20 @@ final class TypePropertyExpander extends AbstractPropertyExpander
     ) {
     }
 
-    protected function handleExpander(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void
+    protected function matchType(array $propertyType): ?string
     {
-        $type = $propertyType[self::TYPE_KEY] ?? null;
-        if ($type === null) {
-            return;
-        }
+        return $propertyType[self::TYPE_KEY] ?? null;
+    }
 
-        $buildInType = BuildInTypeEnum::tryFrom($type);
+    protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
+    {
+        $buildInType = BuildInTypeEnum::tryFrom($matchedType);
         if ($buildInType !== null) {
             $propertyTransfer->buildInType = $buildInType;
 
             return;
         }
 
-        $propertyTransfer->transferType = $this->typeBuilder->createPrefixTypeTransfer($type);
+        $propertyTransfer->transferType = $this->typeBuilder->createPrefixTypeTransfer($matchedType);
     }
 }
