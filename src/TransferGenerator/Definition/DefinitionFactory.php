@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Definition;
 
 use Picamator\TransferObject\Shared\CachedFactoryTrait;
+use Picamator\TransferObject\Shared\SharedFactoryTrait;
+use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
+use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinder;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParserInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\ParserFactory;
@@ -15,6 +18,8 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\ValidatorFac
 
 class DefinitionFactory
 {
+    use ConfigFactoryTrait;
+    use SharedFactoryTrait;
     use CachedFactoryTrait;
 
     private static ValidatorFactory $validatorFactory;
@@ -23,7 +28,6 @@ class DefinitionFactory
 
     public function createDefinitionReader(): DefinitionReaderInterface
     {
-        /** @phpstan-ignore return.type */
         return $this->getCached(
             key: 'definition-reader',
             factory: fn (): DefinitionReaderInterface =>
@@ -42,7 +46,10 @@ class DefinitionFactory
 
     protected function createDefinitionFinder(): DefinitionFinderInterface
     {
-        return $this->getParserFactory()->createDefinitionFinder();
+        return new DefinitionFinder(
+            $this->getFinder(),
+            $this->getConfig(),
+        );
     }
 
     protected function createDefinitionParser(): DefinitionParserInterface
