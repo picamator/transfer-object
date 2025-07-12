@@ -8,10 +8,11 @@ use Generator;
 use Picamator\TransferObject\Generated\FileReaderProgressTransfer;
 use Picamator\TransferObject\Shared\Filesystem\FileReaderInterface;
 
-class FileReaderProgress implements FileReaderProgressInterface
+readonly class FileReaderProgress implements FileReaderProgressInterface
 {
-    public function __construct(private readonly FileReaderInterface $fileReader)
-    {
+    public function __construct(
+        private FileReaderInterface $fileReader,
+    ) {
     }
 
     public function readFile(string $filename): Generator

@@ -98,11 +98,7 @@ readonly final class FilesystemBridge implements FilesystemInterface
             return $this->filesystem->readFile($filename);
         } catch (Throwable $e) {
             throw new FilesystemException(
-                sprintf(
-                    'Failed to read file "%s". Error: "%s".',
-                    $filename,
-                    $e->getMessage(),
-                ),
+                sprintf('Failed to read file "%s". Error: "%s".', $filename, $e->getMessage()),
                 previous: $e,
             );
         }
