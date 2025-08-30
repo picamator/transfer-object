@@ -92,8 +92,7 @@ class CollectionTypeBuilderExpanderTest extends TestCase
             'expected' => false,
         ];
 
-        // phpcs:ignore
-        yield 'type is array and property values is an associative array of arrays and one integer should expect false' => [
+        yield 'type is array and property values is an associative array of mixed types should expect false' => [
             'type' => GetTypeEnum::array,
             'propertyValue' => [
                 '2024-12-26' => ['sku' => 123],
