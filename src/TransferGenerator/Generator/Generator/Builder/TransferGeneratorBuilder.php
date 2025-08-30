@@ -19,7 +19,6 @@ readonly class TransferGeneratorBuilder implements TransferGeneratorBuilderInter
         DefinitionTransfer $definitionTransfer,
     ): TransferGeneratorTransfer {
         $generatorTransfer = new TransferGeneratorTransfer();
-
         $generatorTransfer->className = $definitionTransfer->content->className;
         $generatorTransfer->fileName = $definitionTransfer->fileName;
         $generatorTransfer->validator = $this->createErrorValidatorTransfer($errorMessage);
@@ -38,7 +37,6 @@ readonly class TransferGeneratorBuilder implements TransferGeneratorBuilderInter
     public function createSuccessGeneratorTransfer(): TransferGeneratorTransfer
     {
         $generatorTransfer = new TransferGeneratorTransfer();
-
         $generatorTransfer->validator = $this->createSuccessValidatorTransfer();
 
         return $generatorTransfer;
@@ -48,7 +46,6 @@ readonly class TransferGeneratorBuilder implements TransferGeneratorBuilderInter
         DefinitionTransfer $definitionTransfer,
     ): TransferGeneratorTransfer {
         $generatorTransfer = new TransferGeneratorTransfer();
-
         $generatorTransfer->className = $definitionTransfer->content->className;
         $generatorTransfer->fileName = $definitionTransfer->fileName;
         $generatorTransfer->validator = $definitionTransfer->validator;
@@ -60,14 +57,12 @@ readonly class TransferGeneratorBuilder implements TransferGeneratorBuilderInter
         string $configPath,
         ConfigTransfer $configTransfer,
     ): TransferGeneratorTransfer {
-        $generatorTransfer = new TransferGeneratorTransfer();
-
-        $generatorTransfer->fileName = $configPath;
-
         $validatorTransfer = new ValidatorTransfer();
         $validatorTransfer->isValid = $configTransfer->validator->isValid;
         $validatorTransfer->errorMessages = $configTransfer->validator->errorMessages;
 
+        $generatorTransfer = new TransferGeneratorTransfer();
+        $generatorTransfer->fileName = $configPath;
         $generatorTransfer->validator = $validatorTransfer;
 
         return $generatorTransfer;
