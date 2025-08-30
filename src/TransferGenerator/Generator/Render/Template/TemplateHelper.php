@@ -16,7 +16,7 @@ class TemplateHelper implements TemplateHelperInterface
         ':value',
     ];
 
-    private const string PADDING_LEFT = '    ';
+    private const string PADDING_LEFT = PHP_EOL . '    ';
     private const string EMPTY_STRING = '';
     private const string NULLABLE_TYPE = '?';
     private const string NULLABLE_UNION = 'null|';
@@ -51,7 +51,7 @@ class TemplateHelper implements TemplateHelperInterface
             return self::EMPTY_STRING;
         }
 
-        return PHP_EOL . self::PADDING_LEFT . $attribute;
+        return self::PADDING_LEFT . $attribute;
     }
 
     public function getDockBlock(string $property): string
@@ -62,7 +62,7 @@ class TemplateHelper implements TemplateHelperInterface
             return self::EMPTY_STRING;
         }
 
-        return PHP_EOL . self::PADDING_LEFT . $dockBlock;
+        return self::PADDING_LEFT . $dockBlock;
     }
 
     public function getNullable(string $property): string

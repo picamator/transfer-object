@@ -8,27 +8,28 @@ trait InputNormalizerTrait
 {
     final protected function normalizePath(mixed $value): string
     {
-        if (!is_string($value)) {
-            return '';
-        }
-
         $value = $this->normalizeInput($value);
         if ($value === '') {
             return '';
         }
 
-        if (!stream_is_local($value)) {
-            return $value;
+        if (stream_is_local($value)) {
+            return $this->getLocalPath($value);
         }
 
-        $workingDirectory = getcwd() ?: '';
-        $value = ltrim($value, '.\/');
-
-        return $workingDirectory . DIRECTORY_SEPARATOR . $value;
+        return $value;
     }
 
-    final protected function normalizeInput(?string $value): string
+    final protected function normalizeInput(mixed $value): string
     {
-        return $value ? trim($value) : '';
+        return is_string($value) ? trim($value) : '';
+    }
+
+    private function getLocalPath(string $path): string
+    {
+        $workingDirectory = getcwd() ?: '';
+        $value = ltrim($path, '.\/');
+
+        return $workingDirectory . DIRECTORY_SEPARATOR . $value;
     }
 }

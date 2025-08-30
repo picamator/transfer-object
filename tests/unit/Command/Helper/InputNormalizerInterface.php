@@ -8,5 +8,5 @@ interface InputNormalizerInterface
 {
     public function normalizePath(mixed $value): string;
 
-    public function normalizeInput(?string $value): string;
+    public function normalizeInput(mixed $value): string;
 }

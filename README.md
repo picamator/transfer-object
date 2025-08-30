@@ -131,6 +131,11 @@ Documentation
 
 For more details, please visit [project's wiki](https://github.com/picamator/transfer-object/wiki).
 
+Publications
+------------
+
+1. [Sergii Pryz, "Data Transfer Objects and Property Hooks" PHP Architect Magazine, June 2025](https://www.phparch.com/article/2025-06-data-transfer-objects-and-property-hooks/)
+
 Acknowledgment
 --------------
 

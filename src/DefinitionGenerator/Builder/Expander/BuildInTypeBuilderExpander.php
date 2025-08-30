@@ -31,29 +31,51 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
         DefinitionBuilderTransfer $builderTransfer,
     ): void {
         $propertyTransfer = match (true) {
-            $content->getType()->isString()
-                //  @phpstan-ignore argument.type
-                && DateTime::createFromFormat(DateTimeInterface::ATOM, $content->getPropertyValue()) !== false
-                => $this->createDateTimePropertyTransfer($content->getPropertyName()),
-
-            $content->getType()->isNull() || $content->getType()->isString()
-                => $this->createPropertyTransfer($content->getPropertyName(), GetTypeEnum::string->name),
-
-            $content->getType()->isObject() && $content->getPropertyValue() instanceof ArrayObject
-                => $this->createPropertyTransfer($content->getPropertyName(), ObjectTypeEnum::ARRAY_OBJECT->value),
-
-            $content->getType()->isObject() => throw new DefinitionGeneratorException(
-                sprintf(
-                    'Property "%s" with "%s" type is not supported.',
-                    $content->getPropertyName(),
-                    get_debug_type($content->getPropertyValue()),
-                ),
-            ),
-
-            default => $this->createPropertyTransfer($content->getPropertyName(), $content->getType()->name),
+            $content->getType()->isString() => $this->resolveStringType($content),
+            $content->getType()->isNull() => $this->resolveNullType($content),
+            $content->getType()->isObject() => $this->resolveObjectType($content),
+            default => $this->resolveDefaultType($content),
         };
 
         $builderTransfer->definitionContent->properties[] = $propertyTransfer;
+    }
+
+    private function resolveDefaultType(BuilderContentInterface $content): DefinitionPropertyTransfer
+    {
+        return $this->createPropertyTransfer($content->getPropertyName(), $content->getType()->name);
+    }
+
+    /**
+     * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
+     */
+    private function resolveObjectType(BuilderContentInterface $content): DefinitionPropertyTransfer
+    {
+        if ($content->getPropertyValue() instanceof ArrayObject) {
+            return $this->createPropertyTransfer($content->getPropertyName(), ObjectTypeEnum::ARRAY_OBJECT->value);
+        }
+
+        throw new DefinitionGeneratorException(
+            sprintf(
+                'Property "%s" with "%s" type is not supported.',
+                $content->getPropertyName(),
+                get_debug_type($content->getPropertyValue()),
+            ),
+        );
+    }
+
+    private function resolveNullType(BuilderContentInterface $content): DefinitionPropertyTransfer
+    {
+        return $this->createPropertyTransfer($content->getPropertyName(), GetTypeEnum::string->name);
+    }
+
+    private function resolveStringType(BuilderContentInterface $content): DefinitionPropertyTransfer
+    {
+        //  @phpstan-ignore argument.type
+        if (DateTime::createFromFormat(DateTimeInterface::ATOM, $content->getPropertyValue()) !== false) {
+            return $this->createDateTimePropertyTransfer($content->getPropertyName());
+        }
+
+        return $this->createPropertyTransfer($content->getPropertyName(), GetTypeEnum::string->name);
     }
 
     private function createDateTimePropertyTransfer(string $propertyName): DefinitionPropertyTransfer

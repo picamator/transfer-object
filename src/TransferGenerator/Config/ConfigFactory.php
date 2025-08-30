@@ -23,6 +23,8 @@ use Picamator\TransferObject\TransferGenerator\Config\Validator\BulkContentValid
 use Picamator\TransferObject\TransferGenerator\Config\Validator\BulkContentValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigFileValidator;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigFileValidatorInterface;
+use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigValidator;
+use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\ContentValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\DefinitionPathContentValidator;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\RequiredContentValidator;
@@ -48,9 +50,8 @@ class ConfigFactory
     protected function createConfigReader(): ConfigReaderInterface
     {
         return new ConfigReader(
+            $this->createConfigValidator(),
             $this->createConfigParser(),
-            $this->createConfigFileValidator(),
-            $this->createBulkContentValidator(),
             $this->createConfigBuilder(),
         );
     }
@@ -59,6 +60,14 @@ class ConfigFactory
     {
         return new ConfigBuilder(
             $this->createConfigContentBuilder(),
+        );
+    }
+
+    protected function createConfigValidator(): ConfigValidatorInterface
+    {
+        return new ConfigValidator(
+            $this->createConfigFileValidator(),
+            $this->createBulkContentValidator(),
         );
     }
 
