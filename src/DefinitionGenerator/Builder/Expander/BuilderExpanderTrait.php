@@ -8,11 +8,13 @@ use Picamator\TransferObject\Generated\DefinitionGeneratorContentTransfer;
 
 trait BuilderExpanderTrait
 {
+    private const string CLASS_NAME_SEPARATOR = '_';
+
     final protected function getClassName(string $propertyName): string
     {
-        $className = ucwords($propertyName, '_');
+        $className = ucwords($propertyName, self::CLASS_NAME_SEPARATOR);
 
-        return str_replace('_', '', $className);
+        return str_replace(self::CLASS_NAME_SEPARATOR, '', $className);
     }
 
     /**
