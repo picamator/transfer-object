@@ -11,7 +11,7 @@ class TemplateHelper implements TemplateHelperInterface
     private TemplateTransfer $templateTransfer;
 
     private const string IMPORT_TEMPLATE = 'use %s;';
-    private const string META_DATA_TEMPLATE = '        self::%s => self::%s_DATA_NAME,';
+    private const string META_DATA_TEMPLATE = '        self::%1$s => self::%1$s_DATA_NAME,';
 
     private const string PADDING_LEFT = PHP_EOL . '    ';
     private const string EMPTY_STRING = '';
@@ -41,7 +41,7 @@ class TemplateHelper implements TemplateHelperInterface
     {
         $metaData = [];
         foreach ($this->templateTransfer->metaConstants as $key => $value) {
-            $metaData[] = sprintf(self::META_DATA_TEMPLATE, $key, $key);
+            $metaData[] = sprintf(self::META_DATA_TEMPLATE, $key);
         }
 
         return implode(PHP_EOL, $metaData);
