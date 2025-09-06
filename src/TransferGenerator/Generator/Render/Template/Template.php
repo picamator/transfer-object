@@ -65,7 +65,7 @@ TEMPLATE;
             $i++;
         }
 
-        $content .= <<<TEMPLATE
+        $content .= <<<'TEMPLATE'
 }
 
 TEMPLATE;
