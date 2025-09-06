@@ -10,31 +10,35 @@ use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 
 readonly class DefinitionRender implements DefinitionRenderInterface
 {
-    private const string SCHEMA = <<<'START'
+    private const string SCHEMA = <<<'TEMPLATE'
 # $schema: https://raw.githubusercontent.com/picamator/transfer-object/main/schema/definition.schema.json
 
 
-START;
+TEMPLATE;
 
-    private const string CLASS_TEMPLATE = <<<'START'
-# %s
-%s:
-START;
+    private const string CLASS_TEMPLATE = <<<'TEMPLATE'
+# %1$s
+%1$s:
 
-    private const string TYPE_TEMPLATE = <<<'START'
+TEMPLATE;
+
+    private const string TYPE_TEMPLATE = <<<'TEMPLATE'
   %s:
     type: %s
-START;
 
-    private const string COLLECTION_TYPE_TEMPLATE = <<<'START'
+TEMPLATE;
+
+    private const string COLLECTION_TYPE_TEMPLATE = <<<'TEMPLATE'
   %s:
     collectionType: %s
-START;
 
-    private const string DATE_TIME_TYPE_TEMPLATE = <<<'START'
+TEMPLATE;
+
+    private const string DATE_TIME_TYPE_TEMPLATE = <<<'TEMPLATE'
   %s:
     dateTimeType: %s
-START;
+
+TEMPLATE;
 
     public function renderSchema(): string
     {
@@ -43,10 +47,9 @@ START;
 
     public function renderDefinitionContent(DefinitionContentTransfer $contentTransfer): string
     {
-        $content = sprintf(self::CLASS_TEMPLATE, $contentTransfer->className, $contentTransfer->className) . PHP_EOL;
+        $content = sprintf(self::CLASS_TEMPLATE, $contentTransfer->className);
         foreach ($contentTransfer->properties as $propertyTransfer) {
             $content .= $this->renderProperty($propertyTransfer);
-            $content .= PHP_EOL;
         }
 
         $content .= PHP_EOL;
@@ -61,22 +64,16 @@ START;
     {
         return match (true) {
             $propertyTransfer->buildInType !== null
-                => $this->renderType($propertyTransfer->propertyName, $propertyTransfer->buildInType->value),
+                => $this->renderBuildInType($propertyTransfer),
 
             $propertyTransfer->transferType !== null
-                => $this->renderType($propertyTransfer->propertyName, $propertyTransfer->transferType->name),
+                => $this->renderTransferType($propertyTransfer),
 
             $propertyTransfer->collectionType !== null
-                => $this->renderCollectionType(
-                    $propertyTransfer->propertyName,
-                    $propertyTransfer->collectionType->name,
-                ),
+                => $this->renderCollectionType($propertyTransfer),
 
             $propertyTransfer->dateTimeType !== null
-                => $this->renderDateTimeType(
-                    $propertyTransfer->propertyName,
-                    $propertyTransfer->dateTimeType->name,
-                ),
+                => $this->renderDateTimeType($propertyTransfer),
 
             default => $this->renderDefault($propertyTransfer),
         };
@@ -95,18 +92,39 @@ START;
         );
     }
 
-    private function renderDateTimeType(string $propertyName, string $typeName): string
+    private function renderDateTimeType(DefinitionPropertyTransfer $propertyTransfer): string
     {
-        return sprintf(self::DATE_TIME_TYPE_TEMPLATE, $propertyName, $typeName);
+        return sprintf(
+            self::DATE_TIME_TYPE_TEMPLATE,
+            $propertyTransfer->propertyName,
+            $propertyTransfer->dateTimeType?->name ?: '',
+        );
     }
 
-    private function renderCollectionType(string $propertyName, string $typeName): string
+    private function renderCollectionType(DefinitionPropertyTransfer $propertyTransfer): string
     {
-        return sprintf(self::COLLECTION_TYPE_TEMPLATE, $propertyName, $typeName);
+        return sprintf(
+            self::COLLECTION_TYPE_TEMPLATE,
+            $propertyTransfer->propertyName,
+            $propertyTransfer->collectionType?->name ?: '',
+        );
     }
 
-    private function renderType(string $propertyName, string $typeName): string
+    private function renderTransferType(DefinitionPropertyTransfer $propertyTransfer): string
     {
-        return sprintf(self::TYPE_TEMPLATE, $propertyName, $typeName);
+        return sprintf(
+            self::TYPE_TEMPLATE,
+            $propertyTransfer->propertyName,
+            $propertyTransfer->transferType?->name ?: '',
+        );
+    }
+
+    private function renderBuildInType(DefinitionPropertyTransfer $propertyTransfer): string
+    {
+        return sprintf(
+            self::TYPE_TEMPLATE,
+            $propertyTransfer->propertyName,
+            $propertyTransfer->buildInType?->value ?: '',
+        );
     }
 }

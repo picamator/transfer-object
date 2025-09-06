@@ -81,6 +81,7 @@ class FileReader implements FileReaderInterface
 
         return $file;
     }
+
     /**
      * @return false|resource
      */
