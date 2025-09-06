@@ -8,15 +8,12 @@ use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ClassNameValidatorInterface;
 use Picamator\TransferObject\Shared\Validator\NamespaceValidatorInterface;
-use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
-class CollectionTypePropertyValidator implements PropertyValidatorInterface
+readonly class CollectionTypePropertyValidator implements PropertyValidatorInterface
 {
-    use ValidatorMessageTrait;
-
     public function __construct(
-        private readonly ClassNameValidatorInterface $classNameValidator,
-        private readonly NamespaceValidatorInterface $namespaceValidator,
+        private ClassNameValidatorInterface $classNameValidator,
+        private NamespaceValidatorInterface $namespaceValidator,
     ) {
     }
 
