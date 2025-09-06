@@ -23,7 +23,7 @@ class TemplateHelperTest extends TestCase
         $templateHelper = new TemplateHelper()->setTemplateTransfer($templateTransfer);
 
         // Act
-        $actual = $templateHelper->getNullable($property);
+        $actual = $templateHelper->renderNullable($property);
 
         // Assert
         $this->assertSame($expected, $actual);

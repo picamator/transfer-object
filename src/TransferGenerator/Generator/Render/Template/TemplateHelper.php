@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Template;
 
-use ArrayObject;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 
 class TemplateHelper implements TemplateHelperInterface
 {
     private TemplateTransfer $templateTransfer;
 
-    private const array KEY_VALUE_SEARCH = [
-        ':key',
-        ':value',
-    ];
+    private const string IMPORT_TEMPLATE = 'use %s;';
+    private const string META_DATA_TEMPLATE = '        self::%s => self::%s_DATA_NAME,';
 
     private const string PADDING_LEFT = PHP_EOL . '    ';
     private const string EMPTY_STRING = '';
@@ -29,21 +26,28 @@ class TemplateHelper implements TemplateHelperInterface
         return $this;
     }
 
-    public function renderKeyValue(ArrayObject $data, string $template): string
+    public function renderImports(): string
     {
-        $iterateResult = [];
-        foreach ($data as $key => $value) {
-            $iterateResult[] = str_replace(
-                self::KEY_VALUE_SEARCH,
-                [$key, $value],
-                $template,
-            );
+        $imports = [];
+        /** @var string $import */
+        foreach ($this->templateTransfer->imports as $import) {
+            $imports[] = sprintf(self::IMPORT_TEMPLATE, $import);
         }
 
-        return implode(PHP_EOL, $iterateResult);
+        return implode(PHP_EOL, $imports);
     }
 
-    public function getAttribute(string $property): string
+    public function renderMetaData(): string
+    {
+        $metaData = [];
+        foreach ($this->templateTransfer->metaConstants as $key => $value) {
+            $metaData[] = sprintf(self::META_DATA_TEMPLATE, $key, $key);
+        }
+
+        return implode(PHP_EOL, $metaData);
+    }
+
+    public function renderAttribute(string $property): string
     {
         /** @var string|null $attribute */
         $attribute = $this->templateTransfer->attributes[$property] ?? null;
@@ -54,7 +58,7 @@ class TemplateHelper implements TemplateHelperInterface
         return self::PADDING_LEFT . $attribute;
     }
 
-    public function getDockBlock(string $property): string
+    public function renderDockBlock(string $property): string
     {
         /** @var string|null $dockBlock */
         $dockBlock = $this->templateTransfer->dockBlocks[$property] ?? null;
@@ -65,7 +69,7 @@ class TemplateHelper implements TemplateHelperInterface
         return self::PADDING_LEFT . $dockBlock;
     }
 
-    public function getNullable(string $property): string
+    public function renderNullable(string $property): string
     {
         /** @var string $propertyType */
         $propertyType = $this->templateTransfer->properties[$property];
@@ -80,7 +84,7 @@ class TemplateHelper implements TemplateHelperInterface
         return self::NULLABLE_TYPE;
     }
 
-    public function getProtected(string $property): string
+    public function renderProtected(string $property): string
     {
         return $this->templateTransfer->protects[$property] ? self::PROTECTED_SET : self::EMPTY_STRING;
     }
