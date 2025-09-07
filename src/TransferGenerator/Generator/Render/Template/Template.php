@@ -45,11 +45,20 @@ final class $templateTransfer->className extends AbstractTransfer
 {$this->helper->renderMetaData()}
     ];
 
+    {$this->renderProperties($templateTransfer)}
+}
+
 TEMPLATE;
 
+        return $content;
+    }
+
+    private function renderProperties(TemplateTransfer $templateTransfer): string
+    {
         $i = 0;
+        $properties = [];
         foreach ($templateTransfer->metaConstants as $constant => $property) {
-            $content .= <<<TEMPLATE
+            $properties[] = <<<TEMPLATE
 
     // $property{$this->helper->renderAttribute($property)}
     public const string $constant = '$property';
@@ -60,16 +69,10 @@ TEMPLATE;
         get => \$this->getData(self::{$constant}_DATA_INDEX);
         set => \$this->setData(self::{$constant}_DATA_INDEX, \$value);
     }
-
 TEMPLATE;
             $i++;
         }
 
-        $content .= <<<'TEMPLATE'
-}
-
-TEMPLATE;
-
-        return $content;
+        return trim(implode(PHP_EOL, $properties));
     }
 }
