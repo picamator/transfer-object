@@ -17,7 +17,8 @@ final class NamespaceTemplateExpander extends AbstractTemplateExpander
     #[Override]
     protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        return $this->getNamespaceTransfer($propertyTransfer) !== null;
+        return $propertyTransfer->transferType?->namespace !== null
+            || $propertyTransfer->collectionType?->namespace !== null;
     }
 
     protected function handleExpander(
