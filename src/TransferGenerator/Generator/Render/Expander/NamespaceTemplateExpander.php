@@ -25,9 +25,8 @@ final class NamespaceTemplateExpander extends AbstractTemplateExpander
     ): void {
         /** @var \Picamator\TransferObject\Generated\DefinitionNamespaceTransfer $namespaceTransfer */
         $namespaceTransfer = $this->getNamespaceTransfer($propertyTransfer);
-        $namespace = $namespaceTransfer->fullName;
 
-        $this->expandImports($namespace, $templateTransfer);
+        $this->expandImports($namespaceTransfer->fullName, $templateTransfer);
         $this->expandImports(TransferEnum::INTERFACE, $templateTransfer);
     }
 

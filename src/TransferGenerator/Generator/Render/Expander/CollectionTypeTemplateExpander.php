@@ -43,9 +43,8 @@ final class CollectionTypeTemplateExpander extends AbstractTemplateExpander
     private function getPropertyDockBlock(DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer): string
     {
         $propertyType = $embeddedTypeTransfer->name;
-        $namespaceTransfer = $embeddedTypeTransfer->namespace;
 
-        if ($namespaceTransfer !== null) {
+        if ($embeddedTypeTransfer->namespace !== null) {
             $propertyType = $this->enforceTransferInterface($propertyType);
         }
 
