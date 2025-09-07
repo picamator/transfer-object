@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
+use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeTemplateEnum;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
@@ -23,20 +24,20 @@ final class NumberTypeTemplateExpander extends AbstractTemplateExpander
         $templateTransfer->imports[AttributeEnum::NUMBER_TYPE_ATTRIBUTE->value]
             ??= AttributeEnum::NUMBER_TYPE_ATTRIBUTE->value;
 
-        $importNumber = $propertyTransfer->numberType?->namespace?->fullName ?: '';
+        /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer */
+        $embeddedTypeTransfer = $propertyTransfer->numberType;
 
-        $templateTransfer->imports[$importNumber] ??= $importNumber;
+        $className = $embeddedTypeTransfer->namespace?->fullName ?: '';
+        $templateTransfer->imports[$className] ??= $className;
 
         $propertyName = $propertyTransfer->propertyName;
-        $numberClassName = $propertyTransfer->numberType?->name ?: '';
-
-        $templateTransfer->properties[$propertyName] = $numberClassName;
-        $templateTransfer->attributes[$propertyName] = $this->getPropertyAttribute($numberClassName);
+        $templateTransfer->properties[$propertyName] = $embeddedTypeTransfer->name;
+        $templateTransfer->attributes[$propertyName] = $this->getPropertyAttribute($embeddedTypeTransfer);
         $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
     }
 
-    private function getPropertyAttribute(string $numberClassName): string
+    private function getPropertyAttribute(DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer): string
     {
-        return sprintf(AttributeTemplateEnum::NUMBER_TYPE_ATTRIBUTE->value, $numberClassName);
+        return sprintf(AttributeTemplateEnum::NUMBER_TYPE_ATTRIBUTE->value, $embeddedTypeTransfer->name);
     }
 }

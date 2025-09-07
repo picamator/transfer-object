@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
+use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEnum;
@@ -24,8 +25,11 @@ final class TransferTypeTemplateExpander extends AbstractTemplateExpander
     ): void {
         $templateTransfer->imports[AttributeEnum::TYPE_ATTRIBUTE->value] ??= AttributeEnum::TYPE_ATTRIBUTE->value;
 
+        /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer */
+        $embeddedTypeTransfer = $propertyTransfer->transferType;
         $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->properties[$propertyName] = $this->getPropertyType($propertyTransfer);
+
+        $templateTransfer->properties[$propertyName] = $this->getPropertyType($embeddedTypeTransfer);
         $templateTransfer->attributes[$propertyName] = $this->getPropertyAttribute($propertyTransfer);
         $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
     }
@@ -37,10 +41,10 @@ final class TransferTypeTemplateExpander extends AbstractTemplateExpander
         return sprintf(AttributeTemplateEnum::TYPE_ATTRIBUTE->value, $transferType);
     }
 
-    private function getPropertyType(DefinitionPropertyTransfer $propertyTransfer): string
+    private function getPropertyType(DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer): string
     {
-        $propertyType = $propertyTransfer->transferType?->name ?: '';
-        $namespaceTransfer = $propertyTransfer->transferType?->namespace;
+        $propertyType = $embeddedTypeTransfer->name;
+        $namespaceTransfer = $embeddedTypeTransfer->namespace;
 
         if ($namespaceTransfer === null) {
             return $propertyType;

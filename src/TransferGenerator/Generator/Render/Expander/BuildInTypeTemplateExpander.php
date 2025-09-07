@@ -22,17 +22,20 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
+        /** @var \Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum $buildInTypeEnum */
+        $buildInTypeEnum = $propertyTransfer->buildInType;
+
         $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->properties[$propertyName] = $propertyTransfer->buildInType?->value;
+        $templateTransfer->properties[$propertyName] = $buildInTypeEnum->value;
         $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
 
-        if ($propertyTransfer->buildInType?->isArrayObject()) {
+        if ($buildInTypeEnum->isArrayObject()) {
             $this->expandArrayObjectType($propertyTransfer, $templateTransfer);
 
             return;
         }
 
-        if ($propertyTransfer->buildInType?->isArray()) {
+        if ($buildInTypeEnum->isArray()) {
             $this->expandArrayType($propertyTransfer, $templateTransfer);
         }
     }
@@ -41,11 +44,10 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $propertyName = $propertyTransfer->propertyName;
-
         $templateTransfer->imports[AttributeEnum::ARRAY_TYPE_ATTRIBUTE->value]
             ??= AttributeEnum::ARRAY_TYPE_ATTRIBUTE->value;
 
+        $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->attributes[$propertyName] = AttributeTemplateEnum::ARRAY_TYPE_ATTRIBUTE->value;
         $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY->value;
         $templateTransfer->nullables[$propertyName] = false;
@@ -55,12 +57,11 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $propertyName = $propertyTransfer->propertyName;
-
         $templateTransfer->imports[BuildInTypeEnum::ARRAY_OBJECT->value] ??= BuildInTypeEnum::ARRAY_OBJECT->value;
         $templateTransfer->imports[AttributeEnum::ARRAY_OBJECT_TYPE_ATTRIBUTE->value]
             ??= AttributeEnum::ARRAY_OBJECT_TYPE_ATTRIBUTE->value;
 
+        $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->attributes[$propertyName] = AttributeTemplateEnum::ARRAY_OBJECT_TYPE_ATTRIBUTE->value;
         $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY_OBJECT->value;
         $templateTransfer->nullables[$propertyName] = false;

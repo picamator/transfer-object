@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
+use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeTemplateEnum;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
@@ -23,19 +24,20 @@ final class EnumTypeTemplateExpander extends AbstractTemplateExpander
         $templateTransfer->imports[AttributeEnum::ENUM_TYPE_ATTRIBUTE->value]
             ??= AttributeEnum::ENUM_TYPE_ATTRIBUTE->value;
 
-        $importEnum = $propertyTransfer->enumType?->namespace?->fullName ?: '';
-        $templateTransfer->imports[$importEnum] ??= $importEnum;
+        /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer */
+        $embeddedTypeTransfer = $propertyTransfer->enumType;
+
+        $className = $embeddedTypeTransfer->namespace?->fullName ?: '';
+        $templateTransfer->imports[$className] ??= $className;
 
         $propertyName = $propertyTransfer->propertyName;
-        $enumClassName = $propertyTransfer->enumType?->name ?: '';
-
-        $templateTransfer->properties[$propertyName] = $enumClassName;
-        $templateTransfer->attributes[$propertyName] = $this->getPropertyAttribute($enumClassName);
+        $templateTransfer->properties[$propertyName] = $embeddedTypeTransfer->name;
+        $templateTransfer->attributes[$propertyName] = $this->getPropertyAttribute($embeddedTypeTransfer);
         $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
     }
 
-    private function getPropertyAttribute(string $enumClassName): string
+    private function getPropertyAttribute(DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer): string
     {
-        return sprintf(AttributeTemplateEnum::ENUM_TYPE_ATTRIBUTE->value, $enumClassName);
+        return sprintf(AttributeTemplateEnum::ENUM_TYPE_ATTRIBUTE->value, $embeddedTypeTransfer->name);
     }
 }
