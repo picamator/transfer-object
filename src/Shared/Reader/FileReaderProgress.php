@@ -6,6 +6,7 @@ namespace Picamator\TransferObject\Shared\Reader;
 
 use Generator;
 use Picamator\TransferObject\Generated\FileReaderProgressTransfer;
+use Picamator\TransferObject\Shared\Exception\FileReaderException;
 use Picamator\TransferObject\Shared\Filesystem\FileReaderInterface;
 
 readonly class FileReaderProgress implements FileReaderProgressInterface
@@ -17,9 +18,14 @@ readonly class FileReaderProgress implements FileReaderProgressInterface
 
     public function readFile(string $filename): Generator
     {
-        $contentIterator = $this->fileReader->readFile($filename);
         $progressTransfer = $this->createProgressTransfer($filename);
+        if ($progressTransfer->totalBytes === 0) {
+            throw new FileReaderException(
+                sprintf('File "%s" is empty.', $filename),
+            );
+        }
 
+        $contentIterator = $this->fileReader->readFile($filename);
         foreach ($contentIterator as $content) {
             $progressTransfer->content = $content;
             $progressTransfer->progressBytes += strlen($content);

@@ -126,10 +126,6 @@ MESSAGE;
         ?ProgressBar $progressBar,
     ): void {
         $step = $bulkTransfer->progress->progressBytes;
-        if ($step === 0) {
-            return;
-        }
-
         $progressBar?->advance($step);
     }
 

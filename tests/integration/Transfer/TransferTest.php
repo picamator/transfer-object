@@ -236,6 +236,7 @@ class TransferTest extends TestCase
     #[TestWith([[ItemTransfer::I_AM_ARRAY => true]])]
     #[TestWith([[ItemTransfer::I_AM_ARRAY_OBJECT => true]])]
     #[TestWith([[ItemTransfer::I_AM_ENUM => true]])]
+    #[TestWith([[ItemTransfer::I_AM_DATE_TIME => true]])]
     public function testItemTransferAttributeTypeMismatchFromArrayShouldRiseException(array $data): void
     {
         // Arrange

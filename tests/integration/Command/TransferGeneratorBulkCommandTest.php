@@ -11,6 +11,10 @@ use Symfony\Component\Console\Tester\CommandTester;
 class TransferGeneratorBulkCommandTest extends TestCase
 {
     private const string SUCCESS_CONFIG_LIST_PATH = '/tests/integration/Command/data/config/success/config.list.txt';
+
+    private const string ERROR_CONFIG_EMPTY_LIST_PATH
+        = '/tests/integration/Command/data/config/error/config.empty.list.txt';
+
     private const string ERROR_CONFIG_LIST_PATH = '/tests/integration/Command/data/config/error/config.list.txt';
 
     private CommandTester $commandTester;
@@ -41,7 +45,7 @@ class TransferGeneratorBulkCommandTest extends TestCase
 
         // Assert
         $this->assertSame(1, $this->commandTester->getStatusCode());
-        $this->assertStringContainsString('Failed to open file', $output);
+        $this->assertStringContainsString('[ERROR] File', $output);
     }
 
     public function testRunCommandWithValidConfigurationShouldShowSuccessMessage(): void
@@ -55,6 +59,19 @@ class TransferGeneratorBulkCommandTest extends TestCase
         // Assert
         $this->commandTester->assertCommandIsSuccessful();
         $this->assertStringContainsString('All Transfer Objects were generated successfully!', $output);
+    }
+
+    public function testRunCommandWithEmptyConfigurationShouldShowErrorMessage(): void
+    {
+        // Act
+        $this->commandTester->execute(
+            ['-b' => self::ERROR_CONFIG_EMPTY_LIST_PATH],
+        );
+        $output = $this->commandTester->getDisplay();
+
+        // Assert
+        $this->assertSame(1, $this->commandTester->getStatusCode());
+        $this->assertStringContainsString('[ERROR] File', $output);
     }
 
     public function testRunCommandWithValidConfigurationButInvalidDefinitionShouldShowErrorMessage(): void

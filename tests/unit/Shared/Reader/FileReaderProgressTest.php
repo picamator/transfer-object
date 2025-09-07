@@ -8,6 +8,7 @@ use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\FileReaderProgressTransfer;
+use Picamator\TransferObject\Shared\Exception\FileReaderException;
 use Picamator\TransferObject\Shared\Filesystem\FileReaderInterface;
 use Picamator\TransferObject\Shared\Reader\FileReaderProgress;
 
@@ -58,5 +59,27 @@ class FileReaderProgressTest extends TestCase
         $this->assertSame($filesize, $actual->totalBytes);
         $this->assertSame($filesize, $actual->progressBytes);
         $this->assertSame($fileLine, $actual->content);
+    }
+
+    public function testEmptyFileShouldThrowException(): void
+    {
+        // Arrange
+        $filename = 'some-path/test.txt';
+        $filesize = 0;
+
+        // Expect
+        $this->fileReaderMock->expects($this->never())
+            ->method('readFile');
+
+        $this->fileReaderProgressMock->expects($this->once())
+            ->method('filesize')
+            ->with($filename)
+            ->willReturn($filesize);
+
+        // Expect
+        $this->expectException(FileReaderException::class);
+
+        // Act
+        $this->fileReaderProgressMock->readFile($filename)->current();
     }
 }

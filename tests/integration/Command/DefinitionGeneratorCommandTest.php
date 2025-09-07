@@ -29,7 +29,7 @@ class DefinitionGeneratorCommandTest extends TestCase
     {
         // Act
         $this->commandTester->setInputs([
-            '/tests/integration/Command/Generated/Definition',
+            '/tests/integration/Command/Generated/Definition/Success',
             'Customer',
             '/tests/integration/Command/data/api-response/success/customer.json',
         ]);
@@ -43,6 +43,26 @@ class DefinitionGeneratorCommandTest extends TestCase
             'Successfully generated 1 definition file(s)!',
             $output,
         );
-        $this->assertFileExists(__DIR__ . '/Generated/Definition/customer.transfer.yml');
+        $this->assertFileExists(__DIR__ . '/Generated/Definition/Success/customer.transfer.yml');
+    }
+
+    public function testRunCommandWithInvalidJsonShouldShowErrorMessage(): void
+    {
+        // Act
+        $this->commandTester->setInputs([
+            '/tests/integration/Command/Generated/Definition/Error',
+            'Customer',
+            '/tests/integration/Command/data/api-response/error/customer.json',
+        ]);
+
+        $this->commandTester->execute([]);
+        $output = $this->commandTester->getDisplay();
+
+        // Assert
+        $this->assertSame(1, $this->commandTester->getStatusCode());
+        $this->assertStringContainsString(
+            '[ERROR] Invalid property name "0".',
+            $output,
+        );
     }
 }
