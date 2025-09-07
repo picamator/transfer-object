@@ -6,9 +6,6 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Template;
 
 use Picamator\TransferObject\Generated\TemplateTransfer;
 
-/**
- * phpcs:disable Generic.Files.LineLength
- */
 readonly class Template
 {
     public function __construct(private TemplateHelperInterface $helper)
@@ -65,7 +62,7 @@ TEMPLATE;
     protected const string {$constant}_DATA_NAME = '$constant';
     protected const int {$constant}_DATA_INDEX = $i;
 {$this->helper->renderDockBlock($property)}
-    public{$this->helper->renderProtected($property)} {$this->helper->renderNullable($property)}{$templateTransfer->properties[$property]} \$$property {
+    public{$this->helper->renderPropertyDeclaration($property)} \$$property {
         get => \$this->getData(self::{$constant}_DATA_INDEX);
         set => \$this->setData(self::{$constant}_DATA_INDEX, \$value);
     }

@@ -18,7 +18,7 @@ interface TemplateHelperInterface
 
     public function renderDockBlock(string $property): string;
 
-    public function renderNullable(string $property): string;
+    public function renderPropertyDeclaration(string $property): string;
 
-    public function renderProtected(string $property): string;
+    public function renderNullable(string $property): string;
 }

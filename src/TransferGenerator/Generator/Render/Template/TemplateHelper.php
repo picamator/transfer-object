@@ -69,6 +69,14 @@ class TemplateHelper implements TemplateHelperInterface
         return self::PADDING_LEFT . $dockBlock;
     }
 
+    public function renderPropertyDeclaration(string $property): string
+    {
+        /** @var string $propertyType */
+        $propertyType = $this->templateTransfer->properties[$property];
+
+        return "{$this->renderProtected($property)} {$this->renderNullable($property)}$propertyType";
+    }
+
     public function renderNullable(string $property): string
     {
         /** @var string $propertyType */
@@ -84,7 +92,7 @@ class TemplateHelper implements TemplateHelperInterface
         return self::NULLABLE_TYPE;
     }
 
-    public function renderProtected(string $property): string
+    private function renderProtected(string $property): string
     {
         return $this->templateTransfer->protects[$property] ? self::PROTECTED_SET : self::EMPTY_STRING;
     }
