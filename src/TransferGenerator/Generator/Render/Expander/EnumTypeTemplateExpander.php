@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
 use Override;
-use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEmbeddedTemplateEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEnum;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeTemplateEnum;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 
@@ -32,11 +31,6 @@ final class EnumTypeTemplateExpander extends AbstractTemplateExpander
         $this->expandEmbeddedType($propertyTransfer, $embeddedTypeTransfer, $templateTransfer);
 
         $templateTransfer->attributes[$propertyTransfer->propertyName]
-            = $this->getPropertyAttribute($embeddedTypeTransfer);
-    }
-
-    private function getPropertyAttribute(DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer): string
-    {
-        return sprintf(AttributeTemplateEnum::ENUM_TYPE_ATTRIBUTE->value, $embeddedTypeTransfer->name);
+            = AttributeEmbeddedTemplateEnum::ENUM_TYPE_ATTRIBUTE->renderTemplate($embeddedTypeTransfer);
     }
 }

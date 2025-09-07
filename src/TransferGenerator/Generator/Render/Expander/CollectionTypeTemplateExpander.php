@@ -9,8 +9,8 @@ use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEmbeddedTemplateEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEnum;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeTemplateEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\DockBlockTemplateEnum;
 
 final class CollectionTypeTemplateExpander extends AbstractTemplateExpander
@@ -35,9 +35,11 @@ final class CollectionTypeTemplateExpander extends AbstractTemplateExpander
 
         $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->properties[$propertyName] = BuildInTypeEnum::ARRAY_OBJECT->value;
-        $templateTransfer->attributes[$propertyName] = $this->getPropertyAttribute($embeddedTypeTransfer);
         $templateTransfer->dockBlocks[$propertyName] = $this->getPropertyDockBlock($embeddedTypeTransfer);
         $templateTransfer->nullables[$propertyName] = false;
+
+        $templateTransfer->attributes[$propertyName]
+            = AttributeEmbeddedTemplateEnum::COLLECTION_TYPE_ATTRIBUTE->renderTemplate($embeddedTypeTransfer);
     }
 
     private function getPropertyDockBlock(DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer): string
@@ -50,10 +52,5 @@ final class CollectionTypeTemplateExpander extends AbstractTemplateExpander
         }
 
         return sprintf(DockBlockTemplateEnum::COLLECTION->value, $propertyType);
-    }
-
-    private function getPropertyAttribute(DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer): string
-    {
-        return sprintf(AttributeTemplateEnum::COLLECTION_TYPE_ATTRIBUTE->value, $embeddedTypeTransfer->name);
     }
 }
