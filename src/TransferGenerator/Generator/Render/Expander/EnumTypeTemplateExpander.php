@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
+use Override;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeTemplateEnum;
@@ -14,6 +15,7 @@ final class EnumTypeTemplateExpander extends AbstractTemplateExpander
 {
     use TemplateExpanderTrait;
 
+    #[Override]
     protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
         return $propertyTransfer->enumType !== null;
