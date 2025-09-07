@@ -11,6 +11,8 @@ use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransferEnum;
 
 final class NamespaceTemplateExpander extends AbstractTemplateExpander
 {
+    use TemplateExpanderTrait;
+
     protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
         return $this->getNamespaceTransfer($propertyTransfer) !== null;
@@ -24,8 +26,8 @@ final class NamespaceTemplateExpander extends AbstractTemplateExpander
         $namespaceTransfer = $this->getNamespaceTransfer($propertyTransfer);
         $namespace = $namespaceTransfer->fullName;
 
-        $templateTransfer->imports[$namespace] ??= $namespace;
-        $templateTransfer->imports[TransferEnum::INTERFACE->value] ??= TransferEnum::INTERFACE->value;
+        $this->expandImports($namespace, $templateTransfer);
+        $this->expandImports(TransferEnum::INTERFACE, $templateTransfer);
     }
 
     private function getNamespaceTransfer(DefinitionPropertyTransfer $propertyTransfer): ?DefinitionNamespaceTransfer

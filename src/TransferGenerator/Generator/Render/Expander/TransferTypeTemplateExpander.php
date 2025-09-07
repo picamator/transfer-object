@@ -23,22 +23,20 @@ final class TransferTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $templateTransfer->imports[AttributeEnum::TYPE_ATTRIBUTE->value] ??= AttributeEnum::TYPE_ATTRIBUTE->value;
+        $this->expandImports(AttributeEnum::TYPE_ATTRIBUTE, $templateTransfer);
 
         /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer */
         $embeddedTypeTransfer = $propertyTransfer->transferType;
-        $propertyName = $propertyTransfer->propertyName;
 
+        $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->properties[$propertyName] = $this->getPropertyType($embeddedTypeTransfer);
-        $templateTransfer->attributes[$propertyName] = $this->getPropertyAttribute($propertyTransfer);
+        $templateTransfer->attributes[$propertyName] = $this->getPropertyAttribute($embeddedTypeTransfer);
         $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
     }
 
-    private function getPropertyAttribute(DefinitionPropertyTransfer $propertyTransfer): string
+    private function getPropertyAttribute(DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer): string
     {
-        $transferType = $propertyTransfer->transferType?->name ?: '';
-
-        return sprintf(AttributeTemplateEnum::TYPE_ATTRIBUTE->value, $transferType);
+        return sprintf(AttributeTemplateEnum::TYPE_ATTRIBUTE->value, $embeddedTypeTransfer->name);
     }
 
     private function getPropertyType(DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer): string

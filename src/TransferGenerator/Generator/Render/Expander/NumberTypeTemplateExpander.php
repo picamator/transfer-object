@@ -12,6 +12,8 @@ use Picamator\TransferObject\Generated\TemplateTransfer;
 
 final class NumberTypeTemplateExpander extends AbstractTemplateExpander
 {
+    use TemplateExpanderTrait;
+
     protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
         return $propertyTransfer->numberType !== null;
@@ -21,19 +23,14 @@ final class NumberTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $templateTransfer->imports[AttributeEnum::NUMBER_TYPE_ATTRIBUTE->value]
-            ??= AttributeEnum::NUMBER_TYPE_ATTRIBUTE->value;
+        $this->expandImports(AttributeEnum::NUMBER_TYPE_ATTRIBUTE, $templateTransfer);
 
         /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer */
         $embeddedTypeTransfer = $propertyTransfer->numberType;
+        $this->expandEmbeddedType($propertyTransfer, $embeddedTypeTransfer, $templateTransfer);
 
-        $className = $embeddedTypeTransfer->namespace?->fullName ?: '';
-        $templateTransfer->imports[$className] ??= $className;
-
-        $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->properties[$propertyName] = $embeddedTypeTransfer->name;
-        $templateTransfer->attributes[$propertyName] = $this->getPropertyAttribute($embeddedTypeTransfer);
-        $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
+        $templateTransfer->attributes[$propertyTransfer->propertyName]
+            = $this->getPropertyAttribute($embeddedTypeTransfer);
     }
 
     private function getPropertyAttribute(DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer): string
