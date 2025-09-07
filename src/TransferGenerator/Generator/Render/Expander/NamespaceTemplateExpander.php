@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
-use Override;
 use Picamator\TransferObject\Generated\DefinitionNamespaceTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
@@ -14,7 +13,6 @@ final class NamespaceTemplateExpander extends AbstractTemplateExpander
 {
     use TemplateExpanderTrait;
 
-    #[Override]
     protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
         return $propertyTransfer->transferType?->namespace !== null

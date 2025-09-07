@@ -31,13 +31,7 @@ abstract class AbstractBuilderExpander implements BuilderExpanderInterface
         $this->nextExpander?->expandBuilderTransfer($content, $builderTransfer);
     }
 
-    /**
-     * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
-     */
-    protected function isApplicable(BuilderContentInterface $content): bool
-    {
-        return true;
-    }
+    abstract protected function isApplicable(BuilderContentInterface $content): bool;
 
     abstract protected function handleExpander(
         BuilderContentInterface $content,

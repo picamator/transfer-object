@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator\Builder\Expander;
 
-use Override;
 use Picamator\TransferObject\DefinitionGenerator\Builder\BuilderContentInterface;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
@@ -16,7 +15,6 @@ final class TransferTypeBuilderExpander extends AbstractBuilderExpander
     use BuilderExpanderTrait;
     use VariableValidatorTrait;
 
-    #[Override]
     protected function isApplicable(BuilderContentInterface $content): bool
     {
         if (!$content->getType()->isArray() || empty($content->getPropertyValue())) {

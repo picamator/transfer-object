@@ -13,6 +13,14 @@ final class MetaConstantsTemplateExpander extends AbstractTemplateExpander
 
     private const string META_CONSTANT_ONLY_UPPER_CASE_REGEX = '#^[A-Z]+$#';
 
+    /**
+     * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
+     */
+    protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): true
+    {
+        return true;
+    }
+
     protected function handleExpander(
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,

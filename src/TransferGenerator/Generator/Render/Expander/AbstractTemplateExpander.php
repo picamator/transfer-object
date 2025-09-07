@@ -32,10 +32,7 @@ abstract class AbstractTemplateExpander implements TemplateExpanderInterface
     /**
      * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
      */
-    protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
-    {
-        return true;
-    }
+    abstract protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool;
 
     abstract protected function handleExpander(
         DefinitionPropertyTransfer $propertyTransfer,
