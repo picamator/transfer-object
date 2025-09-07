@@ -26,20 +26,20 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        /** @var \Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum $buildInTypeEnum */
-        $buildInTypeEnum = $propertyTransfer->buildInType;
+        /** @var \Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum $buildInType */
+        $buildInType = $propertyTransfer->buildInType;
 
         $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->properties[$propertyName] = $buildInTypeEnum->value;
+        $templateTransfer->properties[$propertyName] = $buildInType->value;
         $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
 
-        if ($buildInTypeEnum->isArrayObject()) {
+        if ($buildInType->isArrayObject()) {
             $this->expandArrayObjectType($propertyTransfer, $templateTransfer);
 
             return;
         }
 
-        if ($buildInTypeEnum->isArray()) {
+        if ($buildInType->isArray()) {
             $this->expandArrayType($propertyTransfer, $templateTransfer);
         }
     }
