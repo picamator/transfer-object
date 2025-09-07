@@ -94,11 +94,16 @@ abstract class AbstractTransfer implements TransferInterface
     final public function toArray(): array
     {
         $data = [];
-        foreach (static::META_DATA as $metaKey => $metaName) {
-            $dataItem = $this->{$metaKey};
-            $attribute = $this->getConstantAttribute($metaName);
+        $attributes = $this->getTypeAttributes();
 
-            $data[$metaKey] = $attribute !== null ? $attribute->toArray($dataItem) : $dataItem;
+        foreach (static::META_DATA as $metaKey => $metaName) {
+            if (isset($attributes[$metaName])) {
+                $data[$metaKey] = $attributes[$metaName]->toArray($this->{$metaKey});
+
+                continue;
+            }
+
+            $data[$metaKey] = $this->{$metaKey};
         }
 
         return $data;
@@ -119,13 +124,19 @@ abstract class AbstractTransfer implements TransferInterface
             return $this;
         }
 
+        $attributes = $this->getTypeAttributes();
         foreach (static::META_DATA as $metaKey => $metaName) {
             if (!isset($data[$metaKey])) {
                 continue;
             }
 
-            $attribute = $this->getConstantAttribute($metaName);
-            $this->{$metaKey} = $attribute !== null ? $attribute->fromArray($data[$metaKey]) : $data[$metaKey];
+            if (isset($attributes[$metaName])) {
+                $this->{$metaKey} = $attributes[$metaName]->fromArray($data[$metaKey]);
+
+                continue;
+            }
+
+            $this->{$metaKey} = $data[$metaKey];
         }
 
         return $this;
@@ -145,10 +156,10 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->_data = new SplFixedArray(static::META_DATA_SIZE);
 
-        foreach (static::META_DATA as $metaName) {
+        foreach ($this->getInitialAttributes() as $metaName => $attribute) {
             $metaIndex = $metaName . self::DATA_INDEX_SUFFIX;
             // @phpstan-ignore offsetAssign.dimType
-            $this->_data[static::{$metaIndex}] = $this->getConstantInitialAttribute($metaName)?->getInitialValue();
+            $this->_data[static::{$metaIndex}] = $attribute->getInitialValue();
         }
     }
 }
