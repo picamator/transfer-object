@@ -13,27 +13,44 @@ trait TransferBuilderTrait
     use DataAssertTrait;
 
     /**
-     * @param class-string $typeName
+     * Specification:
+     * - Uses lazy loading to postpone initiating embedded transfer objects.
      *
-     * @throws \Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException
+     * @link https://www.php.net/manual/en/language.oop5.lazy-objects.php
+     * @link https://wiki.php.net/rfc/lazy-objects
+     *
+     * @param class-string<AbstractTransfer|TransferInterface> $typeName
      */
     final protected function createTransfer(string $typeName, mixed $data): TransferInterface
     {
         $this->assertArray($data);
 
-        /** @var array<string, mixed> $data */
         $reflection = new ReflectionClass($typeName);
 
-        if (is_subclass_of($typeName, AbstractTransfer::class)) {
-            // @phpstan-ignore argument.type, return.type
-            return $reflection->newLazyGhost(function (AbstractTransfer $object) use ($data): void {
+        if ($reflection->isSubclassOf(AbstractTransfer::class)) {
+            /**
+             * @var TransferInterface $transfer
+             * @var array<string, mixed> $data
+             *
+             * @phpstan-ignore argument.type
+             */
+            $transfer = $reflection->newLazyGhost(function (AbstractTransfer $object) use ($data): void {
                 $object->__construct($data);
             });
+
+            return $transfer;
         }
 
-        // @phpstan-ignore argument.type, return.type
-        return $reflection->newLazyGhost(function (TransferInterface $object) use ($data): void {
+        /**
+         * @var TransferInterface $transfer
+         * @var array<string, mixed> $data
+         *
+         * @phpstan-ignore argument.type
+         */
+        $transfer = $reflection->newLazyGhost(function (TransferInterface $object) use ($data): void {
             $object->fromArray($data);
         });
+
+        return $transfer;
     }
 }
