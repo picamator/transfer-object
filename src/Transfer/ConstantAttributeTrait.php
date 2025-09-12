@@ -8,8 +8,8 @@ use Generator;
 use Picamator\TransferObject\Transfer\Attribute\InitialPropertyTypeAttributeInterface;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttributeInterface;
 use ReflectionAttribute;
-use ReflectionClass;
 use ReflectionClassConstant;
+use ReflectionObject;
 
 trait ConstantAttributeTrait
 {
@@ -59,6 +59,6 @@ trait ConstantAttributeTrait
      */
     private function getReflectionConstants(): array
     {
-        return new ReflectionClass($this)->getReflectionConstants(ReflectionClassConstant::IS_PUBLIC);
+        return new ReflectionObject($this)->getReflectionConstants(ReflectionClassConstant::IS_PUBLIC);
     }
 }
