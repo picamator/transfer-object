@@ -10,6 +10,8 @@ use Picamator\TransferObject\Transfer\TransferInterface;
 
 /**
  * @api
+ *
+ * @property class-string $typeName
  */
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
 final readonly class CollectionPropertyTypeAttribute implements InitialPropertyTypeAttributeInterface
