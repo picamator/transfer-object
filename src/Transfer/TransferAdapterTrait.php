@@ -10,7 +10,7 @@ use BcMath\Number;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
-use ReflectionClass;
+use ReflectionObject;
 use ReflectionProperty;
 use stdClass;
 use Traversable;
@@ -167,13 +167,8 @@ trait TransferAdapterTrait
      */
     private function getPublicProperties(): array
     {
-        if (isset($this->_propertyCache)) {
-            return $this->_propertyCache;
-        }
-
-        $reflection = new ReflectionClass($this);
-
-        return $this->_propertyCache = $reflection->getProperties(ReflectionProperty::IS_PUBLIC);
+        return $this->_propertyCache ??= new ReflectionObject($this)
+            ->getProperties(ReflectionProperty::IS_PUBLIC);
     }
 
     private function isBcMathLoaded(): bool

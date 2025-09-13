@@ -30,7 +30,6 @@ class DependencyContainer implements ContainerInterface
     protected static array $container = [];
 
     /**
-     *
      * @uses static::createFinder()
      * @uses static::createFileSystem()
      * @uses static::createYmlParser()
