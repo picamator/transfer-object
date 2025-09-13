@@ -9,6 +9,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
+use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Destatis\DestatisTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Frankfurter\ExchangeRateTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\GoogleShoppingContent\ProductTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\NasaNeo\AsteroidTransfer;
@@ -99,6 +100,12 @@ class DefinitionGeneratorFacadeTest extends TestCase
             'sampleFileName' => 'tagesschau-api-bund-dev-v2.json',
             'definitionFileName' => 'ardNews.transfer.yml',
         ];
+
+        yield 'Destatis' => [
+            'className' => 'Destatis',
+            'sampleFileName' => 'genesis-destatis-find.json',
+            'definitionFileName' => 'destatis.transfer.yml',
+        ];
     }
 
     #[DataProvider('configPathDataProvider')]
@@ -140,6 +147,10 @@ class DefinitionGeneratorFacadeTest extends TestCase
 
         yield 'Tagesschau' => [
             'tagesschau-api-bund-dev-v2.json',
+        ];
+
+        yield 'Destatis' => [
+            'genesis-destatis-find.json',
         ];
     }
 
@@ -189,6 +200,11 @@ class DefinitionGeneratorFacadeTest extends TestCase
         yield 'Frankfurter' => [
             ExchangeRateTransfer::class,
             'frankfurter-dev-v1.json',
+        ];
+
+        yield 'Destatis' => [
+            DestatisTransfer::class,
+            'genesis-destatis-find.json',
         ];
     }
 
