@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\Transfer;
 
 use PHPUnit\Framework\Attributes\Group;
-use PHPUnit\Framework\Attributes\IgnoreDeprecations;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookmarkData;
 
 #[Group('transfer')]
-#[IgnoreDeprecations]
 class DummyTransferAdapterTest extends TestCase
 {
     private BookmarkData $bookmarkData;
@@ -30,15 +28,6 @@ class DummyTransferAdapterTest extends TestCase
 
         // Act
         $actual = $bookmarkData->toArray();
-
-        // Assert
-        $this->assertSame([], $actual);
-    }
-
-    public function testToFilterArray(): void
-    {
-        // Act
-        $actual = $this->bookmarkData->toFilterArray();
 
         // Assert
         $this->assertSame([], $actual);

@@ -10,7 +10,6 @@ use BcMath\Number;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
-use Deprecated;
 use ReflectionClass;
 use ReflectionProperty;
 use stdClass;
@@ -31,8 +30,6 @@ use Traversable;
  */
 trait TransferAdapterTrait
 {
-    use FilterArrayTrait;
-
     protected const string DATE_TIME_FORMAT = 'Y-m-d H:i:s';
 
     /**
@@ -85,17 +82,6 @@ trait TransferAdapterTrait
         }
 
         return $data;
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    #[Deprecated(message: 'Method will be removed in version 3.0.0. Use FilterArrayTrait instead.', since: '2.3.0')]
-    public function toFilterArray(?callable $callback = null): array
-    {
-        $data = $this->toArray();
-
-        return $this->filterArrayRecursive($data, $callback);
     }
 
     /**
