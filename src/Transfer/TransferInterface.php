@@ -56,6 +56,7 @@ interface TransferInterface extends IteratorAggregate, JsonSerializable, Countab
      * @param array<string,mixed> $data
      *
      * @throws \Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException
+     * @throws \ReflectionException
      */
     public function fromArray(array $data): static;
 }

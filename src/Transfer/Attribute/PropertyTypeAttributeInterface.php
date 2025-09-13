@@ -11,6 +11,7 @@ interface PropertyTypeAttributeInterface
 {
     /**
      * @throws \Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException
+     * @throws \ReflectionException
      */
     public function fromArray(mixed $data): mixed;
 

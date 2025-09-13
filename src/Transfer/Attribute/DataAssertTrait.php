@@ -20,7 +20,7 @@ trait DataAssertTrait
         throw new PropertyTypeTransferException(
             sprintf(
                 'Data must be of type array, "%s" given.',
-                get_debug_type($data)
+                get_debug_type($data),
             ),
         );
     }
@@ -34,7 +34,7 @@ trait DataAssertTrait
             sprintf(
                 'Data must be of type %s, "%s" given.',
                 $expectedType,
-                get_debug_type($data)
+                get_debug_type($data),
             ),
         );
     }
@@ -51,7 +51,7 @@ trait DataAssertTrait
         throw new PropertyTypeTransferException(
             sprintf(
                 'Data must be of type string or integer, "%s" given.',
-                get_debug_type($data)
+                get_debug_type($data),
             ),
         );
     }
