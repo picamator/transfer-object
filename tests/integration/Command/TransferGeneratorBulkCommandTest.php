@@ -21,6 +21,7 @@ class TransferGeneratorBulkCommandTest extends TestCase
 
     protected function setUp(): void
     {
+        putenv('COLUMNS=120');
         $command = new TransferGeneratorBulkCommand();
 
         $this->commandTester = new CommandTester($command);
@@ -45,7 +46,10 @@ class TransferGeneratorBulkCommandTest extends TestCase
 
         // Assert
         $this->assertSame(1, $this->commandTester->getStatusCode());
-        $this->assertStringContainsString('[ERROR] File', $output);
+        $this->assertStringContainsString(
+            '[ERROR] File "/home/transfer/transfer-object/some-invalid-path.list.txt" is not exist.',
+            $output,
+        );
     }
 
     public function testRunCommandWithValidConfigurationShouldShowSuccessMessage(): void
@@ -71,7 +75,7 @@ class TransferGeneratorBulkCommandTest extends TestCase
 
         // Assert
         $this->assertSame(1, $this->commandTester->getStatusCode());
-        $this->assertStringContainsString('[ERROR] File', $output);
+        $this->assertStringContainsString('[ERROR] File size', $output);
     }
 
     public function testRunCommandWithValidConfigurationButInvalidDefinitionShouldShowErrorMessage(): void
