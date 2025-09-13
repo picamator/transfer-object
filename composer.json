@@ -13,7 +13,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Sergii Pryz"
+            "name": "Sergii Pryz",
+            "role": "Developer"
         },
         {
             "name": "Community",
@@ -71,6 +72,7 @@
     "prefer-stable": true,
     "scripts": {
         "phpunit": "./vendor/bin/phpunit --no-progress",
+        "phpunit-group": "./vendor/bin/phpunit --no-progress --group",
         "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon --no-progress --memory-limit=512M",
         "transfer-generate": "php ./bin/transfer-generate",
         "transfer-generate-bulk": "php ./bin/transfer-generate-bulk",
@@ -81,6 +83,7 @@
     },
     "scripts-descriptions": {
         "phpunit": "Run unit and integration tests.",
+        "phpunit-group": "Run unit and integration tests assigned to the group.",
         "phpstan": "Perform static code analysis using PHPStan.",
         "transfer-generate": "Generate Transfer Objects from YML definition templates.",
         "transfer-generate-bulk": "Generate Transfer Objects based on configuration list.",

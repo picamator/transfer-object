@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Config\Environment;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRender;
 
+#[Group('transfer-generator')]
 class ConfigEnvironmentRenderTest extends TestCase
 {
     private ConfigEnvironmentRender&MockObject $renderMock;

@@ -1,0 +1,87 @@
+# $schema: https://raw.githubusercontent.com/picamator/transfer-object/main/schema/definition.schema.json
+
+# Destatis
+Destatis:
+  Ident:
+    type: Ident
+  Status:
+    type: Status
+  Parameter:
+    type: Parameter
+  Cubes:
+    type: string
+  Statistics:
+    collectionType: Statistics
+  Tables:
+    collectionType: Tables
+  Timeseries:
+    type: string
+  Variables:
+    collectionType: Variables
+  Copyright:
+    type: string
+
+# Ident
+Ident:
+  Service:
+    type: string
+  Method:
+    type: string
+
+# Status
+Status:
+  Code:
+    type: int
+  Content:
+    type: string
+  Type:
+    type: string
+
+# Parameter
+Parameter:
+  username:
+    type: string
+  password:
+    type: string
+  term:
+    type: string
+  category:
+    type: string
+  pagelength:
+    type: string
+  language:
+    type: string
+
+# Statistics
+Statistics:
+  Code:
+    type: string
+  Content:
+    type: string
+  Cubes:
+    type: string
+  Information:
+    type: string
+
+# Tables
+Tables:
+  Code:
+    type: string
+  Content:
+    type: string
+  Time:
+    type: string
+
+# Variables
+Variables:
+  Code:
+    type: string
+  Content:
+    type: string
+  Type:
+    type: string
+  Values:
+    type: string
+  Information:
+    type: string
+

@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEmbeddedTemplateEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEnum;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeTemplateEnum;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 
 final class EnumTypeTemplateExpander extends AbstractTemplateExpander
 {
+    use TemplateExpanderTrait;
+
     protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
         return $propertyTransfer->enumType !== null;
@@ -20,22 +22,13 @@ final class EnumTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $templateTransfer->imports[AttributeEnum::ENUM_TYPE_ATTRIBUTE->value]
-            ??= AttributeEnum::ENUM_TYPE_ATTRIBUTE->value;
+        $this->expandImports(AttributeEnum::ENUM_TYPE_ATTRIBUTE, $templateTransfer);
 
-        $importEnum = $propertyTransfer->enumType?->namespace?->fullName ?: '';
-        $templateTransfer->imports[$importEnum] ??= $importEnum;
+        /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer */
+        $embeddedTypeTransfer = $propertyTransfer->enumType;
+        $this->expandEmbeddedType($propertyTransfer, $embeddedTypeTransfer, $templateTransfer);
 
-        $propertyName = $propertyTransfer->propertyName;
-        $enumClassName = $propertyTransfer->enumType?->name ?: '';
-
-        $templateTransfer->properties[$propertyName] = $enumClassName;
-        $templateTransfer->attributes[$propertyName] = $this->getPropertyAttribute($enumClassName);
-        $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
-    }
-
-    private function getPropertyAttribute(string $enumClassName): string
-    {
-        return sprintf(AttributeTemplateEnum::ENUM_TYPE_ATTRIBUTE->value, $enumClassName);
+        $templateTransfer->attributes[$propertyTransfer->propertyName]
+            = AttributeEmbeddedTemplateEnum::ENUM_TYPE_ATTRIBUTE->renderTemplate($embeddedTypeTransfer);
     }
 }

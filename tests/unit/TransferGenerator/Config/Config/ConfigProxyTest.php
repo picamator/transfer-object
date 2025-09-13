@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Config\Config;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigProxy;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException;
 
+#[Group('transfer-generator')]
 class ConfigProxyTest extends TestCase
 {
     private ConfigInterface $proxy;

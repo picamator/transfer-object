@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Generator\Processor\Command;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Dependency\Exception\FilesystemException;
@@ -15,6 +16,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\Trans
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command\PreProcessCommand;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command\PreProcessCommandInterface;
 
+#[Group('transfer-generator')]
 class PreProcessCommandTest extends TestCase
 {
     private PreProcessCommandInterface $command;

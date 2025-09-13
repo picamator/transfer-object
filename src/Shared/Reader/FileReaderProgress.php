@@ -6,6 +6,7 @@ namespace Picamator\TransferObject\Shared\Reader;
 
 use Generator;
 use Picamator\TransferObject\Generated\FileReaderProgressTransfer;
+use Picamator\TransferObject\Shared\Exception\FileReaderException;
 use Picamator\TransferObject\Shared\Filesystem\FileReaderInterface;
 
 readonly class FileReaderProgress implements FileReaderProgressInterface
@@ -17,9 +18,10 @@ readonly class FileReaderProgress implements FileReaderProgressInterface
 
     public function readFile(string $filename): Generator
     {
-        $contentIterator = $this->fileReader->readFile($filename);
-        $progressTransfer = $this->createProgressTransfer($filename);
+        $totalBytes = $this->getTotalBytes($filename);
+        $progressTransfer = $this->createProgressTransfer($totalBytes);
 
+        $contentIterator = $this->fileReader->readFile($filename);
         foreach ($contentIterator as $content) {
             $progressTransfer->content = $content;
             $progressTransfer->progressBytes += strlen($content);
@@ -28,23 +30,53 @@ readonly class FileReaderProgress implements FileReaderProgressInterface
         }
     }
 
-    private function createProgressTransfer(string $filename): FileReaderProgressTransfer
+    private function createProgressTransfer(int $totalBytes): FileReaderProgressTransfer
     {
-        $filesize = (int)$this->filesize($filename);
-
         $progressTransfer = new FileReaderProgressTransfer();
-        $progressTransfer->totalBytes = $filesize;
+        $progressTransfer->totalBytes = $totalBytes;
         $progressTransfer->progressBytes = 0;
 
         return $progressTransfer;
     }
 
-    protected function filesize(string $filename): int|false
+    /**
+     * @throws \Picamator\TransferObject\Shared\Exception\FileReaderException
+     */
+    private function getTotalBytes(string $filename): int
     {
-        if (!file_exists($filename)) {
-            return false;
+        if (!$this->fileExists($filename)) {
+            throw new FileReaderException(
+                sprintf('File "%s" is not exist.', $filename),
+            );
         }
 
-        return filesize($filename);
+        $fileSize = $this->filesize($filename);
+        if ($fileSize === 0) {
+            throw new FileReaderException(
+                sprintf('File size "%s" is empty.', $filename),
+            );
+        }
+
+        if ($fileSize === false) {
+            throw new FileReaderException(
+                sprintf(
+                    'Failed to get file size "%s". Error: "%s".',
+                    $filename,
+                    error_get_last()['message'] ?? '',
+                ),
+            );
+        }
+
+        return $fileSize;
+    }
+
+    protected function filesize(string $filename): int|false
+    {
+        return @filesize($filename);
+    }
+
+    protected function fileExists(string $filename): bool
+    {
+        return file_exists($filename);
     }
 }

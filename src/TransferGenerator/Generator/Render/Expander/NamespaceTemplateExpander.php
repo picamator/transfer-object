@@ -11,20 +11,23 @@ use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransferEnum;
 
 final class NamespaceTemplateExpander extends AbstractTemplateExpander
 {
+    use TemplateExpanderTrait;
+
     protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        return $this->getNamespaceTransfer($propertyTransfer) !== null;
+        return $propertyTransfer->transferType?->namespace !== null
+            || $propertyTransfer->collectionType?->namespace !== null;
     }
 
     protected function handleExpander(
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
+        /** @var \Picamator\TransferObject\Generated\DefinitionNamespaceTransfer $namespaceTransfer */
         $namespaceTransfer = $this->getNamespaceTransfer($propertyTransfer);
-        $namespace = $namespaceTransfer?->fullName ?: '';
 
-        $templateTransfer->imports[$namespace] ??= $namespace;
-        $templateTransfer->imports[TransferEnum::INTERFACE->value] ??= TransferEnum::INTERFACE->value;
+        $this->expandImports($namespaceTransfer->fullName, $templateTransfer);
+        $this->expandImports(TransferEnum::INTERFACE, $templateTransfer);
     }
 
     private function getNamespaceTransfer(DefinitionPropertyTransfer $propertyTransfer): ?DefinitionNamespaceTransfer

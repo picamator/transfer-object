@@ -1,0 +1,5 @@
+# $schema: ./../../../../../../schema/config.schema.json
+generator:
+  transferNamespace: "Picamator\\Tests\\Integration\\TransferObject\\DefinitionGenerator\\Generated\\Destatis"
+  transferPath: "${PROJECT_ROOT}/tests/integration/DefinitionGenerator/Generated/Destatis"
+  definitionPath: "${PROJECT_ROOT}/tests/integration/DefinitionGenerator/data/config/genesis-destatis-find/definition"

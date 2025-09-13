@@ -11,7 +11,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Proper
 
 readonly class ContentBuilder implements ContentBuilderInterface
 {
-    private const TypeSuffixEnum CLASS_SUFFIX = TypeSuffixEnum::TRANSFER;
+    private const TypeSuffixEnum TYPE_SUFFIX = TypeSuffixEnum::TRANSFER;
 
     public function __construct(
         private PropertyExpanderInterface $propertyExpander,
@@ -21,7 +21,7 @@ readonly class ContentBuilder implements ContentBuilderInterface
     public function createContentTransfer(string $className, array $properties): DefinitionContentTransfer
     {
         $contentTransfer = new DefinitionContentTransfer();
-        $contentTransfer->className = self::CLASS_SUFFIX->getClassName($className);
+        $contentTransfer->className = self::TYPE_SUFFIX->getClassName($className);
 
         foreach ($properties as $propertyName => $propertyType) {
             $contentTransfer->properties[] = $this->createPropertyTransfer((string)$propertyName, $propertyType);

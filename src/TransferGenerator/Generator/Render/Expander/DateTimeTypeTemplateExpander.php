@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEmbeddedTemplateEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEnum;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeTemplateEnum;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 
 final class DateTimeTypeTemplateExpander extends AbstractTemplateExpander
 {
+    use TemplateExpanderTrait;
+
     protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
         return $propertyTransfer->dateTimeType !== null;
@@ -20,23 +22,13 @@ final class DateTimeTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $templateTransfer->imports[AttributeEnum::DATE_TIME_TYPE_ATTRIBUTE->value]
-            ??= AttributeEnum::DATE_TIME_TYPE_ATTRIBUTE->value;
+        $this->expandImports(AttributeEnum::DATE_TIME_TYPE_ATTRIBUTE, $templateTransfer);
 
-        $importDateTime = $propertyTransfer->dateTimeType?->namespace?->fullName ?: '';
+        /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer */
+        $embeddedTypeTransfer = $propertyTransfer->dateTimeType;
+        $this->expandEmbeddedType($propertyTransfer, $embeddedTypeTransfer, $templateTransfer);
 
-        $templateTransfer->imports[$importDateTime] ??= $importDateTime;
-
-        $propertyName = $propertyTransfer->propertyName;
-        $dateTimeClassName = $propertyTransfer->dateTimeType?->name ?: '';
-
-        $templateTransfer->properties[$propertyName] = $dateTimeClassName;
-        $templateTransfer->attributes[$propertyName] = $this->getPropertyAttribute($dateTimeClassName);
-        $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
-    }
-
-    private function getPropertyAttribute(string $dateTimeClassName): string
-    {
-        return sprintf(AttributeTemplateEnum::DATE_TIME_TYPE_ATTRIBUTE->value, $dateTimeClassName);
+        $templateTransfer->attributes[$propertyTransfer->propertyName]
+            = AttributeEmbeddedTemplateEnum::DATE_TIME_TYPE_ATTRIBUTE->renderTemplate($embeddedTypeTransfer);
     }
 }

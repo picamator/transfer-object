@@ -21,7 +21,6 @@ final class ProtectedTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->protects[$propertyName] = $propertyTransfer->isProtected;
+        $templateTransfer->protects[$propertyTransfer->propertyName] = $propertyTransfer->isProtected;
     }
 }

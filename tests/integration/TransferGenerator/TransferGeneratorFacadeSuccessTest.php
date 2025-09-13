@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Integration\TransferObject\TransferGenerator;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 
+#[Group('transfer-generator')]
 class TransferGeneratorFacadeSuccessTest extends TestCase
 {
     use TransferGeneratorHelperTrait;

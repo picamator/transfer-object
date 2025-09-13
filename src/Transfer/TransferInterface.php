@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Transfer;
 
 use Countable;
+use Deprecated;
 use IteratorAggregate;
 use JsonSerializable;
 
@@ -36,10 +37,13 @@ interface TransferInterface extends IteratorAggregate, JsonSerializable, Countab
      *
      * @api
      *
+     * @deprecated Method will be removed in version 3.0.0. Use FilterArrayTrait instead.
+     *
      * @param callable|null $callback Optional. A callback function to apply to each property.
      *                                If null, empty entries will be removed.
      * @return array<string,mixed>
      */
+    #[Deprecated(message: 'Method will be removed in version 3.0.0. Use FilterArrayTrait instead.', since: '2.3.0')]
     public function toFilterArray(?callable $callback = null): array;
 
     /**

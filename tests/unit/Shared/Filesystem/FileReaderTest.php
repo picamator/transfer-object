@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Unit\TransferObject\Shared\Filesystem;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Unit\TransferObject\Helper\FileStreamHelperTrait;
 use Picamator\TransferObject\Shared\Exception\FileReaderException;
 use Picamator\TransferObject\Shared\Filesystem\FileReader;
 
+#[Group('shared')]
 class FileReaderTest extends TestCase
 {
     use FileStreamHelperTrait;

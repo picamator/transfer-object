@@ -7,7 +7,9 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
+use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Destatis\DestatisTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Frankfurter\ExchangeRateTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\GoogleShoppingContent\ProductTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\NasaNeo\AsteroidTransfer;
@@ -17,11 +19,14 @@ use Picamator\Tests\Integration\TransferObject\Helper\DefinitionGeneratorHelperT
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacadeInterface;
+use Picamator\TransferObject\Transfer\FilterArrayTrait;
 
+#[Group('definition-generator')]
 class DefinitionGeneratorFacadeTest extends TestCase
 {
     use DefinitionGeneratorHelperTrait;
     use TransferGeneratorHelperTrait;
+    use FilterArrayTrait;
 
     private const string SAMPLE_JSON_PATH = __DIR__ . '/data/api-response/';
 
@@ -97,6 +102,12 @@ class DefinitionGeneratorFacadeTest extends TestCase
             'sampleFileName' => 'tagesschau-api-bund-dev-v2.json',
             'definitionFileName' => 'ardNews.transfer.yml',
         ];
+
+        yield 'Destatis' => [
+            'className' => 'Destatis',
+            'sampleFileName' => 'genesis-destatis-find.json',
+            'definitionFileName' => 'destatis.transfer.yml',
+        ];
     }
 
     #[DataProvider('configPathDataProvider')]
@@ -138,6 +149,10 @@ class DefinitionGeneratorFacadeTest extends TestCase
 
         yield 'Tagesschau' => [
             'tagesschau-api-bund-dev-v2.json',
+        ];
+
+        yield 'Destatis' => [
+            'genesis-destatis-find.json',
         ];
     }
 
@@ -188,6 +203,11 @@ class DefinitionGeneratorFacadeTest extends TestCase
             ExchangeRateTransfer::class,
             'frankfurter-dev-v1.json',
         ];
+
+        yield 'Destatis' => [
+            DestatisTransfer::class,
+            'genesis-destatis-find.json',
+        ];
     }
 
     #[DataProvider('matchFilteredDefinitionDataProvider')]
@@ -207,7 +227,9 @@ class DefinitionGeneratorFacadeTest extends TestCase
 
         // Act
         $transfer->fromArray($sampleContent);
-        $actual = $transfer->toFilterArray(fn (mixed $item): bool => $item !== null);
+
+        $filterCallback = fn (mixed $item): bool => $item !== null;
+        $actual = $this->filterArrayRecursive($transfer->toArray(), $filterCallback);
 
         // Assert
         $this->assertEquals($sampleContent, $actual);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Builder\Expander;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\DefinitionGenerator\Builder\BuilderContentInterface;
@@ -14,6 +15,7 @@ use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorEx
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 use stdClass;
 
+#[Group('definition-generator')]
 class BuildInTypeBuilderExpanderTest extends TestCase
 {
     private BuilderExpanderInterface $expander;

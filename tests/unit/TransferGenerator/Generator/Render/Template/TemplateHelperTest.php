@@ -6,10 +6,12 @@ namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Render
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelper;
 
+#[Group('transfer-generator')]
 class TemplateHelperTest extends TestCase
 {
     /**
@@ -23,7 +25,7 @@ class TemplateHelperTest extends TestCase
         $templateHelper = new TemplateHelper()->setTemplateTransfer($templateTransfer);
 
         // Act
-        $actual = $templateHelper->getNullable($property);
+        $actual = $templateHelper->renderNullable($property);
 
         // Assert
         $this->assertSame($expected, $actual);

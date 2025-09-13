@@ -7,6 +7,7 @@ namespace Picamator\Tests\Integration\TransferObject\Transfer;
 use ArrayObject;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\Attributes\WithoutErrorHandler;
@@ -23,6 +24,7 @@ use Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException;
 use ReflectionProperty;
 use TypeError;
 
+#[Group('transfer')]
 class TransferTest extends TestCase
 {
     use TransferGeneratorHelperTrait;
@@ -236,6 +238,7 @@ class TransferTest extends TestCase
     #[TestWith([[ItemTransfer::I_AM_ARRAY => true]])]
     #[TestWith([[ItemTransfer::I_AM_ARRAY_OBJECT => true]])]
     #[TestWith([[ItemTransfer::I_AM_ENUM => true]])]
+    #[TestWith([[ItemTransfer::I_AM_DATE_TIME => true]])]
     public function testItemTransferAttributeTypeMismatchFromArrayShouldRiseException(array $data): void
     {
         // Arrange

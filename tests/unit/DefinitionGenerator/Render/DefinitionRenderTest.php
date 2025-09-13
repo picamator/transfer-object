@@ -6,6 +6,7 @@ namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Render;
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRender;
@@ -14,6 +15,7 @@ use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 
+#[Group('definition-generator')]
 class DefinitionRenderTest extends TestCase
 {
     private const string TEST_CLASS_NAME = 'TestClass';

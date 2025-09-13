@@ -6,12 +6,14 @@ namespace Picamator\Tests\Integration\TransferObject\TransferGenerator;
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 
+#[Group('transfer-generator')]
 class TransferGeneratorFacadeErrorTest extends TestCase
 {
     use TransferGeneratorHelperTrait;

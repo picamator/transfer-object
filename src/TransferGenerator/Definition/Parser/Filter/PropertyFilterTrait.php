@@ -36,7 +36,7 @@ trait PropertyFilterTrait
 
         $filteredType = [];
         foreach ($propertyType as $key => $typeItem) {
-            if (!is_string($key)) {
+            if (is_int($key)) {
                 continue;
             }
 

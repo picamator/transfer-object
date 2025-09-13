@@ -6,6 +6,7 @@ namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Builder\Expand
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\DefinitionGenerator\Builder\BuilderContentInterface;
@@ -14,6 +15,7 @@ use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuilderExpande
 use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\TransferTypeBuilderExpander;
 use ReflectionMethod;
 
+#[Group('definition-generator')]
 class TransferTypeBuilderExpanderTest extends TestCase
 {
     private BuilderExpanderInterface $expander;
@@ -32,7 +34,6 @@ class TransferTypeBuilderExpanderTest extends TestCase
             TransferTypeBuilderExpander::class,
             'isApplicable',
         );
-        $this->isApplicableReflection->setAccessible(true);
     }
 
     /**

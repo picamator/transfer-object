@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
+use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEmbeddedTemplateEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEnum;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeTemplateEnum;
 
 final class TransferTypeTemplateExpander extends AbstractTemplateExpander
 {
@@ -22,30 +23,25 @@ final class TransferTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $templateTransfer->imports[AttributeEnum::TYPE_ATTRIBUTE->value] ??= AttributeEnum::TYPE_ATTRIBUTE->value;
+        $this->expandImports(AttributeEnum::TYPE_ATTRIBUTE, $templateTransfer);
+
+        /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer */
+        $embeddedTypeTransfer = $propertyTransfer->transferType;
 
         $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->properties[$propertyName] = $this->getPropertyType($propertyTransfer);
-        $templateTransfer->attributes[$propertyName] = $this->getPropertyAttribute($propertyTransfer);
+        $templateTransfer->properties[$propertyName] = $this->getPropertyType($embeddedTypeTransfer);
         $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
+
+        $templateTransfer->attributes[$propertyName]
+            = AttributeEmbeddedTemplateEnum::TYPE_ATTRIBUTE->renderTemplate($embeddedTypeTransfer);
     }
 
-    private function getPropertyAttribute(DefinitionPropertyTransfer $propertyTransfer): string
+    private function getPropertyType(DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer): string
     {
-        $transferType = $propertyTransfer->transferType?->name ?: '';
-
-        return sprintf(AttributeTemplateEnum::TYPE_ATTRIBUTE->value, $transferType);
-    }
-
-    private function getPropertyType(DefinitionPropertyTransfer $propertyTransfer): string
-    {
-        $propertyType = $propertyTransfer->transferType?->name ?: '';
-        $namespaceTransfer = $propertyTransfer->transferType?->namespace;
-
-        if ($namespaceTransfer === null) {
-            return $propertyType;
+        if ($embeddedTypeTransfer->namespace === null) {
+            return $embeddedTypeTransfer->name;
         }
 
-        return $this->enforceTransferInterface($propertyType);
+        return $this->enforceTransferInterface($embeddedTypeTransfer->name);
     }
 }

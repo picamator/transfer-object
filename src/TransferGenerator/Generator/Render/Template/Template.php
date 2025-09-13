@@ -6,9 +6,6 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Template;
 
 use Picamator\TransferObject\Generated\TemplateTransfer;
 
-/**
- * phpcs:disable Generic.Files.LineLength
- */
 readonly class Template
 {
     public function __construct(private TemplateHelperInterface $helper)
@@ -19,14 +16,14 @@ readonly class Template
     {
         $this->helper->setTemplateTransfer($templateTransfer);
 
-        $fileContent = <<<TEMPLATE
+        $content = <<<TEMPLATE
 <?php
 
 declare(strict_types=1);
 
 namespace $templateTransfer->classNamespace;
 
-{$this->helper->renderKeyValue($templateTransfer->imports, 'use :value;')}
+{$this->helper->renderImports()}
 
 /**
  * Specification:
@@ -42,34 +39,37 @@ final class $templateTransfer->className extends AbstractTransfer
     protected const int META_DATA_SIZE = {$templateTransfer->properties->count()};
 
     protected const array META_DATA = [
-{$this->helper->renderKeyValue($templateTransfer->metaConstants, '        self:::key => self:::key_DATA_NAME,')}
+{$this->helper->renderMetaData()}
     ];
 
-TEMPLATE;
-
-        $i = 0;
-        foreach ($templateTransfer->metaConstants as $constant => $property) {
-            $fileContent .= <<<TEMPLATE
-
-    // $property{$this->helper->getAttribute($property)}
-    public const string $constant = '$property';
-    protected const string {$constant}_DATA_NAME = '$constant';
-    protected const int {$constant}_DATA_INDEX = $i;
-{$this->helper->getDockBlock($property)}
-    public{$this->helper->getProtected($property)} {$this->helper->getNullable($property)}{$templateTransfer->properties[$property]} \$$property {
-        get => \$this->getData(self::{$constant}_DATA_INDEX);
-        set => \$this->setData(self::{$constant}_DATA_INDEX, \$value);
-    }
-
-TEMPLATE;
-            $i++;
-        }
-
-        $fileContent .= <<<TEMPLATE
+    {$this->renderProperties($templateTransfer)}
 }
 
 TEMPLATE;
 
-        return $fileContent;
+        return $content;
+    }
+
+    private function renderProperties(TemplateTransfer $templateTransfer): string
+    {
+        $i = 0;
+        $properties = [];
+        foreach ($templateTransfer->metaConstants as $constant => $property) {
+            $properties[] = <<<TEMPLATE
+
+    // $property{$this->helper->renderAttribute($property)}
+    public const string $constant = '$property';
+    protected const string {$constant}_DATA_NAME = '$constant';
+    protected const int {$constant}_DATA_INDEX = $i;
+{$this->helper->renderDockBlock($property)}
+    public{$this->helper->renderPropertyDeclaration($property)} \$$property {
+        get => \$this->getData(self::{$constant}_DATA_INDEX);
+        set => \$this->setData(self::{$constant}_DATA_INDEX, \$value);
+    }
+TEMPLATE;
+            $i++;
+        }
+
+        return trim(implode(PHP_EOL, $properties));
     }
 }

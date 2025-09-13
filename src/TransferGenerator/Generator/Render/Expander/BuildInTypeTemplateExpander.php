@@ -13,6 +13,8 @@ use Picamator\TransferObject\Generated\TemplateTransfer;
 
 final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
 {
+    use TemplateExpanderTrait;
+
     protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
         return $propertyTransfer->buildInType !== null;
@@ -22,17 +24,20 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
+        /** @var \Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum $buildInType */
+        $buildInType = $propertyTransfer->buildInType;
+
         $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->properties[$propertyName] = $propertyTransfer->buildInType?->value;
+        $templateTransfer->properties[$propertyName] = $buildInType->value;
         $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
 
-        if ($propertyTransfer->buildInType?->isArrayObject()) {
+        if ($buildInType->isArrayObject()) {
             $this->expandArrayObjectType($propertyTransfer, $templateTransfer);
 
             return;
         }
 
-        if ($propertyTransfer->buildInType?->isArray()) {
+        if ($buildInType->isArray()) {
             $this->expandArrayType($propertyTransfer, $templateTransfer);
         }
     }
@@ -41,11 +46,9 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
+        $this->expandImports(AttributeEnum::ARRAY_TYPE_ATTRIBUTE, $templateTransfer);
+
         $propertyName = $propertyTransfer->propertyName;
-
-        $templateTransfer->imports[AttributeEnum::ARRAY_TYPE_ATTRIBUTE->value]
-            ??= AttributeEnum::ARRAY_TYPE_ATTRIBUTE->value;
-
         $templateTransfer->attributes[$propertyName] = AttributeTemplateEnum::ARRAY_TYPE_ATTRIBUTE->value;
         $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY->value;
         $templateTransfer->nullables[$propertyName] = false;
@@ -55,12 +58,10 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
+        $this->expandImports(BuildInTypeEnum::ARRAY_OBJECT, $templateTransfer);
+        $this->expandImports(AttributeEnum::ARRAY_OBJECT_TYPE_ATTRIBUTE, $templateTransfer);
+
         $propertyName = $propertyTransfer->propertyName;
-
-        $templateTransfer->imports[BuildInTypeEnum::ARRAY_OBJECT->value] ??= BuildInTypeEnum::ARRAY_OBJECT->value;
-        $templateTransfer->imports[AttributeEnum::ARRAY_OBJECT_TYPE_ATTRIBUTE->value]
-            ??= AttributeEnum::ARRAY_OBJECT_TYPE_ATTRIBUTE->value;
-
         $templateTransfer->attributes[$propertyName] = AttributeTemplateEnum::ARRAY_OBJECT_TYPE_ATTRIBUTE->value;
         $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY_OBJECT->value;
         $templateTransfer->nullables[$propertyName] = false;

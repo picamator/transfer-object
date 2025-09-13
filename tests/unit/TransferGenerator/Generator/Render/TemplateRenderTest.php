@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Render;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
@@ -16,6 +17,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateBuilderI
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRender;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderInterface;
 
+#[Group('transfer-generator')]
 class TemplateRenderTest extends TestCase
 {
     private TemplateRenderInterface $render;

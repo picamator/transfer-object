@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Integration\TransferObject\Command;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Command\DefinitionGeneratorCommand;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Tester\CommandTester;
 
+#[Group('command')]
 class DefinitionGeneratorCommandTest extends TestCase
 {
     private CommandTester $commandTester;
@@ -29,7 +31,7 @@ class DefinitionGeneratorCommandTest extends TestCase
     {
         // Act
         $this->commandTester->setInputs([
-            '/tests/integration/Command/Generated/Definition',
+            '/tests/integration/Command/Generated/Definition/Success',
             'Customer',
             '/tests/integration/Command/data/api-response/success/customer.json',
         ]);
@@ -43,6 +45,26 @@ class DefinitionGeneratorCommandTest extends TestCase
             'Successfully generated 1 definition file(s)!',
             $output,
         );
-        $this->assertFileExists(__DIR__ . '/Generated/Definition/customer.transfer.yml');
+        $this->assertFileExists(__DIR__ . '/Generated/Definition/Success/customer.transfer.yml');
+    }
+
+    public function testRunCommandWithInvalidJsonShouldShowErrorMessage(): void
+    {
+        // Act
+        $this->commandTester->setInputs([
+            '/tests/integration/Command/Generated/Definition/Error',
+            'Customer',
+            '/tests/integration/Command/data/api-response/error/customer.json',
+        ]);
+
+        $this->commandTester->execute([]);
+        $output = $this->commandTester->getDisplay();
+
+        // Assert
+        $this->assertSame(1, $this->commandTester->getStatusCode());
+        $this->assertStringContainsString(
+            '[ERROR] Invalid property name "0".',
+            $output,
+        );
     }
 }

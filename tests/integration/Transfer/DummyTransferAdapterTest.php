@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Integration\TransferObject\Transfer;
 
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\IgnoreDeprecations;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookmarkData;
 
+#[Group('transfer')]
+#[IgnoreDeprecations]
 class DummyTransferAdapterTest extends TestCase
 {
     private BookmarkData $bookmarkData;
@@ -73,6 +77,6 @@ class DummyTransferAdapterTest extends TestCase
         $actual = json_encode($this->bookmarkData, flags: JSON_THROW_ON_ERROR);
 
         // Assert
-        $this->assertSame('[]', $actual);
+        $this->assertJsonStringEqualsJsonString('[]', $actual);
     }
 }

@@ -4,36 +4,61 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Transfer;
 
+use Generator;
 use Picamator\TransferObject\Transfer\Attribute\InitialPropertyTypeAttributeInterface;
 use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttributeInterface;
 use ReflectionAttribute;
 use ReflectionClassConstant;
+use ReflectionObject;
 
 trait ConstantAttributeTrait
 {
-    final protected function getConstantAttribute(string $constantName): ?PropertyTypeAttributeInterface
+    /**
+     * @return array<string, \Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttributeInterface>
+     */
+    final protected function getTypeAttributes(): array
     {
-        $reflection = new ReflectionClassConstant($this, $constantName);
-        $attributeReflections = $reflection->getAttributes(
-            name: PropertyTypeAttributeInterface::class,
-            flags: ReflectionAttribute::IS_INSTANCEOF
-        );
+        $typeAttributes = [];
+        foreach ($this->getReflectionConstants() as $reflectionConstant) {
+            $attributeReflections = $reflectionConstant->getAttributes(
+                name: PropertyTypeAttributeInterface::class,
+                flags: ReflectionAttribute::IS_INSTANCEOF,
+            );
 
-        $attributeReflection = $attributeReflections[0] ?? null;
+            if (!isset($attributeReflections[0])) {
+                continue;
+            }
 
-        return $attributeReflection?->newInstance();
+            $typeAttributes[$reflectionConstant->getName()] = $attributeReflections[0]->newInstance();
+        }
+
+        return $typeAttributes;
     }
 
-    final protected function getConstantInitialAttribute(string $constantName): ?InitialPropertyTypeAttributeInterface
+    /**
+     * @return Generator<string, \Picamator\TransferObject\Transfer\Attribute\InitialPropertyTypeAttributeInterface>
+     */
+    final protected function getInitialAttributes(): Generator
     {
-        $reflection = new ReflectionClassConstant($this, $constantName);
-        $attributeReflections = $reflection->getAttributes(
-            name: InitialPropertyTypeAttributeInterface::class,
-            flags: ReflectionAttribute::IS_INSTANCEOF
-        );
+        foreach ($this->getReflectionConstants() as $reflectionConstant) {
+            $attributeReflections = $reflectionConstant->getAttributes(
+                name: InitialPropertyTypeAttributeInterface::class,
+                flags: ReflectionAttribute::IS_INSTANCEOF,
+            );
 
-        $attributeReflection = $attributeReflections[0] ?? null;
+            if (!isset($attributeReflections[0])) {
+                continue;
+            }
 
-        return $attributeReflection?->newInstance();
+            yield $reflectionConstant->getName() => $attributeReflections[0]->newInstance();
+        }
+    }
+
+    /**
+     * @return array<int, \ReflectionClassConstant>
+     */
+    private function getReflectionConstants(): array
+    {
+        return new ReflectionObject($this)->getReflectionConstants(ReflectionClassConstant::IS_PUBLIC);
     }
 }
