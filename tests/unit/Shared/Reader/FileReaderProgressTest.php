@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Unit\TransferObject\Shared\Reader;
 
 use Generator;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -13,6 +14,7 @@ use Picamator\TransferObject\Shared\Exception\FileReaderException;
 use Picamator\TransferObject\Shared\Filesystem\FileReaderInterface;
 use Picamator\TransferObject\Shared\Reader\FileReaderProgress;
 
+#[Group('shared')]
 class FileReaderProgressTest extends TestCase
 {
     private FileReaderProgress&MockObject $fileReaderProgressMock;

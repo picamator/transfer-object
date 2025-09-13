@@ -6,11 +6,13 @@ namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Definition\Parse
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\DefinitionNamespaceTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builder\NamespaceBuilder;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builder\NamespaceBuilderInterface;
 
+#[Group('transfer-generator')]
 class NamespaceBuilderTest extends TestCase
 {
     private NamespaceBuilderInterface $builder;

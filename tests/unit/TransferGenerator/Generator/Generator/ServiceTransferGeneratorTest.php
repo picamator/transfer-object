@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Generator;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
@@ -13,6 +14,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGener
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorServiceInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Workflow\TransferGeneratorWorkflowInterface;
 
+#[Group('transfer-generator')]
 class ServiceTransferGeneratorTest extends TestCase
 {
     private TransferGeneratorServiceInterface $serviceGenerator;

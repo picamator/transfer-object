@@ -6,10 +6,12 @@ namespace Picamator\Tests\Integration\TransferObject\TransferGenerator\Config\Lo
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactory;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoaderInterface;
 
+#[Group('transfer-generator')]
 class ConfigLoaderTest extends TestCase
 {
     private const string CONFIG_PATH = __DIR__ . '/../../data/config/error/';

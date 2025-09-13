@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Integration\TransferObject\Command;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Command\DefinitionGeneratorCommand;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Tester\CommandTester;
 
+#[Group('command')]
 class DefinitionGeneratorCommandTest extends TestCase
 {
     private CommandTester $commandTester;

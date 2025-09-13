@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Builder;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Unit\TransferObject\Helper\FileStreamHelperTrait;
 use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionContentBuilder;
 use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionContentBuilderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 
+#[Group('definition-generator')]
 class DefinitionContentBuilderTest extends TestCase
 {
     use FileStreamHelperTrait;

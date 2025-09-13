@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Integration\TransferObject\Command;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Command\TransferGeneratorCommand;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 
+#[Group('command')]
 class TransferGeneratorCommandTest extends TestCase
 {
     private const string SUCCESS_CONFIG_PATH = '/tests/integration/Command/data/config/success/generator.config.yml';

@@ -6,9 +6,11 @@ namespace Picamator\Tests\Unit\TransferObject\Command\Helper;
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Command\Helper\InputNormalizerTrait;
 
+#[Group('command')]
 class InputNormalizerTest extends TestCase
 {
     private InputNormalizerInterface $inputNormalizer;

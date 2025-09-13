@@ -7,6 +7,7 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Frankfurter\ExchangeRateTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\GoogleShoppingContent\ProductTransfer;
@@ -18,6 +19,7 @@ use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTra
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacadeInterface;
 
+#[Group('definition-generator')]
 class DefinitionGeneratorFacadeTest extends TestCase
 {
     use DefinitionGeneratorHelperTrait;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Generator\Builder;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
@@ -15,6 +16,7 @@ use Picamator\TransferObject\Shared\Reader\JsonReaderInterface;
 use Picamator\TransferObject\Shared\Validator\ClassNameValidatorInterface;
 use Picamator\TransferObject\Shared\Validator\PathLocalValidatorInterface;
 
+#[Group('definition-generator')]
 class DefinitionGeneratorBuilderTest extends TestCase
 {
     private DefinitionGeneratorBuilderInterface $builder;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Unit\TransferObject\Shared\Reader;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Dependency\Exception\FilesystemException;
@@ -12,6 +13,7 @@ use Picamator\TransferObject\Shared\Exception\JsonReaderException;
 use Picamator\TransferObject\Shared\Reader\JsonReader;
 use Picamator\TransferObject\Shared\Reader\JsonReaderInterface;
 
+#[Group('shared')]
 class JsonReaderTest extends TestCase
 {
     private const string FILE_PATH = 'test.json';

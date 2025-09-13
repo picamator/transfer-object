@@ -6,9 +6,11 @@ namespace Picamator\Tests\Unit\TransferObject\Shared\Validator;
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Shared\Validator\NamespaceValidatorTrait;
 
+#[Group('shared')]
 class NamespaceValidatorTest extends TestCase
 {
     private NamespaceValidatorInterface $validator;

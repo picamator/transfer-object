@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Filesystem;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
@@ -14,6 +15,7 @@ use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorExcept
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystem;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
 
+#[Group('transfer-generator')]
 class GeneratorFilesystemTest extends TestCase
 {
     private GeneratorFilesystemInterface $generatorFilesystem;

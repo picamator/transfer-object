@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Integration\TransferObject\Transfer;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BcMathBookData;
@@ -11,6 +12,7 @@ use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookData;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\CountryEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\AuthorTransfer;
 
+#[Group('transfer')]
 class TransferAdapterTest extends TestCase
 {
     public function testFromArrayToArray(): void

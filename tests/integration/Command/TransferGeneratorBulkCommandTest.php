@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Command;
 
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Command\TransferGeneratorBulkCommand;
 use Symfony\Component\Console\Tester\CommandTester;
 
+#[Group('command')]
 class TransferGeneratorBulkCommandTest extends TestCase
 {
     private const string SUCCESS_CONFIG_LIST_PATH = '/tests/integration/Command/data/config/success/config.list.txt';
