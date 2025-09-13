@@ -16,10 +16,13 @@ abstract class AbstractTransfer implements TransferInterface
     use FilterArrayTrait;
     use ConstantAttributeTrait;
 
+    /**
+     * @var int<0, max>
+     */
     protected const int META_DATA_SIZE = 0;
 
     /**
-     * @var array<string,string>
+     * @var array<string>
      */
     protected const array META_DATA = [];
 
@@ -62,9 +65,6 @@ abstract class AbstractTransfer implements TransferInterface
         $this->_data = $data['_data'];
     }
 
-    /**
-     * @return int
-     */
     final public function count(): int
     {
         return static::META_DATA_SIZE;
@@ -96,13 +96,9 @@ abstract class AbstractTransfer implements TransferInterface
         $attributes = $this->getTypeAttributes();
 
         foreach (static::META_DATA as $propertyName) {
-            if (isset($attributes[$propertyName])) {
-                $data[$propertyName] = $attributes[$propertyName]->toArray($this->{$propertyName});
-
-                continue;
-            }
-
-            $data[$propertyName] = $this->{$propertyName};
+            $data[$propertyName] = isset($attributes[$propertyName])
+                ? $attributes[$propertyName]->toArray($this->{$propertyName})
+                : $this->{$propertyName};
         }
 
         return $data;
@@ -126,17 +122,14 @@ abstract class AbstractTransfer implements TransferInterface
 
         $attributes = $this->getTypeAttributes();
         foreach (static::META_DATA as $propertyName) {
-            if (!isset($data[$propertyName])) {
+            $value = $data[$propertyName] ?? null;
+            if ($value === null) {
                 continue;
             }
 
-            if (isset($attributes[$propertyName])) {
-                $this->{$propertyName} = $attributes[$propertyName]->fromArray($data[$propertyName]);
-
-                continue;
-            }
-
-            $this->{$propertyName} = $data[$propertyName];
+            $this->{$propertyName} = isset($attributes[$propertyName])
+                ? $attributes[$propertyName]->fromArray($value)
+                : $value;
         }
 
         return $this;
@@ -156,7 +149,7 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->_data = new SplFixedArray(size: static::META_DATA_SIZE);
 
-        /** @var array<string, int> $metaData */
+        /** @var array<string,int> $metaData */
         $metaData = array_flip(static::META_DATA);
         foreach ($this->getInitialAttributes() as $propertyName => $attribute) {
             $this->_data[$metaData[$propertyName]] = $attribute->getInitialValue();
