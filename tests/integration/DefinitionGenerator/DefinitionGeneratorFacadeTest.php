@@ -19,12 +19,14 @@ use Picamator\Tests\Integration\TransferObject\Helper\DefinitionGeneratorHelperT
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacadeInterface;
+use Picamator\TransferObject\Transfer\FilterArrayTrait;
 
 #[Group('definition-generator')]
 class DefinitionGeneratorFacadeTest extends TestCase
 {
     use DefinitionGeneratorHelperTrait;
     use TransferGeneratorHelperTrait;
+    use FilterArrayTrait;
 
     private const string SAMPLE_JSON_PATH = __DIR__ . '/data/api-response/';
 
@@ -225,7 +227,9 @@ class DefinitionGeneratorFacadeTest extends TestCase
 
         // Act
         $transfer->fromArray($sampleContent);
-        $actual = $transfer->toFilterArray(fn (mixed $item): bool => $item !== null);
+
+        $filterCallback = fn (mixed $item): bool => $item !== null;
+        $actual = $this->filterArrayRecursive($transfer->toArray(), $filterCallback);
 
         // Assert
         $this->assertEquals($sampleContent, $actual);

@@ -10,6 +10,7 @@ use BcMath\Number;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
+use Deprecated;
 use ReflectionClass;
 use ReflectionProperty;
 use stdClass;
@@ -89,6 +90,7 @@ trait TransferAdapterTrait
     /**
      * @return array<string,mixed>
      */
+    #[Deprecated(message: 'Method will be removed in version 3.0.0. Use FilterArrayTrait instead.', since: '2.3.0')]
     public function toFilterArray(?callable $callback = null): array
     {
         $data = $this->toArray();

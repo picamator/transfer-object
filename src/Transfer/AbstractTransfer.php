@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Transfer;
 
+use Deprecated;
 use SplFixedArray;
 use Traversable;
 
@@ -109,6 +110,7 @@ abstract class AbstractTransfer implements TransferInterface
         return $data;
     }
 
+    #[Deprecated(message: 'Method will be removed in version 3.0.0. Use FilterArrayTrait instead.', since: '2.3.0')]
     final public function toFilterArray(?callable $callback = null): array
     {
         $data = $this->toArray();

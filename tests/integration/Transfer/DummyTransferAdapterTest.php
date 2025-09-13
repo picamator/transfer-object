@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\Transfer;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\IgnoreDeprecations;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookmarkData;
 
 #[Group('transfer')]
+#[IgnoreDeprecations]
 class DummyTransferAdapterTest extends TestCase
 {
     private BookmarkData $bookmarkData;
