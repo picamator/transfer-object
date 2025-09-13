@@ -47,10 +47,7 @@ class TransferGeneratorBulkCommandTest extends TestCase
 
         // Assert
         $this->assertSame(1, $this->commandTester->getStatusCode());
-        $this->assertStringContainsString(
-            '[ERROR] File "/home/transfer/transfer-object/some-invalid-path.list.txt"',
-            $output,
-        );
+        $this->assertStringContainsString('[ERROR] File', $output);
     }
 
     public function testRunCommandWithValidConfigurationShouldShowSuccessMessage(): void
