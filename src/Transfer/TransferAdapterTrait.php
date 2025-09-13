@@ -168,7 +168,7 @@ trait TransferAdapterTrait
     private function getPublicProperties(): array
     {
         return $this->_propertyCache ??= new ReflectionObject($this)
-            ->getProperties(ReflectionProperty::IS_PUBLIC);
+            ->getProperties(filter: ReflectionProperty::IS_PUBLIC);
     }
 
     private function isBcMathLoaded(): bool

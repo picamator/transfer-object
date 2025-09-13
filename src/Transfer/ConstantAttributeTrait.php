@@ -64,6 +64,7 @@ trait ConstantAttributeTrait
      */
     private function getReflectionConstants(): array
     {
-        return new ReflectionObject($this)->getReflectionConstants(filter: ReflectionClassConstant::IS_PUBLIC);
+        return new ReflectionObject($this)
+            ->getReflectionConstants(filter: ReflectionClassConstant::IS_PUBLIC);
     }
 }
