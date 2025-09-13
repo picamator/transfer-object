@@ -26,6 +26,7 @@ function show_usage() {
   echo -e "  $(wrap_in_yellow "composer <command>")         Run composer command"
   echo -e "  $(wrap_in_yellow "phpstan")                    Run PHPStan"
   echo -e "  $(wrap_in_yellow "phpunit")                    Run PHPUnit"
+  echo -e "  $(wrap_in_yellow "phpunit-group")              Run PHPUnit test assigned to the group"
   echo -e "  $(wrap_in_yellow "phpcs")                      Run PHP CodeSniffer"
   echo -e "  $(wrap_in_yellow "phpcbf")                     Run PHP Code Beautifier and Fixer"
   echo -e "  $(wrap_in_yellow "hook-install")               Install CaptainHook"
@@ -90,6 +91,9 @@ case $1 in
     ;;
   phpunit)
     $DOCKER_EXEC composer phpunit
+    ;;
+  phpunit-group)
+    $DOCKER_EXEC composer phpunit-group $2
     ;;
   phpcs)
     $DOCKER_EXEC composer phpcs
