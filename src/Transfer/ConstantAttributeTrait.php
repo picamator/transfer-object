@@ -29,7 +29,9 @@ trait ConstantAttributeTrait
                 continue;
             }
 
-            $typeAttributes[$reflectionConstant->getName()] = $attributeReflections[0]->newInstance();
+            /** @var string $propertyName */
+            $propertyName = $reflectionConstant->getValue();
+            $typeAttributes[$propertyName] = $attributeReflections[0]->newInstance();
         }
 
         return $typeAttributes;
@@ -50,12 +52,15 @@ trait ConstantAttributeTrait
                 continue;
             }
 
-            yield $reflectionConstant->getName() => $attributeReflections[0]->newInstance();
+            /** @var string $propertyName */
+            $propertyName = $reflectionConstant->getValue();
+
+            yield $propertyName => $attributeReflections[0]->newInstance();
         }
     }
 
     /**
-     * @return array<int, \ReflectionClassConstant>
+     * @return array<\ReflectionClassConstant>
      */
     private function getReflectionConstants(): array
     {

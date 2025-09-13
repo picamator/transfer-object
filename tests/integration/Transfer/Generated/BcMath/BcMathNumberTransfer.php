@@ -22,17 +22,16 @@ final class BcMathNumberTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::I_AM_NUMBER => self::I_AM_NUMBER_DATA_NAME,
+        self::I_AM_NUMBER_INDEX => self::I_AM_NUMBER,
     ];
 
     // iAmNumber
     #[NumberPropertyTypeAttribute(Number::class)]
     public const string I_AM_NUMBER = 'iAmNumber';
-    protected const string I_AM_NUMBER_DATA_NAME = 'I_AM_NUMBER';
-    protected const int I_AM_NUMBER_DATA_INDEX = 0;
+    protected const int I_AM_NUMBER_INDEX = 0;
 
     public ?Number $iAmNumber {
-        get => $this->getData(self::I_AM_NUMBER_DATA_INDEX);
-        set => $this->setData(self::I_AM_NUMBER_DATA_INDEX, $value);
+        get => $this->getData(self::I_AM_NUMBER_INDEX);
+        set => $this->setData(self::I_AM_NUMBER_INDEX, $value);
     }
 }

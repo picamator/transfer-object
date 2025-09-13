@@ -23,30 +23,28 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::DEFINITION_CONTENT => self::DEFINITION_CONTENT_DATA_NAME,
-        self::GENERATOR_CONTENTS => self::GENERATOR_CONTENTS_DATA_NAME,
+        self::DEFINITION_CONTENT_INDEX => self::DEFINITION_CONTENT,
+        self::GENERATOR_CONTENTS_INDEX => self::GENERATOR_CONTENTS,
     ];
 
     // definitionContent
     #[PropertyTypeAttribute(DefinitionContentTransfer::class)]
     public const string DEFINITION_CONTENT = 'definitionContent';
-    protected const string DEFINITION_CONTENT_DATA_NAME = 'DEFINITION_CONTENT';
-    protected const int DEFINITION_CONTENT_DATA_INDEX = 0;
+    protected const int DEFINITION_CONTENT_INDEX = 0;
 
     public DefinitionContentTransfer $definitionContent {
-        get => $this->getData(self::DEFINITION_CONTENT_DATA_INDEX);
-        set => $this->setData(self::DEFINITION_CONTENT_DATA_INDEX, $value);
+        get => $this->getData(self::DEFINITION_CONTENT_INDEX);
+        set => $this->setData(self::DEFINITION_CONTENT_INDEX, $value);
     }
 
     // generatorContents
     #[CollectionPropertyTypeAttribute(DefinitionGeneratorContentTransfer::class)]
     public const string GENERATOR_CONTENTS = 'generatorContents';
-    protected const string GENERATOR_CONTENTS_DATA_NAME = 'GENERATOR_CONTENTS';
-    protected const int GENERATOR_CONTENTS_DATA_INDEX = 1;
+    protected const int GENERATOR_CONTENTS_INDEX = 1;
 
     /** @var \ArrayObject<int,DefinitionGeneratorContentTransfer> */
     public ArrayObject $generatorContents {
-        get => $this->getData(self::GENERATOR_CONTENTS_DATA_INDEX);
-        set => $this->setData(self::GENERATOR_CONTENTS_DATA_INDEX, $value);
+        get => $this->getData(self::GENERATOR_CONTENTS_INDEX);
+        set => $this->setData(self::GENERATOR_CONTENTS_INDEX, $value);
     }
 }

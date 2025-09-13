@@ -20,27 +20,25 @@ final class PaletteTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ITEMS => self::ITEMS_DATA_NAME,
-        self::TYPE => self::TYPE_DATA_NAME,
+        self::ITEMS_INDEX => self::ITEMS,
+        self::TYPE_INDEX => self::TYPE,
     ];
 
     // items
     public const string ITEMS = 'items';
-    protected const string ITEMS_DATA_NAME = 'ITEMS';
-    protected const int ITEMS_DATA_INDEX = 0;
+    protected const int ITEMS_INDEX = 0;
 
     public ?int $items {
-        get => $this->getData(self::ITEMS_DATA_INDEX);
-        set => $this->setData(self::ITEMS_DATA_INDEX, $value);
+        get => $this->getData(self::ITEMS_INDEX);
+        set => $this->setData(self::ITEMS_INDEX, $value);
     }
 
     // type
     public const string TYPE = 'type';
-    protected const string TYPE_DATA_NAME = 'TYPE';
-    protected const int TYPE_DATA_INDEX = 1;
+    protected const int TYPE_INDEX = 1;
 
     public ?string $type {
-        get => $this->getData(self::TYPE_DATA_INDEX);
-        set => $this->setData(self::TYPE_DATA_INDEX, $value);
+        get => $this->getData(self::TYPE_INDEX);
+        set => $this->setData(self::TYPE_INDEX, $value);
     }
 }

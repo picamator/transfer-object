@@ -22,29 +22,27 @@ final class DefinitionContentTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::CLASS_NAME => self::CLASS_NAME_DATA_NAME,
-        self::PROPERTIES => self::PROPERTIES_DATA_NAME,
+        self::CLASS_NAME_INDEX => self::CLASS_NAME,
+        self::PROPERTIES_INDEX => self::PROPERTIES,
     ];
 
     // className
     public const string CLASS_NAME = 'className';
-    protected const string CLASS_NAME_DATA_NAME = 'CLASS_NAME';
-    protected const int CLASS_NAME_DATA_INDEX = 0;
+    protected const int CLASS_NAME_INDEX = 0;
 
     public string $className {
-        get => $this->getData(self::CLASS_NAME_DATA_INDEX);
-        set => $this->setData(self::CLASS_NAME_DATA_INDEX, $value);
+        get => $this->getData(self::CLASS_NAME_INDEX);
+        set => $this->setData(self::CLASS_NAME_INDEX, $value);
     }
 
     // properties
     #[CollectionPropertyTypeAttribute(DefinitionPropertyTransfer::class)]
     public const string PROPERTIES = 'properties';
-    protected const string PROPERTIES_DATA_NAME = 'PROPERTIES';
-    protected const int PROPERTIES_DATA_INDEX = 1;
+    protected const int PROPERTIES_INDEX = 1;
 
     /** @var \ArrayObject<int,DefinitionPropertyTransfer> */
     public ArrayObject $properties {
-        get => $this->getData(self::PROPERTIES_DATA_INDEX);
-        set => $this->setData(self::PROPERTIES_DATA_INDEX, $value);
+        get => $this->getData(self::PROPERTIES_INDEX);
+        set => $this->setData(self::PROPERTIES_INDEX, $value);
     }
 }

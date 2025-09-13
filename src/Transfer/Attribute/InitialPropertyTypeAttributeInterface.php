@@ -9,5 +9,8 @@ namespace Picamator\TransferObject\Transfer\Attribute;
  */
 interface InitialPropertyTypeAttributeInterface extends PropertyTypeAttributeInterface
 {
-    public function getInitialValue(): mixed;
+    /**
+     * @return iterable<mixed>
+     */
+    public function getInitialValue(): iterable;
 }

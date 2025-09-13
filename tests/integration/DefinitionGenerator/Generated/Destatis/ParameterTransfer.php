@@ -20,71 +20,65 @@ final class ParameterTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 6;
 
     protected const array META_DATA = [
-        self::CATEGORY => self::CATEGORY_DATA_NAME,
-        self::LANGUAGE => self::LANGUAGE_DATA_NAME,
-        self::PAGELENGTH => self::PAGELENGTH_DATA_NAME,
-        self::PASSWORD => self::PASSWORD_DATA_NAME,
-        self::TERM => self::TERM_DATA_NAME,
-        self::USERNAME => self::USERNAME_DATA_NAME,
+        self::CATEGORY_INDEX => self::CATEGORY,
+        self::LANGUAGE_INDEX => self::LANGUAGE,
+        self::PAGELENGTH_INDEX => self::PAGELENGTH,
+        self::PASSWORD_INDEX => self::PASSWORD,
+        self::TERM_INDEX => self::TERM,
+        self::USERNAME_INDEX => self::USERNAME,
     ];
 
     // category
     public const string CATEGORY = 'category';
-    protected const string CATEGORY_DATA_NAME = 'CATEGORY';
-    protected const int CATEGORY_DATA_INDEX = 0;
+    protected const int CATEGORY_INDEX = 0;
 
     public ?string $category {
-        get => $this->getData(self::CATEGORY_DATA_INDEX);
-        set => $this->setData(self::CATEGORY_DATA_INDEX, $value);
+        get => $this->getData(self::CATEGORY_INDEX);
+        set => $this->setData(self::CATEGORY_INDEX, $value);
     }
 
     // language
     public const string LANGUAGE = 'language';
-    protected const string LANGUAGE_DATA_NAME = 'LANGUAGE';
-    protected const int LANGUAGE_DATA_INDEX = 1;
+    protected const int LANGUAGE_INDEX = 1;
 
     public ?string $language {
-        get => $this->getData(self::LANGUAGE_DATA_INDEX);
-        set => $this->setData(self::LANGUAGE_DATA_INDEX, $value);
+        get => $this->getData(self::LANGUAGE_INDEX);
+        set => $this->setData(self::LANGUAGE_INDEX, $value);
     }
 
     // pagelength
     public const string PAGELENGTH = 'pagelength';
-    protected const string PAGELENGTH_DATA_NAME = 'PAGELENGTH';
-    protected const int PAGELENGTH_DATA_INDEX = 2;
+    protected const int PAGELENGTH_INDEX = 2;
 
     public ?string $pagelength {
-        get => $this->getData(self::PAGELENGTH_DATA_INDEX);
-        set => $this->setData(self::PAGELENGTH_DATA_INDEX, $value);
+        get => $this->getData(self::PAGELENGTH_INDEX);
+        set => $this->setData(self::PAGELENGTH_INDEX, $value);
     }
 
     // password
     public const string PASSWORD = 'password';
-    protected const string PASSWORD_DATA_NAME = 'PASSWORD';
-    protected const int PASSWORD_DATA_INDEX = 3;
+    protected const int PASSWORD_INDEX = 3;
 
     public ?string $password {
-        get => $this->getData(self::PASSWORD_DATA_INDEX);
-        set => $this->setData(self::PASSWORD_DATA_INDEX, $value);
+        get => $this->getData(self::PASSWORD_INDEX);
+        set => $this->setData(self::PASSWORD_INDEX, $value);
     }
 
     // term
     public const string TERM = 'term';
-    protected const string TERM_DATA_NAME = 'TERM';
-    protected const int TERM_DATA_INDEX = 4;
+    protected const int TERM_INDEX = 4;
 
     public ?string $term {
-        get => $this->getData(self::TERM_DATA_INDEX);
-        set => $this->setData(self::TERM_DATA_INDEX, $value);
+        get => $this->getData(self::TERM_INDEX);
+        set => $this->setData(self::TERM_INDEX, $value);
     }
 
     // username
     public const string USERNAME = 'username';
-    protected const string USERNAME_DATA_NAME = 'USERNAME';
-    protected const int USERNAME_DATA_INDEX = 5;
+    protected const int USERNAME_INDEX = 5;
 
     public ?string $username {
-        get => $this->getData(self::USERNAME_DATA_INDEX);
-        set => $this->setData(self::USERNAME_DATA_INDEX, $value);
+        get => $this->getData(self::USERNAME_INDEX);
+        set => $this->setData(self::USERNAME_INDEX, $value);
     }
 }

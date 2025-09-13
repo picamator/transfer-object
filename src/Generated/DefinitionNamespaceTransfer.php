@@ -20,49 +20,45 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
-        self::ALIAS => self::ALIAS_DATA_NAME,
-        self::BASE_NAME => self::BASE_NAME_DATA_NAME,
-        self::FULL_NAME => self::FULL_NAME_DATA_NAME,
-        self::WITHOUT_ALIAS => self::WITHOUT_ALIAS_DATA_NAME,
+        self::ALIAS_INDEX => self::ALIAS,
+        self::BASE_NAME_INDEX => self::BASE_NAME,
+        self::FULL_NAME_INDEX => self::FULL_NAME,
+        self::WITHOUT_ALIAS_INDEX => self::WITHOUT_ALIAS,
     ];
 
     // alias
     public const string ALIAS = 'alias';
-    protected const string ALIAS_DATA_NAME = 'ALIAS';
-    protected const int ALIAS_DATA_INDEX = 0;
+    protected const int ALIAS_INDEX = 0;
 
     public ?string $alias {
-        get => $this->getData(self::ALIAS_DATA_INDEX);
-        set => $this->setData(self::ALIAS_DATA_INDEX, $value);
+        get => $this->getData(self::ALIAS_INDEX);
+        set => $this->setData(self::ALIAS_INDEX, $value);
     }
 
     // baseName
     public const string BASE_NAME = 'baseName';
-    protected const string BASE_NAME_DATA_NAME = 'BASE_NAME';
-    protected const int BASE_NAME_DATA_INDEX = 1;
+    protected const int BASE_NAME_INDEX = 1;
 
     public string $baseName {
-        get => $this->getData(self::BASE_NAME_DATA_INDEX);
-        set => $this->setData(self::BASE_NAME_DATA_INDEX, $value);
+        get => $this->getData(self::BASE_NAME_INDEX);
+        set => $this->setData(self::BASE_NAME_INDEX, $value);
     }
 
     // fullName
     public const string FULL_NAME = 'fullName';
-    protected const string FULL_NAME_DATA_NAME = 'FULL_NAME';
-    protected const int FULL_NAME_DATA_INDEX = 2;
+    protected const int FULL_NAME_INDEX = 2;
 
     public string $fullName {
-        get => $this->getData(self::FULL_NAME_DATA_INDEX);
-        set => $this->setData(self::FULL_NAME_DATA_INDEX, $value);
+        get => $this->getData(self::FULL_NAME_INDEX);
+        set => $this->setData(self::FULL_NAME_INDEX, $value);
     }
 
     // withoutAlias
     public const string WITHOUT_ALIAS = 'withoutAlias';
-    protected const string WITHOUT_ALIAS_DATA_NAME = 'WITHOUT_ALIAS';
-    protected const int WITHOUT_ALIAS_DATA_INDEX = 3;
+    protected const int WITHOUT_ALIAS_INDEX = 3;
 
     public string $withoutAlias {
-        get => $this->getData(self::WITHOUT_ALIAS_DATA_INDEX);
-        set => $this->setData(self::WITHOUT_ALIAS_DATA_INDEX, $value);
+        get => $this->getData(self::WITHOUT_ALIAS_INDEX);
+        set => $this->setData(self::WITHOUT_ALIAS_INDEX, $value);
     }
 }

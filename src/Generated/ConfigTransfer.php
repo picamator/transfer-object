@@ -21,29 +21,27 @@ final class ConfigTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::CONTENT => self::CONTENT_DATA_NAME,
-        self::VALIDATOR => self::VALIDATOR_DATA_NAME,
+        self::CONTENT_INDEX => self::CONTENT,
+        self::VALIDATOR_INDEX => self::VALIDATOR,
     ];
 
     // content
     #[PropertyTypeAttribute(ConfigContentTransfer::class)]
     public const string CONTENT = 'content';
-    protected const string CONTENT_DATA_NAME = 'CONTENT';
-    protected const int CONTENT_DATA_INDEX = 0;
+    protected const int CONTENT_INDEX = 0;
 
     public ConfigContentTransfer $content {
-        get => $this->getData(self::CONTENT_DATA_INDEX);
-        set => $this->setData(self::CONTENT_DATA_INDEX, $value);
+        get => $this->getData(self::CONTENT_INDEX);
+        set => $this->setData(self::CONTENT_INDEX, $value);
     }
 
     // validator
     #[PropertyTypeAttribute(ValidatorTransfer::class)]
     public const string VALIDATOR = 'validator';
-    protected const string VALIDATOR_DATA_NAME = 'VALIDATOR';
-    protected const int VALIDATOR_DATA_INDEX = 1;
+    protected const int VALIDATOR_INDEX = 1;
 
     public ValidatorTransfer $validator {
-        get => $this->getData(self::VALIDATOR_DATA_INDEX);
-        set => $this->setData(self::VALIDATOR_DATA_INDEX, $value);
+        get => $this->getData(self::VALIDATOR_INDEX);
+        set => $this->setData(self::VALIDATOR_INDEX, $value);
     }
 }

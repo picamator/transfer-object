@@ -21,29 +21,27 @@ final class MeasurementUnitTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::BOX => self::BOX_DATA_NAME,
-        self::PALETTE => self::PALETTE_DATA_NAME,
+        self::BOX_INDEX => self::BOX,
+        self::PALETTE_INDEX => self::PALETTE,
     ];
 
     // box
     #[PropertyTypeAttribute(BoxTransfer::class)]
     public const string BOX = 'box';
-    protected const string BOX_DATA_NAME = 'BOX';
-    protected const int BOX_DATA_INDEX = 0;
+    protected const int BOX_INDEX = 0;
 
     public ?BoxTransfer $box {
-        get => $this->getData(self::BOX_DATA_INDEX);
-        set => $this->setData(self::BOX_DATA_INDEX, $value);
+        get => $this->getData(self::BOX_INDEX);
+        set => $this->setData(self::BOX_INDEX, $value);
     }
 
     // palette
     #[PropertyTypeAttribute(PaletteTransfer::class)]
     public const string PALETTE = 'palette';
-    protected const string PALETTE_DATA_NAME = 'PALETTE';
-    protected const int PALETTE_DATA_INDEX = 1;
+    protected const int PALETTE_INDEX = 1;
 
     public ?PaletteTransfer $palette {
-        get => $this->getData(self::PALETTE_DATA_INDEX);
-        set => $this->setData(self::PALETTE_DATA_INDEX, $value);
+        get => $this->getData(self::PALETTE_INDEX);
+        set => $this->setData(self::PALETTE_INDEX, $value);
     }
 }

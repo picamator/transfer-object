@@ -23,8 +23,6 @@ abstract class AbstractTransfer implements TransferInterface
      */
     protected const array META_DATA = [];
 
-    private const string DATA_INDEX_SUFFIX = '_DATA_INDEX';
-
     /**
      * @var \SplFixedArray<mixed>
      */
@@ -79,8 +77,8 @@ abstract class AbstractTransfer implements TransferInterface
 
     final public function getIterator(): Traversable
     {
-        foreach (static::META_DATA as $metaKey => $metaName) {
-            yield $metaKey => $this->{$metaKey};
+        foreach (static::META_DATA as $propertyName) {
+            yield $propertyName => $this->{$propertyName};
         }
     }
 
@@ -97,14 +95,14 @@ abstract class AbstractTransfer implements TransferInterface
         $data = [];
         $attributes = $this->getTypeAttributes();
 
-        foreach (static::META_DATA as $metaKey => $metaName) {
-            if (isset($attributes[$metaName])) {
-                $data[$metaKey] = $attributes[$metaName]->toArray($this->{$metaKey});
+        foreach (static::META_DATA as $propertyName) {
+            if (isset($attributes[$propertyName])) {
+                $data[$propertyName] = $attributes[$propertyName]->toArray($this->{$propertyName});
 
                 continue;
             }
 
-            $data[$metaKey] = $this->{$metaKey};
+            $data[$propertyName] = $this->{$propertyName};
         }
 
         return $data;
@@ -127,18 +125,18 @@ abstract class AbstractTransfer implements TransferInterface
         }
 
         $attributes = $this->getTypeAttributes();
-        foreach (static::META_DATA as $metaKey => $metaName) {
-            if (!isset($data[$metaKey])) {
+        foreach (static::META_DATA as $propertyName) {
+            if (!isset($data[$propertyName])) {
                 continue;
             }
 
-            if (isset($attributes[$metaName])) {
-                $this->{$metaKey} = $attributes[$metaName]->fromArray($data[$metaKey]);
+            if (isset($attributes[$propertyName])) {
+                $this->{$propertyName} = $attributes[$propertyName]->fromArray($data[$propertyName]);
 
                 continue;
             }
 
-            $this->{$metaKey} = $data[$metaKey];
+            $this->{$propertyName} = $data[$propertyName];
         }
 
         return $this;
@@ -156,12 +154,12 @@ abstract class AbstractTransfer implements TransferInterface
 
     private function initData(): void
     {
-        $this->_data = new SplFixedArray(static::META_DATA_SIZE);
+        $this->_data = new SplFixedArray(size: static::META_DATA_SIZE);
 
-        foreach ($this->getInitialAttributes() as $metaName => $attribute) {
-            $metaIndex = $metaName . self::DATA_INDEX_SUFFIX;
-            // @phpstan-ignore offsetAssign.dimType
-            $this->_data[static::{$metaIndex}] = $attribute->getInitialValue();
+        /** @var array<string, int> $metaData */
+        $metaData = array_flip(static::META_DATA);
+        foreach ($this->getInitialAttributes() as $propertyName => $attribute) {
+            $this->_data[$metaData[$propertyName]] = $attribute->getInitialValue();
         }
     }
 }

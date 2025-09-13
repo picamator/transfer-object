@@ -21,53 +21,49 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
-        self::FEET => self::FEET_DATA_NAME,
-        self::KILOMETERS => self::KILOMETERS_DATA_NAME,
-        self::METERS => self::METERS_DATA_NAME,
-        self::MILES => self::MILES_DATA_NAME,
+        self::FEET_INDEX => self::FEET,
+        self::KILOMETERS_INDEX => self::KILOMETERS,
+        self::METERS_INDEX => self::METERS,
+        self::MILES_INDEX => self::MILES,
     ];
 
     // feet
     #[PropertyTypeAttribute(FeetTransfer::class)]
     public const string FEET = 'feet';
-    protected const string FEET_DATA_NAME = 'FEET';
-    protected const int FEET_DATA_INDEX = 0;
+    protected const int FEET_INDEX = 0;
 
     public ?FeetTransfer $feet {
-        get => $this->getData(self::FEET_DATA_INDEX);
-        set => $this->setData(self::FEET_DATA_INDEX, $value);
+        get => $this->getData(self::FEET_INDEX);
+        set => $this->setData(self::FEET_INDEX, $value);
     }
 
     // kilometers
     #[PropertyTypeAttribute(KilometersTransfer::class)]
     public const string KILOMETERS = 'kilometers';
-    protected const string KILOMETERS_DATA_NAME = 'KILOMETERS';
-    protected const int KILOMETERS_DATA_INDEX = 1;
+    protected const int KILOMETERS_INDEX = 1;
 
     public ?KilometersTransfer $kilometers {
-        get => $this->getData(self::KILOMETERS_DATA_INDEX);
-        set => $this->setData(self::KILOMETERS_DATA_INDEX, $value);
+        get => $this->getData(self::KILOMETERS_INDEX);
+        set => $this->setData(self::KILOMETERS_INDEX, $value);
     }
 
     // meters
     #[PropertyTypeAttribute(MetersTransfer::class)]
     public const string METERS = 'meters';
-    protected const string METERS_DATA_NAME = 'METERS';
-    protected const int METERS_DATA_INDEX = 2;
+    protected const int METERS_INDEX = 2;
 
     public ?MetersTransfer $meters {
-        get => $this->getData(self::METERS_DATA_INDEX);
-        set => $this->setData(self::METERS_DATA_INDEX, $value);
+        get => $this->getData(self::METERS_INDEX);
+        set => $this->setData(self::METERS_INDEX, $value);
     }
 
     // miles
     #[PropertyTypeAttribute(MilesTransfer::class)]
     public const string MILES = 'miles';
-    protected const string MILES_DATA_NAME = 'MILES';
-    protected const int MILES_DATA_INDEX = 3;
+    protected const int MILES_INDEX = 3;
 
     public ?MilesTransfer $miles {
-        get => $this->getData(self::MILES_DATA_INDEX);
-        set => $this->setData(self::MILES_DATA_INDEX, $value);
+        get => $this->getData(self::MILES_INDEX);
+        set => $this->setData(self::MILES_INDEX, $value);
     }
 }

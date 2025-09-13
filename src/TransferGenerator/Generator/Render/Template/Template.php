@@ -59,12 +59,11 @@ TEMPLATE;
 
     // $property{$this->helper->renderAttribute($property)}
     public const string $constant = '$property';
-    protected const string {$constant}_DATA_NAME = '$constant';
-    protected const int {$constant}_DATA_INDEX = $i;
+    protected const int {$constant}_INDEX = $i;
 {$this->helper->renderDockBlock($property)}
     public{$this->helper->renderPropertyDeclaration($property)} \$$property {
-        get => \$this->getData(self::{$constant}_DATA_INDEX);
-        set => \$this->setData(self::{$constant}_DATA_INDEX, \$value);
+        get => \$this->getData(self::{$constant}_INDEX);
+        set => \$this->setData(self::{$constant}_INDEX, \$value);
     }
 TEMPLATE;
             $i++;
