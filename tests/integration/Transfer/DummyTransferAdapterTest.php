@@ -75,6 +75,6 @@ class DummyTransferAdapterTest extends TestCase
         $actual = json_encode($this->bookmarkData, flags: JSON_THROW_ON_ERROR);
 
         // Assert
-        $this->assertSame('[]', $actual);
+        $this->assertJsonStringEqualsJsonString('[]', $actual);
     }
 }
