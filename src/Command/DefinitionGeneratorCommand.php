@@ -22,17 +22,10 @@ use Throwable;
     name: 'picamator:definition:generate',
     description: 'Generates Transfer Object definition files from a JSON blueprint.',
     aliases: ['p:d:g'],
-    hidden: false
-)]
-class DefinitionGeneratorCommand extends Command
-{
-    use InputNormalizerTrait;
-
-    /**
-     * phpcs:disable Generic.Files.LineLength
-     */
-    private const string HELP = <<<'HELP'
-This command generates Transfer Object definition files based on a JSON blueprint.
+    hidden: false,
+    // phpcs:disable Generic.Files.LineLength
+    help: <<<HELP
+The <info>%command.name%</info> command generates Transfer Object definition files based on a JSON blueprint.
 
 <options=bold>Interactive prompt options:</>
   - Specify the directory path where the definition files will be saved.
@@ -42,7 +35,11 @@ This command generates Transfer Object definition files based on a JSON blueprin
 <options=bold>Documentation:</>
 For more details, please visit "<href=https://github.com/picamator/transfer-object/wiki/Console-Commands#definition-generate>project's Wiki</>".
 
-HELP;
+HELP
+)]
+class DefinitionGeneratorCommand extends Command
+{
+    use InputNormalizerTrait;
 
     private const string QUESTION_DEFINITION_PATH = 'Definition directory path: ';
     private const string QUESTION_CLASS_NAME = 'Transfer Object class name: ';
@@ -57,11 +54,6 @@ HELP;
         private readonly DefinitionGeneratorFacadeInterface $generatorFacade = new DefinitionGeneratorFacade(),
     ) {
         parent::__construct($name);
-    }
-
-    protected function configure(): void
-    {
-        $this->setHelp(help: self::HELP);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

@@ -20,17 +20,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
     name: 'picamator:transfer:generate:bulk',
     description: 'Generates Transfer Objects based on multiple configurations and their definition files.',
     aliases: ['p:t:g:b'],
-    hidden: false
-)]
-class TransferGeneratorBulkCommand extends Command
-{
-    use InputNormalizerTrait;
-
-    /**
-     * phpcs:disable Generic.Files.LineLength
-     */
-    private const string HELP = <<<'HELP'
-This command generates Transfer Objects from definition files specified by multiple configuration files listed in a TXT file..
+    hidden: false,
+    // phpcs:disable Generic.Files.LineLength
+    help: <<<HELP
+The <info>%command.name%</info> command generates Transfer Objects from definition files specified by multiple configuration files listed in a TXT file..
 
 <options=bold>The configuration list specifies:</>
   -  Each line contains the path to a configuration file in YML format.
@@ -38,7 +31,11 @@ This command generates Transfer Objects from definition files specified by multi
 <options=bold>Documentation:</>
 For more details, please visit "<href=https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate-bulk>project's Wiki</>".
 
-HELP;
+HELP
+)]
+class TransferGeneratorBulkCommand extends Command
+{
+    use InputNormalizerTrait;
 
     private const string OPTION_NAME_BULK = 'bulk';
     private const string OPTION_SHORTCUT_BULK = 'b';
@@ -64,8 +61,6 @@ MESSAGE;
 
     protected function configure(): void
     {
-        $this->setHelp(help: self::HELP);
-
         $this->addOption(
             name: self::OPTION_NAME_BULK,
             shortcut: self::OPTION_SHORTCUT_BULK,
