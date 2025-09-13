@@ -31,7 +31,7 @@ abstract class AbstractTransfer implements TransferInterface
     /**
      * @param array<string,mixed> $data
      *
-     * @throws \Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException
+     * @throws \Picamator\TransferObject\Transfer\Exception\DataAssertTransferException
      */
     final public function __construct(array $data = [])
     {
@@ -83,7 +83,7 @@ abstract class AbstractTransfer implements TransferInterface
     }
 
     /**
-     * @throws \Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException
+     * @throws \Picamator\TransferObject\Transfer\Exception\DataAssertTransferException
      */
     final public function __clone(): void
     {

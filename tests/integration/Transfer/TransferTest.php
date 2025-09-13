@@ -20,7 +20,7 @@ use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\NamespaceTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ProtectedTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\RequiredTransfer;
-use Picamator\TransferObject\Transfer\Exception\PropertyTypeTransferException;
+use Picamator\TransferObject\Transfer\Exception\DataAssertTransferException;
 use ReflectionProperty;
 use TypeError;
 
@@ -245,7 +245,7 @@ class TransferTest extends TestCase
         $itemTransfer = new ItemTransfer();
 
         // Expect
-        $this->expectException(PropertyTypeTransferException::class);
+        $this->expectException(DataAssertTransferException::class);
 
         // Act
         $itemTransfer->fromArray($data);
@@ -279,7 +279,7 @@ class TransferTest extends TestCase
         $itemCollectionTransfer = new ItemCollectionTransfer();
 
         // Expect
-        $this->expectException(PropertyTypeTransferException::class);
+        $this->expectException(DataAssertTransferException::class);
 
         // Act
         $itemCollectionTransfer->fromArray($data);
