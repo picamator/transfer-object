@@ -147,6 +147,16 @@ class TransferTest extends TestCase
                 ItemCollectionTransfer::ITEM => null,
             ],
         ];
+
+        yield 'data does not have any matched to transfer object properties' => [
+            [
+                'some-property' => 'some-value',
+            ],
+            [
+                ItemCollectionTransfer::ITEMS => [],
+                ItemCollectionTransfer::ITEM => null,
+            ],
+        ];
     }
 
     public function testSerialize(): void

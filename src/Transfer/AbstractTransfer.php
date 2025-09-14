@@ -30,12 +30,18 @@ abstract class AbstractTransfer implements TransferInterface
     private SplFixedArray $_data;
 
     /**
-     * @param array<string,mixed> $data
+     * @param array<string,mixed>|null $data
      *
      * @throws \Picamator\TransferObject\Transfer\Exception\DataAssertTransferException
      */
-    final public function __construct(array $data = [])
+    final public function __construct(?array $data = null)
     {
+        if ($data === null) {
+            $this->initData();
+
+            return;
+        }
+
         $this->fromArray($data);
     }
 
@@ -106,17 +112,18 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->initData();
 
+        $data = array_filter(
+            $data,
+            fn (mixed $value, string|int $key): bool => $value !== null && in_array($key, static::META_DATA, true),
+            ARRAY_FILTER_USE_BOTH,
+        );
+
         if ($data === []) {
             return $this;
         }
 
         $attributes = $this->getTypeAttributes();
-        foreach (static::META_DATA as $propertyName) {
-            $value = $data[$propertyName] ?? null;
-            if ($value === null) {
-                continue;
-            }
-
+        foreach ($data as $propertyName => $value) {
             $this->{$propertyName} = isset($attributes[$propertyName])
                 ? $attributes[$propertyName]->fromArray($value)
                 : $value;
