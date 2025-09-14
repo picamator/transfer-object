@@ -72,7 +72,6 @@ Key Features
 * Offers methods:
   * `fromArray()`
   * `toArray()`
-  * `toFilterArray()`
 * Implements standard interfaces:
   * `IteratorAggregate`
   * `JsonSerializable`
