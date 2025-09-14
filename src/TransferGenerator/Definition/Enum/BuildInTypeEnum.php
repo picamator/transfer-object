@@ -15,27 +15,26 @@ enum BuildInTypeEnum: string
     case ARRAY = 'array';
     case ARRAY_OBJECT = 'ArrayObject';
 
+    private const array IS_ALLOWED = [
+        self::BOOL,
+        self::TRUE,
+        self::FALSE,
+        self::INT,
+        self::FLOAT,
+        self::STRING,
+        self::ARRAY,
+        self::ARRAY_OBJECT,
+    ];
+
     case ITERABLE = 'iterable';
     case NULL = 'null';
     case OBJECT = 'object';
     case MIXED = 'mixed';
     case CALLABLE = 'callable';
 
-    private const array NOT_ALLOWED = [
-        self::ITERABLE,
-        self::NULL,
-        self::OBJECT,
-        self::MIXED,
-        self::CALLABLE,
-    ];
-
     public static function getTrueFalse(bool $value): self
     {
-        if ($value === true) {
-            return self::TRUE;
-        }
-
-        return self::FALSE;
+        return $value === true ? self::TRUE : self::FALSE;
     }
 
     public function isArray(): bool
@@ -50,6 +49,6 @@ enum BuildInTypeEnum: string
 
     public function isAllowed(): bool
     {
-        return !in_array($this, self::NOT_ALLOWED, true);
+        return in_array($this, self::IS_ALLOWED, true);
     }
 }

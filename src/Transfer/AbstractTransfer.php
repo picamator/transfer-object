@@ -101,7 +101,7 @@ abstract class AbstractTransfer implements TransferInterface
 
         foreach (static::META_DATA as $index => $propertyName) {
             $data[$propertyName] = isset($attributes[$propertyName])
-                ? $attributes[$propertyName]->toArray($this->{$propertyName})
+                ? $attributes[$propertyName]->toArray($this->_data[$index])
                 : $this->_data[$index];
         }
 
@@ -118,6 +118,7 @@ abstract class AbstractTransfer implements TransferInterface
         }
 
         $attributes = $this->getTypeAttributes();
+
         foreach ($data as $propertyName => $value) {
             $this->{$propertyName} = isset($attributes[$propertyName])
                 ? $attributes[$propertyName]->fromArray($value)
