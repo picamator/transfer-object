@@ -10,9 +10,15 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttributeInterface;
 use ReflectionAttribute;
 use ReflectionClassConstant;
 use ReflectionObject;
+use WeakReference;
 
 trait ConstantAttributeTrait
 {
+    /**
+     * @var \WeakReference<\ReflectionObject>|null
+     */
+    private ?WeakReference $reflectionObjectReference = null;
+
     /**
      * @return array<string, \Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttributeInterface>
      */
@@ -64,7 +70,13 @@ trait ConstantAttributeTrait
      */
     private function getReflectionConstants(): array
     {
-        return new ReflectionObject($this)
-            ->getReflectionConstants(filter: ReflectionClassConstant::IS_PUBLIC);
+        $reflectionObject = $this->reflectionObjectReference?->get();
+
+        if ($reflectionObject === null) {
+            $reflectionObject = new ReflectionObject($this);
+            $this->reflectionObjectReference = WeakReference::create($reflectionObject);
+        }
+
+        return $reflectionObject->getReflectionConstants(filter: ReflectionClassConstant::IS_PUBLIC);
     }
 }
