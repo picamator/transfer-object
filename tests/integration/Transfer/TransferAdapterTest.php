@@ -8,6 +8,7 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BcMathBookData;
+use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookAuthorData;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookData;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\CountryEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\AuthorTransfer;
@@ -48,6 +49,21 @@ class TransferAdapterTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
+    public function testFromArrayOnPartlyInitializedProperties(): void
+    {
+        // Arrange
+        $expected = ['lastName' => 'Kowalski'];
+
+        $bookAuthorData = new BookAuthorData();
+        $bookAuthorData->lastName = 'Kowalski';
+
+        // Act
+        $actual = $bookAuthorData->toArray();
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+
     public function testCount(): void
     {
         // Arrange
@@ -69,6 +85,21 @@ class TransferAdapterTest extends TestCase
 
         // Act
         $actual = iterator_to_array($bookData);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+
+    public function testIteratorOnPartlyInitializedProperties(): void
+    {
+        // Arrange
+        $expected = ['firstName' => 'Jan'];
+
+        $bookAuthorData = new BookAuthorData();
+        $bookAuthorData->firstName = 'Jan';
+
+        // Act
+        $actual = iterator_to_array($bookAuthorData);
 
         // Assert
         $this->assertSame($expected, $actual);

@@ -43,8 +43,12 @@ trait TransferAdapterTrait
      */
     public function getIterator(): Traversable
     {
-        foreach ($this->getPublicProperties() as $property) {
-            $name = $property->getName();
+        foreach ($this->getPublicProperties() as $reflectionProperty) {
+            if (!$reflectionProperty->isInitialized($this)) {
+                continue;
+            }
+
+            $name = $reflectionProperty->getName();
 
             yield $name => $this->$name;
         }
@@ -61,8 +65,12 @@ trait TransferAdapterTrait
     public function toArray(): array
     {
         $data = [];
-        foreach ($this->getPublicProperties() as $property) {
-            $name = $property->getName();
+        foreach ($this->getPublicProperties() as $propertyReflection) {
+            if (!$propertyReflection->isInitialized($this)) {
+                continue;
+            }
+
+            $name = $propertyReflection->getName();
             $value = $this->$name;
 
             $data[$name] = match (true) {
