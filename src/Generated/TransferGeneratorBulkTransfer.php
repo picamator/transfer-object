@@ -21,29 +21,27 @@ final class TransferGeneratorBulkTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::PROGRESS => self::PROGRESS_DATA_NAME,
-        self::VALIDATOR => self::VALIDATOR_DATA_NAME,
+        self::PROGRESS_INDEX => self::PROGRESS,
+        self::VALIDATOR_INDEX => self::VALIDATOR,
     ];
 
     // progress
     #[PropertyTypeAttribute(FileReaderProgressTransfer::class)]
     public const string PROGRESS = 'progress';
-    protected const string PROGRESS_DATA_NAME = 'PROGRESS';
-    protected const int PROGRESS_DATA_INDEX = 0;
+    protected const int PROGRESS_INDEX = 0;
 
     public FileReaderProgressTransfer $progress {
-        get => $this->getData(self::PROGRESS_DATA_INDEX);
-        set => $this->setData(self::PROGRESS_DATA_INDEX, $value);
+        get => $this->getData(self::PROGRESS_INDEX);
+        set => $this->setData(self::PROGRESS_INDEX, $value);
     }
 
     // validator
     #[PropertyTypeAttribute(ValidatorTransfer::class)]
     public const string VALIDATOR = 'validator';
-    protected const string VALIDATOR_DATA_NAME = 'VALIDATOR';
-    protected const int VALIDATOR_DATA_INDEX = 1;
+    protected const int VALIDATOR_INDEX = 1;
 
     public ValidatorTransfer $validator {
-        get => $this->getData(self::VALIDATOR_DATA_INDEX);
-        set => $this->setData(self::VALIDATOR_DATA_INDEX, $value);
+        get => $this->getData(self::VALIDATOR_INDEX);
+        set => $this->setData(self::VALIDATOR_INDEX, $value);
     }
 }

@@ -20,16 +20,15 @@ final class LabelsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::SALE => self::SALE_DATA_NAME,
+        self::SALE_INDEX => self::SALE,
     ];
 
     // sale
     public const string SALE = 'sale';
-    protected const string SALE_DATA_NAME = 'SALE';
-    protected const int SALE_DATA_INDEX = 0;
+    protected const int SALE_INDEX = 0;
 
     public ?string $sale {
-        get => $this->getData(self::SALE_DATA_INDEX);
-        set => $this->setData(self::SALE_DATA_INDEX, $value);
+        get => $this->getData(self::SALE_INDEX);
+        set => $this->setData(self::SALE_INDEX, $value);
     }
 }

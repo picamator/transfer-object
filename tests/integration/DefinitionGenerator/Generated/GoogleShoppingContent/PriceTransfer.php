@@ -20,27 +20,25 @@ final class PriceTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::CURRENCY => self::CURRENCY_DATA_NAME,
-        self::VALUE => self::VALUE_DATA_NAME,
+        self::CURRENCY_INDEX => self::CURRENCY,
+        self::VALUE_INDEX => self::VALUE,
     ];
 
     // currency
     public const string CURRENCY = 'currency';
-    protected const string CURRENCY_DATA_NAME = 'CURRENCY';
-    protected const int CURRENCY_DATA_INDEX = 0;
+    protected const int CURRENCY_INDEX = 0;
 
     public ?string $currency {
-        get => $this->getData(self::CURRENCY_DATA_INDEX);
-        set => $this->setData(self::CURRENCY_DATA_INDEX, $value);
+        get => $this->getData(self::CURRENCY_INDEX);
+        set => $this->setData(self::CURRENCY_INDEX, $value);
     }
 
     // value
     public const string VALUE = 'value';
-    protected const string VALUE_DATA_NAME = 'VALUE';
-    protected const int VALUE_DATA_INDEX = 1;
+    protected const int VALUE_INDEX = 1;
 
     public ?string $value {
-        get => $this->getData(self::VALUE_DATA_INDEX);
-        set => $this->setData(self::VALUE_DATA_INDEX, $value);
+        get => $this->getData(self::VALUE_INDEX);
+        set => $this->setData(self::VALUE_INDEX, $value);
     }
 }

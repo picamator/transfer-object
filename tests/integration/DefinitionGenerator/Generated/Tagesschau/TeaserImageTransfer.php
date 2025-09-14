@@ -21,62 +21,57 @@ final class TeaserImageTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 5;
 
     protected const array META_DATA = [
-        self::ALTTEXT => self::ALTTEXT_DATA_NAME,
-        self::COPYRIGHT => self::COPYRIGHT_DATA_NAME,
-        self::IMAGE_VARIANTS => self::IMAGE_VARIANTS_DATA_NAME,
-        self::TITLE => self::TITLE_DATA_NAME,
-        self::TYPE => self::TYPE_DATA_NAME,
+        self::ALTTEXT_INDEX => self::ALTTEXT,
+        self::COPYRIGHT_INDEX => self::COPYRIGHT,
+        self::IMAGE_VARIANTS_INDEX => self::IMAGE_VARIANTS,
+        self::TITLE_INDEX => self::TITLE,
+        self::TYPE_INDEX => self::TYPE,
     ];
 
     // alttext
     public const string ALTTEXT = 'alttext';
-    protected const string ALTTEXT_DATA_NAME = 'ALTTEXT';
-    protected const int ALTTEXT_DATA_INDEX = 0;
+    protected const int ALTTEXT_INDEX = 0;
 
     public ?string $alttext {
-        get => $this->getData(self::ALTTEXT_DATA_INDEX);
-        set => $this->setData(self::ALTTEXT_DATA_INDEX, $value);
+        get => $this->getData(self::ALTTEXT_INDEX);
+        set => $this->setData(self::ALTTEXT_INDEX, $value);
     }
 
     // copyright
     public const string COPYRIGHT = 'copyright';
-    protected const string COPYRIGHT_DATA_NAME = 'COPYRIGHT';
-    protected const int COPYRIGHT_DATA_INDEX = 1;
+    protected const int COPYRIGHT_INDEX = 1;
 
     public ?string $copyright {
-        get => $this->getData(self::COPYRIGHT_DATA_INDEX);
-        set => $this->setData(self::COPYRIGHT_DATA_INDEX, $value);
+        get => $this->getData(self::COPYRIGHT_INDEX);
+        set => $this->setData(self::COPYRIGHT_INDEX, $value);
     }
 
     // imageVariants
     #[ArrayPropertyTypeAttribute]
     public const string IMAGE_VARIANTS = 'imageVariants';
-    protected const string IMAGE_VARIANTS_DATA_NAME = 'IMAGE_VARIANTS';
-    protected const int IMAGE_VARIANTS_DATA_INDEX = 2;
+    protected const int IMAGE_VARIANTS_INDEX = 2;
 
     /** @var array<int|string,mixed> */
     public array $imageVariants {
-        get => $this->getData(self::IMAGE_VARIANTS_DATA_INDEX);
-        set => $this->setData(self::IMAGE_VARIANTS_DATA_INDEX, $value);
+        get => $this->getData(self::IMAGE_VARIANTS_INDEX);
+        set => $this->setData(self::IMAGE_VARIANTS_INDEX, $value);
     }
 
     // title
     public const string TITLE = 'title';
-    protected const string TITLE_DATA_NAME = 'TITLE';
-    protected const int TITLE_DATA_INDEX = 3;
+    protected const int TITLE_INDEX = 3;
 
     public ?string $title {
-        get => $this->getData(self::TITLE_DATA_INDEX);
-        set => $this->setData(self::TITLE_DATA_INDEX, $value);
+        get => $this->getData(self::TITLE_INDEX);
+        set => $this->setData(self::TITLE_INDEX, $value);
     }
 
     // type
     public const string TYPE = 'type';
-    protected const string TYPE_DATA_NAME = 'TYPE';
-    protected const int TYPE_DATA_INDEX = 4;
+    protected const int TYPE_INDEX = 4;
 
     public ?string $type {
-        get => $this->getData(self::TYPE_DATA_INDEX);
-        set => $this->setData(self::TYPE_DATA_INDEX, $value);
+        get => $this->getData(self::TYPE_INDEX);
+        set => $this->setData(self::TYPE_INDEX, $value);
     }
 }

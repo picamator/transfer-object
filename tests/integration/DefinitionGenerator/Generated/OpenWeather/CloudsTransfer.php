@@ -20,16 +20,15 @@ final class CloudsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::ALL => self::ALL_DATA_NAME,
+        self::ALL_INDEX => self::ALL,
     ];
 
     // all
     public const string ALL = 'all';
-    protected const string ALL_DATA_NAME = 'ALL';
-    protected const int ALL_DATA_INDEX = 0;
+    protected const int ALL_INDEX = 0;
 
     public ?int $all {
-        get => $this->getData(self::ALL_DATA_INDEX);
-        set => $this->setData(self::ALL_DATA_INDEX, $value);
+        get => $this->getData(self::ALL_INDEX);
+        set => $this->setData(self::ALL_INDEX, $value);
     }
 }

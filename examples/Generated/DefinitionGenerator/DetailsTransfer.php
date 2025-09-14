@@ -20,27 +20,25 @@ final class DetailsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::DESCRIPTION => self::DESCRIPTION_DATA_NAME,
-        self::IS_REGIONAL => self::IS_REGIONAL_DATA_NAME,
+        self::DESCRIPTION_INDEX => self::DESCRIPTION,
+        self::IS_REGIONAL_INDEX => self::IS_REGIONAL,
     ];
 
     // description
     public const string DESCRIPTION = 'description';
-    protected const string DESCRIPTION_DATA_NAME = 'DESCRIPTION';
-    protected const int DESCRIPTION_DATA_INDEX = 0;
+    protected const int DESCRIPTION_INDEX = 0;
 
     public ?string $description {
-        get => $this->getData(self::DESCRIPTION_DATA_INDEX);
-        set => $this->setData(self::DESCRIPTION_DATA_INDEX, $value);
+        get => $this->getData(self::DESCRIPTION_INDEX);
+        set => $this->setData(self::DESCRIPTION_INDEX, $value);
     }
 
     // isRegional
     public const string IS_REGIONAL = 'isRegional';
-    protected const string IS_REGIONAL_DATA_NAME = 'IS_REGIONAL';
-    protected const int IS_REGIONAL_DATA_INDEX = 1;
+    protected const int IS_REGIONAL_INDEX = 1;
 
     public ?bool $isRegional {
-        get => $this->getData(self::IS_REGIONAL_DATA_INDEX);
-        set => $this->setData(self::IS_REGIONAL_DATA_INDEX, $value);
+        get => $this->getData(self::IS_REGIONAL_INDEX);
+        set => $this->setData(self::IS_REGIONAL_INDEX, $value);
     }
 }

@@ -22,39 +22,36 @@ final class MerchantTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::COUNTRY => self::COUNTRY_DATA_NAME,
-        self::IS_ACTIVE => self::IS_ACTIVE_DATA_NAME,
-        self::MERCHANT_REFERENCE => self::MERCHANT_REFERENCE_DATA_NAME,
+        self::COUNTRY_INDEX => self::COUNTRY,
+        self::IS_ACTIVE_INDEX => self::IS_ACTIVE,
+        self::MERCHANT_REFERENCE_INDEX => self::MERCHANT_REFERENCE,
     ];
 
     // country
     #[EnumPropertyTypeAttribute(CountryEnum::class)]
     public const string COUNTRY = 'country';
-    protected const string COUNTRY_DATA_NAME = 'COUNTRY';
-    protected const int COUNTRY_DATA_INDEX = 0;
+    protected const int COUNTRY_INDEX = 0;
 
     public CountryEnum $country {
-        get => $this->getData(self::COUNTRY_DATA_INDEX);
-        set => $this->setData(self::COUNTRY_DATA_INDEX, $value);
+        get => $this->getData(self::COUNTRY_INDEX);
+        set => $this->setData(self::COUNTRY_INDEX, $value);
     }
 
     // isActive
     public const string IS_ACTIVE = 'isActive';
-    protected const string IS_ACTIVE_DATA_NAME = 'IS_ACTIVE';
-    protected const int IS_ACTIVE_DATA_INDEX = 1;
+    protected const int IS_ACTIVE_INDEX = 1;
 
     public bool $isActive {
-        get => $this->getData(self::IS_ACTIVE_DATA_INDEX);
-        set => $this->setData(self::IS_ACTIVE_DATA_INDEX, $value);
+        get => $this->getData(self::IS_ACTIVE_INDEX);
+        set => $this->setData(self::IS_ACTIVE_INDEX, $value);
     }
 
     // merchantReference
     public const string MERCHANT_REFERENCE = 'merchantReference';
-    protected const string MERCHANT_REFERENCE_DATA_NAME = 'MERCHANT_REFERENCE';
-    protected const int MERCHANT_REFERENCE_DATA_INDEX = 2;
+    protected const int MERCHANT_REFERENCE_INDEX = 2;
 
     public string $merchantReference {
-        get => $this->getData(self::MERCHANT_REFERENCE_DATA_INDEX);
-        set => $this->setData(self::MERCHANT_REFERENCE_DATA_INDEX, $value);
+        get => $this->getData(self::MERCHANT_REFERENCE_INDEX);
+        set => $this->setData(self::MERCHANT_REFERENCE_INDEX, $value);
     }
 }

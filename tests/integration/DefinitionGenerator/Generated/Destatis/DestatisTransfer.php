@@ -23,113 +23,104 @@ final class DestatisTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 9;
 
     protected const array META_DATA = [
-        self::COPYRIGHT => self::COPYRIGHT_DATA_NAME,
-        self::CUBES => self::CUBES_DATA_NAME,
-        self::IDENT => self::IDENT_DATA_NAME,
-        self::PARAMETER => self::PARAMETER_DATA_NAME,
-        self::STATISTICS => self::STATISTICS_DATA_NAME,
-        self::STATUS => self::STATUS_DATA_NAME,
-        self::TABLES => self::TABLES_DATA_NAME,
-        self::TIMESERIES => self::TIMESERIES_DATA_NAME,
-        self::VARIABLES => self::VARIABLES_DATA_NAME,
+        self::COPYRIGHT_INDEX => self::COPYRIGHT,
+        self::CUBES_INDEX => self::CUBES,
+        self::IDENT_INDEX => self::IDENT,
+        self::PARAMETER_INDEX => self::PARAMETER,
+        self::STATISTICS_INDEX => self::STATISTICS,
+        self::STATUS_INDEX => self::STATUS,
+        self::TABLES_INDEX => self::TABLES,
+        self::TIMESERIES_INDEX => self::TIMESERIES,
+        self::VARIABLES_INDEX => self::VARIABLES,
     ];
 
     // Copyright
     public const string COPYRIGHT = 'Copyright';
-    protected const string COPYRIGHT_DATA_NAME = 'COPYRIGHT';
-    protected const int COPYRIGHT_DATA_INDEX = 0;
+    protected const int COPYRIGHT_INDEX = 0;
 
     public ?string $Copyright {
-        get => $this->getData(self::COPYRIGHT_DATA_INDEX);
-        set => $this->setData(self::COPYRIGHT_DATA_INDEX, $value);
+        get => $this->getData(self::COPYRIGHT_INDEX);
+        set => $this->setData(self::COPYRIGHT_INDEX, $value);
     }
 
     // Cubes
     public const string CUBES = 'Cubes';
-    protected const string CUBES_DATA_NAME = 'CUBES';
-    protected const int CUBES_DATA_INDEX = 1;
+    protected const int CUBES_INDEX = 1;
 
     public ?string $Cubes {
-        get => $this->getData(self::CUBES_DATA_INDEX);
-        set => $this->setData(self::CUBES_DATA_INDEX, $value);
+        get => $this->getData(self::CUBES_INDEX);
+        set => $this->setData(self::CUBES_INDEX, $value);
     }
 
     // Ident
     #[PropertyTypeAttribute(IdentTransfer::class)]
     public const string IDENT = 'Ident';
-    protected const string IDENT_DATA_NAME = 'IDENT';
-    protected const int IDENT_DATA_INDEX = 2;
+    protected const int IDENT_INDEX = 2;
 
     public ?IdentTransfer $Ident {
-        get => $this->getData(self::IDENT_DATA_INDEX);
-        set => $this->setData(self::IDENT_DATA_INDEX, $value);
+        get => $this->getData(self::IDENT_INDEX);
+        set => $this->setData(self::IDENT_INDEX, $value);
     }
 
     // Parameter
     #[PropertyTypeAttribute(ParameterTransfer::class)]
     public const string PARAMETER = 'Parameter';
-    protected const string PARAMETER_DATA_NAME = 'PARAMETER';
-    protected const int PARAMETER_DATA_INDEX = 3;
+    protected const int PARAMETER_INDEX = 3;
 
     public ?ParameterTransfer $Parameter {
-        get => $this->getData(self::PARAMETER_DATA_INDEX);
-        set => $this->setData(self::PARAMETER_DATA_INDEX, $value);
+        get => $this->getData(self::PARAMETER_INDEX);
+        set => $this->setData(self::PARAMETER_INDEX, $value);
     }
 
     // Statistics
     #[CollectionPropertyTypeAttribute(StatisticsTransfer::class)]
     public const string STATISTICS = 'Statistics';
-    protected const string STATISTICS_DATA_NAME = 'STATISTICS';
-    protected const int STATISTICS_DATA_INDEX = 4;
+    protected const int STATISTICS_INDEX = 4;
 
     /** @var \ArrayObject<int,StatisticsTransfer> */
     public ArrayObject $Statistics {
-        get => $this->getData(self::STATISTICS_DATA_INDEX);
-        set => $this->setData(self::STATISTICS_DATA_INDEX, $value);
+        get => $this->getData(self::STATISTICS_INDEX);
+        set => $this->setData(self::STATISTICS_INDEX, $value);
     }
 
     // Status
     #[PropertyTypeAttribute(StatusTransfer::class)]
     public const string STATUS = 'Status';
-    protected const string STATUS_DATA_NAME = 'STATUS';
-    protected const int STATUS_DATA_INDEX = 5;
+    protected const int STATUS_INDEX = 5;
 
     public ?StatusTransfer $Status {
-        get => $this->getData(self::STATUS_DATA_INDEX);
-        set => $this->setData(self::STATUS_DATA_INDEX, $value);
+        get => $this->getData(self::STATUS_INDEX);
+        set => $this->setData(self::STATUS_INDEX, $value);
     }
 
     // Tables
     #[CollectionPropertyTypeAttribute(TablesTransfer::class)]
     public const string TABLES = 'Tables';
-    protected const string TABLES_DATA_NAME = 'TABLES';
-    protected const int TABLES_DATA_INDEX = 6;
+    protected const int TABLES_INDEX = 6;
 
     /** @var \ArrayObject<int,TablesTransfer> */
     public ArrayObject $Tables {
-        get => $this->getData(self::TABLES_DATA_INDEX);
-        set => $this->setData(self::TABLES_DATA_INDEX, $value);
+        get => $this->getData(self::TABLES_INDEX);
+        set => $this->setData(self::TABLES_INDEX, $value);
     }
 
     // Timeseries
     public const string TIMESERIES = 'Timeseries';
-    protected const string TIMESERIES_DATA_NAME = 'TIMESERIES';
-    protected const int TIMESERIES_DATA_INDEX = 7;
+    protected const int TIMESERIES_INDEX = 7;
 
     public ?string $Timeseries {
-        get => $this->getData(self::TIMESERIES_DATA_INDEX);
-        set => $this->setData(self::TIMESERIES_DATA_INDEX, $value);
+        get => $this->getData(self::TIMESERIES_INDEX);
+        set => $this->setData(self::TIMESERIES_INDEX, $value);
     }
 
     // Variables
     #[CollectionPropertyTypeAttribute(VariablesTransfer::class)]
     public const string VARIABLES = 'Variables';
-    protected const string VARIABLES_DATA_NAME = 'VARIABLES';
-    protected const int VARIABLES_DATA_INDEX = 8;
+    protected const int VARIABLES_INDEX = 8;
 
     /** @var \ArrayObject<int,VariablesTransfer> */
     public ArrayObject $Variables {
-        get => $this->getData(self::VARIABLES_DATA_INDEX);
-        set => $this->setData(self::VARIABLES_DATA_INDEX, $value);
+        get => $this->getData(self::VARIABLES_INDEX);
+        set => $this->setData(self::VARIABLES_INDEX, $value);
     }
 }

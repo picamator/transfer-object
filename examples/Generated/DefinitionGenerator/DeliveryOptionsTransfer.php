@@ -20,16 +20,15 @@ final class DeliveryOptionsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::NAME => self::NAME_DATA_NAME,
+        self::NAME_INDEX => self::NAME,
     ];
 
     // name
     public const string NAME = 'name';
-    protected const string NAME_DATA_NAME = 'NAME';
-    protected const int NAME_DATA_INDEX = 0;
+    protected const int NAME_INDEX = 0;
 
     public ?string $name {
-        get => $this->getData(self::NAME_DATA_INDEX);
-        set => $this->setData(self::NAME_DATA_INDEX, $value);
+        get => $this->getData(self::NAME_INDEX);
+        set => $this->setData(self::NAME_INDEX, $value);
     }
 }

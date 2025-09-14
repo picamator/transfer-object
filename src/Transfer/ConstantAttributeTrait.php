@@ -10,9 +10,15 @@ use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttributeInterface;
 use ReflectionAttribute;
 use ReflectionClassConstant;
 use ReflectionObject;
+use WeakReference;
 
 trait ConstantAttributeTrait
 {
+    /**
+     * @var \WeakReference<\ReflectionObject>|null
+     */
+    private ?WeakReference $_reflectionObjectReference = null;
+
     /**
      * @return array<string, \Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttributeInterface>
      */
@@ -29,7 +35,9 @@ trait ConstantAttributeTrait
                 continue;
             }
 
-            $typeAttributes[$reflectionConstant->getName()] = $attributeReflections[0]->newInstance();
+            /** @var string $propertyName */
+            $propertyName = $reflectionConstant->getValue();
+            $typeAttributes[$propertyName] = $attributeReflections[0]->newInstance();
         }
 
         return $typeAttributes;
@@ -50,15 +58,25 @@ trait ConstantAttributeTrait
                 continue;
             }
 
-            yield $reflectionConstant->getName() => $attributeReflections[0]->newInstance();
+            /** @var string $propertyName */
+            $propertyName = $reflectionConstant->getValue();
+
+            yield $propertyName => $attributeReflections[0]->newInstance();
         }
     }
 
     /**
-     * @return array<int, \ReflectionClassConstant>
+     * @return array<\ReflectionClassConstant>
      */
     private function getReflectionConstants(): array
     {
-        return new ReflectionObject($this)->getReflectionConstants(ReflectionClassConstant::IS_PUBLIC);
+        $reflectionObject = $this->_reflectionObjectReference?->get();
+
+        if ($reflectionObject === null) {
+            $reflectionObject = new ReflectionObject($this);
+            $this->_reflectionObjectReference = WeakReference::create($reflectionObject);
+        }
+
+        return $reflectionObject->getReflectionConstants(filter: ReflectionClassConstant::IS_PUBLIC);
     }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Transfer;
 
-use Deprecated;
 use EmptyIterator;
 use Traversable;
 
@@ -20,8 +19,6 @@ use Traversable;
  */
 trait DummyTransferAdapterTrait
 {
-    use FilterArrayTrait;
-
     /**
      * @return Traversable<string, mixed>
      */
@@ -41,17 +38,6 @@ trait DummyTransferAdapterTrait
     public function toArray(): array
     {
         return [];
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    #[Deprecated(message: 'Method will be removed in version 3.0.0. Use FilterArrayTrait instead.', since: '2.3.0')]
-    public function toFilterArray(?callable $callback = null): array
-    {
-        $data = $this->toArray();
-
-        return $this->filterArrayRecursive($data, $callback);
     }
 
     /**

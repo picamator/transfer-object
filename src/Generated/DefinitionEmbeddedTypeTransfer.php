@@ -21,28 +21,26 @@ final class DefinitionEmbeddedTypeTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::NAME => self::NAME_DATA_NAME,
-        self::NAMESPACE => self::NAMESPACE_DATA_NAME,
+        self::NAME_INDEX => self::NAME,
+        self::NAMESPACE_INDEX => self::NAMESPACE,
     ];
 
     // name
     public const string NAME = 'name';
-    protected const string NAME_DATA_NAME = 'NAME';
-    protected const int NAME_DATA_INDEX = 0;
+    protected const int NAME_INDEX = 0;
 
     public string $name {
-        get => $this->getData(self::NAME_DATA_INDEX);
-        set => $this->setData(self::NAME_DATA_INDEX, $value);
+        get => $this->getData(self::NAME_INDEX);
+        set => $this->setData(self::NAME_INDEX, $value);
     }
 
     // namespace
     #[PropertyTypeAttribute(DefinitionNamespaceTransfer::class)]
     public const string NAMESPACE = 'namespace';
-    protected const string NAMESPACE_DATA_NAME = 'NAMESPACE';
-    protected const int NAMESPACE_DATA_INDEX = 1;
+    protected const int NAMESPACE_INDEX = 1;
 
     public ?DefinitionNamespaceTransfer $namespace {
-        get => $this->getData(self::NAMESPACE_DATA_INDEX);
-        set => $this->setData(self::NAMESPACE_DATA_INDEX, $value);
+        get => $this->getData(self::NAMESPACE_INDEX);
+        set => $this->setData(self::NAMESPACE_INDEX, $value);
     }
 }

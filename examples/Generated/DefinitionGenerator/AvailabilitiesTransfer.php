@@ -20,27 +20,25 @@ final class AvailabilitiesTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::BUFFER => self::BUFFER_DATA_NAME,
-        self::TOTAL => self::TOTAL_DATA_NAME,
+        self::BUFFER_INDEX => self::BUFFER,
+        self::TOTAL_INDEX => self::TOTAL,
     ];
 
     // buffer
     public const string BUFFER = 'buffer';
-    protected const string BUFFER_DATA_NAME = 'BUFFER';
-    protected const int BUFFER_DATA_INDEX = 0;
+    protected const int BUFFER_INDEX = 0;
 
     public ?int $buffer {
-        get => $this->getData(self::BUFFER_DATA_INDEX);
-        set => $this->setData(self::BUFFER_DATA_INDEX, $value);
+        get => $this->getData(self::BUFFER_INDEX);
+        set => $this->setData(self::BUFFER_INDEX, $value);
     }
 
     // total
     public const string TOTAL = 'total';
-    protected const string TOTAL_DATA_NAME = 'TOTAL';
-    protected const int TOTAL_DATA_INDEX = 1;
+    protected const int TOTAL_INDEX = 1;
 
     public ?int $total {
-        get => $this->getData(self::TOTAL_DATA_INDEX);
-        set => $this->setData(self::TOTAL_DATA_INDEX, $value);
+        get => $this->getData(self::TOTAL_INDEX);
+        set => $this->setData(self::TOTAL_INDEX, $value);
     }
 }

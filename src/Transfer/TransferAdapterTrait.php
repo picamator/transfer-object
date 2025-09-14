@@ -10,11 +10,11 @@ use BcMath\Number;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
-use Deprecated;
-use ReflectionClass;
+use ReflectionObject;
 use ReflectionProperty;
 use stdClass;
 use Traversable;
+use WeakReference;
 
 /**
  * Specifications:
@@ -22,8 +22,8 @@ use Traversable;
  * - Simplifies integration with external transfer objects by removing the need to implement all interface methods.
  * - Intended for external transfer objects where:
  *   - data are stored in public properties.
- *   - all properties have default initial value
- *   - all properties are nullable
+ *   - all properties have default initial value.
+ *   - all properties are nullable.
  *
  * @api
  *
@@ -31,22 +31,24 @@ use Traversable;
  */
 trait TransferAdapterTrait
 {
-    use FilterArrayTrait;
-
     protected const string DATE_TIME_FORMAT = 'Y-m-d H:i:s';
 
     /**
-     * @var array<\ReflectionProperty>
+     * @var \WeakReference<\ReflectionObject>|null
      */
-    private array $_propertyCache;
+    private ?WeakReference $_reflectionObjectReference = null;
 
     /**
      * @return Traversable<string, mixed>
      */
     public function getIterator(): Traversable
     {
-        foreach ($this->getPublicProperties() as $property) {
-            $name = $property->getName();
+        foreach ($this->getPublicProperties() as $reflectionProperty) {
+            if (!$reflectionProperty->isInitialized($this)) {
+                continue;
+            }
+
+            $name = $reflectionProperty->getName();
 
             yield $name => $this->$name;
         }
@@ -63,8 +65,12 @@ trait TransferAdapterTrait
     public function toArray(): array
     {
         $data = [];
-        foreach ($this->getPublicProperties() as $property) {
-            $name = $property->getName();
+        foreach ($this->getPublicProperties() as $propertyReflection) {
+            if (!$propertyReflection->isInitialized($this)) {
+                continue;
+            }
+
+            $name = $propertyReflection->getName();
             $value = $this->$name;
 
             $data[$name] = match (true) {
@@ -85,17 +91,6 @@ trait TransferAdapterTrait
         }
 
         return $data;
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    #[Deprecated(message: 'Method will be removed in version 3.0.0. Use FilterArrayTrait instead.', since: '2.3.0')]
-    public function toFilterArray(?callable $callback = null): array
-    {
-        $data = $this->toArray();
-
-        return $this->filterArrayRecursive($data, $callback);
     }
 
     /**
@@ -125,30 +120,30 @@ trait TransferAdapterTrait
                     => new $type($value),
 
                 $isArray && is_subclass_of($type, TransferInterface::class)
-                    //  @phpstan-ignore argument.type
+                    // @phpstan-ignore argument.type
                     => new $type()->fromArray($value),
 
                 $isArray && $type === ArrayObject::class
-                    //  @phpstan-ignore argument.type
+                    // @phpstan-ignore argument.type
                     => new ArrayObject($value),
 
                 $isStringOrInt && is_subclass_of($type, BackedEnum::class)
-                    //  @phpstan-ignore argument.type
+                    // @phpstan-ignore argument.type
                     => $type::tryFrom($value),
 
                 $isString && $type === DateTime::class
-                    //  @phpstan-ignore argument.type
+                    // @phpstan-ignore argument.type
                     => new DateTime($value),
 
                 $isString && $type === DateTimeImmutable::class
-                    //  @phpstan-ignore argument.type
+                    // @phpstan-ignore argument.type
                     => new DateTimeImmutable($value),
 
                 $isArray && $type === stdClass::class
                     => (object)$value,
 
                 $isStringOrInt && $this->isBcMathLoaded() && $type === Number::class
-                    //  @phpstan-ignore argument.type
+                    // @phpstan-ignore argument.type
                     => new Number($value),
 
                 default => $value,
@@ -181,13 +176,14 @@ trait TransferAdapterTrait
      */
     private function getPublicProperties(): array
     {
-        if (isset($this->_propertyCache)) {
-            return $this->_propertyCache;
+        $reflectionObject = $this->_reflectionObjectReference?->get();
+
+        if ($reflectionObject === null) {
+            $reflectionObject = new ReflectionObject($this);
+            $this->_reflectionObjectReference = WeakReference::create($reflectionObject);
         }
 
-        $reflection = new ReflectionClass($this);
-
-        return $this->_propertyCache = $reflection->getProperties(ReflectionProperty::IS_PUBLIC);
+        return $reflectionObject->getProperties(filter: ReflectionProperty::IS_PUBLIC);
     }
 
     private function isBcMathLoaded(): bool

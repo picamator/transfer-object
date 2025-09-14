@@ -20,27 +20,25 @@ final class AuthorTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::FIRST_NAME => self::FIRST_NAME_DATA_NAME,
-        self::LAST_NAME => self::LAST_NAME_DATA_NAME,
+        self::FIRST_NAME_INDEX => self::FIRST_NAME,
+        self::LAST_NAME_INDEX => self::LAST_NAME,
     ];
 
     // firstName
     public const string FIRST_NAME = 'firstName';
-    protected const string FIRST_NAME_DATA_NAME = 'FIRST_NAME';
-    protected const int FIRST_NAME_DATA_INDEX = 0;
+    protected const int FIRST_NAME_INDEX = 0;
 
     public string $firstName {
-        get => $this->getData(self::FIRST_NAME_DATA_INDEX);
-        set => $this->setData(self::FIRST_NAME_DATA_INDEX, $value);
+        get => $this->getData(self::FIRST_NAME_INDEX);
+        set => $this->setData(self::FIRST_NAME_INDEX, $value);
     }
 
     // lastName
     public const string LAST_NAME = 'lastName';
-    protected const string LAST_NAME_DATA_NAME = 'LAST_NAME';
-    protected const int LAST_NAME_DATA_INDEX = 1;
+    protected const int LAST_NAME_INDEX = 1;
 
     public string $lastName {
-        get => $this->getData(self::LAST_NAME_DATA_INDEX);
-        set => $this->setData(self::LAST_NAME_DATA_INDEX, $value);
+        get => $this->getData(self::LAST_NAME_INDEX);
+        set => $this->setData(self::LAST_NAME_INDEX, $value);
     }
 }

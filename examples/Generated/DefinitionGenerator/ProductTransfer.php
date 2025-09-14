@@ -24,146 +24,134 @@ final class ProductTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 12;
 
     protected const array META_DATA = [
-        self::AVAILABILITIES => self::AVAILABILITIES_DATA_NAME,
-        self::CURRENCY => self::CURRENCY_DATA_NAME,
-        self::DELIVERY_OPTIONS => self::DELIVERY_OPTIONS_DATA_NAME,
-        self::DETAILS => self::DETAILS_DATA_NAME,
-        self::IS_DISCOUNTED => self::IS_DISCOUNTED_DATA_NAME,
-        self::LABELS => self::LABELS_DATA_NAME,
-        self::MEASUREMENT_UNIT => self::MEASUREMENT_UNIT_DATA_NAME,
-        self::NAME => self::NAME_DATA_NAME,
-        self::PRICE => self::PRICE_DATA_NAME,
-        self::SKU => self::SKU_DATA_NAME,
-        self::STOCK => self::STOCK_DATA_NAME,
-        self::STORES => self::STORES_DATA_NAME,
+        self::AVAILABILITIES_INDEX => self::AVAILABILITIES,
+        self::CURRENCY_INDEX => self::CURRENCY,
+        self::DELIVERY_OPTIONS_INDEX => self::DELIVERY_OPTIONS,
+        self::DETAILS_INDEX => self::DETAILS,
+        self::IS_DISCOUNTED_INDEX => self::IS_DISCOUNTED,
+        self::LABELS_INDEX => self::LABELS,
+        self::MEASUREMENT_UNIT_INDEX => self::MEASUREMENT_UNIT,
+        self::NAME_INDEX => self::NAME,
+        self::PRICE_INDEX => self::PRICE,
+        self::SKU_INDEX => self::SKU,
+        self::STOCK_INDEX => self::STOCK,
+        self::STORES_INDEX => self::STORES,
     ];
 
     // availabilities
     #[CollectionPropertyTypeAttribute(AvailabilitiesTransfer::class)]
     public const string AVAILABILITIES = 'availabilities';
-    protected const string AVAILABILITIES_DATA_NAME = 'AVAILABILITIES';
-    protected const int AVAILABILITIES_DATA_INDEX = 0;
+    protected const int AVAILABILITIES_INDEX = 0;
 
     /** @var \ArrayObject<int,AvailabilitiesTransfer> */
     public ArrayObject $availabilities {
-        get => $this->getData(self::AVAILABILITIES_DATA_INDEX);
-        set => $this->setData(self::AVAILABILITIES_DATA_INDEX, $value);
+        get => $this->getData(self::AVAILABILITIES_INDEX);
+        set => $this->setData(self::AVAILABILITIES_INDEX, $value);
     }
 
     // currency
     public const string CURRENCY = 'currency';
-    protected const string CURRENCY_DATA_NAME = 'CURRENCY';
-    protected const int CURRENCY_DATA_INDEX = 1;
+    protected const int CURRENCY_INDEX = 1;
 
     public ?string $currency {
-        get => $this->getData(self::CURRENCY_DATA_INDEX);
-        set => $this->setData(self::CURRENCY_DATA_INDEX, $value);
+        get => $this->getData(self::CURRENCY_INDEX);
+        set => $this->setData(self::CURRENCY_INDEX, $value);
     }
 
     // deliveryOptions
     #[CollectionPropertyTypeAttribute(DeliveryOptionsTransfer::class)]
     public const string DELIVERY_OPTIONS = 'deliveryOptions';
-    protected const string DELIVERY_OPTIONS_DATA_NAME = 'DELIVERY_OPTIONS';
-    protected const int DELIVERY_OPTIONS_DATA_INDEX = 2;
+    protected const int DELIVERY_OPTIONS_INDEX = 2;
 
     /** @var \ArrayObject<int,DeliveryOptionsTransfer> */
     public ArrayObject $deliveryOptions {
-        get => $this->getData(self::DELIVERY_OPTIONS_DATA_INDEX);
-        set => $this->setData(self::DELIVERY_OPTIONS_DATA_INDEX, $value);
+        get => $this->getData(self::DELIVERY_OPTIONS_INDEX);
+        set => $this->setData(self::DELIVERY_OPTIONS_INDEX, $value);
     }
 
     // details
     #[PropertyTypeAttribute(DetailsTransfer::class)]
     public const string DETAILS = 'details';
-    protected const string DETAILS_DATA_NAME = 'DETAILS';
-    protected const int DETAILS_DATA_INDEX = 3;
+    protected const int DETAILS_INDEX = 3;
 
     public ?DetailsTransfer $details {
-        get => $this->getData(self::DETAILS_DATA_INDEX);
-        set => $this->setData(self::DETAILS_DATA_INDEX, $value);
+        get => $this->getData(self::DETAILS_INDEX);
+        set => $this->setData(self::DETAILS_INDEX, $value);
     }
 
     // isDiscounted
     public const string IS_DISCOUNTED = 'isDiscounted';
-    protected const string IS_DISCOUNTED_DATA_NAME = 'IS_DISCOUNTED';
-    protected const int IS_DISCOUNTED_DATA_INDEX = 4;
+    protected const int IS_DISCOUNTED_INDEX = 4;
 
     public ?bool $isDiscounted {
-        get => $this->getData(self::IS_DISCOUNTED_DATA_INDEX);
-        set => $this->setData(self::IS_DISCOUNTED_DATA_INDEX, $value);
+        get => $this->getData(self::IS_DISCOUNTED_INDEX);
+        set => $this->setData(self::IS_DISCOUNTED_INDEX, $value);
     }
 
     // labels
     #[PropertyTypeAttribute(LabelsTransfer::class)]
     public const string LABELS = 'labels';
-    protected const string LABELS_DATA_NAME = 'LABELS';
-    protected const int LABELS_DATA_INDEX = 5;
+    protected const int LABELS_INDEX = 5;
 
     public ?LabelsTransfer $labels {
-        get => $this->getData(self::LABELS_DATA_INDEX);
-        set => $this->setData(self::LABELS_DATA_INDEX, $value);
+        get => $this->getData(self::LABELS_INDEX);
+        set => $this->setData(self::LABELS_INDEX, $value);
     }
 
     // measurementUnit
     #[PropertyTypeAttribute(MeasurementUnitTransfer::class)]
     public const string MEASUREMENT_UNIT = 'measurementUnit';
-    protected const string MEASUREMENT_UNIT_DATA_NAME = 'MEASUREMENT_UNIT';
-    protected const int MEASUREMENT_UNIT_DATA_INDEX = 6;
+    protected const int MEASUREMENT_UNIT_INDEX = 6;
 
     public ?MeasurementUnitTransfer $measurementUnit {
-        get => $this->getData(self::MEASUREMENT_UNIT_DATA_INDEX);
-        set => $this->setData(self::MEASUREMENT_UNIT_DATA_INDEX, $value);
+        get => $this->getData(self::MEASUREMENT_UNIT_INDEX);
+        set => $this->setData(self::MEASUREMENT_UNIT_INDEX, $value);
     }
 
     // name
     public const string NAME = 'name';
-    protected const string NAME_DATA_NAME = 'NAME';
-    protected const int NAME_DATA_INDEX = 7;
+    protected const int NAME_INDEX = 7;
 
     public ?string $name {
-        get => $this->getData(self::NAME_DATA_INDEX);
-        set => $this->setData(self::NAME_DATA_INDEX, $value);
+        get => $this->getData(self::NAME_INDEX);
+        set => $this->setData(self::NAME_INDEX, $value);
     }
 
     // price
     public const string PRICE = 'price';
-    protected const string PRICE_DATA_NAME = 'PRICE';
-    protected const int PRICE_DATA_INDEX = 8;
+    protected const int PRICE_INDEX = 8;
 
     public ?float $price {
-        get => $this->getData(self::PRICE_DATA_INDEX);
-        set => $this->setData(self::PRICE_DATA_INDEX, $value);
+        get => $this->getData(self::PRICE_INDEX);
+        set => $this->setData(self::PRICE_INDEX, $value);
     }
 
     // sku
     public const string SKU = 'sku';
-    protected const string SKU_DATA_NAME = 'SKU';
-    protected const int SKU_DATA_INDEX = 9;
+    protected const int SKU_INDEX = 9;
 
     public ?string $sku {
-        get => $this->getData(self::SKU_DATA_INDEX);
-        set => $this->setData(self::SKU_DATA_INDEX, $value);
+        get => $this->getData(self::SKU_INDEX);
+        set => $this->setData(self::SKU_INDEX, $value);
     }
 
     // stock
     public const string STOCK = 'stock';
-    protected const string STOCK_DATA_NAME = 'STOCK';
-    protected const int STOCK_DATA_INDEX = 10;
+    protected const int STOCK_INDEX = 10;
 
     public ?int $stock {
-        get => $this->getData(self::STOCK_DATA_INDEX);
-        set => $this->setData(self::STOCK_DATA_INDEX, $value);
+        get => $this->getData(self::STOCK_INDEX);
+        set => $this->setData(self::STOCK_INDEX, $value);
     }
 
     // stores
     #[ArrayPropertyTypeAttribute]
     public const string STORES = 'stores';
-    protected const string STORES_DATA_NAME = 'STORES';
-    protected const int STORES_DATA_INDEX = 11;
+    protected const int STORES_INDEX = 11;
 
     /** @var array<int|string,mixed> */
     public array $stores {
-        get => $this->getData(self::STORES_DATA_INDEX);
-        set => $this->setData(self::STORES_DATA_INDEX, $value);
+        get => $this->getData(self::STORES_INDEX);
+        set => $this->setData(self::STORES_INDEX, $value);
     }
 }

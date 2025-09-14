@@ -20,27 +20,25 @@ final class MilesTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ESTIMATED_DIAMETER_MAX => self::ESTIMATED_DIAMETER_MAX_DATA_NAME,
-        self::ESTIMATED_DIAMETER_MIN => self::ESTIMATED_DIAMETER_MIN_DATA_NAME,
+        self::ESTIMATED_DIAMETER_MAX_INDEX => self::ESTIMATED_DIAMETER_MAX,
+        self::ESTIMATED_DIAMETER_MIN_INDEX => self::ESTIMATED_DIAMETER_MIN,
     ];
 
     // estimated_diameter_max
     public const string ESTIMATED_DIAMETER_MAX = 'estimated_diameter_max';
-    protected const string ESTIMATED_DIAMETER_MAX_DATA_NAME = 'ESTIMATED_DIAMETER_MAX';
-    protected const int ESTIMATED_DIAMETER_MAX_DATA_INDEX = 0;
+    protected const int ESTIMATED_DIAMETER_MAX_INDEX = 0;
 
     public ?float $estimated_diameter_max {
-        get => $this->getData(self::ESTIMATED_DIAMETER_MAX_DATA_INDEX);
-        set => $this->setData(self::ESTIMATED_DIAMETER_MAX_DATA_INDEX, $value);
+        get => $this->getData(self::ESTIMATED_DIAMETER_MAX_INDEX);
+        set => $this->setData(self::ESTIMATED_DIAMETER_MAX_INDEX, $value);
     }
 
     // estimated_diameter_min
     public const string ESTIMATED_DIAMETER_MIN = 'estimated_diameter_min';
-    protected const string ESTIMATED_DIAMETER_MIN_DATA_NAME = 'ESTIMATED_DIAMETER_MIN';
-    protected const int ESTIMATED_DIAMETER_MIN_DATA_INDEX = 1;
+    protected const int ESTIMATED_DIAMETER_MIN_INDEX = 1;
 
     public ?float $estimated_diameter_min {
-        get => $this->getData(self::ESTIMATED_DIAMETER_MIN_DATA_INDEX);
-        set => $this->setData(self::ESTIMATED_DIAMETER_MIN_DATA_INDEX, $value);
+        get => $this->getData(self::ESTIMATED_DIAMETER_MIN_INDEX);
+        set => $this->setData(self::ESTIMATED_DIAMETER_MIN_INDEX, $value);
     }
 }

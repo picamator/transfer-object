@@ -17,7 +17,7 @@ class NumberTypePropertyValidator implements PropertyValidatorInterface
         = 'Property "%s" type "%s" is not a BcMath\Number.';
 
     private const string EXTENSION_IS_NOT_LOADED_ERROR
-        = 'PHP extension BCMath was not loaded. Please install and load extension';
+        = 'PHP extension BCMath was not loaded. Please install and load extension.';
 
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
@@ -50,12 +50,12 @@ class NumberTypePropertyValidator implements PropertyValidatorInterface
     {
         return sprintf(
             self::INVALID_NUMBER_TYPE_ERROR_MESSAGE_TEMPLATE,
-            $propertyTransfer->propertyName,
+            $propertyTransfer->propertyName ?? '',
             $propertyTransfer->numberType?->namespace->withoutAlias ?? '',
         );
     }
 
-    private function isBcMathLoaded(): bool
+    protected function isBcMathLoaded(): bool
     {
         return extension_loaded('bcmath');
     }

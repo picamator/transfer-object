@@ -21,8 +21,6 @@ trait TransferBuilderTrait
 
     /**
      * @param class-string<AbstractTransfer|TransferInterface> $typeName
-     *
-     * @throws \ReflectionException
      */
     final protected function createTransfer(string $typeName, mixed $data): TransferInterface
     {

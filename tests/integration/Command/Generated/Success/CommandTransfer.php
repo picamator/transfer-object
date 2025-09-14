@@ -20,16 +20,15 @@ final class CommandTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::RUN => self::RUN_DATA_NAME,
+        self::RUN_INDEX => self::RUN,
     ];
 
     // run
     public const string RUN = 'run';
-    protected const string RUN_DATA_NAME = 'RUN';
-    protected const int RUN_DATA_INDEX = 0;
+    protected const int RUN_INDEX = 0;
 
     public ?true $run {
-        get => $this->getData(self::RUN_DATA_INDEX);
-        set => $this->setData(self::RUN_DATA_INDEX, $value);
+        get => $this->getData(self::RUN_INDEX);
+        set => $this->setData(self::RUN_INDEX, $value);
     }
 }

@@ -24,246 +24,225 @@ final class NewsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 21;
 
     protected const array META_DATA = [
-        self::BRANDING_IMAGE => self::BRANDING_IMAGE_DATA_NAME,
-        self::BREAKING_NEWS => self::BREAKING_NEWS_DATA_NAME,
-        self::COMMENTS => self::COMMENTS_DATA_NAME,
-        self::DATE => self::DATE_DATA_NAME,
-        self::DETAILS => self::DETAILS_DATA_NAME,
-        self::DETAILSWEB => self::DETAILSWEB_DATA_NAME,
-        self::EXTERNAL_ID => self::EXTERNAL_ID_DATA_NAME,
-        self::FIRST_SENTENCE => self::FIRST_SENTENCE_DATA_NAME,
-        self::GEOTAGS => self::GEOTAGS_DATA_NAME,
-        self::REGION_ID => self::REGION_ID_DATA_NAME,
-        self::REGION_IDS => self::REGION_IDS_DATA_NAME,
-        self::RESSORT => self::RESSORT_DATA_NAME,
-        self::SHARE_U_R_L => self::SHARE_U_R_L_DATA_NAME,
-        self::SOPHORA_ID => self::SOPHORA_ID_DATA_NAME,
-        self::TAGS => self::TAGS_DATA_NAME,
-        self::TEASER_IMAGE => self::TEASER_IMAGE_DATA_NAME,
-        self::TITLE => self::TITLE_DATA_NAME,
-        self::TOPLINE => self::TOPLINE_DATA_NAME,
-        self::TRACKING => self::TRACKING_DATA_NAME,
-        self::TYPE => self::TYPE_DATA_NAME,
-        self::UPDATE_CHECK_URL => self::UPDATE_CHECK_URL_DATA_NAME,
+        self::BRANDING_IMAGE_INDEX => self::BRANDING_IMAGE,
+        self::BREAKING_NEWS_INDEX => self::BREAKING_NEWS,
+        self::COMMENTS_INDEX => self::COMMENTS,
+        self::DATE_INDEX => self::DATE,
+        self::DETAILS_INDEX => self::DETAILS,
+        self::DETAILSWEB_INDEX => self::DETAILSWEB,
+        self::EXTERNAL_ID_INDEX => self::EXTERNAL_ID,
+        self::FIRST_SENTENCE_INDEX => self::FIRST_SENTENCE,
+        self::GEOTAGS_INDEX => self::GEOTAGS,
+        self::REGION_ID_INDEX => self::REGION_ID,
+        self::REGION_IDS_INDEX => self::REGION_IDS,
+        self::RESSORT_INDEX => self::RESSORT,
+        self::SHARE_U_R_L_INDEX => self::SHARE_U_R_L,
+        self::SOPHORA_ID_INDEX => self::SOPHORA_ID,
+        self::TAGS_INDEX => self::TAGS,
+        self::TEASER_IMAGE_INDEX => self::TEASER_IMAGE,
+        self::TITLE_INDEX => self::TITLE,
+        self::TOPLINE_INDEX => self::TOPLINE,
+        self::TRACKING_INDEX => self::TRACKING,
+        self::TYPE_INDEX => self::TYPE,
+        self::UPDATE_CHECK_URL_INDEX => self::UPDATE_CHECK_URL,
     ];
 
     // brandingImage
     #[PropertyTypeAttribute(BrandingImageTransfer::class)]
     public const string BRANDING_IMAGE = 'brandingImage';
-    protected const string BRANDING_IMAGE_DATA_NAME = 'BRANDING_IMAGE';
-    protected const int BRANDING_IMAGE_DATA_INDEX = 0;
+    protected const int BRANDING_IMAGE_INDEX = 0;
 
     public ?BrandingImageTransfer $brandingImage {
-        get => $this->getData(self::BRANDING_IMAGE_DATA_INDEX);
-        set => $this->setData(self::BRANDING_IMAGE_DATA_INDEX, $value);
+        get => $this->getData(self::BRANDING_IMAGE_INDEX);
+        set => $this->setData(self::BRANDING_IMAGE_INDEX, $value);
     }
 
     // breakingNews
     public const string BREAKING_NEWS = 'breakingNews';
-    protected const string BREAKING_NEWS_DATA_NAME = 'BREAKING_NEWS';
-    protected const int BREAKING_NEWS_DATA_INDEX = 1;
+    protected const int BREAKING_NEWS_INDEX = 1;
 
     public ?bool $breakingNews {
-        get => $this->getData(self::BREAKING_NEWS_DATA_INDEX);
-        set => $this->setData(self::BREAKING_NEWS_DATA_INDEX, $value);
+        get => $this->getData(self::BREAKING_NEWS_INDEX);
+        set => $this->setData(self::BREAKING_NEWS_INDEX, $value);
     }
 
     // comments
     public const string COMMENTS = 'comments';
-    protected const string COMMENTS_DATA_NAME = 'COMMENTS';
-    protected const int COMMENTS_DATA_INDEX = 2;
+    protected const int COMMENTS_INDEX = 2;
 
     public ?string $comments {
-        get => $this->getData(self::COMMENTS_DATA_INDEX);
-        set => $this->setData(self::COMMENTS_DATA_INDEX, $value);
+        get => $this->getData(self::COMMENTS_INDEX);
+        set => $this->setData(self::COMMENTS_INDEX, $value);
     }
 
     // date
     public const string DATE = 'date';
-    protected const string DATE_DATA_NAME = 'DATE';
-    protected const int DATE_DATA_INDEX = 3;
+    protected const int DATE_INDEX = 3;
 
     public ?string $date {
-        get => $this->getData(self::DATE_DATA_INDEX);
-        set => $this->setData(self::DATE_DATA_INDEX, $value);
+        get => $this->getData(self::DATE_INDEX);
+        set => $this->setData(self::DATE_INDEX, $value);
     }
 
     // details
     public const string DETAILS = 'details';
-    protected const string DETAILS_DATA_NAME = 'DETAILS';
-    protected const int DETAILS_DATA_INDEX = 4;
+    protected const int DETAILS_INDEX = 4;
 
     public ?string $details {
-        get => $this->getData(self::DETAILS_DATA_INDEX);
-        set => $this->setData(self::DETAILS_DATA_INDEX, $value);
+        get => $this->getData(self::DETAILS_INDEX);
+        set => $this->setData(self::DETAILS_INDEX, $value);
     }
 
     // detailsweb
     public const string DETAILSWEB = 'detailsweb';
-    protected const string DETAILSWEB_DATA_NAME = 'DETAILSWEB';
-    protected const int DETAILSWEB_DATA_INDEX = 5;
+    protected const int DETAILSWEB_INDEX = 5;
 
     public ?string $detailsweb {
-        get => $this->getData(self::DETAILSWEB_DATA_INDEX);
-        set => $this->setData(self::DETAILSWEB_DATA_INDEX, $value);
+        get => $this->getData(self::DETAILSWEB_INDEX);
+        set => $this->setData(self::DETAILSWEB_INDEX, $value);
     }
 
     // externalId
     public const string EXTERNAL_ID = 'externalId';
-    protected const string EXTERNAL_ID_DATA_NAME = 'EXTERNAL_ID';
-    protected const int EXTERNAL_ID_DATA_INDEX = 6;
+    protected const int EXTERNAL_ID_INDEX = 6;
 
     public ?string $externalId {
-        get => $this->getData(self::EXTERNAL_ID_DATA_INDEX);
-        set => $this->setData(self::EXTERNAL_ID_DATA_INDEX, $value);
+        get => $this->getData(self::EXTERNAL_ID_INDEX);
+        set => $this->setData(self::EXTERNAL_ID_INDEX, $value);
     }
 
     // firstSentence
     public const string FIRST_SENTENCE = 'firstSentence';
-    protected const string FIRST_SENTENCE_DATA_NAME = 'FIRST_SENTENCE';
-    protected const int FIRST_SENTENCE_DATA_INDEX = 7;
+    protected const int FIRST_SENTENCE_INDEX = 7;
 
     public ?string $firstSentence {
-        get => $this->getData(self::FIRST_SENTENCE_DATA_INDEX);
-        set => $this->setData(self::FIRST_SENTENCE_DATA_INDEX, $value);
+        get => $this->getData(self::FIRST_SENTENCE_INDEX);
+        set => $this->setData(self::FIRST_SENTENCE_INDEX, $value);
     }
 
     // geotags
     #[ArrayPropertyTypeAttribute]
     public const string GEOTAGS = 'geotags';
-    protected const string GEOTAGS_DATA_NAME = 'GEOTAGS';
-    protected const int GEOTAGS_DATA_INDEX = 8;
+    protected const int GEOTAGS_INDEX = 8;
 
     /** @var array<int|string,mixed> */
     public array $geotags {
-        get => $this->getData(self::GEOTAGS_DATA_INDEX);
-        set => $this->setData(self::GEOTAGS_DATA_INDEX, $value);
+        get => $this->getData(self::GEOTAGS_INDEX);
+        set => $this->setData(self::GEOTAGS_INDEX, $value);
     }
 
     // regionId
     public const string REGION_ID = 'regionId';
-    protected const string REGION_ID_DATA_NAME = 'REGION_ID';
-    protected const int REGION_ID_DATA_INDEX = 9;
+    protected const int REGION_ID_INDEX = 9;
 
     public ?int $regionId {
-        get => $this->getData(self::REGION_ID_DATA_INDEX);
-        set => $this->setData(self::REGION_ID_DATA_INDEX, $value);
+        get => $this->getData(self::REGION_ID_INDEX);
+        set => $this->setData(self::REGION_ID_INDEX, $value);
     }
 
     // regionIds
     #[ArrayPropertyTypeAttribute]
     public const string REGION_IDS = 'regionIds';
-    protected const string REGION_IDS_DATA_NAME = 'REGION_IDS';
-    protected const int REGION_IDS_DATA_INDEX = 10;
+    protected const int REGION_IDS_INDEX = 10;
 
     /** @var array<int|string,mixed> */
     public array $regionIds {
-        get => $this->getData(self::REGION_IDS_DATA_INDEX);
-        set => $this->setData(self::REGION_IDS_DATA_INDEX, $value);
+        get => $this->getData(self::REGION_IDS_INDEX);
+        set => $this->setData(self::REGION_IDS_INDEX, $value);
     }
 
     // ressort
     public const string RESSORT = 'ressort';
-    protected const string RESSORT_DATA_NAME = 'RESSORT';
-    protected const int RESSORT_DATA_INDEX = 11;
+    protected const int RESSORT_INDEX = 11;
 
     public ?string $ressort {
-        get => $this->getData(self::RESSORT_DATA_INDEX);
-        set => $this->setData(self::RESSORT_DATA_INDEX, $value);
+        get => $this->getData(self::RESSORT_INDEX);
+        set => $this->setData(self::RESSORT_INDEX, $value);
     }
 
     // shareURL
     public const string SHARE_U_R_L = 'shareURL';
-    protected const string SHARE_U_R_L_DATA_NAME = 'SHARE_U_R_L';
-    protected const int SHARE_U_R_L_DATA_INDEX = 12;
+    protected const int SHARE_U_R_L_INDEX = 12;
 
     public ?string $shareURL {
-        get => $this->getData(self::SHARE_U_R_L_DATA_INDEX);
-        set => $this->setData(self::SHARE_U_R_L_DATA_INDEX, $value);
+        get => $this->getData(self::SHARE_U_R_L_INDEX);
+        set => $this->setData(self::SHARE_U_R_L_INDEX, $value);
     }
 
     // sophoraId
     public const string SOPHORA_ID = 'sophoraId';
-    protected const string SOPHORA_ID_DATA_NAME = 'SOPHORA_ID';
-    protected const int SOPHORA_ID_DATA_INDEX = 13;
+    protected const int SOPHORA_ID_INDEX = 13;
 
     public ?string $sophoraId {
-        get => $this->getData(self::SOPHORA_ID_DATA_INDEX);
-        set => $this->setData(self::SOPHORA_ID_DATA_INDEX, $value);
+        get => $this->getData(self::SOPHORA_ID_INDEX);
+        set => $this->setData(self::SOPHORA_ID_INDEX, $value);
     }
 
     // tags
     #[CollectionPropertyTypeAttribute(TagsTransfer::class)]
     public const string TAGS = 'tags';
-    protected const string TAGS_DATA_NAME = 'TAGS';
-    protected const int TAGS_DATA_INDEX = 14;
+    protected const int TAGS_INDEX = 14;
 
     /** @var \ArrayObject<int,TagsTransfer> */
     public ArrayObject $tags {
-        get => $this->getData(self::TAGS_DATA_INDEX);
-        set => $this->setData(self::TAGS_DATA_INDEX, $value);
+        get => $this->getData(self::TAGS_INDEX);
+        set => $this->setData(self::TAGS_INDEX, $value);
     }
 
     // teaserImage
     #[PropertyTypeAttribute(TeaserImageTransfer::class)]
     public const string TEASER_IMAGE = 'teaserImage';
-    protected const string TEASER_IMAGE_DATA_NAME = 'TEASER_IMAGE';
-    protected const int TEASER_IMAGE_DATA_INDEX = 15;
+    protected const int TEASER_IMAGE_INDEX = 15;
 
     public ?TeaserImageTransfer $teaserImage {
-        get => $this->getData(self::TEASER_IMAGE_DATA_INDEX);
-        set => $this->setData(self::TEASER_IMAGE_DATA_INDEX, $value);
+        get => $this->getData(self::TEASER_IMAGE_INDEX);
+        set => $this->setData(self::TEASER_IMAGE_INDEX, $value);
     }
 
     // title
     public const string TITLE = 'title';
-    protected const string TITLE_DATA_NAME = 'TITLE';
-    protected const int TITLE_DATA_INDEX = 16;
+    protected const int TITLE_INDEX = 16;
 
     public ?string $title {
-        get => $this->getData(self::TITLE_DATA_INDEX);
-        set => $this->setData(self::TITLE_DATA_INDEX, $value);
+        get => $this->getData(self::TITLE_INDEX);
+        set => $this->setData(self::TITLE_INDEX, $value);
     }
 
     // topline
     public const string TOPLINE = 'topline';
-    protected const string TOPLINE_DATA_NAME = 'TOPLINE';
-    protected const int TOPLINE_DATA_INDEX = 17;
+    protected const int TOPLINE_INDEX = 17;
 
     public ?string $topline {
-        get => $this->getData(self::TOPLINE_DATA_INDEX);
-        set => $this->setData(self::TOPLINE_DATA_INDEX, $value);
+        get => $this->getData(self::TOPLINE_INDEX);
+        set => $this->setData(self::TOPLINE_INDEX, $value);
     }
 
     // tracking
     #[CollectionPropertyTypeAttribute(TrackingTransfer::class)]
     public const string TRACKING = 'tracking';
-    protected const string TRACKING_DATA_NAME = 'TRACKING';
-    protected const int TRACKING_DATA_INDEX = 18;
+    protected const int TRACKING_INDEX = 18;
 
     /** @var \ArrayObject<int,TrackingTransfer> */
     public ArrayObject $tracking {
-        get => $this->getData(self::TRACKING_DATA_INDEX);
-        set => $this->setData(self::TRACKING_DATA_INDEX, $value);
+        get => $this->getData(self::TRACKING_INDEX);
+        set => $this->setData(self::TRACKING_INDEX, $value);
     }
 
     // type
     public const string TYPE = 'type';
-    protected const string TYPE_DATA_NAME = 'TYPE';
-    protected const int TYPE_DATA_INDEX = 19;
+    protected const int TYPE_INDEX = 19;
 
     public ?string $type {
-        get => $this->getData(self::TYPE_DATA_INDEX);
-        set => $this->setData(self::TYPE_DATA_INDEX, $value);
+        get => $this->getData(self::TYPE_INDEX);
+        set => $this->setData(self::TYPE_INDEX, $value);
     }
 
     // updateCheckUrl
     public const string UPDATE_CHECK_URL = 'updateCheckUrl';
-    protected const string UPDATE_CHECK_URL_DATA_NAME = 'UPDATE_CHECK_URL';
-    protected const int UPDATE_CHECK_URL_DATA_INDEX = 20;
+    protected const int UPDATE_CHECK_URL_INDEX = 20;
 
     public ?string $updateCheckUrl {
-        get => $this->getData(self::UPDATE_CHECK_URL_DATA_INDEX);
-        set => $this->setData(self::UPDATE_CHECK_URL_DATA_INDEX, $value);
+        get => $this->getData(self::UPDATE_CHECK_URL_INDEX);
+        set => $this->setData(self::UPDATE_CHECK_URL_INDEX, $value);
     }
 }

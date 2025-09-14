@@ -112,6 +112,19 @@ class FileAppenderTest extends TestCase
         $this->fileAppenderMock->closeFile(self::FILE_NAME);
     }
 
+    public function testFileIsNotExistInTheCacheShouldSkipCloseFile(): void
+    {
+        // Arrange
+        $fileName = 'some-name.txt';
+
+        // Expect
+        $this->fileAppenderMock->expects($this->never())
+            ->method('fclose');
+
+        // Act
+        $this->fileAppenderMock->closeFile($fileName);
+    }
+
     public function testFailedCloseFile(): void
     {
         // Arrange

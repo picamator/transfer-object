@@ -19,17 +19,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
     name: 'picamator:transfer:generate',
     description: 'Generates Transfer Objects from definition files specified by configuration.',
     aliases: ['p:t:g'],
-    hidden: false
-)]
-class TransferGeneratorCommand extends Command
-{
-    use InputNormalizerTrait;
-
-    /**
-     * phpcs:disable Generic.Files.LineLength
-     */
-    private const string HELP = <<<'HELP'
-This command generates Transfer Objects based on configuration file in YML format.
+    hidden: false,
+    // phpcs:disable Generic.Files.LineLength
+    help: <<<HELP
+The <info>%command.name%</info> command generates Transfer Objects based on configuration file in YML format.
 
 <options=bold>The configuration specifies:</>
   - The directory containing the definition files.
@@ -46,7 +39,11 @@ The command supports the first verbosity level to display additional details abo
 <options=bold>Documentation:</>
 For more details, please visit "<href=https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate>project's Wiki</>".
 
-HELP;
+HELP
+)]
+class TransferGeneratorCommand extends Command
+{
+    use InputNormalizerTrait;
 
     private const string OPTION_NAME_CONFIGURATION = 'configuration';
     private const string OPTION_SHORTCUT_CONFIGURATION = 'c';
@@ -75,8 +72,6 @@ MESSAGE;
 
     protected function configure(): void
     {
-        $this->setHelp(help: self::HELP);
-
         $this->addOption(
             name: self::OPTION_NAME_CONFIGURATION,
             shortcut: self::OPTION_SHORTCUT_CONFIGURATION,

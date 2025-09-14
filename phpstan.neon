@@ -23,3 +23,4 @@ parameters:
 rules:
    - PHPStan\Rules\DisallowedConstructs\DisallowedBacktickRule
    - PHPStan\Rules\StrictCalls\StrictFunctionCallsRule
+   - PHPStan\Rules\Classes\RequireParentConstructCallRule

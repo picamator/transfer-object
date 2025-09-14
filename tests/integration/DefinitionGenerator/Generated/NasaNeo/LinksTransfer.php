@@ -20,16 +20,15 @@ final class LinksTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::SELF => self::SELF_DATA_NAME,
+        self::SELF_INDEX => self::SELF,
     ];
 
     // self
     public const string SELF = 'self';
-    protected const string SELF_DATA_NAME = 'SELF';
-    protected const int SELF_DATA_INDEX = 0;
+    protected const int SELF_INDEX = 0;
 
     public ?string $self {
-        get => $this->getData(self::SELF_DATA_INDEX);
-        set => $this->setData(self::SELF_DATA_INDEX, $value);
+        get => $this->getData(self::SELF_INDEX);
+        set => $this->setData(self::SELF_INDEX, $value);
     }
 }

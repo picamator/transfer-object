@@ -20,16 +20,15 @@ final class RequiredTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::I_AM_REQUIRED => self::I_AM_REQUIRED_DATA_NAME,
+        self::I_AM_REQUIRED_INDEX => self::I_AM_REQUIRED,
     ];
 
     // iAmRequired
     public const string I_AM_REQUIRED = 'iAmRequired';
-    protected const string I_AM_REQUIRED_DATA_NAME = 'I_AM_REQUIRED';
-    protected const int I_AM_REQUIRED_DATA_INDEX = 0;
+    protected const int I_AM_REQUIRED_INDEX = 0;
 
     public string $iAmRequired {
-        get => $this->getData(self::I_AM_REQUIRED_DATA_INDEX);
-        set => $this->setData(self::I_AM_REQUIRED_DATA_INDEX, $value);
+        get => $this->getData(self::I_AM_REQUIRED_INDEX);
+        set => $this->setData(self::I_AM_REQUIRED_INDEX, $value);
     }
 }

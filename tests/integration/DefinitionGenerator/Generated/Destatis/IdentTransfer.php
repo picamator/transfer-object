@@ -20,27 +20,25 @@ final class IdentTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::METHOD => self::METHOD_DATA_NAME,
-        self::SERVICE => self::SERVICE_DATA_NAME,
+        self::METHOD_INDEX => self::METHOD,
+        self::SERVICE_INDEX => self::SERVICE,
     ];
 
     // Method
     public const string METHOD = 'Method';
-    protected const string METHOD_DATA_NAME = 'METHOD';
-    protected const int METHOD_DATA_INDEX = 0;
+    protected const int METHOD_INDEX = 0;
 
     public ?string $Method {
-        get => $this->getData(self::METHOD_DATA_INDEX);
-        set => $this->setData(self::METHOD_DATA_INDEX, $value);
+        get => $this->getData(self::METHOD_INDEX);
+        set => $this->setData(self::METHOD_INDEX, $value);
     }
 
     // Service
     public const string SERVICE = 'Service';
-    protected const string SERVICE_DATA_NAME = 'SERVICE';
-    protected const int SERVICE_DATA_INDEX = 1;
+    protected const int SERVICE_INDEX = 1;
 
     public ?string $Service {
-        get => $this->getData(self::SERVICE_DATA_INDEX);
-        set => $this->setData(self::SERVICE_DATA_INDEX, $value);
+        get => $this->getData(self::SERVICE_INDEX);
+        set => $this->setData(self::SERVICE_INDEX, $value);
     }
 }

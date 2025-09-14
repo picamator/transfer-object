@@ -20,27 +20,25 @@ final class CoordTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::LAT => self::LAT_DATA_NAME,
-        self::LON => self::LON_DATA_NAME,
+        self::LAT_INDEX => self::LAT,
+        self::LON_INDEX => self::LON,
     ];
 
     // lat
     public const string LAT = 'lat';
-    protected const string LAT_DATA_NAME = 'LAT';
-    protected const int LAT_DATA_INDEX = 0;
+    protected const int LAT_INDEX = 0;
 
     public ?float $lat {
-        get => $this->getData(self::LAT_DATA_INDEX);
-        set => $this->setData(self::LAT_DATA_INDEX, $value);
+        get => $this->getData(self::LAT_INDEX);
+        set => $this->setData(self::LAT_INDEX, $value);
     }
 
     // lon
     public const string LON = 'lon';
-    protected const string LON_DATA_NAME = 'LON';
-    protected const int LON_DATA_INDEX = 1;
+    protected const int LON_INDEX = 1;
 
     public ?float $lon {
-        get => $this->getData(self::LON_DATA_INDEX);
-        set => $this->setData(self::LON_DATA_INDEX, $value);
+        get => $this->getData(self::LON_INDEX);
+        set => $this->setData(self::LON_INDEX, $value);
     }
 }

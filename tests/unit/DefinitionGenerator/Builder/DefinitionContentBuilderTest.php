@@ -31,8 +31,21 @@ class DefinitionContentBuilderTest extends TestCase
     public function testUnsupportedTypeShouldThrowException(): void
     {
         // Arrange
-        $propertyName = 'file.txt';
+        $propertyName = 'file';
         $propertyValue = $this->getTempFileStream();
+
+        // Expect
+        $this->expectException(DefinitionGeneratorException::class);
+
+        // Act
+        $this->builder->createBuilderContent($propertyName, $propertyValue);
+    }
+
+    public function testInvalidPropertyNameShouldThrowException(): void
+    {
+        // Arrange
+        $propertyName = 'file.txt';
+        $propertyValue = 'something';
 
         // Expect
         $this->expectException(DefinitionGeneratorException::class);
