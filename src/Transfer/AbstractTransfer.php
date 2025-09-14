@@ -112,12 +112,7 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->initData();
 
-        $data = array_filter(
-            $data,
-            fn (mixed $value, string|int $key): bool => $value !== null && in_array($key, static::META_DATA, true),
-            ARRAY_FILTER_USE_BOTH,
-        );
-
+        $data = array_filter($data, $this->filterData(...), ARRAY_FILTER_USE_BOTH);
         if ($data === []) {
             return $this;
         }
@@ -130,6 +125,11 @@ abstract class AbstractTransfer implements TransferInterface
         }
 
         return $this;
+    }
+
+    private function filterData(mixed $value, string|int $key): bool
+    {
+        return $value !== null && in_array($key, static::META_DATA, true);
     }
 
     final protected function getData(int $index): mixed
