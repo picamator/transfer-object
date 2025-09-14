@@ -75,8 +75,8 @@ abstract class AbstractTransfer implements TransferInterface
 
     final public function getIterator(): Traversable
     {
-        foreach (static::META_DATA as $propertyName) {
-            yield $propertyName => $this->{$propertyName};
+        foreach ($this->_data as $index => $value) {
+            yield static::META_DATA[$index] => $value;
         }
     }
 
