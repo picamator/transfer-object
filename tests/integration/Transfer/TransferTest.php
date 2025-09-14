@@ -229,7 +229,8 @@ class TransferTest extends TestCase
         $this->expectException(TypeError::class);
 
         // Act
-        $requiredTransfer->toArray();
+        // @phpstan-ignore expr.resultUnused
+        $requiredTransfer->iAmRequired;
     }
 
     /**

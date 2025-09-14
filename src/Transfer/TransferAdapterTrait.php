@@ -111,30 +111,30 @@ trait TransferAdapterTrait
                     => new $type($value),
 
                 $isArray && is_subclass_of($type, TransferInterface::class)
-                    //  @phpstan-ignore argument.type
+                    // @phpstan-ignore argument.type
                     => new $type()->fromArray($value),
 
                 $isArray && $type === ArrayObject::class
-                    //  @phpstan-ignore argument.type
+                    // @phpstan-ignore argument.type
                     => new ArrayObject($value),
 
                 $isStringOrInt && is_subclass_of($type, BackedEnum::class)
-                    //  @phpstan-ignore argument.type
+                    // @phpstan-ignore argument.type
                     => $type::tryFrom($value),
 
                 $isString && $type === DateTime::class
-                    //  @phpstan-ignore argument.type
+                    // @phpstan-ignore argument.type
                     => new DateTime($value),
 
                 $isString && $type === DateTimeImmutable::class
-                    //  @phpstan-ignore argument.type
+                    // @phpstan-ignore argument.type
                     => new DateTimeImmutable($value),
 
                 $isArray && $type === stdClass::class
                     => (object)$value,
 
                 $isStringOrInt && $this->isBcMathLoaded() && $type === Number::class
-                    //  @phpstan-ignore argument.type
+                    // @phpstan-ignore argument.type
                     => new Number($value),
 
                 default => $value,
