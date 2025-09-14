@@ -40,8 +40,8 @@ class TemplateHelper implements TemplateHelperInterface
     public function renderMetaData(): string
     {
         $metaData = [];
-        foreach ($this->templateTransfer->metaConstants as $key => $value) {
-            $metaData[] = sprintf(self::META_DATA_TEMPLATE, $key);
+        foreach (array_keys($this->templateTransfer->metaConstants->getArrayCopy()) as $value) {
+            $metaData[] = sprintf(self::META_DATA_TEMPLATE, $value);
         }
 
         return implode(PHP_EOL, $metaData);
