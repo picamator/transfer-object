@@ -17,7 +17,7 @@ trait ConstantAttributeTrait
     /**
      * @var \WeakReference<\ReflectionObject>|null
      */
-    private ?WeakReference $reflectionObjectReference = null;
+    private ?WeakReference $_reflectionObjectReference = null;
 
     /**
      * @return array<string, \Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttributeInterface>
@@ -70,11 +70,11 @@ trait ConstantAttributeTrait
      */
     private function getReflectionConstants(): array
     {
-        $reflectionObject = $this->reflectionObjectReference?->get();
+        $reflectionObject = $this->_reflectionObjectReference?->get();
 
         if ($reflectionObject === null) {
             $reflectionObject = new ReflectionObject($this);
-            $this->reflectionObjectReference = WeakReference::create($reflectionObject);
+            $this->_reflectionObjectReference = WeakReference::create($reflectionObject);
         }
 
         return $reflectionObject->getReflectionConstants(filter: ReflectionClassConstant::IS_PUBLIC);

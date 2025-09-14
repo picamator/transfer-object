@@ -14,11 +14,18 @@ class ReservedNamePropertyValidator implements PropertyValidatorInterface
 
     private const string RESERVED_NAME_ERROR_MESSAGE_TEMPLATE = 'Reserved property name "%s".';
 
-    private const string RESERVED_PROPERTY = '_data';
+    /**
+     * @uses \Picamator\TransferObject\Transfer\AbstractTransfer::_data
+     * @uses \Picamator\TransferObject\Transfer\ConstantAttributeTrait::_reflectionObjectReference
+     */
+    private const array RESERVED_PROPERTIES = [
+        '_data',
+        '_reflectionObjectReference',
+    ];
 
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        return $propertyTransfer->propertyName === self::RESERVED_PROPERTY;
+        return in_array($propertyTransfer->propertyName, self::RESERVED_PROPERTIES, true);
     }
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
