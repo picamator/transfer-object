@@ -153,6 +153,11 @@ class TransferGeneratorFacadeErrorTest extends TestCase
             'configCaseName' => 'invalid-type-namespace-with-alias',
             'expectedMessage' => 'Invalid namespace',
         ];
+
+        yield 'invalid date time type' => [
+            'configCaseName' => 'invalid-date-time-type',
+            'expectedMessage' => 'does not implement DateTimeInterface',
+        ];
     }
 
     public function testGenerateTransfersOrFailTransferGeneratorShouldFailOnError(): void

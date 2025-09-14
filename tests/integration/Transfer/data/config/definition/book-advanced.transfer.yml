@@ -1,0 +1,6 @@
+# $schema: ./../../../../../../schema/definition.schema.json
+Book:
+  data:
+    type: "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Advanced\\BookData"
+  bookmarks:
+    collectionType: "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Advanced\\BookmarkData"
