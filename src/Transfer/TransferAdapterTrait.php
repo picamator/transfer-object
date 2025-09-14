@@ -14,6 +14,7 @@ use ReflectionObject;
 use ReflectionProperty;
 use stdClass;
 use Traversable;
+use WeakReference;
 
 /**
  * Specifications:
@@ -21,8 +22,8 @@ use Traversable;
  * - Simplifies integration with external transfer objects by removing the need to implement all interface methods.
  * - Intended for external transfer objects where:
  *   - data are stored in public properties.
- *   - all properties have default initial value
- *   - all properties are nullable
+ *   - all properties have default initial value.
+ *   - all properties are nullable.
  *
  * @api
  *
@@ -33,9 +34,9 @@ trait TransferAdapterTrait
     protected const string DATE_TIME_FORMAT = 'Y-m-d H:i:s';
 
     /**
-     * @var array<\ReflectionProperty>
+     * @var \WeakReference<\ReflectionObject>|null
      */
-    private array $_propertyCache;
+    private ?WeakReference $_reflectionObjectReference = null;
 
     /**
      * @return Traversable<string, mixed>
@@ -167,8 +168,14 @@ trait TransferAdapterTrait
      */
     private function getPublicProperties(): array
     {
-        return $this->_propertyCache ??= new ReflectionObject($this)
-            ->getProperties(filter: ReflectionProperty::IS_PUBLIC);
+        $reflectionObject = $this->_reflectionObjectReference?->get();
+
+        if ($reflectionObject === null) {
+            $reflectionObject = new ReflectionObject($this);
+            $this->_reflectionObjectReference = WeakReference::create($reflectionObject);
+        }
+
+        return $reflectionObject->getProperties(filter: ReflectionProperty::IS_PUBLIC);
     }
 
     private function isBcMathLoaded(): bool
