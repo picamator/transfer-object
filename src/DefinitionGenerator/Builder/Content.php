@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\DefinitionGenerator\Builder;
 
 use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\GetTypeEnum;
 
-readonly class BuilderContent implements BuilderContentInterface
+readonly class Content implements ContentInterface
 {
     public function __construct(
         private GetTypeEnum $type,

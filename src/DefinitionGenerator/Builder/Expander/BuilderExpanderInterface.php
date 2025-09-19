@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator\Builder\Expander;
 
-use Picamator\TransferObject\DefinitionGenerator\Builder\BuilderContentInterface;
+use Picamator\TransferObject\DefinitionGenerator\Builder\ContentInterface;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 
 interface BuilderExpanderInterface
@@ -14,8 +14,5 @@ interface BuilderExpanderInterface
     /**
      * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
      */
-    public function expandBuilderTransfer(
-        BuilderContentInterface $content,
-        DefinitionBuilderTransfer $builderTransfer,
-    ): void;
+    public function expandBuilderTransfer(ContentInterface $content, DefinitionBuilderTransfer $builderTransfer): void;
 }

@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use Picamator\TransferObject\DefinitionGenerator\Builder\BuilderContentInterface;
+use Picamator\TransferObject\DefinitionGenerator\Builder\ContentInterface;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\GetTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuilderExpanderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\TransferTypeBuilderExpander;
@@ -22,11 +22,11 @@ class TransferTypeBuilderExpanderTest extends TestCase
 
     private ReflectionMethod $isApplicableReflection;
 
-    private BuilderContentInterface&Stub $builderContentStub;
+    private ContentInterface&Stub $builderContentStub;
 
     protected function setUp(): void
     {
-        $this->builderContentStub = $this->createStub(BuilderContentInterface::class);
+        $this->builderContentStub = $this->createStub(ContentInterface::class);
 
         $this->expander = new TransferTypeBuilderExpander();
 

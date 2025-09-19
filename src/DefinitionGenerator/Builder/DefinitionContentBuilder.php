@@ -12,12 +12,12 @@ readonly class DefinitionContentBuilder implements DefinitionContentBuilderInter
 {
     use VariableValidatorTrait;
 
-    public function createBuilderContent(string $propertyName, mixed $propertyValue): BuilderContentInterface
+    public function createBuilderContent(string $propertyName, mixed $propertyValue): ContentInterface
     {
         $this->assertPropertyName($propertyName);
         $typeEnum = $this->getTypeEnum($propertyName, $propertyValue);
 
-        return new BuilderContent($typeEnum, $propertyName, $propertyValue);
+        return new Content($typeEnum, $propertyName, $propertyValue);
     }
 
     /**

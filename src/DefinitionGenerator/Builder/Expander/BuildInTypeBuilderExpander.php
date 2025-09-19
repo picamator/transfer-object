@@ -7,7 +7,7 @@ namespace Picamator\TransferObject\DefinitionGenerator\Builder\Expander;
 use ArrayObject;
 use DateTime;
 use DateTimeInterface;
-use Picamator\TransferObject\DefinitionGenerator\Builder\BuilderContentInterface;
+use Picamator\TransferObject\DefinitionGenerator\Builder\ContentInterface;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\GetTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\ObjectTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
@@ -21,13 +21,13 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
     /**
      * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
      */
-    protected function isApplicable(BuilderContentInterface $content): true
+    protected function isApplicable(ContentInterface $content): true
     {
         return true;
     }
 
     protected function handleExpander(
-        BuilderContentInterface $content,
+        ContentInterface $content,
         DefinitionBuilderTransfer $builderTransfer,
     ): void {
         $propertyTransfer = match (true) {
@@ -40,7 +40,7 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
         $builderTransfer->definitionContent->properties[] = $propertyTransfer;
     }
 
-    private function resolveDefaultType(BuilderContentInterface $content): DefinitionPropertyTransfer
+    private function resolveDefaultType(ContentInterface $content): DefinitionPropertyTransfer
     {
         return $this->createPropertyTransfer($content->getPropertyName(), $content->getType()->name);
     }
@@ -48,7 +48,7 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
     /**
      * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
      */
-    private function resolveObjectType(BuilderContentInterface $content): DefinitionPropertyTransfer
+    private function resolveObjectType(ContentInterface $content): DefinitionPropertyTransfer
     {
         if ($content->getPropertyValue() instanceof ArrayObject) {
             return $this->createPropertyTransfer($content->getPropertyName(), ObjectTypeEnum::ARRAY_OBJECT->value);
@@ -63,12 +63,12 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
         );
     }
 
-    private function resolveNullType(BuilderContentInterface $content): DefinitionPropertyTransfer
+    private function resolveNullType(ContentInterface $content): DefinitionPropertyTransfer
     {
         return $this->createPropertyTransfer($content->getPropertyName(), GetTypeEnum::string->name);
     }
 
-    private function resolveStringType(BuilderContentInterface $content): DefinitionPropertyTransfer
+    private function resolveStringType(ContentInterface $content): DefinitionPropertyTransfer
     {
         //  @phpstan-ignore argument.type
         if (DateTime::createFromFormat(DateTimeInterface::ATOM, $content->getPropertyValue()) !== false) {

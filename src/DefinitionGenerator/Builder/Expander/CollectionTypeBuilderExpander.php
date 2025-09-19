@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator\Builder\Expander;
 
-use Picamator\TransferObject\DefinitionGenerator\Builder\BuilderContentInterface;
+use Picamator\TransferObject\DefinitionGenerator\Builder\ContentInterface;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
@@ -13,7 +13,7 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
 {
     use BuilderExpanderTrait;
 
-    protected function isApplicable(BuilderContentInterface $content): bool
+    protected function isApplicable(ContentInterface $content): bool
     {
         if (!$content->getType()->isArray() || empty($content->getPropertyValue())) {
             return false;
@@ -26,7 +26,7 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
     }
 
     protected function handleExpander(
-        BuilderContentInterface $content,
+        ContentInterface $content,
         DefinitionBuilderTransfer $builderTransfer,
     ): void {
         $propertyTransfer = $this->createPropertyTransfer($content->getPropertyName());
@@ -42,7 +42,7 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
     /**
      * @return array<int|string, mixed>
      */
-    private function mergeContent(BuilderContentInterface $content): array
+    private function mergeContent(ContentInterface $content): array
     {
         $mergedContent = [];
         /** @var array<string, array<string, mixed>> $propertyValue */
