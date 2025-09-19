@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Render;
+namespace DefinitionGenerator\Generator\Render;
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
-use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRender;
-use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRenderInterface;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Render\TemplateRender;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Render\TemplateRenderInterface;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
@@ -20,11 +20,11 @@ class DefinitionRenderTest extends TestCase
 {
     private const string TEST_CLASS_NAME = 'TestClass';
 
-    private DefinitionRenderInterface $render;
+    private TemplateRenderInterface $render;
 
     protected function setUp(): void
     {
-        $this->render = new DefinitionRender();
+        $this->render = new TemplateRender();
     }
 
     /**
@@ -39,7 +39,7 @@ class DefinitionRenderTest extends TestCase
         $contentTransfer->properties[] = new DefinitionPropertyTransfer()->fromArray($propertyData);
 
         // Act
-        $actual = $this->render->renderDefinitionContent($contentTransfer);
+        $actual = $this->render->renderContent($contentTransfer);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -113,6 +113,6 @@ DEFINITION,
         $this->expectException(DefinitionGeneratorException::class);
 
         // Act
-        $this->render->renderDefinitionContent($contentTransfer);
+        $this->render->renderContent($contentTransfer);
     }
 }

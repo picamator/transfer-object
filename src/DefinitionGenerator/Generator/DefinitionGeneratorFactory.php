@@ -21,8 +21,8 @@ use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\C
 use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\Command\PreDefinitionProcessCommandInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\DefinitionGeneratorProcessor;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\DefinitionGeneratorProcessorInterface;
-use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRender;
-use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRenderInterface;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Render\TemplateRender;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Render\TemplateRenderInterface;
 use Picamator\TransferObject\Shared\CachedFactoryTrait;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 
@@ -75,7 +75,7 @@ class DefinitionGeneratorFactory
     {
         return new DefinitionProcessCommand(
             $this->createDefinitionBuilder(),
-            $this->createDefinitionRender(),
+            $this->createTemplateRender(),
             $this->createDefinitionFilesystem(),
         );
     }
@@ -83,7 +83,7 @@ class DefinitionGeneratorFactory
     protected function createPreDefinitionProcessCommand(): PreDefinitionProcessCommandInterface
     {
         return new PreDefinitionProcessCommand(
-            $this->createDefinitionRender(),
+            $this->createTemplateRender(),
             $this->createDefinitionFilesystem(),
         );
     }
@@ -99,11 +99,11 @@ class DefinitionGeneratorFactory
         );
     }
 
-    protected function createDefinitionRender(): DefinitionRenderInterface
+    protected function createTemplateRender(): TemplateRenderInterface
     {
         return $this->getCached(
             key: 'definition-render',
-            factory: fn (): DefinitionRenderInterface => new DefinitionRender()
+            factory: fn (): TemplateRenderInterface => new TemplateRender()
         );
     }
 

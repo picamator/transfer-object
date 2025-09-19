@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\DefinitionGenerator\Render;
+namespace Picamator\TransferObject\DefinitionGenerator\Generator\Render;
 
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 
-readonly class DefinitionRender implements DefinitionRenderInterface
+readonly class TemplateRender implements TemplateRenderInterface
 {
     private const string SCHEMA = <<<'TEMPLATE'
 # $schema: https://raw.githubusercontent.com/picamator/transfer-object/main/schema/definition.schema.json
@@ -45,7 +45,7 @@ TEMPLATE;
         return self::SCHEMA;
     }
 
-    public function renderDefinitionContent(DefinitionContentTransfer $contentTransfer): string
+    public function renderContent(DefinitionContentTransfer $contentTransfer): string
     {
         $content = sprintf(self::CLASS_TEMPLATE, $contentTransfer->className);
         foreach ($contentTransfer->properties as $propertyTransfer) {

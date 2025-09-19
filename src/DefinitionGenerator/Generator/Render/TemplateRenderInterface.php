@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\DefinitionGenerator\Render;
+namespace Picamator\TransferObject\DefinitionGenerator\Generator\Render;
 
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 
-interface DefinitionRenderInterface
+interface TemplateRenderInterface
 {
     public function renderSchema(): string;
 
     /**
      * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
      */
-    public function renderDefinitionContent(DefinitionContentTransfer $contentTransfer): string;
+    public function renderContent(DefinitionContentTransfer $contentTransfer): string;
 }
