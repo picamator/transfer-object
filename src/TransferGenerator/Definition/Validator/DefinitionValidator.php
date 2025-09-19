@@ -46,7 +46,7 @@ readonly class DefinitionValidator implements DefinitionValidatorInterface
                 continue;
             }
 
-            $errorMessages[] = $messageTransfer;
+            $errorMessages->append($messageTransfer);
         }
 
         return $errorMessages;

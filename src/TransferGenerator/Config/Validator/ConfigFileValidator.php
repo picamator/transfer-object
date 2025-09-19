@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Config\Validator;
 
-use ArrayObject;
 use Picamator\TransferObject\Generated\ValidatorTransfer;
 use Picamator\TransferObject\Shared\Validator\PathExistValidatorInterface;
 use Picamator\TransferObject\Shared\Validator\ValidatorTrait;
@@ -26,6 +25,9 @@ readonly class ConfigFileValidator implements ConfigFileValidatorInterface
             return $this->createSuccessValidatorTransfer();
         }
 
-        return $this->createErrorValidatorWithMessagesTransfer(new ArrayObject([$messageTransfer]));
+        $validatorTransfer = $this->createErrorValidatorTransfer();
+        $validatorTransfer->errorMessages[] = $messageTransfer;
+
+        return $validatorTransfer;
     }
 }

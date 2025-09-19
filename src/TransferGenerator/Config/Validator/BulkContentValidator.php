@@ -31,25 +31,26 @@ readonly class BulkContentValidator implements BulkContentValidatorInterface
             return $this->createSuccessValidatorTransfer();
         }
 
-        return $this->createErrorValidatorWithMessagesTransfer($errorMessages);
+        $validatorTransfer = $this->createErrorValidatorTransfer();
+        $validatorTransfer->errorMessages = $errorMessages;
+
+        return $validatorTransfer;
     }
 
     /**
-     * @param ConfigContentTransfer $configContentTransfer
      * @return \ArrayObject<int,\Picamator\TransferObject\Generated\ValidatorMessageTransfer>
      */
     private function handleContentValidators(ConfigContentTransfer $configContentTransfer): ArrayObject
     {
         /** @var \ArrayObject<int,\Picamator\TransferObject\Generated\ValidatorMessageTransfer> $errorMessages */
         $errorMessages = new ArrayObject();
-
         foreach ($this->contentValidators as $configValidator) {
             $messageTransfer = $configValidator->validate($configContentTransfer);
             if ($messageTransfer->isValid) {
                 continue;
             }
 
-            $errorMessages[] = $messageTransfer;
+            $errorMessages->append($messageTransfer);
         }
 
         return $errorMessages;
