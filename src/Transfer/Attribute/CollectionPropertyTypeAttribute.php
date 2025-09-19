@@ -10,14 +10,15 @@ use Picamator\TransferObject\Transfer\TransferInterface;
 
 /**
  * @api
- *
- * @property class-string<\Picamator\TransferObject\Transfer\AbstractTransfer|TransferInterface> $typeName
  */
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
 final readonly class CollectionPropertyTypeAttribute implements InitialPropertyTypeAttributeInterface
 {
     use TransferBuilderTrait;
 
+    /**
+     * @param class-string<\Picamator\TransferObject\Transfer\AbstractTransfer|TransferInterface> $typeName
+     */
     public function __construct(private string $typeName)
     {
     }
