@@ -23,7 +23,7 @@ final class TransferTypeBuilderExpander extends AbstractBuilderExpander
 
         /** @var array<int|string, mixed> $propertyValue */
         $propertyValue = $content->getPropertyValue();
-        $key = key($propertyValue);
+        $key = array_key_first($propertyValue);
 
         return is_string($key) && $this->isValidVariable($key);
     }
