@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\Command;
 
-use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionBuilderInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Reader\ContentReaderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Filesystem\DefinitionFilesystemInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Render\TemplateRenderInterface;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
@@ -14,7 +14,7 @@ use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 readonly class DefinitionProcessCommand implements DefinitionProcessCommandInterface
 {
     public function __construct(
-        private DefinitionBuilderInterface $builder,
+        private ContentReaderInterface $contentReader,
         private TemplateRenderInterface $render,
         private DefinitionFilesystemInterface $filesystem,
     ) {
@@ -25,7 +25,7 @@ readonly class DefinitionProcessCommand implements DefinitionProcessCommandInter
         DefinitionFilesystemTransfer $filesystemTransfer,
     ): int {
         $count = 0;
-        foreach ($this->builder->createDefinitionContents($generatorTransfer->content) as $contentTransfer) {
+        foreach ($this->contentReader->getDefinitionContents($generatorTransfer->content) as $contentTransfer) {
             $content = $this->renderContent($contentTransfer);
             $this->appendContent($filesystemTransfer, $content);
 

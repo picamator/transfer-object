@@ -2,32 +2,36 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\DefinitionGenerator\Builder;
+namespace Picamator\TransferObject\DefinitionGenerator\Content;
 
-use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuilderExpanderInterface;
-use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuildInTypeBuilderExpander;
-use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\CollectionTypeBuilderExpander;
-use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\TransferTypeBuilderExpander;
+use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentBuilder;
+use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentBuilderInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Expander\BuilderExpanderInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Expander\BuildInTypeBuilderExpander;
+use Picamator\TransferObject\DefinitionGenerator\Content\Expander\CollectionTypeBuilderExpander;
+use Picamator\TransferObject\DefinitionGenerator\Content\Expander\TransferTypeBuilderExpander;
+use Picamator\TransferObject\DefinitionGenerator\Content\Reader\ContentReader;
+use Picamator\TransferObject\DefinitionGenerator\Content\Reader\ContentReaderInterface;
 use Picamator\TransferObject\Shared\CachedFactoryTrait;
 
-class DefinitionBuilderFactory
+class DefinitionContentFactory
 {
     use CachedFactoryTrait;
 
-    public function createDefinitionBuilder(): DefinitionBuilderInterface
+    public function createContentReader(): ContentReaderInterface
     {
         return $this->getCached(
             key: 'definition-builder',
-            factory: fn (): DefinitionBuilderInterface => new DefinitionBuilder(
-                $this->createDefinitionContentBuilder(),
+            factory: fn (): ContentReaderInterface => new ContentReader(
+                $this->createContentBuilder(),
                 $this->createBuilderExpander(),
             ),
         );
     }
 
-    protected function createDefinitionContentBuilder(): DefinitionContentBuilderInterface
+    protected function createContentBuilder(): ContentBuilderInterface
     {
-        return new DefinitionContentBuilder();
+        return new ContentBuilder();
     }
 
     protected function createBuilderExpander(): BuilderExpanderInterface

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\DefinitionGenerator\Builder;
+namespace Picamator\TransferObject\DefinitionGenerator\Content\Builder;
 
-use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\GetTypeEnum;
+use Picamator\TransferObject\DefinitionGenerator\Content\Enum\GetTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 use Picamator\TransferObject\Shared\Validator\VariableValidatorTrait;
 
-readonly class DefinitionContentBuilder implements DefinitionContentBuilderInterface
+readonly class ContentBuilder implements ContentBuilderInterface
 {
     use VariableValidatorTrait;
 

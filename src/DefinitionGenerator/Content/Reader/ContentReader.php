@@ -2,29 +2,30 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\DefinitionGenerator\Builder;
+namespace Picamator\TransferObject\DefinitionGenerator\Content\Reader;
 
 use Generator;
-use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuilderExpanderInterface;
-use Picamator\TransferObject\Generated\DefinitionContentTransfer;
+use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentBuilderInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Expander\BuilderExpanderInterface;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
+use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionGeneratorContentTransfer;
 
-readonly class DefinitionBuilder implements DefinitionBuilderInterface
+readonly class ContentReader implements ContentReaderInterface
 {
     public function __construct(
-        private DefinitionContentBuilderInterface $contentBuilder,
+        private ContentBuilderInterface $contentBuilder,
         private BuilderExpanderInterface $builderExpander,
     ) {
     }
 
-    public function createDefinitionContents(DefinitionGeneratorContentTransfer $generatorContentTransfer): Generator
+    public function getDefinitionContents(DefinitionGeneratorContentTransfer $generatorContentTransfer): Generator
     {
         $builderTransfer = $this->getBuilderTransfer($generatorContentTransfer);
         yield $builderTransfer->definitionContent;
 
         foreach ($builderTransfer->generatorContents as $generatorContentTransfer) {
-            yield from $this->createDefinitionContents($generatorContentTransfer);
+            yield from $this->getDefinitionContents($generatorContentTransfer);
         }
     }
 
@@ -35,6 +36,7 @@ readonly class DefinitionBuilder implements DefinitionBuilderInterface
         DefinitionGeneratorContentTransfer $generatorContentTransfer,
     ): DefinitionBuilderTransfer {
         $builderTransfer = $this->createDefinitionBuilderTransfer($generatorContentTransfer->className);
+
         foreach ($generatorContentTransfer->content as $propertyName => $propertyValue) {
             $builderContent = $this->contentBuilder->createBuilderContent((string)$propertyName, $propertyValue);
             $this->builderExpander->expandBuilderTransfer($builderContent, $builderTransfer);

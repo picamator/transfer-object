@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\DefinitionGenerator\Builder;
+namespace Picamator\TransferObject\DefinitionGenerator\Content\Builder;
 
-use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\GetTypeEnum;
+use Picamator\TransferObject\DefinitionGenerator\Content\Enum\GetTypeEnum;
 
 interface ContentInterface
 {

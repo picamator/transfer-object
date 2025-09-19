@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\DefinitionGenerator\Builder\Expander;
+namespace Picamator\TransferObject\DefinitionGenerator\Content\Expander;
 
-use Picamator\TransferObject\DefinitionGenerator\Builder\ContentInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentInterface;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 
 abstract class AbstractBuilderExpander implements BuilderExpanderInterface

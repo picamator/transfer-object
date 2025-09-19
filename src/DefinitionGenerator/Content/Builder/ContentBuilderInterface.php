@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\DefinitionGenerator\Builder;
+namespace Picamator\TransferObject\DefinitionGenerator\Content\Builder;
 
-interface DefinitionContentBuilderInterface
+interface ContentBuilderInterface
 {
     /**
      * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException

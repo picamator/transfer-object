@@ -7,10 +7,10 @@ namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Builder\Expand
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use Picamator\TransferObject\DefinitionGenerator\Builder\ContentInterface;
-use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\GetTypeEnum;
-use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuilderExpanderInterface;
-use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuildInTypeBuilderExpander;
+use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Enum\GetTypeEnum;
+use Picamator\TransferObject\DefinitionGenerator\Content\Expander\BuilderExpanderInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Expander\BuildInTypeBuilderExpander;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 use stdClass;

@@ -9,14 +9,14 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use Picamator\TransferObject\DefinitionGenerator\Builder\ContentInterface;
-use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\GetTypeEnum;
-use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuilderExpanderInterface;
-use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\TransferTypeBuilderExpander;
+use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Enum\GetTypeEnum;
+use Picamator\TransferObject\DefinitionGenerator\Content\Expander\BuilderExpanderInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Expander\CollectionTypeBuilderExpander;
 use ReflectionMethod;
 
 #[Group('definition-generator')]
-class TransferTypeBuilderExpanderTest extends TestCase
+class CollectionTypeBuilderExpanderTest extends TestCase
 {
     private BuilderExpanderInterface $expander;
 
@@ -28,10 +28,10 @@ class TransferTypeBuilderExpanderTest extends TestCase
     {
         $this->builderContentStub = $this->createStub(ContentInterface::class);
 
-        $this->expander = new TransferTypeBuilderExpander();
+        $this->expander = new CollectionTypeBuilderExpander();
 
         $this->isApplicableReflection = new ReflectionMethod(
-            TransferTypeBuilderExpander::class,
+            CollectionTypeBuilderExpander::class,
             'isApplicable',
         );
     }
@@ -39,8 +39,8 @@ class TransferTypeBuilderExpanderTest extends TestCase
     /**
      * @param array<string,mixed> $propertyValue
      */
-    #[DataProvider('applicableTransferTypeDataProvider')]
-    public function testApplicableTransferType(GetTypeEnum $type, array $propertyValue, bool $expected): void
+    #[DataProvider('applicableCollectionTypeDataProvider')]
+    public function testApplicableCollectionType(GetTypeEnum $type, array $propertyValue, bool $expected): void
     {
         // Arrange
         $this->builderContentStub
@@ -61,12 +61,22 @@ class TransferTypeBuilderExpanderTest extends TestCase
     /**
      * @return Generator<string,mixed>
      */
-    public static function applicableTransferTypeDataProvider(): Generator
+    public static function applicableCollectionTypeDataProvider(): Generator
     {
-        yield 'type is array and property value is an array with key valid variable name should expect true' => [
+        yield 'type is array and property value is an array of arrays should expect true' => [
             'type' => GetTypeEnum::array,
             'propertyValue' => [
-                'product' => ['sku' => 123],
+                ['sku' => 123],
+                ['sku' => 456],
+            ],
+            'expected' => true,
+        ];
+
+        yield 'type is array and property values is an associative array of arrays should expect true' => [
+            'type' => GetTypeEnum::array,
+            'propertyValue' => [
+                '2024-12-26' => ['sku' => 123],
+                '2024-12-17' => ['sku' => 456],
             ],
             'expected' => true,
         ];
@@ -83,18 +93,12 @@ class TransferTypeBuilderExpanderTest extends TestCase
             'expected' => false,
         ];
 
-        yield 'type is array and property value is an array with key an integer should expect false' => [
-            'type' => GetTypeEnum::array,
-            'propertyValue' => [
-                ['sku' => 123],
-            ],
-            'expected' => false,
-        ];
-
-        yield 'type is array and property value is an array with key is invalid variable name should expect false' => [
+        yield 'type is array and property values is an associative array of mixed types should expect false' => [
             'type' => GetTypeEnum::array,
             'propertyValue' => [
                 '2024-12-26' => ['sku' => 123],
+                '2024-12-17' => ['sku' => 456],
+                'total' => 2,
             ],
             'expected' => false,
         ];
