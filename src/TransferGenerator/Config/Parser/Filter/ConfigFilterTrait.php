@@ -20,7 +20,7 @@ trait ConfigFilterTrait
     /**
      * @return array<string,string>
      */
-    private function filterConfig(mixed $configData): array
+    final protected function filterConfig(mixed $configData): array
     {
         if (!is_array($configData)) {
             return self::DEFAULT_CONTENT_DATA;
@@ -32,6 +32,6 @@ trait ConfigFilterTrait
         $filteredData = array_intersect_key($sectionData, ConfigKeyEnum::getValueName());
         $filteredData = array_filter($filteredData, fn(mixed $item): bool => is_string($item));
 
-        return array_merge(self::DEFAULT_CONTENT_DATA, $filteredData);
+        return $filteredData + self::DEFAULT_CONTENT_DATA;
     }
 }

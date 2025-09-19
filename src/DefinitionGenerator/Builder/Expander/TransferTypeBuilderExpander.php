@@ -21,7 +21,8 @@ final class TransferTypeBuilderExpander extends AbstractBuilderExpander
             return false;
         }
 
-        $propertyValue = (array)$content->getPropertyValue();
+        /** @var array<int|string, mixed> $propertyValue */
+        $propertyValue = $content->getPropertyValue();
         $key = key($propertyValue);
 
         return is_string($key) && $this->isValidVariable($key);
@@ -36,11 +37,9 @@ final class TransferTypeBuilderExpander extends AbstractBuilderExpander
 
         /** @var array<int|string, mixed> $propertyValue */
         $propertyValue = $content->getPropertyValue();
+        $className = $propertyTransfer->transferType?->name ?: '';
 
-        $builderTransfer->generatorContents[] = $this->createGeneratorContentTransfer(
-            $propertyTransfer->transferType?->name ?: '',
-            $propertyValue,
-        );
+        $builderTransfer->generatorContents[] = $this->createGeneratorContentTransfer($className, $propertyValue);
     }
 
     private function createPropertyTransfer(string $propertyName): DefinitionPropertyTransfer

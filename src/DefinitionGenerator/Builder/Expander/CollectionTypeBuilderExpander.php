@@ -20,10 +20,9 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
         }
 
         /** @var array<string, mixed> $propertyValue */
-        $propertyValue = (array)$content->getPropertyValue();
-        $countArrayItems = $this->countArrayItems($propertyValue);
+        $propertyValue = $content->getPropertyValue();
 
-        return $countArrayItems === count($propertyValue);
+        return array_all($propertyValue, fn (mixed $value): bool => is_array($value));
     }
 
     protected function handleExpander(
@@ -33,25 +32,23 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
         $propertyTransfer = $this->createPropertyTransfer($content->getPropertyName());
         $builderTransfer->definitionContent->properties[] = $propertyTransfer;
 
-        $content = (array)$content->getPropertyValue() ?: [];
-        $mergedContent = $this->mergeContent($content);
 
+        $mergedContent = $this->mergeContent($content);
         $className = $propertyTransfer->collectionType?->name ?: '';
 
         $builderTransfer->generatorContents[] = $this->createGeneratorContentTransfer($className, $mergedContent);
     }
 
     /**
-     * @param array<int|string, mixed> $content
-     *
      * @return array<int|string, mixed>
      */
-    private function mergeContent(array $content): array
+    private function mergeContent(BuilderContentInterface $content): array
     {
         $mergedContent = [];
+        /** @var array<string, array<string, mixed>> $propertyValue */
+        $propertyValue = $content->getPropertyValue() ?: [];
 
-        /** @var array<string, mixed> $contentItem */
-        foreach ($content as $contentItem) {
+        foreach ($propertyValue as $contentItem) {
             foreach ($contentItem as $contentKey => $contentValue) {
                 if (!is_array($contentValue)) {
                     $mergedContent[$contentKey] ??= $contentValue;
@@ -60,8 +57,9 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
                 }
 
                 $mergedContent[$contentKey] ??= [];
-                //  @phpstan-ignore argument.type
-                $mergedContent[$contentKey] = array_merge($mergedContent[$contentKey], $contentValue);
+                if (is_array($mergedContent[$contentKey])) {
+                    $mergedContent[$contentKey] = array_merge($mergedContent[$contentKey], $contentValue);
+                }
             }
         }
 
@@ -80,20 +78,5 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
         $propertyTransfer->isProtected = false;
 
         return $propertyTransfer;
-    }
-
-    /**
-     * @param array<string,mixed> $propertyValue
-     */
-    private function countArrayItems(array $propertyValue): int
-    {
-        $count = 0;
-        foreach ($propertyValue as $item) {
-            if (is_array($item)) {
-                $count++;
-            }
-        }
-
-        return $count;
     }
 }
