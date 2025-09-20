@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Unit\TransferObject\Shared\Filesystem;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Unit\TransferObject\Helper\FileStreamHelperTrait;
@@ -36,7 +37,8 @@ class FileReaderTest extends TestCase
         $this->closeTempFileStream();
     }
 
-    public function testFailToOpenFileShouldRiseException(): void
+    #[TestDox('Failed open file should throw exception')]
+    public function testFailOpenFileShouldThrowException(): void
     {
         // Expect
         $this->fileReaderMock->expects($this->once())
@@ -58,7 +60,8 @@ class FileReaderTest extends TestCase
         $this->fileReaderMock->readFile(self::FILE_NAME)->current();
     }
 
-    public function testFailToReadWholeFileShouldRiseException(): void
+    #[TestDox('Failed read file should throw exception')]
+    public function testFailedReadFileShouldThrowException(): void
     {
         // Arrange
         $file = $this->getTempFileStream();
@@ -86,7 +89,8 @@ class FileReaderTest extends TestCase
         $this->fileReaderMock->readFile(self::FILE_NAME)->current();
     }
 
-    public function testFailToCloseFileShouldRiseException(): void
+    #[TestDox('Failed close file should throw exception')]
+    public function testFailedCloseFileShouldThrowException(): void
     {
         // Arrange
         $file = $this->getTempFileStream();
@@ -114,6 +118,7 @@ class FileReaderTest extends TestCase
         $this->fileReaderMock->readFile(self::FILE_NAME)->current();
     }
 
+    #[TestDox('Read file should skip empty lines')]
     public function testReadFileShouldSkipEmptyLines(): void
     {
         // Arrange

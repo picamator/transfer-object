@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Generator\Processor\Command;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Dependency\Exception\FilesystemException;
@@ -32,6 +33,7 @@ class PostProcessCommandTest extends TestCase
         );
     }
 
+    #[TestDox('Filesystem exception should be handled on postProcessSuccess')]
     public function testFilesystemExceptionShouldBeHandledOnPostProcessSuccess(): void
     {
         // Arrange
@@ -46,6 +48,7 @@ class PostProcessCommandTest extends TestCase
         $this->assertFalse($actual->validator->isValid);
     }
 
+    #[TestDox('Filesystem exception should be handled on PostProcessError')]
     public function testFilesystemExceptionShouldBeHandledOnPostProcessError(): void
     {
         // Arrange

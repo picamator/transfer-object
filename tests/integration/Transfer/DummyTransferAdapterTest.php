@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\Transfer;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookmarkData;
 
@@ -18,7 +19,8 @@ class DummyTransferAdapterTest extends TestCase
         $this->bookmarkData = new BookmarkData();
     }
 
-    public function testFromArrayToArray(): void
+    #[TestDox('Transformation fromArray and toArray')]
+    public function testTransformationFromArrayToArray(): void
     {
         // Arrange
         $bookmarkData = $this->bookmarkData
@@ -33,7 +35,8 @@ class DummyTransferAdapterTest extends TestCase
         $this->assertSame([], $actual);
     }
 
-    public function testCount(): void
+    #[TestDox('Transfer count')]
+    public function testTransferCount(): void
     {
         // Act
         $actual = $this->bookmarkData->count();
@@ -42,7 +45,8 @@ class DummyTransferAdapterTest extends TestCase
         $this->assertSame(0, $actual);
     }
 
-    public function testIterator(): void
+    #[TestDox('Transfer iterator')]
+    public function testTransferIterator(): void
     {
         // Act
         $actual = iterator_to_array($this->bookmarkData);
@@ -51,7 +55,8 @@ class DummyTransferAdapterTest extends TestCase
         $this->assertSame([], $actual);
     }
 
-    public function testDebugInfo(): void
+    #[TestDox('Transfer debugInfo')]
+    public function testTransferDebugInfo(): void
     {
         // Act
         $actual = $this->bookmarkData->__debugInfo();
@@ -60,7 +65,8 @@ class DummyTransferAdapterTest extends TestCase
         $this->assertSame([], $actual);
     }
 
-    public function testJsonSerialize(): void
+    #[TestDox('Transfer jsonSerialize')]
+    public function testTransferJsonSerialize(): void
     {
         // Act
         $actual = json_encode($this->bookmarkData, flags: JSON_THROW_ON_ERROR);

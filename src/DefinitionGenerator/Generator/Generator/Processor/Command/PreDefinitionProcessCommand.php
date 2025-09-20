@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\Command;
 
 use Picamator\TransferObject\DefinitionGenerator\Generator\Filesystem\DefinitionFilesystemInterface;
-use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRenderInterface;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Render\TemplateRenderInterface;
 use Picamator\TransferObject\Generated\DefinitionFilesystemTransfer;
 
 readonly class PreDefinitionProcessCommand implements PreDefinitionProcessCommandInterface
 {
     public function __construct(
-        private DefinitionRenderInterface $render,
+        private TemplateRenderInterface $render,
         private DefinitionFilesystemInterface $filesystem,
     ) {
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\TransferGenerator;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 
@@ -23,7 +24,8 @@ class TransferGeneratorFacadeSuccessTest extends TestCase
         self::TRANSFER_OBJECT_PATH . 'CountryTransfer.php',
     ];
 
-    public function testGenerateTransferObjectByValidDefinitionShouldSucceed(): void
+    #[TestDox('Generate transfer objects by valid definition')]
+    public function testGenerateTransferObjectsByValidDefinition(): void
     {
         // Act
         $actual = $this->generateTransfersCallback(self::GENERATOR_CONFIG_PATH, $this->assertGeneratorSuccess(...));

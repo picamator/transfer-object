@@ -7,6 +7,7 @@ namespace Picamator\Tests\Unit\TransferObject\Shared\Validator;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Shared\Validator\NamespaceValidatorTrait;
 
@@ -26,7 +27,8 @@ class NamespaceValidatorTest extends TestCase
     }
 
     #[DataProvider('validNamespaceDataProvider')]
-    public function testValidNamespaceShouldReturnTrue(string $namespace): void
+    #[TestDox('Valid namespace "$namespace"')]
+    public function testValidNamespace(string $namespace): void
     {
         // Act
         $actual = $this->validator->isValidNamespace($namespace);

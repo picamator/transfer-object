@@ -9,6 +9,8 @@ use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RequiresPhpExtension;
+use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\TestDoxFormatter;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
@@ -42,7 +44,8 @@ class TransferTest extends TestCase
      * @param array<string,mixed> $expected
      */
     #[DataProvider('fromToArrayDataProvider')]
-    public function testFromToArrayTransformation(array $data, array $expected): void
+    #[TestDoxFormatter('fromToArrayTestDoxFormatter')]
+    public function testTransformationFromToArray(array $data, array $expected): void
     {
         // Arrange
         $itemCollectionTransfer = new ItemCollectionTransfer();
@@ -52,9 +55,22 @@ class TransferTest extends TestCase
         $actual = $itemCollectionTransfer->toArray();
 
         // Assert
-        //  @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore method.alreadyNarrowedType
         $this->assertContainsOnlyInstancesOf(ItemTransfer::class, $itemCollectionTransfer->items);
         $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @param array<string,mixed> $data
+     * @param array<string,mixed> $expected
+     */
+    public static function fromToArrayTestDoxFormatter(array $data, array $expected): string
+    {
+        return sprintf(
+            "Transformation fromArray \n %s \n to toArray expected \n %s",
+            json_encode($data),
+            json_encode($expected),
+        );
     }
 
     /**
@@ -159,7 +175,8 @@ class TransferTest extends TestCase
         ];
     }
 
-    public function testSerialize(): void
+    #[TestDox('Transfer serialize')]
+    public function testTransferSerialize(): void
     {
         // Arrange
         $itemCollectionTransfer = new ItemCollectionTransfer();
@@ -174,7 +191,8 @@ class TransferTest extends TestCase
         $this->assertEquals($itemCollectionTransfer->toArray(), $unserialized->toArray());
     }
 
-    public function testJsonSerialize(): void
+    #[TestDox('Transfer jsonSerialize')]
+    public function testTransferJsonSerialize(): void
     {
         // Arrange
         $itemCollectionTransfer = new ItemCollectionTransfer();
@@ -188,7 +206,8 @@ class TransferTest extends TestCase
         $this->assertEquals($itemCollectionTransfer->toArray(), $decoded);
     }
 
-    public function testCount(): void
+    #[TestDox('Transfer count')]
+    public function testTransferCount(): void
     {
         // Arrange
         $itemCollectionTransfer = new ItemCollectionTransfer();
@@ -202,7 +221,8 @@ class TransferTest extends TestCase
         $this->assertCount(2, $itemCollectionTransfer);
     }
 
-    public function testDebugInfo(): void
+    #[TestDox('Transfer debugInfo')]
+    public function testTransferDebugInfo(): void
     {
         // Arrange
         $itemCollectionTransfer = new ItemCollectionTransfer();
@@ -216,7 +236,8 @@ class TransferTest extends TestCase
     }
 
     #[WithoutErrorHandler]
-    public function testTypeMismatchFromArrayShouldFailedWithError(): void
+    #[TestDox('Type mismatch fromArray should fail with error')]
+    public function testTypeMismatchFromArrayShouldFailWithError(): void
     {
         // Arrange
         $itemTransfer = new ItemTransfer();
@@ -230,7 +251,8 @@ class TransferTest extends TestCase
         ]);
     }
 
-    public function testAccessRequiredPropertyBeforeInitialisingShouldRiseException(): void
+    #[TestDox('Access required property before initialising should throw exception')]
+    public function testAccessRequiredPropertyBeforeInitialisingShouldThrowException(): void
     {
         // Arrange
         $requiredTransfer = new RequiredTransfer();
@@ -246,11 +268,11 @@ class TransferTest extends TestCase
     /**
      * @param array<string,mixed> $data
      */
-    #[TestWith([[ItemTransfer::I_AM_ARRAY => true]])]
-    #[TestWith([[ItemTransfer::I_AM_ARRAY_OBJECT => true]])]
-    #[TestWith([[ItemTransfer::I_AM_ENUM => true]])]
-    #[TestWith([[ItemTransfer::I_AM_DATE_TIME => true]])]
-    public function testItemTransferAttributeTypeMismatchFromArrayShouldRiseException(array $data): void
+    #[TestWith([[ItemTransfer::I_AM_ARRAY => true]], 'Expecting type array but received boolean')]
+    #[TestWith([[ItemTransfer::I_AM_ARRAY_OBJECT => true]], 'Expecting type ArrayObject but received boolean')]
+    #[TestWith([[ItemTransfer::I_AM_ENUM => true]], 'Expecting type Enum but received boolean')]
+    #[TestWith([[ItemTransfer::I_AM_DATE_TIME => true]], 'Expecting type DateTime but received boolean')]
+    public function testItemTransferAttributeTypeMismatchFromArrayShouldThrowException(array $data): void
     {
         // Arrange
         $itemTransfer = new ItemTransfer();
@@ -265,8 +287,8 @@ class TransferTest extends TestCase
     /**
      * @param array<string,mixed> $data
      */
-    #[TestWith([[ItemTransfer::I_AM_INT => []]])]
-    public function testItemTransferPropertyTypeMismatchFromArrayShouldRiseException(array $data): void
+    #[TestWith([[ItemTransfer::I_AM_INT => []]], 'Expecting type int, but received array')]
+    public function testItemTransferPropertyTypeMismatchFromArrayShouldThrowException(array $data): void
     {
         // Arrange
         $itemTransfer = new ItemTransfer();
@@ -281,10 +303,11 @@ class TransferTest extends TestCase
     /**
      * @param array<string,mixed> $data
      */
-    #[TestWith([[ItemCollectionTransfer::ITEMS => true]])]
-    #[TestWith([[ItemCollectionTransfer::ITEM => true]])]
-    #[TestWith([[ItemCollectionTransfer::ITEMS => ['some-string']]])]
-    public function testItemCollectionTransferAttributeTypeMismatchFromArrayShouldRiseException(array $data): void
+    #[TestWith([[ItemCollectionTransfer::ITEMS => true]], 'Expecting type array of arrays but received boolean')]
+    #[TestWith([[ItemCollectionTransfer::ITEM => true]], 'Expecting type array but received boolean')]
+    // phpcs:disable Generic.Files.LineLength
+    #[TestWith([[ItemCollectionTransfer::ITEMS => ['some-string']]], 'Expecting type array of arrays but received array')]
+    public function testItemCollectionTransferAttributeTypeMismatchFromArrayShouldThrowException(array $data): void
     {
         // Arrange
         $itemCollectionTransfer = new ItemCollectionTransfer();
@@ -296,7 +319,8 @@ class TransferTest extends TestCase
         $itemCollectionTransfer->fromArray($data);
     }
 
-    public function testTypeWithNamespaceShouldSucceed(): void
+    #[TestDox('Type with namespace')]
+    public function testTypeWithNamespace(): void
     {
         // Arrange
         $namespaceTransfer = new NamespaceTransfer();
@@ -307,6 +331,7 @@ class TransferTest extends TestCase
         $this->assertCount(1, $namespaceTransfer->items);
     }
 
+    #[TestDox('Protected property')]
     public function testProtectedProperty(): void
     {
         // Arrange
@@ -316,7 +341,8 @@ class TransferTest extends TestCase
         $this->assertTrue($reflectionProperty->isProtectedSet(), 'Property is not protected for setting.');
     }
 
-    public function testClone(): void
+    #[TestDox('Transfer clone')]
+    public function testTransferClone(): void
     {
         // Arrange
         $itemCollectionTransfer = new ItemCollectionTransfer([
@@ -347,7 +373,8 @@ class TransferTest extends TestCase
     }
 
     #[RequiresPhpExtension('bcmath')]
-    public function testBcMathFromToArrayTransformation(): void
+    #[TestDox('Transformation BcMath fromArray to toArray')]
+    public function testTransformationBcMathFromToArray(): void
     {
         // Arrange
         static::generateTransfersOrFail(self::GENERATOR_BC_MATH_CONFIG_PATH);

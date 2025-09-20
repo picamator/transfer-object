@@ -6,6 +6,7 @@ namespace Picamator\Tests\Unit\TransferObject\Shared\Reader;
 
 use Generator;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -34,6 +35,7 @@ class FileReaderProgressTest extends TestCase
             ->getMock();
     }
 
+    #[TestDox('Read file')]
     public function testReadFile(): void
     {
         // Arrange
@@ -74,6 +76,7 @@ class FileReaderProgressTest extends TestCase
 
     #[TestWith([0])]
     #[TestWith([false])]
+    #[TestDox('Empty file size "$filesize" should throw exception')]
     public function testEmptyFileShouldThrowException(int|false $filesize): void
     {
         // Arrange
@@ -100,6 +103,7 @@ class FileReaderProgressTest extends TestCase
         $this->fileReaderProgressMock->readFile($filename)->current();
     }
 
+    #[TestDox('File not exist should throw exception')]
     public function testFileNotExistShouldThrowException(): void
     {
         // Arrange

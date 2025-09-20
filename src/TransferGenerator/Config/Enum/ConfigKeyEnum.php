@@ -15,8 +15,22 @@ enum ConfigKeyEnum: string
     /**
      * @return array<string,string>
      */
-    public static function getValueName(): array
+    public static function getConfigKeys(): array
     {
         return array_column(self::cases(), column_key: 'name', index_key: 'value');
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function getDefaultConfig(): array
+    {
+        /** @var array<string> $configKeys */
+        $configKeys = array_column(self::cases(), column_key: 'value');
+
+        /** @var array<string, string> $defaultValueContent */
+        $defaultValueContent = array_fill_keys($configKeys, '');
+
+        return $defaultValueContent;
     }
 }

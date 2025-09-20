@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Generator\Builder;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
@@ -40,6 +41,7 @@ class DefinitionGeneratorBuilderTest extends TestCase
         );
     }
 
+    #[TestDox('Definition file is not local should throw exception')]
     public function testDefinitionFileIsNotLocalShouldThrowException(): void
     {
         // Arrange
@@ -58,7 +60,8 @@ class DefinitionGeneratorBuilderTest extends TestCase
         $this->builder->setDefinitionPath($definitionPath);
     }
 
-    public function testInvalidSetClassNameShouldThrowException(): void
+    #[TestDox('Invalid class name should throw exception')]
+    public function testInvalidClassNameShouldThrowException(): void
     {
         // Arrange
         $className = '00Customer';
@@ -77,7 +80,8 @@ class DefinitionGeneratorBuilderTest extends TestCase
         $this->builder->setClassName($className);
     }
 
-    public function testInvalidSetJsonPathShouldThrowException(): void
+    #[TestDox('Invalid json path should throw exception')]
+    public function testInvalidJsonPathShouldThrowException(): void
     {
         // Arrange
         $jsonPath = 'invalid/path.json';

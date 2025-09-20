@@ -7,6 +7,7 @@ namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Definition\Parse
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDoxFormatter;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\DefinitionNamespaceTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builder\NamespaceBuilder;
@@ -26,6 +27,7 @@ class NamespaceBuilderTest extends TestCase
      * @param array<string,mixed> $expected
      */
     #[DataProvider('definitionNamespaceDataProvider')]
+    #[TestDoxFormatter('definitionNamespaceTestDoxFormatter')]
     public function testCreateDefinitionNamespaceTransfer(string $namespace, array $expected): void
     {
         // Act
@@ -33,6 +35,18 @@ class NamespaceBuilderTest extends TestCase
 
         // Assert
         $this->assertEquals($expected, $actual->toArray());
+    }
+
+    /**
+     * @param array<string,mixed> $expected
+     */
+    public static function definitionNamespaceTestDoxFormatter(string $namespace, array $expected): string
+    {
+        return sprintf(
+            'Definition namespace "%s" expected "%s"',
+            $namespace,
+            json_encode($expected),
+        );
     }
 
     /**

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\DefinitionGenerator\Builder\Enum;
+namespace Picamator\TransferObject\DefinitionGenerator\Content\Enum;
 
 enum GetTypeEnum: string
 {

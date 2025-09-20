@@ -4,33 +4,24 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Shared\Validator;
 
-use ArrayObject;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Generated\ValidatorTransfer;
 
 trait ValidatorTrait
 {
-    final protected function createErrorValidatorTransfer(string $errorMessage): ValidatorTransfer
+    final protected function createErrorValidatorTransfer(?string $errorMessage = null): ValidatorTransfer
     {
         $validatorTransfer = new ValidatorTransfer();
         $validatorTransfer->isValid = false;
+
+        if ($errorMessage === null) {
+            return $validatorTransfer;
+        }
 
         $validatorTransfer->errorMessages[] = new ValidatorMessageTransfer([
             ValidatorMessageTransfer::IS_VALID => false,
             ValidatorMessageTransfer::ERROR_MESSAGE => $errorMessage,
         ]);
-
-        return $validatorTransfer;
-    }
-
-    /**
-     * @param \ArrayObject<int,\Picamator\TransferObject\Generated\ValidatorMessageTransfer> $errorMessages
-     */
-    final protected function createErrorValidatorWithMessagesTransfer(ArrayObject $errorMessages): ValidatorTransfer
-    {
-        $validatorTransfer = new ValidatorTransfer();
-        $validatorTransfer->isValid = false;
-        $validatorTransfer->errorMessages = $errorMessages;
 
         return $validatorTransfer;
     }

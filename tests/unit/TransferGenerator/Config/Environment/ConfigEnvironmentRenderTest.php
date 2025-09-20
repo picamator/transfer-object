@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Config\Environment;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRender;
@@ -24,6 +25,7 @@ class ConfigEnvironmentRenderTest extends TestCase
             ->getMock();
     }
 
+    #[TestDox('Environment variable working directory is set')]
     public function testEnvironmentVariableIsSet(): void
     {
         // Arrange
@@ -47,7 +49,8 @@ class ConfigEnvironmentRenderTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
-    public function testEnvironmentVariableIsNotSetShouldRollbackToWorkingDirectory(): void
+    #[TestDox('Environment variable working directory is not set should use fallback')]
+    public function testEnvironmentVariableIsNotSetShouldFallbackToWorkingDirectory(): void
     {
         // Arrange
         $configPath = '${PROJECT_ROOT}/some-config-path.yml';

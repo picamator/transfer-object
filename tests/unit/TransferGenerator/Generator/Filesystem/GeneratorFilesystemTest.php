@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Filesystem;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
@@ -39,7 +40,8 @@ class GeneratorFilesystemTest extends TestCase
         );
     }
 
-    public function testDuplicationFileWriteShouldRiseException(): void
+    #[TestDox('Duplication file write should throw exception')]
+    public function testDuplicationFileWriteShouldThrowException(): void
     {
         // Arrange
         $contentTransfer = new TransferGeneratorContentTransfer([

@@ -8,6 +8,7 @@ use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Destatis\DestatisTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Frankfurter\ExchangeRateTransfer;
@@ -41,6 +42,8 @@ class DefinitionGeneratorFacadeTest extends TestCase
     }
 
     #[DataProvider('generateDefinitionDataProvider')]
+    // phpcs:disable Generic.Files.LineLength
+    #[TestDox('Generate definition "$className" by "$sampleFileName" should successfully create definition file "$definitionFileName"')]
     public function testGenerateDefinitionShouldSuccessfullyCreateDefinitionFile(
         string $className,
         string $sampleFileName,
@@ -112,6 +115,7 @@ class DefinitionGeneratorFacadeTest extends TestCase
 
     #[DataProvider('configPathDataProvider')]
     #[Depends('testGenerateDefinitionShouldSuccessfullyCreateDefinitionFile')]
+    #[TestDox('Generate transfer based on definition "$sampleFileName" should successfully generate transfer objects')]
     public function testGenerateTransferBasedOnDefinitionShouldSuccessfullyGenerateTransferObjects(
         string $sampleFileName,
     ): void {
@@ -158,6 +162,7 @@ class DefinitionGeneratorFacadeTest extends TestCase
 
     #[DataProvider('matchDefinitionDataProvider')]
     #[Depends('testGenerateTransferBasedOnDefinitionShouldSuccessfullyGenerateTransferObjects')]
+    #[TestDox('Compare sample data "$sampleFileName" with transfer object "$classFullName" should successfully match')]
     public function testCompareSampleDataWithTransferObjectShouldSuccessfullyMatch(
         string $classFullName,
         string $sampleFileName,
@@ -212,6 +217,8 @@ class DefinitionGeneratorFacadeTest extends TestCase
 
     #[DataProvider('matchFilteredDefinitionDataProvider')]
     #[Depends('testGenerateTransferBasedOnDefinitionShouldSuccessfullyGenerateTransferObjects')]
+    // phpcs:disable Generic.Files.LineLength
+    #[TestDox('Compare filtered sample data "$sampleFileName" with transfer object "$classFullName" should successfully match')]
     public function testCompareFilteredSampleDataWithTransferObjectShouldSuccessfullyMatch(
         string $classFullName,
         string $sampleFileName,

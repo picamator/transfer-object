@@ -38,7 +38,6 @@ readonly class DefinitionValidator implements DefinitionValidatorInterface
      */
     private function handleContentValidators(DefinitionContentTransfer $contentTransfer): ArrayObject
     {
-        /** @var \ArrayObject<int,\Picamator\TransferObject\Generated\ValidatorMessageTransfer> $errorMessages */
         $errorMessages = new ArrayObject();
         foreach ($this->contentValidators as $validator) {
             $messageTransfer = $validator->validate($contentTransfer);
@@ -46,7 +45,7 @@ readonly class DefinitionValidator implements DefinitionValidatorInterface
                 continue;
             }
 
-            $errorMessages[] = $messageTransfer;
+            $errorMessages->append($messageTransfer);
         }
 
         return $errorMessages;

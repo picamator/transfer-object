@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Builder\Expander;
+namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Content\Expander;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use Picamator\TransferObject\DefinitionGenerator\Builder\BuilderContentInterface;
-use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\GetTypeEnum;
-use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuilderExpanderInterface;
-use Picamator\TransferObject\DefinitionGenerator\Builder\Expander\BuildInTypeBuilderExpander;
+use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Enum\GetTypeEnum;
+use Picamator\TransferObject\DefinitionGenerator\Content\Expander\BuilderExpanderInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Expander\BuildInTypeBuilderExpander;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 use stdClass;
@@ -20,15 +21,16 @@ class BuildInTypeBuilderExpanderTest extends TestCase
 {
     private BuilderExpanderInterface $expander;
 
-    private BuilderContentInterface&Stub $builderContentStub;
+    private ContentInterface&Stub $builderContentStub;
 
     protected function setUp(): void
     {
-        $this->builderContentStub = $this->createStub(BuilderContentInterface::class);
+        $this->builderContentStub = $this->createStub(ContentInterface::class);
 
         $this->expander = new BuildInTypeBuilderExpander();
     }
 
+    #[TestDox('Unsupported type should throw exception')]
     public function testUnsupportedTypeShouldThrowException(): void
     {
         // Arrange

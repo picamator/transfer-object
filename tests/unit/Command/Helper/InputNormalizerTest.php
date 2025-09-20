@@ -7,6 +7,7 @@ namespace Picamator\Tests\Unit\TransferObject\Command\Helper;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Command\Helper\InputNormalizerTrait;
 
@@ -27,6 +28,7 @@ class InputNormalizerTest extends TestCase
     }
 
     #[DataProvider('normalizePathDataProvider')]
+    #[TestDox('Normalize path "$path" to the expected "$expected"')]
     public function testNormalizePath(mixed $path, string $expected): void
     {
         // Act

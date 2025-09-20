@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\DefinitionGenerator\Builder\Expander;
+namespace Picamator\TransferObject\DefinitionGenerator\Content\Expander;
 
-use Picamator\TransferObject\DefinitionGenerator\Builder\BuilderContentInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentInterface;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
@@ -15,20 +15,21 @@ final class TransferTypeBuilderExpander extends AbstractBuilderExpander
     use BuilderExpanderTrait;
     use VariableValidatorTrait;
 
-    protected function isApplicable(BuilderContentInterface $content): bool
+    protected function isApplicable(ContentInterface $content): bool
     {
         if (!$content->getType()->isArray() || empty($content->getPropertyValue())) {
             return false;
         }
 
-        $propertyValue = (array)$content->getPropertyValue();
-        $key = key($propertyValue);
+        /** @var array<int|string, mixed> $propertyValue */
+        $propertyValue = $content->getPropertyValue();
+        $key = array_key_first($propertyValue);
 
         return is_string($key) && $this->isValidVariable($key);
     }
 
     protected function handleExpander(
-        BuilderContentInterface $content,
+        ContentInterface $content,
         DefinitionBuilderTransfer $builderTransfer,
     ): void {
         $propertyTransfer = $this->createPropertyTransfer($content->getPropertyName());
@@ -36,11 +37,9 @@ final class TransferTypeBuilderExpander extends AbstractBuilderExpander
 
         /** @var array<int|string, mixed> $propertyValue */
         $propertyValue = $content->getPropertyValue();
+        $className = $propertyTransfer->transferType?->name ?: '';
 
-        $builderTransfer->generatorContents[] = $this->createGeneratorContentTransfer(
-            $propertyTransfer->transferType?->name ?: '',
-            $propertyValue,
-        );
+        $builderTransfer->generatorContents[] = $this->createGeneratorContentTransfer($className, $propertyValue);
     }
 
     private function createPropertyTransfer(string $propertyName): DefinitionPropertyTransfer

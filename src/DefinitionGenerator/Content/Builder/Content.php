@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\DefinitionGenerator\Builder;
+namespace Picamator\TransferObject\DefinitionGenerator\Content\Builder;
 
-use Picamator\TransferObject\DefinitionGenerator\Builder\Enum\GetTypeEnum;
+use Picamator\TransferObject\DefinitionGenerator\Content\Enum\GetTypeEnum;
 
-readonly class BuilderContent implements BuilderContentInterface
+readonly class Content implements ContentInterface
 {
     public function __construct(
         private GetTypeEnum $type,

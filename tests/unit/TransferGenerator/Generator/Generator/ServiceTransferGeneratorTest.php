@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Generator;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
@@ -28,7 +29,8 @@ class ServiceTransferGeneratorTest extends TestCase
         $this->serviceGenerator = new TransferGeneratorService($this->generatorStub);
     }
 
-    public function testGeneratorIteratesInvalidItemShouldRiseException(): void
+    #[TestDox('Generator iterates invalid item should throw exception')]
+    public function testGeneratorIteratesInvalidItemShouldThrowException(): void
     {
         // Arrange
         $configPath = 'some-config-path.yml';

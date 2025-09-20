@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Unit\TransferObject\Dependency;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Dependency\DependencyContainer;
 use Picamator\TransferObject\Dependency\Exception\ServiceNotFoundException;
@@ -20,6 +21,7 @@ class DependencyContainerTest extends TestCase
         $this->container = new DependencyContainer();
     }
 
+    #[TestDox('Getting unknown service should throw exception')]
     public function testGettingUnknownServiceShouldThrowException(): void
     {
         // Arrange

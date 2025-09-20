@@ -8,7 +8,7 @@ use Symfony\Component\Console\Application;
 
 include $_composer_autoload_path ?? __DIR__ . '/../vendor/autoload.php';
 
-$application = new Application(name:'TransferObject', version:'current');
+$application = new Application(name: 'Generate Transfer Definitions');
 
 $command = new DefinitionGeneratorCommand();
 

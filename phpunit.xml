@@ -10,6 +10,7 @@
          displayDetailsOnTestsThatTriggerErrors="true"
          displayDetailsOnTestsThatTriggerNotices="true"
          displayDetailsOnTestsThatTriggerWarnings="true"
+         testdox="true"
          cacheDirectory="./var/cache">
 
     <php>

@@ -19,6 +19,7 @@ readonly final class FilesystemBridge implements FilesystemInterface
     {
         try {
             $this->filesystem->copy($originFile, $targetFile);
+            // @codeCoverageIgnoreStart
         } catch (Throwable $e) {
             throw new FilesystemException(
                 sprintf(
@@ -30,30 +31,35 @@ readonly final class FilesystemBridge implements FilesystemInterface
                 previous: $e,
             );
         }
+        // @codeCoverageIgnoreEnd
     }
 
     public function mkdir(string $dir): void
     {
         try {
             $this->filesystem->mkdir($dir);
+            // @codeCoverageIgnoreStart
         } catch (Throwable $e) {
             throw new FilesystemException(
                 sprintf('Failed to create directory "%s". Error: "%s".', $dir, $e->getMessage()),
                 previous: $e,
             );
         }
+        // @codeCoverageIgnoreEnd
     }
 
     public function exists(string $file): bool
     {
         try {
             return $this->filesystem->exists($file);
+            // @codeCoverageIgnoreStart
         } catch (Throwable $e) {
             throw new FilesystemException(
                 sprintf('Failed to check if file "%s" exists. Error: "%s".', $file, $e->getMessage()),
                 previous: $e,
             );
         }
+        // @codeCoverageIgnoreEnd
     }
 
     /**
@@ -65,6 +71,7 @@ readonly final class FilesystemBridge implements FilesystemInterface
     {
         try {
             $this->filesystem->remove($files);
+            // @codeCoverageIgnoreStart
         } catch (Throwable $e) {
             $filePlaceholder = is_string($files) ? $files : var_export($files, true);
 
@@ -73,12 +80,14 @@ readonly final class FilesystemBridge implements FilesystemInterface
                 previous: $e,
             );
         }
+        // @codeCoverageIgnoreEnd
     }
 
     public function dumpFile(string $filename, string $content): void
     {
         try {
             $this->filesystem->dumpFile($filename, $content);
+            // @codeCoverageIgnoreStart
         } catch (Throwable $e) {
             throw new FilesystemException(
                 sprintf(
@@ -90,17 +99,20 @@ readonly final class FilesystemBridge implements FilesystemInterface
                 previous: $e,
             );
         }
+        // @codeCoverageIgnoreEnd
     }
 
     public function readFile(string $filename): string
     {
         try {
             return $this->filesystem->readFile($filename);
+            // @codeCoverageIgnoreStart
         } catch (Throwable $e) {
             throw new FilesystemException(
                 sprintf('Failed to read file "%s". Error: "%s".', $filename, $e->getMessage()),
                 previous: $e,
             );
         }
+        // @codeCoverageIgnoreEnd
     }
 }

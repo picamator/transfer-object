@@ -2,15 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Render;
+namespace DefinitionGenerator\Generator\Render;
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\TestDoxFormatter;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
-use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRender;
-use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRenderInterface;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Render\TemplateRender;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Render\TemplateRenderInterface;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
@@ -20,17 +22,18 @@ class DefinitionRenderTest extends TestCase
 {
     private const string TEST_CLASS_NAME = 'TestClass';
 
-    private DefinitionRenderInterface $render;
+    private TemplateRenderInterface $render;
 
     protected function setUp(): void
     {
-        $this->render = new DefinitionRender();
+        $this->render = new TemplateRender();
     }
 
     /**
      * @param array<string,string> $propertyData
      */
     #[DataProvider('successfulRenderDataProvider')]
+    #[TestDoxFormatter('successfulRenderTestDoxFormatter')]
     public function testSuccessfulRenderShouldReturnExpectedContent(array $propertyData, string $expected): void
     {
         // Arrange
@@ -39,10 +42,22 @@ class DefinitionRenderTest extends TestCase
         $contentTransfer->properties[] = new DefinitionPropertyTransfer()->fromArray($propertyData);
 
         // Act
-        $actual = $this->render->renderDefinitionContent($contentTransfer);
+        $actual = $this->render->renderContent($contentTransfer);
 
         // Assert
         $this->assertSame($expected, $actual);
+    }
+
+    /**
+     * @param array<string,string> $propertyData
+     */
+    public static function successfulRenderTestDoxFormatter(array $propertyData, string $expected): string
+    {
+        return sprintf(
+            "Render property data \"%s\" should expect \n \"%s\"",
+            json_encode($propertyData),
+            $expected,
+        );
     }
 
     public static function successfulRenderDataProvider(): Generator
@@ -97,7 +112,8 @@ DEFINITION,
         ];
     }
 
-    public function testPropertyTypeIsNotSetShouldRiseException(): void
+    #[TestDox('Property type is not set should throw exception')]
+    public function testPropertyTypeIsNotSetShouldThrowException(): void
     {
         // Arrange
         $contentTransfer = new DefinitionContentTransfer();
@@ -113,6 +129,6 @@ DEFINITION,
         $this->expectException(DefinitionGeneratorException::class);
 
         // Act
-        $this->render->renderDefinitionContent($contentTransfer);
+        $this->render->renderContent($contentTransfer);
     }
 }

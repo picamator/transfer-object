@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Render;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
@@ -35,7 +36,8 @@ class TemplateRenderTest extends TestCase
         $this->render = new TemplateRender($this->builderStub, $template);
     }
 
-    public function testEmptyTemplateRenderingShouldSucceed(): void
+    #[TestDox('Render empty template')]
+    public function testRenderEmptyTemplate(): void
     {
         // Arrange
         $definitionTransfer = new DefinitionTransfer();

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\DefinitionGenerator\Generator;
 
 // phpcs:disable Generic.Files.LineLength
-use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionBuilderFactory;
-use Picamator\TransferObject\DefinitionGenerator\Builder\DefinitionBuilderInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\DefinitionContentFactory;
+use Picamator\TransferObject\DefinitionGenerator\Content\Reader\ContentReaderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGeneratorBuilder;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGeneratorBuilderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Filesystem\DefinitionFilesystem;
@@ -21,8 +21,8 @@ use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\C
 use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\Command\PreDefinitionProcessCommandInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\DefinitionGeneratorProcessor;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\DefinitionGeneratorProcessorInterface;
-use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRender;
-use Picamator\TransferObject\DefinitionGenerator\Render\DefinitionRenderInterface;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Render\TemplateRender;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Render\TemplateRenderInterface;
 use Picamator\TransferObject\Shared\CachedFactoryTrait;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 
@@ -31,7 +31,7 @@ class DefinitionGeneratorFactory
     use SharedFactoryTrait;
     use CachedFactoryTrait;
 
-    private static DefinitionBuilderFactory $definitionBuilderFactory;
+    private static DefinitionContentFactory $definitionContentFactory;
 
     public function createDefinitionGeneratorService(): DefinitionGeneratorServiceInterface
     {
@@ -74,8 +74,8 @@ class DefinitionGeneratorFactory
     protected function createDefinitionProcessCommand(): DefinitionProcessCommandInterface
     {
         return new DefinitionProcessCommand(
-            $this->createDefinitionBuilder(),
-            $this->createDefinitionRender(),
+            $this->createContentReader(),
+            $this->createTemplateRender(),
             $this->createDefinitionFilesystem(),
         );
     }
@@ -83,7 +83,7 @@ class DefinitionGeneratorFactory
     protected function createPreDefinitionProcessCommand(): PreDefinitionProcessCommandInterface
     {
         return new PreDefinitionProcessCommand(
-            $this->createDefinitionRender(),
+            $this->createTemplateRender(),
             $this->createDefinitionFilesystem(),
         );
     }
@@ -99,22 +99,22 @@ class DefinitionGeneratorFactory
         );
     }
 
-    protected function createDefinitionRender(): DefinitionRenderInterface
+    protected function createTemplateRender(): TemplateRenderInterface
     {
         return $this->getCached(
             key: 'definition-render',
-            factory: fn (): DefinitionRenderInterface => new DefinitionRender()
+            factory: fn (): TemplateRenderInterface => new TemplateRender()
         );
     }
 
-    protected function createDefinitionBuilder(): DefinitionBuilderInterface
+    protected function createContentReader(): ContentReaderInterface
     {
-        return $this->getDefinitionBuilderFactory()
-            ->createDefinitionBuilder();
+        return $this->getDefinitionContentFactory()
+            ->createContentReader();
     }
 
-    protected function getDefinitionBuilderFactory(): DefinitionBuilderFactory
+    protected function getDefinitionContentFactory(): DefinitionContentFactory
     {
-        return self::$definitionBuilderFactory ??= new DefinitionBuilderFactory();
+        return self::$definitionContentFactory ??= new DefinitionContentFactory();
     }
 }
