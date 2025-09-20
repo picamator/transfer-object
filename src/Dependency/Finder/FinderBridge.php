@@ -21,6 +21,7 @@ final readonly class FinderBridge implements FinderInterface
                 ->in($dirName);
 
             return $this->getFinderBridge($finder);
+            // @codeCoverageIgnoreStart
         } catch (Throwable $e) {
             throw new FinderException(
                 sprintf(
@@ -32,6 +33,7 @@ final readonly class FinderBridge implements FinderInterface
                 previous: $e,
             );
         }
+        // @codeCoverageIgnoreEnd
     }
 
     public function findFilesInDirectoryExclude(
@@ -47,6 +49,7 @@ final readonly class FinderBridge implements FinderInterface
                 ->exclude($exclude);
 
             return $this->getFinderBridge($finder);
+            // @codeCoverageIgnoreStart
         } catch (Throwable $e) {
             throw new FinderException(
                 sprintf(
@@ -59,6 +62,7 @@ final readonly class FinderBridge implements FinderInterface
                 previous: $e,
             );
         }
+        // @codeCoverageIgnoreEnd
     }
 
     /**
