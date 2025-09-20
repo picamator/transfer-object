@@ -45,7 +45,7 @@ readonly class TransferGeneratorService implements TransferGeneratorServiceInter
      */
     private function throwError(TransferGeneratorTransfer $generatorTransfer): never
     {
-        $messageParts = [self::ERROR_MESSAGE];
+        $messageParts[] = self::ERROR_MESSAGE;
         if ($generatorTransfer->className !== null) {
             $messageParts[] = sprintf(self::TRANSFER_OBJECT_MESSAGE_TEMPLATE, $generatorTransfer->className);
         }

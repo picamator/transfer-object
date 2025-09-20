@@ -42,7 +42,6 @@ readonly class BulkContentValidator implements BulkContentValidatorInterface
      */
     private function handleContentValidators(ConfigContentTransfer $configContentTransfer): ArrayObject
     {
-        /** @var \ArrayObject<int,\Picamator\TransferObject\Generated\ValidatorMessageTransfer> $errorMessages */
         $errorMessages = new ArrayObject();
         foreach ($this->contentValidators as $configValidator) {
             $messageTransfer = $configValidator->validate($configContentTransfer);
