@@ -1,4 +1,4 @@
-FROM php:8.4
+FROM php:8.4-cli
 
 # create a user and group
 RUN groupadd -g 1000 generator && \
