@@ -1,8 +1,8 @@
 FROM php:8.4-cli
 
 # build arguments for UID/GID flexibility
-ARG USER_ID=1000
 ARG GROUP_ID=1000
+ARG USER_ID=1000
 
 # update apt cache and install system requirements in a single RUN command
 RUN apt-get --allow-unauthenticated --allow-insecure-repositories update && \
@@ -16,11 +16,11 @@ RUN apt-get --allow-unauthenticated --allow-insecure-repositories update && \
 COPY ./config.d/99-xdebug.ini  /usr/local/etc/php/conf.d/99-xdebug.ini
 
 # copy composer from official image
-COPY --from=composer/composer:latest-bin /composer /usr/local/bin/composer
+COPY --from=composer/composer:2-bin /composer /usr/local/bin/composer
 
 # create group and user
-RUN groupadd -g ${USER_ID} generator && \
-    useradd -m -u ${GROUP_ID} -g generator transfer
+RUN groupadd -g ${GROUP_ID} generator && \
+    useradd -m -u ${USER_ID} -g generator transfer
 
 # create working directory
 RUN mkdir /home/transfer/transfer-object
