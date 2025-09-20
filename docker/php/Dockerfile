@@ -1,10 +1,8 @@
 FROM php:8.4-cli
 
-# build arguments for UID/GID flexibility
 ARG GROUP_ID=1000
 ARG USER_ID=1000
 
-# update apt cache and install system requirements in a single RUN command
 RUN apt-get --allow-unauthenticated --allow-insecure-repositories update && \
     apt-get -y install git zip libzip-dev curl libcurl4-openssl-dev && \
     docker-php-ext-configure zip && \
@@ -12,31 +10,31 @@ RUN apt-get --allow-unauthenticated --allow-insecure-repositories update && \
     pecl install xdebug && \
     docker-php-ext-enable xdebug
 
-# copy Xdebug configuration
+# Xdebug https://xdebug.org/docs/all_settings
 COPY ./config.d/99-xdebug.ini  /usr/local/etc/php/conf.d/99-xdebug.ini
 
-# copy composer from official image
+# composer https://getcomposer.org/doc/00-intro.md#docker-image
 COPY --from=composer/composer:2-bin /composer /usr/local/bin/composer
 
-# create group and user
+# group and user
 RUN groupadd -g ${GROUP_ID} generator && \
     useradd -m -u ${USER_ID} -g generator transfer
 
-# create working directory
+# working directory
 RUN mkdir /home/transfer/transfer-object
 WORKDIR /home/transfer/transfer-object
 
-# bash
+# autocomplete and cli style
 COPY ./bash/composer-autocomplete.sh /home/transfer/composer-autocomplete.sh
 COPY ./bash/.bashrc /home/transfer/.bashrc
 
-# change permissions
+# permissions
 RUN chown -R transfer:generator /home/transfer
 
-# switch to the new user
+# user switch
 USER transfer
 
-# create volume
+# volume
 VOLUME /home/transfer/transfer-object
 
 # workaround to keep container running
