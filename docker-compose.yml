@@ -5,6 +5,7 @@ services:
       - "host.docker.internal:host-gateway"
     environment:
       XDEBUG_MODE: ${XDEBUG_MODE:-off}
+      PROJECT_ROOT: /home/transfer/transfer-object
     build:
       context: docker/php
     expose:

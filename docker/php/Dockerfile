@@ -36,9 +36,6 @@ RUN chown -R transfer:generator /home/transfer
 # switch to the new user
 USER transfer
 
-# set environment variable
-ENV PROJECT_ROOT=/home/transfer/transfer-object
-
 # create volume
 VOLUME /home/transfer/transfer-object
 
