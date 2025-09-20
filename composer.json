@@ -71,7 +71,7 @@
     "prefer-stable": true,
     "scripts": {
         "phpunit": "./vendor/bin/phpunit --no-progress",
-        "phpunit-group": "./vendor/bin/phpunit --no-progress --group",
+        "phpunit-group": "./vendor/bin/phpunit --testdox --group",
         "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon --no-progress --memory-limit=512M",
         "transfer-generate": "php ./bin/transfer-generate",
         "transfer-generate-bulk": "php ./bin/transfer-generate-bulk",
