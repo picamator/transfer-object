@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Picamator\Tests\Unit\TransferObject\Shared\Reader;
 
 use PHPUnit\Framework\Attributes\Group;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Dependency\Exception\FilesystemException;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
@@ -20,19 +21,20 @@ class JsonReaderTest extends TestCase
 
     private JsonReaderInterface $reader;
 
-    private FilesystemInterface&MockObject $filesystemMock;
+    private FilesystemInterface&Stub $filesystemStub;
 
     protected function setUp(): void
     {
-        $this->filesystemMock = $this->createMock(FilesystemInterface::class);
+        $this->filesystemStub = $this->createStub(FilesystemInterface::class);
 
-        $this->reader = new JsonReader($this->filesystemMock);
+        $this->reader = new JsonReader($this->filesystemStub);
     }
 
-    public function testFailWithExceptionGetJsonContent(): void
+    #[TestDox('Failed getJsonContent should throw exception')]
+    public function testFailedGetJsonContentShouldThrowException(): void
     {
         // Expect
-        $this->filesystemMock->expects($this->once())
+        $this->filesystemStub
             ->method('readFile')
             ->with(self::FILE_PATH)
             ->willThrowException(new FilesystemException());
@@ -43,14 +45,15 @@ class JsonReaderTest extends TestCase
         $this->reader->getJsonContent(self::FILE_PATH);
     }
 
-    public function testSuccessfulWithExceptionGetJsonContent(): void
+    #[TestDox('Successful getJsonContent')]
+    public function testSuccessfulGetJsonContent(): void
     {
         // Arrange
         $jsonString = '{"test": 1}';
         $expected = ['test' => 1];
 
         // Expect
-        $this->filesystemMock->expects($this->once())
+        $this->filesystemStub
             ->method('readFile')
             ->with(self::FILE_PATH)
             ->willReturn($jsonString);

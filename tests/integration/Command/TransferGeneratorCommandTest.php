@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\Command;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Command\TransferGeneratorCommand;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -25,6 +26,7 @@ class TransferGeneratorCommandTest extends TestCase
         $this->commandTester = new CommandTester($command);
     }
 
+    #[TestDox('Run command without configuration should show error message')]
     public function testRunCommandWithoutConfigurationShouldShowErrorMessage(): void
     {
         // Act
@@ -36,6 +38,7 @@ class TransferGeneratorCommandTest extends TestCase
         $this->assertStringContainsString('The required -c option is missing.', $output);
     }
 
+    #[TestDox('Run command with invalid configuration path should show error message')]
     public function testRunCommandWithInvalidConfigurationPathShouldShowErrorMessage(): void
     {
         // Act
@@ -47,6 +50,7 @@ class TransferGeneratorCommandTest extends TestCase
         $this->assertStringContainsString('not exist.', $output);
     }
 
+    #[TestDox('Run command with valid configuration should show success message')]
     public function testRunCommandWithValidConfigurationShouldShowSuccessMessage(): void
     {
         // Act
@@ -62,6 +66,7 @@ class TransferGeneratorCommandTest extends TestCase
         $this->assertStringContainsString('All Transfer Objects were generated successfully!', $output);
     }
 
+    #[TestDox('Run command with valid configuration but invalid definition should show error message')]
     public function testRunCommandWithValidConfigurationButInvalidDefinitionShouldShowErrorMessage(): void
     {
         // Act

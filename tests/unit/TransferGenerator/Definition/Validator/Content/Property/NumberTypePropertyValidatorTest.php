@@ -6,6 +6,7 @@ namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Definition\Valid
 
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RequiresPhpExtension;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
@@ -26,7 +27,8 @@ class NumberTypePropertyValidatorTest extends TestCase
             ->getMock();
     }
 
-    public function testBcMathWasNotLoadedShouldReturnError(): void
+    #[TestDox('BcMath is not loaded should return error')]
+    public function testBcMathIsNotLoadedShouldReturnError(): void
     {
         // Arrange
         $propertyTransfer = new DefinitionPropertyTransfer();
@@ -45,6 +47,7 @@ class NumberTypePropertyValidatorTest extends TestCase
     }
 
     #[RequiresPhpExtension('bcmath')]
+    #[TestDox('Invalid BcMath type should return error')]
     public function testInvalidBcMathTypeShouldReturnError(): void
     {
         // Arrange

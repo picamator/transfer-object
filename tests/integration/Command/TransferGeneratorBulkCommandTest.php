@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Command;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Command\TransferGeneratorBulkCommand;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -28,6 +29,7 @@ class TransferGeneratorBulkCommandTest extends TestCase
         $this->commandTester = new CommandTester($command);
     }
 
+    #[TestDox('Run command without configuration should show error message')]
     public function testRunCommandWithoutConfigurationShouldShowErrorMessage(): void
     {
         // Act
@@ -39,6 +41,7 @@ class TransferGeneratorBulkCommandTest extends TestCase
         $this->assertStringContainsString('The required -b option is missing.', $output);
     }
 
+    #[TestDox('Run command with invalid configuration path should show error message')]
     public function testRunCommandWithInvalidConfigurationPathShouldShowErrorMessage(): void
     {
         // Act
@@ -50,6 +53,7 @@ class TransferGeneratorBulkCommandTest extends TestCase
         $this->assertStringContainsString('[ERROR] File', $output);
     }
 
+    #[TestDox('Run command with valid configuration should show success message')]
     public function testRunCommandWithValidConfigurationShouldShowSuccessMessage(): void
     {
         // Act
@@ -63,6 +67,7 @@ class TransferGeneratorBulkCommandTest extends TestCase
         $this->assertStringContainsString('All Transfer Objects were generated successfully!', $output);
     }
 
+    #[TestDox('Run command with empty configuration should show error message')]
     public function testRunCommandWithEmptyConfigurationShouldShowErrorMessage(): void
     {
         // Act
@@ -76,6 +81,7 @@ class TransferGeneratorBulkCommandTest extends TestCase
         $this->assertStringContainsString('[ERROR] File size', $output);
     }
 
+    #[TestDox('Run command with valid configuration but invalid definition should show error message')]
     public function testRunCommandWithValidConfigurationButInvalidDefinitionShouldShowErrorMessage(): void
     {
         // Act

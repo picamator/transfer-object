@@ -7,6 +7,7 @@ namespace Picamator\Tests\Integration\TransferObject\TransferGenerator\Config\Lo
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactory;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoaderInterface;
@@ -24,6 +25,7 @@ class ConfigLoaderTest extends TestCase
     }
 
     #[DataProvider('invalidConfigDataProvider')]
+    #[TestDox('Invalid config "$configName" should return error')]
     public function testInvalidConfigShouldReturnError(string $configName): void
     {
         // Arrange

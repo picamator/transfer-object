@@ -6,6 +6,7 @@ namespace Picamator\Tests\Integration\TransferObject\Transfer;
 
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RequiresPhpExtension;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BcMathBookData;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookAuthorData;
@@ -16,7 +17,8 @@ use Picamator\Tests\Integration\TransferObject\Transfer\Generated\AuthorTransfer
 #[Group('transfer')]
 class TransferAdapterTest extends TestCase
 {
-    public function testFromArrayToArray(): void
+    #[TestDox('Transformation fromArray and toArray')]
+    public function testTransformationFromArrayToArray(): void
     {
         // Arrange
         $expected = [
@@ -49,7 +51,8 @@ class TransferAdapterTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
-    public function testFromArrayOnPartlyInitializedProperties(): void
+    #[TestDox('Transformation fromArray on partly initialized properties')]
+    public function testTransformationFromArrayOnPartlyInitializedProperties(): void
     {
         // Arrange
         $expected = ['lastName' => 'Kowalski'];
@@ -64,7 +67,8 @@ class TransferAdapterTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
-    public function testCount(): void
+    #[TestDox('Transfer count')]
+    public function testTransferCount(): void
     {
         // Arrange
         $bookData = new BookData();
@@ -77,7 +81,8 @@ class TransferAdapterTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
-    public function testIterator(): void
+    #[TestDox('Transfer iterator')]
+    public function testTransferIterator(): void
     {
         // Arrange
         $bookData = new BookData();
@@ -90,6 +95,7 @@ class TransferAdapterTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
+    #[TestDox('Iterator on partly initialized properties')]
     public function testIteratorOnPartlyInitializedProperties(): void
     {
         // Arrange
@@ -105,7 +111,8 @@ class TransferAdapterTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
-    public function testClone(): void
+    #[TestDox('Transfer clone')]
+    public function testTransferClone(): void
     {
         // Arrange
         $expected = [
@@ -146,6 +153,7 @@ class TransferAdapterTest extends TestCase
         $this->assertNotSame($bookData->notes, $clonedBookData->notes);
     }
 
+    #[TestDox('Transfer debugInfo')]
     public function testDebugInfo(): void
     {
         // Arrange
@@ -159,7 +167,8 @@ class TransferAdapterTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
-    public function testJsonSerialize(): void
+    #[TestDox('Transfer jsonSerialize')]
+    public function testTransferJsonSerialize(): void
     {
         // Arrange
         $bookData = new BookData();
@@ -174,7 +183,8 @@ class TransferAdapterTest extends TestCase
     }
 
     #[RequiresPhpExtension('bcmath')]
-    public function testBcMathToArray(): void
+    #[TestDox('Transformation BcMath toArray')]
+    public function testTransformationBcMathToArray(): void
     {
         // Arrange
         $expected = [

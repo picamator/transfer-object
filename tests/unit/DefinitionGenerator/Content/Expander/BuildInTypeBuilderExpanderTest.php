@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Builder\Expander;
+namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Content\Expander;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentInterface;
@@ -29,6 +30,7 @@ class BuildInTypeBuilderExpanderTest extends TestCase
         $this->expander = new BuildInTypeBuilderExpander();
     }
 
+    #[TestDox('Unsupported type should throw exception')]
     public function testUnsupportedTypeShouldThrowException(): void
     {
         // Arrange

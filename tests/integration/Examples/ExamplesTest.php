@@ -6,6 +6,7 @@ namespace Picamator\Tests\Integration\TransferObject\Examples;
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\OutputBufferHelperTrait;
@@ -18,7 +19,8 @@ class ExamplesTest extends TestCase
 
     #[WithoutErrorHandler]
     #[DataProvider('examplesNameDataProvider')]
-    public function testExamplesBufferOutputShouldSucceed(string $exampleName): void
+    #[TestDox('Successful example "$exampleName" output')]
+    public function testSuccessfulExampleOutput(string $exampleName): void
     {
         // Arrange
         $examplePath = self::EXAMPLE_PATH . $exampleName;

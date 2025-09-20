@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\Command;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Command\DefinitionGeneratorCommand;
 use Symfony\Component\Console\Helper\HelperSet;
@@ -27,6 +28,7 @@ class DefinitionGeneratorCommandTest extends TestCase
         $this->commandTester = new CommandTester($command);
     }
 
+    #[TestDox('Run command with valid json should show success message')]
     public function testRunCommandWithValidJsonShouldShowSuccessMessage(): void
     {
         // Act
@@ -48,6 +50,7 @@ class DefinitionGeneratorCommandTest extends TestCase
         $this->assertFileExists(__DIR__ . '/Generated/Definition/Success/customer.transfer.yml');
     }
 
+    #[TestDox('Run command with invalid json should show error message')]
     public function testRunCommandWithInvalidJsonShouldShowErrorMessage(): void
     {
         // Act

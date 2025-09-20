@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Unit\TransferObject\Shared\Filesystem;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Unit\TransferObject\Helper\FileStreamHelperTrait;
@@ -36,7 +37,8 @@ class FileAppenderTest extends TestCase
         $this->closeTempFileStream();
     }
 
-    public function testFailedOpenFileShouldRiseException(): void
+    #[TestDox('Failed open file should throw exception')]
+    public function testFailedOpenFileShouldThrowException(): void
     {
         // Expect
         $this->fileAppenderMock->expects($this->once())
@@ -50,7 +52,8 @@ class FileAppenderTest extends TestCase
         $this->fileAppenderMock->appendToFile(self::FILE_NAME, self::FILE_CONTENT);
     }
 
-    public function testFailedWriteFileShouldRiseException(): void
+    #[TestDox('Failed write file should throw exception')]
+    public function testFailedWriteFileShouldThrowException(): void
     {
         // Expect
         $this->fileAppenderMock->expects($this->once())
@@ -68,6 +71,7 @@ class FileAppenderTest extends TestCase
         $this->fileAppenderMock->appendToFile(self::FILE_NAME, self::FILE_CONTENT);
     }
 
+    #[TestDox('Successful write file')]
     public function testSuccessfulWriteFile(): void
     {
         // Arrange
@@ -88,6 +92,7 @@ class FileAppenderTest extends TestCase
         $this->fileAppenderMock->appendToFile(self::FILE_NAME, self::FILE_CONTENT);
     }
 
+    #[TestDox('Close file')]
     public function testCloseFile(): void
     {
         // Arrange
@@ -112,6 +117,7 @@ class FileAppenderTest extends TestCase
         $this->fileAppenderMock->closeFile(self::FILE_NAME);
     }
 
+    #[TestDox('File is not exist in the cache should skip closing file')]
     public function testFileIsNotExistInTheCacheShouldSkipCloseFile(): void
     {
         // Arrange
@@ -125,6 +131,7 @@ class FileAppenderTest extends TestCase
         $this->fileAppenderMock->closeFile($fileName);
     }
 
+    #[TestDox('Failed to close the file')]
     public function testFailedCloseFile(): void
     {
         // Arrange

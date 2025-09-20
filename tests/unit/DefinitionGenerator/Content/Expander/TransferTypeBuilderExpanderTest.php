@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Builder\Expander;
+namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Content\Expander;
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDoxFormatterExternal;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentInterface;
@@ -40,6 +41,7 @@ class TransferTypeBuilderExpanderTest extends TestCase
      * @param array<string,mixed> $propertyValue
      */
     #[DataProvider('applicableTransferTypeDataProvider')]
+    #[TestDoxFormatterExternal(ExpanderTestDoxFormatter::class, 'applicableTransferTypeFormatter')]
     public function testApplicableTransferType(GetTypeEnum $type, array $propertyValue, bool $expected): void
     {
         // Arrange

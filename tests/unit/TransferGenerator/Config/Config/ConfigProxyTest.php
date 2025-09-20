@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Config\Config;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigProxy;
@@ -20,7 +21,8 @@ class ConfigProxyTest extends TestCase
         $this->proxy = new ConfigProxy();
     }
 
-    public function testGetTransferNamespaceWithoutLoadingConfigFirstShouldRiseException(): void
+    #[TestDox('Get transfer namespace without loading config first should throw exception')]
+    public function testGetTransferNamespaceWithoutLoadingConfigFirstShouldThrowException(): void
     {
         // Arrange
         ConfigProxy::resetConfig();

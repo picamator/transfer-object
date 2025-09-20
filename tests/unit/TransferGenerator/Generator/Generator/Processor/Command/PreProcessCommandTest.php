@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Generator\Processor\Command;
 
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Dependency\Exception\FilesystemException;
@@ -40,6 +41,7 @@ class PreProcessCommandTest extends TestCase
         );
     }
 
+    #[TestDox('Filesystem exception should be handled on command')]
     public function testFilesystemExceptionShouldBeHandledOnCommand(): void
     {
         // Arrange

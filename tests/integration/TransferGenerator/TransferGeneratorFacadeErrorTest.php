@@ -7,6 +7,7 @@ namespace Picamator\Tests\Integration\TransferObject\TransferGenerator;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
@@ -21,7 +22,9 @@ class TransferGeneratorFacadeErrorTest extends TestCase
     private const string CONFIG_PATH_TEMPLATE = __DIR__ . '/data/config/error/%s/generator.config.yml';
 
     #[DataProvider('invalidDefinitionDataProvider')]
-    public function testGenerateTransferObjectByInvalidDefinitionShouldFail(
+    // phpcs:disable Generic.Files.LineLength
+    #[TestDox('Generate transfer objects by invalid definition "$configCaseName" should fail with message "$expectedMessage"')]
+    public function testGenerateTransferObjectsByInvalidDefinitionShouldFail(
         string $configCaseName,
         string $expectedMessage,
     ): void {
@@ -50,7 +53,8 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         $this->assertFalse($actual);
     }
 
-    public function testGenerateTransferObjectByDuplicateDefinitionShouldFail(): void
+    #[TestDox('Generate transfer objects by duplicate definitions should fail')]
+    public function testGenerateTransferObjectByDuplicateDefinitionsShouldFail(): void
     {
         $configCaseName = 'duplicate-transfer';
 
@@ -160,7 +164,8 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         ];
     }
 
-    public function testGenerateTransfersOrFailTransferGeneratorShouldFailOnError(): void
+    #[TestDox('Fail generate transfer objects')]
+    public function testFailGenerateTransferObjects(): void
     {
         // Arrange
         $configPath = $this->getConfigPath('invalid-class-name');
