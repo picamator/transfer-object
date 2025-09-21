@@ -21,7 +21,7 @@ class DefinitionContentFactory
     public function createContentReader(): ContentReaderInterface
     {
         return $this->getCached(
-            key: 'definition-builder',
+            key: 'definition-generator:ContentReader',
             factory: fn (): ContentReaderInterface => new ContentReader(
                 $this->createContentBuilder(),
                 $this->createBuilderExpander(),

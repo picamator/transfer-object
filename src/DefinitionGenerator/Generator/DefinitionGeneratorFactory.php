@@ -23,20 +23,18 @@ use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\D
 use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\DefinitionGeneratorProcessorInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Render\TemplateRender;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Render\TemplateRenderInterface;
-use Picamator\TransferObject\Shared\CachedFactoryTrait;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 
 class DefinitionGeneratorFactory
 {
     use SharedFactoryTrait;
-    use CachedFactoryTrait;
 
     private static DefinitionContentFactory $definitionContentFactory;
 
     public function createDefinitionGeneratorService(): DefinitionGeneratorServiceInterface
     {
         return $this->getCached(
-            key: 'definition-generator-service',
+            key: 'definition-generator:DefinitionGeneratorService',
             factory: fn (): DefinitionGeneratorServiceInterface => new DefinitionGeneratorService(
                 $this->createDefinitionGeneratorProcessor(),
             ),
@@ -46,7 +44,7 @@ class DefinitionGeneratorFactory
     public function createDefinitionGeneratorBuilder(): DefinitionGeneratorBuilderInterface
     {
         return $this->getCached(
-            key: 'definition-generator-builder',
+            key: 'definition-generator:DefinitionGeneratorBuilder',
             factory: fn (): DefinitionGeneratorBuilderInterface => new DefinitionGeneratorBuilder(
                 $this->createPathLocalValidator(),
                 $this->createClassNameValidator(),
@@ -90,21 +88,30 @@ class DefinitionGeneratorFactory
 
     protected function createDefinitionFilesystem(): DefinitionFilesystemInterface
     {
-        return $this->getCached(
-            key: 'definition-filesystem',
-            factory: fn (): DefinitionFilesystemInterface => new DefinitionFilesystem(
-                $this->getFilesystem(),
-                $this->createFileAppender(),
-            ),
+        /** @var DefinitionFilesystemInterface $definitionFilesystem */
+        $definitionFilesystem = $this->getLazyGhost(
+            className: DefinitionFilesystem::class,
+            initializer: function (DefinitionFilesystem $ghost): void {
+                $ghost->__construct(
+                    $this->createFilesystem(),
+                    $this->createFileAppender(),
+                );
+            }
         );
+
+        return $definitionFilesystem;
     }
 
     protected function createTemplateRender(): TemplateRenderInterface
     {
-        return $this->getCached(
-            key: 'definition-render',
-            factory: fn (): TemplateRenderInterface => new TemplateRender()
+        /** @var TemplateRenderInterface $templateRender */
+        $templateRender = $this->getLazyGhost(
+            className: TemplateRender::class,
+            initializer: function (): void {
+            }
         );
+
+        return $templateRender;
     }
 
     protected function createContentReader(): ContentReaderInterface

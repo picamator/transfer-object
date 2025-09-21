@@ -9,6 +9,7 @@ use Picamator\TransferObject\Shared\Filesystem\FileAppender;
 use Picamator\TransferObject\Shared\Filesystem\FileAppenderInterface;
 use Picamator\TransferObject\Shared\Filesystem\FileReader;
 use Picamator\TransferObject\Shared\Filesystem\FileReaderInterface;
+use Picamator\TransferObject\Shared\Initializer\LazyGhostInitializerTrait;
 use Picamator\TransferObject\Shared\Reader\FileReaderProgress;
 use Picamator\TransferObject\Shared\Reader\FileReaderProgressInterface;
 use Picamator\TransferObject\Shared\Reader\JsonReader;
@@ -25,44 +26,70 @@ use Picamator\TransferObject\Shared\Validator\PathLocalValidatorInterface;
 trait SharedFactoryTrait
 {
     use DependencyFactoryTrait;
+    use CachedFactoryTrait;
+    use LazyGhostInitializerTrait;
 
     final protected function createFileAppender(): FileAppenderInterface
     {
-        return new FileAppender();
+        return $this->getCached(
+            key: 'shared:FileAppender',
+            factory: fn (): FileAppenderInterface => new FileAppender(),
+        );
     }
 
     final protected function createJsonReader(): JsonReaderInterface
     {
-        return new JsonReader($this->getFilesystem());
+        return $this->getCached(
+            key: 'shared:JsonReader',
+            factory: fn (): JsonReaderInterface => new JsonReader($this->createFilesystem()),
+        );
     }
 
     final protected function createClassNameValidator(): ClassNameValidatorInterface
     {
-        return new ClassNameValidator();
+        return $this->getCached(
+            key: 'shared:ClassNameValidator',
+            factory: fn (): ClassNameValidatorInterface => new ClassNameValidator(),
+        );
     }
 
     final protected function createNamespaceValidator(): NamespaceValidatorInterface
     {
-        return new NamespaceValidator();
+        return $this->getCached(
+            key: 'shared:NamespaceValidator',
+            factory: fn (): NamespaceValidatorInterface => new NamespaceValidator(),
+        );
     }
 
     final protected function createPathExistValidator(): PathExistValidatorInterface
     {
-        return new PathExistValidator($this->getFilesystem());
+        return $this->getCached(
+            key: 'shared:PathExistValidator',
+            factory: fn (): PathExistValidatorInterface => new PathExistValidator($this->createFilesystem()),
+        );
     }
 
     final protected function createPathLocalValidator(): PathLocalValidatorInterface
     {
-        return new PathLocalValidator();
+        return $this->getCached(
+            key: 'shared:PathLocalValidator',
+            factory: fn (): PathLocalValidatorInterface => new PathLocalValidator(),
+        );
     }
 
     final protected function createFileReaderProgress(): FileReaderProgressInterface
     {
-        return new FileReaderProgress($this->createFileReader());
+        return $this->getCached(
+            key: 'shared:FileReaderProgress',
+            factory: fn (): FileReaderProgressInterface => new FileReaderProgress($this->createFileReader()),
+        );
     }
 
     final protected function createFileReader(): FileReaderInterface
     {
-        return new FileReader();
+        return $this->getCached(
+            key: 'shared:FileReader',
+            factory: fn (): FileReaderInterface => new FileReader(),
+        );
     }
 }

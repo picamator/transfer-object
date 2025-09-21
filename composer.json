@@ -40,7 +40,6 @@
     "require": {
         "php": ">=8.4",
         "composer-runtime-api": "^2.2",
-        "psr/container": "^2.0",
         "symfony/console": "^7.3",
         "symfony/filesystem": "^7.3",
         "symfony/finder": "^7.3",

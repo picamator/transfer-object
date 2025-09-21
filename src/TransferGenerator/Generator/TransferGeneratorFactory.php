@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator;
 
-use Picamator\TransferObject\Shared\CachedFactoryTrait;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBulkBuilder;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBulkBuilderInterface;
@@ -20,36 +19,31 @@ use Picamator\TransferObject\TransferGenerator\Generator\Generator\WorkflowFacto
 class TransferGeneratorFactory
 {
     use SharedFactoryTrait;
-    use CachedFactoryTrait;
 
     private static WorkflowFactory $workflowFactory;
 
     public function createTransferGeneratorFiber(): TransferGeneratorFiberInterface
     {
         return $this->getCached(
-            key: 'transfer-generator-fiber',
+            key: 'transfer-generator:TransferGeneratorFiber',
             factory: fn (): TransferGeneratorFiberInterface =>
-                new TransferGeneratorFiber(
-                    $this->createTransferGeneratorWorkflow(),
-                ),
+                new TransferGeneratorFiber($this->createTransferGeneratorWorkflow()),
         );
     }
 
     public function createTransferGeneratorService(): TransferGeneratorServiceInterface
     {
         return $this->getCached(
-            key: 'transfer-generator-service',
+            key: 'transfer-generator:TransferGeneratorService',
             factory: fn (): TransferGeneratorServiceInterface =>
-                new TransferGeneratorService(
-                    $this->createTransferGeneratorWorkflow(),
-                ),
+                new TransferGeneratorService($this->createTransferGeneratorWorkflow()),
         );
     }
 
     public function createTransferGeneratorBulkFiber(): TransferGeneratorBulkFiberInterface
     {
         return $this->getCached(
-            key: 'transfer-generator-bulk-fiber',
+            key: 'transfer-generator:TransferGeneratorBulkFiber',
             factory: fn (): TransferGeneratorBulkFiberInterface =>
                 new TransferGeneratorBulkFiber(
                     $this->createFileReaderProgress(),

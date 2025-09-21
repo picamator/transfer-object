@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 
-use Picamator\TransferObject\Shared\CachedFactoryTrait;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactory;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
@@ -32,7 +31,6 @@ class GeneratorFactory
 {
     use SharedFactoryTrait;
     use ConfigFactoryTrait;
-    use CachedFactoryTrait;
 
     public function createGeneratorProcessor(): GeneratorProcessorInterface
     {
@@ -79,27 +77,35 @@ class GeneratorFactory
 
     protected function createGeneratorFilesystem(): GeneratorFilesystemInterface
     {
-        return $this->getCached(
-            key: 'generator-filesystem',
-            factory: fn () => new GeneratorFilesystem(
-                $this->getFilesystem(),
-                $this->getFinder(),
-                $this->getConfig(),
-            ),
+        /** @var GeneratorFilesystemInterface $generatorFileSystem */
+        $generatorFileSystem = $this->getLazyGhost(
+            className: GeneratorFilesystem::class,
+            initializer: function (GeneratorFilesystem $ghost): void {
+                $ghost->__construct(
+                    $this->createFilesystem(),
+                    $this->createFinder(),
+                    $this->getConfig(),
+                );
+            }
         );
+
+        return $generatorFileSystem;
     }
 
     protected function createTransferGeneratorBuilder(): TransferGeneratorBuilderInterface
     {
         return $this->getCached(
-            key: 'generator-builder',
+            key: 'transfer-generator:TransferGeneratorBuilder',
             factory: fn () => new TransferGeneratorBuilder(),
         );
     }
 
     protected function createTemplateRender(): TemplateRenderInterface
     {
-        return new RenderFactory()->createTemplateRender();
+        return $this->getCached(
+            key: 'transfer-generator:TemplateRender',
+            factory: fn (): TemplateRenderInterface => new RenderFactory()->createTemplateRender(),
+        );
     }
 
     protected function createConfigLoader(): ConfigLoaderInterface

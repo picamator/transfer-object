@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Config;
 
 use ArrayObject;
-use Picamator\TransferObject\Shared\CachedFactoryTrait;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRender;
 use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRenderInterface;
@@ -34,16 +33,12 @@ use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\Transfer
 class ConfigFactory
 {
     use SharedFactoryTrait;
-    use CachedFactoryTrait;
 
     public function createConfigLoader(): ConfigLoaderInterface
     {
         return $this->getCached(
-            key: 'config-loader',
-            factory: fn(): ConfigLoaderInterface =>
-                new ConfigLoader(
-                    $this->createConfigReader(),
-                ),
+            key: 'transfer-generator:ConfigLoader',
+            factory: fn(): ConfigLoaderInterface => new ConfigLoader($this->createConfigReader()),
         );
     }
 
@@ -125,10 +120,18 @@ class ConfigFactory
 
     protected function createConfigParser(): ConfigParserInterface
     {
-        return new ConfigParser(
-            $this->getYmlParser(),
-            $this->createConfigContentBuilder(),
+        /** @var ConfigParserInterface $configParser */
+        $configParser = $this->getLazyGhost(
+            className: ConfigParser::class,
+            initializer: function (ConfigParser $ghost): void {
+                $ghost->__construct(
+                    $this->createYmlParser(),
+                    $this->createConfigContentBuilder(),
+                );
+            }
         );
+
+        return $configParser;
     }
 
     protected function createConfigContentBuilder(): ConfigContentBuilderInterface

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Definition;
 
-use Picamator\TransferObject\Shared\CachedFactoryTrait;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinder;
@@ -20,7 +19,6 @@ class DefinitionFactory
 {
     use ConfigFactoryTrait;
     use SharedFactoryTrait;
-    use CachedFactoryTrait;
 
     private static ValidatorFactory $validatorFactory;
 
@@ -29,7 +27,7 @@ class DefinitionFactory
     public function createDefinitionReader(): DefinitionReaderInterface
     {
         return $this->getCached(
-            key: 'definition-reader',
+            key: 'transfer-generator:DefinitionReader',
             factory: fn (): DefinitionReaderInterface =>
                 new DefinitionReader(
                     $this->createDefinitionFinder(),
@@ -47,7 +45,7 @@ class DefinitionFactory
     protected function createDefinitionFinder(): DefinitionFinderInterface
     {
         return new DefinitionFinder(
-            $this->getFinder(),
+            $this->createFinder(),
             $this->getConfig(),
         );
     }

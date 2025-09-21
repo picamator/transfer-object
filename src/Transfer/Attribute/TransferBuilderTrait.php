@@ -43,12 +43,9 @@ trait TransferBuilderTrait
      */
     private function createLazyTransfer(ReflectionClass $reflection, array $data): TransferInterface
     {
-        /**
-         * @var TransferInterface $transfer
-         * @phpstan-ignore argument.type
-         */
-        $transfer = $reflection->newLazyGhost(function (TransferInterface $object) use ($data): void {
-            $object->fromArray($data);
+        /** @var TransferInterface $transfer */
+        $transfer = $reflection->newLazyGhost(function (TransferInterface $ghost) use ($data): void {
+            $ghost->fromArray($data);
         });
 
         return $transfer;
@@ -60,12 +57,9 @@ trait TransferBuilderTrait
      */
     private function createLazyAbstractTransfer(ReflectionClass $reflection, array $data): TransferInterface
     {
-        /**
-         * @var TransferInterface $transfer
-         * @phpstan-ignore argument.type
-         */
-        $transfer = $reflection->newLazyGhost(function (AbstractTransfer $object) use ($data): void {
-            $object->__construct($data);
+        /** @var TransferInterface $transfer */
+        $transfer = $reflection->newLazyGhost(function (AbstractTransfer $ghost) use ($data): void {
+            $ghost->__construct($data);
         });
 
         return $transfer;
