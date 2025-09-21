@@ -23,15 +23,11 @@ use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\D
 use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\DefinitionGeneratorProcessorInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Render\TemplateRender;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Render\TemplateRenderInterface;
-use Picamator\TransferObject\Shared\CachedFactoryTrait;
-use Picamator\TransferObject\Shared\Initializer\LazyGhostInitializerTrait;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 
 class DefinitionGeneratorFactory
 {
     use SharedFactoryTrait;
-    use CachedFactoryTrait;
-    use LazyGhostInitializerTrait;
 
     private static DefinitionContentFactory $definitionContentFactory;
 

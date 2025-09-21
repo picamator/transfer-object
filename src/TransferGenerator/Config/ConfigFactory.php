@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Config;
 
 use ArrayObject;
-use Picamator\TransferObject\Shared\CachedFactoryTrait;
-use Picamator\TransferObject\Shared\Initializer\LazyGhostInitializerTrait;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRender;
 use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRenderInterface;
@@ -35,8 +33,6 @@ use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\Transfer
 class ConfigFactory
 {
     use SharedFactoryTrait;
-    use CachedFactoryTrait;
-    use LazyGhostInitializerTrait;
 
     public function createConfigLoader(): ConfigLoaderInterface
     {

@@ -9,6 +9,7 @@ use Picamator\TransferObject\Shared\Filesystem\FileAppender;
 use Picamator\TransferObject\Shared\Filesystem\FileAppenderInterface;
 use Picamator\TransferObject\Shared\Filesystem\FileReader;
 use Picamator\TransferObject\Shared\Filesystem\FileReaderInterface;
+use Picamator\TransferObject\Shared\Initializer\LazyGhostInitializerTrait;
 use Picamator\TransferObject\Shared\Reader\FileReaderProgress;
 use Picamator\TransferObject\Shared\Reader\FileReaderProgressInterface;
 use Picamator\TransferObject\Shared\Reader\JsonReader;
@@ -26,6 +27,7 @@ trait SharedFactoryTrait
 {
     use DependencyFactoryTrait;
     use CachedFactoryTrait;
+    use LazyGhostInitializerTrait;
 
     final protected function createFileAppender(): FileAppenderInterface
     {

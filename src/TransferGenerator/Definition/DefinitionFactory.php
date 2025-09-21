@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Definition;
 
-use Picamator\TransferObject\Shared\CachedFactoryTrait;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionFinder;
@@ -20,7 +19,6 @@ class DefinitionFactory
 {
     use ConfigFactoryTrait;
     use SharedFactoryTrait;
-    use CachedFactoryTrait;
 
     private static ValidatorFactory $validatorFactory;
 

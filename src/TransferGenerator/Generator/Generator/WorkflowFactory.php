@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 
-use Picamator\TransferObject\Shared\CachedFactoryTrait;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\GeneratorProcessorInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Workflow\TransferGeneratorWorkflow;
@@ -13,7 +12,6 @@ use Picamator\TransferObject\TransferGenerator\Generator\Generator\Workflow\Tran
 class WorkflowFactory
 {
     use SharedFactoryTrait;
-    use CachedFactoryTrait;
 
     private static GeneratorFactory $generatorFactory;
 

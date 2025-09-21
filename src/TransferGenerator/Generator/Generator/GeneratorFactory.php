@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 
-use Picamator\TransferObject\Shared\CachedFactoryTrait;
-use Picamator\TransferObject\Shared\Initializer\LazyGhostInitializerTrait;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactory;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
@@ -33,8 +31,6 @@ class GeneratorFactory
 {
     use SharedFactoryTrait;
     use ConfigFactoryTrait;
-    use CachedFactoryTrait;
-    use LazyGhostInitializerTrait;
 
     public function createGeneratorProcessor(): GeneratorProcessorInterface
     {
