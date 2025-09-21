@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use Picamator\TransferObject\Shared\Exception\TransferExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-class ServiceNotFoundException extends InvalidArgumentException implements
+class NotFoundContainerException extends InvalidArgumentException implements
     NotFoundExceptionInterface,
     TransferExceptionInterface
 {
