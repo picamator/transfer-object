@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render;
 
 use Picamator\TransferObject\Shared\CachedFactoryTrait;
+use Picamator\TransferObject\Shared\Initializer\LazyGhostInitializerTrait;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\BuildInTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\CollectionTypeTemplateExpander;
@@ -24,17 +25,22 @@ class RenderFactory
 {
     use ConfigFactoryTrait;
     use CachedFactoryTrait;
+    use LazyGhostInitializerTrait;
 
     public function createTemplateRender(): TemplateRenderInterface
     {
-        return $this->getCached(
-            key: 'transfer-generator:TemplateRender',
-            factory: fn (): TemplateRenderInterface =>
-                new TemplateRender(
+        /** @var TemplateRenderInterface $templateRender */
+        $templateRender = $this->getLazyGhost(
+            className: TemplateRender::class,
+            initializer: function (TemplateRender $ghost): void {
+                $ghost->__construct(
                     $this->createTemplateBuilder(),
                     $this->createTemplate(),
-                ),
+                );
+            }
         );
+
+        return $templateRender;
     }
 
     protected function createTemplate(): Template
