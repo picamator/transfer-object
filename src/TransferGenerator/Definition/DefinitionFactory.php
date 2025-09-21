@@ -29,7 +29,7 @@ class DefinitionFactory
     public function createDefinitionReader(): DefinitionReaderInterface
     {
         return $this->getCached(
-            key: 'definition-reader',
+            key: 'transfer-generator:DefinitionReader',
             factory: fn (): DefinitionReaderInterface =>
                 new DefinitionReader(
                     $this->createDefinitionFinder(),

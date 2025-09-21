@@ -36,7 +36,7 @@ class DefinitionGeneratorFactory
     public function createDefinitionGeneratorService(): DefinitionGeneratorServiceInterface
     {
         return $this->getCached(
-            key: 'definition-generator-service',
+            key: 'definition-generator:DefinitionGeneratorService',
             factory: fn (): DefinitionGeneratorServiceInterface => new DefinitionGeneratorService(
                 $this->createDefinitionGeneratorProcessor(),
             ),
@@ -46,7 +46,7 @@ class DefinitionGeneratorFactory
     public function createDefinitionGeneratorBuilder(): DefinitionGeneratorBuilderInterface
     {
         return $this->getCached(
-            key: 'definition-generator-builder',
+            key: 'definition-generator:DefinitionGeneratorBuilder',
             factory: fn (): DefinitionGeneratorBuilderInterface => new DefinitionGeneratorBuilder(
                 $this->createPathLocalValidator(),
                 $this->createClassNameValidator(),
@@ -91,7 +91,7 @@ class DefinitionGeneratorFactory
     protected function createDefinitionFilesystem(): DefinitionFilesystemInterface
     {
         return $this->getCached(
-            key: 'definition-filesystem',
+            key: 'definition-generator:DefinitionFilesystem',
             factory: fn (): DefinitionFilesystemInterface => new DefinitionFilesystem(
                 $this->createFilesystem(),
                 $this->createFileAppender(),
@@ -102,7 +102,7 @@ class DefinitionGeneratorFactory
     protected function createTemplateRender(): TemplateRenderInterface
     {
         return $this->getCached(
-            key: 'definition-render',
+            key: 'definition-generator:TemplateRender',
             factory: fn (): TemplateRenderInterface => new TemplateRender()
         );
     }

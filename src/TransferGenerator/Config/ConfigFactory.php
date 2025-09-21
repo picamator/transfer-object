@@ -39,11 +39,8 @@ class ConfigFactory
     public function createConfigLoader(): ConfigLoaderInterface
     {
         return $this->getCached(
-            key: 'config-loader',
-            factory: fn(): ConfigLoaderInterface =>
-                new ConfigLoader(
-                    $this->createConfigReader(),
-                ),
+            key: 'transfer-generator:ConfigLoader',
+            factory: fn(): ConfigLoaderInterface => new ConfigLoader($this->createConfigReader()),
         );
     }
 

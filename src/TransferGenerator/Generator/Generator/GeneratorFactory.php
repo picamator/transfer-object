@@ -80,7 +80,7 @@ class GeneratorFactory
     protected function createGeneratorFilesystem(): GeneratorFilesystemInterface
     {
         return $this->getCached(
-            key: 'generator-filesystem',
+            key: 'transfer-generator:GeneratorFilesystem',
             factory: fn () => new GeneratorFilesystem(
                 $this->createFilesystem(),
                 $this->createFinder(),
@@ -92,7 +92,7 @@ class GeneratorFactory
     protected function createTransferGeneratorBuilder(): TransferGeneratorBuilderInterface
     {
         return $this->getCached(
-            key: 'generator-builder',
+            key: 'transfer-generator:TransferGeneratorBuilder',
             factory: fn () => new TransferGeneratorBuilder(),
         );
     }

@@ -9,10 +9,10 @@ trait CachedFactoryTrait
     /**
      * @var array<string,mixed>
      */
-    protected array $cache = [];
+    private static array $cache = [];
 
-    protected function getCached(string $key, callable $factory): mixed
+    final protected function getCached(string $key, callable $factory): mixed
     {
-        return $this->cache[$key] ??= $factory();
+        return self::$cache[$key] ??= $factory();
     }
 }

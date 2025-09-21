@@ -28,7 +28,7 @@ class RenderFactory
     public function createTemplateRender(): TemplateRenderInterface
     {
         return $this->getCached(
-            key: 'template-render',
+            key: 'transfer-generator:TemplateRender',
             factory: fn (): TemplateRenderInterface =>
                 new TemplateRender(
                     $this->createTemplateBuilder(),

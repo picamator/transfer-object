@@ -27,29 +27,25 @@ class TransferGeneratorFactory
     public function createTransferGeneratorFiber(): TransferGeneratorFiberInterface
     {
         return $this->getCached(
-            key: 'transfer-generator-fiber',
+            key: 'transfer-generator:TransferGeneratorFiber',
             factory: fn (): TransferGeneratorFiberInterface =>
-                new TransferGeneratorFiber(
-                    $this->createTransferGeneratorWorkflow(),
-                ),
+                new TransferGeneratorFiber($this->createTransferGeneratorWorkflow()),
         );
     }
 
     public function createTransferGeneratorService(): TransferGeneratorServiceInterface
     {
         return $this->getCached(
-            key: 'transfer-generator-service',
+            key: 'transfer-generator:TransferGeneratorService',
             factory: fn (): TransferGeneratorServiceInterface =>
-                new TransferGeneratorService(
-                    $this->createTransferGeneratorWorkflow(),
-                ),
+                new TransferGeneratorService($this->createTransferGeneratorWorkflow()),
         );
     }
 
     public function createTransferGeneratorBulkFiber(): TransferGeneratorBulkFiberInterface
     {
         return $this->getCached(
-            key: 'transfer-generator-bulk-fiber',
+            key: 'transfer-generator:TransferGeneratorBulkFiber',
             factory: fn (): TransferGeneratorBulkFiberInterface =>
                 new TransferGeneratorBulkFiber(
                     $this->createFileReaderProgress(),
