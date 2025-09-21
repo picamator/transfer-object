@@ -24,8 +24,8 @@ readonly class ContentReader implements ContentReaderInterface
         $builderTransfer = $this->getBuilderTransfer($generatorContentTransfer);
         yield $builderTransfer->definitionContent;
 
-        foreach ($builderTransfer->generatorContents as $generatorContentTransfer) {
-            yield from $this->getDefinitionContents($generatorContentTransfer);
+        foreach ($builderTransfer->generatorContents as $contentTransfer) {
+            yield from $this->getDefinitionContents($contentTransfer);
         }
     }
 

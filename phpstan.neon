@@ -12,15 +12,12 @@ parameters:
     - examples/Generated/*
   ignoreErrors:
     -
-        identifier: argument.type
-        path: src/TransferGenerator/Generator/Render/Template/Template.php
-    -
-        identifier: encapsedStringPart.nonString
-        path: src/TransferGenerator/Generator/Render/Template/Template.php
-    -
         identifier: return.type
         path: src/*/*Factory.php
 rules:
    - PHPStan\Rules\DisallowedConstructs\DisallowedBacktickRule
    - PHPStan\Rules\StrictCalls\StrictFunctionCallsRule
    - PHPStan\Rules\Classes\RequireParentConstructCallRule
+   - PHPStan\Rules\Functions\ClosureUsesThisRule
+   - PHPStan\Rules\ForLoop\OverwriteVariablesWithForLoopInitRule
+   - PHPStan\Rules\ForeachLoop\OverwriteVariablesWithForeachRule
