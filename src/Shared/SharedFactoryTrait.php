@@ -33,7 +33,7 @@ trait SharedFactoryTrait
 
     final protected function createJsonReader(): JsonReaderInterface
     {
-        return new JsonReader($this->getFilesystem());
+        return new JsonReader($this->createFilesystem());
     }
 
     final protected function createClassNameValidator(): ClassNameValidatorInterface
@@ -48,7 +48,7 @@ trait SharedFactoryTrait
 
     final protected function createPathExistValidator(): PathExistValidatorInterface
     {
-        return new PathExistValidator($this->getFilesystem());
+        return new PathExistValidator($this->createFilesystem());
     }
 
     final protected function createPathLocalValidator(): PathLocalValidatorInterface

@@ -31,7 +31,7 @@ class ParserFactory
         return $this->getCached(
             key: 'definition-parser',
             factory: fn (): DefinitionParserInterface => new DefinitionParser(
-                $this->getYmlParser(),
+                $this->createYmlParser(),
                 $this->createContentBuilder(),
             ),
         );

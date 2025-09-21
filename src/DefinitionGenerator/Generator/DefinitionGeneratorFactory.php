@@ -93,7 +93,7 @@ class DefinitionGeneratorFactory
         return $this->getCached(
             key: 'definition-filesystem',
             factory: fn (): DefinitionFilesystemInterface => new DefinitionFilesystem(
-                $this->getFilesystem(),
+                $this->createFilesystem(),
                 $this->createFileAppender(),
             ),
         );

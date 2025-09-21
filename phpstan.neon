@@ -13,7 +13,7 @@ parameters:
   ignoreErrors:
     -
         identifier: return.type
-        path: src/*/*Factory.php
+        path: src/*/*Factory*.php
 rules:
    - PHPStan\Rules\DisallowedConstructs\DisallowedBacktickRule
    - PHPStan\Rules\StrictCalls\StrictFunctionCallsRule

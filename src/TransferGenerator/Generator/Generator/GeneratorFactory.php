@@ -82,8 +82,8 @@ class GeneratorFactory
         return $this->getCached(
             key: 'generator-filesystem',
             factory: fn () => new GeneratorFilesystem(
-                $this->getFilesystem(),
-                $this->getFinder(),
+                $this->createFilesystem(),
+                $this->createFinder(),
                 $this->getConfig(),
             ),
         );

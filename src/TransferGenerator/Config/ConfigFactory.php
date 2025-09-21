@@ -126,7 +126,7 @@ class ConfigFactory
     protected function createConfigParser(): ConfigParserInterface
     {
         return new ConfigParser(
-            $this->getYmlParser(),
+            $this->createYmlParser(),
             $this->createConfigContentBuilder(),
         );
     }

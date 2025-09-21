@@ -47,7 +47,7 @@ class DefinitionFactory
     protected function createDefinitionFinder(): DefinitionFinderInterface
     {
         return new DefinitionFinder(
-            $this->getFinder(),
+            $this->createFinder(),
             $this->getConfig(),
         );
     }

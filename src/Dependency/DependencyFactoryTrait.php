@@ -4,50 +4,41 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Dependency;
 
+use Picamator\TransferObject\Dependency\Filesystem\FilesystemBridge;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
+use Picamator\TransferObject\Dependency\Finder\FinderBridge;
 use Picamator\TransferObject\Dependency\Finder\FinderInterface;
+use Picamator\TransferObject\Dependency\YmlParser\YmlParserBridge;
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
+use Picamator\TransferObject\Shared\CachedFactoryTrait;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Yaml\Parser;
 
 trait DependencyFactoryTrait
 {
-    /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\NotFoundContainerException
-     */
-    final protected function getContainer(string $id): mixed
+    use CachedFactoryTrait;
+
+    final protected function createFilesystem(): FilesystemInterface
     {
-        return new DependencyContainer()->get($id);
+        return $this->getCached(
+            key: 'dependency:filesystem',
+            factory: fn (): FilesystemInterface => new FilesystemBridge(new Filesystem()),
+        );
     }
 
-    /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\NotFoundContainerException
-     */
-    final protected function getFilesystem(): FilesystemInterface
+    final protected function createFinder(): FinderInterface
     {
-        /** @var \Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface $fileSystem */
-        $fileSystem = $this->getContainer(DependencyContainer::FILESYSTEM);
-
-        return $fileSystem;
+        return $this->getCached(
+            key: 'dependency:finder',
+            factory: fn (): FinderInterface => new FinderBridge(),
+        );
     }
 
-    /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\NotFoundContainerException
-     */
-    final protected function getFinder(): FinderInterface
+    final protected function createYmlParser(): YmlParserInterface
     {
-        /** @var \Picamator\TransferObject\Dependency\Finder\FinderInterface $finder */
-        $finder = $this->getContainer(DependencyContainer::FINDER);
-
-        return $finder;
-    }
-
-    /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\NotFoundContainerException
-     */
-    final protected function getYmlParser(): YmlParserInterface
-    {
-        /** @var \Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface $ymlParser */
-        $ymlParser = $this->getContainer(DependencyContainer::YML_PARSER);
-
-        return $ymlParser;
+        return $this->getCached(
+            key: 'dependency:yml-parser',
+            factory: fn (): YmlParserInterface => new YmlParserBridge(new Parser()),
+        );
     }
 }
