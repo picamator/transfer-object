@@ -55,6 +55,7 @@
     <rule ref="SlevomatCodingStandard.ControlStructures.UselessIfConditionWithReturn"/>
     <rule ref="SlevomatCodingStandard.ControlStructures.UselessTernaryOperator"/>
     <rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition"/>
+    <rule ref="SlevomatCodingStandard.Complexity.Cognitive"/>
 
     <file>bin</file>
     <file>examples</file>

@@ -18,39 +18,41 @@ trait PropertyFilterTrait
         }
 
         /** @var array<string,array<string,string|null>> $filteredProperties */
-        $filteredProperties = array_map($this->filterPropertyType(...), $properties);
+        $filteredProperties = array_map(
+            fn (mixed $propertyType): array => is_array($propertyType) ? $this->filterPropertyType($propertyType) : [],
+            $properties
+        );
 
         return $filteredProperties;
     }
 
     /**
-     * @param mixed $propertyType
+     * @param array<string|int, mixed> $propertyType
      *
      * @return array<string,string|null>
      */
-    private function filterPropertyType(mixed $propertyType): array
+    private function filterPropertyType(array $propertyType): array
     {
-        if (!is_array($propertyType)) {
-            return [];
-        }
+        /** @var array<string,string|bool|null> $filteredType */
+        $filteredType = array_filter($propertyType, $this->filterPropertyTypeItem(...), ARRAY_FILTER_USE_BOTH);
 
-        $filteredType = [];
-        foreach ($propertyType as $key => $typeItem) {
-            if (is_int($key)) {
-                continue;
-            }
-
-            if (is_bool($typeItem)) {
-                $filteredType[$key] = BuildInTypeEnum::getTrueFalse($typeItem)->value;
-
-                continue;
-            }
-
-            if (is_string($typeItem) || is_null($typeItem)) {
-                $filteredType[$key] = $typeItem;
-            }
-        }
+        /** @var array<string,string|null> $filteredType */
+        $filteredType = array_map(
+            fn (string|bool|null $item) => is_bool($item)
+                ? BuildInTypeEnum::getTrueFalse($item)->value
+                : $item,
+            $filteredType
+        );
 
         return $filteredType;
+    }
+
+    private function filterPropertyTypeItem(mixed $value, int|string $key): bool
+    {
+        if (is_int($key)) {
+            return false;
+        }
+
+        return is_bool($value) || is_string($value) || is_null($value);
     }
 }

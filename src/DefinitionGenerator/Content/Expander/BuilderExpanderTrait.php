@@ -29,4 +29,14 @@ trait BuilderExpanderTrait
             DefinitionGeneratorContentTransfer::CONTENT => $content,
         ]);
     }
+
+    final protected function filterOnlyArray(mixed $item): bool
+    {
+        return is_array($item);
+    }
+
+    final protected function filterNonArray(mixed $item): bool
+    {
+        return !is_array($item);
+    }
 }
