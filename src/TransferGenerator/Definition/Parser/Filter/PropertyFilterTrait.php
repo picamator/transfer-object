@@ -11,7 +11,7 @@ trait PropertyFilterTrait
     /**
      * @return array<string,array<string,string|null>>
      */
-    protected function filterProperties(mixed $properties): array
+    final protected function filterProperties(mixed $properties): array
     {
         if (!is_array($properties)) {
             return [];
