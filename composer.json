@@ -34,6 +34,7 @@
         "psr-4": {
             "Picamator\\Tests\\Unit\\TransferObject\\": "tests/unit/",
             "Picamator\\Tests\\Integration\\TransferObject\\": "tests/integration/",
+            "Picamator\\Tests\\Extension\\TransferObject\\": "tests/extension/",
             "Picamator\\Examples\\TransferObject\\": "examples/"
         }
     },
