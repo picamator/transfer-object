@@ -16,9 +16,8 @@ use Picamator\Tests\Extension\TransferObject\ExecutionTimeReport\Transfer\TimeRe
 
 /**
  * Specification:
- * - Collects TestSuit's execution time.
- * - Shows TestSuits list with execution time.
- * - Limits TestSuit list by configurable parameter `total` with default value 10.
+ * - Shows top list of the slowest TestSuits.
+ * - The list is configurable by parameter `total` with default value 10.
  *
  * @see https://docs.phpunit.de
  */

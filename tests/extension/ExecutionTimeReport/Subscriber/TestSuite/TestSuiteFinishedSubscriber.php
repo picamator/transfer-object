@@ -25,7 +25,6 @@ readonly class TestSuiteFinishedSubscriber implements FinishedSubscriber
 
         $endTime = $event->telemetryInfo()->time();
 
-        $timeReportItem->endTime = $endTime;
         $timeReportItem->duration = $endTime->duration($timeReportItem->startTime);
     }
 }

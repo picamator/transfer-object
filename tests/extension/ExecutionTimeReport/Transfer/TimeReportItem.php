@@ -13,7 +13,6 @@ final class TimeReportItem
         readonly public string $group,
         readonly public string $testSuite,
         readonly public HRTime $startTime,
-        public ?HRTime $endTime = null,
         public ?Duration $duration = null,
     ) {
     }
