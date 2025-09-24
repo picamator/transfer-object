@@ -8,6 +8,7 @@ use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Large;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Destatis\DestatisTransfer;
@@ -22,6 +23,7 @@ use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacadeInterface;
 use Picamator\TransferObject\Transfer\FilterArrayTrait;
 
+#[Large]
 #[Group('definition-generator')]
 class DefinitionGeneratorFacadeTest extends TestCase
 {
