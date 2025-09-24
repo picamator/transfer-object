@@ -79,12 +79,12 @@ CloseApproachData:
     type: string
   epoch_date_close_approach:
     type: int
+  orbiting_body:
+    type: string
   relative_velocity:
     type: RelativeVelocity
   miss_distance:
     type: MissDistance
-  orbiting_body:
-    type: string
 
 # RelativeVelocity
 RelativeVelocity:

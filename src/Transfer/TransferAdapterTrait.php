@@ -54,6 +54,9 @@ trait TransferAdapterTrait
         }
     }
 
+    /**
+     * @return int<0, max>
+     */
     public function count(): int
     {
         return count($this->getPublicProperties());
@@ -103,54 +106,99 @@ trait TransferAdapterTrait
             $value = $data[$name] ?? null;
 
             $typeReflection = $property->getType();
-            if ($typeReflection === null) {
-                $this->$name = $value;
 
-                continue;
-            }
-
-            $type = str_replace('?', '', (string)$typeReflection);
-
-            $isArray = is_array($value);
-            $isString = is_string($value);
-            $isStringOrInt = $isString || is_int($value);
-
-            $this->$name = match (true) {
-                $isArray && is_subclass_of($type, AbstractTransfer::class)
-                    => new $type($value),
-
-                $isArray && is_subclass_of($type, TransferInterface::class)
-                    // @phpstan-ignore argument.type
-                    => new $type()->fromArray($value),
-
-                $isArray && $type === ArrayObject::class
-                    // @phpstan-ignore argument.type
-                    => new ArrayObject($value),
-
-                $isStringOrInt && is_subclass_of($type, BackedEnum::class)
-                    // @phpstan-ignore argument.type
-                    => $type::tryFrom($value),
-
-                $isString && $type === DateTime::class
-                    // @phpstan-ignore argument.type
-                    => new DateTime($value),
-
-                $isString && $type === DateTimeImmutable::class
-                    // @phpstan-ignore argument.type
-                    => new DateTimeImmutable($value),
-
-                $isArray && $type === stdClass::class
-                    => (object)$value,
-
-                $isStringOrInt && $this->isBcMathLoaded() && $type === Number::class
-                    // @phpstan-ignore argument.type
-                    => new Number($value),
-
-                default => $value,
-            };
+            $this->$name = $typeReflection === null || $value === null
+                ? $value
+                : $this->resolveValue((string)$typeReflection, $value);
         }
 
         return $this;
+    }
+
+    private function resolveValue(string $typeReflection, mixed $value): mixed
+    {
+        $type = str_replace('?', '', $typeReflection);
+
+        if (is_string($value)) {
+            return $this->resolveStringValue($type, $value);
+        }
+
+        if (is_int($value)) {
+            return $this->resolveIntValue($type, $value);
+        }
+
+        if (is_array($value)) {
+            return $this->resolveArrayValue($type, $value);
+        }
+
+        return $value;
+    }
+
+    private function resolveIntValue(string $type, int $value): object|int|null
+    {
+        if (is_subclass_of($type, BackedEnum::class)) {
+            // @phpstan-ignore argument.type
+            return $type::tryFrom($value);
+        }
+
+        if ($this->isBcMathLoaded() && $type === Number::class) {
+            // @phpstan-ignore argument.type
+            return new Number($value);
+        }
+
+        return $value;
+    }
+
+    private function resolveStringValue(string $type, string $value): object|string|null
+    {
+        if ($type === DateTime::class) {
+            // @phpstan-ignore argument.type
+            return new DateTime($value);
+        }
+
+        if ($type === DateTimeImmutable::class) {
+            // @phpstan-ignore argument.type
+            return new DateTimeImmutable($value);
+        }
+
+        if (is_subclass_of($type, BackedEnum::class)) {
+            // @phpstan-ignore argument.type
+            return $type::tryFrom($value);
+        }
+
+        if ($this->isBcMathLoaded() && $type === Number::class) {
+            // @phpstan-ignore argument.type
+            return new Number($value);
+        }
+
+        return $value;
+    }
+
+    /**
+     * @param array<string|int, mixed> $value
+     *
+     * @return object|array<string|int, mixed>
+     */
+    private function resolveArrayValue(string $type, array $value): object|array
+    {
+        if (is_subclass_of($type, AbstractTransfer::class)) {
+            return new $type($value);
+        }
+
+        if (is_subclass_of($type, TransferInterface::class)) {
+            /** @var array<string, mixed> $value */
+            return new $type()->fromArray($value);
+        }
+
+        if ($type === ArrayObject::class) {
+            return new ArrayObject($value);
+        }
+
+        if ($type === stdClass::class) {
+            return (object)$value;
+        }
+
+        return $value;
     }
 
     /**

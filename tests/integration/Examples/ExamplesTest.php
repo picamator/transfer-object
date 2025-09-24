@@ -6,11 +6,13 @@ namespace Picamator\Tests\Integration\TransferObject\Examples;
 
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\OutputBufferHelperTrait;
 
+#[Group('examples')]
 class ExamplesTest extends TestCase
 {
     use OutputBufferHelperTrait;

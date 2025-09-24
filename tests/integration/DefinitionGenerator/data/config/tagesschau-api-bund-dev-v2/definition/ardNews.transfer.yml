@@ -23,14 +23,8 @@ News:
     type: string
   date:
     type: string
-  teaserImage:
-    type: TeaserImage
-  tags:
-    collectionType: Tags
   updateCheckUrl:
     type: string
-  tracking:
-    collectionType: Tracking
   topline:
     type: string
   firstSentence:
@@ -43,18 +37,24 @@ News:
     type: string
   comments:
     type: string
-  geotags:
-    type: array
   regionId:
     type: int
-  regionIds:
-    type: array
   ressort:
     type: string
   breakingNews:
     type: bool
   type:
     type: string
+  teaserImage:
+    type: TeaserImage
+  tags:
+    collectionType: Tags
+  tracking:
+    collectionType: Tracking
+  geotags:
+    type: array
+  regionIds:
+    type: array
   brandingImage:
     type: BrandingImage
 

@@ -45,25 +45,45 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
     private function mergeContent(ContentInterface $content): array
     {
         $mergedContent = [];
+
         /** @var array<string, array<string, mixed>> $propertyValue */
         $propertyValue = $content->getPropertyValue() ?: [];
 
         foreach ($propertyValue as $contentItem) {
-            foreach ($contentItem as $contentKey => $contentValue) {
-                if (!is_array($contentValue)) {
-                    $mergedContent[$contentKey] ??= $contentValue;
+            $contentItemMixed = array_filter($contentItem, $this->filterNonArray(...));
+            /** @var array<int|string, array<int|string,mixed>> $contentItemArray */
+            $contentItemArray = array_filter($contentItem, $this->filterOnlyArray(...));
 
-                    continue;
-                }
-
-                $mergedContent[$contentKey] ??= [];
-                if (is_array($mergedContent[$contentKey])) {
-                    $mergedContent[$contentKey] = array_merge($mergedContent[$contentKey], $contentValue);
-                }
-            }
+            $this->mergeContentMixed($contentItemMixed, $mergedContent);
+            $this->mergeContentArray($contentItemArray, $mergedContent);
         }
 
         return $mergedContent;
+    }
+
+    /**
+     * @param array<int|string, mixed> $contentItem
+     * @param array<int|string, mixed> $mergedContent
+     */
+    private function mergeContentMixed(array $contentItem, array &$mergedContent): void
+    {
+        foreach ($contentItem as $contentKey => $contentValue) {
+            $mergedContent[$contentKey] ??= $contentValue;
+        }
+    }
+
+    /**
+     * @param array<int|string, array<int|string,mixed>> $contentItem
+     * @param array<int|string, mixed> $mergedContent
+     */
+    private function mergeContentArray(array $contentItem, array &$mergedContent): void
+    {
+        foreach ($contentItem as $contentKey => $contentValue) {
+            $mergedContent[$contentKey] ??= [];
+            if (is_array($mergedContent[$contentKey])) {
+                $mergedContent[$contentKey] = array_merge($mergedContent[$contentKey], $contentValue);
+            }
+        }
     }
 
     private function createPropertyTransfer(string $propertyName): DefinitionPropertyTransfer
