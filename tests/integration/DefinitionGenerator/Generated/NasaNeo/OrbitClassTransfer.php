@@ -27,7 +27,7 @@ final class OrbitClassTransfer extends AbstractTransfer
 
     // orbit_class_description
     public const string ORBIT_CLASS_DESCRIPTION = 'orbit_class_description';
-    protected const int ORBIT_CLASS_DESCRIPTION_INDEX = 0;
+    private const int ORBIT_CLASS_DESCRIPTION_INDEX = 0;
 
     public ?string $orbit_class_description {
         get => $this->getData(self::ORBIT_CLASS_DESCRIPTION_INDEX);
@@ -36,7 +36,7 @@ final class OrbitClassTransfer extends AbstractTransfer
 
     // orbit_class_range
     public const string ORBIT_CLASS_RANGE = 'orbit_class_range';
-    protected const int ORBIT_CLASS_RANGE_INDEX = 1;
+    private const int ORBIT_CLASS_RANGE_INDEX = 1;
 
     public ?string $orbit_class_range {
         get => $this->getData(self::ORBIT_CLASS_RANGE_INDEX);
@@ -45,7 +45,7 @@ final class OrbitClassTransfer extends AbstractTransfer
 
     // orbit_class_type
     public const string ORBIT_CLASS_TYPE = 'orbit_class_type';
-    protected const int ORBIT_CLASS_TYPE_INDEX = 2;
+    private const int ORBIT_CLASS_TYPE_INDEX = 2;
 
     public ?string $orbit_class_type {
         get => $this->getData(self::ORBIT_CLASS_TYPE_INDEX);

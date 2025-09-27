@@ -30,7 +30,7 @@ final class ItemCollectionTransfer extends AbstractTransfer
     // item
     #[PropertyTypeAttribute(ItemTransfer::class)]
     public const string ITEM = 'item';
-    protected const int ITEM_INDEX = 0;
+    private const int ITEM_INDEX = 0;
 
     public ?ItemTransfer $item {
         get => $this->getData(self::ITEM_INDEX);
@@ -40,7 +40,7 @@ final class ItemCollectionTransfer extends AbstractTransfer
     // items
     #[CollectionPropertyTypeAttribute(ItemTransfer::class)]
     public const string ITEMS = 'items';
-    protected const int ITEMS_INDEX = 1;
+    private const int ITEMS_INDEX = 1;
 
     /** @var \ArrayObject<int,ItemTransfer> */
     public ArrayObject $items {

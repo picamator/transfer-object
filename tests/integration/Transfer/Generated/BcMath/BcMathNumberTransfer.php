@@ -28,7 +28,7 @@ final class BcMathNumberTransfer extends AbstractTransfer
     // iAmNumber
     #[NumberPropertyTypeAttribute(Number::class)]
     public const string I_AM_NUMBER = 'iAmNumber';
-    protected const int I_AM_NUMBER_INDEX = 0;
+    private const int I_AM_NUMBER_INDEX = 0;
 
     public ?Number $iAmNumber {
         get => $this->getData(self::I_AM_NUMBER_INDEX);

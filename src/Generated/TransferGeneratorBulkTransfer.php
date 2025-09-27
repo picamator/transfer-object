@@ -28,7 +28,7 @@ final class TransferGeneratorBulkTransfer extends AbstractTransfer
     // progress
     #[PropertyTypeAttribute(FileReaderProgressTransfer::class)]
     public const string PROGRESS = 'progress';
-    protected const int PROGRESS_INDEX = 0;
+    private const int PROGRESS_INDEX = 0;
 
     public FileReaderProgressTransfer $progress {
         get => $this->getData(self::PROGRESS_INDEX);
@@ -38,7 +38,7 @@ final class TransferGeneratorBulkTransfer extends AbstractTransfer
     // validator
     #[PropertyTypeAttribute(ValidatorTransfer::class)]
     public const string VALIDATOR = 'validator';
-    protected const int VALIDATOR_INDEX = 1;
+    private const int VALIDATOR_INDEX = 1;
 
     public ValidatorTransfer $validator {
         get => $this->getData(self::VALIDATOR_INDEX);

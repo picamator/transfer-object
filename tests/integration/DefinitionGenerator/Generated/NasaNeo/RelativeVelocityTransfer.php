@@ -27,7 +27,7 @@ final class RelativeVelocityTransfer extends AbstractTransfer
 
     // kilometers_per_hour
     public const string KILOMETERS_PER_HOUR = 'kilometers_per_hour';
-    protected const int KILOMETERS_PER_HOUR_INDEX = 0;
+    private const int KILOMETERS_PER_HOUR_INDEX = 0;
 
     public ?string $kilometers_per_hour {
         get => $this->getData(self::KILOMETERS_PER_HOUR_INDEX);
@@ -36,7 +36,7 @@ final class RelativeVelocityTransfer extends AbstractTransfer
 
     // kilometers_per_second
     public const string KILOMETERS_PER_SECOND = 'kilometers_per_second';
-    protected const int KILOMETERS_PER_SECOND_INDEX = 1;
+    private const int KILOMETERS_PER_SECOND_INDEX = 1;
 
     public ?string $kilometers_per_second {
         get => $this->getData(self::KILOMETERS_PER_SECOND_INDEX);
@@ -45,7 +45,7 @@ final class RelativeVelocityTransfer extends AbstractTransfer
 
     // miles_per_hour
     public const string MILES_PER_HOUR = 'miles_per_hour';
-    protected const int MILES_PER_HOUR_INDEX = 2;
+    private const int MILES_PER_HOUR_INDEX = 2;
 
     public ?string $miles_per_hour {
         get => $this->getData(self::MILES_PER_HOUR_INDEX);

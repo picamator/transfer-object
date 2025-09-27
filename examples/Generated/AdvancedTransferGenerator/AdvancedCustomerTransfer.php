@@ -33,7 +33,7 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
     // address
     #[PropertyTypeAttribute(AddressData::class)]
     public const string ADDRESS = 'address';
-    protected const int ADDRESS_INDEX = 0;
+    private const int ADDRESS_INDEX = 0;
 
     public TransferInterface&AddressData $address {
         get => $this->getData(self::ADDRESS_INDEX);
@@ -43,7 +43,7 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
     // credentials
     #[PropertyTypeAttribute(CredentialsData::class)]
     public const string CREDENTIALS = 'credentials';
-    protected const int CREDENTIALS_INDEX = 1;
+    private const int CREDENTIALS_INDEX = 1;
 
     public TransferInterface&CredentialsData $credentials {
         get => $this->getData(self::CREDENTIALS_INDEX);
@@ -53,7 +53,7 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
     // customer
     #[PropertyTypeAttribute(CustomerTransfer::class)]
     public const string CUSTOMER = 'customer';
-    protected const int CUSTOMER_INDEX = 2;
+    private const int CUSTOMER_INDEX = 2;
 
     public TransferInterface&CustomerTransfer $customer {
         get => $this->getData(self::CUSTOMER_INDEX);

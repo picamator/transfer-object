@@ -30,7 +30,7 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     // feet
     #[PropertyTypeAttribute(FeetTransfer::class)]
     public const string FEET = 'feet';
-    protected const int FEET_INDEX = 0;
+    private const int FEET_INDEX = 0;
 
     public ?FeetTransfer $feet {
         get => $this->getData(self::FEET_INDEX);
@@ -40,7 +40,7 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     // kilometers
     #[PropertyTypeAttribute(KilometersTransfer::class)]
     public const string KILOMETERS = 'kilometers';
-    protected const int KILOMETERS_INDEX = 1;
+    private const int KILOMETERS_INDEX = 1;
 
     public ?KilometersTransfer $kilometers {
         get => $this->getData(self::KILOMETERS_INDEX);
@@ -50,7 +50,7 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     // meters
     #[PropertyTypeAttribute(MetersTransfer::class)]
     public const string METERS = 'meters';
-    protected const int METERS_INDEX = 2;
+    private const int METERS_INDEX = 2;
 
     public ?MetersTransfer $meters {
         get => $this->getData(self::METERS_INDEX);
@@ -60,7 +60,7 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     // miles
     #[PropertyTypeAttribute(MilesTransfer::class)]
     public const string MILES = 'miles';
-    protected const int MILES_INDEX = 3;
+    private const int MILES_INDEX = 3;
 
     public ?MilesTransfer $miles {
         get => $this->getData(self::MILES_INDEX);

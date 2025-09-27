@@ -31,7 +31,7 @@ final class CloseApproachDataTransfer extends AbstractTransfer
 
     // close_approach_date
     public const string CLOSE_APPROACH_DATE = 'close_approach_date';
-    protected const int CLOSE_APPROACH_DATE_INDEX = 0;
+    private const int CLOSE_APPROACH_DATE_INDEX = 0;
 
     public ?string $close_approach_date {
         get => $this->getData(self::CLOSE_APPROACH_DATE_INDEX);
@@ -40,7 +40,7 @@ final class CloseApproachDataTransfer extends AbstractTransfer
 
     // close_approach_date_full
     public const string CLOSE_APPROACH_DATE_FULL = 'close_approach_date_full';
-    protected const int CLOSE_APPROACH_DATE_FULL_INDEX = 1;
+    private const int CLOSE_APPROACH_DATE_FULL_INDEX = 1;
 
     public ?string $close_approach_date_full {
         get => $this->getData(self::CLOSE_APPROACH_DATE_FULL_INDEX);
@@ -49,7 +49,7 @@ final class CloseApproachDataTransfer extends AbstractTransfer
 
     // epoch_date_close_approach
     public const string EPOCH_DATE_CLOSE_APPROACH = 'epoch_date_close_approach';
-    protected const int EPOCH_DATE_CLOSE_APPROACH_INDEX = 2;
+    private const int EPOCH_DATE_CLOSE_APPROACH_INDEX = 2;
 
     public ?int $epoch_date_close_approach {
         get => $this->getData(self::EPOCH_DATE_CLOSE_APPROACH_INDEX);
@@ -59,7 +59,7 @@ final class CloseApproachDataTransfer extends AbstractTransfer
     // miss_distance
     #[PropertyTypeAttribute(MissDistanceTransfer::class)]
     public const string MISS_DISTANCE = 'miss_distance';
-    protected const int MISS_DISTANCE_INDEX = 3;
+    private const int MISS_DISTANCE_INDEX = 3;
 
     public ?MissDistanceTransfer $miss_distance {
         get => $this->getData(self::MISS_DISTANCE_INDEX);
@@ -68,7 +68,7 @@ final class CloseApproachDataTransfer extends AbstractTransfer
 
     // orbiting_body
     public const string ORBITING_BODY = 'orbiting_body';
-    protected const int ORBITING_BODY_INDEX = 4;
+    private const int ORBITING_BODY_INDEX = 4;
 
     public ?string $orbiting_body {
         get => $this->getData(self::ORBITING_BODY_INDEX);
@@ -78,7 +78,7 @@ final class CloseApproachDataTransfer extends AbstractTransfer
     // relative_velocity
     #[PropertyTypeAttribute(RelativeVelocityTransfer::class)]
     public const string RELATIVE_VELOCITY = 'relative_velocity';
-    protected const int RELATIVE_VELOCITY_INDEX = 5;
+    private const int RELATIVE_VELOCITY_INDEX = 5;
 
     public ?RelativeVelocityTransfer $relative_velocity {
         get => $this->getData(self::RELATIVE_VELOCITY_INDEX);

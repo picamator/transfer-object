@@ -25,7 +25,7 @@ final class LabelsTransfer extends AbstractTransfer
 
     // sale
     public const string SALE = 'sale';
-    protected const int SALE_INDEX = 0;
+    private const int SALE_INDEX = 0;
 
     public ?string $sale {
         get => $this->getData(self::SALE_INDEX);

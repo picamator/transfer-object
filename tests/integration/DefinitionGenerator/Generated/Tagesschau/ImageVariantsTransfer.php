@@ -25,7 +25,7 @@ final class ImageVariantsTransfer extends AbstractTransfer
 
     // original
     public const string ORIGINAL = 'original';
-    protected const int ORIGINAL_INDEX = 0;
+    private const int ORIGINAL_INDEX = 0;
 
     public ?string $original {
         get => $this->getData(self::ORIGINAL_INDEX);

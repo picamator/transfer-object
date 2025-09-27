@@ -30,7 +30,7 @@ final class ParameterTransfer extends AbstractTransfer
 
     // category
     public const string CATEGORY = 'category';
-    protected const int CATEGORY_INDEX = 0;
+    private const int CATEGORY_INDEX = 0;
 
     public ?string $category {
         get => $this->getData(self::CATEGORY_INDEX);
@@ -39,7 +39,7 @@ final class ParameterTransfer extends AbstractTransfer
 
     // language
     public const string LANGUAGE = 'language';
-    protected const int LANGUAGE_INDEX = 1;
+    private const int LANGUAGE_INDEX = 1;
 
     public ?string $language {
         get => $this->getData(self::LANGUAGE_INDEX);
@@ -48,7 +48,7 @@ final class ParameterTransfer extends AbstractTransfer
 
     // pagelength
     public const string PAGELENGTH = 'pagelength';
-    protected const int PAGELENGTH_INDEX = 2;
+    private const int PAGELENGTH_INDEX = 2;
 
     public ?string $pagelength {
         get => $this->getData(self::PAGELENGTH_INDEX);
@@ -57,7 +57,7 @@ final class ParameterTransfer extends AbstractTransfer
 
     // password
     public const string PASSWORD = 'password';
-    protected const int PASSWORD_INDEX = 3;
+    private const int PASSWORD_INDEX = 3;
 
     public ?string $password {
         get => $this->getData(self::PASSWORD_INDEX);
@@ -66,7 +66,7 @@ final class ParameterTransfer extends AbstractTransfer
 
     // term
     public const string TERM = 'term';
-    protected const int TERM_INDEX = 4;
+    private const int TERM_INDEX = 4;
 
     public ?string $term {
         get => $this->getData(self::TERM_INDEX);
@@ -75,7 +75,7 @@ final class ParameterTransfer extends AbstractTransfer
 
     // username
     public const string USERNAME = 'username';
-    protected const int USERNAME_INDEX = 5;
+    private const int USERNAME_INDEX = 5;
 
     public ?string $username {
         get => $this->getData(self::USERNAME_INDEX);

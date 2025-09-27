@@ -30,7 +30,7 @@ final class AgentTransfer extends AbstractTransfer
     // customer
     #[PropertyTypeAttribute(CustomerTransfer::class)]
     public const string CUSTOMER = 'customer';
-    protected const int CUSTOMER_INDEX = 0;
+    private const int CUSTOMER_INDEX = 0;
 
     public ?CustomerTransfer $customer {
         get => $this->getData(self::CUSTOMER_INDEX);
@@ -40,7 +40,7 @@ final class AgentTransfer extends AbstractTransfer
     // merchants
     #[CollectionPropertyTypeAttribute(MerchantTransfer::class)]
     public const string MERCHANTS = 'merchants';
-    protected const int MERCHANTS_INDEX = 1;
+    private const int MERCHANTS_INDEX = 1;
 
     /** @var \ArrayObject<int,MerchantTransfer> */
     public ArrayObject $merchants {

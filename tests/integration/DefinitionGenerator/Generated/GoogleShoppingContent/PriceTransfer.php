@@ -26,7 +26,7 @@ final class PriceTransfer extends AbstractTransfer
 
     // currency
     public const string CURRENCY = 'currency';
-    protected const int CURRENCY_INDEX = 0;
+    private const int CURRENCY_INDEX = 0;
 
     public ?string $currency {
         get => $this->getData(self::CURRENCY_INDEX);
@@ -35,7 +35,7 @@ final class PriceTransfer extends AbstractTransfer
 
     // value
     public const string VALUE = 'value';
-    protected const int VALUE_INDEX = 1;
+    private const int VALUE_INDEX = 1;
 
     public ?string $value {
         get => $this->getData(self::VALUE_INDEX);

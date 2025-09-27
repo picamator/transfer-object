@@ -44,7 +44,7 @@ final class ItemTransfer extends AbstractTransfer
     // iAmArray
     #[ArrayPropertyTypeAttribute]
     public const string I_AM_ARRAY = 'iAmArray';
-    protected const int I_AM_ARRAY_INDEX = 0;
+    private const int I_AM_ARRAY_INDEX = 0;
 
     /** @var array<int|string,mixed> */
     public array $iAmArray {
@@ -55,7 +55,7 @@ final class ItemTransfer extends AbstractTransfer
     // iAmArrayObject
     #[ArrayObjectPropertyTypeAttribute]
     public const string I_AM_ARRAY_OBJECT = 'iAmArrayObject';
-    protected const int I_AM_ARRAY_OBJECT_INDEX = 1;
+    private const int I_AM_ARRAY_OBJECT_INDEX = 1;
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $iAmArrayObject {
@@ -65,7 +65,7 @@ final class ItemTransfer extends AbstractTransfer
 
     // iAmBool
     public const string I_AM_BOOL = 'iAmBool';
-    protected const int I_AM_BOOL_INDEX = 2;
+    private const int I_AM_BOOL_INDEX = 2;
 
     public ?bool $iAmBool {
         get => $this->getData(self::I_AM_BOOL_INDEX);
@@ -75,7 +75,7 @@ final class ItemTransfer extends AbstractTransfer
     // iAmDateTime
     #[DateTimePropertyTypeAttribute(DateTime::class)]
     public const string I_AM_DATE_TIME = 'iAmDateTime';
-    protected const int I_AM_DATE_TIME_INDEX = 3;
+    private const int I_AM_DATE_TIME_INDEX = 3;
 
     public ?DateTime $iAmDateTime {
         get => $this->getData(self::I_AM_DATE_TIME_INDEX);
@@ -85,7 +85,7 @@ final class ItemTransfer extends AbstractTransfer
     // iAmDateTimeImmutable
     #[DateTimePropertyTypeAttribute(DateTimeImmutable::class)]
     public const string I_AM_DATE_TIME_IMMUTABLE = 'iAmDateTimeImmutable';
-    protected const int I_AM_DATE_TIME_IMMUTABLE_INDEX = 4;
+    private const int I_AM_DATE_TIME_IMMUTABLE_INDEX = 4;
 
     public ?DateTimeImmutable $iAmDateTimeImmutable {
         get => $this->getData(self::I_AM_DATE_TIME_IMMUTABLE_INDEX);
@@ -95,7 +95,7 @@ final class ItemTransfer extends AbstractTransfer
     // iAmEnum
     #[EnumPropertyTypeAttribute(ImBackedEnum::class)]
     public const string I_AM_ENUM = 'iAmEnum';
-    protected const int I_AM_ENUM_INDEX = 5;
+    private const int I_AM_ENUM_INDEX = 5;
 
     public ?ImBackedEnum $iAmEnum {
         get => $this->getData(self::I_AM_ENUM_INDEX);
@@ -104,7 +104,7 @@ final class ItemTransfer extends AbstractTransfer
 
     // iAmFalse
     public const string I_AM_FALSE = 'iAmFalse';
-    protected const int I_AM_FALSE_INDEX = 6;
+    private const int I_AM_FALSE_INDEX = 6;
 
     public ?false $iAmFalse {
         get => $this->getData(self::I_AM_FALSE_INDEX);
@@ -113,7 +113,7 @@ final class ItemTransfer extends AbstractTransfer
 
     // iAmFloat
     public const string I_AM_FLOAT = 'iAmFloat';
-    protected const int I_AM_FLOAT_INDEX = 7;
+    private const int I_AM_FLOAT_INDEX = 7;
 
     public ?float $iAmFloat {
         get => $this->getData(self::I_AM_FLOAT_INDEX);
@@ -122,7 +122,7 @@ final class ItemTransfer extends AbstractTransfer
 
     // iAmInt
     public const string I_AM_INT = 'iAmInt';
-    protected const int I_AM_INT_INDEX = 8;
+    private const int I_AM_INT_INDEX = 8;
 
     public ?int $iAmInt {
         get => $this->getData(self::I_AM_INT_INDEX);
@@ -131,7 +131,7 @@ final class ItemTransfer extends AbstractTransfer
 
     // iAmString
     public const string I_AM_STRING = 'iAmString';
-    protected const int I_AM_STRING_INDEX = 9;
+    private const int I_AM_STRING_INDEX = 9;
 
     public ?string $iAmString {
         get => $this->getData(self::I_AM_STRING_INDEX);
@@ -140,7 +140,7 @@ final class ItemTransfer extends AbstractTransfer
 
     // iAmTrue
     public const string I_AM_TRUE = 'iAmTrue';
-    protected const int I_AM_TRUE_INDEX = 10;
+    private const int I_AM_TRUE_INDEX = 10;
 
     public ?true $iAmTrue {
         get => $this->getData(self::I_AM_TRUE_INDEX);

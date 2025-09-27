@@ -26,7 +26,7 @@ final class CoordTransfer extends AbstractTransfer
 
     // lat
     public const string LAT = 'lat';
-    protected const int LAT_INDEX = 0;
+    private const int LAT_INDEX = 0;
 
     public ?float $lat {
         get => $this->getData(self::LAT_INDEX);
@@ -35,7 +35,7 @@ final class CoordTransfer extends AbstractTransfer
 
     // lon
     public const string LON = 'lon';
-    protected const int LON_INDEX = 1;
+    private const int LON_INDEX = 1;
 
     public ?float $lon {
         get => $this->getData(self::LON_INDEX);

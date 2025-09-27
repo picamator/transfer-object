@@ -25,7 +25,7 @@ final class CloudsTransfer extends AbstractTransfer
 
     // all
     public const string ALL = 'all';
-    protected const int ALL_INDEX = 0;
+    private const int ALL_INDEX = 0;
 
     public ?int $all {
         get => $this->getData(self::ALL_INDEX);

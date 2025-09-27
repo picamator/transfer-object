@@ -33,7 +33,7 @@ final class BookTransfer extends AbstractTransfer
     // bookmarks
     #[CollectionPropertyTypeAttribute(BookmarkData::class)]
     public const string BOOKMARKS = 'bookmarks';
-    protected const int BOOKMARKS_INDEX = 0;
+    private const int BOOKMARKS_INDEX = 0;
 
     /** @var \ArrayObject<int,TransferInterface&BookmarkData> */
     public ArrayObject $bookmarks {
@@ -44,7 +44,7 @@ final class BookTransfer extends AbstractTransfer
     // data
     #[PropertyTypeAttribute(BookData::class)]
     public const string DATA = 'data';
-    protected const int DATA_INDEX = 1;
+    private const int DATA_INDEX = 1;
 
     public TransferInterface&BookData $data {
         get => $this->getData(self::DATA_INDEX);

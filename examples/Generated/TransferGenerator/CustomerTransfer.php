@@ -26,7 +26,7 @@ final class CustomerTransfer extends AbstractTransfer
 
     // firstName
     public const string FIRST_NAME = 'firstName';
-    protected const int FIRST_NAME_INDEX = 0;
+    private const int FIRST_NAME_INDEX = 0;
 
     public ?string $firstName {
         get => $this->getData(self::FIRST_NAME_INDEX);
@@ -35,7 +35,7 @@ final class CustomerTransfer extends AbstractTransfer
 
     // lastName
     public const string LAST_NAME = 'lastName';
-    protected const int LAST_NAME_INDEX = 1;
+    private const int LAST_NAME_INDEX = 1;
 
     public ?string $lastName {
         get => $this->getData(self::LAST_NAME_INDEX);

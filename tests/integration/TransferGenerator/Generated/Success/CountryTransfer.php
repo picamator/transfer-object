@@ -26,7 +26,7 @@ final class CountryTransfer extends AbstractTransfer
 
     // iso2Code
     public const string ISO2_CODE = 'iso2Code';
-    protected const int ISO2_CODE_INDEX = 0;
+    private const int ISO2_CODE_INDEX = 0;
 
     public ?string $iso2Code {
         get => $this->getData(self::ISO2_CODE_INDEX);
@@ -35,7 +35,7 @@ final class CountryTransfer extends AbstractTransfer
 
     // name
     public const string NAME = 'name';
-    protected const int NAME_INDEX = 1;
+    private const int NAME_INDEX = 1;
 
     public ?string $name {
         get => $this->getData(self::NAME_INDEX);

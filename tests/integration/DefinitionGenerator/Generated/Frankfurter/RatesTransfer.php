@@ -54,7 +54,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // AUD
     public const string AUD = 'AUD';
-    protected const int AUD_INDEX = 0;
+    private const int AUD_INDEX = 0;
 
     public ?float $AUD {
         get => $this->getData(self::AUD_INDEX);
@@ -63,7 +63,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // BGN
     public const string BGN = 'BGN';
-    protected const int BGN_INDEX = 1;
+    private const int BGN_INDEX = 1;
 
     public ?float $BGN {
         get => $this->getData(self::BGN_INDEX);
@@ -72,7 +72,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // BRL
     public const string BRL = 'BRL';
-    protected const int BRL_INDEX = 2;
+    private const int BRL_INDEX = 2;
 
     public ?float $BRL {
         get => $this->getData(self::BRL_INDEX);
@@ -81,7 +81,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // CAD
     public const string CAD = 'CAD';
-    protected const int CAD_INDEX = 3;
+    private const int CAD_INDEX = 3;
 
     public ?float $CAD {
         get => $this->getData(self::CAD_INDEX);
@@ -90,7 +90,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // CHF
     public const string CHF = 'CHF';
-    protected const int CHF_INDEX = 4;
+    private const int CHF_INDEX = 4;
 
     public ?float $CHF {
         get => $this->getData(self::CHF_INDEX);
@@ -99,7 +99,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // CNY
     public const string CNY = 'CNY';
-    protected const int CNY_INDEX = 5;
+    private const int CNY_INDEX = 5;
 
     public ?float $CNY {
         get => $this->getData(self::CNY_INDEX);
@@ -108,7 +108,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // CZK
     public const string CZK = 'CZK';
-    protected const int CZK_INDEX = 6;
+    private const int CZK_INDEX = 6;
 
     public ?float $CZK {
         get => $this->getData(self::CZK_INDEX);
@@ -117,7 +117,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // DKK
     public const string DKK = 'DKK';
-    protected const int DKK_INDEX = 7;
+    private const int DKK_INDEX = 7;
 
     public ?float $DKK {
         get => $this->getData(self::DKK_INDEX);
@@ -126,7 +126,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // GBP
     public const string GBP = 'GBP';
-    protected const int GBP_INDEX = 8;
+    private const int GBP_INDEX = 8;
 
     public ?float $GBP {
         get => $this->getData(self::GBP_INDEX);
@@ -135,7 +135,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // HKD
     public const string HKD = 'HKD';
-    protected const int HKD_INDEX = 9;
+    private const int HKD_INDEX = 9;
 
     public ?float $HKD {
         get => $this->getData(self::HKD_INDEX);
@@ -144,7 +144,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // HUF
     public const string HUF = 'HUF';
-    protected const int HUF_INDEX = 10;
+    private const int HUF_INDEX = 10;
 
     public ?float $HUF {
         get => $this->getData(self::HUF_INDEX);
@@ -153,7 +153,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // IDR
     public const string IDR = 'IDR';
-    protected const int IDR_INDEX = 11;
+    private const int IDR_INDEX = 11;
 
     public ?int $IDR {
         get => $this->getData(self::IDR_INDEX);
@@ -162,7 +162,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // ILS
     public const string ILS = 'ILS';
-    protected const int ILS_INDEX = 12;
+    private const int ILS_INDEX = 12;
 
     public ?float $ILS {
         get => $this->getData(self::ILS_INDEX);
@@ -171,7 +171,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // INR
     public const string INR = 'INR';
-    protected const int INR_INDEX = 13;
+    private const int INR_INDEX = 13;
 
     public ?float $INR {
         get => $this->getData(self::INR_INDEX);
@@ -180,7 +180,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // ISK
     public const string ISK = 'ISK';
-    protected const int ISK_INDEX = 14;
+    private const int ISK_INDEX = 14;
 
     public ?float $ISK {
         get => $this->getData(self::ISK_INDEX);
@@ -189,7 +189,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // JPY
     public const string JPY = 'JPY';
-    protected const int JPY_INDEX = 15;
+    private const int JPY_INDEX = 15;
 
     public ?float $JPY {
         get => $this->getData(self::JPY_INDEX);
@@ -198,7 +198,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // KRW
     public const string KRW = 'KRW';
-    protected const int KRW_INDEX = 16;
+    private const int KRW_INDEX = 16;
 
     public ?float $KRW {
         get => $this->getData(self::KRW_INDEX);
@@ -207,7 +207,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // MXN
     public const string MXN = 'MXN';
-    protected const int MXN_INDEX = 17;
+    private const int MXN_INDEX = 17;
 
     public ?float $MXN {
         get => $this->getData(self::MXN_INDEX);
@@ -216,7 +216,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // MYR
     public const string MYR = 'MYR';
-    protected const int MYR_INDEX = 18;
+    private const int MYR_INDEX = 18;
 
     public ?float $MYR {
         get => $this->getData(self::MYR_INDEX);
@@ -225,7 +225,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // NOK
     public const string NOK = 'NOK';
-    protected const int NOK_INDEX = 19;
+    private const int NOK_INDEX = 19;
 
     public ?float $NOK {
         get => $this->getData(self::NOK_INDEX);
@@ -234,7 +234,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // NZD
     public const string NZD = 'NZD';
-    protected const int NZD_INDEX = 20;
+    private const int NZD_INDEX = 20;
 
     public ?float $NZD {
         get => $this->getData(self::NZD_INDEX);
@@ -243,7 +243,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // PHP
     public const string PHP = 'PHP';
-    protected const int PHP_INDEX = 21;
+    private const int PHP_INDEX = 21;
 
     public ?float $PHP {
         get => $this->getData(self::PHP_INDEX);
@@ -252,7 +252,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // PLN
     public const string PLN = 'PLN';
-    protected const int PLN_INDEX = 22;
+    private const int PLN_INDEX = 22;
 
     public ?float $PLN {
         get => $this->getData(self::PLN_INDEX);
@@ -261,7 +261,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // RON
     public const string RON = 'RON';
-    protected const int RON_INDEX = 23;
+    private const int RON_INDEX = 23;
 
     public ?float $RON {
         get => $this->getData(self::RON_INDEX);
@@ -270,7 +270,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // SEK
     public const string SEK = 'SEK';
-    protected const int SEK_INDEX = 24;
+    private const int SEK_INDEX = 24;
 
     public ?float $SEK {
         get => $this->getData(self::SEK_INDEX);
@@ -279,7 +279,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // SGD
     public const string SGD = 'SGD';
-    protected const int SGD_INDEX = 25;
+    private const int SGD_INDEX = 25;
 
     public ?float $SGD {
         get => $this->getData(self::SGD_INDEX);
@@ -288,7 +288,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // THB
     public const string THB = 'THB';
-    protected const int THB_INDEX = 26;
+    private const int THB_INDEX = 26;
 
     public ?float $THB {
         get => $this->getData(self::THB_INDEX);
@@ -297,7 +297,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // TRY
     public const string TRY = 'TRY';
-    protected const int TRY_INDEX = 27;
+    private const int TRY_INDEX = 27;
 
     public ?float $TRY {
         get => $this->getData(self::TRY_INDEX);
@@ -306,7 +306,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // USD
     public const string USD = 'USD';
-    protected const int USD_INDEX = 28;
+    private const int USD_INDEX = 28;
 
     public ?float $USD {
         get => $this->getData(self::USD_INDEX);
@@ -315,7 +315,7 @@ final class RatesTransfer extends AbstractTransfer
 
     // ZAR
     public const string ZAR = 'ZAR';
-    protected const int ZAR_INDEX = 29;
+    private const int ZAR_INDEX = 29;
 
     public ?float $ZAR {
         get => $this->getData(self::ZAR_INDEX);

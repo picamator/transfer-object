@@ -26,7 +26,7 @@ final class AvailabilitiesTransfer extends AbstractTransfer
 
     // buffer
     public const string BUFFER = 'buffer';
-    protected const int BUFFER_INDEX = 0;
+    private const int BUFFER_INDEX = 0;
 
     public ?int $buffer {
         get => $this->getData(self::BUFFER_INDEX);
@@ -35,7 +35,7 @@ final class AvailabilitiesTransfer extends AbstractTransfer
 
     // total
     public const string TOTAL = 'total';
-    protected const int TOTAL_INDEX = 1;
+    private const int TOTAL_INDEX = 1;
 
     public ?int $total {
         get => $this->getData(self::TOTAL_INDEX);

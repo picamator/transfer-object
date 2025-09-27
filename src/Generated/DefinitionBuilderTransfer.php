@@ -30,7 +30,7 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
     // definitionContent
     #[PropertyTypeAttribute(DefinitionContentTransfer::class)]
     public const string DEFINITION_CONTENT = 'definitionContent';
-    protected const int DEFINITION_CONTENT_INDEX = 0;
+    private const int DEFINITION_CONTENT_INDEX = 0;
 
     public DefinitionContentTransfer $definitionContent {
         get => $this->getData(self::DEFINITION_CONTENT_INDEX);
@@ -40,7 +40,7 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
     // generatorContents
     #[CollectionPropertyTypeAttribute(DefinitionGeneratorContentTransfer::class)]
     public const string GENERATOR_CONTENTS = 'generatorContents';
-    protected const int GENERATOR_CONTENTS_INDEX = 1;
+    private const int GENERATOR_CONTENTS_INDEX = 1;
 
     /** @var \ArrayObject<int,DefinitionGeneratorContentTransfer> */
     public ArrayObject $generatorContents {

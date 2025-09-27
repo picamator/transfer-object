@@ -28,7 +28,7 @@ final class DefinitionContentTransfer extends AbstractTransfer
 
     // className
     public const string CLASS_NAME = 'className';
-    protected const int CLASS_NAME_INDEX = 0;
+    private const int CLASS_NAME_INDEX = 0;
 
     public string $className {
         get => $this->getData(self::CLASS_NAME_INDEX);
@@ -38,7 +38,7 @@ final class DefinitionContentTransfer extends AbstractTransfer
     // properties
     #[CollectionPropertyTypeAttribute(DefinitionPropertyTransfer::class)]
     public const string PROPERTIES = 'properties';
-    protected const int PROPERTIES_INDEX = 1;
+    private const int PROPERTIES_INDEX = 1;
 
     /** @var \ArrayObject<int,DefinitionPropertyTransfer> */
     public ArrayObject $properties {

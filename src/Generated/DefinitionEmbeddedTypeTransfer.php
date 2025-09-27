@@ -27,7 +27,7 @@ final class DefinitionEmbeddedTypeTransfer extends AbstractTransfer
 
     // name
     public const string NAME = 'name';
-    protected const int NAME_INDEX = 0;
+    private const int NAME_INDEX = 0;
 
     public string $name {
         get => $this->getData(self::NAME_INDEX);
@@ -37,7 +37,7 @@ final class DefinitionEmbeddedTypeTransfer extends AbstractTransfer
     // namespace
     #[PropertyTypeAttribute(DefinitionNamespaceTransfer::class)]
     public const string NAMESPACE = 'namespace';
-    protected const int NAMESPACE_INDEX = 1;
+    private const int NAMESPACE_INDEX = 1;
 
     public ?DefinitionNamespaceTransfer $namespace {
         get => $this->getData(self::NAMESPACE_INDEX);

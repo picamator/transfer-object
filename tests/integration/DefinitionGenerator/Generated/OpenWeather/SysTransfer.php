@@ -29,7 +29,7 @@ final class SysTransfer extends AbstractTransfer
 
     // country
     public const string COUNTRY = 'country';
-    protected const int COUNTRY_INDEX = 0;
+    private const int COUNTRY_INDEX = 0;
 
     public ?string $country {
         get => $this->getData(self::COUNTRY_INDEX);
@@ -38,7 +38,7 @@ final class SysTransfer extends AbstractTransfer
 
     // id
     public const string ID = 'id';
-    protected const int ID_INDEX = 1;
+    private const int ID_INDEX = 1;
 
     public ?int $id {
         get => $this->getData(self::ID_INDEX);
@@ -47,7 +47,7 @@ final class SysTransfer extends AbstractTransfer
 
     // sunrise
     public const string SUNRISE = 'sunrise';
-    protected const int SUNRISE_INDEX = 2;
+    private const int SUNRISE_INDEX = 2;
 
     public ?int $sunrise {
         get => $this->getData(self::SUNRISE_INDEX);
@@ -56,7 +56,7 @@ final class SysTransfer extends AbstractTransfer
 
     // sunset
     public const string SUNSET = 'sunset';
-    protected const int SUNSET_INDEX = 3;
+    private const int SUNSET_INDEX = 3;
 
     public ?int $sunset {
         get => $this->getData(self::SUNSET_INDEX);
@@ -65,7 +65,7 @@ final class SysTransfer extends AbstractTransfer
 
     // type
     public const string TYPE = 'type';
-    protected const int TYPE_INDEX = 4;
+    private const int TYPE_INDEX = 4;
 
     public ?int $type {
         get => $this->getData(self::TYPE_INDEX);

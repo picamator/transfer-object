@@ -26,7 +26,7 @@ final class IdentTransfer extends AbstractTransfer
 
     // Method
     public const string METHOD = 'Method';
-    protected const int METHOD_INDEX = 0;
+    private const int METHOD_INDEX = 0;
 
     public ?string $Method {
         get => $this->getData(self::METHOD_INDEX);
@@ -35,7 +35,7 @@ final class IdentTransfer extends AbstractTransfer
 
     // Service
     public const string SERVICE = 'Service';
-    protected const int SERVICE_INDEX = 1;
+    private const int SERVICE_INDEX = 1;
 
     public ?string $Service {
         get => $this->getData(self::SERVICE_INDEX);

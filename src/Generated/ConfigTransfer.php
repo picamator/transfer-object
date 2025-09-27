@@ -28,7 +28,7 @@ final class ConfigTransfer extends AbstractTransfer
     // content
     #[PropertyTypeAttribute(ConfigContentTransfer::class)]
     public const string CONTENT = 'content';
-    protected const int CONTENT_INDEX = 0;
+    private const int CONTENT_INDEX = 0;
 
     public ConfigContentTransfer $content {
         get => $this->getData(self::CONTENT_INDEX);
@@ -38,7 +38,7 @@ final class ConfigTransfer extends AbstractTransfer
     // validator
     #[PropertyTypeAttribute(ValidatorTransfer::class)]
     public const string VALIDATOR = 'validator';
-    protected const int VALIDATOR_INDEX = 1;
+    private const int VALIDATOR_INDEX = 1;
 
     public ValidatorTransfer $validator {
         get => $this->getData(self::VALIDATOR_INDEX);

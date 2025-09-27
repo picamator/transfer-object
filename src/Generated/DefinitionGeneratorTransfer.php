@@ -28,7 +28,7 @@ final class DefinitionGeneratorTransfer extends AbstractTransfer
     // content
     #[PropertyTypeAttribute(DefinitionGeneratorContentTransfer::class)]
     public const string CONTENT = 'content';
-    protected const int CONTENT_INDEX = 0;
+    private const int CONTENT_INDEX = 0;
 
     public DefinitionGeneratorContentTransfer $content {
         get => $this->getData(self::CONTENT_INDEX);
@@ -37,7 +37,7 @@ final class DefinitionGeneratorTransfer extends AbstractTransfer
 
     // definitionPath
     public const string DEFINITION_PATH = 'definitionPath';
-    protected const int DEFINITION_PATH_INDEX = 1;
+    private const int DEFINITION_PATH_INDEX = 1;
 
     public string $definitionPath {
         get => $this->getData(self::DEFINITION_PATH_INDEX);

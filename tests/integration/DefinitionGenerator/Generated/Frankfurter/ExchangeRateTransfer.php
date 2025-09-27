@@ -29,7 +29,7 @@ final class ExchangeRateTransfer extends AbstractTransfer
 
     // amount
     public const string AMOUNT = 'amount';
-    protected const int AMOUNT_INDEX = 0;
+    private const int AMOUNT_INDEX = 0;
 
     public ?int $amount {
         get => $this->getData(self::AMOUNT_INDEX);
@@ -38,7 +38,7 @@ final class ExchangeRateTransfer extends AbstractTransfer
 
     // base
     public const string BASE = 'base';
-    protected const int BASE_INDEX = 1;
+    private const int BASE_INDEX = 1;
 
     public ?string $base {
         get => $this->getData(self::BASE_INDEX);
@@ -47,7 +47,7 @@ final class ExchangeRateTransfer extends AbstractTransfer
 
     // date
     public const string DATE = 'date';
-    protected const int DATE_INDEX = 2;
+    private const int DATE_INDEX = 2;
 
     public ?string $date {
         get => $this->getData(self::DATE_INDEX);
@@ -57,7 +57,7 @@ final class ExchangeRateTransfer extends AbstractTransfer
     // rates
     #[PropertyTypeAttribute(RatesTransfer::class)]
     public const string RATES = 'rates';
-    protected const int RATES_INDEX = 3;
+    private const int RATES_INDEX = 3;
 
     public ?RatesTransfer $rates {
         get => $this->getData(self::RATES_INDEX);

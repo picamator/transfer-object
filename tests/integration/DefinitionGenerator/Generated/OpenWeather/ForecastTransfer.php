@@ -42,7 +42,7 @@ final class ForecastTransfer extends AbstractTransfer
 
     // base
     public const string BASE = 'base';
-    protected const int BASE_INDEX = 0;
+    private const int BASE_INDEX = 0;
 
     public ?string $base {
         get => $this->getData(self::BASE_INDEX);
@@ -52,7 +52,7 @@ final class ForecastTransfer extends AbstractTransfer
     // clouds
     #[PropertyTypeAttribute(CloudsTransfer::class)]
     public const string CLOUDS = 'clouds';
-    protected const int CLOUDS_INDEX = 1;
+    private const int CLOUDS_INDEX = 1;
 
     public ?CloudsTransfer $clouds {
         get => $this->getData(self::CLOUDS_INDEX);
@@ -61,7 +61,7 @@ final class ForecastTransfer extends AbstractTransfer
 
     // cod
     public const string COD = 'cod';
-    protected const int COD_INDEX = 2;
+    private const int COD_INDEX = 2;
 
     public ?int $cod {
         get => $this->getData(self::COD_INDEX);
@@ -71,7 +71,7 @@ final class ForecastTransfer extends AbstractTransfer
     // coord
     #[PropertyTypeAttribute(CoordTransfer::class)]
     public const string COORD = 'coord';
-    protected const int COORD_INDEX = 3;
+    private const int COORD_INDEX = 3;
 
     public ?CoordTransfer $coord {
         get => $this->getData(self::COORD_INDEX);
@@ -80,7 +80,7 @@ final class ForecastTransfer extends AbstractTransfer
 
     // dt
     public const string DT = 'dt';
-    protected const int DT_INDEX = 4;
+    private const int DT_INDEX = 4;
 
     public ?int $dt {
         get => $this->getData(self::DT_INDEX);
@@ -89,7 +89,7 @@ final class ForecastTransfer extends AbstractTransfer
 
     // id
     public const string ID = 'id';
-    protected const int ID_INDEX = 5;
+    private const int ID_INDEX = 5;
 
     public ?int $id {
         get => $this->getData(self::ID_INDEX);
@@ -99,7 +99,7 @@ final class ForecastTransfer extends AbstractTransfer
     // main
     #[PropertyTypeAttribute(MainTransfer::class)]
     public const string MAIN = 'main';
-    protected const int MAIN_INDEX = 6;
+    private const int MAIN_INDEX = 6;
 
     public ?MainTransfer $main {
         get => $this->getData(self::MAIN_INDEX);
@@ -108,7 +108,7 @@ final class ForecastTransfer extends AbstractTransfer
 
     // name
     public const string NAME = 'name';
-    protected const int NAME_INDEX = 7;
+    private const int NAME_INDEX = 7;
 
     public ?string $name {
         get => $this->getData(self::NAME_INDEX);
@@ -118,7 +118,7 @@ final class ForecastTransfer extends AbstractTransfer
     // rain
     #[ArrayPropertyTypeAttribute]
     public const string RAIN = 'rain';
-    protected const int RAIN_INDEX = 8;
+    private const int RAIN_INDEX = 8;
 
     /** @var array<int|string,mixed> */
     public array $rain {
@@ -129,7 +129,7 @@ final class ForecastTransfer extends AbstractTransfer
     // sys
     #[PropertyTypeAttribute(SysTransfer::class)]
     public const string SYS = 'sys';
-    protected const int SYS_INDEX = 9;
+    private const int SYS_INDEX = 9;
 
     public ?SysTransfer $sys {
         get => $this->getData(self::SYS_INDEX);
@@ -138,7 +138,7 @@ final class ForecastTransfer extends AbstractTransfer
 
     // timezone
     public const string TIMEZONE = 'timezone';
-    protected const int TIMEZONE_INDEX = 10;
+    private const int TIMEZONE_INDEX = 10;
 
     public ?int $timezone {
         get => $this->getData(self::TIMEZONE_INDEX);
@@ -147,7 +147,7 @@ final class ForecastTransfer extends AbstractTransfer
 
     // visibility
     public const string VISIBILITY = 'visibility';
-    protected const int VISIBILITY_INDEX = 11;
+    private const int VISIBILITY_INDEX = 11;
 
     public ?int $visibility {
         get => $this->getData(self::VISIBILITY_INDEX);
@@ -157,7 +157,7 @@ final class ForecastTransfer extends AbstractTransfer
     // weather
     #[CollectionPropertyTypeAttribute(WeatherTransfer::class)]
     public const string WEATHER = 'weather';
-    protected const int WEATHER_INDEX = 12;
+    private const int WEATHER_INDEX = 12;
 
     /** @var \ArrayObject<int,WeatherTransfer> */
     public ArrayObject $weather {
@@ -168,7 +168,7 @@ final class ForecastTransfer extends AbstractTransfer
     // wind
     #[PropertyTypeAttribute(WindTransfer::class)]
     public const string WIND = 'wind';
-    protected const int WIND_INDEX = 13;
+    private const int WIND_INDEX = 13;
 
     public ?WindTransfer $wind {
         get => $this->getData(self::WIND_INDEX);

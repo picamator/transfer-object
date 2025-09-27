@@ -16,7 +16,7 @@ readonly class Template
     {
         $this->helper->setTemplateTransfer($templateTransfer);
 
-        $content = <<<TEMPLATE
+        return <<<TEMPLATE
 <?php
 
 declare(strict_types=1);
@@ -46,8 +46,6 @@ final class $templateTransfer->className extends AbstractTransfer
 }
 
 TEMPLATE;
-
-        return $content;
     }
 
     private function renderProperties(TemplateTransfer $templateTransfer): string
@@ -64,7 +62,7 @@ TEMPLATE;
 
     // $property{$this->helper->renderAttribute($property)}
     public const string $constant = '$property';
-    protected const int {$constant}_INDEX = $i;
+    private const int {$constant}_INDEX = $i;
 {$this->helper->renderDockBlock($property)}
     public{$this->helper->renderPropertyDeclaration($property)} \$$property {
         get => \$this->getData(self::{$constant}_INDEX);

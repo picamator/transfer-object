@@ -41,7 +41,7 @@ final class ProductTransfer extends AbstractTransfer
     // availabilities
     #[CollectionPropertyTypeAttribute(AvailabilitiesTransfer::class)]
     public const string AVAILABILITIES = 'availabilities';
-    protected const int AVAILABILITIES_INDEX = 0;
+    private const int AVAILABILITIES_INDEX = 0;
 
     /** @var \ArrayObject<int,AvailabilitiesTransfer> */
     public ArrayObject $availabilities {
@@ -51,7 +51,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // currency
     public const string CURRENCY = 'currency';
-    protected const int CURRENCY_INDEX = 1;
+    private const int CURRENCY_INDEX = 1;
 
     public ?string $currency {
         get => $this->getData(self::CURRENCY_INDEX);
@@ -61,7 +61,7 @@ final class ProductTransfer extends AbstractTransfer
     // deliveryOptions
     #[CollectionPropertyTypeAttribute(DeliveryOptionsTransfer::class)]
     public const string DELIVERY_OPTIONS = 'deliveryOptions';
-    protected const int DELIVERY_OPTIONS_INDEX = 2;
+    private const int DELIVERY_OPTIONS_INDEX = 2;
 
     /** @var \ArrayObject<int,DeliveryOptionsTransfer> */
     public ArrayObject $deliveryOptions {
@@ -72,7 +72,7 @@ final class ProductTransfer extends AbstractTransfer
     // details
     #[PropertyTypeAttribute(DetailsTransfer::class)]
     public const string DETAILS = 'details';
-    protected const int DETAILS_INDEX = 3;
+    private const int DETAILS_INDEX = 3;
 
     public ?DetailsTransfer $details {
         get => $this->getData(self::DETAILS_INDEX);
@@ -81,7 +81,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // isDiscounted
     public const string IS_DISCOUNTED = 'isDiscounted';
-    protected const int IS_DISCOUNTED_INDEX = 4;
+    private const int IS_DISCOUNTED_INDEX = 4;
 
     public ?bool $isDiscounted {
         get => $this->getData(self::IS_DISCOUNTED_INDEX);
@@ -91,7 +91,7 @@ final class ProductTransfer extends AbstractTransfer
     // labels
     #[PropertyTypeAttribute(LabelsTransfer::class)]
     public const string LABELS = 'labels';
-    protected const int LABELS_INDEX = 5;
+    private const int LABELS_INDEX = 5;
 
     public ?LabelsTransfer $labels {
         get => $this->getData(self::LABELS_INDEX);
@@ -101,7 +101,7 @@ final class ProductTransfer extends AbstractTransfer
     // measurementUnit
     #[PropertyTypeAttribute(MeasurementUnitTransfer::class)]
     public const string MEASUREMENT_UNIT = 'measurementUnit';
-    protected const int MEASUREMENT_UNIT_INDEX = 6;
+    private const int MEASUREMENT_UNIT_INDEX = 6;
 
     public ?MeasurementUnitTransfer $measurementUnit {
         get => $this->getData(self::MEASUREMENT_UNIT_INDEX);
@@ -110,7 +110,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // name
     public const string NAME = 'name';
-    protected const int NAME_INDEX = 7;
+    private const int NAME_INDEX = 7;
 
     public ?string $name {
         get => $this->getData(self::NAME_INDEX);
@@ -119,7 +119,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // price
     public const string PRICE = 'price';
-    protected const int PRICE_INDEX = 8;
+    private const int PRICE_INDEX = 8;
 
     public ?float $price {
         get => $this->getData(self::PRICE_INDEX);
@@ -128,7 +128,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // sku
     public const string SKU = 'sku';
-    protected const int SKU_INDEX = 9;
+    private const int SKU_INDEX = 9;
 
     public ?string $sku {
         get => $this->getData(self::SKU_INDEX);
@@ -137,7 +137,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // stock
     public const string STOCK = 'stock';
-    protected const int STOCK_INDEX = 10;
+    private const int STOCK_INDEX = 10;
 
     public ?int $stock {
         get => $this->getData(self::STOCK_INDEX);
@@ -147,7 +147,7 @@ final class ProductTransfer extends AbstractTransfer
     // stores
     #[ArrayPropertyTypeAttribute]
     public const string STORES = 'stores';
-    protected const int STORES_INDEX = 11;
+    private const int STORES_INDEX = 11;
 
     /** @var array<int|string,mixed> */
     public array $stores {

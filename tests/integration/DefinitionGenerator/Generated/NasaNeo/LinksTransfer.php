@@ -25,7 +25,7 @@ final class LinksTransfer extends AbstractTransfer
 
     // self
     public const string SELF = 'self';
-    protected const int SELF_INDEX = 0;
+    private const int SELF_INDEX = 0;
 
     public ?string $self {
         get => $this->getData(self::SELF_INDEX);

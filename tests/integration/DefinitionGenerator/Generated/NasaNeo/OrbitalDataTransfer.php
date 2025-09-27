@@ -48,7 +48,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // aphelion_distance
     public const string APHELION_DISTANCE = 'aphelion_distance';
-    protected const int APHELION_DISTANCE_INDEX = 0;
+    private const int APHELION_DISTANCE_INDEX = 0;
 
     public ?string $aphelion_distance {
         get => $this->getData(self::APHELION_DISTANCE_INDEX);
@@ -57,7 +57,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // ascending_node_longitude
     public const string ASCENDING_NODE_LONGITUDE = 'ascending_node_longitude';
-    protected const int ASCENDING_NODE_LONGITUDE_INDEX = 1;
+    private const int ASCENDING_NODE_LONGITUDE_INDEX = 1;
 
     public ?string $ascending_node_longitude {
         get => $this->getData(self::ASCENDING_NODE_LONGITUDE_INDEX);
@@ -66,7 +66,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // data_arc_in_days
     public const string DATA_ARC_IN_DAYS = 'data_arc_in_days';
-    protected const int DATA_ARC_IN_DAYS_INDEX = 2;
+    private const int DATA_ARC_IN_DAYS_INDEX = 2;
 
     public ?int $data_arc_in_days {
         get => $this->getData(self::DATA_ARC_IN_DAYS_INDEX);
@@ -75,7 +75,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // eccentricity
     public const string ECCENTRICITY = 'eccentricity';
-    protected const int ECCENTRICITY_INDEX = 3;
+    private const int ECCENTRICITY_INDEX = 3;
 
     public ?string $eccentricity {
         get => $this->getData(self::ECCENTRICITY_INDEX);
@@ -84,7 +84,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // epoch_osculation
     public const string EPOCH_OSCULATION = 'epoch_osculation';
-    protected const int EPOCH_OSCULATION_INDEX = 4;
+    private const int EPOCH_OSCULATION_INDEX = 4;
 
     public ?string $epoch_osculation {
         get => $this->getData(self::EPOCH_OSCULATION_INDEX);
@@ -93,7 +93,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // equinox
     public const string EQUINOX = 'equinox';
-    protected const int EQUINOX_INDEX = 5;
+    private const int EQUINOX_INDEX = 5;
 
     public ?string $equinox {
         get => $this->getData(self::EQUINOX_INDEX);
@@ -102,7 +102,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // first_observation_date
     public const string FIRST_OBSERVATION_DATE = 'first_observation_date';
-    protected const int FIRST_OBSERVATION_DATE_INDEX = 6;
+    private const int FIRST_OBSERVATION_DATE_INDEX = 6;
 
     public ?string $first_observation_date {
         get => $this->getData(self::FIRST_OBSERVATION_DATE_INDEX);
@@ -111,7 +111,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // inclination
     public const string INCLINATION = 'inclination';
-    protected const int INCLINATION_INDEX = 7;
+    private const int INCLINATION_INDEX = 7;
 
     public ?string $inclination {
         get => $this->getData(self::INCLINATION_INDEX);
@@ -120,7 +120,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // jupiter_tisserand_invariant
     public const string JUPITER_TISSERAND_INVARIANT = 'jupiter_tisserand_invariant';
-    protected const int JUPITER_TISSERAND_INVARIANT_INDEX = 8;
+    private const int JUPITER_TISSERAND_INVARIANT_INDEX = 8;
 
     public ?string $jupiter_tisserand_invariant {
         get => $this->getData(self::JUPITER_TISSERAND_INVARIANT_INDEX);
@@ -129,7 +129,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // last_observation_date
     public const string LAST_OBSERVATION_DATE = 'last_observation_date';
-    protected const int LAST_OBSERVATION_DATE_INDEX = 9;
+    private const int LAST_OBSERVATION_DATE_INDEX = 9;
 
     public ?string $last_observation_date {
         get => $this->getData(self::LAST_OBSERVATION_DATE_INDEX);
@@ -138,7 +138,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // mean_anomaly
     public const string MEAN_ANOMALY = 'mean_anomaly';
-    protected const int MEAN_ANOMALY_INDEX = 10;
+    private const int MEAN_ANOMALY_INDEX = 10;
 
     public ?string $mean_anomaly {
         get => $this->getData(self::MEAN_ANOMALY_INDEX);
@@ -147,7 +147,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // mean_motion
     public const string MEAN_MOTION = 'mean_motion';
-    protected const int MEAN_MOTION_INDEX = 11;
+    private const int MEAN_MOTION_INDEX = 11;
 
     public ?string $mean_motion {
         get => $this->getData(self::MEAN_MOTION_INDEX);
@@ -156,7 +156,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // minimum_orbit_intersection
     public const string MINIMUM_ORBIT_INTERSECTION = 'minimum_orbit_intersection';
-    protected const int MINIMUM_ORBIT_INTERSECTION_INDEX = 12;
+    private const int MINIMUM_ORBIT_INTERSECTION_INDEX = 12;
 
     public ?string $minimum_orbit_intersection {
         get => $this->getData(self::MINIMUM_ORBIT_INTERSECTION_INDEX);
@@ -165,7 +165,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // observations_used
     public const string OBSERVATIONS_USED = 'observations_used';
-    protected const int OBSERVATIONS_USED_INDEX = 13;
+    private const int OBSERVATIONS_USED_INDEX = 13;
 
     public ?int $observations_used {
         get => $this->getData(self::OBSERVATIONS_USED_INDEX);
@@ -175,7 +175,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     // orbit_class
     #[PropertyTypeAttribute(OrbitClassTransfer::class)]
     public const string ORBIT_CLASS = 'orbit_class';
-    protected const int ORBIT_CLASS_INDEX = 14;
+    private const int ORBIT_CLASS_INDEX = 14;
 
     public ?OrbitClassTransfer $orbit_class {
         get => $this->getData(self::ORBIT_CLASS_INDEX);
@@ -184,7 +184,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // orbit_determination_date
     public const string ORBIT_DETERMINATION_DATE = 'orbit_determination_date';
-    protected const int ORBIT_DETERMINATION_DATE_INDEX = 15;
+    private const int ORBIT_DETERMINATION_DATE_INDEX = 15;
 
     public ?string $orbit_determination_date {
         get => $this->getData(self::ORBIT_DETERMINATION_DATE_INDEX);
@@ -193,7 +193,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // orbit_id
     public const string ORBIT_ID = 'orbit_id';
-    protected const int ORBIT_ID_INDEX = 16;
+    private const int ORBIT_ID_INDEX = 16;
 
     public ?string $orbit_id {
         get => $this->getData(self::ORBIT_ID_INDEX);
@@ -202,7 +202,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // orbit_uncertainty
     public const string ORBIT_UNCERTAINTY = 'orbit_uncertainty';
-    protected const int ORBIT_UNCERTAINTY_INDEX = 17;
+    private const int ORBIT_UNCERTAINTY_INDEX = 17;
 
     public ?string $orbit_uncertainty {
         get => $this->getData(self::ORBIT_UNCERTAINTY_INDEX);
@@ -211,7 +211,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // orbital_period
     public const string ORBITAL_PERIOD = 'orbital_period';
-    protected const int ORBITAL_PERIOD_INDEX = 18;
+    private const int ORBITAL_PERIOD_INDEX = 18;
 
     public ?string $orbital_period {
         get => $this->getData(self::ORBITAL_PERIOD_INDEX);
@@ -220,7 +220,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // perihelion_argument
     public const string PERIHELION_ARGUMENT = 'perihelion_argument';
-    protected const int PERIHELION_ARGUMENT_INDEX = 19;
+    private const int PERIHELION_ARGUMENT_INDEX = 19;
 
     public ?string $perihelion_argument {
         get => $this->getData(self::PERIHELION_ARGUMENT_INDEX);
@@ -229,7 +229,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // perihelion_distance
     public const string PERIHELION_DISTANCE = 'perihelion_distance';
-    protected const int PERIHELION_DISTANCE_INDEX = 20;
+    private const int PERIHELION_DISTANCE_INDEX = 20;
 
     public ?string $perihelion_distance {
         get => $this->getData(self::PERIHELION_DISTANCE_INDEX);
@@ -238,7 +238,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // perihelion_time
     public const string PERIHELION_TIME = 'perihelion_time';
-    protected const int PERIHELION_TIME_INDEX = 21;
+    private const int PERIHELION_TIME_INDEX = 21;
 
     public ?string $perihelion_time {
         get => $this->getData(self::PERIHELION_TIME_INDEX);
@@ -247,7 +247,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // semi_major_axis
     public const string SEMI_MAJOR_AXIS = 'semi_major_axis';
-    protected const int SEMI_MAJOR_AXIS_INDEX = 22;
+    private const int SEMI_MAJOR_AXIS_INDEX = 22;
 
     public ?string $semi_major_axis {
         get => $this->getData(self::SEMI_MAJOR_AXIS_INDEX);

@@ -27,7 +27,7 @@ final class StatusTransfer extends AbstractTransfer
 
     // Code
     public const string CODE = 'Code';
-    protected const int CODE_INDEX = 0;
+    private const int CODE_INDEX = 0;
 
     public ?int $Code {
         get => $this->getData(self::CODE_INDEX);
@@ -36,7 +36,7 @@ final class StatusTransfer extends AbstractTransfer
 
     // Content
     public const string CONTENT = 'Content';
-    protected const int CONTENT_INDEX = 1;
+    private const int CONTENT_INDEX = 1;
 
     public ?string $Content {
         get => $this->getData(self::CONTENT_INDEX);
@@ -45,7 +45,7 @@ final class StatusTransfer extends AbstractTransfer
 
     // Type
     public const string TYPE = 'Type';
-    protected const int TYPE_INDEX = 2;
+    private const int TYPE_INDEX = 2;
 
     public ?string $Type {
         get => $this->getData(self::TYPE_INDEX);

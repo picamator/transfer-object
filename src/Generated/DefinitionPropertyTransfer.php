@@ -37,7 +37,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     // buildInType
     #[EnumPropertyTypeAttribute(BuildInTypeEnum::class)]
     public const string BUILD_IN_TYPE = 'buildInType';
-    protected const int BUILD_IN_TYPE_INDEX = 0;
+    private const int BUILD_IN_TYPE_INDEX = 0;
 
     public ?BuildInTypeEnum $buildInType {
         get => $this->getData(self::BUILD_IN_TYPE_INDEX);
@@ -47,7 +47,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     // collectionType
     #[PropertyTypeAttribute(DefinitionEmbeddedTypeTransfer::class)]
     public const string COLLECTION_TYPE = 'collectionType';
-    protected const int COLLECTION_TYPE_INDEX = 1;
+    private const int COLLECTION_TYPE_INDEX = 1;
 
     public ?DefinitionEmbeddedTypeTransfer $collectionType {
         get => $this->getData(self::COLLECTION_TYPE_INDEX);
@@ -57,7 +57,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     // dateTimeType
     #[PropertyTypeAttribute(DefinitionEmbeddedTypeTransfer::class)]
     public const string DATE_TIME_TYPE = 'dateTimeType';
-    protected const int DATE_TIME_TYPE_INDEX = 2;
+    private const int DATE_TIME_TYPE_INDEX = 2;
 
     public ?DefinitionEmbeddedTypeTransfer $dateTimeType {
         get => $this->getData(self::DATE_TIME_TYPE_INDEX);
@@ -67,7 +67,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     // enumType
     #[PropertyTypeAttribute(DefinitionEmbeddedTypeTransfer::class)]
     public const string ENUM_TYPE = 'enumType';
-    protected const int ENUM_TYPE_INDEX = 3;
+    private const int ENUM_TYPE_INDEX = 3;
 
     public ?DefinitionEmbeddedTypeTransfer $enumType {
         get => $this->getData(self::ENUM_TYPE_INDEX);
@@ -76,7 +76,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     // isNullable
     public const string IS_NULLABLE = 'isNullable';
-    protected const int IS_NULLABLE_INDEX = 4;
+    private const int IS_NULLABLE_INDEX = 4;
 
     public bool $isNullable {
         get => $this->getData(self::IS_NULLABLE_INDEX);
@@ -85,7 +85,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     // isProtected
     public const string IS_PROTECTED = 'isProtected';
-    protected const int IS_PROTECTED_INDEX = 5;
+    private const int IS_PROTECTED_INDEX = 5;
 
     public bool $isProtected {
         get => $this->getData(self::IS_PROTECTED_INDEX);
@@ -95,7 +95,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     // numberType
     #[PropertyTypeAttribute(DefinitionEmbeddedTypeTransfer::class)]
     public const string NUMBER_TYPE = 'numberType';
-    protected const int NUMBER_TYPE_INDEX = 6;
+    private const int NUMBER_TYPE_INDEX = 6;
 
     public ?DefinitionEmbeddedTypeTransfer $numberType {
         get => $this->getData(self::NUMBER_TYPE_INDEX);
@@ -104,7 +104,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     // propertyName
     public const string PROPERTY_NAME = 'propertyName';
-    protected const int PROPERTY_NAME_INDEX = 7;
+    private const int PROPERTY_NAME_INDEX = 7;
 
     public string $propertyName {
         get => $this->getData(self::PROPERTY_NAME_INDEX);
@@ -114,7 +114,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     // transferType
     #[PropertyTypeAttribute(DefinitionEmbeddedTypeTransfer::class)]
     public const string TRANSFER_TYPE = 'transferType';
-    protected const int TRANSFER_TYPE_INDEX = 8;
+    private const int TRANSFER_TYPE_INDEX = 8;
 
     public ?DefinitionEmbeddedTypeTransfer $transferType {
         get => $this->getData(self::TRANSFER_TYPE_INDEX);

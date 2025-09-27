@@ -25,7 +25,7 @@ final class TagsTransfer extends AbstractTransfer
 
     // tag
     public const string TAG = 'tag';
-    protected const int TAG_INDEX = 0;
+    private const int TAG_INDEX = 0;
 
     public ?string $tag {
         get => $this->getData(self::TAG_INDEX);

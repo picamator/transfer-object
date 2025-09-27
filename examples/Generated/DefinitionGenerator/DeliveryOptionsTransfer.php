@@ -25,7 +25,7 @@ final class DeliveryOptionsTransfer extends AbstractTransfer
 
     // name
     public const string NAME = 'name';
-    protected const int NAME_INDEX = 0;
+    private const int NAME_INDEX = 0;
 
     public ?string $name {
         get => $this->getData(self::NAME_INDEX);

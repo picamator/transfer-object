@@ -30,7 +30,7 @@ final class MerchantTransfer extends AbstractTransfer
     // country
     #[EnumPropertyTypeAttribute(CountryEnum::class)]
     public const string COUNTRY = 'country';
-    protected const int COUNTRY_INDEX = 0;
+    private const int COUNTRY_INDEX = 0;
 
     public CountryEnum $country {
         get => $this->getData(self::COUNTRY_INDEX);
@@ -39,7 +39,7 @@ final class MerchantTransfer extends AbstractTransfer
 
     // isActive
     public const string IS_ACTIVE = 'isActive';
-    protected const int IS_ACTIVE_INDEX = 1;
+    private const int IS_ACTIVE_INDEX = 1;
 
     public bool $isActive {
         get => $this->getData(self::IS_ACTIVE_INDEX);
@@ -48,7 +48,7 @@ final class MerchantTransfer extends AbstractTransfer
 
     // merchantReference
     public const string MERCHANT_REFERENCE = 'merchantReference';
-    protected const int MERCHANT_REFERENCE_INDEX = 2;
+    private const int MERCHANT_REFERENCE_INDEX = 2;
 
     public string $merchantReference {
         get => $this->getData(self::MERCHANT_REFERENCE_INDEX);
