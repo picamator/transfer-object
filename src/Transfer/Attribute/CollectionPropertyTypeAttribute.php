@@ -52,7 +52,7 @@ final readonly class CollectionPropertyTypeAttribute implements InitialPropertyT
     public function toArray(mixed $data): array
     {
         return array_map(
-            fn(TransferInterface $transfer): array => $transfer->toArray(),
+            fn (TransferInterface $transfer): array => $transfer->toArray(),
             $data->getArrayCopy()
         );
     }
