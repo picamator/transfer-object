@@ -25,7 +25,7 @@ final class ProtectedTransfer extends AbstractTransfer
 
     // iAmProtected
     public const string I_AM_PROTECTED = 'iAmProtected';
-    protected const int I_AM_PROTECTED_INDEX = 0;
+    private const int I_AM_PROTECTED_INDEX = 0;
 
     public protected(set) ?string $iAmProtected {
         get => $this->getData(self::I_AM_PROTECTED_INDEX);

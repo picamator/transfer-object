@@ -15,16 +15,19 @@ trait ConfigFilterTrait
      */
     final protected function filterConfig(mixed $configData): array
     {
+        $defaultConfig = ConfigKeyEnum::getDefaultConfig();
         if (!is_array($configData)) {
-            return ConfigKeyEnum::getDefaultConfig();
+            return $defaultConfig;
         }
 
         $sectionData = $configData[self::CONFIG_SECTION_KEY] ?? [];
-        $sectionData = is_array($sectionData) ? $sectionData : [];
+        if ($sectionData === [] || !is_array($sectionData)) {
+            return $defaultConfig;
+        }
 
-        $filteredData = array_intersect_key($sectionData, ConfigKeyEnum::getConfigKeys());
-        $filteredData = array_filter($filteredData, fn(mixed $item): bool => is_string($item));
+        $filteredData = array_intersect_key($sectionData, $defaultConfig);
+        $filteredData = array_filter($filteredData, 'is_string');
 
-        return $filteredData + ConfigKeyEnum::getDefaultConfig();
+        return $filteredData + $defaultConfig;
     }
 }

@@ -28,7 +28,7 @@ final class TransferGeneratorTransfer extends AbstractTransfer
 
     // className
     public const string CLASS_NAME = 'className';
-    protected const int CLASS_NAME_INDEX = 0;
+    private const int CLASS_NAME_INDEX = 0;
 
     public ?string $className {
         get => $this->getData(self::CLASS_NAME_INDEX);
@@ -37,7 +37,7 @@ final class TransferGeneratorTransfer extends AbstractTransfer
 
     // fileName
     public const string FILE_NAME = 'fileName';
-    protected const int FILE_NAME_INDEX = 1;
+    private const int FILE_NAME_INDEX = 1;
 
     public ?string $fileName {
         get => $this->getData(self::FILE_NAME_INDEX);
@@ -47,7 +47,7 @@ final class TransferGeneratorTransfer extends AbstractTransfer
     // validator
     #[PropertyTypeAttribute(ValidatorTransfer::class)]
     public const string VALIDATOR = 'validator';
-    protected const int VALIDATOR_INDEX = 2;
+    private const int VALIDATOR_INDEX = 2;
 
     public ValidatorTransfer $validator {
         get => $this->getData(self::VALIDATOR_INDEX);

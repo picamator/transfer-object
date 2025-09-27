@@ -53,7 +53,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // ageGroup
     public const string AGE_GROUP = 'ageGroup';
-    protected const int AGE_GROUP_INDEX = 0;
+    private const int AGE_GROUP_INDEX = 0;
 
     public ?string $ageGroup {
         get => $this->getData(self::AGE_GROUP_INDEX);
@@ -62,7 +62,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // availability
     public const string AVAILABILITY = 'availability';
-    protected const int AVAILABILITY_INDEX = 1;
+    private const int AVAILABILITY_INDEX = 1;
 
     public ?string $availability {
         get => $this->getData(self::AVAILABILITY_INDEX);
@@ -72,7 +72,7 @@ final class ProductTransfer extends AbstractTransfer
     // availabilityDate
     #[DateTimePropertyTypeAttribute(DateTime::class)]
     public const string AVAILABILITY_DATE = 'availabilityDate';
-    protected const int AVAILABILITY_DATE_INDEX = 2;
+    private const int AVAILABILITY_DATE_INDEX = 2;
 
     public ?DateTime $availabilityDate {
         get => $this->getData(self::AVAILABILITY_DATE_INDEX);
@@ -81,7 +81,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // brand
     public const string BRAND = 'brand';
-    protected const int BRAND_INDEX = 3;
+    private const int BRAND_INDEX = 3;
 
     public ?string $brand {
         get => $this->getData(self::BRAND_INDEX);
@@ -90,7 +90,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // channel
     public const string CHANNEL = 'channel';
-    protected const int CHANNEL_INDEX = 4;
+    private const int CHANNEL_INDEX = 4;
 
     public ?string $channel {
         get => $this->getData(self::CHANNEL_INDEX);
@@ -99,7 +99,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // color
     public const string COLOR = 'color';
-    protected const int COLOR_INDEX = 5;
+    private const int COLOR_INDEX = 5;
 
     public ?string $color {
         get => $this->getData(self::COLOR_INDEX);
@@ -108,7 +108,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // condition
     public const string CONDITION = 'condition';
-    protected const int CONDITION_INDEX = 6;
+    private const int CONDITION_INDEX = 6;
 
     public ?string $condition {
         get => $this->getData(self::CONDITION_INDEX);
@@ -117,7 +117,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // contentLanguage
     public const string CONTENT_LANGUAGE = 'contentLanguage';
-    protected const int CONTENT_LANGUAGE_INDEX = 7;
+    private const int CONTENT_LANGUAGE_INDEX = 7;
 
     public ?string $contentLanguage {
         get => $this->getData(self::CONTENT_LANGUAGE_INDEX);
@@ -126,7 +126,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // description
     public const string DESCRIPTION = 'description';
-    protected const int DESCRIPTION_INDEX = 8;
+    private const int DESCRIPTION_INDEX = 8;
 
     public ?string $description {
         get => $this->getData(self::DESCRIPTION_INDEX);
@@ -135,7 +135,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // feedLabel
     public const string FEED_LABEL = 'feedLabel';
-    protected const int FEED_LABEL_INDEX = 9;
+    private const int FEED_LABEL_INDEX = 9;
 
     public ?string $feedLabel {
         get => $this->getData(self::FEED_LABEL_INDEX);
@@ -144,7 +144,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // gender
     public const string GENDER = 'gender';
-    protected const int GENDER_INDEX = 10;
+    private const int GENDER_INDEX = 10;
 
     public ?string $gender {
         get => $this->getData(self::GENDER_INDEX);
@@ -153,7 +153,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // googleProductCategory
     public const string GOOGLE_PRODUCT_CATEGORY = 'googleProductCategory';
-    protected const int GOOGLE_PRODUCT_CATEGORY_INDEX = 11;
+    private const int GOOGLE_PRODUCT_CATEGORY_INDEX = 11;
 
     public ?string $googleProductCategory {
         get => $this->getData(self::GOOGLE_PRODUCT_CATEGORY_INDEX);
@@ -162,7 +162,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // gtin
     public const string GTIN = 'gtin';
-    protected const int GTIN_INDEX = 12;
+    private const int GTIN_INDEX = 12;
 
     public ?string $gtin {
         get => $this->getData(self::GTIN_INDEX);
@@ -171,7 +171,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // id
     public const string ID = 'id';
-    protected const int ID_INDEX = 13;
+    private const int ID_INDEX = 13;
 
     public ?string $id {
         get => $this->getData(self::ID_INDEX);
@@ -180,7 +180,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // imageLink
     public const string IMAGE_LINK = 'imageLink';
-    protected const int IMAGE_LINK_INDEX = 14;
+    private const int IMAGE_LINK_INDEX = 14;
 
     public ?string $imageLink {
         get => $this->getData(self::IMAGE_LINK_INDEX);
@@ -189,7 +189,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // itemGroupId
     public const string ITEM_GROUP_ID = 'itemGroupId';
-    protected const int ITEM_GROUP_ID_INDEX = 15;
+    private const int ITEM_GROUP_ID_INDEX = 15;
 
     public ?string $itemGroupId {
         get => $this->getData(self::ITEM_GROUP_ID_INDEX);
@@ -198,7 +198,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // kind
     public const string KIND = 'kind';
-    protected const int KIND_INDEX = 16;
+    private const int KIND_INDEX = 16;
 
     public ?string $kind {
         get => $this->getData(self::KIND_INDEX);
@@ -207,7 +207,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // link
     public const string LINK = 'link';
-    protected const int LINK_INDEX = 17;
+    private const int LINK_INDEX = 17;
 
     public ?string $link {
         get => $this->getData(self::LINK_INDEX);
@@ -216,7 +216,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // mpn
     public const string MPN = 'mpn';
-    protected const int MPN_INDEX = 18;
+    private const int MPN_INDEX = 18;
 
     public ?string $mpn {
         get => $this->getData(self::MPN_INDEX);
@@ -225,7 +225,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // offerId
     public const string OFFER_ID = 'offerId';
-    protected const int OFFER_ID_INDEX = 19;
+    private const int OFFER_ID_INDEX = 19;
 
     public ?string $offerId {
         get => $this->getData(self::OFFER_ID_INDEX);
@@ -235,7 +235,7 @@ final class ProductTransfer extends AbstractTransfer
     // price
     #[PropertyTypeAttribute(PriceTransfer::class)]
     public const string PRICE = 'price';
-    protected const int PRICE_INDEX = 20;
+    private const int PRICE_INDEX = 20;
 
     public ?PriceTransfer $price {
         get => $this->getData(self::PRICE_INDEX);
@@ -245,7 +245,7 @@ final class ProductTransfer extends AbstractTransfer
     // sizes
     #[ArrayPropertyTypeAttribute]
     public const string SIZES = 'sizes';
-    protected const int SIZES_INDEX = 21;
+    private const int SIZES_INDEX = 21;
 
     /** @var array<int|string,mixed> */
     public array $sizes {
@@ -255,7 +255,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // source
     public const string SOURCE = 'source';
-    protected const int SOURCE_INDEX = 22;
+    private const int SOURCE_INDEX = 22;
 
     public ?string $source {
         get => $this->getData(self::SOURCE_INDEX);
@@ -264,7 +264,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // targetCountry
     public const string TARGET_COUNTRY = 'targetCountry';
-    protected const int TARGET_COUNTRY_INDEX = 23;
+    private const int TARGET_COUNTRY_INDEX = 23;
 
     public ?string $targetCountry {
         get => $this->getData(self::TARGET_COUNTRY_INDEX);
@@ -273,7 +273,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // title
     public const string TITLE = 'title';
-    protected const int TITLE_INDEX = 24;
+    private const int TITLE_INDEX = 24;
 
     public ?string $title {
         get => $this->getData(self::TITLE_INDEX);

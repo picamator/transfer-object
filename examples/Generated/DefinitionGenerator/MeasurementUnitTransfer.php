@@ -28,7 +28,7 @@ final class MeasurementUnitTransfer extends AbstractTransfer
     // box
     #[PropertyTypeAttribute(BoxTransfer::class)]
     public const string BOX = 'box';
-    protected const int BOX_INDEX = 0;
+    private const int BOX_INDEX = 0;
 
     public ?BoxTransfer $box {
         get => $this->getData(self::BOX_INDEX);
@@ -38,7 +38,7 @@ final class MeasurementUnitTransfer extends AbstractTransfer
     // palette
     #[PropertyTypeAttribute(PaletteTransfer::class)]
     public const string PALETTE = 'palette';
-    protected const int PALETTE_INDEX = 1;
+    private const int PALETTE_INDEX = 1;
 
     public ?PaletteTransfer $palette {
         get => $this->getData(self::PALETTE_INDEX);

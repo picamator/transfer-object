@@ -36,7 +36,7 @@ final class DestatisTransfer extends AbstractTransfer
 
     // Copyright
     public const string COPYRIGHT = 'Copyright';
-    protected const int COPYRIGHT_INDEX = 0;
+    private const int COPYRIGHT_INDEX = 0;
 
     public ?string $Copyright {
         get => $this->getData(self::COPYRIGHT_INDEX);
@@ -45,7 +45,7 @@ final class DestatisTransfer extends AbstractTransfer
 
     // Cubes
     public const string CUBES = 'Cubes';
-    protected const int CUBES_INDEX = 1;
+    private const int CUBES_INDEX = 1;
 
     public ?string $Cubes {
         get => $this->getData(self::CUBES_INDEX);
@@ -55,7 +55,7 @@ final class DestatisTransfer extends AbstractTransfer
     // Ident
     #[PropertyTypeAttribute(IdentTransfer::class)]
     public const string IDENT = 'Ident';
-    protected const int IDENT_INDEX = 2;
+    private const int IDENT_INDEX = 2;
 
     public ?IdentTransfer $Ident {
         get => $this->getData(self::IDENT_INDEX);
@@ -65,7 +65,7 @@ final class DestatisTransfer extends AbstractTransfer
     // Parameter
     #[PropertyTypeAttribute(ParameterTransfer::class)]
     public const string PARAMETER = 'Parameter';
-    protected const int PARAMETER_INDEX = 3;
+    private const int PARAMETER_INDEX = 3;
 
     public ?ParameterTransfer $Parameter {
         get => $this->getData(self::PARAMETER_INDEX);
@@ -75,7 +75,7 @@ final class DestatisTransfer extends AbstractTransfer
     // Statistics
     #[CollectionPropertyTypeAttribute(StatisticsTransfer::class)]
     public const string STATISTICS = 'Statistics';
-    protected const int STATISTICS_INDEX = 4;
+    private const int STATISTICS_INDEX = 4;
 
     /** @var \ArrayObject<int,StatisticsTransfer> */
     public ArrayObject $Statistics {
@@ -86,7 +86,7 @@ final class DestatisTransfer extends AbstractTransfer
     // Status
     #[PropertyTypeAttribute(StatusTransfer::class)]
     public const string STATUS = 'Status';
-    protected const int STATUS_INDEX = 5;
+    private const int STATUS_INDEX = 5;
 
     public ?StatusTransfer $Status {
         get => $this->getData(self::STATUS_INDEX);
@@ -96,7 +96,7 @@ final class DestatisTransfer extends AbstractTransfer
     // Tables
     #[CollectionPropertyTypeAttribute(TablesTransfer::class)]
     public const string TABLES = 'Tables';
-    protected const int TABLES_INDEX = 6;
+    private const int TABLES_INDEX = 6;
 
     /** @var \ArrayObject<int,TablesTransfer> */
     public ArrayObject $Tables {
@@ -106,7 +106,7 @@ final class DestatisTransfer extends AbstractTransfer
 
     // Timeseries
     public const string TIMESERIES = 'Timeseries';
-    protected const int TIMESERIES_INDEX = 7;
+    private const int TIMESERIES_INDEX = 7;
 
     public ?string $Timeseries {
         get => $this->getData(self::TIMESERIES_INDEX);
@@ -116,7 +116,7 @@ final class DestatisTransfer extends AbstractTransfer
     // Variables
     #[CollectionPropertyTypeAttribute(VariablesTransfer::class)]
     public const string VARIABLES = 'Variables';
-    protected const int VARIABLES_INDEX = 8;
+    private const int VARIABLES_INDEX = 8;
 
     /** @var \ArrayObject<int,VariablesTransfer> */
     public ArrayObject $Variables {

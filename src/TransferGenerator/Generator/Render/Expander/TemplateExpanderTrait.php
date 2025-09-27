@@ -18,9 +18,9 @@ trait TemplateExpanderTrait
 
     final protected function expandImports(string|BackedEnum $className, TemplateTransfer $templateTransfer): void
     {
-        if ($className instanceof BackedEnum) {
-            $className = $className->value;
-        }
+        $className = is_string($className)
+            ? $className
+            : $className->value;
 
         $templateTransfer->imports[$className] ??= $className;
     }

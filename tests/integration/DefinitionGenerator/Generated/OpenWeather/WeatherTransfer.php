@@ -28,7 +28,7 @@ final class WeatherTransfer extends AbstractTransfer
 
     // description
     public const string DESCRIPTION = 'description';
-    protected const int DESCRIPTION_INDEX = 0;
+    private const int DESCRIPTION_INDEX = 0;
 
     public ?string $description {
         get => $this->getData(self::DESCRIPTION_INDEX);
@@ -37,7 +37,7 @@ final class WeatherTransfer extends AbstractTransfer
 
     // icon
     public const string ICON = 'icon';
-    protected const int ICON_INDEX = 1;
+    private const int ICON_INDEX = 1;
 
     public ?string $icon {
         get => $this->getData(self::ICON_INDEX);
@@ -46,7 +46,7 @@ final class WeatherTransfer extends AbstractTransfer
 
     // id
     public const string ID = 'id';
-    protected const int ID_INDEX = 2;
+    private const int ID_INDEX = 2;
 
     public ?int $id {
         get => $this->getData(self::ID_INDEX);
@@ -55,7 +55,7 @@ final class WeatherTransfer extends AbstractTransfer
 
     // main
     public const string MAIN = 'main';
-    protected const int MAIN_INDEX = 3;
+    private const int MAIN_INDEX = 3;
 
     public ?string $main {
         get => $this->getData(self::MAIN_INDEX);

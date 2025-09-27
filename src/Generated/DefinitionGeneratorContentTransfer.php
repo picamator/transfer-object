@@ -27,7 +27,7 @@ final class DefinitionGeneratorContentTransfer extends AbstractTransfer
 
     // className
     public const string CLASS_NAME = 'className';
-    protected const int CLASS_NAME_INDEX = 0;
+    private const int CLASS_NAME_INDEX = 0;
 
     public string $className {
         get => $this->getData(self::CLASS_NAME_INDEX);
@@ -37,7 +37,7 @@ final class DefinitionGeneratorContentTransfer extends AbstractTransfer
     // content
     #[ArrayPropertyTypeAttribute]
     public const string CONTENT = 'content';
-    protected const int CONTENT_INDEX = 1;
+    private const int CONTENT_INDEX = 1;
 
     /** @var array<int|string,mixed> */
     public array $content {

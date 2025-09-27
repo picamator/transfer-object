@@ -26,7 +26,7 @@ final class TransferGeneratorContentTransfer extends AbstractTransfer
 
     // className
     public const string CLASS_NAME = 'className';
-    protected const int CLASS_NAME_INDEX = 0;
+    private const int CLASS_NAME_INDEX = 0;
 
     public protected(set) string $className {
         get => $this->getData(self::CLASS_NAME_INDEX);
@@ -35,7 +35,7 @@ final class TransferGeneratorContentTransfer extends AbstractTransfer
 
     // content
     public const string CONTENT = 'content';
-    protected const int CONTENT_INDEX = 1;
+    private const int CONTENT_INDEX = 1;
 
     public protected(set) string $content {
         get => $this->getData(self::CONTENT_INDEX);

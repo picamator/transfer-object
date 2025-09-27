@@ -126,6 +126,7 @@ DEFINITION,
 
         $contentTransfer->properties[] = $propertyTransfer;
 
+        // Expect
         $this->expectException(DefinitionGeneratorException::class);
 
         // Act

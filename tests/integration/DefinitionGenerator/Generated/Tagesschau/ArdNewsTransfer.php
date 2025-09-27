@@ -32,7 +32,7 @@ final class ArdNewsTransfer extends AbstractTransfer
 
     // newStoriesCountLink
     public const string NEW_STORIES_COUNT_LINK = 'newStoriesCountLink';
-    protected const int NEW_STORIES_COUNT_LINK_INDEX = 0;
+    private const int NEW_STORIES_COUNT_LINK_INDEX = 0;
 
     public ?string $newStoriesCountLink {
         get => $this->getData(self::NEW_STORIES_COUNT_LINK_INDEX);
@@ -42,7 +42,7 @@ final class ArdNewsTransfer extends AbstractTransfer
     // news
     #[CollectionPropertyTypeAttribute(NewsTransfer::class)]
     public const string NEWS = 'news';
-    protected const int NEWS_INDEX = 1;
+    private const int NEWS_INDEX = 1;
 
     /** @var \ArrayObject<int,NewsTransfer> */
     public ArrayObject $news {
@@ -52,7 +52,7 @@ final class ArdNewsTransfer extends AbstractTransfer
 
     // nextPage
     public const string NEXT_PAGE = 'nextPage';
-    protected const int NEXT_PAGE_INDEX = 2;
+    private const int NEXT_PAGE_INDEX = 2;
 
     public ?string $nextPage {
         get => $this->getData(self::NEXT_PAGE_INDEX);
@@ -62,7 +62,7 @@ final class ArdNewsTransfer extends AbstractTransfer
     // regional
     #[ArrayPropertyTypeAttribute]
     public const string REGIONAL = 'regional';
-    protected const int REGIONAL_INDEX = 3;
+    private const int REGIONAL_INDEX = 3;
 
     /** @var array<int|string,mixed> */
     public array $regional {
@@ -72,7 +72,7 @@ final class ArdNewsTransfer extends AbstractTransfer
 
     // type
     public const string TYPE = 'type';
-    protected const int TYPE_INDEX = 4;
+    private const int TYPE_INDEX = 4;
 
     public ?string $type {
         get => $this->getData(self::TYPE_INDEX);

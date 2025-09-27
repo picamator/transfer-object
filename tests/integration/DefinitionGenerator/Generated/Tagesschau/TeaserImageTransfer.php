@@ -30,7 +30,7 @@ final class TeaserImageTransfer extends AbstractTransfer
 
     // alttext
     public const string ALTTEXT = 'alttext';
-    protected const int ALTTEXT_INDEX = 0;
+    private const int ALTTEXT_INDEX = 0;
 
     public ?string $alttext {
         get => $this->getData(self::ALTTEXT_INDEX);
@@ -39,7 +39,7 @@ final class TeaserImageTransfer extends AbstractTransfer
 
     // copyright
     public const string COPYRIGHT = 'copyright';
-    protected const int COPYRIGHT_INDEX = 1;
+    private const int COPYRIGHT_INDEX = 1;
 
     public ?string $copyright {
         get => $this->getData(self::COPYRIGHT_INDEX);
@@ -49,7 +49,7 @@ final class TeaserImageTransfer extends AbstractTransfer
     // imageVariants
     #[ArrayPropertyTypeAttribute]
     public const string IMAGE_VARIANTS = 'imageVariants';
-    protected const int IMAGE_VARIANTS_INDEX = 2;
+    private const int IMAGE_VARIANTS_INDEX = 2;
 
     /** @var array<int|string,mixed> */
     public array $imageVariants {
@@ -59,7 +59,7 @@ final class TeaserImageTransfer extends AbstractTransfer
 
     // title
     public const string TITLE = 'title';
-    protected const int TITLE_INDEX = 3;
+    private const int TITLE_INDEX = 3;
 
     public ?string $title {
         get => $this->getData(self::TITLE_INDEX);
@@ -68,7 +68,7 @@ final class TeaserImageTransfer extends AbstractTransfer
 
     // type
     public const string TYPE = 'type';
-    protected const int TYPE_INDEX = 4;
+    private const int TYPE_INDEX = 4;
 
     public ?string $type {
         get => $this->getData(self::TYPE_INDEX);

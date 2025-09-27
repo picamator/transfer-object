@@ -36,7 +36,7 @@ final class AddressTransfer extends AbstractTransfer
 
     // address1
     public const string ADDRESS1 = 'address1';
-    protected const int ADDRESS1_INDEX = 0;
+    private const int ADDRESS1_INDEX = 0;
 
     public ?string $address1 {
         get => $this->getData(self::ADDRESS1_INDEX);
@@ -45,7 +45,7 @@ final class AddressTransfer extends AbstractTransfer
 
     // address2
     public const string ADDRESS2 = 'address2';
-    protected const int ADDRESS2_INDEX = 1;
+    private const int ADDRESS2_INDEX = 1;
 
     public ?string $address2 {
         get => $this->getData(self::ADDRESS2_INDEX);
@@ -54,7 +54,7 @@ final class AddressTransfer extends AbstractTransfer
 
     // address3
     public const string ADDRESS3 = 'address3';
-    protected const int ADDRESS3_INDEX = 2;
+    private const int ADDRESS3_INDEX = 2;
 
     public ?string $address3 {
         get => $this->getData(self::ADDRESS3_INDEX);
@@ -64,7 +64,7 @@ final class AddressTransfer extends AbstractTransfer
     // country
     #[CollectionPropertyTypeAttribute(CountryTransfer::class)]
     public const string COUNTRY = 'country';
-    protected const int COUNTRY_INDEX = 3;
+    private const int COUNTRY_INDEX = 3;
 
     /** @var \ArrayObject<int,CountryTransfer> */
     public ArrayObject $country {
@@ -74,7 +74,7 @@ final class AddressTransfer extends AbstractTransfer
 
     // firstName
     public const string FIRST_NAME = 'firstName';
-    protected const int FIRST_NAME_INDEX = 4;
+    private const int FIRST_NAME_INDEX = 4;
 
     public ?string $firstName {
         get => $this->getData(self::FIRST_NAME_INDEX);
@@ -83,7 +83,7 @@ final class AddressTransfer extends AbstractTransfer
 
     // isActive
     public const string IS_ACTIVE = 'isActive';
-    protected const int IS_ACTIVE_INDEX = 5;
+    private const int IS_ACTIVE_INDEX = 5;
 
     public ?bool $isActive {
         get => $this->getData(self::IS_ACTIVE_INDEX);
@@ -92,7 +92,7 @@ final class AddressTransfer extends AbstractTransfer
 
     // lastName
     public const string LAST_NAME = 'lastName';
-    protected const int LAST_NAME_INDEX = 6;
+    private const int LAST_NAME_INDEX = 6;
 
     public ?string $lastName {
         get => $this->getData(self::LAST_NAME_INDEX);
@@ -101,7 +101,7 @@ final class AddressTransfer extends AbstractTransfer
 
     // phone
     public const string PHONE = 'phone';
-    protected const int PHONE_INDEX = 7;
+    private const int PHONE_INDEX = 7;
 
     public ?string $phone {
         get => $this->getData(self::PHONE_INDEX);
@@ -110,7 +110,7 @@ final class AddressTransfer extends AbstractTransfer
 
     // uuid
     public const string UUID = 'uuid';
-    protected const int UUID_INDEX = 8;
+    private const int UUID_INDEX = 8;
 
     public ?string $uuid {
         get => $this->getData(self::UUID_INDEX);
@@ -119,7 +119,7 @@ final class AddressTransfer extends AbstractTransfer
 
     // zipCode
     public const string ZIP_CODE = 'zipCode';
-    protected const int ZIP_CODE_INDEX = 9;
+    private const int ZIP_CODE_INDEX = 9;
 
     public ?string $zipCode {
         get => $this->getData(self::ZIP_CODE_INDEX);

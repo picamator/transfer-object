@@ -25,7 +25,7 @@ final class RequiredTransfer extends AbstractTransfer
 
     // iAmRequired
     public const string I_AM_REQUIRED = 'iAmRequired';
-    protected const int I_AM_REQUIRED_INDEX = 0;
+    private const int I_AM_REQUIRED_INDEX = 0;
 
     public string $iAmRequired {
         get => $this->getData(self::I_AM_REQUIRED_INDEX);

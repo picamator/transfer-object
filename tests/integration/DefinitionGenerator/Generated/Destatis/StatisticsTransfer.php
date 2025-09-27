@@ -28,7 +28,7 @@ final class StatisticsTransfer extends AbstractTransfer
 
     // Code
     public const string CODE = 'Code';
-    protected const int CODE_INDEX = 0;
+    private const int CODE_INDEX = 0;
 
     public ?string $Code {
         get => $this->getData(self::CODE_INDEX);
@@ -37,7 +37,7 @@ final class StatisticsTransfer extends AbstractTransfer
 
     // Content
     public const string CONTENT = 'Content';
-    protected const int CONTENT_INDEX = 1;
+    private const int CONTENT_INDEX = 1;
 
     public ?string $Content {
         get => $this->getData(self::CONTENT_INDEX);
@@ -46,7 +46,7 @@ final class StatisticsTransfer extends AbstractTransfer
 
     // Cubes
     public const string CUBES = 'Cubes';
-    protected const int CUBES_INDEX = 2;
+    private const int CUBES_INDEX = 2;
 
     public ?string $Cubes {
         get => $this->getData(self::CUBES_INDEX);
@@ -55,7 +55,7 @@ final class StatisticsTransfer extends AbstractTransfer
 
     // Information
     public const string INFORMATION = 'Information';
-    protected const int INFORMATION_INDEX = 3;
+    private const int INFORMATION_INDEX = 3;
 
     public ?string $Information {
         get => $this->getData(self::INFORMATION_INDEX);

@@ -33,7 +33,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
 
     // addressBookUuid
     public const string ADDRESS_BOOK_UUID = 'addressBookUuid';
-    protected const int ADDRESS_BOOK_UUID_INDEX = 0;
+    private const int ADDRESS_BOOK_UUID_INDEX = 0;
 
     public ?string $addressBookUuid {
         get => $this->getData(self::ADDRESS_BOOK_UUID_INDEX);
@@ -42,7 +42,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
 
     // addressUuid
     public const string ADDRESS_UUID = 'addressUuid';
-    protected const int ADDRESS_UUID_INDEX = 1;
+    private const int ADDRESS_UUID_INDEX = 1;
 
     public ?string $addressUuid {
         get => $this->getData(self::ADDRESS_UUID_INDEX);
@@ -51,7 +51,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
 
     // isActive
     public const string IS_ACTIVE = 'isActive';
-    protected const int IS_ACTIVE_INDEX = 2;
+    private const int IS_ACTIVE_INDEX = 2;
 
     public ?true $isActive {
         get => $this->getData(self::IS_ACTIVE_INDEX);
@@ -60,7 +60,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
 
     // isBlocked
     public const string IS_BLOCKED = 'isBlocked';
-    protected const int IS_BLOCKED_INDEX = 3;
+    private const int IS_BLOCKED_INDEX = 3;
 
     public ?false $isBlocked {
         get => $this->getData(self::IS_BLOCKED_INDEX);
@@ -69,7 +69,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
 
     // orderAverage
     public const string ORDER_AVERAGE = 'orderAverage';
-    protected const int ORDER_AVERAGE_INDEX = 4;
+    private const int ORDER_AVERAGE_INDEX = 4;
 
     public ?float $orderAverage {
         get => $this->getData(self::ORDER_AVERAGE_INDEX);
@@ -78,7 +78,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
 
     // orderCount
     public const string ORDER_COUNT = 'orderCount';
-    protected const int ORDER_COUNT_INDEX = 5;
+    private const int ORDER_COUNT_INDEX = 5;
 
     public ?int $orderCount {
         get => $this->getData(self::ORDER_COUNT_INDEX);
@@ -88,7 +88,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     // orderReferences
     #[ArrayObjectPropertyTypeAttribute]
     public const string ORDER_REFERENCES = 'orderReferences';
-    protected const int ORDER_REFERENCES_INDEX = 6;
+    private const int ORDER_REFERENCES_INDEX = 6;
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $orderReferences {

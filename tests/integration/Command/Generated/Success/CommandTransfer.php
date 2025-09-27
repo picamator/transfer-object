@@ -25,7 +25,7 @@ final class CommandTransfer extends AbstractTransfer
 
     // run
     public const string RUN = 'run';
-    protected const int RUN_INDEX = 0;
+    private const int RUN_INDEX = 0;
 
     public ?true $run {
         get => $this->getData(self::RUN_INDEX);

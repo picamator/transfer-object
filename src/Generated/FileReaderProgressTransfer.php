@@ -27,7 +27,7 @@ final class FileReaderProgressTransfer extends AbstractTransfer
 
     // content
     public const string CONTENT = 'content';
-    protected const int CONTENT_INDEX = 0;
+    private const int CONTENT_INDEX = 0;
 
     public string $content {
         get => $this->getData(self::CONTENT_INDEX);
@@ -36,7 +36,7 @@ final class FileReaderProgressTransfer extends AbstractTransfer
 
     // progressBytes
     public const string PROGRESS_BYTES = 'progressBytes';
-    protected const int PROGRESS_BYTES_INDEX = 1;
+    private const int PROGRESS_BYTES_INDEX = 1;
 
     public int $progressBytes {
         get => $this->getData(self::PROGRESS_BYTES_INDEX);
@@ -45,7 +45,7 @@ final class FileReaderProgressTransfer extends AbstractTransfer
 
     // totalBytes
     public const string TOTAL_BYTES = 'totalBytes';
-    protected const int TOTAL_BYTES_INDEX = 2;
+    private const int TOTAL_BYTES_INDEX = 2;
 
     public int $totalBytes {
         get => $this->getData(self::TOTAL_BYTES_INDEX);

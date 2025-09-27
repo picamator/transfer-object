@@ -28,8 +28,9 @@ readonly class DefinitionReader implements DefinitionReaderInterface
 
     public function getDefinitions(): Generator
     {
+        $count = 0;
+
         try {
-            $count = 0;
             $definitionFiles = $this->finder->getDefinitionFiles();
             foreach ($definitionFiles as $fileName => $filePath) {
                 $contentGenerator = $this->getContentGenerator($fileName, $filePath);
@@ -79,7 +80,6 @@ readonly class DefinitionReader implements DefinitionReaderInterface
         $definitionTransfer = new DefinitionTransfer();
 
         $definitionTransfer->fileName = $fileName;
-
         $definitionTransfer->content = new DefinitionContentTransfer();
         $definitionTransfer->content->className = '';
         $definitionTransfer->validator = $this->createErrorValidatorTransfer($errorMessage);

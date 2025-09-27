@@ -50,7 +50,7 @@ final class NewsTransfer extends AbstractTransfer
     // brandingImage
     #[PropertyTypeAttribute(BrandingImageTransfer::class)]
     public const string BRANDING_IMAGE = 'brandingImage';
-    protected const int BRANDING_IMAGE_INDEX = 0;
+    private const int BRANDING_IMAGE_INDEX = 0;
 
     public ?BrandingImageTransfer $brandingImage {
         get => $this->getData(self::BRANDING_IMAGE_INDEX);
@@ -59,7 +59,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // breakingNews
     public const string BREAKING_NEWS = 'breakingNews';
-    protected const int BREAKING_NEWS_INDEX = 1;
+    private const int BREAKING_NEWS_INDEX = 1;
 
     public ?bool $breakingNews {
         get => $this->getData(self::BREAKING_NEWS_INDEX);
@@ -68,7 +68,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // comments
     public const string COMMENTS = 'comments';
-    protected const int COMMENTS_INDEX = 2;
+    private const int COMMENTS_INDEX = 2;
 
     public ?string $comments {
         get => $this->getData(self::COMMENTS_INDEX);
@@ -77,7 +77,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // date
     public const string DATE = 'date';
-    protected const int DATE_INDEX = 3;
+    private const int DATE_INDEX = 3;
 
     public ?string $date {
         get => $this->getData(self::DATE_INDEX);
@@ -86,7 +86,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // details
     public const string DETAILS = 'details';
-    protected const int DETAILS_INDEX = 4;
+    private const int DETAILS_INDEX = 4;
 
     public ?string $details {
         get => $this->getData(self::DETAILS_INDEX);
@@ -95,7 +95,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // detailsweb
     public const string DETAILSWEB = 'detailsweb';
-    protected const int DETAILSWEB_INDEX = 5;
+    private const int DETAILSWEB_INDEX = 5;
 
     public ?string $detailsweb {
         get => $this->getData(self::DETAILSWEB_INDEX);
@@ -104,7 +104,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // externalId
     public const string EXTERNAL_ID = 'externalId';
-    protected const int EXTERNAL_ID_INDEX = 6;
+    private const int EXTERNAL_ID_INDEX = 6;
 
     public ?string $externalId {
         get => $this->getData(self::EXTERNAL_ID_INDEX);
@@ -113,7 +113,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // firstSentence
     public const string FIRST_SENTENCE = 'firstSentence';
-    protected const int FIRST_SENTENCE_INDEX = 7;
+    private const int FIRST_SENTENCE_INDEX = 7;
 
     public ?string $firstSentence {
         get => $this->getData(self::FIRST_SENTENCE_INDEX);
@@ -123,7 +123,7 @@ final class NewsTransfer extends AbstractTransfer
     // geotags
     #[ArrayPropertyTypeAttribute]
     public const string GEOTAGS = 'geotags';
-    protected const int GEOTAGS_INDEX = 8;
+    private const int GEOTAGS_INDEX = 8;
 
     /** @var array<int|string,mixed> */
     public array $geotags {
@@ -133,7 +133,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // regionId
     public const string REGION_ID = 'regionId';
-    protected const int REGION_ID_INDEX = 9;
+    private const int REGION_ID_INDEX = 9;
 
     public ?int $regionId {
         get => $this->getData(self::REGION_ID_INDEX);
@@ -143,7 +143,7 @@ final class NewsTransfer extends AbstractTransfer
     // regionIds
     #[ArrayPropertyTypeAttribute]
     public const string REGION_IDS = 'regionIds';
-    protected const int REGION_IDS_INDEX = 10;
+    private const int REGION_IDS_INDEX = 10;
 
     /** @var array<int|string,mixed> */
     public array $regionIds {
@@ -153,7 +153,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // ressort
     public const string RESSORT = 'ressort';
-    protected const int RESSORT_INDEX = 11;
+    private const int RESSORT_INDEX = 11;
 
     public ?string $ressort {
         get => $this->getData(self::RESSORT_INDEX);
@@ -162,7 +162,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // shareURL
     public const string SHARE_U_R_L = 'shareURL';
-    protected const int SHARE_U_R_L_INDEX = 12;
+    private const int SHARE_U_R_L_INDEX = 12;
 
     public ?string $shareURL {
         get => $this->getData(self::SHARE_U_R_L_INDEX);
@@ -171,7 +171,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // sophoraId
     public const string SOPHORA_ID = 'sophoraId';
-    protected const int SOPHORA_ID_INDEX = 13;
+    private const int SOPHORA_ID_INDEX = 13;
 
     public ?string $sophoraId {
         get => $this->getData(self::SOPHORA_ID_INDEX);
@@ -181,7 +181,7 @@ final class NewsTransfer extends AbstractTransfer
     // tags
     #[CollectionPropertyTypeAttribute(TagsTransfer::class)]
     public const string TAGS = 'tags';
-    protected const int TAGS_INDEX = 14;
+    private const int TAGS_INDEX = 14;
 
     /** @var \ArrayObject<int,TagsTransfer> */
     public ArrayObject $tags {
@@ -192,7 +192,7 @@ final class NewsTransfer extends AbstractTransfer
     // teaserImage
     #[PropertyTypeAttribute(TeaserImageTransfer::class)]
     public const string TEASER_IMAGE = 'teaserImage';
-    protected const int TEASER_IMAGE_INDEX = 15;
+    private const int TEASER_IMAGE_INDEX = 15;
 
     public ?TeaserImageTransfer $teaserImage {
         get => $this->getData(self::TEASER_IMAGE_INDEX);
@@ -201,7 +201,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // title
     public const string TITLE = 'title';
-    protected const int TITLE_INDEX = 16;
+    private const int TITLE_INDEX = 16;
 
     public ?string $title {
         get => $this->getData(self::TITLE_INDEX);
@@ -210,7 +210,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // topline
     public const string TOPLINE = 'topline';
-    protected const int TOPLINE_INDEX = 17;
+    private const int TOPLINE_INDEX = 17;
 
     public ?string $topline {
         get => $this->getData(self::TOPLINE_INDEX);
@@ -220,7 +220,7 @@ final class NewsTransfer extends AbstractTransfer
     // tracking
     #[CollectionPropertyTypeAttribute(TrackingTransfer::class)]
     public const string TRACKING = 'tracking';
-    protected const int TRACKING_INDEX = 18;
+    private const int TRACKING_INDEX = 18;
 
     /** @var \ArrayObject<int,TrackingTransfer> */
     public ArrayObject $tracking {
@@ -230,7 +230,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // type
     public const string TYPE = 'type';
-    protected const int TYPE_INDEX = 19;
+    private const int TYPE_INDEX = 19;
 
     public ?string $type {
         get => $this->getData(self::TYPE_INDEX);
@@ -239,7 +239,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // updateCheckUrl
     public const string UPDATE_CHECK_URL = 'updateCheckUrl';
-    protected const int UPDATE_CHECK_URL_INDEX = 20;
+    private const int UPDATE_CHECK_URL_INDEX = 20;
 
     public ?string $updateCheckUrl {
         get => $this->getData(self::UPDATE_CHECK_URL_INDEX);

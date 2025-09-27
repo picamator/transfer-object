@@ -33,7 +33,7 @@ final class NamespaceTransfer extends AbstractTransfer
     // items
     #[CollectionPropertyTypeAttribute(ItemTransfer::class)]
     public const string ITEMS = 'items';
-    protected const int ITEMS_INDEX = 0;
+    private const int ITEMS_INDEX = 0;
 
     /** @var \ArrayObject<int,TransferInterface&ItemTransfer> */
     public ArrayObject $items {
@@ -44,7 +44,7 @@ final class NamespaceTransfer extends AbstractTransfer
     // required
     #[PropertyTypeAttribute(RequiredAlias::class)]
     public const string REQUIRED = 'required';
-    protected const int REQUIRED_INDEX = 1;
+    private const int REQUIRED_INDEX = 1;
 
     public TransferInterface&RequiredAlias $required {
         get => $this->getData(self::REQUIRED_INDEX);

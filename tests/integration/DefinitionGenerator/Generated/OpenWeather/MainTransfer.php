@@ -32,7 +32,7 @@ final class MainTransfer extends AbstractTransfer
 
     // feels_like
     public const string FEELS_LIKE = 'feels_like';
-    protected const int FEELS_LIKE_INDEX = 0;
+    private const int FEELS_LIKE_INDEX = 0;
 
     public ?float $feels_like {
         get => $this->getData(self::FEELS_LIKE_INDEX);
@@ -41,7 +41,7 @@ final class MainTransfer extends AbstractTransfer
 
     // grnd_level
     public const string GRND_LEVEL = 'grnd_level';
-    protected const int GRND_LEVEL_INDEX = 1;
+    private const int GRND_LEVEL_INDEX = 1;
 
     public ?int $grnd_level {
         get => $this->getData(self::GRND_LEVEL_INDEX);
@@ -50,7 +50,7 @@ final class MainTransfer extends AbstractTransfer
 
     // humidity
     public const string HUMIDITY = 'humidity';
-    protected const int HUMIDITY_INDEX = 2;
+    private const int HUMIDITY_INDEX = 2;
 
     public ?int $humidity {
         get => $this->getData(self::HUMIDITY_INDEX);
@@ -59,7 +59,7 @@ final class MainTransfer extends AbstractTransfer
 
     // pressure
     public const string PRESSURE = 'pressure';
-    protected const int PRESSURE_INDEX = 3;
+    private const int PRESSURE_INDEX = 3;
 
     public ?int $pressure {
         get => $this->getData(self::PRESSURE_INDEX);
@@ -68,7 +68,7 @@ final class MainTransfer extends AbstractTransfer
 
     // sea_level
     public const string SEA_LEVEL = 'sea_level';
-    protected const int SEA_LEVEL_INDEX = 4;
+    private const int SEA_LEVEL_INDEX = 4;
 
     public ?int $sea_level {
         get => $this->getData(self::SEA_LEVEL_INDEX);
@@ -77,7 +77,7 @@ final class MainTransfer extends AbstractTransfer
 
     // temp
     public const string TEMP = 'temp';
-    protected const int TEMP_INDEX = 5;
+    private const int TEMP_INDEX = 5;
 
     public ?float $temp {
         get => $this->getData(self::TEMP_INDEX);
@@ -86,7 +86,7 @@ final class MainTransfer extends AbstractTransfer
 
     // temp_max
     public const string TEMP_MAX = 'temp_max';
-    protected const int TEMP_MAX_INDEX = 6;
+    private const int TEMP_MAX_INDEX = 6;
 
     public ?float $temp_max {
         get => $this->getData(self::TEMP_MAX_INDEX);
@@ -95,7 +95,7 @@ final class MainTransfer extends AbstractTransfer
 
     // temp_min
     public const string TEMP_MIN = 'temp_min';
-    protected const int TEMP_MIN_INDEX = 7;
+    private const int TEMP_MIN_INDEX = 7;
 
     public ?float $temp_min {
         get => $this->getData(self::TEMP_MIN_INDEX);

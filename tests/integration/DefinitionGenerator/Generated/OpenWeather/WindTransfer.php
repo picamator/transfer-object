@@ -27,7 +27,7 @@ final class WindTransfer extends AbstractTransfer
 
     // deg
     public const string DEG = 'deg';
-    protected const int DEG_INDEX = 0;
+    private const int DEG_INDEX = 0;
 
     public ?int $deg {
         get => $this->getData(self::DEG_INDEX);
@@ -36,7 +36,7 @@ final class WindTransfer extends AbstractTransfer
 
     // gust
     public const string GUST = 'gust';
-    protected const int GUST_INDEX = 1;
+    private const int GUST_INDEX = 1;
 
     public ?float $gust {
         get => $this->getData(self::GUST_INDEX);
@@ -45,7 +45,7 @@ final class WindTransfer extends AbstractTransfer
 
     // speed
     public const string SPEED = 'speed';
-    protected const int SPEED_INDEX = 2;
+    private const int SPEED_INDEX = 2;
 
     public ?float $speed {
         get => $this->getData(self::SPEED_INDEX);

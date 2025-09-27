@@ -29,7 +29,7 @@ final class VariablesTransfer extends AbstractTransfer
 
     // Code
     public const string CODE = 'Code';
-    protected const int CODE_INDEX = 0;
+    private const int CODE_INDEX = 0;
 
     public ?string $Code {
         get => $this->getData(self::CODE_INDEX);
@@ -38,7 +38,7 @@ final class VariablesTransfer extends AbstractTransfer
 
     // Content
     public const string CONTENT = 'Content';
-    protected const int CONTENT_INDEX = 1;
+    private const int CONTENT_INDEX = 1;
 
     public ?string $Content {
         get => $this->getData(self::CONTENT_INDEX);
@@ -47,7 +47,7 @@ final class VariablesTransfer extends AbstractTransfer
 
     // Information
     public const string INFORMATION = 'Information';
-    protected const int INFORMATION_INDEX = 2;
+    private const int INFORMATION_INDEX = 2;
 
     public ?string $Information {
         get => $this->getData(self::INFORMATION_INDEX);
@@ -56,7 +56,7 @@ final class VariablesTransfer extends AbstractTransfer
 
     // Type
     public const string TYPE = 'Type';
-    protected const int TYPE_INDEX = 3;
+    private const int TYPE_INDEX = 3;
 
     public ?string $Type {
         get => $this->getData(self::TYPE_INDEX);
@@ -65,7 +65,7 @@ final class VariablesTransfer extends AbstractTransfer
 
     // Values
     public const string VALUES = 'Values';
-    protected const int VALUES_INDEX = 4;
+    private const int VALUES_INDEX = 4;
 
     public ?string $Values {
         get => $this->getData(self::VALUES_INDEX);

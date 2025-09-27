@@ -28,7 +28,7 @@ final class MissDistanceTransfer extends AbstractTransfer
 
     // astronomical
     public const string ASTRONOMICAL = 'astronomical';
-    protected const int ASTRONOMICAL_INDEX = 0;
+    private const int ASTRONOMICAL_INDEX = 0;
 
     public ?string $astronomical {
         get => $this->getData(self::ASTRONOMICAL_INDEX);
@@ -37,7 +37,7 @@ final class MissDistanceTransfer extends AbstractTransfer
 
     // kilometers
     public const string KILOMETERS = 'kilometers';
-    protected const int KILOMETERS_INDEX = 1;
+    private const int KILOMETERS_INDEX = 1;
 
     public ?string $kilometers {
         get => $this->getData(self::KILOMETERS_INDEX);
@@ -46,7 +46,7 @@ final class MissDistanceTransfer extends AbstractTransfer
 
     // lunar
     public const string LUNAR = 'lunar';
-    protected const int LUNAR_INDEX = 2;
+    private const int LUNAR_INDEX = 2;
 
     public ?string $lunar {
         get => $this->getData(self::LUNAR_INDEX);
@@ -55,7 +55,7 @@ final class MissDistanceTransfer extends AbstractTransfer
 
     // miles
     public const string MILES = 'miles';
-    protected const int MILES_INDEX = 3;
+    private const int MILES_INDEX = 3;
 
     public ?string $miles {
         get => $this->getData(self::MILES_INDEX);

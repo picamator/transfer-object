@@ -28,7 +28,7 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
 
     // alias
     public const string ALIAS = 'alias';
-    protected const int ALIAS_INDEX = 0;
+    private const int ALIAS_INDEX = 0;
 
     public ?string $alias {
         get => $this->getData(self::ALIAS_INDEX);
@@ -37,7 +37,7 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
 
     // baseName
     public const string BASE_NAME = 'baseName';
-    protected const int BASE_NAME_INDEX = 1;
+    private const int BASE_NAME_INDEX = 1;
 
     public string $baseName {
         get => $this->getData(self::BASE_NAME_INDEX);
@@ -46,7 +46,7 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
 
     // fullName
     public const string FULL_NAME = 'fullName';
-    protected const int FULL_NAME_INDEX = 2;
+    private const int FULL_NAME_INDEX = 2;
 
     public string $fullName {
         get => $this->getData(self::FULL_NAME_INDEX);
@@ -55,7 +55,7 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
 
     // withoutAlias
     public const string WITHOUT_ALIAS = 'withoutAlias';
-    protected const int WITHOUT_ALIAS_INDEX = 3;
+    private const int WITHOUT_ALIAS_INDEX = 3;
 
     public string $withoutAlias {
         get => $this->getData(self::WITHOUT_ALIAS_INDEX);

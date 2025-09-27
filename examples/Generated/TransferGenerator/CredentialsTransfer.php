@@ -32,7 +32,7 @@ final class CredentialsTransfer extends AbstractTransfer
     // createdAt
     #[DateTimePropertyTypeAttribute(DateTimeImmutable::class)]
     public const string CREATED_AT = 'createdAt';
-    protected const int CREATED_AT_INDEX = 0;
+    private const int CREATED_AT_INDEX = 0;
 
     public protected(set) DateTimeImmutable $createdAt {
         get => $this->getData(self::CREATED_AT_INDEX);
@@ -41,7 +41,7 @@ final class CredentialsTransfer extends AbstractTransfer
 
     // login
     public const string LOGIN = 'login';
-    protected const int LOGIN_INDEX = 1;
+    private const int LOGIN_INDEX = 1;
 
     public protected(set) string $login {
         get => $this->getData(self::LOGIN_INDEX);
@@ -50,7 +50,7 @@ final class CredentialsTransfer extends AbstractTransfer
 
     // token
     public const string TOKEN = 'token';
-    protected const int TOKEN_INDEX = 2;
+    private const int TOKEN_INDEX = 2;
 
     public protected(set) string $token {
         get => $this->getData(self::TOKEN_INDEX);
@@ -60,7 +60,7 @@ final class CredentialsTransfer extends AbstractTransfer
     // updatedAt
     #[DateTimePropertyTypeAttribute(DateTime::class)]
     public const string UPDATED_AT = 'updatedAt';
-    protected const int UPDATED_AT_INDEX = 3;
+    private const int UPDATED_AT_INDEX = 3;
 
     public DateTime $updatedAt {
         get => $this->getData(self::UPDATED_AT_INDEX);

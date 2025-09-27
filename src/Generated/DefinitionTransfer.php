@@ -29,7 +29,7 @@ final class DefinitionTransfer extends AbstractTransfer
     // content
     #[PropertyTypeAttribute(DefinitionContentTransfer::class)]
     public const string CONTENT = 'content';
-    protected const int CONTENT_INDEX = 0;
+    private const int CONTENT_INDEX = 0;
 
     public DefinitionContentTransfer $content {
         get => $this->getData(self::CONTENT_INDEX);
@@ -38,7 +38,7 @@ final class DefinitionTransfer extends AbstractTransfer
 
     // fileName
     public const string FILE_NAME = 'fileName';
-    protected const int FILE_NAME_INDEX = 1;
+    private const int FILE_NAME_INDEX = 1;
 
     public string $fileName {
         get => $this->getData(self::FILE_NAME_INDEX);
@@ -48,7 +48,7 @@ final class DefinitionTransfer extends AbstractTransfer
     // validator
     #[PropertyTypeAttribute(ValidatorTransfer::class)]
     public const string VALIDATOR = 'validator';
-    protected const int VALIDATOR_INDEX = 2;
+    private const int VALIDATOR_INDEX = 2;
 
     public ValidatorTransfer $validator {
         get => $this->getData(self::VALIDATOR_INDEX);

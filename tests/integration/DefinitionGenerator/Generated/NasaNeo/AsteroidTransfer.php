@@ -39,7 +39,7 @@ final class AsteroidTransfer extends AbstractTransfer
 
     // absolute_magnitude_h
     public const string ABSOLUTE_MAGNITUDE_H = 'absolute_magnitude_h';
-    protected const int ABSOLUTE_MAGNITUDE_H_INDEX = 0;
+    private const int ABSOLUTE_MAGNITUDE_H_INDEX = 0;
 
     public ?float $absolute_magnitude_h {
         get => $this->getData(self::ABSOLUTE_MAGNITUDE_H_INDEX);
@@ -49,7 +49,7 @@ final class AsteroidTransfer extends AbstractTransfer
     // close_approach_data
     #[CollectionPropertyTypeAttribute(CloseApproachDataTransfer::class)]
     public const string CLOSE_APPROACH_DATA = 'close_approach_data';
-    protected const int CLOSE_APPROACH_DATA_INDEX = 1;
+    private const int CLOSE_APPROACH_DATA_INDEX = 1;
 
     /** @var \ArrayObject<int,CloseApproachDataTransfer> */
     public ArrayObject $close_approach_data {
@@ -59,7 +59,7 @@ final class AsteroidTransfer extends AbstractTransfer
 
     // designation
     public const string DESIGNATION = 'designation';
-    protected const int DESIGNATION_INDEX = 2;
+    private const int DESIGNATION_INDEX = 2;
 
     public ?string $designation {
         get => $this->getData(self::DESIGNATION_INDEX);
@@ -69,7 +69,7 @@ final class AsteroidTransfer extends AbstractTransfer
     // estimated_diameter
     #[PropertyTypeAttribute(EstimatedDiameterTransfer::class)]
     public const string ESTIMATED_DIAMETER = 'estimated_diameter';
-    protected const int ESTIMATED_DIAMETER_INDEX = 3;
+    private const int ESTIMATED_DIAMETER_INDEX = 3;
 
     public ?EstimatedDiameterTransfer $estimated_diameter {
         get => $this->getData(self::ESTIMATED_DIAMETER_INDEX);
@@ -78,7 +78,7 @@ final class AsteroidTransfer extends AbstractTransfer
 
     // id
     public const string ID = 'id';
-    protected const int ID_INDEX = 4;
+    private const int ID_INDEX = 4;
 
     public ?string $id {
         get => $this->getData(self::ID_INDEX);
@@ -87,7 +87,7 @@ final class AsteroidTransfer extends AbstractTransfer
 
     // is_potentially_hazardous_asteroid
     public const string IS_POTENTIALLY_HAZARDOUS_ASTEROID = 'is_potentially_hazardous_asteroid';
-    protected const int IS_POTENTIALLY_HAZARDOUS_ASTEROID_INDEX = 5;
+    private const int IS_POTENTIALLY_HAZARDOUS_ASTEROID_INDEX = 5;
 
     public ?bool $is_potentially_hazardous_asteroid {
         get => $this->getData(self::IS_POTENTIALLY_HAZARDOUS_ASTEROID_INDEX);
@@ -96,7 +96,7 @@ final class AsteroidTransfer extends AbstractTransfer
 
     // is_sentry_object
     public const string IS_SENTRY_OBJECT = 'is_sentry_object';
-    protected const int IS_SENTRY_OBJECT_INDEX = 6;
+    private const int IS_SENTRY_OBJECT_INDEX = 6;
 
     public ?bool $is_sentry_object {
         get => $this->getData(self::IS_SENTRY_OBJECT_INDEX);
@@ -106,7 +106,7 @@ final class AsteroidTransfer extends AbstractTransfer
     // links
     #[PropertyTypeAttribute(LinksTransfer::class)]
     public const string LINKS = 'links';
-    protected const int LINKS_INDEX = 7;
+    private const int LINKS_INDEX = 7;
 
     public ?LinksTransfer $links {
         get => $this->getData(self::LINKS_INDEX);
@@ -115,7 +115,7 @@ final class AsteroidTransfer extends AbstractTransfer
 
     // name
     public const string NAME = 'name';
-    protected const int NAME_INDEX = 8;
+    private const int NAME_INDEX = 8;
 
     public ?string $name {
         get => $this->getData(self::NAME_INDEX);
@@ -124,7 +124,7 @@ final class AsteroidTransfer extends AbstractTransfer
 
     // nasa_jpl_url
     public const string NASA_JPL_URL = 'nasa_jpl_url';
-    protected const int NASA_JPL_URL_INDEX = 9;
+    private const int NASA_JPL_URL_INDEX = 9;
 
     public ?string $nasa_jpl_url {
         get => $this->getData(self::NASA_JPL_URL_INDEX);
@@ -133,7 +133,7 @@ final class AsteroidTransfer extends AbstractTransfer
 
     // neo_reference_id
     public const string NEO_REFERENCE_ID = 'neo_reference_id';
-    protected const int NEO_REFERENCE_ID_INDEX = 10;
+    private const int NEO_REFERENCE_ID_INDEX = 10;
 
     public ?string $neo_reference_id {
         get => $this->getData(self::NEO_REFERENCE_ID_INDEX);
@@ -143,7 +143,7 @@ final class AsteroidTransfer extends AbstractTransfer
     // orbital_data
     #[PropertyTypeAttribute(OrbitalDataTransfer::class)]
     public const string ORBITAL_DATA = 'orbital_data';
-    protected const int ORBITAL_DATA_INDEX = 11;
+    private const int ORBITAL_DATA_INDEX = 11;
 
     public ?OrbitalDataTransfer $orbital_data {
         get => $this->getData(self::ORBITAL_DATA_INDEX);

@@ -29,7 +29,7 @@ final class ValidatorTransfer extends AbstractTransfer
     // errorMessages
     #[CollectionPropertyTypeAttribute(ValidatorMessageTransfer::class)]
     public const string ERROR_MESSAGES = 'errorMessages';
-    protected const int ERROR_MESSAGES_INDEX = 0;
+    private const int ERROR_MESSAGES_INDEX = 0;
 
     /** @var \ArrayObject<int,ValidatorMessageTransfer> */
     public ArrayObject $errorMessages {
@@ -39,7 +39,7 @@ final class ValidatorTransfer extends AbstractTransfer
 
     // isValid
     public const string IS_VALID = 'isValid';
-    protected const int IS_VALID_INDEX = 1;
+    private const int IS_VALID_INDEX = 1;
 
     public bool $isValid {
         get => $this->getData(self::IS_VALID_INDEX);

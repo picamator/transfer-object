@@ -40,8 +40,13 @@ class TemplateHelper implements TemplateHelperInterface
     public function renderMetaData(): string
     {
         $metaData = [];
-        foreach (array_keys($this->templateTransfer->metaConstants->getArrayCopy()) as $value) {
-            $metaData[] = sprintf(self::META_DATA_TEMPLATE, $value);
+
+        $iterator = $this->templateTransfer->metaConstants->getIterator();
+        $iterator->rewind();
+
+        while ($iterator->valid()) {
+            $metaData[] = sprintf(self::META_DATA_TEMPLATE, $iterator->key());
+            $iterator->next();
         }
 
         return implode(PHP_EOL, $metaData);
@@ -81,7 +86,10 @@ class TemplateHelper implements TemplateHelperInterface
     {
         /** @var string $propertyType */
         $propertyType = $this->templateTransfer->properties[$property];
-        if (!$this->templateTransfer->nullables[$property] || str_contains($propertyType, '&')) {
+        /** @var bool $isNullable */
+        $isNullable = $this->templateTransfer->nullables[$property];
+
+        if (!$isNullable || str_contains($propertyType, '&')) {
             return self::EMPTY_STRING;
         }
 

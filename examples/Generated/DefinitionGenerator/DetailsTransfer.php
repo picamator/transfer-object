@@ -26,7 +26,7 @@ final class DetailsTransfer extends AbstractTransfer
 
     // description
     public const string DESCRIPTION = 'description';
-    protected const int DESCRIPTION_INDEX = 0;
+    private const int DESCRIPTION_INDEX = 0;
 
     public ?string $description {
         get => $this->getData(self::DESCRIPTION_INDEX);
@@ -35,7 +35,7 @@ final class DetailsTransfer extends AbstractTransfer
 
     // isRegional
     public const string IS_REGIONAL = 'isRegional';
-    protected const int IS_REGIONAL_INDEX = 1;
+    private const int IS_REGIONAL_INDEX = 1;
 
     public ?bool $isRegional {
         get => $this->getData(self::IS_REGIONAL_INDEX);

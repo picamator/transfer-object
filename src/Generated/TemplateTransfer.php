@@ -37,7 +37,7 @@ final class TemplateTransfer extends AbstractTransfer
     // attributes
     #[ArrayObjectPropertyTypeAttribute]
     public const string ATTRIBUTES = 'attributes';
-    protected const int ATTRIBUTES_INDEX = 0;
+    private const int ATTRIBUTES_INDEX = 0;
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $attributes {
@@ -47,7 +47,7 @@ final class TemplateTransfer extends AbstractTransfer
 
     // className
     public const string CLASS_NAME = 'className';
-    protected const int CLASS_NAME_INDEX = 1;
+    private const int CLASS_NAME_INDEX = 1;
 
     public string $className {
         get => $this->getData(self::CLASS_NAME_INDEX);
@@ -56,7 +56,7 @@ final class TemplateTransfer extends AbstractTransfer
 
     // classNamespace
     public const string CLASS_NAMESPACE = 'classNamespace';
-    protected const int CLASS_NAMESPACE_INDEX = 2;
+    private const int CLASS_NAMESPACE_INDEX = 2;
 
     public string $classNamespace {
         get => $this->getData(self::CLASS_NAMESPACE_INDEX);
@@ -65,7 +65,7 @@ final class TemplateTransfer extends AbstractTransfer
 
     // definitionPath
     public const string DEFINITION_PATH = 'definitionPath';
-    protected const int DEFINITION_PATH_INDEX = 3;
+    private const int DEFINITION_PATH_INDEX = 3;
 
     public string $definitionPath {
         get => $this->getData(self::DEFINITION_PATH_INDEX);
@@ -75,7 +75,7 @@ final class TemplateTransfer extends AbstractTransfer
     // dockBlocks
     #[ArrayObjectPropertyTypeAttribute]
     public const string DOCK_BLOCKS = 'dockBlocks';
-    protected const int DOCK_BLOCKS_INDEX = 4;
+    private const int DOCK_BLOCKS_INDEX = 4;
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $dockBlocks {
@@ -86,7 +86,7 @@ final class TemplateTransfer extends AbstractTransfer
     // imports
     #[ArrayObjectPropertyTypeAttribute]
     public const string IMPORTS = 'imports';
-    protected const int IMPORTS_INDEX = 5;
+    private const int IMPORTS_INDEX = 5;
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $imports {
@@ -97,7 +97,7 @@ final class TemplateTransfer extends AbstractTransfer
     // metaConstants
     #[ArrayObjectPropertyTypeAttribute]
     public const string META_CONSTANTS = 'metaConstants';
-    protected const int META_CONSTANTS_INDEX = 6;
+    private const int META_CONSTANTS_INDEX = 6;
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $metaConstants {
@@ -108,7 +108,7 @@ final class TemplateTransfer extends AbstractTransfer
     // nullables
     #[ArrayObjectPropertyTypeAttribute]
     public const string NULLABLES = 'nullables';
-    protected const int NULLABLES_INDEX = 7;
+    private const int NULLABLES_INDEX = 7;
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $nullables {
@@ -119,7 +119,7 @@ final class TemplateTransfer extends AbstractTransfer
     // properties
     #[ArrayObjectPropertyTypeAttribute]
     public const string PROPERTIES = 'properties';
-    protected const int PROPERTIES_INDEX = 8;
+    private const int PROPERTIES_INDEX = 8;
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $properties {
@@ -130,7 +130,7 @@ final class TemplateTransfer extends AbstractTransfer
     // protects
     #[ArrayObjectPropertyTypeAttribute]
     public const string PROTECTS = 'protects';
-    protected const int PROTECTS_INDEX = 9;
+    private const int PROTECTS_INDEX = 9;
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $protects {
