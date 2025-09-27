@@ -86,7 +86,10 @@ class TemplateHelper implements TemplateHelperInterface
     {
         /** @var string $propertyType */
         $propertyType = $this->templateTransfer->properties[$property];
-        if (!$this->templateTransfer->nullables[$property] || str_contains($propertyType, '&')) {
+        /** @var bool $isNullable */
+        $isNullable = $this->templateTransfer->nullables[$property];
+
+        if (!$isNullable || str_contains($propertyType, '&')) {
             return self::EMPTY_STRING;
         }
 
