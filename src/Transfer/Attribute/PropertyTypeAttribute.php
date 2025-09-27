@@ -24,7 +24,7 @@ final readonly class PropertyTypeAttribute implements PropertyTypeAttributeInter
 
     public function fromArray(mixed $data): TransferInterface
     {
-        return $this->createTransfer($this->typeName, $data);
+        return $this->createTransfer($data);
     }
 
     /**

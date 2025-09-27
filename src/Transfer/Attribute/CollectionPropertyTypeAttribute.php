@@ -36,10 +36,7 @@ final readonly class CollectionPropertyTypeAttribute implements InitialPropertyT
          * @var array<string|int, mixed> $data
          * @var array<string|int,\Picamator\TransferObject\Transfer\TransferInterface> $collectionData
          */
-        $collectionData = array_map(
-            fn (mixed $dataItem): TransferInterface => $this->createTransfer($this->typeName, $dataItem),
-            $data
-        );
+        $collectionData = array_map($this->createTransfer(...), $data);
 
         return new ArrayObject($collectionData);
     }
