@@ -15,7 +15,7 @@ final readonly class DateTimePropertyTypeAttribute implements PropertyTypeAttrib
 {
     use DataAssertTrait;
 
-    protected const string DATE_TIME_FORMAT = DateTimeInterface::ATOM;
+    private const string DATE_TIME_FORMAT = DateTimeInterface::ATOM;
 
     public function __construct(private string $typeName)
     {
