@@ -12,7 +12,7 @@ final class ProtectedPropertyExpander extends AbstractPropertyExpander
 
     protected function matchType(array $propertyType): string
     {
-        return (string)array_key_exists(self::PROTECTED_KEY, $propertyType) ? '1' : '0';
+        return array_key_exists(self::PROTECTED_KEY, $propertyType) ? '1' : '0';
     }
 
     protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
