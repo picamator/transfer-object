@@ -99,10 +99,10 @@ abstract class AbstractTransfer implements TransferInterface
         $data = [];
         $attributes = $this->getTypeAttributes();
 
-        foreach (static::META_DATA as $index => $propertyName) {
+        foreach (static::META_DATA as $propertyName) {
             $data[$propertyName] = isset($attributes[$propertyName])
-                ? $attributes[$propertyName]->toArray($this->_data[$index])
-                : $this->_data[$index];
+                ? $attributes[$propertyName]->toArray($this->$propertyName)
+                : $this->$propertyName;
         }
 
         return $data;
@@ -120,7 +120,7 @@ abstract class AbstractTransfer implements TransferInterface
         $attributes = $this->getTypeAttributes();
 
         foreach ($data as $propertyName => $value) {
-            $this->{$propertyName} = isset($attributes[$propertyName])
+            $this->$propertyName = isset($attributes[$propertyName])
                 ? $attributes[$propertyName]->fromArray($value)
                 : $value;
         }
@@ -148,7 +148,7 @@ abstract class AbstractTransfer implements TransferInterface
         $this->_data = new SplFixedArray(size: static::META_DATA_SIZE);
 
         foreach ($this->getInitialAttributes() as $propertyName => $attribute) {
-            $this->{$propertyName} = $attribute->getInitialValue();
+            $this->$propertyName = $attribute->getInitialValue();
         }
     }
 }
