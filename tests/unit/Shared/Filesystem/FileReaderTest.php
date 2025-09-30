@@ -8,14 +8,14 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Picamator\Tests\Unit\TransferObject\Helper\FileStreamHelperTrait;
+use Picamator\Tests\Unit\TransferObject\Helper\FileHelperTrait;
 use Picamator\TransferObject\Shared\Exception\FileReaderException;
 use Picamator\TransferObject\Shared\Filesystem\FileReader;
 
 #[Group('shared')]
 class FileReaderTest extends TestCase
 {
-    use FileStreamHelperTrait;
+    use FileHelperTrait;
 
     private const string FILE_NAME = 'test.yml';
 
@@ -32,9 +32,9 @@ class FileReaderTest extends TestCase
             ])->getMock();
     }
 
-    protected function tearDown(): void
+    public static function tearDownAfterClass(): void
     {
-        $this->closeTempFileStream();
+        self::closeClose();
     }
 
     #[TestDox('Failed open file should throw exception')]
@@ -64,7 +64,7 @@ class FileReaderTest extends TestCase
     public function testFailedReadFileShouldThrowException(): void
     {
         // Arrange
-        $file = $this->getTempFileStream();
+        $file = self::openFile();
 
         // Expect
         $this->fileReaderMock->expects($this->once())
@@ -93,7 +93,7 @@ class FileReaderTest extends TestCase
     public function testFailedCloseFileShouldThrowException(): void
     {
         // Arrange
-        $file = $this->getTempFileStream();
+        $file = self::openFile();
 
         // Expect
         $this->fileReaderMock->expects($this->once())
@@ -122,7 +122,7 @@ class FileReaderTest extends TestCase
     public function testReadFileShouldSkipEmptyLines(): void
     {
         // Arrange
-        $file = $this->getTempFileStream();
+        $file = self::openFile();
         $expected = ['some.config.yml'];
 
         // Expect

@@ -7,7 +7,7 @@ namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Content;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
-use Picamator\Tests\Unit\TransferObject\Helper\FileStreamHelperTrait;
+use Picamator\Tests\Unit\TransferObject\Helper\FileHelperTrait;
 use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentBuilder;
 use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentBuilderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
@@ -15,7 +15,7 @@ use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorEx
 #[Group('definition-generator')]
 class DefinitionContentBuilderTest extends TestCase
 {
-    use FileStreamHelperTrait;
+    use FileHelperTrait;
 
     private ContentBuilderInterface $builder;
 
@@ -24,9 +24,9 @@ class DefinitionContentBuilderTest extends TestCase
         $this->builder = new ContentBuilder();
     }
 
-    protected function tearDown(): void
+    public static function tearDownAfterClass(): void
     {
-        $this->closeTempFileStream();
+        self::closeClose();
     }
 
     #[TestDox('Unsupported type should throw exception')]
@@ -34,7 +34,7 @@ class DefinitionContentBuilderTest extends TestCase
     {
         // Arrange
         $propertyName = 'file';
-        $propertyValue = $this->getTempFileStream();
+        $propertyValue = self::openFile();
 
         // Expect
         $this->expectException(DefinitionGeneratorException::class);
