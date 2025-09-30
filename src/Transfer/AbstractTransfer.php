@@ -99,10 +99,10 @@ abstract class AbstractTransfer implements TransferInterface
         $data = [];
         $attributes = $this->getTypeAttributes();
 
-        foreach (static::META_DATA as $propertyName) {
+        foreach ($this as $propertyName => $value) {
             $data[$propertyName] = isset($attributes[$propertyName])
-                ? $attributes[$propertyName]->toArray($this->$propertyName)
-                : $this->$propertyName;
+                ? $attributes[$propertyName]->toArray($value)
+                : $value;
         }
 
         return $data;
@@ -112,7 +112,8 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->initData();
 
-        $data = array_filter($data, $this->filterData(...), ARRAY_FILTER_USE_BOTH);
+        $data = array_filter($data, fn ($value) => $value !== null);
+        $data = array_intersect_key($data, array_flip(static::META_DATA));
         if ($data === []) {
             return $this;
         }
@@ -126,11 +127,6 @@ abstract class AbstractTransfer implements TransferInterface
         }
 
         return $this;
-    }
-
-    private function filterData(mixed $value, string|int $key): bool
-    {
-        return $value !== null && in_array($key, static::META_DATA, true);
     }
 
     final protected function getData(int $index): mixed

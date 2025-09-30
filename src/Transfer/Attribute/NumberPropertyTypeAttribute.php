@@ -21,14 +21,14 @@ final readonly class NumberPropertyTypeAttribute implements PropertyTypeAttribut
 
     public function fromArray(mixed $data): Number
     {
-        /** @var \BcMath\Number $dateTime */
-        $dateTime = match (true) {
+        /** @var \BcMath\Number $bcNumber */
+        $bcNumber = match (true) {
             is_string($data) || is_int($data) => new $this->typeName($data),
             $data instanceof Number => $data,
             default => $this->assertInvalidType($data, $this->typeName),
         };
 
-        return $dateTime;
+        return $bcNumber;
     }
 
     /**

@@ -54,9 +54,9 @@ trait TransferBuilderTrait
      * @param ReflectionClass<AbstractTransfer> $reflection
      * @param array<string, mixed> $data
      */
-    private function createLazyAbstractTransfer(ReflectionClass $reflection, array $data): TransferInterface
+    private function createLazyAbstractTransfer(ReflectionClass $reflection, array $data): AbstractTransfer
     {
-        /** @var TransferInterface $transfer */
+        /** @var AbstractTransfer $transfer */
         $transfer = $reflection->newLazyGhost(function (AbstractTransfer $ghost) use ($data): void {
             $ghost->__construct($data);
         });
