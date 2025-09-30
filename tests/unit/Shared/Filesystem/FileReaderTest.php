@@ -34,7 +34,7 @@ class FileReaderTest extends TestCase
 
     public static function tearDownAfterClass(): void
     {
-        self::closeClose();
+        self::closeFile();
     }
 
     #[TestDox('Failed open file should throw exception')]

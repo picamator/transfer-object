@@ -22,7 +22,7 @@ trait FileHelperTrait
         );
     }
 
-    final protected static function closeClose(): void
+    final protected static function closeFile(): void
     {
         if (is_resource(self::$file)) {
             fclose(self::$file);

@@ -26,7 +26,7 @@ class DefinitionContentBuilderTest extends TestCase
 
     public static function tearDownAfterClass(): void
     {
-        self::closeClose();
+        self::closeFile();
     }
 
     #[TestDox('Unsupported type should throw exception')]
