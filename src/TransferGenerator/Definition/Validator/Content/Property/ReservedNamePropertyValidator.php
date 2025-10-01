@@ -7,6 +7,7 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Validator\Conten
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
+use Picamator\TransferObject\TransferGenerator\Definition\Enum\ReservedPropertyEnum;
 
 class ReservedNamePropertyValidator implements PropertyValidatorInterface
 {
@@ -14,18 +15,9 @@ class ReservedNamePropertyValidator implements PropertyValidatorInterface
 
     private const string RESERVED_NAME_ERROR_MESSAGE_TEMPLATE = 'Reserved property name "%s".';
 
-    /**
-     * @uses \Picamator\TransferObject\Transfer\AbstractTransfer::_data
-     * @uses \Picamator\TransferObject\Transfer\ConstantAttributeTrait::_reflectionObjectReference
-     */
-    private const array RESERVED_PROPERTIES = [
-        '_data',
-        '_reflectionObjectReference',
-    ];
-
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        return in_array($propertyTransfer->propertyName, self::RESERVED_PROPERTIES, true);
+        return ReservedPropertyEnum::tryFrom($propertyTransfer->propertyName) !== null;
     }
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
