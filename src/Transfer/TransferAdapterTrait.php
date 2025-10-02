@@ -31,7 +31,7 @@ use WeakReference;
  */
 trait TransferAdapterTrait
 {
-    protected const string DATE_TIME_FORMAT = 'Y-m-d H:i:s';
+    protected const string DATE_TIME_FORMAT = DateTimeInterface::ATOM;
 
     /**
      * @var \WeakReference<\ReflectionObject>|null
@@ -131,18 +131,41 @@ trait TransferAdapterTrait
             return $this->resolveArrayValue($type, $value);
         }
 
+        if (is_float($value)) {
+            return $this->resolveFloatValue($type, $value);
+        }
+
+        return $value;
+    }
+
+    private function resolveFloatValue(string $type, float $value): object|float|null
+    {
+        if ($type === DateTime::class) {
+            return DateTime::createFromTimestamp($value);
+        }
+
+        if ($type === DateTimeImmutable::class) {
+            return DateTimeImmutable::createFromTimestamp($value);
+        }
+
         return $value;
     }
 
     private function resolveIntValue(string $type, int $value): object|int|null
     {
         if (is_subclass_of($type, BackedEnum::class)) {
-            // @phpstan-ignore argument.type
             return $type::tryFrom($value);
         }
 
+        if ($type === DateTime::class) {
+            return DateTime::createFromTimestamp($value);
+        }
+
+        if ($type === DateTimeImmutable::class) {
+            return DateTimeImmutable::createFromTimestamp($value);
+        }
+
         if ($this->isBcMathLoaded() && $type === Number::class) {
-            // @phpstan-ignore argument.type
             return new Number($value);
         }
 
@@ -152,22 +175,18 @@ trait TransferAdapterTrait
     private function resolveStringValue(string $type, string $value): object|string|null
     {
         if ($type === DateTime::class) {
-            // @phpstan-ignore argument.type
             return new DateTime($value);
         }
 
         if ($type === DateTimeImmutable::class) {
-            // @phpstan-ignore argument.type
             return new DateTimeImmutable($value);
         }
 
         if (is_subclass_of($type, BackedEnum::class)) {
-            // @phpstan-ignore argument.type
             return $type::tryFrom($value);
         }
 
         if ($this->isBcMathLoaded() && $type === Number::class) {
-            // @phpstan-ignore argument.type
             return new Number($value);
         }
 

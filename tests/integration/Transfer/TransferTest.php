@@ -175,6 +175,44 @@ class TransferTest extends TestCase
         ];
     }
 
+    /**
+     * @param array<string,mixed> $data
+     * @param array<string,mixed> $expected
+     */
+    #[TestDoxFormatter('fromToArrayTestDoxFormatter')]
+    #[TestWith([
+        [
+            ItemTransfer::I_AM_DATE_TIME => 1759419659,
+            ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => 1759419659,
+        ], [
+            ItemTransfer::I_AM_DATE_TIME => '2025-10-02T15:40:59+00:00',
+            ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => '2025-10-02T15:40:59+00:00',
+        ],
+    ], 'Date and date time immutable are integer timestamp')]
+    #[TestWith([
+        [
+            ItemTransfer::I_AM_DATE_TIME => 1759419693.3584,
+            ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => 1759419693.3584,
+        ], [
+            ItemTransfer::I_AM_DATE_TIME => '2025-10-02T15:41:33+00:00',
+            ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => '2025-10-02T15:41:33+00:00',
+        ],
+    ], 'Date and date time immutable are float microtime')]
+    public function testDateTimeTransformationFromToArray(array $data, array $expected): void
+    {
+        // Arrange
+        $itemTransfer = new ItemTransfer();
+
+        // Act
+        $itemTransfer->fromArray($data);
+
+        $actual = $itemTransfer->toArray();
+        $actual = array_filter($actual);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+
     #[TestDox('Transfer serialize')]
     public function testTransferSerialize(): void
     {

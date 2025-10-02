@@ -7,6 +7,7 @@ namespace Picamator\Tests\Integration\TransferObject\Transfer;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BcMathBookData;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookAuthorData;
@@ -32,8 +33,8 @@ class TransferAdapterTest extends TestCase
                 'uuid' => '123-123-123-123',
             ],
             'labels' => ['wishlist'],
-            'updatedAt' => '2025-05-01 21:39:18',
-            'createdAt' => '2025-05-01 20:39:18',
+            'updatedAt' => '2025-05-01T21:39:18+00:00',
+            'createdAt' => '2025-05-01T20:39:18+00:00',
             'notes' => [
                 'title' => 'wishlist',
             ],
@@ -126,8 +127,8 @@ class TransferAdapterTest extends TestCase
                 'uuid' => '123-123-123-123',
             ],
             'labels' => ['wishlist'],
-            'updatedAt' => '2025-05-01 21:39:18',
-            'createdAt' => '2025-05-01 20:39:18',
+            'updatedAt' => '2025-05-01T21:39:18+00:00',
+            'createdAt' => '2025-05-01T20:39:18+00:00',
             'notes' => [
                 'title' => 'wishlist',
             ],
@@ -182,13 +183,35 @@ class TransferAdapterTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
+    #[TestDox('Transformation date time $dateTime to $expected by toArray')]
+    #[TestWith(['2025-05-01T21:39:18+00:00', '2025-05-01T21:39:18+00:00'], 'Date and date time immutable are string')]
+    #[TestWith([1759419659, '2025-10-02T15:40:59+00:00'], 'Date and date time immutable are integer timestamp')]
+    #[TestWith([1759419693.3584, '2025-10-02T15:41:33+00:00'], 'Date and date time immutable are float microtime')]
+    public function testDateTimeTransformationFromToArray(string|int|float $dateTime, string $expected): void
+    {
+        // Act
+        $bookData = new BookData()
+            ->fromArray([
+                'updatedAt' => $dateTime,
+                'createdAt' => $dateTime,
+            ]);
+
+        $actual = $bookData->toArray();
+
+        // Assert
+        $this->assertSame($expected, $actual['updatedAt']);
+        $this->assertSame($expected, $actual['createdAt']);
+    }
+
     #[RequiresPhpExtension('bcmath')]
-    #[TestDox('Transformation BcMath toArray')]
-    public function testTransformationBcMathToArray(): void
+    #[TestDox('Transformation $price as BcMath Number toArray')]
+    #[TestWith(['12.34'], 'Price is string')]
+    #[TestWith([12], 'Price is integer')]
+    public function testBcMathTransformationToArray(string|int $price): void
     {
         // Arrange
         $expected = [
-            'price' => '12.34',
+            'price' => $price,
         ];
 
         // Act
@@ -198,6 +221,6 @@ class TransferAdapterTest extends TestCase
         $actual = $bookData->toArray();
 
         // Assert
-        $this->assertSame($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 }

@@ -15,20 +15,22 @@ final readonly class NumberPropertyTypeAttribute implements PropertyTypeAttribut
 {
     use DataAssertTrait;
 
+    /**
+     * @param class-string<\BcMath\Number> $typeName
+     */
     public function __construct(private string $typeName)
     {
     }
 
     public function fromArray(mixed $data): Number
     {
-        /** @var \BcMath\Number $bcNumber */
-        $bcNumber = match (true) {
+        return match (true) {
             is_string($data) || is_int($data) => new $this->typeName($data),
+
             $data instanceof Number => $data,
+
             default => $this->assertInvalidType($data, $this->typeName),
         };
-
-        return $bcNumber;
     }
 
     /**

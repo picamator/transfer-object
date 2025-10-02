@@ -15,6 +15,9 @@ final readonly class EnumPropertyTypeAttribute implements PropertyTypeAttributeI
 {
     use DataAssertTrait;
 
+    /**
+     * @param \BackedEnum|class-string<\BackedEnum> $typeName
+     */
     public function __construct(private BackedEnum|string $typeName)
     {
     }
