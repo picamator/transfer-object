@@ -41,7 +41,7 @@ readonly class DefinitionValidator implements DefinitionValidatorInterface
         $errorMessages = new ArrayObject();
         foreach ($this->contentValidators as $validator) {
             $messageTransfer = $validator->validate($contentTransfer);
-            if ($messageTransfer->isValid) {
+            if ($messageTransfer === null || $messageTransfer->isValid) {
                 continue;
             }
 

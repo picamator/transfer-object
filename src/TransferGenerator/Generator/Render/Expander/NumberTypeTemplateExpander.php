@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEmbeddedTemplateEnum;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEnum;
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransformerAttributeTemplateEnum;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 
@@ -22,13 +21,15 @@ final class NumberTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $this->expandImports(AttributeEnum::NUMBER_TYPE_ATTRIBUTE, $templateTransfer);
+        $transformerEnum = TransformerAttributeTemplateEnum::NUMBER;
+        $this->expandImports($transformerEnum->getImport(), $templateTransfer);
 
-        /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer */
-        $embeddedTypeTransfer = $propertyTransfer->numberType;
-        $this->expandEmbeddedType($propertyTransfer, $embeddedTypeTransfer, $templateTransfer);
+        /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $typeTransfer */
+        $typeTransfer = $propertyTransfer->numberType;
+        $this->expandEmbeddedType($propertyTransfer, $typeTransfer, $templateTransfer);
 
-        $templateTransfer->attributes[$propertyTransfer->propertyName]
-            = AttributeEmbeddedTemplateEnum::NUMBER_TYPE_ATTRIBUTE->renderTemplate($embeddedTypeTransfer);
+        $templateTransfer->metaAttributes[$propertyTransfer->propertyName] = [
+            $transformerEnum->renderTemplate($typeTransfer),
+        ];
     }
 }

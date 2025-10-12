@@ -9,22 +9,28 @@ use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\DefinitionTypeKeyEnum;
 
-class RequiredTypePropertyValidator implements PropertyValidatorInterface
+readonly class RequiredTypePropertyValidator implements PropertyValidatorInterface
 {
     use ValidatorMessageTrait;
 
     private const string MISSED_REQUIRED_TYPE_ERROR_MESSAGE_TEMPLATE
         = 'Property "%s" type definition is missing or set multiple times.';
 
-    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
+    /**
+     * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
+     */
+    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): true
     {
-        $definedTypes = $this->getDefinedTypes($propertyTransfer);
-
-        return count($definedTypes) !== 1;
+        return true;
     }
 
-    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
+    public function validate(DefinitionPropertyTransfer $propertyTransfer): ?ValidatorMessageTransfer
     {
+        $definedTypes = $this->getDefinedTypes($propertyTransfer);
+        if (count($definedTypes) === 1) {
+            return null;
+        }
+
         $errorMessage = $this->getErrorMessage($propertyTransfer);
 
         return $this->createErrorMessageTransfer($errorMessage);

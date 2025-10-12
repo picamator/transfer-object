@@ -6,27 +6,12 @@ namespace Picamator\TransferObject\DefinitionGenerator\Content\Builder;
 
 use Picamator\TransferObject\DefinitionGenerator\Content\Enum\GetTypeEnum;
 
-readonly class Content implements ContentInterface
+readonly class Content
 {
     public function __construct(
-        private GetTypeEnum $type,
-        private string $propertyName,
-        private mixed $propertyValue,
+        public GetTypeEnum $type,
+        public string $propertyName,
+        public mixed $propertyValue,
     ) {
-    }
-
-    public function getType(): GetTypeEnum
-    {
-        return $this->type;
-    }
-
-    public function getPropertyName(): string
-    {
-        return $this->propertyName;
-    }
-
-    public function getPropertyValue(): mixed
-    {
-        return $this->propertyValue;
     }
 }

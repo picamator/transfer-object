@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\Transfer\Attribute;
+namespace Picamator\TransferObject\Transfer\Attribute\Transformer;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\TransferInterface;
@@ -14,19 +14,18 @@ use ReflectionClass;
  *
  * @link https://www.php.net/manual/en/language.oop5.lazy-objects.php
  * @link https://wiki.php.net/rfc/lazy-objects
+ *
+ * @property class-string<\Picamator\TransferObject\Transfer\AbstractTransfer|TransferInterface> $typeName
  */
 trait TransferBuilderTrait
 {
     use DataAssertTrait;
 
-    /**
-     * @param class-string<AbstractTransfer|TransferInterface> $typeName
-     */
-    final protected function createTransfer(string $typeName, mixed $data): TransferInterface
+    final protected function createTransfer(mixed $data): TransferInterface
     {
         $this->assertArray($data);
 
-        $reflection = new ReflectionClass($typeName);
+        $reflection = new ReflectionClass($this->typeName);
 
         if ($reflection->isSubclassOf(AbstractTransfer::class)) {
             /** @var array<string, mixed> $data */
@@ -55,9 +54,9 @@ trait TransferBuilderTrait
      * @param ReflectionClass<AbstractTransfer> $reflection
      * @param array<string, mixed> $data
      */
-    private function createLazyAbstractTransfer(ReflectionClass $reflection, array $data): TransferInterface
+    private function createLazyAbstractTransfer(ReflectionClass $reflection, array $data): AbstractTransfer
     {
-        /** @var TransferInterface $transfer */
+        /** @var AbstractTransfer $transfer */
         $transfer = $reflection->newLazyGhost(function (AbstractTransfer $ghost) use ($data): void {
             $ghost->__construct($data);
         });

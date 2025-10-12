@@ -9,20 +9,27 @@ use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 use Picamator\TransferObject\Shared\Validator\VariableValidatorTrait;
 
-class NamePropertyValidator implements PropertyValidatorInterface
+readonly class NamePropertyValidator implements PropertyValidatorInterface
 {
     use VariableValidatorTrait;
     use ValidatorMessageTrait;
 
     private const string INVALID_NAME_ERROR_MESSAGE_TEMPLATE = 'Invalid property name "%s".';
 
-    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
+    /**
+     * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
+     */
+    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): true
     {
-        return !$this->isValidVariable($propertyTransfer->propertyName);
+        return true;
     }
 
-    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
+    public function validate(DefinitionPropertyTransfer $propertyTransfer): ?ValidatorMessageTransfer
     {
+        if ($this->isValidVariable($propertyTransfer->propertyName)) {
+            return null;
+        }
+
         $errorMessage = $this->getErrorMessage($propertyTransfer);
 
         return $this->createErrorMessageTransfer($errorMessage);

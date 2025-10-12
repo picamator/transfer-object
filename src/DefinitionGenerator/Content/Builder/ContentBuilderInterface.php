@@ -9,5 +9,5 @@ interface ContentBuilderInterface
     /**
      * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
      */
-    public function createBuilderContent(string $propertyName, mixed $propertyValue): ContentInterface;
+    public function createBuilderContent(string $propertyName, mixed $propertyValue): Content;
 }

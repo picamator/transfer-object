@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -35,7 +35,7 @@ final class DefinitionEmbeddedTypeTransfer extends AbstractTransfer
     }
 
     // namespace
-    #[PropertyTypeAttribute(DefinitionNamespaceTransfer::class)]
+    #[TransferTransformerAttribute(DefinitionNamespaceTransfer::class)]
     public const string NAMESPACE = 'namespace';
     private const int NAMESPACE_INDEX = 1;
 

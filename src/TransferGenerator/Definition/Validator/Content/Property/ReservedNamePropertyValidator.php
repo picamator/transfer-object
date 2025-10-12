@@ -7,29 +7,28 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Validator\Conten
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
+use Picamator\TransferObject\TransferGenerator\Definition\Enum\ReservedPropertyEnum;
 
-class ReservedNamePropertyValidator implements PropertyValidatorInterface
+readonly class ReservedNamePropertyValidator implements PropertyValidatorInterface
 {
     use ValidatorMessageTrait;
 
     private const string RESERVED_NAME_ERROR_MESSAGE_TEMPLATE = 'Reserved property name "%s".';
 
     /**
-     * @uses \Picamator\TransferObject\Transfer\AbstractTransfer::_data
-     * @uses \Picamator\TransferObject\Transfer\ConstantAttributeTrait::_reflectionObjectReference
+     * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
      */
-    private const array RESERVED_PROPERTIES = [
-        '_data',
-        '_reflectionObjectReference',
-    ];
-
-    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
+    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): true
     {
-        return in_array($propertyTransfer->propertyName, self::RESERVED_PROPERTIES, true);
+        return true;
     }
 
-    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
+    public function validate(DefinitionPropertyTransfer $propertyTransfer): ?ValidatorMessageTransfer
     {
+        if (ReservedPropertyEnum::tryFrom($propertyTransfer->propertyName) === null) {
+            return null;
+        }
+
         $errorMessage = $this->getErrorMessage($propertyTransfer);
 
         return $this->createErrorMessageTransfer($errorMessage);

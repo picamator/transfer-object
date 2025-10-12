@@ -6,17 +6,17 @@ namespace Picamator\TransferObject\Shared\Validator;
 
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 
-class NamespaceValidator implements NamespaceValidatorInterface
+readonly class NamespaceValidator implements NamespaceValidatorInterface
 {
     use ValidatorMessageTrait;
     use NamespaceValidatorTrait;
 
     private const string INVALID_NAMESPACE_ERROR_MESSAGE_TEMPLATE = 'Invalid namespace "%s".';
 
-    public function validate(?string $namespace): ValidatorMessageTransfer
+    public function validate(?string $namespace): ?ValidatorMessageTransfer
     {
         if ($this->isValidNamespace($namespace)) {
-            return $this->createSuccessMessageTransfer();
+            return null;
         }
 
         $errorMessage = $this->getErrorMessage($namespace);

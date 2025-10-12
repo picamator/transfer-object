@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Frankfurter;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -55,7 +55,7 @@ final class ExchangeRateTransfer extends AbstractTransfer
     }
 
     // rates
-    #[PropertyTypeAttribute(RatesTransfer::class)]
+    #[TransferTransformerAttribute(RatesTransfer::class)]
     public const string RATES = 'rates';
     private const int RATES_INDEX = 3;
 

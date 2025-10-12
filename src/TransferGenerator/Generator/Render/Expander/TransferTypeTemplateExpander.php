@@ -7,8 +7,7 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEmbeddedTemplateEnum;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEnum;
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransformerAttributeTemplateEnum;
 
 final class TransferTypeTemplateExpander extends AbstractTemplateExpander
 {
@@ -23,25 +22,27 @@ final class TransferTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $this->expandImports(AttributeEnum::TYPE_ATTRIBUTE, $templateTransfer);
+        $transformerEnum = TransformerAttributeTemplateEnum::TRANSFER;
+        $this->expandImports($transformerEnum->getImport(), $templateTransfer);
 
-        /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer */
-        $embeddedTypeTransfer = $propertyTransfer->transferType;
+        /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $typeTransfer */
+        $typeTransfer = $propertyTransfer->transferType;
 
         $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->properties[$propertyName] = $this->getPropertyType($embeddedTypeTransfer);
+        $templateTransfer->properties[$propertyName] = $this->getPropertyType($typeTransfer);
         $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
 
-        $templateTransfer->attributes[$propertyName]
-            = AttributeEmbeddedTemplateEnum::TYPE_ATTRIBUTE->renderTemplate($embeddedTypeTransfer);
+        $templateTransfer->metaAttributes[$propertyName] = [
+            $transformerEnum->renderTemplate($typeTransfer),
+        ];
     }
 
-    private function getPropertyType(DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer): string
+    private function getPropertyType(DefinitionEmbeddedTypeTransfer $typeTransfer): string
     {
-        if ($embeddedTypeTransfer->namespace === null) {
-            return $embeddedTypeTransfer->name;
+        if ($typeTransfer->namespace === null) {
+            return $typeTransfer->name;
         }
 
-        return $this->enforceTransferInterface($embeddedTypeTransfer->name);
+        return $this->enforceTransferInterface($typeTransfer->name);
     }
 }

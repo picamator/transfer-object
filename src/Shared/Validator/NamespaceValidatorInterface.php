@@ -8,5 +8,5 @@ use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 
 interface NamespaceValidatorInterface
 {
-    public function validate(?string $namespace): ValidatorMessageTransfer;
+    public function validate(?string $namespace): ?ValidatorMessageTransfer;
 }

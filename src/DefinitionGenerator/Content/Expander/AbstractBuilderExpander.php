@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator\Content\Expander;
 
-use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Builder\Content;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 
 abstract class AbstractBuilderExpander implements BuilderExpanderInterface
@@ -18,7 +18,7 @@ abstract class AbstractBuilderExpander implements BuilderExpanderInterface
         return $expander;
     }
 
-    public function expandBuilderTransfer(ContentInterface $content, DefinitionBuilderTransfer $builderTransfer): void
+    public function expandBuilderTransfer(Content $content, DefinitionBuilderTransfer $builderTransfer): void
     {
         if ($this->isApplicable($content)) {
             $this->handleExpander($content, $builderTransfer);
@@ -29,10 +29,10 @@ abstract class AbstractBuilderExpander implements BuilderExpanderInterface
         $this->nextExpander?->expandBuilderTransfer($content, $builderTransfer);
     }
 
-    abstract protected function isApplicable(ContentInterface $content): bool;
+    abstract protected function isApplicable(Content $content): bool;
 
     abstract protected function handleExpander(
-        ContentInterface $content,
+        Content $content,
         DefinitionBuilderTransfer $builderTransfer,
     ): void;
 }

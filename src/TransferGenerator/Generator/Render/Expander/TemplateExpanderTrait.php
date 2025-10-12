@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
-use BackedEnum;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
@@ -16,12 +15,8 @@ trait TemplateExpanderTrait
         return 'TransferInterface&' . $propertyType;
     }
 
-    final protected function expandImports(string|BackedEnum $className, TemplateTransfer $templateTransfer): void
+    final protected function expandImports(string $className, TemplateTransfer $templateTransfer): void
     {
-        $className = is_string($className)
-            ? $className
-            : $className->value;
-
         $templateTransfer->imports[$className] ??= $className;
     }
 

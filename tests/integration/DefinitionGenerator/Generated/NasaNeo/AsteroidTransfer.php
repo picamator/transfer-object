@@ -6,8 +6,9 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -47,7 +48,8 @@ final class AsteroidTransfer extends AbstractTransfer
     }
 
     // close_approach_data
-    #[CollectionPropertyTypeAttribute(CloseApproachDataTransfer::class)]
+    #[CollectionInitiatorAttribute]
+    #[CollectionTransformerAttribute(CloseApproachDataTransfer::class)]
     public const string CLOSE_APPROACH_DATA = 'close_approach_data';
     private const int CLOSE_APPROACH_DATA_INDEX = 1;
 
@@ -67,7 +69,7 @@ final class AsteroidTransfer extends AbstractTransfer
     }
 
     // estimated_diameter
-    #[PropertyTypeAttribute(EstimatedDiameterTransfer::class)]
+    #[TransferTransformerAttribute(EstimatedDiameterTransfer::class)]
     public const string ESTIMATED_DIAMETER = 'estimated_diameter';
     private const int ESTIMATED_DIAMETER_INDEX = 3;
 
@@ -104,7 +106,7 @@ final class AsteroidTransfer extends AbstractTransfer
     }
 
     // links
-    #[PropertyTypeAttribute(LinksTransfer::class)]
+    #[TransferTransformerAttribute(LinksTransfer::class)]
     public const string LINKS = 'links';
     private const int LINKS_INDEX = 7;
 
@@ -141,7 +143,7 @@ final class AsteroidTransfer extends AbstractTransfer
     }
 
     // orbital_data
-    #[PropertyTypeAttribute(OrbitalDataTransfer::class)]
+    #[TransferTransformerAttribute(OrbitalDataTransfer::class)]
     public const string ORBITAL_DATA = 'orbital_data';
     private const int ORBITAL_DATA_INDEX = 11;
 

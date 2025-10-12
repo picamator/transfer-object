@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\Transfer\Attribute;
+namespace Picamator\TransferObject\Transfer\Attribute\Transformer;
 
 use Attribute;
 use BcMath\Number;
@@ -11,24 +11,26 @@ use BcMath\Number;
  * @api
  */
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
-final readonly class NumberPropertyTypeAttribute implements PropertyTypeAttributeInterface
+final readonly class NumberTransformerAttribute implements TransformerAttributeInterface
 {
     use DataAssertTrait;
 
+    /**
+     * @param class-string<\BcMath\Number> $typeName
+     */
     public function __construct(private string $typeName)
     {
     }
 
     public function fromArray(mixed $data): Number
     {
-        /** @var \BcMath\Number $dateTime */
-        $dateTime = match (true) {
+        return match (true) {
             is_string($data) || is_int($data) => new $this->typeName($data),
+
             $data instanceof Number => $data,
+
             default => $this->assertInvalidType($data, $this->typeName),
         };
-
-        return $dateTime;
     }
 
     /**

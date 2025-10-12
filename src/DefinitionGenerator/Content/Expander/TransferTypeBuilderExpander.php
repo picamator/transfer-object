@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator\Content\Expander;
 
-use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Builder\Content;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
@@ -15,28 +15,28 @@ final class TransferTypeBuilderExpander extends AbstractBuilderExpander
     use BuilderExpanderTrait;
     use VariableValidatorTrait;
 
-    protected function isApplicable(ContentInterface $content): bool
+    protected function isApplicable(Content $content): bool
     {
-        if (!$content->getType()->isArray() || empty($content->getPropertyValue())) {
+        if (!$content->type->isArray() || empty($content->propertyValue)) {
             return false;
         }
 
         /** @var array<int|string, mixed> $propertyValue */
-        $propertyValue = $content->getPropertyValue();
+        $propertyValue = $content->propertyValue;
         $key = array_key_first($propertyValue);
 
         return is_string($key) && $this->isValidVariable($key);
     }
 
     protected function handleExpander(
-        ContentInterface $content,
+        Content $content,
         DefinitionBuilderTransfer $builderTransfer,
     ): void {
-        $propertyTransfer = $this->createPropertyTransfer($content->getPropertyName());
+        $propertyTransfer = $this->createPropertyTransfer($content->propertyName);
         $builderTransfer->definitionContent->properties[] = $propertyTransfer;
 
         /** @var array<int|string, mixed> $propertyValue */
-        $propertyValue = $content->getPropertyValue();
+        $propertyValue = $content->propertyValue;
         $className = $propertyTransfer->transferType?->name ?: '';
 
         $builderTransfer->generatorContents[] = $this->createGeneratorContentTransfer($className, $propertyValue);

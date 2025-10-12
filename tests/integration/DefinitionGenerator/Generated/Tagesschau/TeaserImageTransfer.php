@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Tagesschau;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayTransformerAttribute;
 
 /**
  * Specification:
@@ -47,7 +48,8 @@ final class TeaserImageTransfer extends AbstractTransfer
     }
 
     // imageVariants
-    #[ArrayPropertyTypeAttribute]
+    #[ArrayInitiatorAttribute]
+    #[ArrayTransformerAttribute]
     public const string IMAGE_VARIANTS = 'imageVariants';
     private const int IMAGE_VARIANTS_INDEX = 2;
 

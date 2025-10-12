@@ -17,12 +17,12 @@ readonly class DefinitionPathContentValidator implements ContentValidatorInterfa
     ) {
     }
 
-    public function validate(ConfigContentTransfer $configContentTransfer): ValidatorMessageTransfer
+    public function validate(ConfigContentTransfer $configContentTransfer): ?ValidatorMessageTransfer
     {
         $path = $configContentTransfer->definitionPath;
 
         $validatorMessageTransfer = $this->pathLocalValidator->validate($path);
-        if ($validatorMessageTransfer->isValid === false) {
+        if ($validatorMessageTransfer !== null) {
             return $validatorMessageTransfer;
         }
 

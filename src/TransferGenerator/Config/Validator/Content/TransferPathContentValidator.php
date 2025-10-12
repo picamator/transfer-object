@@ -15,7 +15,7 @@ readonly class TransferPathContentValidator implements ContentValidatorInterface
     ) {
     }
 
-    public function validate(ConfigContentTransfer $configContentTransfer): ValidatorMessageTransfer
+    public function validate(ConfigContentTransfer $configContentTransfer): ?ValidatorMessageTransfer
     {
         return $this->pathLocalValidator->validate($configContentTransfer->transferPath);
     }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\NasaNeo;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -28,7 +28,7 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     ];
 
     // feet
-    #[PropertyTypeAttribute(FeetTransfer::class)]
+    #[TransferTransformerAttribute(FeetTransfer::class)]
     public const string FEET = 'feet';
     private const int FEET_INDEX = 0;
 
@@ -38,7 +38,7 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     }
 
     // kilometers
-    #[PropertyTypeAttribute(KilometersTransfer::class)]
+    #[TransferTransformerAttribute(KilometersTransfer::class)]
     public const string KILOMETERS = 'kilometers';
     private const int KILOMETERS_INDEX = 1;
 
@@ -48,7 +48,7 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     }
 
     // meters
-    #[PropertyTypeAttribute(MetersTransfer::class)]
+    #[TransferTransformerAttribute(MetersTransfer::class)]
     public const string METERS = 'meters';
     private const int METERS_INDEX = 2;
 
@@ -58,7 +58,7 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     }
 
     // miles
-    #[PropertyTypeAttribute(MilesTransfer::class)]
+    #[TransferTransformerAttribute(MilesTransfer::class)]
     public const string MILES = 'miles';
     private const int MILES_INDEX = 3;
 

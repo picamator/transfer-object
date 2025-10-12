@@ -6,14 +6,14 @@ namespace Picamator\TransferObject\TransferGenerator\Config\Parser\Filter;
 
 use Picamator\TransferObject\TransferGenerator\Config\Enum\ConfigKeyEnum;
 
-trait ConfigFilterTrait
+trait ConfigNormalizerTrait
 {
     private const string CONFIG_SECTION_KEY = 'generator';
 
     /**
      * @return array<string,string>
      */
-    final protected function filterConfig(mixed $configData): array
+    final protected function normalizeConfig(mixed $configData): array
     {
         $defaultConfig = ConfigKeyEnum::getDefaultConfig();
         if (!is_array($configData)) {

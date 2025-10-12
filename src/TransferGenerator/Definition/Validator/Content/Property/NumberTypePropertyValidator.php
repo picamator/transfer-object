@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
-class NumberTypePropertyValidator implements PropertyValidatorInterface
+readonly class NumberTypePropertyValidator implements PropertyValidatorInterface
 {
     use ValidatorMessageTrait;
 
@@ -24,7 +24,7 @@ class NumberTypePropertyValidator implements PropertyValidatorInterface
         return $propertyTransfer->numberType !== null;
     }
 
-    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
+    public function validate(DefinitionPropertyTransfer $propertyTransfer): ?ValidatorMessageTransfer
     {
         if (!$this->isBcMathLoaded()) {
             return $this->createErrorMessageTransfer(self::EXTENSION_IS_NOT_LOADED_ERROR);
@@ -33,12 +33,12 @@ class NumberTypePropertyValidator implements PropertyValidatorInterface
         return $this->validateType($propertyTransfer);
     }
 
-    private function validateType(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
+    private function validateType(DefinitionPropertyTransfer $propertyTransfer): ?ValidatorMessageTransfer
     {
         $numberClassName = $propertyTransfer->numberType?->namespace?->withoutAlias ?: '';
 
         if ($numberClassName === Number::class) {
-            return $this->createSuccessMessageTransfer();
+            return null;
         }
 
         $errorMessage = $this->getErrorMessage($propertyTransfer);

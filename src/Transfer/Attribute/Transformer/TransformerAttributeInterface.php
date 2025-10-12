@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\Transfer\Attribute;
+namespace Picamator\TransferObject\Transfer\Attribute\Transformer;
 
 /**
  * @api
  */
-interface PropertyTypeAttributeInterface
+interface TransformerAttributeInterface
 {
     /**
      * @throws \Picamator\TransferObject\Transfer\Exception\DataAssertTransferException

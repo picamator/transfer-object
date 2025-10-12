@@ -9,5 +9,5 @@ use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 
 interface ContentValidatorInterface
 {
-    public function validate(DefinitionContentTransfer $contentTransfer): ValidatorMessageTransfer;
+    public function validate(DefinitionContentTransfer $contentTransfer): ?ValidatorMessageTransfer;
 }

@@ -8,5 +8,5 @@ use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 
 interface PathLocalValidatorInterface
 {
-    public function validate(string $path): ValidatorMessageTransfer;
+    public function validate(string $path): ?ValidatorMessageTransfer;
 }

@@ -27,7 +27,7 @@ final class NamespaceTemplateExpander extends AbstractTemplateExpander
         $namespaceTransfer = $this->getNamespaceTransfer($propertyTransfer);
 
         $this->expandImports($namespaceTransfer->fullName, $templateTransfer);
-        $this->expandImports(TransferEnum::INTERFACE, $templateTransfer);
+        $this->expandImports(TransferEnum::INTERFACE->value, $templateTransfer);
     }
 
     private function getNamespaceTransfer(DefinitionPropertyTransfer $propertyTransfer): ?DefinitionNamespaceTransfer

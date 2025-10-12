@@ -6,8 +6,8 @@ namespace Picamator\TransferObject\Generated;
 
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\EnumTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -35,7 +35,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     ];
 
     // buildInType
-    #[EnumPropertyTypeAttribute(BuildInTypeEnum::class)]
+    #[EnumTransformerAttribute(BuildInTypeEnum::class)]
     public const string BUILD_IN_TYPE = 'buildInType';
     private const int BUILD_IN_TYPE_INDEX = 0;
 
@@ -45,7 +45,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     }
 
     // collectionType
-    #[PropertyTypeAttribute(DefinitionEmbeddedTypeTransfer::class)]
+    #[TransferTransformerAttribute(DefinitionEmbeddedTypeTransfer::class)]
     public const string COLLECTION_TYPE = 'collectionType';
     private const int COLLECTION_TYPE_INDEX = 1;
 
@@ -55,7 +55,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     }
 
     // dateTimeType
-    #[PropertyTypeAttribute(DefinitionEmbeddedTypeTransfer::class)]
+    #[TransferTransformerAttribute(DefinitionEmbeddedTypeTransfer::class)]
     public const string DATE_TIME_TYPE = 'dateTimeType';
     private const int DATE_TIME_TYPE_INDEX = 2;
 
@@ -65,7 +65,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     }
 
     // enumType
-    #[PropertyTypeAttribute(DefinitionEmbeddedTypeTransfer::class)]
+    #[TransferTransformerAttribute(DefinitionEmbeddedTypeTransfer::class)]
     public const string ENUM_TYPE = 'enumType';
     private const int ENUM_TYPE_INDEX = 3;
 
@@ -93,7 +93,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     }
 
     // numberType
-    #[PropertyTypeAttribute(DefinitionEmbeddedTypeTransfer::class)]
+    #[TransferTransformerAttribute(DefinitionEmbeddedTypeTransfer::class)]
     public const string NUMBER_TYPE = 'numberType';
     private const int NUMBER_TYPE_INDEX = 6;
 
@@ -112,7 +112,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     }
 
     // transferType
-    #[PropertyTypeAttribute(DefinitionEmbeddedTypeTransfer::class)]
+    #[TransferTransformerAttribute(DefinitionEmbeddedTypeTransfer::class)]
     public const string TRANSFER_TYPE = 'transferType';
     private const int TRANSFER_TYPE_INDEX = 8;
 

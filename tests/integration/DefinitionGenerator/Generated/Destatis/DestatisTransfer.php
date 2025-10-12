@@ -6,8 +6,9 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -53,7 +54,7 @@ final class DestatisTransfer extends AbstractTransfer
     }
 
     // Ident
-    #[PropertyTypeAttribute(IdentTransfer::class)]
+    #[TransferTransformerAttribute(IdentTransfer::class)]
     public const string IDENT = 'Ident';
     private const int IDENT_INDEX = 2;
 
@@ -63,7 +64,7 @@ final class DestatisTransfer extends AbstractTransfer
     }
 
     // Parameter
-    #[PropertyTypeAttribute(ParameterTransfer::class)]
+    #[TransferTransformerAttribute(ParameterTransfer::class)]
     public const string PARAMETER = 'Parameter';
     private const int PARAMETER_INDEX = 3;
 
@@ -73,7 +74,8 @@ final class DestatisTransfer extends AbstractTransfer
     }
 
     // Statistics
-    #[CollectionPropertyTypeAttribute(StatisticsTransfer::class)]
+    #[CollectionInitiatorAttribute]
+    #[CollectionTransformerAttribute(StatisticsTransfer::class)]
     public const string STATISTICS = 'Statistics';
     private const int STATISTICS_INDEX = 4;
 
@@ -84,7 +86,7 @@ final class DestatisTransfer extends AbstractTransfer
     }
 
     // Status
-    #[PropertyTypeAttribute(StatusTransfer::class)]
+    #[TransferTransformerAttribute(StatusTransfer::class)]
     public const string STATUS = 'Status';
     private const int STATUS_INDEX = 5;
 
@@ -94,7 +96,8 @@ final class DestatisTransfer extends AbstractTransfer
     }
 
     // Tables
-    #[CollectionPropertyTypeAttribute(TablesTransfer::class)]
+    #[CollectionInitiatorAttribute]
+    #[CollectionTransformerAttribute(TablesTransfer::class)]
     public const string TABLES = 'Tables';
     private const int TABLES_INDEX = 6;
 
@@ -114,7 +117,8 @@ final class DestatisTransfer extends AbstractTransfer
     }
 
     // Variables
-    #[CollectionPropertyTypeAttribute(VariablesTransfer::class)]
+    #[CollectionInitiatorAttribute]
+    #[CollectionTransformerAttribute(VariablesTransfer::class)]
     public const string VARIABLES = 'Variables';
     private const int VARIABLES_INDEX = 8;
 

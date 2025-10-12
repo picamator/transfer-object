@@ -60,7 +60,7 @@ TEMPLATE;
         foreach ($templateTransfer->metaConstants as $constant => $property) {
             $properties[] = <<<TEMPLATE
 
-    // $property{$this->helper->renderAttribute($property)}
+    // $property{$this->helper->renderMetaAttributes($property)}
     public const string $constant = '$property';
     private const int {$constant}_INDEX = $i;
 {$this->helper->renderDockBlock($property)}

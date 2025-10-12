@@ -7,7 +7,7 @@ namespace Picamator\Examples\TransferObject\Generated\TransferGenerator;
 use DateTime;
 use DateTimeImmutable;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\DateTimePropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\DateTimeTransformerAttribute;
 
 /**
  * Specification:
@@ -30,7 +30,7 @@ final class CredentialsTransfer extends AbstractTransfer
     ];
 
     // createdAt
-    #[DateTimePropertyTypeAttribute(DateTimeImmutable::class)]
+    #[DateTimeTransformerAttribute(DateTimeImmutable::class)]
     public const string CREATED_AT = 'createdAt';
     private const int CREATED_AT_INDEX = 0;
 
@@ -58,7 +58,7 @@ final class CredentialsTransfer extends AbstractTransfer
     }
 
     // updatedAt
-    #[DateTimePropertyTypeAttribute(DateTime::class)]
+    #[DateTimeTransformerAttribute(DateTime::class)]
     public const string UPDATED_AT = 'updatedAt';
     private const int UPDATED_AT_INDEX = 3;
 

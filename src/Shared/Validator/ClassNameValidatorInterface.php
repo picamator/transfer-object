@@ -8,5 +8,5 @@ use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 
 interface ClassNameValidatorInterface
 {
-    public function validate(?string $className): ValidatorMessageTransfer;
+    public function validate(?string $className): ?ValidatorMessageTransfer;
 }

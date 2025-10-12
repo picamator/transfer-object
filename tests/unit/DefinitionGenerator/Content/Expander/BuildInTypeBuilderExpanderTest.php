@@ -6,9 +6,8 @@ namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Content\Expand
 
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
-use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Builder\Content;
 use Picamator\TransferObject\DefinitionGenerator\Content\Enum\GetTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Content\Expander\BuilderExpanderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Content\Expander\BuildInTypeBuilderExpander;
@@ -21,12 +20,8 @@ class BuildInTypeBuilderExpanderTest extends TestCase
 {
     private BuilderExpanderInterface $expander;
 
-    private ContentInterface&Stub $builderContentStub;
-
     protected function setUp(): void
     {
-        $this->builderContentStub = $this->createStub(ContentInterface::class);
-
         $this->expander = new BuildInTypeBuilderExpander();
     }
 
@@ -34,20 +29,11 @@ class BuildInTypeBuilderExpanderTest extends TestCase
     public function testUnsupportedTypeShouldThrowException(): void
     {
         // Arrange
-        $getTypeEnum = GetTypeEnum::object;
-        $this->builderContentStub
-            ->method('getType')
-            ->willReturn($getTypeEnum);
-
-        $propertyValue = new stdClass();
-        $this->builderContentStub
-            ->method('getPropertyValue')
-            ->willReturn($propertyValue);
-
-        $propertyName = 'someObject';
-        $this->builderContentStub
-            ->method('getPropertyName')
-            ->willReturn($propertyName);
+        $content = new Content(
+            type: GetTypeEnum::object,
+            propertyName: 'someObject',
+            propertyValue: new stdClass(),
+        );
 
         $builderTransfer = new DefinitionBuilderTransfer();
 
@@ -55,6 +41,6 @@ class BuildInTypeBuilderExpanderTest extends TestCase
         $this->expectException(DefinitionGeneratorException::class);
 
         // Act
-        $this->expander->expandBuilderTransfer($this->builderContentStub, $builderTransfer);
+        $this->expander->expandBuilderTransfer($content, $builderTransfer);
     }
 }

@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
-class EnumTypePropertyValidator implements PropertyValidatorInterface
+readonly class EnumTypePropertyValidator implements PropertyValidatorInterface
 {
     use ValidatorMessageTrait;
 
@@ -21,11 +21,11 @@ class EnumTypePropertyValidator implements PropertyValidatorInterface
         return $propertyTransfer->enumType !== null;
     }
 
-    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
+    public function validate(DefinitionPropertyTransfer $propertyTransfer): ?ValidatorMessageTransfer
     {
         $enumClassName = $propertyTransfer->enumType?->namespace?->withoutAlias ?: '';
         if (is_subclass_of($enumClassName, BackedEnum::class)) {
-            return $this->createSuccessMessageTransfer();
+            return null;
         }
 
         $errorMessage = $this->getErrorMessage($propertyTransfer);

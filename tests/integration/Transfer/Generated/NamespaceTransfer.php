@@ -8,8 +8,9 @@ use ArrayObject;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\RequiredTransfer as RequiredAlias;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 use Picamator\TransferObject\Transfer\TransferInterface;
 
 /**
@@ -31,7 +32,8 @@ final class NamespaceTransfer extends AbstractTransfer
     ];
 
     // items
-    #[CollectionPropertyTypeAttribute(ItemTransfer::class)]
+    #[CollectionInitiatorAttribute]
+    #[CollectionTransformerAttribute(ItemTransfer::class)]
     public const string ITEMS = 'items';
     private const int ITEMS_INDEX = 0;
 
@@ -42,7 +44,7 @@ final class NamespaceTransfer extends AbstractTransfer
     }
 
     // required
-    #[PropertyTypeAttribute(RequiredAlias::class)]
+    #[TransferTransformerAttribute(RequiredAlias::class)]
     public const string REQUIRED = 'required';
     private const int REQUIRED_INDEX = 1;
 

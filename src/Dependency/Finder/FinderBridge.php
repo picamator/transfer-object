@@ -18,6 +18,7 @@ final readonly class FinderBridge implements FinderInterface
             $finder = Finder::create()
                 ->files()
                 ->name($filePattern)
+                ->depth(0)
                 ->in($dirName);
 
             return $this->getFinderBridge($finder);
@@ -45,6 +46,7 @@ final readonly class FinderBridge implements FinderInterface
             $finder = Finder::create()
                 ->files()
                 ->name($filePattern)
+                ->depth(0)
                 ->in($dirName)
                 ->exclude($exclude);
 

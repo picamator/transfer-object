@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEmbeddedTemplateEnum;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEnum;
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransformerAttributeTemplateEnum;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 
@@ -22,13 +21,15 @@ final class DateTimeTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $this->expandImports(AttributeEnum::DATE_TIME_TYPE_ATTRIBUTE, $templateTransfer);
+        $transformerEnum = TransformerAttributeTemplateEnum::DATE_TIME;
+        $this->expandImports($transformerEnum->getImport(), $templateTransfer);
 
-        /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer */
-        $embeddedTypeTransfer = $propertyTransfer->dateTimeType;
-        $this->expandEmbeddedType($propertyTransfer, $embeddedTypeTransfer, $templateTransfer);
+        /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $typeTransfer */
+        $typeTransfer = $propertyTransfer->dateTimeType;
+        $this->expandEmbeddedType($propertyTransfer, $typeTransfer, $templateTransfer);
 
-        $templateTransfer->attributes[$propertyTransfer->propertyName]
-            = AttributeEmbeddedTemplateEnum::DATE_TIME_TYPE_ATTRIBUTE->renderTemplate($embeddedTypeTransfer);
+        $templateTransfer->metaAttributes[$propertyTransfer->propertyName] = [
+            $transformerEnum->renderTemplate($typeTransfer),
+        ];
     }
 }

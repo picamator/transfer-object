@@ -6,8 +6,10 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 
 /**
  * Specification:
@@ -40,7 +42,8 @@ final class ArdNewsTransfer extends AbstractTransfer
     }
 
     // news
-    #[CollectionPropertyTypeAttribute(NewsTransfer::class)]
+    #[CollectionInitiatorAttribute]
+    #[CollectionTransformerAttribute(NewsTransfer::class)]
     public const string NEWS = 'news';
     private const int NEWS_INDEX = 1;
 
@@ -60,7 +63,8 @@ final class ArdNewsTransfer extends AbstractTransfer
     }
 
     // regional
-    #[ArrayPropertyTypeAttribute]
+    #[ArrayInitiatorAttribute]
+    #[ArrayTransformerAttribute]
     public const string REGIONAL = 'regional';
     private const int REGIONAL_INDEX = 3;
 

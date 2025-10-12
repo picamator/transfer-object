@@ -97,12 +97,12 @@ abstract class AbstractTransfer implements TransferInterface
     final public function toArray(): array
     {
         $data = [];
-        $attributes = $this->getTypeAttributes();
+        $attributes = $this->getTransformerAttributes();
 
-        foreach (static::META_DATA as $index => $propertyName) {
+        foreach ($this as $propertyName => $value) {
             $data[$propertyName] = isset($attributes[$propertyName])
-                ? $attributes[$propertyName]->toArray($this->_data[$index])
-                : $this->_data[$index];
+                ? $attributes[$propertyName]->toArray($value)
+                : $value;
         }
 
         return $data;
@@ -112,25 +112,21 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->initData();
 
-        $data = array_filter($data, $this->filterData(...), ARRAY_FILTER_USE_BOTH);
+        $data = array_filter($data, fn ($value) => $value !== null);
+        $data = array_intersect_key($data, array_flip(static::META_DATA));
         if ($data === []) {
             return $this;
         }
 
-        $attributes = $this->getTypeAttributes();
+        $attributes = $this->getTransformerAttributes();
 
         foreach ($data as $propertyName => $value) {
-            $this->{$propertyName} = isset($attributes[$propertyName])
+            $this->$propertyName = isset($attributes[$propertyName])
                 ? $attributes[$propertyName]->fromArray($value)
                 : $value;
         }
 
         return $this;
-    }
-
-    private function filterData(mixed $value, string|int $key): bool
-    {
-        return $value !== null && in_array($key, static::META_DATA, true);
     }
 
     final protected function getData(int $index): mixed
@@ -147,8 +143,8 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->_data = new SplFixedArray(size: static::META_DATA_SIZE);
 
-        foreach ($this->getInitialAttributes() as $propertyName => $attribute) {
-            $this->{$propertyName} = $attribute->getInitialValue();
+        foreach ($this->getInitiatorAttributes() as $propertyName => $attribute) {
+            $this->$propertyName = $attribute->getInitialValue();
         }
     }
 }

@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
-class DateTimeTypePropertyValidator implements PropertyValidatorInterface
+readonly class DateTimeTypePropertyValidator implements PropertyValidatorInterface
 {
     use ValidatorMessageTrait;
 
@@ -21,11 +21,11 @@ class DateTimeTypePropertyValidator implements PropertyValidatorInterface
         return $propertyTransfer->dateTimeType !== null;
     }
 
-    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
+    public function validate(DefinitionPropertyTransfer $propertyTransfer): ?ValidatorMessageTransfer
     {
         $dateTimeClassName = $propertyTransfer->dateTimeType?->namespace?->withoutAlias ?: '';
         if (is_subclass_of($dateTimeClassName, DateTimeInterface::class)) {
-            return $this->createSuccessMessageTransfer();
+            return null;
         }
 
         $errorMessage = $this->getErrorMessage($propertyTransfer);

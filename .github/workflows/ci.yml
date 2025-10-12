@@ -1,5 +1,8 @@
 name: CI
 
+env:
+  PHP_VERSION: 8.4
+
 on:
   push:
     branches:
@@ -13,18 +16,20 @@ jobs:
   setup:
     name: Project Setup
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: read
       actions: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4'
+          php-version: ${{ env.PHP_VERSION }}
           coverage: none
+          tools: composer:v2
 
       - name: Cache vendor directory
         id: cache-vendor
@@ -46,18 +51,20 @@ jobs:
     name: PHPStan
     needs: setup
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: read
       actions: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4'
+          php-version: ${{ env.PHP_VERSION }}
           coverage: none
+          tools: composer:v2
 
       - name: Cache vendor directory
         id: cache-vendor
@@ -79,18 +86,20 @@ jobs:
     name: PHP CodeSniffer
     needs: setup
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: read
       actions: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4'
+          php-version: ${{ env.PHP_VERSION }}
           coverage: none
+          tools: composer:v2
 
       - name: Cache vendor directory
         id: cache-vendor
@@ -112,21 +121,24 @@ jobs:
     name: PHPUnit Tests
     needs: setup
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: read
       actions: read
     strategy:
       matrix:
         php-version: [8.4, 8.5]
+      fail-fast: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
           coverage: none
+          tools: composer:v2
 
       - name: Cache vendor directory
         id: cache-vendor

@@ -11,5 +11,5 @@ interface PathExistValidatorInterface
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      */
-    public function validate(string $path): ValidatorMessageTransfer;
+    public function validate(string $path): ?ValidatorMessageTransfer;
 }

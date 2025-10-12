@@ -6,7 +6,7 @@ namespace Picamator\Tests\Integration\TransferObject\Transfer\Generated\BcMath;
 
 use BcMath\Number;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\NumberPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\NumberTransformerAttribute;
 
 /**
  * Specification:
@@ -26,7 +26,7 @@ final class BcMathNumberTransfer extends AbstractTransfer
     ];
 
     // iAmNumber
-    #[NumberPropertyTypeAttribute(Number::class)]
+    #[NumberTransformerAttribute(Number::class)]
     public const string I_AM_NUMBER = 'iAmNumber';
     private const int I_AM_NUMBER_INDEX = 0;
 

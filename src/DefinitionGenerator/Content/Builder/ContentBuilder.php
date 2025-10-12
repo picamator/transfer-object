@@ -12,7 +12,7 @@ readonly class ContentBuilder implements ContentBuilderInterface
 {
     use VariableValidatorTrait;
 
-    public function createBuilderContent(string $propertyName, mixed $propertyValue): ContentInterface
+    public function createBuilderContent(string $propertyName, mixed $propertyValue): Content
     {
         $this->assertPropertyName($propertyName);
         $typeEnum = $this->getTypeEnum($propertyName, $propertyValue);

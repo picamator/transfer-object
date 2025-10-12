@@ -6,9 +6,10 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 
 use DateTime;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\DateTimePropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\DateTimeTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -70,7 +71,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // availabilityDate
-    #[DateTimePropertyTypeAttribute(DateTime::class)]
+    #[DateTimeTransformerAttribute(DateTime::class)]
     public const string AVAILABILITY_DATE = 'availabilityDate';
     private const int AVAILABILITY_DATE_INDEX = 2;
 
@@ -233,7 +234,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // price
-    #[PropertyTypeAttribute(PriceTransfer::class)]
+    #[TransferTransformerAttribute(PriceTransfer::class)]
     public const string PRICE = 'price';
     private const int PRICE_INDEX = 20;
 
@@ -243,7 +244,8 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // sizes
-    #[ArrayPropertyTypeAttribute]
+    #[ArrayInitiatorAttribute]
+    #[ArrayTransformerAttribute]
     public const string SIZES = 'sizes';
     private const int SIZES_INDEX = 21;
 

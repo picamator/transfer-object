@@ -8,14 +8,14 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Picamator\Tests\Unit\TransferObject\Helper\FileStreamHelperTrait;
+use Picamator\Tests\Unit\TransferObject\Helper\FileHelperTrait;
 use Picamator\TransferObject\Shared\Exception\FileAppenderException;
 use Picamator\TransferObject\Shared\Filesystem\FileAppender;
 
 #[Group('shared')]
 class FileAppenderTest extends TestCase
 {
-    use FileStreamHelperTrait;
+    use FileHelperTrait;
 
     private const string FILE_NAME = 'test.yml';
     private const string FILE_CONTENT = 'test content';
@@ -32,9 +32,9 @@ class FileAppenderTest extends TestCase
             ])->getMock();
     }
 
-    protected function tearDown(): void
+    public static function tearDownAfterClass(): void
     {
-        $this->closeTempFileStream();
+        self::closeFile();
     }
 
     #[TestDox('Failed open file should throw exception')]
@@ -55,11 +55,14 @@ class FileAppenderTest extends TestCase
     #[TestDox('Failed write file should throw exception')]
     public function testFailedWriteFileShouldThrowException(): void
     {
+        // Arrange
+        $file = self::openFile();
+
         // Expect
         $this->fileAppenderMock->expects($this->once())
             ->method('fopen')
             ->with(self::FILE_NAME)
-            ->willReturn($this->file);
+            ->willReturn($file);
 
         $this->fileAppenderMock->expects($this->once())
             ->method('fwrite')
@@ -75,7 +78,7 @@ class FileAppenderTest extends TestCase
     public function testSuccessfulWriteFile(): void
     {
         // Arrange
-        $file = $this->getTempFileStream();
+        $file = self::openFile();
 
         // Expect
         $this->fileAppenderMock->expects($this->once())
@@ -96,7 +99,7 @@ class FileAppenderTest extends TestCase
     public function testCloseFile(): void
     {
         // Arrange
-        $file = $this->getTempFileStream();
+        $file = self::openFile();
 
         // Expect
         $this->fileAppenderMock->expects($this->once())
@@ -135,7 +138,7 @@ class FileAppenderTest extends TestCase
     public function testFailedCloseFile(): void
     {
         // Arrange
-        $file = $this->getTempFileStream();
+        $file = self::openFile();
 
         // Expect
         $this->fileAppenderMock->expects($this->once())

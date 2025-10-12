@@ -12,5 +12,5 @@ interface ContentValidatorInterface
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      */
-    public function validate(ConfigContentTransfer $configContentTransfer): ValidatorMessageTransfer;
+    public function validate(ConfigContentTransfer $configContentTransfer): ?ValidatorMessageTransfer;
 }

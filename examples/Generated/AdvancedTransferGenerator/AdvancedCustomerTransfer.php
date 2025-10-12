@@ -8,7 +8,7 @@ use Picamator\Examples\TransferObject\Advanced\AddressData;
 use Picamator\Examples\TransferObject\Advanced\CredentialsData;
 use Picamator\Examples\TransferObject\Generated\TransferGenerator\CustomerTransfer;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 use Picamator\TransferObject\Transfer\TransferInterface;
 
 /**
@@ -31,7 +31,7 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
     ];
 
     // address
-    #[PropertyTypeAttribute(AddressData::class)]
+    #[TransferTransformerAttribute(AddressData::class)]
     public const string ADDRESS = 'address';
     private const int ADDRESS_INDEX = 0;
 
@@ -41,7 +41,7 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
     }
 
     // credentials
-    #[PropertyTypeAttribute(CredentialsData::class)]
+    #[TransferTransformerAttribute(CredentialsData::class)]
     public const string CREDENTIALS = 'credentials';
     private const int CREDENTIALS_INDEX = 1;
 
@@ -51,7 +51,7 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
     }
 
     // customer
-    #[PropertyTypeAttribute(CustomerTransfer::class)]
+    #[TransferTransformerAttribute(CustomerTransfer::class)]
     public const string CUSTOMER = 'customer';
     private const int CUSTOMER_INDEX = 2;
 

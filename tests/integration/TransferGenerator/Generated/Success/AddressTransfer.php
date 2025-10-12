@@ -6,7 +6,8 @@ namespace Picamator\Tests\Integration\TransferObject\TransferGenerator\Generated
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 
 /**
  * Specification:
@@ -62,7 +63,8 @@ final class AddressTransfer extends AbstractTransfer
     }
 
     // country
-    #[CollectionPropertyTypeAttribute(CountryTransfer::class)]
+    #[CollectionInitiatorAttribute]
+    #[CollectionTransformerAttribute(CountryTransfer::class)]
     public const string COUNTRY = 'country';
     private const int COUNTRY_INDEX = 3;
 

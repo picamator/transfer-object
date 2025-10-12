@@ -15,7 +15,7 @@ readonly class ClassNameContentValidator implements ContentValidatorInterface
     ) {
     }
 
-    public function validate(DefinitionContentTransfer $contentTransfer): ValidatorMessageTransfer
+    public function validate(DefinitionContentTransfer $contentTransfer): ?ValidatorMessageTransfer
     {
         return $this->classNameValidator->validate($contentTransfer->className);
     }

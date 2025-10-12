@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator\Content\Expander;
 
-use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Builder\Content;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
@@ -13,23 +13,23 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
 {
     use BuilderExpanderTrait;
 
-    protected function isApplicable(ContentInterface $content): bool
+    protected function isApplicable(Content $content): bool
     {
-        if (!$content->getType()->isArray() || empty($content->getPropertyValue())) {
+        if (!$content->type->isArray() || empty($content->propertyValue)) {
             return false;
         }
 
         /** @var array<string, mixed> $propertyValue */
-        $propertyValue = $content->getPropertyValue();
+        $propertyValue = $content->propertyValue;
 
         return array_all($propertyValue, fn (mixed $value): bool => is_array($value));
     }
 
     protected function handleExpander(
-        ContentInterface $content,
+        Content $content,
         DefinitionBuilderTransfer $builderTransfer,
     ): void {
-        $propertyTransfer = $this->createPropertyTransfer($content->getPropertyName());
+        $propertyTransfer = $this->createPropertyTransfer($content->propertyName);
         $builderTransfer->definitionContent->properties[] = $propertyTransfer;
 
 
@@ -42,12 +42,12 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
     /**
      * @return array<int|string, mixed>
      */
-    private function mergeContent(ContentInterface $content): array
+    private function mergeContent(Content $content): array
     {
         $mergedContent = [];
 
         /** @var array<string, array<string, mixed>> $propertyValue */
-        $propertyValue = $content->getPropertyValue() ?: [];
+        $propertyValue = $content->propertyValue ?: [];
 
         foreach ($propertyValue as $contentItem) {
             $contentItemMixed = array_filter($contentItem, $this->filterNonArray(...));

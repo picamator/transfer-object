@@ -6,8 +6,9 @@ namespace Picamator\TransferObject\Generated;
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -28,7 +29,7 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
     ];
 
     // definitionContent
-    #[PropertyTypeAttribute(DefinitionContentTransfer::class)]
+    #[TransferTransformerAttribute(DefinitionContentTransfer::class)]
     public const string DEFINITION_CONTENT = 'definitionContent';
     private const int DEFINITION_CONTENT_INDEX = 0;
 
@@ -38,7 +39,8 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
     }
 
     // generatorContents
-    #[CollectionPropertyTypeAttribute(DefinitionGeneratorContentTransfer::class)]
+    #[CollectionInitiatorAttribute]
+    #[CollectionTransformerAttribute(DefinitionGeneratorContentTransfer::class)]
     public const string GENERATOR_CONTENTS = 'generatorContents';
     private const int GENERATOR_CONTENTS_INDEX = 1;
 

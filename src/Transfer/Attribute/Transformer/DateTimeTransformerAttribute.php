@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\Transfer\Attribute;
+namespace Picamator\TransferObject\Transfer\Attribute\Transformer;
 
 use Attribute;
 use DateTimeInterface;
@@ -11,26 +11,30 @@ use DateTimeInterface;
  * @api
  */
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
-final readonly class DateTimePropertyTypeAttribute implements PropertyTypeAttributeInterface
+final readonly class DateTimeTransformerAttribute implements TransformerAttributeInterface
 {
     use DataAssertTrait;
 
-    protected const string DATE_TIME_FORMAT = DateTimeInterface::ATOM;
+    private const string DATE_TIME_FORMAT = DateTimeInterface::ATOM;
 
+    /**
+     * @param class-string<\DateTime|\DateTimeImmutable> $typeName
+     */
     public function __construct(private string $typeName)
     {
     }
 
     public function fromArray(mixed $data): DateTimeInterface
     {
-        /** @var DateTimeInterface $dateTime */
-        $dateTime = match (true) {
+        return match (true) {
             is_string($data) => new $this->typeName($data),
+
+            is_int($data) || is_float($data) => $this->typeName::createFromTimestamp($data),
+
             $data instanceof DateTimeInterface => $data,
+
             default => $this->assertInvalidType($data, $this->typeName),
         };
-
-        return $dateTime;
     }
 
     /**

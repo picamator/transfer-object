@@ -6,7 +6,7 @@ namespace Picamator\Examples\TransferObject\Generated\TransferGenerator;
 
 use Picamator\Examples\TransferObject\Enum\CountryEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\EnumTransformerAttribute;
 
 /**
  * Specification:
@@ -28,7 +28,7 @@ final class MerchantTransfer extends AbstractTransfer
     ];
 
     // country
-    #[EnumPropertyTypeAttribute(CountryEnum::class)]
+    #[EnumTransformerAttribute(CountryEnum::class)]
     public const string COUNTRY = 'country';
     private const int COUNTRY_INDEX = 0;
 
