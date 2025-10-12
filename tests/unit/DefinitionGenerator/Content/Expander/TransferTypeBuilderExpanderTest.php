@@ -8,9 +8,8 @@ use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDoxFormatterExternal;
-use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Builder\Content;
 use Picamator\TransferObject\DefinitionGenerator\Content\Enum\GetTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Content\Expander\BuilderExpanderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Content\Expander\TransferTypeBuilderExpander;
@@ -23,12 +22,8 @@ class TransferTypeBuilderExpanderTest extends TestCase
 
     private ReflectionMethod $isApplicableReflection;
 
-    private ContentInterface&Stub $builderContentStub;
-
     protected function setUp(): void
     {
-        $this->builderContentStub = $this->createStub(ContentInterface::class);
-
         $this->expander = new TransferTypeBuilderExpander();
 
         $this->isApplicableReflection = new ReflectionMethod(
@@ -45,16 +40,14 @@ class TransferTypeBuilderExpanderTest extends TestCase
     public function testApplicableTransferType(GetTypeEnum $type, array $propertyValue, bool $expected): void
     {
         // Arrange
-        $this->builderContentStub
-            ->method('getType')
-            ->willReturn($type);
-
-        $this->builderContentStub
-            ->method('getPropertyValue')
-            ->willReturn($propertyValue);
+        $content = new Content(
+            type: $type,
+            propertyName: 'someObject',
+            propertyValue: $propertyValue,
+        );
 
         // Act
-        $actual = $this->isApplicableReflection->invoke($this->expander, $this->builderContentStub);
+        $actual = $this->isApplicableReflection->invoke($this->expander, $content);
 
         // Assert
         $this->assertSame($expected, $actual);

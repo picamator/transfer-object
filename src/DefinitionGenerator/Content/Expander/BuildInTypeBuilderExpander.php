@@ -7,7 +7,7 @@ namespace Picamator\TransferObject\DefinitionGenerator\Content\Expander;
 use ArrayObject;
 use DateTime;
 use DateTimeInterface;
-use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentInterface;
+use Picamator\TransferObject\DefinitionGenerator\Content\Builder\Content;
 use Picamator\TransferObject\DefinitionGenerator\Content\Enum\GetTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Content\Enum\ObjectTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
@@ -21,61 +21,61 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
     /**
      * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
      */
-    protected function isApplicable(ContentInterface $content): true
+    protected function isApplicable(Content $content): true
     {
         return true;
     }
 
     protected function handleExpander(
-        ContentInterface $content,
+        Content $content,
         DefinitionBuilderTransfer $builderTransfer,
     ): void {
         $propertyTransfer = match (true) {
-            $content->getType()->isString() => $this->resolveStringType($content),
-            $content->getType()->isNull() => $this->resolveNullType($content),
-            $content->getType()->isObject() => $this->resolveObjectType($content),
+            $content->type->isString() => $this->resolveStringType($content),
+            $content->type->isNull() => $this->resolveNullType($content),
+            $content->type->isObject() => $this->resolveObjectType($content),
             default => $this->resolveDefaultType($content),
         };
 
         $builderTransfer->definitionContent->properties[] = $propertyTransfer;
     }
 
-    private function resolveDefaultType(ContentInterface $content): DefinitionPropertyTransfer
+    private function resolveDefaultType(Content $content): DefinitionPropertyTransfer
     {
-        return $this->createPropertyTransfer($content->getPropertyName(), $content->getType()->name);
+        return $this->createPropertyTransfer($content->propertyName, $content->type->name);
     }
 
     /**
      * @throws \Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException
      */
-    private function resolveObjectType(ContentInterface $content): DefinitionPropertyTransfer
+    private function resolveObjectType(Content $content): DefinitionPropertyTransfer
     {
-        if ($content->getPropertyValue() instanceof ArrayObject) {
-            return $this->createPropertyTransfer($content->getPropertyName(), ObjectTypeEnum::ARRAY_OBJECT->value);
+        if ($content->propertyValue instanceof ArrayObject) {
+            return $this->createPropertyTransfer($content->propertyName, ObjectTypeEnum::ARRAY_OBJECT->value);
         }
 
         throw new DefinitionGeneratorException(
             sprintf(
                 'Property "%s" with "%s" type is not supported.',
-                $content->getPropertyName(),
-                get_debug_type($content->getPropertyValue()),
+                $content->propertyName,
+                get_debug_type($content->propertyValue),
             ),
         );
     }
 
-    private function resolveNullType(ContentInterface $content): DefinitionPropertyTransfer
+    private function resolveNullType(Content $content): DefinitionPropertyTransfer
     {
-        return $this->createPropertyTransfer($content->getPropertyName(), GetTypeEnum::string->name);
+        return $this->createPropertyTransfer($content->propertyName, GetTypeEnum::string->name);
     }
 
-    private function resolveStringType(ContentInterface $content): DefinitionPropertyTransfer
+    private function resolveStringType(Content $content): DefinitionPropertyTransfer
     {
         //  @phpstan-ignore argument.type
-        if (DateTime::createFromFormat(DateTimeInterface::ATOM, $content->getPropertyValue()) !== false) {
-            return $this->createDateTimePropertyTransfer($content->getPropertyName());
+        if (DateTime::createFromFormat(DateTimeInterface::ATOM, $content->propertyValue) !== false) {
+            return $this->createDateTimePropertyTransfer($content->propertyName);
         }
 
-        return $this->createPropertyTransfer($content->getPropertyName(), GetTypeEnum::string->name);
+        return $this->createPropertyTransfer($content->propertyName, GetTypeEnum::string->name);
     }
 
     private function createDateTimePropertyTransfer(string $propertyName): DefinitionPropertyTransfer
