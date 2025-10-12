@@ -7,11 +7,11 @@ namespace Picamator\TransferObject\TransferGenerator\Config\Parser\Builder;
 use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Enum\ConfigKeyEnum;
 use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRenderInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Parser\Filter\ConfigFilterTrait;
+use Picamator\TransferObject\TransferGenerator\Config\Parser\Filter\ConfigNormalizerTrait;
 
 readonly class ConfigContentBuilder implements ConfigContentBuilderInterface
 {
-    use ConfigFilterTrait;
+    use ConfigNormalizerTrait;
 
     public function __construct(
         private ConfigEnvironmentRenderInterface $environmentRender,

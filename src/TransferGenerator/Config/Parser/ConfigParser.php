@@ -7,11 +7,11 @@ namespace Picamator\TransferObject\TransferGenerator\Config\Parser;
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Parser\Builder\ConfigContentBuilderInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Parser\Filter\ConfigFilterTrait;
+use Picamator\TransferObject\TransferGenerator\Config\Parser\Filter\ConfigNormalizerTrait;
 
 readonly class ConfigParser implements ConfigParserInterface
 {
-    use ConfigFilterTrait;
+    use ConfigNormalizerTrait;
 
     public function __construct(
         private YmlParserInterface $parser,
@@ -22,7 +22,7 @@ readonly class ConfigParser implements ConfigParserInterface
     public function parseConfig(string $configPath): ConfigContentTransfer
     {
         $configData = $this->parser->parseFile($configPath);
-        $filteredConfigData = $this->filterConfig($configData);
+        $filteredConfigData = $this->normalizeConfig($configData);
 
         return $this->builder->createContentTransfer($filteredConfigData);
     }
