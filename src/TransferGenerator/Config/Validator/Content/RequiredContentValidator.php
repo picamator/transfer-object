@@ -8,17 +8,17 @@ use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
-class RequiredContentValidator implements ContentValidatorInterface
+readonly class RequiredContentValidator implements ContentValidatorInterface
 {
     use ValidatorMessageTrait;
 
     private const string ERROR_MESSAGE_TEMPLATE = 'Missing required configuration keys: "%s".';
 
-    public function validate(ConfigContentTransfer $configContentTransfer): ValidatorMessageTransfer
+    public function validate(ConfigContentTransfer $configContentTransfer): ?ValidatorMessageTransfer
     {
         $missedKeys = $this->getMissedKeys($configContentTransfer);
         if (count($missedKeys) === 0) {
-            return $this->createSuccessMessageTransfer();
+            return null;
         }
 
         $errorMessage = $this->getErrorMessage($missedKeys);

@@ -9,19 +9,26 @@ use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\ReservedPropertyEnum;
 
-class ReservedNamePropertyValidator implements PropertyValidatorInterface
+readonly class ReservedNamePropertyValidator implements PropertyValidatorInterface
 {
     use ValidatorMessageTrait;
 
     private const string RESERVED_NAME_ERROR_MESSAGE_TEMPLATE = 'Reserved property name "%s".';
 
-    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
+    /**
+     * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
+     */
+    public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): true
     {
-        return ReservedPropertyEnum::tryFrom($propertyTransfer->propertyName) !== null;
+        return true;
     }
 
-    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
+    public function validate(DefinitionPropertyTransfer $propertyTransfer): ?ValidatorMessageTransfer
     {
+        if (ReservedPropertyEnum::tryFrom($propertyTransfer->propertyName) === null) {
+            return null;
+        }
+
         $errorMessage = $this->getErrorMessage($propertyTransfer);
 
         return $this->createErrorMessageTransfer($errorMessage);

@@ -9,18 +9,18 @@ use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\NamespaceValidatorTrait;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
-class TransferNamespaceContentValidator implements ContentValidatorInterface
+readonly class TransferNamespaceContentValidator implements ContentValidatorInterface
 {
     use ValidatorMessageTrait;
     use NamespaceValidatorTrait;
 
     private const string ERROR_MESSAGE_TEMPLATE = 'Invalid configuration namespace "%s".';
 
-    public function validate(ConfigContentTransfer $configContentTransfer): ValidatorMessageTransfer
+    public function validate(ConfigContentTransfer $configContentTransfer): ?ValidatorMessageTransfer
     {
         $namespace = $configContentTransfer->transferNamespace;
         if ($this->isValidNamespace($namespace)) {
-            return $this->createSuccessMessageTransfer();
+            return null;
         }
 
         $errorMessage = $this->getErrorMessage($namespace);

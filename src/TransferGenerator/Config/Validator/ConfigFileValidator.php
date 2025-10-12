@@ -21,7 +21,7 @@ readonly class ConfigFileValidator implements ConfigFileValidatorInterface
     {
         $messageTransfer = $this->pathValidator->validate($filePath);
 
-        if ($messageTransfer->isValid) {
+        if ($messageTransfer === null) {
             return $this->createSuccessValidatorTransfer();
         }
 

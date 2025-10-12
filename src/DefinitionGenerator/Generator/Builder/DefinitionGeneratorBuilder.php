@@ -26,7 +26,7 @@ class DefinitionGeneratorBuilder implements DefinitionGeneratorBuilderInterface
     {
         $messageTransfer = $this->pathLocalValidator->validate($definitionPath);
 
-        if ($messageTransfer->isValid) {
+        if ($messageTransfer === null) {
             $definitionPath = rtrim($definitionPath, '\/');
             $this->getGeneratorTransfer()->definitionPath = $definitionPath;
 
@@ -40,7 +40,7 @@ class DefinitionGeneratorBuilder implements DefinitionGeneratorBuilderInterface
     {
         $messageTransfer = $this->classNameValidator->validate($className);
 
-        if ($messageTransfer->isValid) {
+        if ($messageTransfer === null) {
             $this->getGeneratorTransfer()->content->className = $className;
 
             return $this;

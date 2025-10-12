@@ -11,5 +11,5 @@ interface PropertyValidatorInterface
 {
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool;
 
-    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer;
+    public function validate(DefinitionPropertyTransfer $propertyTransfer): ?ValidatorMessageTransfer;
 }

@@ -7,21 +7,21 @@ namespace Picamator\TransferObject\Shared\Validator;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 
-class PathExistValidator implements PathExistValidatorInterface
+readonly class PathExistValidator implements PathExistValidatorInterface
 {
     use ValidatorMessageTrait;
 
     private const string ERROR_MESSAGE_TEMPLATE = 'Path "%s" does not exist.';
 
     public function __construct(
-        private readonly FilesystemInterface $filesystem,
+        private FilesystemInterface $filesystem,
     ) {
     }
 
-    public function validate(string $path): ValidatorMessageTransfer
+    public function validate(string $path): ?ValidatorMessageTransfer
     {
         if ($this->filesystem->exists($path)) {
-            return $this->createSuccessMessageTransfer();
+            return null;
         }
 
         $errorMessage = $this->getErrorMessage($path);

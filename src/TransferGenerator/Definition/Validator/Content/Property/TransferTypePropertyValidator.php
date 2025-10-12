@@ -22,7 +22,7 @@ readonly class TransferTypePropertyValidator implements PropertyValidatorInterfa
         return $propertyTransfer->transferType !== null;
     }
 
-    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
+    public function validate(DefinitionPropertyTransfer $propertyTransfer): ?ValidatorMessageTransfer
     {
         $namespaceTransfer = $propertyTransfer->transferType?->namespace;
         if ($namespaceTransfer === null) {

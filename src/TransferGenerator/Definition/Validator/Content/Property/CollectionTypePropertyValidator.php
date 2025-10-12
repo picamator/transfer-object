@@ -22,7 +22,7 @@ readonly class CollectionTypePropertyValidator implements PropertyValidatorInter
         return $propertyTransfer->collectionType !== null;
     }
 
-    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
+    public function validate(DefinitionPropertyTransfer $propertyTransfer): ?ValidatorMessageTransfer
     {
         $namespaceTransfer = $propertyTransfer->collectionType?->namespace;
         if ($namespaceTransfer === null) {

@@ -26,7 +26,7 @@ class BuildInTypePropertyValidator implements PropertyValidatorInterface
         return $buildInType !== null && !isset(self::$successCache[$buildInType->value]);
     }
 
-    public function validate(DefinitionPropertyTransfer $propertyTransfer): ValidatorMessageTransfer
+    public function validate(DefinitionPropertyTransfer $propertyTransfer): ?ValidatorMessageTransfer
     {
         /** @var \Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum $buildInType */
         $buildInType = $propertyTransfer->buildInType;
@@ -34,7 +34,7 @@ class BuildInTypePropertyValidator implements PropertyValidatorInterface
         if ($buildInType->isAllowed()) {
             self::$successCache[$buildInType->value] = true;
 
-            return $this->createSuccessMessageTransfer();
+            return null;
         }
 
         $errorMessage = $this->getErrorMessage($propertyTransfer);

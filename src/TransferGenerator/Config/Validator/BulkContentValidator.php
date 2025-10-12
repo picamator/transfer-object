@@ -45,7 +45,7 @@ readonly class BulkContentValidator implements BulkContentValidatorInterface
         $errorMessages = new ArrayObject();
         foreach ($this->contentValidators as $configValidator) {
             $messageTransfer = $configValidator->validate($configContentTransfer);
-            if ($messageTransfer->isValid) {
+            if ($messageTransfer === null || $messageTransfer->isValid) {
                 continue;
             }
 

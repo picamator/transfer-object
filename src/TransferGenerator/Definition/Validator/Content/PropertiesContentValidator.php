@@ -8,24 +8,21 @@ use ArrayObject;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
-use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
 /**
  * phpcs:disable Generic.Files.LineLength
  */
-class PropertiesContentValidator implements ContentValidatorInterface
+readonly class PropertiesContentValidator implements ContentValidatorInterface
 {
-    use ValidatorMessageTrait;
-
     /**
      * @param \ArrayObject<int,\Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Property\PropertyValidatorInterface> $propertyValidators
      */
     public function __construct(
-        private readonly ArrayObject $propertyValidators,
+        private ArrayObject $propertyValidators,
     ) {
     }
 
-    public function validate(DefinitionContentTransfer $contentTransfer): ValidatorMessageTransfer
+    public function validate(DefinitionContentTransfer $contentTransfer): ?ValidatorMessageTransfer
     {
         foreach ($contentTransfer->properties as $propertyTransfer) {
             $messageTransfer = $this->handlerPropertyValidators($propertyTransfer);
@@ -34,7 +31,7 @@ class PropertiesContentValidator implements ContentValidatorInterface
             }
         }
 
-        return $this->createSuccessMessageTransfer();
+        return null;
     }
 
     private function handlerPropertyValidators(DefinitionPropertyTransfer $propertyTransfer): ?ValidatorMessageTransfer
@@ -45,7 +42,7 @@ class PropertiesContentValidator implements ContentValidatorInterface
             }
 
             $messageTransfer = $validator->validate($propertyTransfer);
-            if (!$messageTransfer->isValid) {
+            if ($messageTransfer !== null) {
                 return $messageTransfer;
             }
         }

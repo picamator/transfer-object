@@ -42,8 +42,12 @@ class NumberTypePropertyValidatorTest extends TestCase
         $actual = $this->validatorMock->validate($propertyTransfer);
 
         // Assert
+        $this->assertNotNull($actual);
         $this->assertFalse($actual->isValid);
-        $this->assertStringContainsString('PHP extension BCMath was not loaded', $actual->errorMessage);
+        $this->assertStringContainsString(
+            'PHP extension BCMath was not loaded',
+            $actual->errorMessage,
+        );
     }
 
     #[RequiresPhpExtension('bcmath')]
@@ -71,7 +75,11 @@ class NumberTypePropertyValidatorTest extends TestCase
         $actual = $this->validatorMock->validate($propertyTransfer);
 
         // Assert
+        $this->assertNotNull($actual);
         $this->assertFalse($actual->isValid);
-        $this->assertStringContainsString('is not a BcMath\Number', $actual->errorMessage);
+        $this->assertStringContainsString(
+            'is not a BcMath\Number',
+            $actual->errorMessage,
+        );
     }
 }
