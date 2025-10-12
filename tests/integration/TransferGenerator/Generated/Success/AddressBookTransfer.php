@@ -8,9 +8,11 @@ use ArrayObject;
 use Picamator\Tests\Integration\TransferObject\TransferGenerator\Enum\AddressLabelEnum;
 use Picamator\Tests\Integration\TransferObject\TransferGenerator\Enum\Alias\AddressLabelEnum as AliasAddressLabelEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\EnumTransformerAttribute;
 
 /**
  * Specification:
@@ -35,7 +37,8 @@ final class AddressBookTransfer extends AbstractTransfer
     ];
 
     // addresses
-    #[CollectionPropertyTypeAttribute(AddressTransfer::class)]
+    #[CollectionInitiatorAttribute]
+    #[CollectionTransformerAttribute(AddressTransfer::class)]
     public const string ADDRESSES = 'addresses';
     private const int ADDRESSES_INDEX = 0;
 
@@ -46,7 +49,8 @@ final class AddressBookTransfer extends AbstractTransfer
     }
 
     // categories
-    #[ArrayPropertyTypeAttribute]
+    #[ArrayInitiatorAttribute]
+    #[ArrayTransformerAttribute]
     public const string CATEGORIES = 'categories';
     private const int CATEGORIES_INDEX = 1;
 
@@ -57,7 +61,7 @@ final class AddressBookTransfer extends AbstractTransfer
     }
 
     // label
-    #[EnumPropertyTypeAttribute(AddressLabelEnum::class)]
+    #[EnumTransformerAttribute(AddressLabelEnum::class)]
     public const string LABEL = 'label';
     private const int LABEL_INDEX = 2;
 
@@ -67,7 +71,7 @@ final class AddressBookTransfer extends AbstractTransfer
     }
 
     // labelAlias
-    #[EnumPropertyTypeAttribute(AliasAddressLabelEnum::class)]
+    #[EnumTransformerAttribute(AliasAddressLabelEnum::class)]
     public const string LABEL_ALIAS = 'labelAlias';
     private const int LABEL_ALIAS_INDEX = 3;
 

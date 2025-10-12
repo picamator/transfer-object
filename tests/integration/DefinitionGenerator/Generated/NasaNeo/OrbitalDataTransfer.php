@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\NasaNeo;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -173,7 +173,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // orbit_class
-    #[PropertyTypeAttribute(OrbitClassTransfer::class)]
+    #[TransferTransformerAttribute(OrbitClassTransfer::class)]
     public const string ORBIT_CLASS = 'orbit_class';
     private const int ORBIT_CLASS_INDEX = 14;
 

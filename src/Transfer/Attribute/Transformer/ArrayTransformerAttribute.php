@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\Transfer\Attribute;
+namespace Picamator\TransferObject\Transfer\Attribute\Transformer;
 
 use Attribute;
 
@@ -10,7 +10,7 @@ use Attribute;
  * @api
  */
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
-final readonly class ArrayPropertyTypeAttribute implements InitialPropertyTypeAttributeInterface
+final readonly class ArrayTransformerAttribute implements TransformerAttributeInterface
 {
     use DataAssertTrait;
 
@@ -35,13 +35,5 @@ final readonly class ArrayPropertyTypeAttribute implements InitialPropertyTypeAt
     public function toArray(mixed $data): array
     {
         return $data;
-    }
-
-    /**
-     * @return array<string|int,mixed>
-     */
-    public function getInitialValue(): array
-    {
-        return [];
     }
 }

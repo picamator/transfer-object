@@ -14,7 +14,7 @@ interface TemplateHelperInterface
 
     public function renderMetaData(): string;
 
-    public function renderAttribute(string $property): string;
+    public function renderMetaAttributes(string $property): string;
 
     public function renderDockBlock(string $property): string;
 

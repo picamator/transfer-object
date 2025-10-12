@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeEnum;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\AttributeTemplateEnum;
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\InitiatorAttributeEnum;
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransformerAttributeEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\DockBlockTemplateEnum;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
@@ -46,10 +46,18 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $this->expandImports(AttributeEnum::ARRAY_TYPE_ATTRIBUTE, $templateTransfer);
+        $initiatorEnum = InitiatorAttributeEnum::ARRAY;
+        $transformerEnum = TransformerAttributeEnum::ARRAY;
+
+        $this->expandImports($initiatorEnum->getImport(), $templateTransfer);
+        $this->expandImports($transformerEnum->getImport(), $templateTransfer);
 
         $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->attributes[$propertyName] = AttributeTemplateEnum::ARRAY_TYPE_ATTRIBUTE->value;
+        $templateTransfer->metaAttributes[$propertyName] = [
+            $initiatorEnum->value,
+            $transformerEnum->value,
+        ];
+
         $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY->value;
         $templateTransfer->nullables[$propertyName] = false;
     }
@@ -58,11 +66,19 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $this->expandImports(BuildInTypeEnum::ARRAY_OBJECT, $templateTransfer);
-        $this->expandImports(AttributeEnum::ARRAY_OBJECT_TYPE_ATTRIBUTE, $templateTransfer);
+        $initiatorEnum = InitiatorAttributeEnum::ARRAY_OBJECT;
+        $transformerEnum = TransformerAttributeEnum::ARRAY_OBJECT;
+
+        $this->expandImports(BuildInTypeEnum::ARRAY_OBJECT->value, $templateTransfer);
+        $this->expandImports($initiatorEnum->getImport(), $templateTransfer);
+        $this->expandImports($transformerEnum->getImport(), $templateTransfer);
 
         $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->attributes[$propertyName] = AttributeTemplateEnum::ARRAY_OBJECT_TYPE_ATTRIBUTE->value;
+        $templateTransfer->metaAttributes[$propertyName] = [
+            $initiatorEnum->value,
+            $transformerEnum->value,
+        ];
+
         $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY_OBJECT->value;
         $templateTransfer->nullables[$propertyName] = false;
     }

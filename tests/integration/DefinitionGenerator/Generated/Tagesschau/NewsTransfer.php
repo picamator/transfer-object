@@ -6,9 +6,11 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -48,7 +50,7 @@ final class NewsTransfer extends AbstractTransfer
     ];
 
     // brandingImage
-    #[PropertyTypeAttribute(BrandingImageTransfer::class)]
+    #[TransferTransformerAttribute(BrandingImageTransfer::class)]
     public const string BRANDING_IMAGE = 'brandingImage';
     private const int BRANDING_IMAGE_INDEX = 0;
 
@@ -121,7 +123,8 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // geotags
-    #[ArrayPropertyTypeAttribute]
+    #[ArrayInitiatorAttribute]
+    #[ArrayTransformerAttribute]
     public const string GEOTAGS = 'geotags';
     private const int GEOTAGS_INDEX = 8;
 
@@ -141,7 +144,8 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // regionIds
-    #[ArrayPropertyTypeAttribute]
+    #[ArrayInitiatorAttribute]
+    #[ArrayTransformerAttribute]
     public const string REGION_IDS = 'regionIds';
     private const int REGION_IDS_INDEX = 10;
 
@@ -179,7 +183,8 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // tags
-    #[CollectionPropertyTypeAttribute(TagsTransfer::class)]
+    #[CollectionInitiatorAttribute]
+    #[CollectionTransformerAttribute(TagsTransfer::class)]
     public const string TAGS = 'tags';
     private const int TAGS_INDEX = 14;
 
@@ -190,7 +195,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // teaserImage
-    #[PropertyTypeAttribute(TeaserImageTransfer::class)]
+    #[TransferTransformerAttribute(TeaserImageTransfer::class)]
     public const string TEASER_IMAGE = 'teaserImage';
     private const int TEASER_IMAGE_INDEX = 15;
 
@@ -218,7 +223,8 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // tracking
-    #[CollectionPropertyTypeAttribute(TrackingTransfer::class)]
+    #[CollectionInitiatorAttribute]
+    #[CollectionTransformerAttribute(TrackingTransfer::class)]
     public const string TRACKING = 'tracking';
     private const int TRACKING_INDEX = 18;
 

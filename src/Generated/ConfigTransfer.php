@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -26,7 +26,7 @@ final class ConfigTransfer extends AbstractTransfer
     ];
 
     // content
-    #[PropertyTypeAttribute(ConfigContentTransfer::class)]
+    #[TransferTransformerAttribute(ConfigContentTransfer::class)]
     public const string CONTENT = 'content';
     private const int CONTENT_INDEX = 0;
 
@@ -36,7 +36,7 @@ final class ConfigTransfer extends AbstractTransfer
     }
 
     // validator
-    #[PropertyTypeAttribute(ValidatorTransfer::class)]
+    #[TransferTransformerAttribute(ValidatorTransfer::class)]
     public const string VALIDATOR = 'validator';
     private const int VALIDATOR_INDEX = 1;
 

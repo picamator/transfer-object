@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -26,7 +26,7 @@ final class DefinitionGeneratorTransfer extends AbstractTransfer
     ];
 
     // content
-    #[PropertyTypeAttribute(DefinitionGeneratorContentTransfer::class)]
+    #[TransferTransformerAttribute(DefinitionGeneratorContentTransfer::class)]
     public const string CONTENT = 'content';
     private const int CONTENT_INDEX = 0;
 

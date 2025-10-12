@@ -9,10 +9,12 @@ use DateTime;
 use DateTimeImmutable;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\ArrayObjectPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\DateTimePropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\EnumPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayObjectTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\DateTimeTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\EnumTransformerAttribute;
 
 /**
  * Specification:
@@ -42,7 +44,8 @@ final class ItemTransfer extends AbstractTransfer
     ];
 
     // iAmArray
-    #[ArrayPropertyTypeAttribute]
+    #[ArrayInitiatorAttribute]
+    #[ArrayTransformerAttribute]
     public const string I_AM_ARRAY = 'iAmArray';
     private const int I_AM_ARRAY_INDEX = 0;
 
@@ -53,7 +56,8 @@ final class ItemTransfer extends AbstractTransfer
     }
 
     // iAmArrayObject
-    #[ArrayObjectPropertyTypeAttribute]
+    #[ArrayObjectInitiatorAttribute]
+    #[ArrayObjectTransformerAttribute]
     public const string I_AM_ARRAY_OBJECT = 'iAmArrayObject';
     private const int I_AM_ARRAY_OBJECT_INDEX = 1;
 
@@ -73,7 +77,7 @@ final class ItemTransfer extends AbstractTransfer
     }
 
     // iAmDateTime
-    #[DateTimePropertyTypeAttribute(DateTime::class)]
+    #[DateTimeTransformerAttribute(DateTime::class)]
     public const string I_AM_DATE_TIME = 'iAmDateTime';
     private const int I_AM_DATE_TIME_INDEX = 3;
 
@@ -83,7 +87,7 @@ final class ItemTransfer extends AbstractTransfer
     }
 
     // iAmDateTimeImmutable
-    #[DateTimePropertyTypeAttribute(DateTimeImmutable::class)]
+    #[DateTimeTransformerAttribute(DateTimeImmutable::class)]
     public const string I_AM_DATE_TIME_IMMUTABLE = 'iAmDateTimeImmutable';
     private const int I_AM_DATE_TIME_IMMUTABLE_INDEX = 4;
 
@@ -93,7 +97,7 @@ final class ItemTransfer extends AbstractTransfer
     }
 
     // iAmEnum
-    #[EnumPropertyTypeAttribute(ImBackedEnum::class)]
+    #[EnumTransformerAttribute(ImBackedEnum::class)]
     public const string I_AM_ENUM = 'iAmEnum';
     private const int I_AM_ENUM_INDEX = 5;
 

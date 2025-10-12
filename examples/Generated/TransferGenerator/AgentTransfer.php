@@ -6,8 +6,9 @@ namespace Picamator\Examples\TransferObject\Generated\TransferGenerator;
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -28,7 +29,7 @@ final class AgentTransfer extends AbstractTransfer
     ];
 
     // customer
-    #[PropertyTypeAttribute(CustomerTransfer::class)]
+    #[TransferTransformerAttribute(CustomerTransfer::class)]
     public const string CUSTOMER = 'customer';
     private const int CUSTOMER_INDEX = 0;
 
@@ -38,7 +39,8 @@ final class AgentTransfer extends AbstractTransfer
     }
 
     // merchants
-    #[CollectionPropertyTypeAttribute(MerchantTransfer::class)]
+    #[CollectionInitiatorAttribute]
+    #[CollectionTransformerAttribute(MerchantTransfer::class)]
     public const string MERCHANTS = 'merchants';
     private const int MERCHANTS_INDEX = 1;
 

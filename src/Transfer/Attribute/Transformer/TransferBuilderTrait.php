@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\Transfer\Attribute;
+namespace Picamator\TransferObject\Transfer\Attribute\Transformer;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\TransferInterface;

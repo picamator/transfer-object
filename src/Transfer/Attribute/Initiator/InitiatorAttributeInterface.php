@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\Transfer\Attribute;
+namespace Picamator\TransferObject\Transfer\Attribute\Initiator;
 
 /**
  * @api
  */
-interface InitialPropertyTypeAttributeInterface extends PropertyTypeAttributeInterface
+interface InitiatorAttributeInterface
 {
     /**
      * @return iterable<mixed>

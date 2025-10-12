@@ -15,7 +15,7 @@ Template:
     type: ArrayObject
   metaConstants:
     type: ArrayObject
-  attributes:
+  metaAttributes:
     type: ArrayObject
   dockBlocks:
     type: ArrayObject

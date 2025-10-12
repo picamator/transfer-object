@@ -6,7 +6,8 @@ namespace Picamator\TransferObject\Generated;
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\ArrayObjectPropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayObjectTransformerAttribute;
 
 /**
  * Specification:
@@ -22,32 +23,21 @@ final class TemplateTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 10;
 
     protected const array META_DATA = [
-        self::ATTRIBUTES_INDEX => self::ATTRIBUTES,
         self::CLASS_NAME_INDEX => self::CLASS_NAME,
         self::CLASS_NAMESPACE_INDEX => self::CLASS_NAMESPACE,
         self::DEFINITION_PATH_INDEX => self::DEFINITION_PATH,
         self::DOCK_BLOCKS_INDEX => self::DOCK_BLOCKS,
         self::IMPORTS_INDEX => self::IMPORTS,
+        self::META_ATTRIBUTES_INDEX => self::META_ATTRIBUTES,
         self::META_CONSTANTS_INDEX => self::META_CONSTANTS,
         self::NULLABLES_INDEX => self::NULLABLES,
         self::PROPERTIES_INDEX => self::PROPERTIES,
         self::PROTECTS_INDEX => self::PROTECTS,
     ];
 
-    // attributes
-    #[ArrayObjectPropertyTypeAttribute]
-    public const string ATTRIBUTES = 'attributes';
-    private const int ATTRIBUTES_INDEX = 0;
-
-    /** @var \ArrayObject<string|int,mixed> */
-    public ArrayObject $attributes {
-        get => $this->getData(self::ATTRIBUTES_INDEX);
-        set => $this->setData(self::ATTRIBUTES_INDEX, $value);
-    }
-
     // className
     public const string CLASS_NAME = 'className';
-    private const int CLASS_NAME_INDEX = 1;
+    private const int CLASS_NAME_INDEX = 0;
 
     public string $className {
         get => $this->getData(self::CLASS_NAME_INDEX);
@@ -56,7 +46,7 @@ final class TemplateTransfer extends AbstractTransfer
 
     // classNamespace
     public const string CLASS_NAMESPACE = 'classNamespace';
-    private const int CLASS_NAMESPACE_INDEX = 2;
+    private const int CLASS_NAMESPACE_INDEX = 1;
 
     public string $classNamespace {
         get => $this->getData(self::CLASS_NAMESPACE_INDEX);
@@ -65,7 +55,7 @@ final class TemplateTransfer extends AbstractTransfer
 
     // definitionPath
     public const string DEFINITION_PATH = 'definitionPath';
-    private const int DEFINITION_PATH_INDEX = 3;
+    private const int DEFINITION_PATH_INDEX = 2;
 
     public string $definitionPath {
         get => $this->getData(self::DEFINITION_PATH_INDEX);
@@ -73,9 +63,10 @@ final class TemplateTransfer extends AbstractTransfer
     }
 
     // dockBlocks
-    #[ArrayObjectPropertyTypeAttribute]
+    #[ArrayObjectInitiatorAttribute]
+    #[ArrayObjectTransformerAttribute]
     public const string DOCK_BLOCKS = 'dockBlocks';
-    private const int DOCK_BLOCKS_INDEX = 4;
+    private const int DOCK_BLOCKS_INDEX = 3;
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $dockBlocks {
@@ -84,9 +75,10 @@ final class TemplateTransfer extends AbstractTransfer
     }
 
     // imports
-    #[ArrayObjectPropertyTypeAttribute]
+    #[ArrayObjectInitiatorAttribute]
+    #[ArrayObjectTransformerAttribute]
     public const string IMPORTS = 'imports';
-    private const int IMPORTS_INDEX = 5;
+    private const int IMPORTS_INDEX = 4;
 
     /** @var \ArrayObject<string|int,mixed> */
     public ArrayObject $imports {
@@ -94,8 +86,21 @@ final class TemplateTransfer extends AbstractTransfer
         set => $this->setData(self::IMPORTS_INDEX, $value);
     }
 
+    // metaAttributes
+    #[ArrayObjectInitiatorAttribute]
+    #[ArrayObjectTransformerAttribute]
+    public const string META_ATTRIBUTES = 'metaAttributes';
+    private const int META_ATTRIBUTES_INDEX = 5;
+
+    /** @var \ArrayObject<string|int,mixed> */
+    public ArrayObject $metaAttributes {
+        get => $this->getData(self::META_ATTRIBUTES_INDEX);
+        set => $this->setData(self::META_ATTRIBUTES_INDEX, $value);
+    }
+
     // metaConstants
-    #[ArrayObjectPropertyTypeAttribute]
+    #[ArrayObjectInitiatorAttribute]
+    #[ArrayObjectTransformerAttribute]
     public const string META_CONSTANTS = 'metaConstants';
     private const int META_CONSTANTS_INDEX = 6;
 
@@ -106,7 +111,8 @@ final class TemplateTransfer extends AbstractTransfer
     }
 
     // nullables
-    #[ArrayObjectPropertyTypeAttribute]
+    #[ArrayObjectInitiatorAttribute]
+    #[ArrayObjectTransformerAttribute]
     public const string NULLABLES = 'nullables';
     private const int NULLABLES_INDEX = 7;
 
@@ -117,7 +123,8 @@ final class TemplateTransfer extends AbstractTransfer
     }
 
     // properties
-    #[ArrayObjectPropertyTypeAttribute]
+    #[ArrayObjectInitiatorAttribute]
+    #[ArrayObjectTransformerAttribute]
     public const string PROPERTIES = 'properties';
     private const int PROPERTIES_INDEX = 8;
 
@@ -128,7 +135,8 @@ final class TemplateTransfer extends AbstractTransfer
     }
 
     // protects
-    #[ArrayObjectPropertyTypeAttribute]
+    #[ArrayObjectInitiatorAttribute]
+    #[ArrayObjectTransformerAttribute]
     public const string PROTECTS = 'protects';
     private const int PROTECTS_INDEX = 9;
 

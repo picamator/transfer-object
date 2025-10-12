@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\Transfer\Attribute;
+namespace Picamator\TransferObject\Transfer\Attribute\Transformer;
 
 use Attribute;
 use Picamator\TransferObject\Transfer\TransferInterface;
@@ -11,7 +11,7 @@ use Picamator\TransferObject\Transfer\TransferInterface;
  * @api
  */
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
-final readonly class PropertyTypeAttribute implements PropertyTypeAttributeInterface
+final readonly class TransferTransformerAttribute implements TransformerAttributeInterface
 {
     use TransferBuilderTrait;
 

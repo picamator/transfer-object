@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Examples\TransferObject\Generated\DefinitionGenerator;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -26,7 +26,7 @@ final class MeasurementUnitTransfer extends AbstractTransfer
     ];
 
     // box
-    #[PropertyTypeAttribute(BoxTransfer::class)]
+    #[TransferTransformerAttribute(BoxTransfer::class)]
     public const string BOX = 'box';
     private const int BOX_INDEX = 0;
 
@@ -36,7 +36,7 @@ final class MeasurementUnitTransfer extends AbstractTransfer
     }
 
     // palette
-    #[PropertyTypeAttribute(PaletteTransfer::class)]
+    #[TransferTransformerAttribute(PaletteTransfer::class)]
     public const string PALETTE = 'palette';
     private const int PALETTE_INDEX = 1;
 

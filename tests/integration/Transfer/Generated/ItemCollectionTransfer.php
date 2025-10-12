@@ -6,8 +6,9 @@ namespace Picamator\Tests\Integration\TransferObject\Transfer\Generated;
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -28,7 +29,7 @@ final class ItemCollectionTransfer extends AbstractTransfer
     ];
 
     // item
-    #[PropertyTypeAttribute(ItemTransfer::class)]
+    #[TransferTransformerAttribute(ItemTransfer::class)]
     public const string ITEM = 'item';
     private const int ITEM_INDEX = 0;
 
@@ -38,7 +39,8 @@ final class ItemCollectionTransfer extends AbstractTransfer
     }
 
     // items
-    #[CollectionPropertyTypeAttribute(ItemTransfer::class)]
+    #[CollectionInitiatorAttribute]
+    #[CollectionTransformerAttribute(ItemTransfer::class)]
     public const string ITEMS = 'items';
     private const int ITEMS_INDEX = 1;
 

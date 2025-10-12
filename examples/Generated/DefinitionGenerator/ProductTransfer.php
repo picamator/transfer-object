@@ -6,9 +6,11 @@ namespace Picamator\Examples\TransferObject\Generated\DefinitionGenerator;
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -39,7 +41,8 @@ final class ProductTransfer extends AbstractTransfer
     ];
 
     // availabilities
-    #[CollectionPropertyTypeAttribute(AvailabilitiesTransfer::class)]
+    #[CollectionInitiatorAttribute]
+    #[CollectionTransformerAttribute(AvailabilitiesTransfer::class)]
     public const string AVAILABILITIES = 'availabilities';
     private const int AVAILABILITIES_INDEX = 0;
 
@@ -59,7 +62,8 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // deliveryOptions
-    #[CollectionPropertyTypeAttribute(DeliveryOptionsTransfer::class)]
+    #[CollectionInitiatorAttribute]
+    #[CollectionTransformerAttribute(DeliveryOptionsTransfer::class)]
     public const string DELIVERY_OPTIONS = 'deliveryOptions';
     private const int DELIVERY_OPTIONS_INDEX = 2;
 
@@ -70,7 +74,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // details
-    #[PropertyTypeAttribute(DetailsTransfer::class)]
+    #[TransferTransformerAttribute(DetailsTransfer::class)]
     public const string DETAILS = 'details';
     private const int DETAILS_INDEX = 3;
 
@@ -89,7 +93,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // labels
-    #[PropertyTypeAttribute(LabelsTransfer::class)]
+    #[TransferTransformerAttribute(LabelsTransfer::class)]
     public const string LABELS = 'labels';
     private const int LABELS_INDEX = 5;
 
@@ -99,7 +103,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // measurementUnit
-    #[PropertyTypeAttribute(MeasurementUnitTransfer::class)]
+    #[TransferTransformerAttribute(MeasurementUnitTransfer::class)]
     public const string MEASUREMENT_UNIT = 'measurementUnit';
     private const int MEASUREMENT_UNIT_INDEX = 6;
 
@@ -145,7 +149,8 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // stores
-    #[ArrayPropertyTypeAttribute]
+    #[ArrayInitiatorAttribute]
+    #[ArrayTransformerAttribute]
     public const string STORES = 'stores';
     private const int STORES_INDEX = 11;
 

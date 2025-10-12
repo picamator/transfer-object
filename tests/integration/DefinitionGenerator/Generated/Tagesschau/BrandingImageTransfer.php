@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Tagesschau;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -47,7 +47,7 @@ final class BrandingImageTransfer extends AbstractTransfer
     }
 
     // imageVariants
-    #[PropertyTypeAttribute(ImageVariantsTransfer::class)]
+    #[TransferTransformerAttribute(ImageVariantsTransfer::class)]
     public const string IMAGE_VARIANTS = 'imageVariants';
     private const int IMAGE_VARIANTS_INDEX = 2;
 

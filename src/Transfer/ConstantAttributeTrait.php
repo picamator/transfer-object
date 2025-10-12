@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Transfer;
 
 use Generator;
-use Picamator\TransferObject\Transfer\Attribute\InitialPropertyTypeAttributeInterface;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttributeInterface;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\InitiatorAttributeInterface;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransformerAttributeInterface;
 use ReflectionAttribute;
 use ReflectionClassConstant;
 use ReflectionObject;
@@ -20,14 +20,14 @@ trait ConstantAttributeTrait
     private ?WeakReference $_reflectionObjectReference = null;
 
     /**
-     * @return array<string, \Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttributeInterface>
+     * @return array<string, \Picamator\TransferObject\Transfer\Attribute\Transformer\TransformerAttributeInterface>
      */
-    final protected function getTypeAttributes(): array
+    final protected function getTransformerAttributes(): array
     {
         $typeAttributes = [];
         foreach ($this->getReflectionConstants() as $reflectionConstant) {
             $attributeReflections = $reflectionConstant->getAttributes(
-                name: PropertyTypeAttributeInterface::class,
+                name: TransformerAttributeInterface::class,
                 flags: ReflectionAttribute::IS_INSTANCEOF,
             );
 
@@ -44,13 +44,13 @@ trait ConstantAttributeTrait
     }
 
     /**
-     * @return Generator<string, \Picamator\TransferObject\Transfer\Attribute\InitialPropertyTypeAttributeInterface>
+     * @return Generator<string, \Picamator\TransferObject\Transfer\Attribute\Initiator\InitiatorAttributeInterface>
      */
-    final protected function getInitialAttributes(): Generator
+    final protected function getInitiatorAttributes(): Generator
     {
         foreach ($this->getReflectionConstants() as $reflectionConstant) {
             $attributeReflections = $reflectionConstant->getAttributes(
-                name: InitialPropertyTypeAttributeInterface::class,
+                name: InitiatorAttributeInterface::class,
                 flags: ReflectionAttribute::IS_INSTANCEOF,
             );
 

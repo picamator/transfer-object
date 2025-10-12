@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\Transfer\Attribute;
+namespace Picamator\TransferObject\Transfer\Attribute\Transformer;
 
 use Attribute;
 use BcMath\Number;
@@ -11,7 +11,7 @@ use BcMath\Number;
  * @api
  */
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
-final readonly class NumberPropertyTypeAttribute implements PropertyTypeAttributeInterface
+final readonly class NumberTransformerAttribute implements TransformerAttributeInterface
 {
     use DataAssertTrait;
 

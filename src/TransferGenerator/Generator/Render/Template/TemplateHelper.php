@@ -13,7 +13,9 @@ class TemplateHelper implements TemplateHelperInterface
     private const string IMPORT_TEMPLATE = 'use %s;';
     private const string META_DATA_TEMPLATE = '        self::%1$s_INDEX => self::%1$s,';
 
-    private const string PADDING_LEFT = PHP_EOL . '    ';
+    private const string PADDING_LEFT = '    ';
+    private const string PHP_EOL_PADDING_LEFT = PHP_EOL . self::PADDING_LEFT;
+
     private const string EMPTY_STRING = '';
     private const string NULLABLE_TYPE = '?';
     private const string NULLABLE_UNION = 'null|';
@@ -52,15 +54,21 @@ class TemplateHelper implements TemplateHelperInterface
         return implode(PHP_EOL, $metaData);
     }
 
-    public function renderAttribute(string $property): string
+    public function renderMetaAttributes(string $property): string
     {
-        /** @var string|null $attribute */
-        $attribute = $this->templateTransfer->attributes[$property] ?? null;
-        if ($attribute === null) {
+        /** @var array<string>|null $metaAttributes */
+        $metaAttributes = $this->templateTransfer->metaAttributes[$property] ?? null;
+        if ($metaAttributes === null) {
             return self::EMPTY_STRING;
         }
 
-        return self::PADDING_LEFT . $attribute;
+        natsort($metaAttributes);
+        $metaAttributes = array_map(
+            fn(string $attribute): string => self::PADDING_LEFT . $attribute,
+            $metaAttributes,
+        );
+
+        return PHP_EOL . implode(PHP_EOL, $metaAttributes);
     }
 
     public function renderDockBlock(string $property): string
@@ -71,7 +79,7 @@ class TemplateHelper implements TemplateHelperInterface
             return self::EMPTY_STRING;
         }
 
-        return self::PADDING_LEFT . $dockBlock;
+        return self::PHP_EOL_PADDING_LEFT . $dockBlock;
     }
 
     public function renderPropertyDeclaration(string $property): string

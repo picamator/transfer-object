@@ -6,9 +6,11 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\ArrayPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\CollectionPropertyTypeAttribute;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -50,7 +52,7 @@ final class ForecastTransfer extends AbstractTransfer
     }
 
     // clouds
-    #[PropertyTypeAttribute(CloudsTransfer::class)]
+    #[TransferTransformerAttribute(CloudsTransfer::class)]
     public const string CLOUDS = 'clouds';
     private const int CLOUDS_INDEX = 1;
 
@@ -69,7 +71,7 @@ final class ForecastTransfer extends AbstractTransfer
     }
 
     // coord
-    #[PropertyTypeAttribute(CoordTransfer::class)]
+    #[TransferTransformerAttribute(CoordTransfer::class)]
     public const string COORD = 'coord';
     private const int COORD_INDEX = 3;
 
@@ -97,7 +99,7 @@ final class ForecastTransfer extends AbstractTransfer
     }
 
     // main
-    #[PropertyTypeAttribute(MainTransfer::class)]
+    #[TransferTransformerAttribute(MainTransfer::class)]
     public const string MAIN = 'main';
     private const int MAIN_INDEX = 6;
 
@@ -116,7 +118,8 @@ final class ForecastTransfer extends AbstractTransfer
     }
 
     // rain
-    #[ArrayPropertyTypeAttribute]
+    #[ArrayInitiatorAttribute]
+    #[ArrayTransformerAttribute]
     public const string RAIN = 'rain';
     private const int RAIN_INDEX = 8;
 
@@ -127,7 +130,7 @@ final class ForecastTransfer extends AbstractTransfer
     }
 
     // sys
-    #[PropertyTypeAttribute(SysTransfer::class)]
+    #[TransferTransformerAttribute(SysTransfer::class)]
     public const string SYS = 'sys';
     private const int SYS_INDEX = 9;
 
@@ -155,7 +158,8 @@ final class ForecastTransfer extends AbstractTransfer
     }
 
     // weather
-    #[CollectionPropertyTypeAttribute(WeatherTransfer::class)]
+    #[CollectionInitiatorAttribute]
+    #[CollectionTransformerAttribute(WeatherTransfer::class)]
     public const string WEATHER = 'weather';
     private const int WEATHER_INDEX = 12;
 
@@ -166,7 +170,7 @@ final class ForecastTransfer extends AbstractTransfer
     }
 
     // wind
-    #[PropertyTypeAttribute(WindTransfer::class)]
+    #[TransferTransformerAttribute(WindTransfer::class)]
     public const string WIND = 'wind';
     private const int WIND_INDEX = 13;
 

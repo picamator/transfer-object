@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\Transfer\Attribute;
+namespace Picamator\TransferObject\Transfer\Attribute\Transformer;
 
 use Attribute;
 use DateTimeInterface;
@@ -11,7 +11,7 @@ use DateTimeInterface;
  * @api
  */
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
-final readonly class DateTimePropertyTypeAttribute implements PropertyTypeAttributeInterface
+final readonly class DateTimeTransformerAttribute implements TransformerAttributeInterface
 {
     use DataAssertTrait;
 

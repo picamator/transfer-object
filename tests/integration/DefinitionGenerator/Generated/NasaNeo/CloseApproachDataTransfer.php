@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\NasaNeo;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\PropertyTypeAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
 /**
  * Specification:
@@ -57,7 +57,7 @@ final class CloseApproachDataTransfer extends AbstractTransfer
     }
 
     // miss_distance
-    #[PropertyTypeAttribute(MissDistanceTransfer::class)]
+    #[TransferTransformerAttribute(MissDistanceTransfer::class)]
     public const string MISS_DISTANCE = 'miss_distance';
     private const int MISS_DISTANCE_INDEX = 3;
 
@@ -76,7 +76,7 @@ final class CloseApproachDataTransfer extends AbstractTransfer
     }
 
     // relative_velocity
-    #[PropertyTypeAttribute(RelativeVelocityTransfer::class)]
+    #[TransferTransformerAttribute(RelativeVelocityTransfer::class)]
     public const string RELATIVE_VELOCITY = 'relative_velocity';
     private const int RELATIVE_VELOCITY_INDEX = 5;
 
