@@ -8,7 +8,7 @@ use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 
-trait DefinitionGeneratorHelperTrait
+trait DefinitionGeneratorTrait
 {
     use SharedFactoryTrait;
 

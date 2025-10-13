@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
-use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
+use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorTrait;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
@@ -17,7 +17,7 @@ use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 #[Group('transfer-generator')]
 class TransferGeneratorFacadeErrorTest extends TestCase
 {
-    use TransferGeneratorHelperTrait;
+    use TransferGeneratorTrait;
 
     private const string CONFIG_PATH_TEMPLATE = __DIR__ . '/data/config/error/%s/generator.config.yml';
 

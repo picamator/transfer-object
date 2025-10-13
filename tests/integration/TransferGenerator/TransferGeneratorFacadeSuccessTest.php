@@ -7,12 +7,12 @@ namespace Picamator\Tests\Integration\TransferObject\TransferGenerator;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
-use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
+use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorTrait;
 
 #[Group('transfer-generator')]
 class TransferGeneratorFacadeSuccessTest extends TestCase
 {
-    use TransferGeneratorHelperTrait;
+    use TransferGeneratorTrait;
 
     private const string GENERATOR_CONFIG_PATH = __DIR__ . '/data/config/success/generator.config.yml';
     private const string TRANSFER_OBJECT_PATH = __DIR__ . '/Generated/Success/';

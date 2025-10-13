@@ -8,14 +8,14 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Picamator\Tests\Unit\TransferObject\Helper\FileHelperTrait;
+use Picamator\Tests\Unit\TransferObject\Helper\FileTrait;
 use Picamator\TransferObject\Shared\Exception\FileReaderException;
 use Picamator\TransferObject\Shared\Filesystem\FileReader;
 
 #[Group('shared')]
 class FileReaderTest extends TestCase
 {
-    use FileHelperTrait;
+    use FileTrait;
 
     private const string FILE_NAME = 'test.yml';
 

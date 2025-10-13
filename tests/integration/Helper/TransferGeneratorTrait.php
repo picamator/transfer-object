@@ -8,7 +8,7 @@ use ArrayObject;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 
-trait TransferGeneratorHelperTrait
+trait TransferGeneratorTrait
 {
     /**
      * @throws \Throwable
@@ -48,7 +48,7 @@ trait TransferGeneratorHelperTrait
     }
 
     /**
-     * @param ArrayObject<int, \Picamator\TransferObject\Generated\ValidatorMessageTransfer> $validatorMessages
+     * @param \ArrayObject<int, \Picamator\TransferObject\Generated\ValidatorMessageTransfer> $validatorMessages
      */
     private function groupValidatorMessages(ArrayObject $validatorMessages): string
     {

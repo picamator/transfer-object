@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Integration\TransferObject\Helper;
 
-trait OutputBufferHelperTrait
+trait OutputBufferTrait
 {
     final protected function getOutputBuffer(string $scriptPath): bool|string
     {

@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\TestDoxFormatter;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
-use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
+use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorTrait;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\BcMath\BcMathNumberTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemCollectionTransfer;
@@ -29,7 +29,7 @@ use TypeError;
 #[Group('transfer')]
 class TransferTest extends TestCase
 {
-    use TransferGeneratorHelperTrait;
+    use TransferGeneratorTrait;
 
     private const string GENERATOR_CONFIG_PATH = __DIR__ . '/data/config/generator.config.yml';
     private const string GENERATOR_BC_MATH_CONFIG_PATH = __DIR__ . '/data/config/bcmath/generator.config.yml';
