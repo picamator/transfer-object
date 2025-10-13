@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\Transfer\Advanced;
 
 use BcMath\Number;
-use Picamator\TransferObject\Transfer\TransferAdapterTrait;
+use Picamator\TransferObject\Transfer\Adapter\TransferAdapterTrait;
 use Picamator\TransferObject\Transfer\TransferInterface;
 
 class BcMathBookData implements TransferInterface

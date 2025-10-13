@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Examples\TransferObject\Advanced;
 
-use Picamator\TransferObject\Transfer\TransferAdapterTrait;
+use Picamator\TransferObject\Transfer\Adapter\TransferAdapterTrait;
 use Picamator\TransferObject\Transfer\TransferInterface;
 
 class AddressData implements TransferInterface

@@ -21,7 +21,7 @@ use Picamator\Tests\Integration\TransferObject\Helper\DefinitionGeneratorHelperT
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacadeInterface;
-use Picamator\TransferObject\Transfer\FilterArrayTrait;
+use Picamator\TransferObject\Transfer\Filter\FilterArrayTrait;
 
 #[Large]
 #[Group('definition-generator')]

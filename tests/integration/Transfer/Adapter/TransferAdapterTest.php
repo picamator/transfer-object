@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\Tests\Integration\TransferObject\Transfer;
+namespace Picamator\Tests\Integration\TransferObject\Transfer\Adapter;
 
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RequiresPhpExtension;

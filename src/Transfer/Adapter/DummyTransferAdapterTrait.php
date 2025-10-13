@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\Transfer;
+namespace Picamator\TransferObject\Transfer\Adapter;
 
 use EmptyIterator;
 use Traversable;
