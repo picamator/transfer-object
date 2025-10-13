@@ -18,10 +18,10 @@ use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Nas
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\OpenWeather\ForecastTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Tagesschau\ArdNewsTransfer;
 use Picamator\Tests\Integration\TransferObject\Helper\DefinitionGeneratorHelperTrait;
+use Picamator\Tests\Integration\TransferObject\Helper\FilterArrayTrait;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacadeInterface;
-use Picamator\TransferObject\Transfer\Filter\FilterArrayTrait;
 
 #[Large]
 #[Group('definition-generator')]

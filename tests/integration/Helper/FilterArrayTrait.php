@@ -2,11 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\Transfer\Filter;
+namespace Picamator\Tests\Integration\TransferObject\Helper;
 
-/**
- * @api
- */
 trait FilterArrayTrait
 {
     /**
