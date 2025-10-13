@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\Transfer;
+namespace Picamator\TransferObject\Transfer\Attribute;
 
 use Generator;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\InitiatorAttributeInterface;
@@ -12,7 +12,7 @@ use ReflectionClassConstant;
 use ReflectionObject;
 use WeakReference;
 
-trait ConstantAttributeTrait
+trait AttributeTrait
 {
     /**
      * @var \WeakReference<\ReflectionObject>|null

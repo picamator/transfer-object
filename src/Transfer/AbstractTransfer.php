@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Transfer;
 
+use Picamator\TransferObject\Transfer\Attribute\AttributeTrait;
 use SplFixedArray;
 use Traversable;
 
@@ -12,7 +13,7 @@ use Traversable;
  */
 abstract class AbstractTransfer implements TransferInterface
 {
-    use ConstantAttributeTrait;
+    use AttributeTrait;
 
     /**
      * @var int<0, max>
