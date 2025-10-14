@@ -24,7 +24,7 @@ trait AttributeTrait
      */
     final protected function getTransformerAttributes(): array
     {
-        $typeAttributes = [];
+        $attributes = [];
         foreach ($this->getReflectionConstants() as $reflectionConstant) {
             $attributeReflections = $reflectionConstant->getAttributes(
                 name: TransformerAttributeInterface::class,
@@ -37,10 +37,10 @@ trait AttributeTrait
 
             /** @var string $propertyName */
             $propertyName = $reflectionConstant->getValue();
-            $typeAttributes[$propertyName] = $attributeReflections[0]->newInstance();
+            $attributes[$propertyName] = $attributeReflections[0]->newInstance();
         }
 
-        return $typeAttributes;
+        return $attributes;
     }
 
     /**
