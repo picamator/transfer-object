@@ -32,13 +32,15 @@ final readonly class CollectionTransformerAttribute implements TransformerAttrib
     {
         $this->assertArray($data);
 
-        /**
-         * @var array<string|int, mixed> $data
-         * @var array<string|int,\Picamator\TransferObject\Transfer\TransferInterface> $collectionData
-         */
-        $collectionData = array_map($this->createTransfer(...), $data);
+        /** @var \ArrayObject<string|int,\Picamator\TransferObject\Transfer\TransferInterface> $collection */
+        $collection = new ArrayObject();
 
-        return new ArrayObject($collectionData);
+        /** @var array<string|int, mixed> $data */
+        foreach ($data as $key => $item) {
+            $collection->offsetSet($key, $this->createTransfer($item));
+        }
+
+        return $collection;
     }
 
     /**
