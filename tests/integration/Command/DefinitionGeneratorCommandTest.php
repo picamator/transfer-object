@@ -43,10 +43,7 @@ class DefinitionGeneratorCommandTest extends TestCase
 
         // Assert
         $this->assertSame(0, $this->commandTester->getStatusCode());
-        $this->assertStringContainsString(
-            'Successfully generated 1 definition file(s)!',
-            $output,
-        );
+        $this->assertStringContainsString('Successfully generated 1 definition file(s)!', $output);
         $this->assertFileExists(__DIR__ . '/Generated/Definition/Success/customer.transfer.yml');
     }
 
@@ -65,9 +62,6 @@ class DefinitionGeneratorCommandTest extends TestCase
 
         // Assert
         $this->assertSame(1, $this->commandTester->getStatusCode());
-        $this->assertStringContainsString(
-            '[ERROR] Invalid property name "0".',
-            $output,
-        );
+        $this->assertStringContainsString('[ERROR] Invalid property name "0".', $output);
     }
 }
