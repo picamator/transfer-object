@@ -47,15 +47,12 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
         TemplateTransfer $templateTransfer,
     ): void {
         $initiatorEnum = InitiatorAttributeEnum::ARRAY;
-        $transformerEnum = TransformerAttributeEnum::ARRAY;
 
         $this->expandImports($initiatorEnum->getImport(), $templateTransfer);
-        $this->expandImports($transformerEnum->getImport(), $templateTransfer);
 
         $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->metaAttributes[$propertyName] = [
             $initiatorEnum->value,
-            $transformerEnum->value,
         ];
 
         $templateTransfer->dockBlocks[$propertyName] = DockBlockTemplateEnum::ARRAY->value;

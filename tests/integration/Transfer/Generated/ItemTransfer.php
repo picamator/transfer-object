@@ -12,7 +12,6 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayObjectTransformerAttribute;
-use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\DateTimeTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\EnumTransformerAttribute;
 
@@ -45,7 +44,6 @@ final class ItemTransfer extends AbstractTransfer
 
     // iAmArray
     #[ArrayInitiatorAttribute]
-    #[ArrayTransformerAttribute]
     public const string I_AM_ARRAY = 'iAmArray';
     private const int I_AM_ARRAY_INDEX = 0;
 

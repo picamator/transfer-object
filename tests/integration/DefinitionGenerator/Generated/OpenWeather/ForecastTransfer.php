@@ -8,7 +8,6 @@ use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
-use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -119,7 +118,6 @@ final class ForecastTransfer extends AbstractTransfer
 
     // rain
     #[ArrayInitiatorAttribute]
-    #[ArrayTransformerAttribute]
     public const string RAIN = 'rain';
     private const int RAIN_INDEX = 8;
 

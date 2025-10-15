@@ -10,7 +10,6 @@ use Picamator\Tests\Integration\TransferObject\TransferGenerator\Enum\Alias\Addr
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
-use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\EnumTransformerAttribute;
 
@@ -50,7 +49,6 @@ final class AddressBookTransfer extends AbstractTransfer
 
     // categories
     #[ArrayInitiatorAttribute]
-    #[ArrayTransformerAttribute]
     public const string CATEGORIES = 'categories';
     private const int CATEGORIES_INDEX = 1;
 

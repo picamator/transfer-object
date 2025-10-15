@@ -306,7 +306,6 @@ class TransferTest extends TestCase
     /**
      * @param array<string,mixed> $data
      */
-    #[TestWith([[ItemTransfer::I_AM_ARRAY => true]], 'Expecting type array but received boolean')]
     #[TestWith([[ItemTransfer::I_AM_ARRAY_OBJECT => true]], 'Expecting type ArrayObject but received boolean')]
     #[TestWith([[ItemTransfer::I_AM_ENUM => true]], 'Expecting type Enum but received boolean')]
     #[TestWith([[ItemTransfer::I_AM_DATE_TIME => true]], 'Expecting type DateTime but received boolean')]
