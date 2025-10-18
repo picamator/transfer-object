@@ -8,6 +8,7 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Command\TransferGeneratorBulkCommand;
+use Symfony\Component\Console\SingleCommandApplication;
 use Symfony\Component\Console\Tester\CommandTester;
 
 #[Group('command')]
@@ -24,9 +25,11 @@ class TransferGeneratorBulkCommandTest extends TestCase
 
     protected function setUp(): void
     {
-        $command = new TransferGeneratorBulkCommand();
+        $application = new SingleCommandApplication()
+            ->setCode(code: new TransferGeneratorBulkCommand())
+            ->setAutoExit(autoExit: false);
 
-        $this->commandTester = new CommandTester($command);
+        $this->commandTester = new CommandTester($application);
     }
 
     #[TestDox('Run command without configuration should show error message')]

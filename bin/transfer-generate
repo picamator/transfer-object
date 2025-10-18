@@ -4,15 +4,12 @@
 declare(strict_types=1);
 
 use Picamator\TransferObject\Command\TransferGeneratorCommand;
-use Symfony\Component\Console\Application;
+use Symfony\Component\Console\SingleCommandApplication;
 
 include $_composer_autoload_path ?? __DIR__ . '/../vendor/autoload.php';
 
-$application = new Application(name: 'Generate Transfer Objects');
-
-$command = new TransferGeneratorCommand();
-
-$application->add($command);
-$application->setDefaultCommand($command->getName(), isSingleCommand: true);
-
-$application->run();
+new SingleCommandApplication()
+    ->setName(name: 'Generate Transfer Objects')
+    ->setVersion(version: 'latest')
+    ->setCode(code: new TransferGeneratorCommand())
+    ->run();
