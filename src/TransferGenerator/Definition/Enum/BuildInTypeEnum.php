@@ -32,11 +32,6 @@ enum BuildInTypeEnum: string
     case MIXED = 'mixed';
     case CALLABLE = 'callable';
 
-    public static function getTrueFalse(bool $value): self
-    {
-        return $value === true ? self::TRUE : self::FALSE;
-    }
-
     public function isArray(): bool
     {
         return $this === self::ARRAY;

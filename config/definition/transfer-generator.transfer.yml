@@ -61,6 +61,16 @@ DefinitionProperty:
   isProtected:
     type: bool
     required:
+  attributes:
+    collectionType: DefinitionAttribute
+
+DefinitionAttribute:
+  name:
+    type: string
+    required:
+  namespace:
+    type: DefinitionNamespace
+    required:
 
 DefinitionBuildInType:
   name:
