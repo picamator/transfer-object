@@ -44,7 +44,7 @@ DefinitionProperty:
     type: string
     required:
   buildInType:
-    enumType: "Picamator\\TransferObject\\TransferGenerator\\Definition\\Enum\\BuildInTypeEnum"
+    type: DefinitionBuildInType
   transferType:
     type: DefinitionEmbeddedType
   collectionType:
@@ -61,6 +61,13 @@ DefinitionProperty:
   isProtected:
     type: bool
     required:
+
+DefinitionBuildInType:
+  name:
+    enumType: "Picamator\\TransferObject\\TransferGenerator\\Definition\\Enum\\BuildInTypeEnum"
+    required:
+  dockBlock:
+    type: string
 
 DefinitionEmbeddedType:
   name:

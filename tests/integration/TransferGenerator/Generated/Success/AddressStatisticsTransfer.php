@@ -92,7 +92,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     public const string ORDER_REFERENCES = 'orderReferences';
     private const int ORDER_REFERENCES_INDEX = 6;
 
-    /** @var \ArrayObject<string|int,mixed> */
+    /** @var \ArrayObject<int|string,mixed> */
     public ArrayObject $orderReferences {
         get => $this->getData(self::ORDER_REFERENCES_INDEX);
         set => $this->setData(self::ORDER_REFERENCES_INDEX, $value);

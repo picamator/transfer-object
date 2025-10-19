@@ -14,8 +14,12 @@ Item:
     type: string
   iAmArray:
     type: array
+  iAmArrayWithDocBlock:
+    type: array<int,string>
   iAmArrayObject:
     type: ArrayObject
+  iAmArrayObjectWithDockBlock:
+    type: ArrayObject<int,string>
   iAmEnum:
     enumType: "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Enum\\ImBackedEnum"
   iAmDateTime:

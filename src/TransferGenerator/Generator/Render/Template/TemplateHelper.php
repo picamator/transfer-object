@@ -31,7 +31,6 @@ class TemplateHelper implements TemplateHelperInterface
     public function renderImports(): string
     {
         $imports = [];
-        /** @var string $import */
         foreach ($this->templateTransfer->imports as $import) {
             $imports[] = sprintf(self::IMPORT_TEMPLATE, $import);
         }
@@ -56,7 +55,6 @@ class TemplateHelper implements TemplateHelperInterface
 
     public function renderMetaAttributes(string $property): string
     {
-        /** @var array<string>|null $metaAttributes */
         $metaAttributes = $this->templateTransfer->metaAttributes[$property] ?? null;
         if ($metaAttributes === null) {
             return self::EMPTY_STRING;
@@ -73,7 +71,6 @@ class TemplateHelper implements TemplateHelperInterface
 
     public function renderDockBlock(string $property): string
     {
-        /** @var string|null $dockBlock */
         $dockBlock = $this->templateTransfer->dockBlocks[$property] ?? null;
         if ($dockBlock === null) {
             return self::EMPTY_STRING;
@@ -94,7 +91,6 @@ class TemplateHelper implements TemplateHelperInterface
     {
         /** @var string $propertyType */
         $propertyType = $this->templateTransfer->properties[$property];
-        /** @var bool $isNullable */
         $isNullable = $this->templateTransfer->nullables[$property];
 
         if (!$isNullable || str_contains($propertyType, '&')) {

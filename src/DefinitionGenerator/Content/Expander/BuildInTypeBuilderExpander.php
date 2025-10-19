@@ -12,6 +12,7 @@ use Picamator\TransferObject\DefinitionGenerator\Content\Enum\GetTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Content\Enum\ObjectTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
+use Picamator\TransferObject\Generated\DefinitionBuildInTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
@@ -94,9 +95,12 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
 
     private function createPropertyTransfer(string $propertyName, string $buildInType): DefinitionPropertyTransfer
     {
+        $buildItTypeTransfer = new DefinitionBuildInTypeTransfer();
+        $buildItTypeTransfer->name = BuildInTypeEnum::from($buildInType);
+
         $propertyTransfer = new DefinitionPropertyTransfer();
         $propertyTransfer->propertyName = $propertyName;
-        $propertyTransfer->buildInType = BuildInTypeEnum::from($buildInType);
+        $propertyTransfer->buildInType = $buildItTypeTransfer;
 
         return $propertyTransfer;
     }

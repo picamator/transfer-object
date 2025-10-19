@@ -10,16 +10,16 @@ Template:
     type: string
     required:
   imports:
-    type: ArrayObject
+    type: ArrayObject<string,string>
   properties:
-    type: ArrayObject
+    type: ArrayObject<string,string>
   metaConstants:
-    type: ArrayObject
+    type: ArrayObject<string,string>
   metaAttributes:
-    type: ArrayObject
+    type: ArrayObject<string,array<int,string>>
   dockBlocks:
-    type: ArrayObject
+    type: ArrayObject<string,string>
   nullables:
-    type: ArrayObject
+    type: ArrayObject<string,bool>
   protects:
-    type: ArrayObject
+    type: ArrayObject<string,bool>

@@ -23,16 +23,16 @@ class BuildInTypePropertyValidator implements PropertyValidatorInterface
     {
         $buildInType = $propertyTransfer->buildInType;
 
-        return $buildInType !== null && !isset(self::$successCache[$buildInType->value]);
+        return $buildInType !== null && !isset(self::$successCache[$buildInType->name->value]);
     }
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ?ValidatorMessageTransfer
     {
-        /** @var \Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum $buildInType */
-        $buildInType = $propertyTransfer->buildInType;
+        /** @var \Picamator\TransferObject\Generated\DefinitionBuildInTypeTransfer $buildInTypeTransfer */
+        $buildInTypeTransfer = $propertyTransfer->buildInType;
 
-        if ($buildInType->isAllowed()) {
-            self::$successCache[$buildInType->value] = true;
+        if ($buildInTypeTransfer->name->isAllowed()) {
+            self::$successCache[$buildInTypeTransfer->name->value] = true;
 
             return null;
         }
@@ -47,7 +47,7 @@ class BuildInTypePropertyValidator implements PropertyValidatorInterface
         return sprintf(
             self::UNSUPPORTED_TYPE_ERROR_MESSAGE_TEMPLATE,
             $propertyTransfer->propertyName,
-            $propertyTransfer->buildInType->value ?? '',
+            $propertyTransfer->buildInType?->name->value ?? '',
         );
     }
 }
