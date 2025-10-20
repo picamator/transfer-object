@@ -26,3 +26,7 @@ Item:
     dateTimeType: "DateTime"
   iAmDateTimeImmutable:
     dateTimeType: "DateTimeImmutable"
+  iAmWithAttribute:
+    type: array<string>
+    attributes:
+      - "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Attribute\\PropertyAttribute(property: 'iAmWithAttribute')"

@@ -21,17 +21,17 @@ final class DefinitionAttributeTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::NAME_INDEX => self::NAME,
+        self::ARGUMENTS_INDEX => self::ARGUMENTS,
         self::NAMESPACE_INDEX => self::NAMESPACE,
     ];
 
-    // name
-    public const string NAME = 'name';
-    private const int NAME_INDEX = 0;
+    // arguments
+    public const string ARGUMENTS = 'arguments';
+    private const int ARGUMENTS_INDEX = 0;
 
-    public string $name {
-        get => $this->getData(self::NAME_INDEX);
-        set => $this->setData(self::NAME_INDEX, $value);
+    public ?string $arguments {
+        get => $this->getData(self::ARGUMENTS_INDEX);
+        set => $this->setData(self::ARGUMENTS_INDEX, $value);
     }
 
     // namespace

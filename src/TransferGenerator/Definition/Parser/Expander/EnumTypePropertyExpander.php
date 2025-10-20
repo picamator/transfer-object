@@ -18,7 +18,10 @@ final class EnumTypePropertyExpander extends AbstractPropertyExpander
 
     protected function matchType(array $propertyType): ?string
     {
-        return $propertyType[self::ENUM_TYPE_KEY] ?? null;
+        /** @var string|null $matchType */
+        $matchType = $propertyType[self::ENUM_TYPE_KEY] ?? null;
+
+        return $matchType;
     }
 
     protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void

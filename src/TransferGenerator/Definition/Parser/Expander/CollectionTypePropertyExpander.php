@@ -18,7 +18,10 @@ final class CollectionTypePropertyExpander extends AbstractPropertyExpander
 
     protected function matchType(array $propertyType): ?string
     {
-        return $propertyType[self::COLLECTION_TYPE_KEY] ?? null;
+        /** @var string|null $matchType */
+        $matchType = $propertyType[self::COLLECTION_TYPE_KEY] ?? null;
+
+        return $matchType;
     }
 
     protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void

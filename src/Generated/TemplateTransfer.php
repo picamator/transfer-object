@@ -20,7 +20,7 @@ use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayObjectTransform
  */
 final class TemplateTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 10;
+    protected const int META_DATA_SIZE = 11;
 
     protected const array META_DATA = [
         self::CLASS_NAME_INDEX => self::CLASS_NAME,
@@ -32,6 +32,7 @@ final class TemplateTransfer extends AbstractTransfer
         self::META_CONSTANTS_INDEX => self::META_CONSTANTS,
         self::NULLABLES_INDEX => self::NULLABLES,
         self::PROPERTIES_INDEX => self::PROPERTIES,
+        self::PROPERTY_ATTRIBUTES_INDEX => self::PROPERTY_ATTRIBUTES,
         self::PROTECTS_INDEX => self::PROTECTS,
     ];
 
@@ -134,11 +135,23 @@ final class TemplateTransfer extends AbstractTransfer
         set => $this->setData(self::PROPERTIES_INDEX, $value);
     }
 
+    // propertyAttributes
+    #[ArrayObjectInitiatorAttribute]
+    #[ArrayObjectTransformerAttribute]
+    public const string PROPERTY_ATTRIBUTES = 'propertyAttributes';
+    private const int PROPERTY_ATTRIBUTES_INDEX = 9;
+
+    /** @var \ArrayObject<string,array<int,string>> */
+    public ArrayObject $propertyAttributes {
+        get => $this->getData(self::PROPERTY_ATTRIBUTES_INDEX);
+        set => $this->setData(self::PROPERTY_ATTRIBUTES_INDEX, $value);
+    }
+
     // protects
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
     public const string PROTECTS = 'protects';
-    private const int PROTECTS_INDEX = 9;
+    private const int PROTECTS_INDEX = 10;
 
     /** @var \ArrayObject<string,bool> */
     public ArrayObject $protects {

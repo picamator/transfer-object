@@ -65,9 +65,8 @@ DefinitionProperty:
     collectionType: DefinitionAttribute
 
 DefinitionAttribute:
-  name:
+  arguments:
     type: string
-    required:
   namespace:
     type: DefinitionNamespace
     required:

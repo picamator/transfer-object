@@ -13,6 +13,8 @@ Template:
     type: ArrayObject<string,string>
   properties:
     type: ArrayObject<string,string>
+  propertyAttributes:
+    type: ArrayObject<string,array<int,string>>
   metaConstants:
     type: ArrayObject<string,string>
   metaAttributes:

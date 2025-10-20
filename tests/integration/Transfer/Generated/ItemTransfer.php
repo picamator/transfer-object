@@ -7,6 +7,7 @@ namespace Picamator\Tests\Integration\TransferObject\Transfer\Generated;
 use ArrayObject;
 use DateTime;
 use DateTimeImmutable;
+use Picamator\Tests\Integration\TransferObject\Transfer\Attribute\PropertyAttribute;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
@@ -26,7 +27,7 @@ use Picamator\TransferObject\Transfer\Attribute\Transformer\EnumTransformerAttri
  */
 final class ItemTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 13;
+    protected const int META_DATA_SIZE = 14;
 
     protected const array META_DATA = [
         self::I_AM_ARRAY_INDEX => self::I_AM_ARRAY,
@@ -42,6 +43,7 @@ final class ItemTransfer extends AbstractTransfer
         self::I_AM_INT_INDEX => self::I_AM_INT,
         self::I_AM_STRING_INDEX => self::I_AM_STRING,
         self::I_AM_TRUE_INDEX => self::I_AM_TRUE,
+        self::I_AM_WITH_ATTRIBUTE_INDEX => self::I_AM_WITH_ATTRIBUTE,
     ];
 
     // iAmArray
@@ -172,5 +174,17 @@ final class ItemTransfer extends AbstractTransfer
     public ?true $iAmTrue {
         get => $this->getData(self::I_AM_TRUE_INDEX);
         set => $this->setData(self::I_AM_TRUE_INDEX, $value);
+    }
+
+    // iAmWithAttribute
+    #[ArrayInitiatorAttribute]
+    public const string I_AM_WITH_ATTRIBUTE = 'iAmWithAttribute';
+    private const int I_AM_WITH_ATTRIBUTE_INDEX = 13;
+
+    /** @var array<string> */
+    #[PropertyAttribute(property: 'iAmWithAttribute')]
+    public array $iAmWithAttribute {
+        get => $this->getData(self::I_AM_WITH_ATTRIBUTE_INDEX);
+        set => $this->setData(self::I_AM_WITH_ATTRIBUTE_INDEX, $value);
     }
 }

@@ -11,7 +11,7 @@ interface PropertyExpanderInterface
     public function setNextExpander(PropertyExpanderInterface $expander): PropertyExpanderInterface;
 
     /**
-     * @param array<string,string|null> $propertyType
+     * @param array<string,string|array<int,string>|null> $propertyType
      */
     public function expandPropertyTransfer(array $propertyType, DefinitionPropertyTransfer $propertyTransfer): void;
 }
