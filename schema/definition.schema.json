@@ -16,8 +16,6 @@
                             "type": ["string", "boolean"],
                             "description": "PHP built-in type or Transfer Object name without Transfer suffix or the full class path, optionally with alias.",
                             "anyOf": [
-                                true,
-                                false,
                                 "bool",
                                 "int",
                                 "float",
