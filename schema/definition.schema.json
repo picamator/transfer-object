@@ -94,6 +94,11 @@
                         "protected": {
                             "type": "null",
                             "description": "Marks the property as having asymmetric protected(set) visibility."
+                        },
+                        "attributes": {
+                            "description": "List of attribute strings to be attached to the property (fully qualified attribute invocation).",
+                            "type": "array",
+                            "items": { "type": "string" }
                         }
                     },
                     "oneOf": [
