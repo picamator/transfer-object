@@ -50,7 +50,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         $actual = $this->generateTransfersCallback($configPath, $callback);
 
         // Assert
-        $this->assertFalse($actual);
+        $this->assertFalse($actual, 'The validator should fail.');
     }
 
     #[TestDox('Generate transfer objects by duplicate definitions should fail')]
@@ -68,7 +68,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
 
             $errorMessage = $generatorTransfer->validator->errorMessages[0] ?? null;
 
-            $this->assertFalse($generatorTransfer->validator->isValid);
+            $this->assertFalse($generatorTransfer->validator->isValid, 'The validator should fail.');
             $this->assertNotNull($errorMessage);
             $this->assertStringContainsString(
                 'A file with the same name already exists.',
@@ -161,6 +161,21 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         yield 'invalid date time type' => [
             'configCaseName' => 'invalid-date-time-type',
             'expectedMessage' => 'does not implement DateTimeInterface',
+        ];
+
+        yield 'invalid attribute name' => [
+            'configCaseName' => 'invalid-attribute-name',
+            'expectedMessage' => 'not found',
+        ];
+
+        yield 'invalid attribute' => [
+            'configCaseName' => 'invalid-attribute',
+            'expectedMessage' => 'is not an attribute',
+        ];
+
+        yield 'invalid attribute target' => [
+            'configCaseName' => 'invalid-attribute-target',
+            'expectedMessage' => 'is not allowed',
         ];
     }
 

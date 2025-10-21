@@ -29,4 +29,4 @@ Item:
   iAmWithAttribute:
     type: array<string>
     attributes:
-      - "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Attribute\\PropertyAttribute(property: 'iAmWithAttribute')"
+      - "Picamator\\Tests\\Integration\\TransferObject\\Helper\\Attribute\\PropertyAttribute(property: 'iAmWithAttribute')"

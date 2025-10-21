@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\Tests\Integration\TransferObject\Transfer\Attribute;
+namespace Picamator\Tests\Integration\TransferObject\Helper\Attribute;
 
 use Attribute;
 

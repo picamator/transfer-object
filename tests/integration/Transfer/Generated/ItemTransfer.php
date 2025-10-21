@@ -7,7 +7,7 @@ namespace Picamator\Tests\Integration\TransferObject\Transfer\Generated;
 use ArrayObject;
 use DateTime;
 use DateTimeImmutable;
-use Picamator\Tests\Integration\TransferObject\Transfer\Attribute\PropertyAttribute;
+use Picamator\Tests\Integration\TransferObject\Helper\Attribute\PropertyAttribute;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
