@@ -39,7 +39,22 @@ Customer:
     type: string
 ```
 
-Then, running another [console command](https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate):
+Optionally, update the definition file to include [Symfony validation](https://github.com/symfony/validator)
+attributes:
+
+```yml
+Customer:
+  firstName:
+    type: string
+    attributes:
+        - "sf-assert:NotBlank"
+  lastName:
+    type: string
+    attributes:
+        - "sf-assert:NotBlank"
+```
+
+Then, running [console command](https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate):
 
 ```console
 $ ./vendor/bin/transfer-generate [-c|--configuration CONFIGURATION]

@@ -58,8 +58,8 @@
         "symfony/var-dumper": "^7.3"
     },
     "suggest": {
-        "ext-bcmath": "Required for supporting 'numberType' with BcMath Number.",
-        "symfony/validator": "Required for supporting property assert attributes."
+        "ext-bcmath": "Provides support for 'numberType'.",
+        "symfony/validator": "Adds support for attribute asserts using the 'sf-assert' shortcut."
     },
     "bin": [
         "bin/transfer-generate",
