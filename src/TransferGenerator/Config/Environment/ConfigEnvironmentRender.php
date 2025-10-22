@@ -6,8 +6,8 @@ namespace Picamator\TransferObject\TransferGenerator\Config\Environment;
 
 class ConfigEnvironmentRender implements ConfigEnvironmentRenderInterface
 {
-    private const string PLACEHOLDER = '${PROJECT_ROOT}';
-    private const string ENVIRONMENT_KEY = 'PROJECT_ROOT';
+    protected const string PLACEHOLDER = '${PROJECT_ROOT}';
+    protected const string ENVIRONMENT_KEY = 'PROJECT_ROOT';
 
     private string $projectRootCache;
 
@@ -16,14 +16,14 @@ class ConfigEnvironmentRender implements ConfigEnvironmentRenderInterface
         $projectRoot = $this->getProjectRoot();
         $path = $this->rtrimPath($path);
 
-        return str_replace(self::PLACEHOLDER, $projectRoot, $path);
+        return str_replace(static::PLACEHOLDER, $projectRoot, $path);
     }
 
     public function renderRelativeProjectRoot(string $path): string
     {
         $path = $this->rtrimPath($path);
 
-        return str_replace(self::PLACEHOLDER, '', $path);
+        return str_replace(static::PLACEHOLDER, '', $path);
     }
 
     private function getProjectRoot(): string
@@ -44,7 +44,7 @@ class ConfigEnvironmentRender implements ConfigEnvironmentRenderInterface
 
     protected function getEnvironment(): string
     {
-        $envValue = getenv(self::ENVIRONMENT_KEY);
+        $envValue = getenv(static::ENVIRONMENT_KEY);
         if (!is_string($envValue)) {
             return '';
         }
