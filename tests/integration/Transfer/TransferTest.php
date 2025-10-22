@@ -22,8 +22,10 @@ use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\NamespaceTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ProtectedTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\RequiredTransfer;
+use Picamator\Tests\Integration\TransferObject\Transfer\Generated\SymfonyAttributeTransfer;
 use Picamator\TransferObject\Transfer\Exception\DataAssertTransferException;
 use ReflectionProperty;
+use Symfony\Component\Validator\Validation;
 use TypeError;
 
 #[Group('transfer')]
@@ -440,5 +442,23 @@ class TransferTest extends TestCase
 
         // Assert
         $this->assertSame($expected, $actual[BcMathNumberTransfer::I_AM_NUMBER]);
+    }
+
+    #[TestDox('Symfony assert attribute')]
+    public function testSymfonyAssertAttribute(): void
+    {
+        // Arrange
+        $symfonyAttributeTransfer = new SymfonyAttributeTransfer();
+
+        $validator = Validation::createValidatorBuilder()
+            ->enableAttributeMapping()
+            ->getValidator();
+
+        // Act
+        $actual = $validator->validate($symfonyAttributeTransfer);
+
+        // Assert
+        $this->assertCount(1, $actual, 'Expected one error message');
+        $this->assertSame('This value should not be blank.', $actual[0]?->getMessage());
     }
 }
