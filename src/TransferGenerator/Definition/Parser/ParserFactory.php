@@ -8,6 +8,7 @@ use Picamator\TransferObject\Shared\CachedFactoryTrait;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\AttributesPropertyExpander;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builder\AttributesNamespaceBuilder;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builder\EmbeddedTypeBuilder;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builder\EmbeddedTypeBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builder\NamespaceBuilder;
@@ -61,7 +62,12 @@ class ParserFactory
 
     protected function createAttributesPropertyExpander(): PropertyExpanderInterface
     {
-        return new AttributesPropertyExpander($this->createNamespaceBuilder());
+        return new AttributesPropertyExpander($this->createAttributesNamespaceBuilder());
+    }
+
+    protected function createAttributesNamespaceBuilder(): NamespaceBuilderInterface
+    {
+        return new AttributesNamespaceBuilder($this->createNamespaceBuilder());
     }
 
     protected function createNumberTypePropertyExpander(): PropertyExpanderInterface

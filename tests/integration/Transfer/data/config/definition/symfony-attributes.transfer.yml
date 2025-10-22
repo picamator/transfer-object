@@ -1,0 +1,6 @@
+# $schema: ./../../../../../../schema/definition.schema.json
+SymfonyAttribute:
+  iAmAssert:
+    type: string
+    attributes:
+      - "sf-assert:NotBlank"
