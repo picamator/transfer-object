@@ -39,21 +39,6 @@ Customer:
     type: string
 ```
 
-Optionally, update the definition file to include [Symfony validation](https://github.com/symfony/validator)
-attributes:
-
-```yml
-Customer:
-  firstName:
-    type: string
-    attributes:
-        - "sf-assert:NotBlank"
-  lastName:
-    type: string
-    attributes:
-        - "sf-assert:NotBlank"
-```
-
 Then, running [console command](https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate):
 
 ```console
@@ -80,7 +65,8 @@ Key Features
  * Includes Symfony services:
    * [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php)
    * [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php)
- * Enables Symfony request data mapping.
+ * Enables automatic Symfony request query data mapping
+ * Supports [Symfony validation](https://github.com/symfony/validator) attributes
 
 **Transfer Object:**
 
