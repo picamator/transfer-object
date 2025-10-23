@@ -66,7 +66,7 @@ Key Features
    * [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php)
    * [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php)
  * Enables automatic Symfony request query data mapping
- * Supports [Symfony validation](https://github.com/symfony/validator) attributes
+ * Supports [Symfony validator](https://github.com/symfony/validator) attributes
 
 **Transfer Object:**
 
