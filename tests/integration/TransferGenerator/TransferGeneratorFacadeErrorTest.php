@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
-use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
+use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorTrait;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
@@ -17,7 +17,7 @@ use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 #[Group('transfer-generator')]
 class TransferGeneratorFacadeErrorTest extends TestCase
 {
-    use TransferGeneratorHelperTrait;
+    use TransferGeneratorTrait;
 
     private const string CONFIG_PATH_TEMPLATE = __DIR__ . '/data/config/error/%s/generator.config.yml';
 
@@ -50,7 +50,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         $actual = $this->generateTransfersCallback($configPath, $callback);
 
         // Assert
-        $this->assertFalse($actual);
+        $this->assertFalse($actual, 'The validator should fail.');
     }
 
     #[TestDox('Generate transfer objects by duplicate definitions should fail')]
@@ -68,7 +68,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
 
             $errorMessage = $generatorTransfer->validator->errorMessages[0] ?? null;
 
-            $this->assertFalse($generatorTransfer->validator->isValid);
+            $this->assertFalse($generatorTransfer->validator->isValid, 'The validator should fail.');
             $this->assertNotNull($errorMessage);
             $this->assertStringContainsString(
                 'A file with the same name already exists.',
@@ -161,6 +161,21 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         yield 'invalid date time type' => [
             'configCaseName' => 'invalid-date-time-type',
             'expectedMessage' => 'does not implement DateTimeInterface',
+        ];
+
+        yield 'invalid attribute name' => [
+            'configCaseName' => 'invalid-attribute-name',
+            'expectedMessage' => 'not found',
+        ];
+
+        yield 'invalid attribute' => [
+            'configCaseName' => 'invalid-attribute',
+            'expectedMessage' => 'is not an attribute',
+        ];
+
+        yield 'invalid attribute target' => [
+            'configCaseName' => 'invalid-attribute-target',
+            'expectedMessage' => 'is not allowed',
         ];
     }
 

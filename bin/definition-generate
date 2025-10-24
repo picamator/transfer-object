@@ -4,15 +4,12 @@
 declare(strict_types=1);
 
 use Picamator\TransferObject\Command\DefinitionGeneratorCommand;
-use Symfony\Component\Console\Application;
+use Symfony\Component\Console\SingleCommandApplication;
 
 include $_composer_autoload_path ?? __DIR__ . '/../vendor/autoload.php';
 
-$application = new Application(name: 'Generate Transfer Definitions');
-
-$command = new DefinitionGeneratorCommand();
-
-$application->add($command);
-$application->setDefaultCommand($command->getName(), isSingleCommand: true);
-
-$application->run();
+new SingleCommandApplication()
+    ->setName(name: 'Generate Transfer Definitions')
+    ->setVersion(version: 'latest')
+    ->setCode(code: new DefinitionGeneratorCommand())
+    ->run();

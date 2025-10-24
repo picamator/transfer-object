@@ -17,18 +17,18 @@ use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Goo
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\NasaNeo\AsteroidTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\OpenWeather\ForecastTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Tagesschau\ArdNewsTransfer;
-use Picamator\Tests\Integration\TransferObject\Helper\DefinitionGeneratorHelperTrait;
-use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
+use Picamator\Tests\Integration\TransferObject\Helper\DefinitionGeneratorTrait;
+use Picamator\Tests\Integration\TransferObject\Helper\FilterArrayTrait;
+use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorTrait;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacade;
 use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacadeInterface;
-use Picamator\TransferObject\Transfer\FilterArrayTrait;
 
 #[Large]
 #[Group('definition-generator')]
 class DefinitionGeneratorFacadeTest extends TestCase
 {
-    use DefinitionGeneratorHelperTrait;
-    use TransferGeneratorHelperTrait;
+    use DefinitionGeneratorTrait;
+    use TransferGeneratorTrait;
     use FilterArrayTrait;
 
     private const string SAMPLE_JSON_PATH = __DIR__ . '/data/api-response/';

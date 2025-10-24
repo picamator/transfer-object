@@ -7,7 +7,6 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 use DateTime;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
-use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\DateTimeTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -245,7 +244,6 @@ final class ProductTransfer extends AbstractTransfer
 
     // sizes
     #[ArrayInitiatorAttribute]
-    #[ArrayTransformerAttribute]
     public const string SIZES = 'sizes';
     private const int SIZES_INDEX = 21;
 

@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\TestDoxFormatter;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
-use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorHelperTrait;
+use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorTrait;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\BcMath\BcMathNumberTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemCollectionTransfer;
@@ -22,14 +22,16 @@ use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\NamespaceTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ProtectedTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\RequiredTransfer;
+use Picamator\Tests\Integration\TransferObject\Transfer\Generated\SymfonyAttributeTransfer;
 use Picamator\TransferObject\Transfer\Exception\DataAssertTransferException;
 use ReflectionProperty;
+use Symfony\Component\Validator\Validation;
 use TypeError;
 
 #[Group('transfer')]
 class TransferTest extends TestCase
 {
-    use TransferGeneratorHelperTrait;
+    use TransferGeneratorTrait;
 
     private const string GENERATOR_CONFIG_PATH = __DIR__ . '/data/config/generator.config.yml';
     private const string GENERATOR_BC_MATH_CONFIG_PATH = __DIR__ . '/data/config/bcmath/generator.config.yml';
@@ -89,10 +91,13 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_FLOAT => 0.1,
                         ItemTransfer::I_AM_STRING => 'test string',
                         ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
+                        ItemTransfer::I_AM_ARRAY_WITH_DOC_BLOCK => ['value'],
                         ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
+                        ItemTransfer::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK => ['value'],
                         ItemTransfer::I_AM_ENUM => ImBackedEnum::SOME_CASE->value,
                         ItemTransfer::I_AM_DATE_TIME => '2025-05-03T20:53:00+02:00',
                         ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => '2025-05-03T20:53:00+02:00',
+                        ItemTransfer::I_AM_WITH_ATTRIBUTE => ['value'],
                     ],
                 ],
             ],
@@ -106,10 +111,13 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_FLOAT => 0.1,
                         ItemTransfer::I_AM_STRING => 'test string',
                         ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
+                        ItemTransfer::I_AM_ARRAY_WITH_DOC_BLOCK => ['value'],
                         ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
+                        ItemTransfer::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK => ['value'],
                         ItemTransfer::I_AM_ENUM => ImBackedEnum::SOME_CASE->value,
                         ItemTransfer::I_AM_DATE_TIME => '2025-05-03T20:53:00+02:00',
                         ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => '2025-05-03T20:53:00+02:00',
+                        ItemTransfer::I_AM_WITH_ATTRIBUTE => ['value'],
                     ],
                 ],
                 ItemCollectionTransfer::ITEM => null,
@@ -127,10 +135,13 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_FLOAT => null,
                         ItemTransfer::I_AM_STRING => null,
                         ItemTransfer::I_AM_ARRAY => null,
+                        ItemTransfer::I_AM_ARRAY_WITH_DOC_BLOCK => null,
                         ItemTransfer::I_AM_ARRAY_OBJECT => null,
+                        ItemTransfer::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK => null,
                         ItemTransfer::I_AM_ENUM => null,
                         ItemTransfer::I_AM_DATE_TIME => null,
                         ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => null,
+                        ItemTransfer::I_AM_WITH_ATTRIBUTE => null,
                     ],
                 ],
             ],
@@ -144,10 +155,13 @@ class TransferTest extends TestCase
                         ItemTransfer::I_AM_FLOAT => null,
                         ItemTransfer::I_AM_STRING => null,
                         ItemTransfer::I_AM_ARRAY => [],
+                        ItemTransfer::I_AM_ARRAY_WITH_DOC_BLOCK => [],
                         ItemTransfer::I_AM_ARRAY_OBJECT => [],
+                        ItemTransfer::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK => [],
                         ItemTransfer::I_AM_ENUM => null,
                         ItemTransfer::I_AM_DATE_TIME => null,
                         ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => null,
+                        ItemTransfer::I_AM_WITH_ATTRIBUTE => [],
                     ],
                 ],
                 ItemCollectionTransfer::ITEM => null,
@@ -306,7 +320,6 @@ class TransferTest extends TestCase
     /**
      * @param array<string,mixed> $data
      */
-    #[TestWith([[ItemTransfer::I_AM_ARRAY => true]], 'Expecting type array but received boolean')]
     #[TestWith([[ItemTransfer::I_AM_ARRAY_OBJECT => true]], 'Expecting type ArrayObject but received boolean')]
     #[TestWith([[ItemTransfer::I_AM_ENUM => true]], 'Expecting type Enum but received boolean')]
     #[TestWith([[ItemTransfer::I_AM_DATE_TIME => true]], 'Expecting type DateTime but received boolean')]
@@ -429,5 +442,23 @@ class TransferTest extends TestCase
 
         // Assert
         $this->assertSame($expected, $actual[BcMathNumberTransfer::I_AM_NUMBER]);
+    }
+
+    #[TestDox('Symfony assert attribute')]
+    public function testSymfonyAssertAttribute(): void
+    {
+        // Arrange
+        $symfonyAttributeTransfer = new SymfonyAttributeTransfer();
+
+        $validator = Validation::createValidatorBuilder()
+            ->enableAttributeMapping()
+            ->getValidator();
+
+        // Act
+        $actual = $validator->validate($symfonyAttributeTransfer);
+
+        // Assert
+        $this->assertCount(1, $actual, 'Expected one error message');
+        $this->assertSame('This value should not be blank.', $actual[0]?->getMessage());
     }
 }

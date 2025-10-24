@@ -6,7 +6,6 @@ namespace Picamator\TransferObject\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
-use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayTransformerAttribute;
 
 /**
  * Specification:
@@ -37,7 +36,6 @@ final class DefinitionGeneratorContentTransfer extends AbstractTransfer
 
     // content
     #[ArrayInitiatorAttribute]
-    #[ArrayTransformerAttribute]
     public const string CONTENT = 'content';
     private const int CONTENT_INDEX = 1;
 

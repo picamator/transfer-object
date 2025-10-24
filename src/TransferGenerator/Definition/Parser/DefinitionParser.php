@@ -6,11 +6,11 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Parser;
 
 use Generator;
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
-use Picamator\TransferObject\TransferGenerator\Definition\Parser\Filter\PropertyFilterTrait;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Filter\PropertyNormalizerTrait;
 
 readonly class DefinitionParser implements DefinitionParserInterface
 {
-    use PropertyFilterTrait;
+    use PropertyNormalizerTrait;
 
     public function __construct(
         private YmlParserInterface $parser,
@@ -26,7 +26,7 @@ readonly class DefinitionParser implements DefinitionParserInterface
 
             yield $this->contentBuilder->createContentTransfer(
                 className: (string)$className,
-                properties: $this->filterProperties($properties),
+                properties: $this->normalizeProperties($properties),
             );
         }
 

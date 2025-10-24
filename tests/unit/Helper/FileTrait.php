@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Unit\TransferObject\Helper;
 
-trait FileHelperTrait
+trait FileTrait
 {
     /**
      * @var false|resource|null

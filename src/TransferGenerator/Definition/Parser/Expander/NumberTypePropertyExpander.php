@@ -18,7 +18,10 @@ final class NumberTypePropertyExpander extends AbstractPropertyExpander
 
     protected function matchType(array $propertyType): ?string
     {
-        return $propertyType[self::NUMBER_TYPE_KEY] ?? null;
+        /** @var string|null $matchType */
+        $matchType = $propertyType[self::NUMBER_TYPE_KEY] ?? null;
+
+        return $matchType;
     }
 
     protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void

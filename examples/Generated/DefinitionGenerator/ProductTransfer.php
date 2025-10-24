@@ -8,7 +8,6 @@ use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
-use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -150,7 +149,6 @@ final class ProductTransfer extends AbstractTransfer
 
     // stores
     #[ArrayInitiatorAttribute]
-    #[ArrayTransformerAttribute]
     public const string STORES = 'stores';
     private const int STORES_INDEX = 11;
 

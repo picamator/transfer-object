@@ -8,14 +8,14 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Picamator\Tests\Unit\TransferObject\Helper\FileHelperTrait;
+use Picamator\Tests\Unit\TransferObject\Helper\FileTrait;
 use Picamator\TransferObject\Shared\Exception\FileAppenderException;
 use Picamator\TransferObject\Shared\Filesystem\FileAppender;
 
 #[Group('shared')]
 class FileAppenderTest extends TestCase
 {
-    use FileHelperTrait;
+    use FileTrait;
 
     private const string FILE_NAME = 'test.yml';
     private const string FILE_CONTENT = 'test content';

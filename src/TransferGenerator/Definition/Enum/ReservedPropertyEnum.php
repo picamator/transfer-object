@@ -12,7 +12,7 @@ enum ReservedPropertyEnum: string
     case DATA = '_data';
 
     /**
-     * @uses \Picamator\TransferObject\Transfer\ConstantAttributeTrait::_reflectionObjectReference
+     * @uses \Picamator\TransferObject\Transfer\Attribute\AttributeTrait::_reflectionObjectReference
      */
     case REFLECTION_OBJECT_REFERENCE = '_reflectionObjectReference';
 }

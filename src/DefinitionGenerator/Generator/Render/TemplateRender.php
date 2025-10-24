@@ -124,7 +124,7 @@ TEMPLATE;
         return sprintf(
             self::TYPE_TEMPLATE,
             $propertyTransfer->propertyName,
-            $propertyTransfer->buildInType?->value ?: '',
+            $propertyTransfer->buildInType?->name->value ?: '',
         );
     }
 }

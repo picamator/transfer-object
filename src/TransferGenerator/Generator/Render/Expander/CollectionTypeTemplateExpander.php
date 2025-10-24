@@ -16,6 +16,8 @@ final class CollectionTypeTemplateExpander extends AbstractTemplateExpander
 {
     use TemplateExpanderTrait;
 
+    private const string DOCK_BLOCK_TEMPLATE = '<int,%s>';
+
     protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
         return $propertyTransfer->collectionType !== null;
@@ -54,6 +56,8 @@ final class CollectionTypeTemplateExpander extends AbstractTemplateExpander
             $propertyType = $this->enforceTransferInterface($propertyType);
         }
 
-        return sprintf(DockBlockTemplateEnum::COLLECTION->value, $propertyType);
+        $dockBlock = sprintf(self::DOCK_BLOCK_TEMPLATE, $propertyType);
+
+        return DockBlockTemplateEnum::ARRAY_OBJECT->renderTemplate($dockBlock);
     }
 }

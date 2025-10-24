@@ -1,0 +1,5 @@
+AddressStatistics:
+  addressBookUuid:
+    type: string
+    attributes:
+      - "Picamator\\Tests\\Integration\\TransferObject\\Helper\\Attribute\\PropertyAttributeNotExist"

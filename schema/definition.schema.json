@@ -16,14 +16,44 @@
                             "type": ["string", "boolean"],
                             "description": "PHP built-in type or Transfer Object name without Transfer suffix or the full class path, optionally with alias.",
                             "anyOf": [
-                                true,
-                                false,
                                 "bool",
                                 "int",
                                 "float",
                                 "string",
                                 "array",
+                                "array<bool>",
+                                "array<int,bool>",
+                                "array<string,bool>",
+                                "array<int>",
+                                "array<int,int>",
+                                "array<string,int>",
+                                "array<float>",
+                                "array<int,float>",
+                                "array<string,float>",
+                                "array<string>",
+                                "array<int,string>",
+                                "array<string,string>",
+                                "array<mixed>",
+                                "array<int,mixed>",
+                                "array<string,mixed>",
+                                "array<string,array<int,string>>",
                                 "ArrayObject",
+                                "ArrayObject<bool>",
+                                "ArrayObject<int,bool>",
+                                "ArrayObject<string,bool>",
+                                "ArrayObject<int>",
+                                "ArrayObject<int,int>",
+                                "ArrayObject<string,int>",
+                                "ArrayObject<float>",
+                                "ArrayObject<int,float>",
+                                "ArrayObject<string,float>",
+                                "ArrayObject<string>",
+                                "ArrayObject<int,string>",
+                                "ArrayObject<string,string>",
+                                "ArrayObject<mixed>",
+                                "ArrayObject<int,mixed>",
+                                "ArrayObject<string,mixed>",
+                                "ArrayObject<string,array<int,string>>",
                                 {
                                     "pattern": ".*"
                                 }
@@ -62,6 +92,11 @@
                         "protected": {
                             "type": "null",
                             "description": "Marks the property as having asymmetric protected(set) visibility."
+                        },
+                        "attributes": {
+                            "description": "List of attribute strings to be attached to the property (fully qualified attribute invocation).",
+                            "type": "array",
+                            "items": { "type": "string" }
                         }
                     },
                     "oneOf": [

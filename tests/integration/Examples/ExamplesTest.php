@@ -10,12 +10,12 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
-use Picamator\Tests\Integration\TransferObject\Helper\OutputBufferHelperTrait;
+use Picamator\Tests\Integration\TransferObject\Helper\OutputBufferTrait;
 
 #[Group('examples')]
 class ExamplesTest extends TestCase
 {
-    use OutputBufferHelperTrait;
+    use OutputBufferTrait;
 
     private const string EXAMPLE_PATH = __DIR__ . '/../../../examples/';
 

@@ -16,7 +16,7 @@ jobs:
   setup:
     name: Project Setup
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 3
     permissions:
       contents: read
       actions: read
@@ -51,7 +51,7 @@ jobs:
     name: PHPStan
     needs: setup
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 3
     permissions:
       contents: read
       actions: read
@@ -86,7 +86,7 @@ jobs:
     name: PHP CodeSniffer
     needs: setup
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 3
     permissions:
       contents: read
       actions: read
@@ -121,7 +121,7 @@ jobs:
     name: PHPUnit Tests
     needs: setup
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 3
     permissions:
       contents: read
       actions: read

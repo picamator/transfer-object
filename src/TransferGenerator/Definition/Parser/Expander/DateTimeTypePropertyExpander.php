@@ -18,7 +18,10 @@ final class DateTimeTypePropertyExpander extends AbstractPropertyExpander
 
     protected function matchType(array $propertyType): ?string
     {
-        return $propertyType[self::DATE_TIME_TYPE_KEY] ?? null;
+        /** @var string|null $matchType */
+        $matchType = $propertyType[self::DATE_TIME_TYPE_KEY] ?? null;
+
+        return $matchType;
     }
 
     protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void

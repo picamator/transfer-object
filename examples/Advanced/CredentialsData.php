@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Examples\TransferObject\Advanced;
 
-use Picamator\TransferObject\Transfer\DummyTransferAdapterTrait;
+use Picamator\TransferObject\Transfer\Adapter\DummyTransferAdapterTrait;
 use Picamator\TransferObject\Transfer\TransferInterface;
 
 class CredentialsData implements TransferInterface

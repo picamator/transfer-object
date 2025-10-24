@@ -7,7 +7,7 @@ namespace Picamator\TransferObject\Shared\Filesystem;
 use Generator;
 use Picamator\TransferObject\Shared\Exception\FileReaderException;
 
-class FileReader implements FileReaderInterface
+readonly class FileReader implements FileReaderInterface
 {
     public function readFile(string $filename): Generator
     {

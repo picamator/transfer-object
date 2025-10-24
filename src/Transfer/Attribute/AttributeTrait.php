@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\Transfer;
+namespace Picamator\TransferObject\Transfer\Attribute;
 
 use Generator;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\InitiatorAttributeInterface;
@@ -12,7 +12,7 @@ use ReflectionClassConstant;
 use ReflectionObject;
 use WeakReference;
 
-trait ConstantAttributeTrait
+trait AttributeTrait
 {
     /**
      * @var \WeakReference<\ReflectionObject>|null
@@ -24,7 +24,7 @@ trait ConstantAttributeTrait
      */
     final protected function getTransformerAttributes(): array
     {
-        $typeAttributes = [];
+        $attributes = [];
         foreach ($this->getReflectionConstants() as $reflectionConstant) {
             $attributeReflections = $reflectionConstant->getAttributes(
                 name: TransformerAttributeInterface::class,
@@ -37,10 +37,10 @@ trait ConstantAttributeTrait
 
             /** @var string $propertyName */
             $propertyName = $reflectionConstant->getValue();
-            $typeAttributes[$propertyName] = $attributeReflections[0]->newInstance();
+            $attributes[$propertyName] = $attributeReflections[0]->newInstance();
         }
 
-        return $typeAttributes;
+        return $attributes;
     }
 
     /**

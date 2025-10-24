@@ -7,7 +7,7 @@ namespace Picamator\Tests\Unit\TransferObject\DefinitionGenerator\Content;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
-use Picamator\Tests\Unit\TransferObject\Helper\FileHelperTrait;
+use Picamator\Tests\Unit\TransferObject\Helper\FileTrait;
 use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentBuilder;
 use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentBuilderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
@@ -15,7 +15,7 @@ use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorEx
 #[Group('definition-generator')]
 class DefinitionContentBuilderTest extends TestCase
 {
-    use FileHelperTrait;
+    use FileTrait;
 
     private ContentBuilderInterface $builder;
 

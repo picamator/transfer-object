@@ -14,11 +14,19 @@ Item:
     type: string
   iAmArray:
     type: array
+  iAmArrayWithDocBlock:
+    type: array<int,string>
   iAmArrayObject:
     type: ArrayObject
+  iAmArrayObjectWithDockBlock:
+    type: ArrayObject<int,string>
   iAmEnum:
     enumType: "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Enum\\ImBackedEnum"
   iAmDateTime:
     dateTimeType: "DateTime"
   iAmDateTimeImmutable:
     dateTimeType: "DateTimeImmutable"
+  iAmWithAttribute:
+    type: array<string>
+    attributes:
+      - "Picamator\\Tests\\Integration\\TransferObject\\Helper\\Attribute\\PropertyAttribute(property: 'iAmWithAttribute')"

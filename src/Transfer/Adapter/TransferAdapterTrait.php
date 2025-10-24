@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\Transfer;
+namespace Picamator\TransferObject\Transfer\Adapter;
 
 use ArrayObject;
 use BackedEnum;
@@ -10,6 +10,8 @@ use BcMath\Number;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
+use Picamator\TransferObject\Transfer\AbstractTransfer;
+use Picamator\TransferObject\Transfer\TransferInterface;
 use ReflectionObject;
 use ReflectionProperty;
 use stdClass;
@@ -39,7 +41,7 @@ trait TransferAdapterTrait
     private ?WeakReference $_reflectionObjectReference = null;
 
     /**
-     * @return Traversable<string, mixed>
+     * @return \Traversable<string, mixed>
      */
     public function getIterator(): Traversable
     {
@@ -255,6 +257,9 @@ trait TransferAdapterTrait
 
     private function isBcMathLoaded(): bool
     {
-        return extension_loaded('bcmath');
+        static $isLoaded = extension_loaded('bcmath');
+
+        /** @phpstan-ignore return.type */
+        return $isLoaded;
     }
 }

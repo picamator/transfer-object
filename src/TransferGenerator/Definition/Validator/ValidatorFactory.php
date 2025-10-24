@@ -11,6 +11,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Clas
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\ContentValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\EmptyPropertiesContentValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\PropertiesContentValidator;
+use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Property\AttributesPropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Property\BuildInTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Property\CollectionTypePropertyValidator;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Property\DateTimeTypePropertyValidator;
@@ -67,7 +68,13 @@ class ValidatorFactory
             $this->createEnumTypePropertyValidator(),
             $this->createDateTimeTypePropertyValidator(),
             $this->createNumberTypePropertyValidator(),
+            $this->createAttributesPropertyValidator(),
         ]);
+    }
+
+    protected function createAttributesPropertyValidator(): PropertyValidatorInterface
+    {
+        return new AttributesPropertyValidator();
     }
 
     protected function createNumberTypePropertyValidator(): PropertyValidatorInterface

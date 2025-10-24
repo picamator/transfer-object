@@ -8,7 +8,6 @@ use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
-use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -124,7 +123,6 @@ final class NewsTransfer extends AbstractTransfer
 
     // geotags
     #[ArrayInitiatorAttribute]
-    #[ArrayTransformerAttribute]
     public const string GEOTAGS = 'geotags';
     private const int GEOTAGS_INDEX = 8;
 
@@ -145,7 +143,6 @@ final class NewsTransfer extends AbstractTransfer
 
     // regionIds
     #[ArrayInitiatorAttribute]
-    #[ArrayTransformerAttribute]
     public const string REGION_IDS = 'regionIds';
     private const int REGION_IDS_INDEX = 10;
 

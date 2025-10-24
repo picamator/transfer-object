@@ -10,6 +10,9 @@ RUN apt-get --allow-unauthenticated --allow-insecure-repositories update && \
     pecl install xdebug && \
     docker-php-ext-enable xdebug
 
+# php
+COPY ./config.d/99-php.ini  /usr/local/etc/php/conf.d/99-php.ini
+
 # Xdebug https://xdebug.org/docs/all_settings
 COPY ./config.d/99-xdebug.ini  /usr/local/etc/php/conf.d/99-xdebug.ini
 

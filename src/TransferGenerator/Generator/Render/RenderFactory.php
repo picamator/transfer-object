@@ -7,6 +7,7 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Render;
 use Picamator\TransferObject\Shared\CachedFactoryTrait;
 use Picamator\TransferObject\Shared\Initializer\LazyGhostInitializerTrait;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\AttributesTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\BuildInTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\CollectionTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\DateTimeTypeTemplateExpander;
@@ -73,9 +74,15 @@ class RenderFactory
             ->setNextExpander($this->createMetaConstantsTemplateExpander())
             ->setNextExpander($this->createProtectedTemplateExpander())
             ->setNextExpander($this->createDateTimeTypeTemplateExpander())
-            ->setNextExpander($this->createNumberTypeTemplateExpander());
+            ->setNextExpander($this->createNumberTypeTemplateExpander())
+            ->setNextExpander($this->createAttributesTemplateExpander());
 
         return $templateExpander;
+    }
+
+    protected function createAttributesTemplateExpander(): TemplateExpanderInterface
+    {
+        return new AttributesTemplateExpander();
     }
 
     protected function createNumberTypeTemplateExpander(): TemplateExpanderInterface

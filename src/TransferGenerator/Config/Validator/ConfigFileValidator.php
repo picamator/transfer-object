@@ -26,7 +26,7 @@ readonly class ConfigFileValidator implements ConfigFileValidatorInterface
         }
 
         $validatorTransfer = $this->createErrorValidatorTransfer();
-        $validatorTransfer->errorMessages[] = $messageTransfer;
+        $validatorTransfer->errorMessages->append($messageTransfer);
 
         return $validatorTransfer;
     }

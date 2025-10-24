@@ -7,12 +7,12 @@ namespace Picamator\Tests\Integration\TransferObject\Transfer\Generated;
 use ArrayObject;
 use DateTime;
 use DateTimeImmutable;
+use Picamator\Tests\Integration\TransferObject\Helper\Attribute\PropertyAttribute;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayObjectTransformerAttribute;
-use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\DateTimeTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\EnumTransformerAttribute;
 
@@ -27,11 +27,13 @@ use Picamator\TransferObject\Transfer\Attribute\Transformer\EnumTransformerAttri
  */
 final class ItemTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 11;
+    protected const int META_DATA_SIZE = 14;
 
     protected const array META_DATA = [
         self::I_AM_ARRAY_INDEX => self::I_AM_ARRAY,
         self::I_AM_ARRAY_OBJECT_INDEX => self::I_AM_ARRAY_OBJECT,
+        self::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_INDEX => self::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK,
+        self::I_AM_ARRAY_WITH_DOC_BLOCK_INDEX => self::I_AM_ARRAY_WITH_DOC_BLOCK,
         self::I_AM_BOOL_INDEX => self::I_AM_BOOL,
         self::I_AM_DATE_TIME_INDEX => self::I_AM_DATE_TIME,
         self::I_AM_DATE_TIME_IMMUTABLE_INDEX => self::I_AM_DATE_TIME_IMMUTABLE,
@@ -41,11 +43,11 @@ final class ItemTransfer extends AbstractTransfer
         self::I_AM_INT_INDEX => self::I_AM_INT,
         self::I_AM_STRING_INDEX => self::I_AM_STRING,
         self::I_AM_TRUE_INDEX => self::I_AM_TRUE,
+        self::I_AM_WITH_ATTRIBUTE_INDEX => self::I_AM_WITH_ATTRIBUTE,
     ];
 
     // iAmArray
     #[ArrayInitiatorAttribute]
-    #[ArrayTransformerAttribute]
     public const string I_AM_ARRAY = 'iAmArray';
     private const int I_AM_ARRAY_INDEX = 0;
 
@@ -61,15 +63,38 @@ final class ItemTransfer extends AbstractTransfer
     public const string I_AM_ARRAY_OBJECT = 'iAmArrayObject';
     private const int I_AM_ARRAY_OBJECT_INDEX = 1;
 
-    /** @var \ArrayObject<string|int,mixed> */
+    /** @var \ArrayObject<int|string,mixed> */
     public ArrayObject $iAmArrayObject {
         get => $this->getData(self::I_AM_ARRAY_OBJECT_INDEX);
         set => $this->setData(self::I_AM_ARRAY_OBJECT_INDEX, $value);
     }
 
+    // iAmArrayObjectWithDockBlock
+    #[ArrayObjectInitiatorAttribute]
+    #[ArrayObjectTransformerAttribute]
+    public const string I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK = 'iAmArrayObjectWithDockBlock';
+    private const int I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_INDEX = 2;
+
+    /** @var \ArrayObject<int,string> */
+    public ArrayObject $iAmArrayObjectWithDockBlock {
+        get => $this->getData(self::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_INDEX);
+        set => $this->setData(self::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_INDEX, $value);
+    }
+
+    // iAmArrayWithDocBlock
+    #[ArrayInitiatorAttribute]
+    public const string I_AM_ARRAY_WITH_DOC_BLOCK = 'iAmArrayWithDocBlock';
+    private const int I_AM_ARRAY_WITH_DOC_BLOCK_INDEX = 3;
+
+    /** @var array<int,string> */
+    public array $iAmArrayWithDocBlock {
+        get => $this->getData(self::I_AM_ARRAY_WITH_DOC_BLOCK_INDEX);
+        set => $this->setData(self::I_AM_ARRAY_WITH_DOC_BLOCK_INDEX, $value);
+    }
+
     // iAmBool
     public const string I_AM_BOOL = 'iAmBool';
-    private const int I_AM_BOOL_INDEX = 2;
+    private const int I_AM_BOOL_INDEX = 4;
 
     public ?bool $iAmBool {
         get => $this->getData(self::I_AM_BOOL_INDEX);
@@ -79,7 +104,7 @@ final class ItemTransfer extends AbstractTransfer
     // iAmDateTime
     #[DateTimeTransformerAttribute(DateTime::class)]
     public const string I_AM_DATE_TIME = 'iAmDateTime';
-    private const int I_AM_DATE_TIME_INDEX = 3;
+    private const int I_AM_DATE_TIME_INDEX = 5;
 
     public ?DateTime $iAmDateTime {
         get => $this->getData(self::I_AM_DATE_TIME_INDEX);
@@ -89,7 +114,7 @@ final class ItemTransfer extends AbstractTransfer
     // iAmDateTimeImmutable
     #[DateTimeTransformerAttribute(DateTimeImmutable::class)]
     public const string I_AM_DATE_TIME_IMMUTABLE = 'iAmDateTimeImmutable';
-    private const int I_AM_DATE_TIME_IMMUTABLE_INDEX = 4;
+    private const int I_AM_DATE_TIME_IMMUTABLE_INDEX = 6;
 
     public ?DateTimeImmutable $iAmDateTimeImmutable {
         get => $this->getData(self::I_AM_DATE_TIME_IMMUTABLE_INDEX);
@@ -99,7 +124,7 @@ final class ItemTransfer extends AbstractTransfer
     // iAmEnum
     #[EnumTransformerAttribute(ImBackedEnum::class)]
     public const string I_AM_ENUM = 'iAmEnum';
-    private const int I_AM_ENUM_INDEX = 5;
+    private const int I_AM_ENUM_INDEX = 7;
 
     public ?ImBackedEnum $iAmEnum {
         get => $this->getData(self::I_AM_ENUM_INDEX);
@@ -108,7 +133,7 @@ final class ItemTransfer extends AbstractTransfer
 
     // iAmFalse
     public const string I_AM_FALSE = 'iAmFalse';
-    private const int I_AM_FALSE_INDEX = 6;
+    private const int I_AM_FALSE_INDEX = 8;
 
     public ?false $iAmFalse {
         get => $this->getData(self::I_AM_FALSE_INDEX);
@@ -117,7 +142,7 @@ final class ItemTransfer extends AbstractTransfer
 
     // iAmFloat
     public const string I_AM_FLOAT = 'iAmFloat';
-    private const int I_AM_FLOAT_INDEX = 7;
+    private const int I_AM_FLOAT_INDEX = 9;
 
     public ?float $iAmFloat {
         get => $this->getData(self::I_AM_FLOAT_INDEX);
@@ -126,7 +151,7 @@ final class ItemTransfer extends AbstractTransfer
 
     // iAmInt
     public const string I_AM_INT = 'iAmInt';
-    private const int I_AM_INT_INDEX = 8;
+    private const int I_AM_INT_INDEX = 10;
 
     public ?int $iAmInt {
         get => $this->getData(self::I_AM_INT_INDEX);
@@ -135,7 +160,7 @@ final class ItemTransfer extends AbstractTransfer
 
     // iAmString
     public const string I_AM_STRING = 'iAmString';
-    private const int I_AM_STRING_INDEX = 9;
+    private const int I_AM_STRING_INDEX = 11;
 
     public ?string $iAmString {
         get => $this->getData(self::I_AM_STRING_INDEX);
@@ -144,10 +169,22 @@ final class ItemTransfer extends AbstractTransfer
 
     // iAmTrue
     public const string I_AM_TRUE = 'iAmTrue';
-    private const int I_AM_TRUE_INDEX = 10;
+    private const int I_AM_TRUE_INDEX = 12;
 
     public ?true $iAmTrue {
         get => $this->getData(self::I_AM_TRUE_INDEX);
         set => $this->setData(self::I_AM_TRUE_INDEX, $value);
+    }
+
+    // iAmWithAttribute
+    #[ArrayInitiatorAttribute]
+    public const string I_AM_WITH_ATTRIBUTE = 'iAmWithAttribute';
+    private const int I_AM_WITH_ATTRIBUTE_INDEX = 13;
+
+    /** @var array<string> */
+    #[PropertyAttribute(property: 'iAmWithAttribute')]
+    public array $iAmWithAttribute {
+        get => $this->getData(self::I_AM_WITH_ATTRIBUTE_INDEX);
+        set => $this->setData(self::I_AM_WITH_ATTRIBUTE_INDEX, $value);
     }
 }

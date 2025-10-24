@@ -12,11 +12,6 @@
          displayDetailsOnTestsThatTriggerWarnings="true"
          cacheDirectory="./var/cache">
 
-    <php>
-        <ini name="error_reporting" value="-1" />
-        <ini name="memory_limit" value="-1" />
-    </php>
-
     <extensions>
         <bootstrap class="Picamator\Tests\Extension\TransferObject\ExecutionTimeReport\ExecutionTimeReportExtension">
             <parameter name="total" value="10"/>

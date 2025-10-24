@@ -39,7 +39,7 @@ Customer:
     type: string
 ```
 
-Then, running another [console command](https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate):
+Then, running [console command](https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate):
 
 ```console
 $ ./vendor/bin/transfer-generate [-c|--configuration CONFIGURATION]
@@ -65,7 +65,8 @@ Key Features
  * Includes Symfony services:
    * [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php)
    * [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php)
- * Enables Symfony request data mapping.
+ * Enables automatic Symfony request query data mapping
+ * Supports [Symfony validator](https://github.com/symfony/validator) attributes
 
 **Transfer Object:**
 

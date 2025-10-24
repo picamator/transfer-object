@@ -9,10 +9,8 @@ use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacadeInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Attribute\Option;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
@@ -41,7 +39,7 @@ For more details, please visit "<href=https://github.com/picamator/transfer-obje
 
 HELP
 )]
-class TransferGeneratorCommand extends Command
+readonly class TransferGeneratorCommand
 {
     use InputNormalizerTrait;
 
@@ -64,52 +62,45 @@ MESSAGE;
     private const string SUCCESS_MESSAGE = 'All Transfer Objects were generated successfully! 🎉';
 
     public function __construct(
-        ?string $name = null,
-        private readonly TransferGeneratorFacadeInterface $generatorFacade = new TransferGeneratorFacade(),
+        private TransferGeneratorFacadeInterface $generatorFacade = new TransferGeneratorFacade(),
     ) {
-        parent::__construct($name);
     }
 
-    protected function configure(): void
-    {
-        $this->addOption(
+    public function __invoke(
+        SymfonyStyle $io,
+        #[Option(
+            description: self::OPTION_DESCRIPTION_CONFIGURATION,
             name: self::OPTION_NAME_CONFIGURATION,
             shortcut: self::OPTION_SHORTCUT_CONFIGURATION,
-            mode: InputOption::VALUE_REQUIRED,
-            description: self::OPTION_DESCRIPTION_CONFIGURATION,
-        );
-    }
+        )] string $configPath = '',
+    ): int {
+        $io->section(self::START_SECTION_NAME);
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $styleOutput = new SymfonyStyle($input, $output);
-        $styleOutput->section(self::START_SECTION_NAME);
-
-        $configPath = $this->getConfigPath($input, $styleOutput);
+        $configPath = $this->getConfigPath($io, $configPath);
         if ($configPath === '') {
             return Command::FAILURE;
         }
 
-        $styleOutput->writeln(sprintf(self::CONFIGURATION_MESSAGE_TEMPLATE, $configPath));
-        $styleOutput->newLine();
+        $io->writeln(sprintf(self::CONFIGURATION_MESSAGE_TEMPLATE, $configPath));
+        $io->newLine();
 
-        if (!$this->generateTransfers($configPath, $styleOutput)) {
+        if (!$this->generateTransfers($io, $configPath)) {
             return Command::FAILURE;
         }
 
-        $styleOutput->success(self::SUCCESS_MESSAGE);
+        $io->success(self::SUCCESS_MESSAGE);
 
         return Command::SUCCESS;
     }
 
-    private function generateTransfers(string $configPath, SymfonyStyle $styleOutput): bool
+    private function generateTransfers(SymfonyStyle $io, string $configPath): bool
     {
         $generatorFiber = $this->generatorFacade->getTransferGeneratorFiber();
 
         /** @var \Picamator\TransferObject\Generated\TransferGeneratorTransfer $generatorTransfer */
         $generatorTransfer = $generatorFiber->start($configPath);
 
-        $this->writelnErrorMessages($generatorTransfer, $styleOutput);
+        $this->writelnErrorMessages($io, $generatorTransfer);
 
         while (!$generatorFiber->isTerminated()) {
             $generatorTransfer = $generatorFiber->resume();
@@ -117,19 +108,17 @@ MESSAGE;
                 continue;
             }
 
-            $this->writelnErrorMessages($generatorTransfer, $styleOutput);
-            $this->writelnDebugMessages($generatorTransfer, $styleOutput);
+            $this->writelnErrorMessages($io, $generatorTransfer);
+            $this->writelnDebugMessages($io, $generatorTransfer);
         }
 
         return $generatorFiber->getReturn();
     }
 
-    private function writelnDebugMessages(
-        TransferGeneratorTransfer $generatorTransfer,
-        SymfonyStyle $styleOutput,
-    ): void {
+    private function writelnDebugMessages(SymfonyStyle $io, TransferGeneratorTransfer $generatorTransfer): void
+    {
         if (
-            !$styleOutput->isVerbose()
+            !$io->isVerbose()
             || $generatorTransfer->validator->isValid === false
             || $generatorTransfer->fileName === null
             || $generatorTransfer->className === null
@@ -142,10 +131,10 @@ MESSAGE;
         if ($fileName !== $generatorTransfer->fileName) {
             $fileName = $generatorTransfer->fileName;
 
-            $styleOutput->newLine();
+            $io->newLine();
         }
 
-        $styleOutput->writeln(
+        $io->writeln(
             sprintf(
                 self::DEBUG_MESSAGE_TEMPLATE,
                 $generatorTransfer->fileName,
@@ -154,38 +143,35 @@ MESSAGE;
         );
     }
 
-    private function writelnErrorMessages(
-        TransferGeneratorTransfer $generatorTransfer,
-        SymfonyStyle $styleOutput,
-    ): void {
+    private function writelnErrorMessages(SymfonyStyle $io, TransferGeneratorTransfer $generatorTransfer): void
+    {
         if ($generatorTransfer->validator->isValid === true) {
             return;
         }
 
-        $styleOutput->newLine();
+        $io->newLine();
 
         $className = $generatorTransfer->className ?? '';
         if ($className !== '') {
-            $styleOutput->writeln(sprintf(self::TRANSFER_OBJECT_MESSAGE_TEMPLATE, $className));
+            $io->writeln(sprintf(self::TRANSFER_OBJECT_MESSAGE_TEMPLATE, $className));
         }
 
         $fileName = $generatorTransfer->fileName ?? '';
         if ($fileName !== '') {
-            $styleOutput->writeln(sprintf(self::DEFINITION_MESSAGE_TEMPLATE, $fileName));
+            $io->writeln(sprintf(self::DEFINITION_MESSAGE_TEMPLATE, $fileName));
         }
 
         foreach ($generatorTransfer->validator->errorMessages as $errorMessage) {
-            $styleOutput->error($errorMessage->errorMessage);
+            $io->error($errorMessage->errorMessage);
         }
     }
 
-    private function getConfigPath(InputInterface $input, SymfonyStyle $styleOutput): string
+    private function getConfigPath(SymfonyStyle $io, string $configPath): string
     {
-        $configPath = $input->getOption(name: self::OPTION_NAME_CONFIGURATION);
         $configPath = $this->normalizePath($configPath);
 
         if ($configPath === '') {
-            $styleOutput->error(self::ERROR_MISSED_OPTION_CONFIGURATION_MESSAGE);
+            $io->error(self::ERROR_MISSED_OPTION_CONFIGURATION_MESSAGE);
         }
 
         return $configPath;

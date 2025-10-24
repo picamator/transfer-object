@@ -21,6 +21,8 @@ class TemplateHelper implements TemplateHelperInterface
     private const string NULLABLE_UNION = 'null|';
     private const string PROTECTED_SET = ' protected(set)';
 
+    private const string PROPERTY_ATTRIBUTE_TEMPLATE = '    #[%s]';
+
     public function setTemplateTransfer(TemplateTransfer $templateTransfer): self
     {
         $this->templateTransfer = $templateTransfer;
@@ -31,7 +33,6 @@ class TemplateHelper implements TemplateHelperInterface
     public function renderImports(): string
     {
         $imports = [];
-        /** @var string $import */
         foreach ($this->templateTransfer->imports as $import) {
             $imports[] = sprintf(self::IMPORT_TEMPLATE, $import);
         }
@@ -56,7 +57,6 @@ class TemplateHelper implements TemplateHelperInterface
 
     public function renderMetaAttributes(string $property): string
     {
-        /** @var array<string>|null $metaAttributes */
         $metaAttributes = $this->templateTransfer->metaAttributes[$property] ?? null;
         if ($metaAttributes === null) {
             return self::EMPTY_STRING;
@@ -73,13 +73,27 @@ class TemplateHelper implements TemplateHelperInterface
 
     public function renderDockBlock(string $property): string
     {
-        /** @var string|null $dockBlock */
         $dockBlock = $this->templateTransfer->dockBlocks[$property] ?? null;
         if ($dockBlock === null) {
             return self::EMPTY_STRING;
         }
 
         return self::PHP_EOL_PADDING_LEFT . $dockBlock;
+    }
+
+    public function renderPropertyAttributes(string $property): string
+    {
+        $propertyAttributes = $this->templateTransfer->propertyAttributes[$property] ?? null;
+        if ($propertyAttributes === null) {
+            return '';
+        }
+
+        $attributes = [];
+        foreach ($propertyAttributes as $attribute) {
+            $attributes[] = sprintf(self::PROPERTY_ATTRIBUTE_TEMPLATE, $attribute);
+        }
+
+        return PHP_EOL . implode(PHP_EOL, $attributes);
     }
 
     public function renderPropertyDeclaration(string $property): string
@@ -94,7 +108,6 @@ class TemplateHelper implements TemplateHelperInterface
     {
         /** @var string $propertyType */
         $propertyType = $this->templateTransfer->properties[$property];
-        /** @var bool $isNullable */
         $isNullable = $this->templateTransfer->nullables[$property];
 
         if (!$isNullable || str_contains($propertyType, '&')) {

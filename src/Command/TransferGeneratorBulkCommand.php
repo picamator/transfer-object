@@ -9,11 +9,9 @@ use Picamator\TransferObject\Generated\TransferGeneratorBulkTransfer;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacadeInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Attribute\Option;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
@@ -33,7 +31,7 @@ For more details, please visit "<href=https://github.com/picamator/transfer-obje
 
 HELP
 )]
-class TransferGeneratorBulkCommand extends Command
+readonly class TransferGeneratorBulkCommand
 {
     use InputNormalizerTrait;
 
@@ -53,53 +51,46 @@ MESSAGE;
     private const string SUCCESS_MESSAGE = 'All Transfer Objects were generated successfully! 🎉';
 
     public function __construct(
-        ?string $name = null,
-        private readonly TransferGeneratorFacadeInterface $generatorFacade = new TransferGeneratorFacade(),
+        private TransferGeneratorFacadeInterface $generatorFacade = new TransferGeneratorFacade(),
     ) {
-        parent::__construct($name);
     }
 
-    protected function configure(): void
-    {
-        $this->addOption(
+    public function __invoke(
+        SymfonyStyle $io,
+        #[Option(
+            description: self::OPTION_DESCRIPTION_CONFIGURATION,
             name: self::OPTION_NAME_BULK,
             shortcut: self::OPTION_SHORTCUT_BULK,
-            mode: InputOption::VALUE_REQUIRED,
-            description: self::OPTION_DESCRIPTION_CONFIGURATION,
-        );
-    }
+        )] string $configListPath = '',
+    ): int {
+        $io->section(self::START_SECTION_NAME);
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $styleOutput = new SymfonyStyle($input, $output);
-        $styleOutput->section(self::START_SECTION_NAME);
-
-        $configListPath = $this->getConfigListPath($input, $styleOutput);
+        $configListPath = $this->getConfigListPath($io, $configListPath);
         if ($configListPath === '') {
             return Command::FAILURE;
         }
 
-        $styleOutput->writeln(sprintf(self::CONFIGURATION_LIST_MESSAGE_TEMPLATE, $configListPath));
-        $styleOutput->newLine();
+        $io->writeln(sprintf(self::CONFIGURATION_LIST_MESSAGE_TEMPLATE, $configListPath));
+        $io->newLine();
 
-        if (!$this->generateTransfers($configListPath, $styleOutput)) {
+        if (!$this->generateTransfers($io, $configListPath)) {
             return Command::FAILURE;
         }
 
-        $styleOutput->success(self::SUCCESS_MESSAGE);
+        $io->success(self::SUCCESS_MESSAGE);
 
         return Command::SUCCESS;
     }
 
-    private function generateTransfers(string $configListPath, SymfonyStyle $styleOutput): bool
+    private function generateTransfers(SymfonyStyle $io, string $configListPath): bool
     {
         $generatorFiber = $this->generatorFacade->getTransferGeneratorBulkFiber();
 
         /** @var \Picamator\TransferObject\Generated\TransferGeneratorBulkTransfer $bulkTransfer */
         $bulkTransfer = $generatorFiber->start($configListPath);
 
-        $progressBar = $this->getProgressBar($bulkTransfer, $styleOutput);
-        $this->writelnErrorMessages($bulkTransfer, $styleOutput);
+        $progressBar = $this->getProgressBar($io, $bulkTransfer);
+        $this->writelnErrorMessages($io, $bulkTransfer);
 
         while (!$generatorFiber->isTerminated()) {
             $bulkTransfer = $generatorFiber->resume();
@@ -108,7 +99,7 @@ MESSAGE;
             }
 
             $this->advanceProgressBar($bulkTransfer, $progressBar);
-            $this->writelnErrorMessages($bulkTransfer, $styleOutput);
+            $this->writelnErrorMessages($io, $bulkTransfer);
         }
 
         $progressBar?->finish();
@@ -125,8 +116,8 @@ MESSAGE;
     }
 
     private function getProgressBar(
+        SymfonyStyle $io,
         TransferGeneratorBulkTransfer $bulkTransfer,
-        SymfonyStyle $styleOutput,
     ): ?ProgressBar {
         $max = $bulkTransfer->progress->totalBytes;
         if ($max === 0) {
@@ -135,39 +126,36 @@ MESSAGE;
 
         ProgressBar::setFormatDefinition('minimal', 'Progress: %percent%%');
 
-        $progressBar = new ProgressBar($styleOutput, max: $max);
+        $progressBar = new ProgressBar($io, max: $max);
         $progressBar->setFormat('minimal');
 
         return $progressBar;
     }
 
-    private function writelnErrorMessages(
-        TransferGeneratorBulkTransfer $bulkTransfer,
-        SymfonyStyle $styleOutput,
-    ): void {
+    private function writelnErrorMessages(SymfonyStyle $io, TransferGeneratorBulkTransfer $bulkTransfer): void
+    {
         if ($bulkTransfer->validator->isValid === true) {
             return;
         }
 
-        $styleOutput->newLine();
+        $io->newLine();
 
         $configFile = $bulkTransfer->progress->content;
         if ($configFile !== '') {
-            $styleOutput->writeln(sprintf(self::CONFIGURATION_MESSAGE_TEMPLATE, $configFile));
+            $io->writeln(sprintf(self::CONFIGURATION_MESSAGE_TEMPLATE, $configFile));
         }
 
         foreach ($bulkTransfer->validator->errorMessages as $errorMessage) {
-            $styleOutput->error($errorMessage->errorMessage);
+            $io->error($errorMessage->errorMessage);
         }
     }
 
-    private function getConfigListPath(InputInterface $input, SymfonyStyle $styleOutput): string
+    private function getConfigListPath(SymfonyStyle $io, string $configListPath): string
     {
-        $configListPath = $input->getOption(name: self::OPTION_NAME_BULK);
         $configListPath = $this->normalizePath($configListPath);
 
         if ($configListPath === '') {
-            $styleOutput->error(self::ERROR_MISSED_OPTION_BULK_MESSAGE);
+            $io->error(self::ERROR_MISSED_OPTION_BULK_MESSAGE);
         }
 
         return $configListPath;

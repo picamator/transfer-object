@@ -20,7 +20,7 @@ use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayObjectTransform
  */
 final class TemplateTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 10;
+    protected const int META_DATA_SIZE = 11;
 
     protected const array META_DATA = [
         self::CLASS_NAME_INDEX => self::CLASS_NAME,
@@ -32,6 +32,7 @@ final class TemplateTransfer extends AbstractTransfer
         self::META_CONSTANTS_INDEX => self::META_CONSTANTS,
         self::NULLABLES_INDEX => self::NULLABLES,
         self::PROPERTIES_INDEX => self::PROPERTIES,
+        self::PROPERTY_ATTRIBUTES_INDEX => self::PROPERTY_ATTRIBUTES,
         self::PROTECTS_INDEX => self::PROTECTS,
     ];
 
@@ -68,7 +69,7 @@ final class TemplateTransfer extends AbstractTransfer
     public const string DOCK_BLOCKS = 'dockBlocks';
     private const int DOCK_BLOCKS_INDEX = 3;
 
-    /** @var \ArrayObject<string|int,mixed> */
+    /** @var \ArrayObject<string,string> */
     public ArrayObject $dockBlocks {
         get => $this->getData(self::DOCK_BLOCKS_INDEX);
         set => $this->setData(self::DOCK_BLOCKS_INDEX, $value);
@@ -80,7 +81,7 @@ final class TemplateTransfer extends AbstractTransfer
     public const string IMPORTS = 'imports';
     private const int IMPORTS_INDEX = 4;
 
-    /** @var \ArrayObject<string|int,mixed> */
+    /** @var \ArrayObject<string,string> */
     public ArrayObject $imports {
         get => $this->getData(self::IMPORTS_INDEX);
         set => $this->setData(self::IMPORTS_INDEX, $value);
@@ -92,7 +93,7 @@ final class TemplateTransfer extends AbstractTransfer
     public const string META_ATTRIBUTES = 'metaAttributes';
     private const int META_ATTRIBUTES_INDEX = 5;
 
-    /** @var \ArrayObject<string|int,mixed> */
+    /** @var \ArrayObject<string,array<int,string>> */
     public ArrayObject $metaAttributes {
         get => $this->getData(self::META_ATTRIBUTES_INDEX);
         set => $this->setData(self::META_ATTRIBUTES_INDEX, $value);
@@ -104,7 +105,7 @@ final class TemplateTransfer extends AbstractTransfer
     public const string META_CONSTANTS = 'metaConstants';
     private const int META_CONSTANTS_INDEX = 6;
 
-    /** @var \ArrayObject<string|int,mixed> */
+    /** @var \ArrayObject<string,string> */
     public ArrayObject $metaConstants {
         get => $this->getData(self::META_CONSTANTS_INDEX);
         set => $this->setData(self::META_CONSTANTS_INDEX, $value);
@@ -116,7 +117,7 @@ final class TemplateTransfer extends AbstractTransfer
     public const string NULLABLES = 'nullables';
     private const int NULLABLES_INDEX = 7;
 
-    /** @var \ArrayObject<string|int,mixed> */
+    /** @var \ArrayObject<string,bool> */
     public ArrayObject $nullables {
         get => $this->getData(self::NULLABLES_INDEX);
         set => $this->setData(self::NULLABLES_INDEX, $value);
@@ -128,19 +129,31 @@ final class TemplateTransfer extends AbstractTransfer
     public const string PROPERTIES = 'properties';
     private const int PROPERTIES_INDEX = 8;
 
-    /** @var \ArrayObject<string|int,mixed> */
+    /** @var \ArrayObject<string,string> */
     public ArrayObject $properties {
         get => $this->getData(self::PROPERTIES_INDEX);
         set => $this->setData(self::PROPERTIES_INDEX, $value);
+    }
+
+    // propertyAttributes
+    #[ArrayObjectInitiatorAttribute]
+    #[ArrayObjectTransformerAttribute]
+    public const string PROPERTY_ATTRIBUTES = 'propertyAttributes';
+    private const int PROPERTY_ATTRIBUTES_INDEX = 9;
+
+    /** @var \ArrayObject<string,array<int,string>> */
+    public ArrayObject $propertyAttributes {
+        get => $this->getData(self::PROPERTY_ATTRIBUTES_INDEX);
+        set => $this->setData(self::PROPERTY_ATTRIBUTES_INDEX, $value);
     }
 
     // protects
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
     public const string PROTECTS = 'protects';
-    private const int PROTECTS_INDEX = 9;
+    private const int PROTECTS_INDEX = 10;
 
-    /** @var \ArrayObject<string|int,mixed> */
+    /** @var \ArrayObject<string,bool> */
     public ArrayObject $protects {
         get => $this->getData(self::PROTECTS_INDEX);
         set => $this->setData(self::PROTECTS_INDEX, $value);

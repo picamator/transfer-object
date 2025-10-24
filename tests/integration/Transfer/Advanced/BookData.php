@@ -9,7 +9,7 @@ use DateTime;
 use DateTimeImmutable;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\CountryEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\AuthorTransfer;
-use Picamator\TransferObject\Transfer\TransferAdapterTrait;
+use Picamator\TransferObject\Transfer\Adapter\TransferAdapterTrait;
 use Picamator\TransferObject\Transfer\TransferInterface;
 use stdClass;
 
