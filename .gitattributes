@@ -6,6 +6,7 @@
 
 /.idea                  export-ignore
 /.github                export-ignore
+/.xdebug                export-ignore
 /config/                export-ignore
 /docker/                export-ignore
 /examples/              export-ignore
