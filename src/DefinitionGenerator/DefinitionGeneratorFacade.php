@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\DefinitionGenerator;
 
+use NoDiscard;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGeneratorBuilderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\DefinitionGeneratorFactory;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
@@ -19,6 +20,7 @@ class DefinitionGeneratorFacade implements DefinitionGeneratorFacadeInterface
             ->generateDefinitionsOrFail($generatorTransfer);
     }
 
+    #[NoDiscard('The builder should be used to create DefinitionGeneratorTransfer.')]
     public function createDefinitionGeneratorBuilder(): DefinitionGeneratorBuilderInterface
     {
         return $this->getFactory()
