@@ -19,6 +19,7 @@ COPY ./config.d/99-php.ini  /usr/local/etc/php/conf.d/99-php.ini
 
 # composer https://getcomposer.org/doc/00-intro.md#docker-image
 COPY --from=composer/composer:2-bin /composer /usr/local/bin/composer
+RUN composer self-update
 
 # group and user
 RUN groupadd -g ${GROUP_ID} generator && \
