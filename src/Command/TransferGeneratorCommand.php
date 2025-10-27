@@ -14,10 +14,8 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'picamator:transfer:generate',
+    name: 'picamator:transfer:generate|p:t:g',
     description: 'Generates Transfer Objects from definition files specified by configuration.',
-    aliases: ['p:t:g'],
-    hidden: false,
     // phpcs:disable Generic.Files.LineLength
     help: <<<HELP
 The <info>%command.name%</info> command generates Transfer Objects based on configuration file in YML format.

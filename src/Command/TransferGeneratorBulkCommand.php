@@ -15,10 +15,8 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'picamator:transfer:generate:bulk',
+    name: 'picamator:transfer:generate:bulk|p:t:g:b',
     description: 'Generates Transfer Objects based on multiple configurations and their definition files.',
-    aliases: ['p:t:g:b'],
-    hidden: false,
     // phpcs:disable Generic.Files.LineLength
     help: <<<HELP
 The <info>%command.name%</info> command generates Transfer Objects from definition files specified by multiple configuration files listed in a TXT file..

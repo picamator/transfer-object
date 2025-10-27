@@ -16,10 +16,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
 
 #[AsCommand(
-    name: 'picamator:definition:generate',
+    name: 'picamator:definition:generate|p:d:g',
     description: 'Generates Transfer Object definition files from a JSON blueprint.',
-    aliases: ['p:d:g'],
-    hidden: false,
     // phpcs:disable Generic.Files.LineLength
     help: <<<HELP
 The <info>%command.name%</info> command generates Transfer Object definition files based on a JSON blueprint.
