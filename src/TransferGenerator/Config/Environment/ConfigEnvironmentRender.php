@@ -49,9 +49,10 @@ class ConfigEnvironmentRender implements ConfigEnvironmentRenderInterface
             return '';
         }
 
-        $envValue = trim($envValue);
-
-        return $this->rtrimPath($envValue);
+        /** @phpstan-ignore return.type */
+        return $envValue
+            |> trim(...)
+            |> $this->rtrimPath(...);
     }
 
     private function rtrimPath(string $path): string
