@@ -96,6 +96,11 @@ Composer installation:
 $ composer require picamator/transfer-object
 ```
 
+| Version     | PHP  | Symfony |
+|-------------|------|---------|
+| up to 4.0.0 | ^8.4 | ^7.3    |
+| from 5.0.0. | ^8.5 | ^7.4    |
+
 Examples
 ---------
 

@@ -92,7 +92,8 @@ readonly class DefinitionGeneratorCommand
     private function createJsonPathQuestion(DefinitionGeneratorBuilderInterface $builder): Question
     {
         return new Question(question: self::QUESTION_JSON_PATH)
-            ->setValidator(function (string $answer) use ($builder) {
+            /** @phpstan-ignore argument.type */
+            ->setValidator(function (string $answer) use ($builder): string {
                 $builder->setJsonPath($answer);
 
                 return $answer;
@@ -104,7 +105,8 @@ readonly class DefinitionGeneratorCommand
     private function createClassNameQuestion(DefinitionGeneratorBuilderInterface $builder): Question
     {
         return new Question(question: self::QUESTION_CLASS_NAME)
-            ->setValidator(function (string $answer) use ($builder) {
+            /** @phpstan-ignore argument.type */
+            ->setValidator(function (string $answer) use ($builder): string {
                 $builder->setClassName($answer);
 
                 return $answer;
@@ -116,7 +118,8 @@ readonly class DefinitionGeneratorCommand
     private function createDefinitionPathQuestion(DefinitionGeneratorBuilderInterface $builder): Question
     {
         return new Question(question: self::QUESTION_DEFINITION_PATH)
-            ->setValidator(function (string $answer) use ($builder) {
+            /** @phpstan-ignore argument.type */
+            ->setValidator(function (string $answer) use ($builder): string {
                 $builder->setDefinitionPath($answer);
 
                 return $answer;

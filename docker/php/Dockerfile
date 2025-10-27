@@ -1,4 +1,4 @@
-FROM php:8.4-cli
+FROM php:8.5-rc-cli
 
 ARG GROUP_ID=1000
 ARG USER_ID=1000
@@ -6,15 +6,16 @@ ARG USER_ID=1000
 RUN apt-get --allow-unauthenticated --allow-insecure-repositories update && \
     apt-get -y install git zip libzip-dev curl libcurl4-openssl-dev && \
     docker-php-ext-configure zip && \
-    docker-php-ext-install zip curl bcmath && \
-    pecl install xdebug && \
-    docker-php-ext-enable xdebug
+    docker-php-ext-install zip curl bcmath
+#    pecl config-set preferred_state alpha && \
+#    pecl install xdebug-3.5.0alpha1 && \
+#    docker-php-ext-enable xdebug
 
 # php
 COPY ./config.d/99-php.ini  /usr/local/etc/php/conf.d/99-php.ini
 
 # Xdebug https://xdebug.org/docs/all_settings
-COPY ./config.d/99-xdebug.ini  /usr/local/etc/php/conf.d/99-xdebug.ini
+#COPY ./config.d/99-xdebug.ini  /usr/local/etc/php/conf.d/99-xdebug.ini
 
 # composer https://getcomposer.org/doc/00-intro.md#docker-image
 COPY --from=composer/composer:2-bin /composer /usr/local/bin/composer

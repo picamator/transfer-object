@@ -1,7 +1,7 @@
 name: CI
 
 env:
-  PHP_VERSION: 8.4
+  PHP_VERSION: 8.5
 
 on:
   push:
@@ -127,7 +127,7 @@ jobs:
       actions: read
     strategy:
       matrix:
-        php-version: [8.4, 8.5]
+        php-version: [8.5, 8.6]
       fail-fast: false
     steps:
       - name: Checkout
