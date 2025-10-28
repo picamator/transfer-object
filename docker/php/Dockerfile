@@ -5,7 +5,6 @@ ARG USER_ID=1000
 
 RUN apt-get --allow-unauthenticated --allow-insecure-repositories update && \
     apt-get -y install git zip libzip-dev curl libcurl4-openssl-dev && \
-    apt-get -y install gcc make autoconf libtool bison re2c pkg-config && \
     docker-php-ext-configure zip && \
     docker-php-ext-install zip curl bcmath
 
@@ -22,8 +21,7 @@ COPY ./config.d/99-xdebug.ini  /usr/local/etc/php/conf.d/99-xdebug.ini
 COPY ./config.d/99-php.ini  /usr/local/etc/php/conf.d/99-php.ini
 
 # composer https://getcomposer.org/doc/00-intro.md#docker-image
-COPY --from=composer/composer:2-bin /composer /usr/local/bin/composer
-RUN composer self-update
+COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
 
 # group and user
 RUN groupadd -g ${GROUP_ID} generator && \
