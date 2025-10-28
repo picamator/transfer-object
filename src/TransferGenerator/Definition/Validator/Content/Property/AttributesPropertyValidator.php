@@ -11,7 +11,7 @@ use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 use ReflectionAttribute;
 use ReflectionClass;
 
-class AttributesPropertyValidator implements PropertyValidatorInterface
+readonly class AttributesPropertyValidator implements PropertyValidatorInterface
 {
     use ValidatorMessageTrait;
 
