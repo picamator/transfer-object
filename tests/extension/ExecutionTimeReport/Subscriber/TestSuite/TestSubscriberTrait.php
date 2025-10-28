@@ -9,7 +9,7 @@ use PHPUnit\Event\TestSuite\Started;
 
 trait TestSubscriberTrait
 {
-    final protected function getTestSuiteName(Started|Finished $event): string
+    final protected function getTestSuite(Started|Finished $event): string
     {
         return strstr($event->testSuite()->name(), '::', true) ?: '';
     }

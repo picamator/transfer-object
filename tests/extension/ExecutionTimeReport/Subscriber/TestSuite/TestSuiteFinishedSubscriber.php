@@ -18,7 +18,9 @@ readonly class TestSuiteFinishedSubscriber implements FinishedSubscriber
 
     public function notify(Finished $event): void
     {
-        $timeReportItem = $this->timeReport->data[$this->getTestSuiteName($event)] ?? null;
+        $testSuite = $this->getTestSuite($event);
+        $timeReportItem = $this->timeReport->data[$testSuite] ?? null;
+
         if ($timeReportItem === null) {
             return;
         }
