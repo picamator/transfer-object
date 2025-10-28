@@ -65,12 +65,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "c3da86291d89157fe2a9ba2401c4acf1a7c93eba"
+                "reference": "0bb20e5f98f5e476b1ce151899bb15cccf8b28bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/c3da86291d89157fe2a9ba2401c4acf1a7c93eba",
-                "reference": "c3da86291d89157fe2a9ba2401c4acf1a7c93eba",
+                "url": "https://api.github.com/repos/symfony/console/zipball/0bb20e5f98f5e476b1ce151899bb15cccf8b28bf",
+                "reference": "0bb20e5f98f5e476b1ce151899bb15cccf8b28bf",
                 "shasum": ""
             },
             "require": {
@@ -155,7 +155,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-10-15T08:15:57+00:00"
+            "time": "2025-10-27T14:00:43+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -3510,12 +3510,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "6213f356ca7fd24ea1063b5db180d9d1a4022911"
+                "reference": "ec6573942bd67865589b3863e421c91306247b0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/6213f356ca7fd24ea1063b5db180d9d1a4022911",
-                "reference": "6213f356ca7fd24ea1063b5db180d9d1a4022911",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/ec6573942bd67865589b3863e421c91306247b0a",
+                "reference": "ec6573942bd67865589b3863e421c91306247b0a",
                 "shasum": ""
             },
             "require": {
@@ -3606,7 +3606,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-10-24T14:27:28+00:00"
+            "time": "2025-10-27T13:40:45+00:00"
         },
         {
             "name": "symfony/var-dumper",
@@ -3614,12 +3614,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "0c9272cc57ad469bbcb3f881f2c9d0b1295d477d"
+                "reference": "41fd6c4ae28c38b294b42af6db61446594a0dece"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/0c9272cc57ad469bbcb3f881f2c9d0b1295d477d",
-                "reference": "0c9272cc57ad469bbcb3f881f2c9d0b1295d477d",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/41fd6c4ae28c38b294b42af6db61446594a0dece",
+                "reference": "41fd6c4ae28c38b294b42af6db61446594a0dece",
                 "shasum": ""
             },
             "require": {
@@ -3693,7 +3693,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-29T13:00:59+00:00"
+            "time": "2025-10-27T20:36:44+00:00"
         },
         {
             "name": "theseer/tokenizer",
