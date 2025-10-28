@@ -25,14 +25,19 @@ readonly class ContentBuilder implements ContentBuilderInterface
      */
     private function getTypeEnum(string $propertyName, mixed $propertyValue): GetTypeEnum
     {
-        $propertyType = gettype($propertyValue);
-        $typeEnum = GetTypeEnum::tryFrom($propertyType);
+        /** @var GetTypeEnum|null $typeEnum */
+        $typeEnum = gettype($propertyValue) |> GetTypeEnum::tryFrom(...);
+
         if ($typeEnum !== null) {
             return $typeEnum;
         }
 
         throw new DefinitionGeneratorException(
-            sprintf('Property "%s" with type "%s" is not supported.', $propertyName, $propertyType),
+            sprintf(
+                'Property "%s" with type "%s" is not supported.',
+                $propertyName,
+                get_debug_type($propertyValue),
+            ),
         );
     }
 
