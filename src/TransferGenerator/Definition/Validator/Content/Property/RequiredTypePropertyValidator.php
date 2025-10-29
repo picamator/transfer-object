@@ -45,15 +45,20 @@ readonly class RequiredTypePropertyValidator implements PropertyValidatorInterfa
 
     private function isUniqueDefinedType(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        $typeCount = 0;
+        $count = 0;
+
         foreach (self::TYPE_KEYS as $key) {
             $value = $propertyTransfer->{$key};
             if ($value !== null) {
-                $typeCount++;
+                $count++;
+            }
+
+            if ($count > 1) {
+                return false;
             }
         }
 
-        return $typeCount === 1;
+        return $count === 1;
     }
 
     private function getErrorMessage(DefinitionPropertyTransfer $propertyTransfer): string
