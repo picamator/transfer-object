@@ -105,13 +105,13 @@ trait TransferAdapterTrait
     {
         foreach ($this->getPublicProperties() as $property) {
             $name = $property->getName();
-            $value = $data[$name] ?? null;
 
+            $value = $data[$name] ?? null;
             $typeReflection = $property->getType();
 
-            $this->$name = $typeReflection === null || $value === null
-                ? $value
-                : $this->resolveValue((string)$typeReflection, $value);
+            $this->$name = $value !== null && $typeReflection !== null
+                ? $this->resolveValue((string)$typeReflection, $value)
+                : $value;
         }
 
         return $this;
