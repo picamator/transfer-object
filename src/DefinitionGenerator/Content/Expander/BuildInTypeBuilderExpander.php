@@ -33,8 +33,11 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
     ): void {
         $propertyTransfer = match (true) {
             $content->type->isString() => $this->resolveStringType($content),
+
             $content->type->isNull() => $this->resolveNullType($content),
+
             $content->type->isObject() => $this->resolveObjectType($content),
+
             default => $this->resolveDefaultType($content),
         };
 

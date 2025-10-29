@@ -24,8 +24,11 @@ enum DefinitionKeyEnum: string
     {
         return match (true) {
             is_string($value) => $this->normalizeString($value),
+
             is_bool($value) => $this->normalizeBool($value),
+
             is_array($value) => $this->normalizeArray($value),
+
             default => null,
         };
     }
