@@ -69,8 +69,8 @@ readonly class DefinitionReader implements DefinitionReaderInterface
         $definitionTransfer = new DefinitionTransfer();
 
         $definitionTransfer->fileName = $fileName;
-        $definitionTransfer->content = $contentTransfer;
         $definitionTransfer->validator = $this->validator->validate($contentTransfer);
+        $definitionTransfer->content = $contentTransfer;
 
         return $definitionTransfer;
     }
@@ -80,9 +80,10 @@ readonly class DefinitionReader implements DefinitionReaderInterface
         $definitionTransfer = new DefinitionTransfer();
 
         $definitionTransfer->fileName = $fileName;
+        $definitionTransfer->validator = $this->createErrorValidatorTransfer($errorMessage);
+
         $definitionTransfer->content = new DefinitionContentTransfer();
         $definitionTransfer->content->className = '';
-        $definitionTransfer->validator = $this->createErrorValidatorTransfer($errorMessage);
 
         return $definitionTransfer;
     }
