@@ -31,13 +31,15 @@ trait AttributeTrait
                 flags: ReflectionAttribute::IS_INSTANCEOF,
             );
 
-            if (!isset($attributeReflections[0])) {
+            /** @var \ReflectionAttribute<TransformerAttributeInterface>|null $attributeReflection */
+            $attributeReflection = array_first($attributeReflections);
+            if ($attributeReflection === null) {
                 continue;
             }
 
             /** @var string $propertyName */
             $propertyName = $reflectionConstant->getValue();
-            $attributes[$propertyName] = $attributeReflections[0]->newInstance();
+            $attributes[$propertyName] = $attributeReflection->newInstance();
         }
 
         return $attributes;
@@ -54,14 +56,16 @@ trait AttributeTrait
                 flags: ReflectionAttribute::IS_INSTANCEOF,
             );
 
-            if (!isset($attributeReflections[0])) {
+            /** @var \ReflectionAttribute<InitiatorAttributeInterface>|null $attributeReflection */
+            $attributeReflection = array_first($attributeReflections);
+            if ($attributeReflection === null) {
                 continue;
             }
 
             /** @var string $propertyName */
             $propertyName = $reflectionConstant->getValue();
 
-            yield $propertyName => $attributeReflections[0]->newInstance();
+            yield $propertyName => $attributeReflection->newInstance();
         }
     }
 
