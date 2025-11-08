@@ -96,7 +96,7 @@ class GeneratorFactory
     {
         return $this->getCached(
             key: 'transfer-generator:TransferGeneratorBuilder',
-            factory: fn () => new TransferGeneratorBuilder(),
+            factory: fn() => new TransferGeneratorBuilder(),
         );
     }
 
@@ -104,7 +104,7 @@ class GeneratorFactory
     {
         return $this->getCached(
             key: 'transfer-generator:TemplateRender',
-            factory: fn (): TemplateRenderInterface => new RenderFactory()->createTemplateRender(),
+            factory: fn(): TemplateRenderInterface => new RenderFactory()->createTemplateRender(),
         );
     }
 

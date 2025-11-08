@@ -19,7 +19,7 @@ trait PropertyNormalizerTrait
 
         /** @var array<string,array<string,string|null>> $filteredProperties */
         $filteredProperties = array_map(
-            fn (mixed $property): array => is_array($property) ? $this->normalizeProperty($property) : [],
+            fn(mixed $property): array => is_array($property) ? $this->normalizeProperty($property) : [],
             $properties
         );
 

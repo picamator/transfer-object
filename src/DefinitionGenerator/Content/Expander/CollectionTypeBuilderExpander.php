@@ -22,7 +22,7 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
         /** @var array<string, mixed> $propertyValue */
         $propertyValue = $content->propertyValue;
 
-        return array_all($propertyValue, fn (mixed $value): bool => is_array($value));
+        return array_all($propertyValue, fn(mixed $value): bool => is_array($value));
     }
 
     protected function handleExpander(

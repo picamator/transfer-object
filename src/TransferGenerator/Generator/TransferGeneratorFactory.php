@@ -26,7 +26,7 @@ class TransferGeneratorFactory
     {
         return $this->getCached(
             key: 'transfer-generator:TransferGeneratorFiber',
-            factory: fn (): TransferGeneratorFiberInterface =>
+            factory: fn(): TransferGeneratorFiberInterface =>
                 new TransferGeneratorFiber($this->createTransferGeneratorWorkflow()),
         );
     }
@@ -35,7 +35,7 @@ class TransferGeneratorFactory
     {
         return $this->getCached(
             key: 'transfer-generator:TransferGeneratorService',
-            factory: fn (): TransferGeneratorServiceInterface =>
+            factory: fn(): TransferGeneratorServiceInterface =>
                 new TransferGeneratorService($this->createTransferGeneratorWorkflow()),
         );
     }
@@ -44,7 +44,7 @@ class TransferGeneratorFactory
     {
         return $this->getCached(
             key: 'transfer-generator:TransferGeneratorBulkFiber',
-            factory: fn (): TransferGeneratorBulkFiberInterface =>
+            factory: fn(): TransferGeneratorBulkFiberInterface =>
                 new TransferGeneratorBulkFiber(
                     $this->createFileReaderProgress(),
                     $this->createTransferGeneratorBulkBuilder(),

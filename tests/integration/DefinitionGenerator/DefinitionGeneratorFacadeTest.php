@@ -237,7 +237,7 @@ class DefinitionGeneratorFacadeTest extends TestCase
         // Act
         $transfer->fromArray($sampleContent);
 
-        $filterCallback = fn (mixed $item): bool => $item !== null;
+        $filterCallback = fn(mixed $item): bool => $item !== null;
         $actual = $this->filterArrayRecursive($transfer->toArray(), $filterCallback);
 
         // Assert

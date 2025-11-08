@@ -32,7 +32,7 @@ class ParserFactory
     {
         return $this->getCached(
             key: 'transfer-generator:DefinitionParser',
-            factory: fn (): DefinitionParserInterface => new DefinitionParser(
+            factory: fn(): DefinitionParserInterface => new DefinitionParser(
                 $this->createYmlParser(),
                 $this->createContentBuilder(),
             ),

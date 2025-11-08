@@ -35,7 +35,7 @@ class DefinitionGeneratorFactory
     {
         return $this->getCached(
             key: 'definition-generator:DefinitionGeneratorService',
-            factory: fn (): DefinitionGeneratorServiceInterface => new DefinitionGeneratorService(
+            factory: fn(): DefinitionGeneratorServiceInterface => new DefinitionGeneratorService(
                 $this->createDefinitionGeneratorProcessor(),
             ),
         );
@@ -45,7 +45,7 @@ class DefinitionGeneratorFactory
     {
         return $this->getCached(
             key: 'definition-generator:DefinitionGeneratorBuilder',
-            factory: fn (): DefinitionGeneratorBuilderInterface => new DefinitionGeneratorBuilder(
+            factory: fn(): DefinitionGeneratorBuilderInterface => new DefinitionGeneratorBuilder(
                 $this->createPathLocalValidator(),
                 $this->createClassNameValidator(),
                 $this->createJsonReader(),

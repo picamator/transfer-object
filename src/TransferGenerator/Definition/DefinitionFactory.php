@@ -28,7 +28,7 @@ class DefinitionFactory
     {
         return $this->getCached(
             key: 'transfer-generator:DefinitionReader',
-            factory: fn (): DefinitionReaderInterface =>
+            factory: fn(): DefinitionReaderInterface =>
                 new DefinitionReader(
                     $this->createDefinitionFinder(),
                     $this->createDefinitionParser(),

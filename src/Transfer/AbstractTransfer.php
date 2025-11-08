@@ -113,7 +113,7 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->initData();
 
-        $data = array_filter($data, fn ($value) => $value !== null);
+        $data = array_filter($data, fn($value) => $value !== null);
         $data = array_intersect_key($data, array_flip(static::META_DATA));
         if ($data === []) {
             return $this;

@@ -22,7 +22,7 @@ trait DependencyFactoryTrait
     {
         return $this->getCached(
             key: 'dependency:Filesystem',
-            factory: fn (): FilesystemInterface => new FilesystemBridge(new Filesystem()),
+            factory: fn(): FilesystemInterface => new FilesystemBridge(new Filesystem()),
         );
     }
 
@@ -30,7 +30,7 @@ trait DependencyFactoryTrait
     {
         return $this->getCached(
             key: 'dependency:Finder',
-            factory: fn (): FinderInterface => new FinderBridge(),
+            factory: fn(): FinderInterface => new FinderBridge(),
         );
     }
 
@@ -38,7 +38,7 @@ trait DependencyFactoryTrait
     {
         return $this->getCached(
             key: 'dependency:YmlParser',
-            factory: fn (): YmlParserInterface => new YmlParserBridge(new Parser()),
+            factory: fn(): YmlParserInterface => new YmlParserBridge(new Parser()),
         );
     }
 }
