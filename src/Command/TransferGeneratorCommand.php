@@ -12,6 +12,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Attribute\Option;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Throwable;
 
 #[AsCommand(
     name: 'picamator:transfer:generate|p:t:g',
@@ -74,23 +75,37 @@ MESSAGE;
     ): int {
         $io->section(self::START_SECTION_NAME);
 
-        $configPath = $this->getConfigPath($io, $configPath);
+        $configPath = $this->normalizePath($configPath);
         if ($configPath === '') {
+            $io->error(self::ERROR_MISSED_OPTION_CONFIGURATION_MESSAGE);
+
             return Command::FAILURE;
         }
 
         $io->writeln(sprintf(self::CONFIGURATION_MESSAGE_TEMPLATE, $configPath));
         $io->newLine();
 
-        if (!$this->generateTransfers($io, $configPath)) {
+        try {
+            $result = $this->generateTransfers($io, $configPath);
+        } catch (Throwable $e) {
+            $io->error($e->getMessage());
+
             return Command::FAILURE;
         }
 
-        $io->success(self::SUCCESS_MESSAGE);
+        if ($result) {
+            $io->success(self::SUCCESS_MESSAGE);
 
-        return Command::SUCCESS;
+            return Command::SUCCESS;
+        }
+
+        return Command::FAILURE;
     }
 
+    /**
+     * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
+     * @throws \Throwable
+     */
     private function generateTransfers(SymfonyStyle $io, string $configPath): bool
     {
         $generatorFiber = $this->generatorFacade->getTransferGeneratorFiber();
@@ -162,16 +177,5 @@ MESSAGE;
         foreach ($generatorTransfer->validator->errorMessages as $errorMessage) {
             $io->error($errorMessage->errorMessage);
         }
-    }
-
-    private function getConfigPath(SymfonyStyle $io, string $configPath): string
-    {
-        $configPath = $this->normalizePath($configPath);
-
-        if ($configPath === '') {
-            $io->error(self::ERROR_MISSED_OPTION_CONFIGURATION_MESSAGE);
-        }
-
-        return $configPath;
     }
 }

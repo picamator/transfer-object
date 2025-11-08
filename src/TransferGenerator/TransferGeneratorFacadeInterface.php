@@ -23,8 +23,6 @@ interface TransferGeneratorFacadeInterface
      * @example /src/Command/TransferGeneratorCommand.php
      *
      * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
-     * @throws \FiberError
-     * @throws \Throwable
      *
      * @return \Fiber<string,null,bool,\Picamator\TransferObject\Generated\TransferGeneratorTransfer>
      */
@@ -45,8 +43,6 @@ interface TransferGeneratorFacadeInterface
      * @example /src/Command/TransferGeneratorBulkCommand.php
      *
      * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
-     * @throws \FiberError
-     * @throws \Throwable
      *
      * @return \Fiber<string,null,bool,\Picamator\TransferObject\Generated\TransferGeneratorBulkTransfer>
      */
