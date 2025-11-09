@@ -14,6 +14,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Filesystem\DefinitionF
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\DefinitionParserInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\DefinitionValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorDefinitionException;
+use Throwable;
 
 readonly class DefinitionReader implements DefinitionReaderInterface
 {
@@ -41,7 +42,7 @@ readonly class DefinitionReader implements DefinitionReaderInterface
                 $count += $contentGenerator->getReturn();
             }
         } catch (FinderException | TransferGeneratorDefinitionException | YmlParserException $e) {
-            yield $this->createErrorDefinitionTransfer(errorMessage: $e->getMessage(), fileName: $fileName ?? '');
+            yield $this->createErrorDefinitionTransfer($e, fileName: $fileName ?? '');
         }
 
         return $count;
@@ -75,12 +76,12 @@ readonly class DefinitionReader implements DefinitionReaderInterface
         return $definitionTransfer;
     }
 
-    private function createErrorDefinitionTransfer(string $errorMessage, string $fileName): DefinitionTransfer
+    private function createErrorDefinitionTransfer(Throwable $e, string $fileName): DefinitionTransfer
     {
         $definitionTransfer = new DefinitionTransfer();
 
         $definitionTransfer->fileName = $fileName;
-        $definitionTransfer->validator = $this->createErrorValidatorTransfer($errorMessage);
+        $definitionTransfer->validator = $this->createErrorValidatorTransfer($e->getMessage());
 
         $definitionTransfer->content = new DefinitionContentTransfer();
         $definitionTransfer->content->className = '';
