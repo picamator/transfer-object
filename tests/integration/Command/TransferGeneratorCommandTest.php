@@ -11,7 +11,6 @@ use Picamator\Tests\Integration\TransferObject\Helper\FailedFiberTrait;
 use Picamator\TransferObject\Command\TransferGeneratorCommand;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacadeInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\SingleCommandApplication;
 use Symfony\Component\Console\Tester\CommandTester;
 
 #[Group('command')]
@@ -26,11 +25,8 @@ class TransferGeneratorCommandTest extends TestCase
 
     protected function setUp(): void
     {
-        $application = new SingleCommandApplication()
-            ->setCode(code: new TransferGeneratorCommand())
-            ->setAutoExit(autoExit: false);
-
-        $this->commandTester = new CommandTester($application);
+        $command = new TransferGeneratorCommand();
+        $this->commandTester = new CommandTester($command);
     }
 
     #[TestDox('Run command without configuration should show error message')]
@@ -95,11 +91,8 @@ class TransferGeneratorCommandTest extends TestCase
         $generatorFacadeMock = $this->createMock(TransferGeneratorFacadeInterface::class);
         $fiber = $this->getFailedFiber();
 
-        $application = new SingleCommandApplication()
-            ->setCode(code: new TransferGeneratorCommand($generatorFacadeMock))
-            ->setAutoExit(autoExit: false);
-
-        $commandTester = new CommandTester($application);
+        $command = new TransferGeneratorCommand($generatorFacadeMock);
+        $commandTester = new CommandTester($command);
 
         // Expect
         $generatorFacadeMock->expects($this->once())

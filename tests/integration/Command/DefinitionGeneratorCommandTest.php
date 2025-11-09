@@ -8,7 +8,6 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Command\DefinitionGeneratorCommand;
-use Symfony\Component\Console\SingleCommandApplication;
 use Symfony\Component\Console\Tester\CommandTester;
 
 #[Group('command')]
@@ -18,11 +17,8 @@ class DefinitionGeneratorCommandTest extends TestCase
 
     protected function setUp(): void
     {
-        $application = new SingleCommandApplication()
-            ->setCode(code: new DefinitionGeneratorCommand())
-            ->setAutoExit(autoExit: false);
-
-        $this->commandTester = new CommandTester($application);
+        $command = new DefinitionGeneratorCommand();
+        $this->commandTester = new CommandTester($command);
     }
 
     #[TestDox('Run command with valid json should show success message')]
