@@ -8,21 +8,18 @@ use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\Generated\ConfigTransfer;
 use Picamator\TransferObject\Generated\ValidatorTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorTrait;
+use Picamator\TransferObject\TransferGenerator\Config\Enum\ConfigKeyEnum;
+use Throwable;
 
 readonly class ConfigBuilder implements ConfigBuilderInterface
 {
     use ValidatorTrait;
 
-    public function __construct(
-        private ConfigContentBuilderInterface $contentBuilder,
-    ) {
-    }
-
     public function createConfigTransfer(
         ValidatorTransfer $validatorTransfer,
         ?ConfigContentTransfer $contentTransfer = null,
     ): ConfigTransfer {
-        $contentTransfer ??= $this->contentBuilder->createDefaultContentTransfer();
+        $contentTransfer ??= $this->createDefaultContentTransfer();
 
         $configTransfer = new ConfigTransfer();
         $configTransfer->validator = $validatorTransfer;
@@ -31,12 +28,17 @@ readonly class ConfigBuilder implements ConfigBuilderInterface
         return $configTransfer;
     }
 
-    public function createErrorConfigTransfer(string $errorMessage): ConfigTransfer
+    public function createErrorConfigTransfer(Throwable $e): ConfigTransfer
     {
         $configTransfer = new ConfigTransfer();
-        $configTransfer->validator = $this->createErrorValidatorTransfer($errorMessage);
-        $configTransfer->content = $this->contentBuilder->createDefaultContentTransfer();
+        $configTransfer->validator = $this->createErrorValidatorTransfer($e->getMessage());
+        $configTransfer->content = $this->createDefaultContentTransfer();
 
         return $configTransfer;
+    }
+
+    private function createDefaultContentTransfer(): ConfigContentTransfer
+    {
+        return new ConfigContentTransfer(ConfigKeyEnum::getDefaultConfig());
     }
 }

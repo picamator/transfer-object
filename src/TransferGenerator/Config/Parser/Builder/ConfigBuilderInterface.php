@@ -7,6 +7,7 @@ namespace Picamator\TransferObject\TransferGenerator\Config\Parser\Builder;
 use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\Generated\ConfigTransfer;
 use Picamator\TransferObject\Generated\ValidatorTransfer;
+use Throwable;
 
 interface ConfigBuilderInterface
 {
@@ -15,5 +16,5 @@ interface ConfigBuilderInterface
         ?ConfigContentTransfer $contentTransfer = null,
     ): ConfigTransfer;
 
-    public function createErrorConfigTransfer(string $errorMessage): ConfigTransfer;
+    public function createErrorConfigTransfer(Throwable $e): ConfigTransfer;
 }

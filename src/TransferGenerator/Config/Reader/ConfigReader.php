@@ -6,6 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Config\Reader;
 
 use Picamator\TransferObject\Dependency\Exception\FilesystemException;
 use Picamator\TransferObject\Dependency\Exception\YmlParserException;
+use Picamator\TransferObject\Generated\ConfigContentTransfer;
 use Picamator\TransferObject\Generated\ConfigTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Parser\Builder\ConfigBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Parser\ConfigParserInterface;
@@ -22,23 +23,43 @@ readonly class ConfigReader implements ConfigReaderInterface
 
     public function getConfig(string $configPath): ConfigTransfer
     {
-        try {
-            return $this->handleConfig($configPath);
-        } catch (YmlParserException | FilesystemException $e) {
-            return $this->builder->createErrorConfigTransfer($e->getMessage());
+        $configTransfer = $this->validateConfigPath($configPath);
+        if ($configTransfer !== null) {
+            return $configTransfer;
         }
+
+        try {
+            $contentTransfer = $this->parser->parseConfig($configPath);
+        } catch (YmlParserException $e) {
+            return $this->builder->createErrorConfigTransfer($e);
+        }
+
+        return $this->validateConfigContent($contentTransfer);
     }
 
-    private function handleConfig(string $configPath): ConfigTransfer
+    private function validateConfigContent(ConfigContentTransfer $contentTransfer): ConfigTransfer
     {
-        $validatorTransfer = $this->validator->validateFile($configPath);
-        if (!$validatorTransfer->isValid) {
-            return $this->builder->createConfigTransfer($validatorTransfer);
+        try {
+            $validatorTransfer = $this->validator->validateContent($contentTransfer);
+        } catch (FilesystemException $e) {
+            return $this->builder->createErrorConfigTransfer($e);
         }
 
-        $contentTransfer = $this->parser->parseConfig($configPath);
-        $validatorTransfer = $this->validator->validateContent($contentTransfer);
-
         return $this->builder->createConfigTransfer($validatorTransfer, $contentTransfer);
+    }
+
+    private function validateConfigPath(string $configPath): ?ConfigTransfer
+    {
+        try {
+            $validatorTransfer = $this->validator->validateFile($configPath);
+        } catch (FilesystemException $e) {
+            return $this->builder->createErrorConfigTransfer($e);
+        }
+
+        if ($validatorTransfer->isValid) {
+            return null;
+        }
+
+        return $this->builder->createConfigTransfer($validatorTransfer);
     }
 }
