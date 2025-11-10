@@ -15,7 +15,7 @@ echo <<<'STORY'
 ==============================================================
            Generate Transfer Objects
                   with notice
-     for demonstration exception handling was skipped
+     for demo the exception handling was skipped
 ==============================================================
 
 STORY;

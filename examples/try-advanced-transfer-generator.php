@@ -99,7 +99,7 @@ echo <<<'STORY'
 =======================================================
            Generate Transfer Object
                   with notice
-    for demonstration exception handling was skipped
+    for demo the exception handling was skipped
 =======================================================
 
 STORY;
@@ -109,8 +109,6 @@ new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
 echo <<<'STORY'
 =======================================================
         Try newly Generated Transfer Object
-                      and
-                     Debug
 =======================================================
 
 STORY;
