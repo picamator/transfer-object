@@ -2,6 +2,7 @@
 
 [![CI workflow](https://github.com/picamator/transfer-object/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/picamator/transfer-object/actions)
 [![License](https://poser.pugx.org/picamator/transfer-object/license)](https://packagist.org/packages/picamator/transfer-object)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/11465/badge)](https://www.bestpractices.dev/projects/11465)
 [![PHP Version Require](https://poser.pugx.org/picamator/transfer-object/require/php)](https://packagist.org/packages/picamator/transfer-object)
 [![Symfony Compatibility](https://img.shields.io/badge/Symfony-%5E7.4-blue)](https://github.com/picamator/transfer-object/tree/development?tab=readme-ov-file#key-features)
 [![Wiki](https://img.shields.io/badge/wiki-available-brightgreen)](https://github.com/picamator/transfer-object/wiki)
