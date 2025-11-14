@@ -41,7 +41,7 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: Install dependencies (if needed)
-        run: composer install --no-ansi --no-interaction --no-progress
+        run: composer install --audit --no-ansi --no-interaction --no-progress
         if: steps.cache-vendor.outputs.cache-hit != 'true'
 
       - name: Validate composer.json
