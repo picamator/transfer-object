@@ -104,7 +104,9 @@ echo <<<'STORY'
 
 STORY;
 $configPath = __DIR__ . '/config/advanced-transfer-generator/generator.config.yml';
-new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
+$generatedTransferCount = new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
+
+echo "Generated $generatedTransferCount transfer objects.\n";
 
 echo <<<'STORY'
 =======================================================

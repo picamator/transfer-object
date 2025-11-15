@@ -15,7 +15,7 @@ trait TransferGeneratorTrait
      */
     final protected static function generateTransfersOrFail(string $configPath): void
     {
-        new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
+        (void)new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
     }
 
     /**

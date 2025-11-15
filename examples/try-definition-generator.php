@@ -73,9 +73,9 @@ $generatorTransfer = new DefinitionGeneratorTransfer(
     ]
 );
 
-$generatedDefinitions = new DefinitionGeneratorFacade()->generateDefinitionsOrFail($generatorTransfer);
+$generatedDefinitionCount = new DefinitionGeneratorFacade()->generateDefinitionsOrFail($generatorTransfer);
 
-echo "Definitions $generatedDefinitions were successfully generated.\n";
+echo "Definitions $generatedDefinitionCount were successfully generated.\n";
 
 echo <<<'STORY'
 =======================================================
@@ -86,7 +86,9 @@ echo <<<'STORY'
 
 STORY;
 $configPath = __DIR__ . '/config/definition-generator/generator.config.yml';
-new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
+$generatedTransferCount = new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
+
+echo "Generated $generatedTransferCount transfer objects.\n";
 
 echo <<<'STORY'
 =======================================================

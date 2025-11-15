@@ -13,6 +13,7 @@ class DefinitionGeneratorFacade implements DefinitionGeneratorFacadeInterface
 {
     private static DefinitionGeneratorFactory $factory;
 
+    #[NoDiscard('The result should be used to validate how many definitions were generated.')]
     public function generateDefinitionsOrFail(DefinitionGeneratorTransfer $generatorTransfer): int
     {
         return $this->getFactory()
