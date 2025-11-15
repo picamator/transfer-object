@@ -1,5 +1,5 @@
-PHPStorm Junie Guidelines
-=========================
+Transfer Object Guidelines
+==========================
 
 Documentation
 -------------
@@ -7,8 +7,8 @@ Documentation
 - WIKI: https://github.com/picamator/transfer-object/wiki
 - Readme: README.md
 
-Directory Structure
---------------------
+Project Structure
+-----------------
 
 - `bin`: includes a Symfony single console application
 - `config`: transfer object and definition configurations used for definition and transfer generators
