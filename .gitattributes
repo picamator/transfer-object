@@ -6,12 +6,14 @@
 
 /.idea                  export-ignore
 /.github                export-ignore
+/.junie                 export-ignore
 /.xdebug                export-ignore
 /config/                export-ignore
 /docker/                export-ignore
 /examples/              export-ignore
 /tests/                 export-ignore
 /var/                   export-ignore
+/.aiignore              export-ignore
 /.editorconfig          export-ignore
 /.env.dist              export-ignore
 /.gitattributes         export-ignore
