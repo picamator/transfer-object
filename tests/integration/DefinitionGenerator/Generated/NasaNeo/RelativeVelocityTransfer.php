@@ -20,9 +20,9 @@ final class RelativeVelocityTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::KILOMETERS_PER_HOUR_INDEX => self::KILOMETERS_PER_HOUR,
-        self::KILOMETERS_PER_SECOND_INDEX => self::KILOMETERS_PER_SECOND,
-        self::MILES_PER_HOUR_INDEX => self::MILES_PER_HOUR,
+        self::KILOMETERS_PER_HOUR => self::KILOMETERS_PER_HOUR_INDEX,
+        self::KILOMETERS_PER_SECOND => self::KILOMETERS_PER_SECOND_INDEX,
+        self::MILES_PER_HOUR => self::MILES_PER_HOUR_INDEX,
     ];
 
     // kilometers_per_hour

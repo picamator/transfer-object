@@ -20,7 +20,7 @@ final class LabelsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::SALE_INDEX => self::SALE,
+        self::SALE => self::SALE_INDEX,
     ];
 
     // sale

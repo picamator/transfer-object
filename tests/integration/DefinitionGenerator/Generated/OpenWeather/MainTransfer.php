@@ -20,14 +20,14 @@ final class MainTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 8;
 
     protected const array META_DATA = [
-        self::FEELS_LIKE_INDEX => self::FEELS_LIKE,
-        self::GRND_LEVEL_INDEX => self::GRND_LEVEL,
-        self::HUMIDITY_INDEX => self::HUMIDITY,
-        self::PRESSURE_INDEX => self::PRESSURE,
-        self::SEA_LEVEL_INDEX => self::SEA_LEVEL,
-        self::TEMP_INDEX => self::TEMP,
-        self::TEMP_MAX_INDEX => self::TEMP_MAX,
-        self::TEMP_MIN_INDEX => self::TEMP_MIN,
+        self::FEELS_LIKE => self::FEELS_LIKE_INDEX,
+        self::GRND_LEVEL => self::GRND_LEVEL_INDEX,
+        self::HUMIDITY => self::HUMIDITY_INDEX,
+        self::PRESSURE => self::PRESSURE_INDEX,
+        self::SEA_LEVEL => self::SEA_LEVEL_INDEX,
+        self::TEMP => self::TEMP_INDEX,
+        self::TEMP_MAX => self::TEMP_MAX_INDEX,
+        self::TEMP_MIN => self::TEMP_MIN_INDEX,
     ];
 
     // feels_like

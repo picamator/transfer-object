@@ -21,8 +21,8 @@ final class TransferGeneratorBulkTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::PROGRESS_INDEX => self::PROGRESS,
-        self::VALIDATOR_INDEX => self::VALIDATOR,
+        self::PROGRESS => self::PROGRESS_INDEX,
+        self::VALIDATOR => self::VALIDATOR_INDEX,
     ];
 
     // progress

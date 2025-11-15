@@ -20,9 +20,9 @@ final class FileReaderProgressTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::CONTENT_INDEX => self::CONTENT,
-        self::PROGRESS_BYTES_INDEX => self::PROGRESS_BYTES,
-        self::TOTAL_BYTES_INDEX => self::TOTAL_BYTES,
+        self::CONTENT => self::CONTENT_INDEX,
+        self::PROGRESS_BYTES => self::PROGRESS_BYTES_INDEX,
+        self::TOTAL_BYTES => self::TOTAL_BYTES_INDEX,
     ];
 
     // content

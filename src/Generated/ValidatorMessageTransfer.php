@@ -20,8 +20,8 @@ final class ValidatorMessageTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ERROR_MESSAGE_INDEX => self::ERROR_MESSAGE,
-        self::IS_VALID_INDEX => self::IS_VALID,
+        self::ERROR_MESSAGE => self::ERROR_MESSAGE_INDEX,
+        self::IS_VALID => self::IS_VALID_INDEX,
     ];
 
     // errorMessage

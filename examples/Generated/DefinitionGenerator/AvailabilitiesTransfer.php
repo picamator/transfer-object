@@ -20,8 +20,8 @@ final class AvailabilitiesTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::BUFFER_INDEX => self::BUFFER,
-        self::TOTAL_INDEX => self::TOTAL,
+        self::BUFFER => self::BUFFER_INDEX,
+        self::TOTAL => self::TOTAL_INDEX,
     ];
 
     // buffer

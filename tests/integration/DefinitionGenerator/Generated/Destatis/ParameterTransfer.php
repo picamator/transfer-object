@@ -20,12 +20,12 @@ final class ParameterTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 6;
 
     protected const array META_DATA = [
-        self::CATEGORY_INDEX => self::CATEGORY,
-        self::LANGUAGE_INDEX => self::LANGUAGE,
-        self::PAGELENGTH_INDEX => self::PAGELENGTH,
-        self::PASSWORD_INDEX => self::PASSWORD,
-        self::TERM_INDEX => self::TERM,
-        self::USERNAME_INDEX => self::USERNAME,
+        self::CATEGORY => self::CATEGORY_INDEX,
+        self::LANGUAGE => self::LANGUAGE_INDEX,
+        self::PAGELENGTH => self::PAGELENGTH_INDEX,
+        self::PASSWORD => self::PASSWORD_INDEX,
+        self::TERM => self::TERM_INDEX,
+        self::USERNAME => self::USERNAME_INDEX,
     ];
 
     // category

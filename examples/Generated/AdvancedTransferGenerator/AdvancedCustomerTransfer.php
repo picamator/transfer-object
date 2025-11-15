@@ -25,9 +25,9 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::ADDRESS_INDEX => self::ADDRESS,
-        self::CREDENTIALS_INDEX => self::CREDENTIALS,
-        self::CUSTOMER_INDEX => self::CUSTOMER,
+        self::ADDRESS => self::ADDRESS_INDEX,
+        self::CREDENTIALS => self::CREDENTIALS_INDEX,
+        self::CUSTOMER => self::CUSTOMER_INDEX,
     ];
 
     // address

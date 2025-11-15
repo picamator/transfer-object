@@ -20,16 +20,16 @@ final class TrackingTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 10;
 
     protected const array META_DATA = [
-        self::AV_FULL_SHOW_INDEX => self::AV_FULL_SHOW,
-        self::BCR_INDEX => self::BCR,
-        self::CID_INDEX => self::CID,
-        self::CTP_INDEX => self::CTP,
-        self::OTP_INDEX => self::OTP,
-        self::PDT_INDEX => self::PDT,
-        self::PTI_INDEX => self::PTI,
-        self::SID_INDEX => self::SID,
-        self::SRC_INDEX => self::SRC,
-        self::TYPE_INDEX => self::TYPE,
+        self::AV_FULL_SHOW => self::AV_FULL_SHOW_INDEX,
+        self::BCR => self::BCR_INDEX,
+        self::CID => self::CID_INDEX,
+        self::CTP => self::CTP_INDEX,
+        self::OTP => self::OTP_INDEX,
+        self::PDT => self::PDT_INDEX,
+        self::PTI => self::PTI_INDEX,
+        self::SID => self::SID_INDEX,
+        self::SRC => self::SRC_INDEX,
+        self::TYPE => self::TYPE_INDEX,
     ];
 
     // av_full_show

@@ -21,10 +21,10 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
-        self::FEET_INDEX => self::FEET,
-        self::KILOMETERS_INDEX => self::KILOMETERS,
-        self::METERS_INDEX => self::METERS,
-        self::MILES_INDEX => self::MILES,
+        self::FEET => self::FEET_INDEX,
+        self::KILOMETERS => self::KILOMETERS_INDEX,
+        self::METERS => self::METERS_INDEX,
+        self::MILES => self::MILES_INDEX,
     ];
 
     // feet

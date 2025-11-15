@@ -23,16 +23,16 @@ final class AddressTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 10;
 
     protected const array META_DATA = [
-        self::ADDRESS1_INDEX => self::ADDRESS1,
-        self::ADDRESS2_INDEX => self::ADDRESS2,
-        self::ADDRESS3_INDEX => self::ADDRESS3,
-        self::COUNTRY_INDEX => self::COUNTRY,
-        self::FIRST_NAME_INDEX => self::FIRST_NAME,
-        self::IS_ACTIVE_INDEX => self::IS_ACTIVE,
-        self::LAST_NAME_INDEX => self::LAST_NAME,
-        self::PHONE_INDEX => self::PHONE,
-        self::UUID_INDEX => self::UUID,
-        self::ZIP_CODE_INDEX => self::ZIP_CODE,
+        self::ADDRESS1 => self::ADDRESS1_INDEX,
+        self::ADDRESS2 => self::ADDRESS2_INDEX,
+        self::ADDRESS3 => self::ADDRESS3_INDEX,
+        self::COUNTRY => self::COUNTRY_INDEX,
+        self::FIRST_NAME => self::FIRST_NAME_INDEX,
+        self::IS_ACTIVE => self::IS_ACTIVE_INDEX,
+        self::LAST_NAME => self::LAST_NAME_INDEX,
+        self::PHONE => self::PHONE_INDEX,
+        self::UUID => self::UUID_INDEX,
+        self::ZIP_CODE => self::ZIP_CODE_INDEX,
     ];
 
     // address1

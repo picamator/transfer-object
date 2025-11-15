@@ -11,7 +11,7 @@ class TemplateHelper implements TemplateHelperInterface
     private TemplateTransfer $templateTransfer;
 
     private const string IMPORT_TEMPLATE = 'use %s;';
-    private const string META_DATA_TEMPLATE = '        self::%1$s_INDEX => self::%1$s,';
+    private const string META_DATA_TEMPLATE = '        self::%1$s => self::%1$s_INDEX,';
 
     private const string PADDING_LEFT = '    ';
     private const string PHP_EOL_PADDING_LEFT = PHP_EOL . self::PADDING_LEFT;

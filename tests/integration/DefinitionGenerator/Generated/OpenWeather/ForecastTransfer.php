@@ -25,20 +25,20 @@ final class ForecastTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 14;
 
     protected const array META_DATA = [
-        self::BASE_INDEX => self::BASE,
-        self::CLOUDS_INDEX => self::CLOUDS,
-        self::COD_INDEX => self::COD,
-        self::COORD_INDEX => self::COORD,
-        self::DT_INDEX => self::DT,
-        self::ID_INDEX => self::ID,
-        self::MAIN_INDEX => self::MAIN,
-        self::NAME_INDEX => self::NAME,
-        self::RAIN_INDEX => self::RAIN,
-        self::SYS_INDEX => self::SYS,
-        self::TIMEZONE_INDEX => self::TIMEZONE,
-        self::VISIBILITY_INDEX => self::VISIBILITY,
-        self::WEATHER_INDEX => self::WEATHER,
-        self::WIND_INDEX => self::WIND,
+        self::BASE => self::BASE_INDEX,
+        self::CLOUDS => self::CLOUDS_INDEX,
+        self::COD => self::COD_INDEX,
+        self::COORD => self::COORD_INDEX,
+        self::DT => self::DT_INDEX,
+        self::ID => self::ID_INDEX,
+        self::MAIN => self::MAIN_INDEX,
+        self::NAME => self::NAME_INDEX,
+        self::RAIN => self::RAIN_INDEX,
+        self::SYS => self::SYS_INDEX,
+        self::TIMEZONE => self::TIMEZONE_INDEX,
+        self::VISIBILITY => self::VISIBILITY_INDEX,
+        self::WEATHER => self::WEATHER_INDEX,
+        self::WIND => self::WIND_INDEX,
     ];
 
     // base

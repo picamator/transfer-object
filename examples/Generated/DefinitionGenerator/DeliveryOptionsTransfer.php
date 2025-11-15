@@ -20,7 +20,7 @@ final class DeliveryOptionsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::NAME_INDEX => self::NAME,
+        self::NAME => self::NAME_INDEX,
     ];
 
     // name

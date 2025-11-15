@@ -21,8 +21,8 @@ final class DefinitionEmbeddedTypeTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::NAME_INDEX => self::NAME,
-        self::NAMESPACE_INDEX => self::NAMESPACE,
+        self::NAME => self::NAME_INDEX,
+        self::NAMESPACE => self::NAMESPACE_INDEX,
     ];
 
     // name

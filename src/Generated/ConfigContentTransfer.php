@@ -20,10 +20,10 @@ final class ConfigContentTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
-        self::DEFINITION_PATH_INDEX => self::DEFINITION_PATH,
-        self::RELATIVE_DEFINITION_PATH_INDEX => self::RELATIVE_DEFINITION_PATH,
-        self::TRANSFER_NAMESPACE_INDEX => self::TRANSFER_NAMESPACE,
-        self::TRANSFER_PATH_INDEX => self::TRANSFER_PATH,
+        self::DEFINITION_PATH => self::DEFINITION_PATH_INDEX,
+        self::RELATIVE_DEFINITION_PATH => self::RELATIVE_DEFINITION_PATH_INDEX,
+        self::TRANSFER_NAMESPACE => self::TRANSFER_NAMESPACE_INDEX,
+        self::TRANSFER_PATH => self::TRANSFER_PATH_INDEX,
     ];
 
     // definitionPath

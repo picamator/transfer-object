@@ -24,18 +24,18 @@ final class AsteroidTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 12;
 
     protected const array META_DATA = [
-        self::ABSOLUTE_MAGNITUDE_H_INDEX => self::ABSOLUTE_MAGNITUDE_H,
-        self::CLOSE_APPROACH_DATA_INDEX => self::CLOSE_APPROACH_DATA,
-        self::DESIGNATION_INDEX => self::DESIGNATION,
-        self::ESTIMATED_DIAMETER_INDEX => self::ESTIMATED_DIAMETER,
-        self::ID_INDEX => self::ID,
-        self::IS_POTENTIALLY_HAZARDOUS_ASTEROID_INDEX => self::IS_POTENTIALLY_HAZARDOUS_ASTEROID,
-        self::IS_SENTRY_OBJECT_INDEX => self::IS_SENTRY_OBJECT,
-        self::LINKS_INDEX => self::LINKS,
-        self::NAME_INDEX => self::NAME,
-        self::NASA_JPL_URL_INDEX => self::NASA_JPL_URL,
-        self::NEO_REFERENCE_ID_INDEX => self::NEO_REFERENCE_ID,
-        self::ORBITAL_DATA_INDEX => self::ORBITAL_DATA,
+        self::ABSOLUTE_MAGNITUDE_H => self::ABSOLUTE_MAGNITUDE_H_INDEX,
+        self::CLOSE_APPROACH_DATA => self::CLOSE_APPROACH_DATA_INDEX,
+        self::DESIGNATION => self::DESIGNATION_INDEX,
+        self::ESTIMATED_DIAMETER => self::ESTIMATED_DIAMETER_INDEX,
+        self::ID => self::ID_INDEX,
+        self::IS_POTENTIALLY_HAZARDOUS_ASTEROID => self::IS_POTENTIALLY_HAZARDOUS_ASTEROID_INDEX,
+        self::IS_SENTRY_OBJECT => self::IS_SENTRY_OBJECT_INDEX,
+        self::LINKS => self::LINKS_INDEX,
+        self::NAME => self::NAME_INDEX,
+        self::NASA_JPL_URL => self::NASA_JPL_URL_INDEX,
+        self::NEO_REFERENCE_ID => self::NEO_REFERENCE_ID_INDEX,
+        self::ORBITAL_DATA => self::ORBITAL_DATA_INDEX,
     ];
 
     // absolute_magnitude_h

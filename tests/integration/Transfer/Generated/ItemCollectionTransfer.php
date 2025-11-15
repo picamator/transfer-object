@@ -24,8 +24,8 @@ final class ItemCollectionTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ITEM_INDEX => self::ITEM,
-        self::ITEMS_INDEX => self::ITEMS,
+        self::ITEM => self::ITEM_INDEX,
+        self::ITEMS => self::ITEMS_INDEX,
     ];
 
     // item

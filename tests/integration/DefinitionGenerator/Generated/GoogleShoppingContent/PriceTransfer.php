@@ -20,8 +20,8 @@ final class PriceTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::CURRENCY_INDEX => self::CURRENCY,
-        self::VALUE_INDEX => self::VALUE,
+        self::CURRENCY => self::CURRENCY_INDEX,
+        self::VALUE => self::VALUE_INDEX,
     ];
 
     // currency

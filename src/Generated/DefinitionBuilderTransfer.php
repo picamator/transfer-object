@@ -24,8 +24,8 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::DEFINITION_CONTENT_INDEX => self::DEFINITION_CONTENT,
-        self::GENERATOR_CONTENTS_INDEX => self::GENERATOR_CONTENTS,
+        self::DEFINITION_CONTENT => self::DEFINITION_CONTENT_INDEX,
+        self::GENERATOR_CONTENTS => self::GENERATOR_CONTENTS_INDEX,
     ];
 
     // definitionContent

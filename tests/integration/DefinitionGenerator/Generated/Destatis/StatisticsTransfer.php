@@ -20,10 +20,10 @@ final class StatisticsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
-        self::CODE_INDEX => self::CODE,
-        self::CONTENT_INDEX => self::CONTENT,
-        self::CUBES_INDEX => self::CUBES,
-        self::INFORMATION_INDEX => self::INFORMATION,
+        self::CODE => self::CODE_INDEX,
+        self::CONTENT => self::CONTENT_INDEX,
+        self::CUBES => self::CUBES_INDEX,
+        self::INFORMATION => self::INFORMATION_INDEX,
     ];
 
     // Code

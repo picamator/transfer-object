@@ -22,7 +22,7 @@ final class SymfonyAttributeTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::I_AM_ASSERT_INDEX => self::I_AM_ASSERT,
+        self::I_AM_ASSERT => self::I_AM_ASSERT_INDEX,
     ];
 
     // iAmAssert

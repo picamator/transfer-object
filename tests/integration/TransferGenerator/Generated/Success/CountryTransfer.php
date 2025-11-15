@@ -20,8 +20,8 @@ final class CountryTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ISO2_CODE_INDEX => self::ISO2_CODE,
-        self::NAME_INDEX => self::NAME,
+        self::ISO2_CODE => self::ISO2_CODE_INDEX,
+        self::NAME => self::NAME_INDEX,
     ];
 
     // iso2Code

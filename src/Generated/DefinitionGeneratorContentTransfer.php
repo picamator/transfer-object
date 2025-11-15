@@ -21,8 +21,8 @@ final class DefinitionGeneratorContentTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::CLASS_NAME_INDEX => self::CLASS_NAME,
-        self::CONTENT_INDEX => self::CONTENT,
+        self::CLASS_NAME => self::CLASS_NAME_INDEX,
+        self::CONTENT => self::CONTENT_INDEX,
     ];
 
     // className

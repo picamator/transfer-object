@@ -21,12 +21,12 @@ final class CloseApproachDataTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 6;
 
     protected const array META_DATA = [
-        self::CLOSE_APPROACH_DATE_INDEX => self::CLOSE_APPROACH_DATE,
-        self::CLOSE_APPROACH_DATE_FULL_INDEX => self::CLOSE_APPROACH_DATE_FULL,
-        self::EPOCH_DATE_CLOSE_APPROACH_INDEX => self::EPOCH_DATE_CLOSE_APPROACH,
-        self::MISS_DISTANCE_INDEX => self::MISS_DISTANCE,
-        self::ORBITING_BODY_INDEX => self::ORBITING_BODY,
-        self::RELATIVE_VELOCITY_INDEX => self::RELATIVE_VELOCITY,
+        self::CLOSE_APPROACH_DATE => self::CLOSE_APPROACH_DATE_INDEX,
+        self::CLOSE_APPROACH_DATE_FULL => self::CLOSE_APPROACH_DATE_FULL_INDEX,
+        self::EPOCH_DATE_CLOSE_APPROACH => self::EPOCH_DATE_CLOSE_APPROACH_INDEX,
+        self::MISS_DISTANCE => self::MISS_DISTANCE_INDEX,
+        self::ORBITING_BODY => self::ORBITING_BODY_INDEX,
+        self::RELATIVE_VELOCITY => self::RELATIVE_VELOCITY_INDEX,
     ];
 
     // close_approach_date

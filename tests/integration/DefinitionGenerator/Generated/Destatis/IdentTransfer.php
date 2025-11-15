@@ -20,8 +20,8 @@ final class IdentTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::METHOD_INDEX => self::METHOD,
-        self::SERVICE_INDEX => self::SERVICE,
+        self::METHOD => self::METHOD_INDEX,
+        self::SERVICE => self::SERVICE_INDEX,
     ];
 
     // Method

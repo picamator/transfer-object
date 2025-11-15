@@ -20,10 +20,10 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
-        self::ALIAS_INDEX => self::ALIAS,
-        self::BASE_NAME_INDEX => self::BASE_NAME,
-        self::FULL_NAME_INDEX => self::FULL_NAME,
-        self::WITHOUT_ALIAS_INDEX => self::WITHOUT_ALIAS,
+        self::ALIAS => self::ALIAS_INDEX,
+        self::BASE_NAME => self::BASE_NAME_INDEX,
+        self::FULL_NAME => self::FULL_NAME_INDEX,
+        self::WITHOUT_ALIAS => self::WITHOUT_ALIAS_INDEX,
     ];
 
     // alias

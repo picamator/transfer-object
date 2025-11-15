@@ -21,9 +21,9 @@ final class TransferGeneratorTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::CLASS_NAME_INDEX => self::CLASS_NAME,
-        self::FILE_NAME_INDEX => self::FILE_NAME,
-        self::VALIDATOR_INDEX => self::VALIDATOR,
+        self::CLASS_NAME => self::CLASS_NAME_INDEX,
+        self::FILE_NAME => self::FILE_NAME_INDEX,
+        self::VALIDATOR => self::VALIDATOR_INDEX,
     ];
 
     // className

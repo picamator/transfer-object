@@ -23,13 +23,13 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 7;
 
     protected const array META_DATA = [
-        self::ADDRESS_BOOK_UUID_INDEX => self::ADDRESS_BOOK_UUID,
-        self::ADDRESS_UUID_INDEX => self::ADDRESS_UUID,
-        self::IS_ACTIVE_INDEX => self::IS_ACTIVE,
-        self::IS_BLOCKED_INDEX => self::IS_BLOCKED,
-        self::ORDER_AVERAGE_INDEX => self::ORDER_AVERAGE,
-        self::ORDER_COUNT_INDEX => self::ORDER_COUNT,
-        self::ORDER_REFERENCES_INDEX => self::ORDER_REFERENCES,
+        self::ADDRESS_BOOK_UUID => self::ADDRESS_BOOK_UUID_INDEX,
+        self::ADDRESS_UUID => self::ADDRESS_UUID_INDEX,
+        self::IS_ACTIVE => self::IS_ACTIVE_INDEX,
+        self::IS_BLOCKED => self::IS_BLOCKED_INDEX,
+        self::ORDER_AVERAGE => self::ORDER_AVERAGE_INDEX,
+        self::ORDER_COUNT => self::ORDER_COUNT_INDEX,
+        self::ORDER_REFERENCES => self::ORDER_REFERENCES_INDEX,
     ];
 
     // addressBookUuid

@@ -20,9 +20,9 @@ final class WindTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::DEG_INDEX => self::DEG,
-        self::GUST_INDEX => self::GUST,
-        self::SPEED_INDEX => self::SPEED,
+        self::DEG => self::DEG_INDEX,
+        self::GUST => self::GUST_INDEX,
+        self::SPEED => self::SPEED_INDEX,
     ];
 
     // deg

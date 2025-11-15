@@ -20,11 +20,11 @@ final class SysTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 5;
 
     protected const array META_DATA = [
-        self::COUNTRY_INDEX => self::COUNTRY,
-        self::ID_INDEX => self::ID,
-        self::SUNRISE_INDEX => self::SUNRISE,
-        self::SUNSET_INDEX => self::SUNSET,
-        self::TYPE_INDEX => self::TYPE,
+        self::COUNTRY => self::COUNTRY_INDEX,
+        self::ID => self::ID_INDEX,
+        self::SUNRISE => self::SUNRISE_INDEX,
+        self::SUNSET => self::SUNSET_INDEX,
+        self::TYPE => self::TYPE_INDEX,
     ];
 
     // country

@@ -20,8 +20,8 @@ final class CustomerTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::FIRST_NAME_INDEX => self::FIRST_NAME,
-        self::LAST_NAME_INDEX => self::LAST_NAME,
+        self::FIRST_NAME => self::FIRST_NAME_INDEX,
+        self::LAST_NAME => self::LAST_NAME_INDEX,
     ];
 
     // firstName

@@ -20,8 +20,8 @@ final class BoxTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ITEMS_INDEX => self::ITEMS,
-        self::TYPE_INDEX => self::TYPE,
+        self::ITEMS => self::ITEMS_INDEX,
+        self::TYPE => self::TYPE_INDEX,
     ];
 
     // items

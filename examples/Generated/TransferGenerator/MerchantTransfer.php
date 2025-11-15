@@ -22,9 +22,9 @@ final class MerchantTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::COUNTRY_INDEX => self::COUNTRY,
-        self::IS_ACTIVE_INDEX => self::IS_ACTIVE,
-        self::MERCHANT_REFERENCE_INDEX => self::MERCHANT_REFERENCE,
+        self::COUNTRY => self::COUNTRY_INDEX,
+        self::IS_ACTIVE => self::IS_ACTIVE_INDEX,
+        self::MERCHANT_REFERENCE => self::MERCHANT_REFERENCE_INDEX,
     ];
 
     // country

@@ -27,8 +27,8 @@ final class NamespaceTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ITEMS_INDEX => self::ITEMS,
-        self::REQUIRED_INDEX => self::REQUIRED,
+        self::ITEMS => self::ITEMS_INDEX,
+        self::REQUIRED => self::REQUIRED_INDEX,
     ];
 
     // items

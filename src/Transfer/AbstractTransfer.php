@@ -21,7 +21,7 @@ abstract class AbstractTransfer implements TransferInterface
     protected const int META_DATA_SIZE = 0;
 
     /**
-     * @var array<string>
+     * @var array<string, int>
      */
     protected const array META_DATA = [];
 
@@ -86,8 +86,8 @@ abstract class AbstractTransfer implements TransferInterface
 
     final public function getIterator(): Traversable
     {
-        foreach ($this->_data as $index => $value) {
-            yield static::META_DATA[$index] => $value;
+        foreach (static::META_DATA as $propertyName => $index) {
+            yield $propertyName => $this->_data[$index];
         }
     }
 
@@ -118,7 +118,7 @@ abstract class AbstractTransfer implements TransferInterface
         $this->initData();
 
         $data = array_filter($data, callback: self::FILTER_DATA_CALLBACK);
-        $data = array_intersect_key($data, array_flip(static::META_DATA));
+        $data = array_intersect_key($data, static::META_DATA);
         if ($data === []) {
             return $this;
         }

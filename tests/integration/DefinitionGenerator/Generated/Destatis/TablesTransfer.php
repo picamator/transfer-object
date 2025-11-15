@@ -20,9 +20,9 @@ final class TablesTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::CODE_INDEX => self::CODE,
-        self::CONTENT_INDEX => self::CONTENT,
-        self::TIME_INDEX => self::TIME,
+        self::CODE => self::CODE_INDEX,
+        self::CONTENT => self::CONTENT_INDEX,
+        self::TIME => self::TIME_INDEX,
     ];
 
     // Code

@@ -21,10 +21,10 @@ final class ExchangeRateTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
-        self::AMOUNT_INDEX => self::AMOUNT,
-        self::BASE_INDEX => self::BASE,
-        self::DATE_INDEX => self::DATE,
-        self::RATES_INDEX => self::RATES,
+        self::AMOUNT => self::AMOUNT_INDEX,
+        self::BASE => self::BASE_INDEX,
+        self::DATE => self::DATE_INDEX,
+        self::RATES => self::RATES_INDEX,
     ];
 
     // amount

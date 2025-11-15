@@ -30,20 +30,20 @@ final class ItemTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 14;
 
     protected const array META_DATA = [
-        self::I_AM_ARRAY_INDEX => self::I_AM_ARRAY,
-        self::I_AM_ARRAY_OBJECT_INDEX => self::I_AM_ARRAY_OBJECT,
-        self::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_INDEX => self::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK,
-        self::I_AM_ARRAY_WITH_DOC_BLOCK_INDEX => self::I_AM_ARRAY_WITH_DOC_BLOCK,
-        self::I_AM_BOOL_INDEX => self::I_AM_BOOL,
-        self::I_AM_DATE_TIME_INDEX => self::I_AM_DATE_TIME,
-        self::I_AM_DATE_TIME_IMMUTABLE_INDEX => self::I_AM_DATE_TIME_IMMUTABLE,
-        self::I_AM_ENUM_INDEX => self::I_AM_ENUM,
-        self::I_AM_FALSE_INDEX => self::I_AM_FALSE,
-        self::I_AM_FLOAT_INDEX => self::I_AM_FLOAT,
-        self::I_AM_INT_INDEX => self::I_AM_INT,
-        self::I_AM_STRING_INDEX => self::I_AM_STRING,
-        self::I_AM_TRUE_INDEX => self::I_AM_TRUE,
-        self::I_AM_WITH_ATTRIBUTE_INDEX => self::I_AM_WITH_ATTRIBUTE,
+        self::I_AM_ARRAY => self::I_AM_ARRAY_INDEX,
+        self::I_AM_ARRAY_OBJECT => self::I_AM_ARRAY_OBJECT_INDEX,
+        self::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK => self::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_INDEX,
+        self::I_AM_ARRAY_WITH_DOC_BLOCK => self::I_AM_ARRAY_WITH_DOC_BLOCK_INDEX,
+        self::I_AM_BOOL => self::I_AM_BOOL_INDEX,
+        self::I_AM_DATE_TIME => self::I_AM_DATE_TIME_INDEX,
+        self::I_AM_DATE_TIME_IMMUTABLE => self::I_AM_DATE_TIME_IMMUTABLE_INDEX,
+        self::I_AM_ENUM => self::I_AM_ENUM_INDEX,
+        self::I_AM_FALSE => self::I_AM_FALSE_INDEX,
+        self::I_AM_FLOAT => self::I_AM_FLOAT_INDEX,
+        self::I_AM_INT => self::I_AM_INT_INDEX,
+        self::I_AM_STRING => self::I_AM_STRING_INDEX,
+        self::I_AM_TRUE => self::I_AM_TRUE_INDEX,
+        self::I_AM_WITH_ATTRIBUTE => self::I_AM_WITH_ATTRIBUTE_INDEX,
     ];
 
     // iAmArray

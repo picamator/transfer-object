@@ -20,7 +20,7 @@ final class CloudsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::ALL_INDEX => self::ALL,
+        self::ALL => self::ALL_INDEX,
     ];
 
     // all

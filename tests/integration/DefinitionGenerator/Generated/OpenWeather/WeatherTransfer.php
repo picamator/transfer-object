@@ -20,10 +20,10 @@ final class WeatherTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
-        self::DESCRIPTION_INDEX => self::DESCRIPTION,
-        self::ICON_INDEX => self::ICON,
-        self::ID_INDEX => self::ID,
-        self::MAIN_INDEX => self::MAIN,
+        self::DESCRIPTION => self::DESCRIPTION_INDEX,
+        self::ICON => self::ICON_INDEX,
+        self::ID => self::ID_INDEX,
+        self::MAIN => self::MAIN_INDEX,
     ];
 
     // description

@@ -22,8 +22,8 @@ final class DefinitionBuildInTypeTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::DOCK_BLOCK_INDEX => self::DOCK_BLOCK,
-        self::NAME_INDEX => self::NAME,
+        self::DOCK_BLOCK => self::DOCK_BLOCK_INDEX,
+        self::NAME => self::NAME_INDEX,
     ];
 
     // dockBlock

@@ -23,8 +23,8 @@ final class DefinitionContentTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::CLASS_NAME_INDEX => self::CLASS_NAME,
-        self::PROPERTIES_INDEX => self::PROPERTIES,
+        self::CLASS_NAME => self::CLASS_NAME_INDEX,
+        self::PROPERTIES => self::PROPERTIES_INDEX,
     ];
 
     // className

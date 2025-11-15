@@ -25,18 +25,18 @@ final class ProductTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 12;
 
     protected const array META_DATA = [
-        self::AVAILABILITIES_INDEX => self::AVAILABILITIES,
-        self::CURRENCY_INDEX => self::CURRENCY,
-        self::DELIVERY_OPTIONS_INDEX => self::DELIVERY_OPTIONS,
-        self::DETAILS_INDEX => self::DETAILS,
-        self::IS_DISCOUNTED_INDEX => self::IS_DISCOUNTED,
-        self::LABELS_INDEX => self::LABELS,
-        self::MEASUREMENT_UNIT_INDEX => self::MEASUREMENT_UNIT,
-        self::NAME_INDEX => self::NAME,
-        self::PRICE_INDEX => self::PRICE,
-        self::SKU_INDEX => self::SKU,
-        self::STOCK_INDEX => self::STOCK,
-        self::STORES_INDEX => self::STORES,
+        self::AVAILABILITIES => self::AVAILABILITIES_INDEX,
+        self::CURRENCY => self::CURRENCY_INDEX,
+        self::DELIVERY_OPTIONS => self::DELIVERY_OPTIONS_INDEX,
+        self::DETAILS => self::DETAILS_INDEX,
+        self::IS_DISCOUNTED => self::IS_DISCOUNTED_INDEX,
+        self::LABELS => self::LABELS_INDEX,
+        self::MEASUREMENT_UNIT => self::MEASUREMENT_UNIT_INDEX,
+        self::NAME => self::NAME_INDEX,
+        self::PRICE => self::PRICE_INDEX,
+        self::SKU => self::SKU_INDEX,
+        self::STOCK => self::STOCK_INDEX,
+        self::STORES => self::STORES_INDEX,
     ];
 
     // availabilities

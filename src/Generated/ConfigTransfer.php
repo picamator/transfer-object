@@ -21,8 +21,8 @@ final class ConfigTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::CONTENT_INDEX => self::CONTENT,
-        self::VALIDATOR_INDEX => self::VALIDATOR,
+        self::CONTENT => self::CONTENT_INDEX,
+        self::VALIDATOR => self::VALIDATOR_INDEX,
     ];
 
     // content

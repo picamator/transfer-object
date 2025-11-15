@@ -20,11 +20,11 @@ final class VariablesTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 5;
 
     protected const array META_DATA = [
-        self::CODE_INDEX => self::CODE,
-        self::CONTENT_INDEX => self::CONTENT,
-        self::INFORMATION_INDEX => self::INFORMATION,
-        self::TYPE_INDEX => self::TYPE,
-        self::VALUES_INDEX => self::VALUES,
+        self::CODE => self::CODE_INDEX,
+        self::CONTENT => self::CONTENT_INDEX,
+        self::INFORMATION => self::INFORMATION_INDEX,
+        self::TYPE => self::TYPE_INDEX,
+        self::VALUES => self::VALUES_INDEX,
     ];
 
     // Code

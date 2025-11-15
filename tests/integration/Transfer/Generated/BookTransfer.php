@@ -27,8 +27,8 @@ final class BookTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::BOOKMARKS_INDEX => self::BOOKMARKS,
-        self::DATA_INDEX => self::DATA,
+        self::BOOKMARKS => self::BOOKMARKS_INDEX,
+        self::DATA => self::DATA_INDEX,
     ];
 
     // bookmarks

@@ -20,10 +20,10 @@ final class MissDistanceTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
-        self::ASTRONOMICAL_INDEX => self::ASTRONOMICAL,
-        self::KILOMETERS_INDEX => self::KILOMETERS,
-        self::LUNAR_INDEX => self::LUNAR,
-        self::MILES_INDEX => self::MILES,
+        self::ASTRONOMICAL => self::ASTRONOMICAL_INDEX,
+        self::KILOMETERS => self::KILOMETERS_INDEX,
+        self::LUNAR => self::LUNAR_INDEX,
+        self::MILES => self::MILES_INDEX,
     ];
 
     // astronomical

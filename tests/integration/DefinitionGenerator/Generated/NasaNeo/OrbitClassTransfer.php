@@ -20,9 +20,9 @@ final class OrbitClassTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::ORBIT_CLASS_DESCRIPTION_INDEX => self::ORBIT_CLASS_DESCRIPTION,
-        self::ORBIT_CLASS_RANGE_INDEX => self::ORBIT_CLASS_RANGE,
-        self::ORBIT_CLASS_TYPE_INDEX => self::ORBIT_CLASS_TYPE,
+        self::ORBIT_CLASS_DESCRIPTION => self::ORBIT_CLASS_DESCRIPTION_INDEX,
+        self::ORBIT_CLASS_RANGE => self::ORBIT_CLASS_RANGE_INDEX,
+        self::ORBIT_CLASS_TYPE => self::ORBIT_CLASS_TYPE_INDEX,
     ];
 
     // orbit_class_description

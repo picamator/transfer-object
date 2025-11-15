@@ -24,11 +24,11 @@ final class ArdNewsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 5;
 
     protected const array META_DATA = [
-        self::NEW_STORIES_COUNT_LINK_INDEX => self::NEW_STORIES_COUNT_LINK,
-        self::NEWS_INDEX => self::NEWS,
-        self::NEXT_PAGE_INDEX => self::NEXT_PAGE,
-        self::REGIONAL_INDEX => self::REGIONAL,
-        self::TYPE_INDEX => self::TYPE,
+        self::NEW_STORIES_COUNT_LINK => self::NEW_STORIES_COUNT_LINK_INDEX,
+        self::NEWS => self::NEWS_INDEX,
+        self::NEXT_PAGE => self::NEXT_PAGE_INDEX,
+        self::REGIONAL => self::REGIONAL_INDEX,
+        self::TYPE => self::TYPE_INDEX,
     ];
 
     // newStoriesCountLink

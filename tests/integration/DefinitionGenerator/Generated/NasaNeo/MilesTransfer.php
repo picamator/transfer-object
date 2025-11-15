@@ -20,8 +20,8 @@ final class MilesTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ESTIMATED_DIAMETER_MAX_INDEX => self::ESTIMATED_DIAMETER_MAX,
-        self::ESTIMATED_DIAMETER_MIN_INDEX => self::ESTIMATED_DIAMETER_MIN,
+        self::ESTIMATED_DIAMETER_MAX => self::ESTIMATED_DIAMETER_MAX_INDEX,
+        self::ESTIMATED_DIAMETER_MIN => self::ESTIMATED_DIAMETER_MIN_INDEX,
     ];
 
     // estimated_diameter_max

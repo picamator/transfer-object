@@ -21,9 +21,9 @@ final class DefinitionTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::CONTENT_INDEX => self::CONTENT,
-        self::FILE_NAME_INDEX => self::FILE_NAME,
-        self::VALIDATOR_INDEX => self::VALIDATOR,
+        self::CONTENT => self::CONTENT_INDEX,
+        self::FILE_NAME => self::FILE_NAME_INDEX,
+        self::VALIDATOR => self::VALIDATOR_INDEX,
     ];
 
     // content

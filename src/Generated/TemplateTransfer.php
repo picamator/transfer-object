@@ -23,17 +23,17 @@ final class TemplateTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 11;
 
     protected const array META_DATA = [
-        self::CLASS_NAME_INDEX => self::CLASS_NAME,
-        self::CLASS_NAMESPACE_INDEX => self::CLASS_NAMESPACE,
-        self::DEFINITION_PATH_INDEX => self::DEFINITION_PATH,
-        self::DOCK_BLOCKS_INDEX => self::DOCK_BLOCKS,
-        self::IMPORTS_INDEX => self::IMPORTS,
-        self::META_ATTRIBUTES_INDEX => self::META_ATTRIBUTES,
-        self::META_CONSTANTS_INDEX => self::META_CONSTANTS,
-        self::NULLABLES_INDEX => self::NULLABLES,
-        self::PROPERTIES_INDEX => self::PROPERTIES,
-        self::PROPERTY_ATTRIBUTES_INDEX => self::PROPERTY_ATTRIBUTES,
-        self::PROTECTS_INDEX => self::PROTECTS,
+        self::CLASS_NAME => self::CLASS_NAME_INDEX,
+        self::CLASS_NAMESPACE => self::CLASS_NAMESPACE_INDEX,
+        self::DEFINITION_PATH => self::DEFINITION_PATH_INDEX,
+        self::DOCK_BLOCKS => self::DOCK_BLOCKS_INDEX,
+        self::IMPORTS => self::IMPORTS_INDEX,
+        self::META_ATTRIBUTES => self::META_ATTRIBUTES_INDEX,
+        self::META_CONSTANTS => self::META_CONSTANTS_INDEX,
+        self::NULLABLES => self::NULLABLES_INDEX,
+        self::PROPERTIES => self::PROPERTIES_INDEX,
+        self::PROPERTY_ATTRIBUTES => self::PROPERTY_ATTRIBUTES_INDEX,
+        self::PROTECTS => self::PROTECTS_INDEX,
     ];
 
     // className

@@ -27,12 +27,12 @@ final class AddressBookTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 6;
 
     protected const array META_DATA = [
-        self::ADDRESSES_INDEX => self::ADDRESSES,
-        self::CATEGORIES_INDEX => self::CATEGORIES,
-        self::LABEL_INDEX => self::LABEL,
-        self::LABEL_ALIAS_INDEX => self::LABEL_ALIAS,
-        self::NAME_INDEX => self::NAME,
-        self::UUID_INDEX => self::UUID,
+        self::ADDRESSES => self::ADDRESSES_INDEX,
+        self::CATEGORIES => self::CATEGORIES_INDEX,
+        self::LABEL => self::LABEL_INDEX,
+        self::LABEL_ALIAS => self::LABEL_ALIAS_INDEX,
+        self::NAME => self::NAME_INDEX,
+        self::UUID => self::UUID_INDEX,
     ];
 
     // addresses

@@ -20,8 +20,8 @@ final class CoordTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::LAT_INDEX => self::LAT,
-        self::LON_INDEX => self::LON,
+        self::LAT => self::LAT_INDEX,
+        self::LON => self::LON_INDEX,
     ];
 
     // lat

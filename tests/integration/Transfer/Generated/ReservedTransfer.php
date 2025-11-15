@@ -23,7 +23,7 @@ final class ReservedTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::DATA_INDEX => self::DATA,
+        self::DATA => self::DATA_INDEX,
     ];
 
     // data

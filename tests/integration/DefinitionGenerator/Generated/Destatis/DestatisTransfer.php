@@ -24,15 +24,15 @@ final class DestatisTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 9;
 
     protected const array META_DATA = [
-        self::COPYRIGHT_INDEX => self::COPYRIGHT,
-        self::CUBES_INDEX => self::CUBES,
-        self::IDENT_INDEX => self::IDENT,
-        self::PARAMETER_INDEX => self::PARAMETER,
-        self::STATISTICS_INDEX => self::STATISTICS,
-        self::STATUS_INDEX => self::STATUS,
-        self::TABLES_INDEX => self::TABLES,
-        self::TIMESERIES_INDEX => self::TIMESERIES,
-        self::VARIABLES_INDEX => self::VARIABLES,
+        self::COPYRIGHT => self::COPYRIGHT_INDEX,
+        self::CUBES => self::CUBES_INDEX,
+        self::IDENT => self::IDENT_INDEX,
+        self::PARAMETER => self::PARAMETER_INDEX,
+        self::STATISTICS => self::STATISTICS_INDEX,
+        self::STATUS => self::STATUS_INDEX,
+        self::TABLES => self::TABLES_INDEX,
+        self::TIMESERIES => self::TIMESERIES_INDEX,
+        self::VARIABLES => self::VARIABLES_INDEX,
     ];
 
     // Copyright

@@ -21,11 +21,11 @@ final class BrandingImageTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 5;
 
     protected const array META_DATA = [
-        self::ALTTEXT_INDEX => self::ALTTEXT,
-        self::COPYRIGHT_INDEX => self::COPYRIGHT,
-        self::IMAGE_VARIANTS_INDEX => self::IMAGE_VARIANTS,
-        self::TITLE_INDEX => self::TITLE,
-        self::TYPE_INDEX => self::TYPE,
+        self::ALTTEXT => self::ALTTEXT_INDEX,
+        self::COPYRIGHT => self::COPYRIGHT_INDEX,
+        self::IMAGE_VARIANTS => self::IMAGE_VARIANTS_INDEX,
+        self::TITLE => self::TITLE_INDEX,
+        self::TYPE => self::TYPE_INDEX,
     ];
 
     // alttext

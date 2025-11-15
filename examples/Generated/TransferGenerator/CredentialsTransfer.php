@@ -23,10 +23,10 @@ final class CredentialsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
-        self::CREATED_AT_INDEX => self::CREATED_AT,
-        self::LOGIN_INDEX => self::LOGIN,
-        self::TOKEN_INDEX => self::TOKEN,
-        self::UPDATED_AT_INDEX => self::UPDATED_AT,
+        self::CREATED_AT => self::CREATED_AT_INDEX,
+        self::LOGIN => self::LOGIN_INDEX,
+        self::TOKEN => self::TOKEN_INDEX,
+        self::UPDATED_AT => self::UPDATED_AT_INDEX,
     ];
 
     // createdAt

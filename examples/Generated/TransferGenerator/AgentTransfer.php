@@ -24,8 +24,8 @@ final class AgentTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::CUSTOMER_INDEX => self::CUSTOMER,
-        self::MERCHANTS_INDEX => self::MERCHANTS,
+        self::CUSTOMER => self::CUSTOMER_INDEX,
+        self::MERCHANTS => self::MERCHANTS_INDEX,
     ];
 
     // customer

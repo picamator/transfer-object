@@ -21,8 +21,8 @@ final class MeasurementUnitTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::BOX_INDEX => self::BOX,
-        self::PALETTE_INDEX => self::PALETTE,
+        self::BOX => self::BOX_INDEX,
+        self::PALETTE => self::PALETTE_INDEX,
     ];
 
     // box

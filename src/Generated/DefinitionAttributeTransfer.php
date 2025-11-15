@@ -21,8 +21,8 @@ final class DefinitionAttributeTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ARGUMENTS_INDEX => self::ARGUMENTS,
-        self::NAMESPACE_INDEX => self::NAMESPACE,
+        self::ARGUMENTS => self::ARGUMENTS_INDEX,
+        self::NAMESPACE => self::NAMESPACE_INDEX,
     ];
 
     // arguments

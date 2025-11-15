@@ -20,8 +20,8 @@ final class DetailsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::DESCRIPTION_INDEX => self::DESCRIPTION,
-        self::IS_REGIONAL_INDEX => self::IS_REGIONAL,
+        self::DESCRIPTION => self::DESCRIPTION_INDEX,
+        self::IS_REGIONAL => self::IS_REGIONAL_INDEX,
     ];
 
     // description

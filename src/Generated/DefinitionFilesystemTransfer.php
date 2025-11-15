@@ -20,9 +20,9 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::CONTENT_INDEX => self::CONTENT,
-        self::DEFINITION_PATH_INDEX => self::DEFINITION_PATH,
-        self::FILE_NAME_INDEX => self::FILE_NAME,
+        self::CONTENT => self::CONTENT_INDEX,
+        self::DEFINITION_PATH => self::DEFINITION_PATH_INDEX,
+        self::FILE_NAME => self::FILE_NAME_INDEX,
     ];
 
     // content

@@ -24,16 +24,16 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 10;
 
     protected const array META_DATA = [
-        self::ATTRIBUTES_INDEX => self::ATTRIBUTES,
-        self::BUILD_IN_TYPE_INDEX => self::BUILD_IN_TYPE,
-        self::COLLECTION_TYPE_INDEX => self::COLLECTION_TYPE,
-        self::DATE_TIME_TYPE_INDEX => self::DATE_TIME_TYPE,
-        self::ENUM_TYPE_INDEX => self::ENUM_TYPE,
-        self::IS_NULLABLE_INDEX => self::IS_NULLABLE,
-        self::IS_PROTECTED_INDEX => self::IS_PROTECTED,
-        self::NUMBER_TYPE_INDEX => self::NUMBER_TYPE,
-        self::PROPERTY_NAME_INDEX => self::PROPERTY_NAME,
-        self::TRANSFER_TYPE_INDEX => self::TRANSFER_TYPE,
+        self::ATTRIBUTES => self::ATTRIBUTES_INDEX,
+        self::BUILD_IN_TYPE => self::BUILD_IN_TYPE_INDEX,
+        self::COLLECTION_TYPE => self::COLLECTION_TYPE_INDEX,
+        self::DATE_TIME_TYPE => self::DATE_TIME_TYPE_INDEX,
+        self::ENUM_TYPE => self::ENUM_TYPE_INDEX,
+        self::IS_NULLABLE => self::IS_NULLABLE_INDEX,
+        self::IS_PROTECTED => self::IS_PROTECTED_INDEX,
+        self::NUMBER_TYPE => self::NUMBER_TYPE_INDEX,
+        self::PROPERTY_NAME => self::PROPERTY_NAME_INDEX,
+        self::TRANSFER_TYPE => self::TRANSFER_TYPE_INDEX,
     ];
 
     // attributes
