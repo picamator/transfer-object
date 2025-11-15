@@ -20,11 +20,10 @@ trait AttributeTrait
     private ?WeakReference $_reflectionObjectReference = null;
 
     /**
-     * @return array<string, \Picamator\TransferObject\Transfer\Attribute\Transformer\TransformerAttributeInterface>
+     * @return Generator<string, \ReflectionAttribute<TransformerAttributeInterface>>
      */
-    final protected function getTransformerAttributes(): array
+    final protected function getTransformerAttributeReflections(): Generator
     {
-        $attributes = [];
         foreach ($this->getReflectionConstants() as $reflectionConstant) {
             $attributeReflections = $reflectionConstant->getAttributes(
                 name: TransformerAttributeInterface::class,
@@ -39,10 +38,9 @@ trait AttributeTrait
 
             /** @var string $propertyName */
             $propertyName = $reflectionConstant->getValue();
-            $attributes[$propertyName] = $attributeReflection->newInstance();
-        }
 
-        return $attributes;
+            yield $propertyName => $attributeReflection;
+        }
     }
 
     /**

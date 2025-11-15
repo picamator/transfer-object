@@ -102,12 +102,14 @@ abstract class AbstractTransfer implements TransferInterface
     final public function toArray(): array
     {
         $data = [];
-        $attributes = $this->getTransformerAttributes();
+        foreach ($this->getTransformerAttributeReflections() as $propertyName => $reflection) {
+            $data[$propertyName] = $reflection->newInstance()->toArray($this->$propertyName);
+        }
 
-        foreach ($this as $propertyName => $value) {
-            $data[$propertyName] = isset($attributes[$propertyName])
-                ? $attributes[$propertyName]->toArray($value)
-                : $value;
+        $propertyNames = array_diff_key(static::META_DATA, $data);
+        $propertyNames = array_keys($propertyNames);
+        foreach ($propertyNames as $propertyName) {
+            $data[$propertyName] = $this->$propertyName;
         }
 
         return $data;
@@ -123,12 +125,17 @@ abstract class AbstractTransfer implements TransferInterface
             return $this;
         }
 
-        $attributes = $this->getTransformerAttributes();
+        foreach ($this->getTransformerAttributeReflections() as $propertyName => $reflection) {
+            if (!isset($data[$propertyName])) {
+                continue;
+            }
+
+            $this->$propertyName = $reflection->newInstance()->fromArray($data[$propertyName]);
+            unset($data[$propertyName]);
+        }
 
         foreach ($data as $propertyName => $value) {
-            $this->$propertyName = isset($attributes[$propertyName])
-                ? $attributes[$propertyName]->fromArray($value)
-                : $value;
+            $this->$propertyName = $value;
         }
 
         return $this;

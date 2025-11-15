@@ -20,7 +20,7 @@ readonly class ApplicationFinishedSubscriber implements FinishedSubscriber
 
     public function notify(Finished $event): void
     {
-        if ($event->shellExitCode() === 1 || $this->timeReport->count() === 0) {
+        if ($event->shellExitCode() !== 0 || $this->timeReport->count() === 0) {
             return;
         }
 
