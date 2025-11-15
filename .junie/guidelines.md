@@ -51,6 +51,7 @@ Code Style
 * reader classes should have `public` methods prefixed by `get`
 * render classes should have `public` methods prefixed by `render`
 * validator classes should have `public` methods prefixed by `validate`
+* methods returning `bool` should be prefixed by `is`
 
 Module Structure
 ----------------
