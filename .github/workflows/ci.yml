@@ -36,9 +36,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ./vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-composer-${{ env.PHP_VERSION }}-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
-            ${{ runner.os }}-composer-
+            ${{ runner.os }}-composer-${{ env.PHP_VERSION }}-
 
       - name: Install dependencies (if needed)
         run: composer install --audit --no-ansi --no-interaction --no-progress
@@ -71,9 +71,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ./vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-composer-${{ env.PHP_VERSION }}-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
-            ${{ runner.os }}-composer-
+            ${{ runner.os }}-composer-${{ env.PHP_VERSION }}-
 
       - name: Install dependencies (if needed)
         run: composer install --no-ansi --no-interaction --no-progress
@@ -106,9 +106,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ./vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-composer-${{ env.PHP_VERSION }}-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
-            ${{ runner.os }}-composer-
+            ${{ runner.os }}-composer-${{ env.PHP_VERSION }}-
 
       - name: Install dependencies (if needed)
         run: composer install --no-ansi --no-interaction --no-progress
