@@ -14,6 +14,7 @@ use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookAuthorData;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookData;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\CountryEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\AuthorTransfer;
+use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ReservedTransfer;
 
 #[Group('transfer')]
 class TransferAdapterTest extends TestCase
@@ -66,6 +67,27 @@ class TransferAdapterTest extends TestCase
 
         // Assert
         $this->assertSame($expected, $actual);
+    }
+
+    #[TestDox('Transformation fromArray and toArray with reserved properties')]
+    public function testTransformationFromArrayToArrayWithReservedProperties(): void
+    {
+        // Arrange
+        $expected = [
+            ReservedTransfer::DATA => [
+                '_data' => 'data',
+            ],
+        ];
+
+        $reserverPropertyData = new ReservedTransfer()
+            ->fromArray($expected);
+
+        // Act
+        $actual = $reserverPropertyData->toArray();
+
+        // Assert
+        $this->assertSame($expected, $actual);
+        $this->assertSame($expected[ReservedTransfer::DATA]['_data'], $reserverPropertyData->data->_data);
     }
 
     #[TestDox('Transfer count')]
