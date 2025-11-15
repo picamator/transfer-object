@@ -23,6 +23,10 @@ class TemplateHelper implements TemplateHelperInterface
 
     private const string PROPERTY_ATTRIBUTE_TEMPLATE = '    #[%s]';
 
+    private const \Closure PADDING_CALLBACK = static function (string $attribute): string {
+        return self::PADDING_LEFT . $attribute;
+    };
+
     public function setTemplateTransfer(TemplateTransfer $templateTransfer): self
     {
         $this->templateTransfer = $templateTransfer;
@@ -63,10 +67,7 @@ class TemplateHelper implements TemplateHelperInterface
         }
 
         natsort($metaAttributes);
-        $metaAttributes = array_map(
-            fn(string $attribute): string => self::PADDING_LEFT . $attribute,
-            $metaAttributes,
-        );
+        $metaAttributes = array_map(self::PADDING_CALLBACK, $metaAttributes);
 
         return PHP_EOL . implode(PHP_EOL, $metaAttributes);
     }

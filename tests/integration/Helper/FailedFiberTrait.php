@@ -9,13 +9,15 @@ use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorExcept
 
 trait FailedFiberTrait
 {
+    private const \Closure FIBER_CALLBACK = static function (): never {
+        throw new TransferGeneratorException('Fiber cannot be started.');
+    };
+
     /**
      * @phpstan-ignore missingType.generics
      */
     final protected function getFailedFiber(): Fiber
     {
-        return new Fiber(
-            fn() => throw new TransferGeneratorException('Fiber cannot be started.'),
-        );
+        return new Fiber(callback: self::FIBER_CALLBACK);
     }
 }

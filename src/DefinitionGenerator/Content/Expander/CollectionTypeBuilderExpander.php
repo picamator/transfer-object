@@ -13,6 +13,10 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
 {
     use BuilderExpanderTrait;
 
+    private const \Closure SEARCH_IS_ARRAY_CALLBACK = static function (mixed $value): bool {
+        return is_array($value);
+    };
+
     protected function isApplicable(Content $content): bool
     {
         if (!$content->type->isArray() || empty($content->propertyValue)) {
@@ -22,7 +26,7 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
         /** @var array<string, mixed> $propertyValue */
         $propertyValue = $content->propertyValue;
 
-        return array_all($propertyValue, fn(mixed $value): bool => is_array($value));
+        return array_all($propertyValue, self::SEARCH_IS_ARRAY_CALLBACK);
     }
 
     protected function handleExpander(
