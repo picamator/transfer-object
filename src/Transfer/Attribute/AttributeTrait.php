@@ -22,7 +22,7 @@ trait AttributeTrait
     /**
      * @return Generator<string, \ReflectionAttribute<TransformerAttributeInterface>>
      */
-    final protected function getTransformerAttributeReflections(): Generator
+    final protected function getTransformerReflections(): Generator
     {
         foreach ($this->getReflectionConstants() as $reflectionConstant) {
             $attributeReflections = $reflectionConstant->getAttributes(
@@ -46,7 +46,7 @@ trait AttributeTrait
     /**
      * @return Generator<string, \Picamator\TransferObject\Transfer\Attribute\Initiator\InitiatorAttributeInterface>
      */
-    final protected function getInitiatorAttributes(): Generator
+    final protected function getInitiators(): Generator
     {
         foreach ($this->getReflectionConstants() as $reflectionConstant) {
             $attributeReflections = $reflectionConstant->getAttributes(
