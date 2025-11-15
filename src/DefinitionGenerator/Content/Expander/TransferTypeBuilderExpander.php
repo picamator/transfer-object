@@ -33,7 +33,7 @@ final class TransferTypeBuilderExpander extends AbstractBuilderExpander
         DefinitionBuilderTransfer $builderTransfer,
     ): void {
         $propertyTransfer = $this->createPropertyTransfer($content->propertyName);
-        $builderTransfer->definitionContent->properties[] = $propertyTransfer;
+        $builderTransfer->definitionContent->properties->append($propertyTransfer);
 
         /** @var array<int|string, mixed> $propertyValue */
         $propertyValue = $content->propertyValue;

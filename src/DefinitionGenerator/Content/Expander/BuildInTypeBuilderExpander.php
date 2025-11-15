@@ -41,7 +41,7 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
             default => $this->resolveDefaultType($content),
         };
 
-        $builderTransfer->definitionContent->properties[] = $propertyTransfer;
+        $builderTransfer->definitionContent->properties->append($propertyTransfer);
     }
 
     private function resolveDefaultType(Content $content): DefinitionPropertyTransfer

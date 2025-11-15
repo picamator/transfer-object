@@ -34,7 +34,7 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
         DefinitionBuilderTransfer $builderTransfer,
     ): void {
         $propertyTransfer = $this->createPropertyTransfer($content->propertyName);
-        $builderTransfer->definitionContent->properties[] = $propertyTransfer;
+        $builderTransfer->definitionContent->properties->append($propertyTransfer);
 
 
         $mergedContent = $this->mergeContent($content);
