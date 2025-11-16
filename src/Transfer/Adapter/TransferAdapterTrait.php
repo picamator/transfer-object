@@ -257,9 +257,9 @@ trait TransferAdapterTrait
 
     private function isBcMathLoaded(): bool
     {
+        /** @var bool $isLoaded */
         static $isLoaded = extension_loaded('bcmath');
 
-        /** @phpstan-ignore return.type */
         return $isLoaded;
     }
 }
