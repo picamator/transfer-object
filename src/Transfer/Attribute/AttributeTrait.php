@@ -44,10 +44,12 @@ trait AttributeTrait
     }
 
     /**
-     * @return Generator<string, \Picamator\TransferObject\Transfer\Attribute\Initiator\InitiatorAttributeInterface>
+     * @return Generator<string, InitiatorAttributeInterface>
      */
     final protected function getInitiators(): Generator
     {
+        /** @var array<string, InitiatorAttributeInterface> $initiators */
+        $initiators = [];
         foreach ($this->getReflectionConstants() as $reflectionConstant) {
             $attributeReflections = $reflectionConstant->getAttributes(
                 name: InitiatorAttributeInterface::class,
@@ -62,8 +64,11 @@ trait AttributeTrait
 
             /** @var string $propertyName */
             $propertyName = $reflectionConstant->getValue();
+            $initiatorName = $attributeReflection->getName();
 
-            yield $propertyName => $attributeReflection->newInstance();
+            $initiators[$initiatorName] ??= $attributeReflection->newInstance();
+
+            yield $propertyName => $initiators[$initiatorName];
         }
     }
 
