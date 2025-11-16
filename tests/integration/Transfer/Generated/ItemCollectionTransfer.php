@@ -24,13 +24,13 @@ final class ItemCollectionTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ITEM => self::ITEM_INDEX,
-        self::ITEMS => self::ITEMS_INDEX,
+        self::ITEM_PROP => self::ITEM_INDEX,
+        self::ITEMS_PROP => self::ITEMS_INDEX,
     ];
 
     // item
     #[TransferTransformerAttribute(ItemTransfer::class)]
-    public const string ITEM = 'item';
+    public const string ITEM_PROP = 'item';
     private const int ITEM_INDEX = 0;
 
     public ?ItemTransfer $item {
@@ -41,7 +41,7 @@ final class ItemCollectionTransfer extends AbstractTransfer
     // items
     #[CollectionInitiatorAttribute]
     #[CollectionTransformerAttribute(ItemTransfer::class)]
-    public const string ITEMS = 'items';
+    public const string ITEMS_PROP = 'items';
     private const int ITEMS_INDEX = 1;
 
     /** @var \ArrayObject<int,ItemTransfer> */

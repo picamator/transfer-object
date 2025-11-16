@@ -20,11 +20,11 @@ final class CommandTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::RUN => self::RUN_INDEX,
+        self::RUN_PROP => self::RUN_INDEX,
     ];
 
     // run
-    public const string RUN = 'run';
+    public const string RUN_PROP = 'run';
     private const int RUN_INDEX = 0;
 
     public ?true $run {

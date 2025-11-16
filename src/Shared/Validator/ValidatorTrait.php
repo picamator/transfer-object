@@ -19,8 +19,8 @@ trait ValidatorTrait
         }
 
         $validatorTransfer->errorMessages[] = new ValidatorMessageTransfer([
-            ValidatorMessageTransfer::IS_VALID => false,
-            ValidatorMessageTransfer::ERROR_MESSAGE => $errorMessage,
+            ValidatorMessageTransfer::IS_VALID_PROP => false,
+            ValidatorMessageTransfer::ERROR_MESSAGE_PROP => $errorMessage,
         ]);
 
         return $validatorTransfer;

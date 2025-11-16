@@ -1,4 +1,4 @@
 # $schema: ./../../../../../../schema/definition.schema.json
-Reserved:
+ReservedAdvanced:
   data:
     type: "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Advanced\\ReservedPropertyData"

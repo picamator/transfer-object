@@ -24,35 +24,35 @@ final class ProductTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 25;
 
     protected const array META_DATA = [
-        self::AGE_GROUP => self::AGE_GROUP_INDEX,
-        self::AVAILABILITY => self::AVAILABILITY_INDEX,
-        self::AVAILABILITY_DATE => self::AVAILABILITY_DATE_INDEX,
-        self::BRAND => self::BRAND_INDEX,
-        self::CHANNEL => self::CHANNEL_INDEX,
-        self::COLOR => self::COLOR_INDEX,
-        self::CONDITION => self::CONDITION_INDEX,
-        self::CONTENT_LANGUAGE => self::CONTENT_LANGUAGE_INDEX,
-        self::DESCRIPTION => self::DESCRIPTION_INDEX,
-        self::FEED_LABEL => self::FEED_LABEL_INDEX,
-        self::GENDER => self::GENDER_INDEX,
-        self::GOOGLE_PRODUCT_CATEGORY => self::GOOGLE_PRODUCT_CATEGORY_INDEX,
-        self::GTIN => self::GTIN_INDEX,
-        self::ID => self::ID_INDEX,
-        self::IMAGE_LINK => self::IMAGE_LINK_INDEX,
-        self::ITEM_GROUP_ID => self::ITEM_GROUP_ID_INDEX,
-        self::KIND => self::KIND_INDEX,
-        self::LINK => self::LINK_INDEX,
-        self::MPN => self::MPN_INDEX,
-        self::OFFER_ID => self::OFFER_ID_INDEX,
-        self::PRICE => self::PRICE_INDEX,
-        self::SIZES => self::SIZES_INDEX,
-        self::SOURCE => self::SOURCE_INDEX,
-        self::TARGET_COUNTRY => self::TARGET_COUNTRY_INDEX,
-        self::TITLE => self::TITLE_INDEX,
+        self::AGE_GROUP_PROP => self::AGE_GROUP_INDEX,
+        self::AVAILABILITY_PROP => self::AVAILABILITY_INDEX,
+        self::AVAILABILITY_DATE_PROP => self::AVAILABILITY_DATE_INDEX,
+        self::BRAND_PROP => self::BRAND_INDEX,
+        self::CHANNEL_PROP => self::CHANNEL_INDEX,
+        self::COLOR_PROP => self::COLOR_INDEX,
+        self::CONDITION_PROP => self::CONDITION_INDEX,
+        self::CONTENT_LANGUAGE_PROP => self::CONTENT_LANGUAGE_INDEX,
+        self::DESCRIPTION_PROP => self::DESCRIPTION_INDEX,
+        self::FEED_LABEL_PROP => self::FEED_LABEL_INDEX,
+        self::GENDER_PROP => self::GENDER_INDEX,
+        self::GOOGLE_PRODUCT_CATEGORY_PROP => self::GOOGLE_PRODUCT_CATEGORY_INDEX,
+        self::GTIN_PROP => self::GTIN_INDEX,
+        self::ID_PROP => self::ID_INDEX,
+        self::IMAGE_LINK_PROP => self::IMAGE_LINK_INDEX,
+        self::ITEM_GROUP_ID_PROP => self::ITEM_GROUP_ID_INDEX,
+        self::KIND_PROP => self::KIND_INDEX,
+        self::LINK_PROP => self::LINK_INDEX,
+        self::MPN_PROP => self::MPN_INDEX,
+        self::OFFER_ID_PROP => self::OFFER_ID_INDEX,
+        self::PRICE_PROP => self::PRICE_INDEX,
+        self::SIZES_PROP => self::SIZES_INDEX,
+        self::SOURCE_PROP => self::SOURCE_INDEX,
+        self::TARGET_COUNTRY_PROP => self::TARGET_COUNTRY_INDEX,
+        self::TITLE_PROP => self::TITLE_INDEX,
     ];
 
     // ageGroup
-    public const string AGE_GROUP = 'ageGroup';
+    public const string AGE_GROUP_PROP = 'ageGroup';
     private const int AGE_GROUP_INDEX = 0;
 
     public ?string $ageGroup {
@@ -61,7 +61,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // availability
-    public const string AVAILABILITY = 'availability';
+    public const string AVAILABILITY_PROP = 'availability';
     private const int AVAILABILITY_INDEX = 1;
 
     public ?string $availability {
@@ -71,7 +71,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // availabilityDate
     #[DateTimeTransformerAttribute(DateTime::class)]
-    public const string AVAILABILITY_DATE = 'availabilityDate';
+    public const string AVAILABILITY_DATE_PROP = 'availabilityDate';
     private const int AVAILABILITY_DATE_INDEX = 2;
 
     public ?DateTime $availabilityDate {
@@ -80,7 +80,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // brand
-    public const string BRAND = 'brand';
+    public const string BRAND_PROP = 'brand';
     private const int BRAND_INDEX = 3;
 
     public ?string $brand {
@@ -89,7 +89,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // channel
-    public const string CHANNEL = 'channel';
+    public const string CHANNEL_PROP = 'channel';
     private const int CHANNEL_INDEX = 4;
 
     public ?string $channel {
@@ -98,7 +98,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // color
-    public const string COLOR = 'color';
+    public const string COLOR_PROP = 'color';
     private const int COLOR_INDEX = 5;
 
     public ?string $color {
@@ -107,7 +107,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // condition
-    public const string CONDITION = 'condition';
+    public const string CONDITION_PROP = 'condition';
     private const int CONDITION_INDEX = 6;
 
     public ?string $condition {
@@ -116,7 +116,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // contentLanguage
-    public const string CONTENT_LANGUAGE = 'contentLanguage';
+    public const string CONTENT_LANGUAGE_PROP = 'contentLanguage';
     private const int CONTENT_LANGUAGE_INDEX = 7;
 
     public ?string $contentLanguage {
@@ -125,7 +125,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // description
-    public const string DESCRIPTION = 'description';
+    public const string DESCRIPTION_PROP = 'description';
     private const int DESCRIPTION_INDEX = 8;
 
     public ?string $description {
@@ -134,7 +134,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // feedLabel
-    public const string FEED_LABEL = 'feedLabel';
+    public const string FEED_LABEL_PROP = 'feedLabel';
     private const int FEED_LABEL_INDEX = 9;
 
     public ?string $feedLabel {
@@ -143,7 +143,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // gender
-    public const string GENDER = 'gender';
+    public const string GENDER_PROP = 'gender';
     private const int GENDER_INDEX = 10;
 
     public ?string $gender {
@@ -152,7 +152,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // googleProductCategory
-    public const string GOOGLE_PRODUCT_CATEGORY = 'googleProductCategory';
+    public const string GOOGLE_PRODUCT_CATEGORY_PROP = 'googleProductCategory';
     private const int GOOGLE_PRODUCT_CATEGORY_INDEX = 11;
 
     public ?string $googleProductCategory {
@@ -161,7 +161,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // gtin
-    public const string GTIN = 'gtin';
+    public const string GTIN_PROP = 'gtin';
     private const int GTIN_INDEX = 12;
 
     public ?string $gtin {
@@ -170,7 +170,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // id
-    public const string ID = 'id';
+    public const string ID_PROP = 'id';
     private const int ID_INDEX = 13;
 
     public ?string $id {
@@ -179,7 +179,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // imageLink
-    public const string IMAGE_LINK = 'imageLink';
+    public const string IMAGE_LINK_PROP = 'imageLink';
     private const int IMAGE_LINK_INDEX = 14;
 
     public ?string $imageLink {
@@ -188,7 +188,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // itemGroupId
-    public const string ITEM_GROUP_ID = 'itemGroupId';
+    public const string ITEM_GROUP_ID_PROP = 'itemGroupId';
     private const int ITEM_GROUP_ID_INDEX = 15;
 
     public ?string $itemGroupId {
@@ -197,7 +197,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // kind
-    public const string KIND = 'kind';
+    public const string KIND_PROP = 'kind';
     private const int KIND_INDEX = 16;
 
     public ?string $kind {
@@ -206,7 +206,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // link
-    public const string LINK = 'link';
+    public const string LINK_PROP = 'link';
     private const int LINK_INDEX = 17;
 
     public ?string $link {
@@ -215,7 +215,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // mpn
-    public const string MPN = 'mpn';
+    public const string MPN_PROP = 'mpn';
     private const int MPN_INDEX = 18;
 
     public ?string $mpn {
@@ -224,7 +224,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // offerId
-    public const string OFFER_ID = 'offerId';
+    public const string OFFER_ID_PROP = 'offerId';
     private const int OFFER_ID_INDEX = 19;
 
     public ?string $offerId {
@@ -234,7 +234,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // price
     #[TransferTransformerAttribute(PriceTransfer::class)]
-    public const string PRICE = 'price';
+    public const string PRICE_PROP = 'price';
     private const int PRICE_INDEX = 20;
 
     public ?PriceTransfer $price {
@@ -244,7 +244,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // sizes
     #[ArrayInitiatorAttribute]
-    public const string SIZES = 'sizes';
+    public const string SIZES_PROP = 'sizes';
     private const int SIZES_INDEX = 21;
 
     /** @var array<int|string,mixed> */
@@ -254,7 +254,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // source
-    public const string SOURCE = 'source';
+    public const string SOURCE_PROP = 'source';
     private const int SOURCE_INDEX = 22;
 
     public ?string $source {
@@ -263,7 +263,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // targetCountry
-    public const string TARGET_COUNTRY = 'targetCountry';
+    public const string TARGET_COUNTRY_PROP = 'targetCountry';
     private const int TARGET_COUNTRY_INDEX = 23;
 
     public ?string $targetCountry {
@@ -272,7 +272,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // title
-    public const string TITLE = 'title';
+    public const string TITLE_PROP = 'title';
     private const int TITLE_INDEX = 24;
 
     public ?string $title {

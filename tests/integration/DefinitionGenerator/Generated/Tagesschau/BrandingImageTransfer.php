@@ -21,15 +21,15 @@ final class BrandingImageTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 5;
 
     protected const array META_DATA = [
-        self::ALTTEXT => self::ALTTEXT_INDEX,
-        self::COPYRIGHT => self::COPYRIGHT_INDEX,
-        self::IMAGE_VARIANTS => self::IMAGE_VARIANTS_INDEX,
-        self::TITLE => self::TITLE_INDEX,
-        self::TYPE => self::TYPE_INDEX,
+        self::ALTTEXT_PROP => self::ALTTEXT_INDEX,
+        self::COPYRIGHT_PROP => self::COPYRIGHT_INDEX,
+        self::IMAGE_VARIANTS_PROP => self::IMAGE_VARIANTS_INDEX,
+        self::TITLE_PROP => self::TITLE_INDEX,
+        self::TYPE_PROP => self::TYPE_INDEX,
     ];
 
     // alttext
-    public const string ALTTEXT = 'alttext';
+    public const string ALTTEXT_PROP = 'alttext';
     private const int ALTTEXT_INDEX = 0;
 
     public ?string $alttext {
@@ -38,7 +38,7 @@ final class BrandingImageTransfer extends AbstractTransfer
     }
 
     // copyright
-    public const string COPYRIGHT = 'copyright';
+    public const string COPYRIGHT_PROP = 'copyright';
     private const int COPYRIGHT_INDEX = 1;
 
     public ?string $copyright {
@@ -48,7 +48,7 @@ final class BrandingImageTransfer extends AbstractTransfer
 
     // imageVariants
     #[TransferTransformerAttribute(ImageVariantsTransfer::class)]
-    public const string IMAGE_VARIANTS = 'imageVariants';
+    public const string IMAGE_VARIANTS_PROP = 'imageVariants';
     private const int IMAGE_VARIANTS_INDEX = 2;
 
     public ?ImageVariantsTransfer $imageVariants {
@@ -57,7 +57,7 @@ final class BrandingImageTransfer extends AbstractTransfer
     }
 
     // title
-    public const string TITLE = 'title';
+    public const string TITLE_PROP = 'title';
     private const int TITLE_INDEX = 3;
 
     public ?string $title {
@@ -66,7 +66,7 @@ final class BrandingImageTransfer extends AbstractTransfer
     }
 
     // type
-    public const string TYPE = 'type';
+    public const string TYPE_PROP = 'type';
     private const int TYPE_INDEX = 4;
 
     public ?string $type {

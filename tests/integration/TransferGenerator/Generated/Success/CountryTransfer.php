@@ -20,12 +20,12 @@ final class CountryTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ISO2_CODE => self::ISO2_CODE_INDEX,
-        self::NAME => self::NAME_INDEX,
+        self::ISO2_CODE_PROP => self::ISO2_CODE_INDEX,
+        self::NAME_PROP => self::NAME_INDEX,
     ];
 
     // iso2Code
-    public const string ISO2_CODE = 'iso2Code';
+    public const string ISO2_CODE_PROP = 'iso2Code';
     private const int ISO2_CODE_INDEX = 0;
 
     public ?string $iso2Code {
@@ -34,7 +34,7 @@ final class CountryTransfer extends AbstractTransfer
     }
 
     // name
-    public const string NAME = 'name';
+    public const string NAME_PROP = 'name';
     private const int NAME_INDEX = 1;
 
     public ?string $name {

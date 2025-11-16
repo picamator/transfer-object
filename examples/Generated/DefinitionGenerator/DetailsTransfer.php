@@ -20,12 +20,12 @@ final class DetailsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::DESCRIPTION => self::DESCRIPTION_INDEX,
-        self::IS_REGIONAL => self::IS_REGIONAL_INDEX,
+        self::DESCRIPTION_PROP => self::DESCRIPTION_INDEX,
+        self::IS_REGIONAL_PROP => self::IS_REGIONAL_INDEX,
     ];
 
     // description
-    public const string DESCRIPTION = 'description';
+    public const string DESCRIPTION_PROP = 'description';
     private const int DESCRIPTION_INDEX = 0;
 
     public ?string $description {
@@ -34,7 +34,7 @@ final class DetailsTransfer extends AbstractTransfer
     }
 
     // isRegional
-    public const string IS_REGIONAL = 'isRegional';
+    public const string IS_REGIONAL_PROP = 'isRegional';
     private const int IS_REGIONAL_INDEX = 1;
 
     public ?bool $isRegional {

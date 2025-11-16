@@ -23,12 +23,12 @@ final class DefinitionContentTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::CLASS_NAME => self::CLASS_NAME_INDEX,
-        self::PROPERTIES => self::PROPERTIES_INDEX,
+        self::CLASS_NAME_PROP => self::CLASS_NAME_INDEX,
+        self::PROPERTIES_PROP => self::PROPERTIES_INDEX,
     ];
 
     // className
-    public const string CLASS_NAME = 'className';
+    public const string CLASS_NAME_PROP = 'className';
     private const int CLASS_NAME_INDEX = 0;
 
     public string $className {
@@ -39,7 +39,7 @@ final class DefinitionContentTransfer extends AbstractTransfer
     // properties
     #[CollectionInitiatorAttribute]
     #[CollectionTransformerAttribute(DefinitionPropertyTransfer::class)]
-    public const string PROPERTIES = 'properties';
+    public const string PROPERTIES_PROP = 'properties';
     private const int PROPERTIES_INDEX = 1;
 
     /** @var \ArrayObject<int,DefinitionPropertyTransfer> */

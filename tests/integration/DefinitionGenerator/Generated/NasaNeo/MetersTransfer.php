@@ -20,12 +20,12 @@ final class MetersTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ESTIMATED_DIAMETER_MAX => self::ESTIMATED_DIAMETER_MAX_INDEX,
-        self::ESTIMATED_DIAMETER_MIN => self::ESTIMATED_DIAMETER_MIN_INDEX,
+        self::ESTIMATED_DIAMETER_MAX_PROP => self::ESTIMATED_DIAMETER_MAX_INDEX,
+        self::ESTIMATED_DIAMETER_MIN_PROP => self::ESTIMATED_DIAMETER_MIN_INDEX,
     ];
 
     // estimated_diameter_max
-    public const string ESTIMATED_DIAMETER_MAX = 'estimated_diameter_max';
+    public const string ESTIMATED_DIAMETER_MAX_PROP = 'estimated_diameter_max';
     private const int ESTIMATED_DIAMETER_MAX_INDEX = 0;
 
     public ?float $estimated_diameter_max {
@@ -34,7 +34,7 @@ final class MetersTransfer extends AbstractTransfer
     }
 
     // estimated_diameter_min
-    public const string ESTIMATED_DIAMETER_MIN = 'estimated_diameter_min';
+    public const string ESTIMATED_DIAMETER_MIN_PROP = 'estimated_diameter_min';
     private const int ESTIMATED_DIAMETER_MIN_INDEX = 1;
 
     public ?float $estimated_diameter_min {

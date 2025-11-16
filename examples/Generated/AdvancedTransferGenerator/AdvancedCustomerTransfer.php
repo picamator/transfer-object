@@ -25,14 +25,14 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::ADDRESS => self::ADDRESS_INDEX,
-        self::CREDENTIALS => self::CREDENTIALS_INDEX,
-        self::CUSTOMER => self::CUSTOMER_INDEX,
+        self::ADDRESS_PROP => self::ADDRESS_INDEX,
+        self::CREDENTIALS_PROP => self::CREDENTIALS_INDEX,
+        self::CUSTOMER_PROP => self::CUSTOMER_INDEX,
     ];
 
     // address
     #[TransferTransformerAttribute(AddressData::class)]
-    public const string ADDRESS = 'address';
+    public const string ADDRESS_PROP = 'address';
     private const int ADDRESS_INDEX = 0;
 
     public TransferInterface&AddressData $address {
@@ -42,7 +42,7 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
 
     // credentials
     #[TransferTransformerAttribute(CredentialsData::class)]
-    public const string CREDENTIALS = 'credentials';
+    public const string CREDENTIALS_PROP = 'credentials';
     private const int CREDENTIALS_INDEX = 1;
 
     public TransferInterface&CredentialsData $credentials {
@@ -52,7 +52,7 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
 
     // customer
     #[TransferTransformerAttribute(CustomerTransfer::class)]
-    public const string CUSTOMER = 'customer';
+    public const string CUSTOMER_PROP = 'customer';
     private const int CUSTOMER_INDEX = 2;
 
     public TransferInterface&CustomerTransfer $customer {

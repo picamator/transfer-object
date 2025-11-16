@@ -20,15 +20,15 @@ final class VariablesTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 5;
 
     protected const array META_DATA = [
-        self::CODE => self::CODE_INDEX,
-        self::CONTENT => self::CONTENT_INDEX,
-        self::INFORMATION => self::INFORMATION_INDEX,
-        self::TYPE => self::TYPE_INDEX,
-        self::VALUES => self::VALUES_INDEX,
+        self::CODE_PROP => self::CODE_INDEX,
+        self::CONTENT_PROP => self::CONTENT_INDEX,
+        self::INFORMATION_PROP => self::INFORMATION_INDEX,
+        self::TYPE_PROP => self::TYPE_INDEX,
+        self::VALUES_PROP => self::VALUES_INDEX,
     ];
 
     // Code
-    public const string CODE = 'Code';
+    public const string CODE_PROP = 'Code';
     private const int CODE_INDEX = 0;
 
     public ?string $Code {
@@ -37,7 +37,7 @@ final class VariablesTransfer extends AbstractTransfer
     }
 
     // Content
-    public const string CONTENT = 'Content';
+    public const string CONTENT_PROP = 'Content';
     private const int CONTENT_INDEX = 1;
 
     public ?string $Content {
@@ -46,7 +46,7 @@ final class VariablesTransfer extends AbstractTransfer
     }
 
     // Information
-    public const string INFORMATION = 'Information';
+    public const string INFORMATION_PROP = 'Information';
     private const int INFORMATION_INDEX = 2;
 
     public ?string $Information {
@@ -55,7 +55,7 @@ final class VariablesTransfer extends AbstractTransfer
     }
 
     // Type
-    public const string TYPE = 'Type';
+    public const string TYPE_PROP = 'Type';
     private const int TYPE_INDEX = 3;
 
     public ?string $Type {
@@ -64,7 +64,7 @@ final class VariablesTransfer extends AbstractTransfer
     }
 
     // Values
-    public const string VALUES = 'Values';
+    public const string VALUES_PROP = 'Values';
     private const int VALUES_INDEX = 4;
 
     public ?string $Values {

@@ -20,13 +20,13 @@ final class WindTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::DEG => self::DEG_INDEX,
-        self::GUST => self::GUST_INDEX,
-        self::SPEED => self::SPEED_INDEX,
+        self::DEG_PROP => self::DEG_INDEX,
+        self::GUST_PROP => self::GUST_INDEX,
+        self::SPEED_PROP => self::SPEED_INDEX,
     ];
 
     // deg
-    public const string DEG = 'deg';
+    public const string DEG_PROP = 'deg';
     private const int DEG_INDEX = 0;
 
     public ?int $deg {
@@ -35,7 +35,7 @@ final class WindTransfer extends AbstractTransfer
     }
 
     // gust
-    public const string GUST = 'gust';
+    public const string GUST_PROP = 'gust';
     private const int GUST_INDEX = 1;
 
     public ?float $gust {
@@ -44,7 +44,7 @@ final class WindTransfer extends AbstractTransfer
     }
 
     // speed
-    public const string SPEED = 'speed';
+    public const string SPEED_PROP = 'speed';
     private const int SPEED_INDEX = 2;
 
     public ?float $speed {

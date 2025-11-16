@@ -20,12 +20,12 @@ final class AvailabilitiesTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::BUFFER => self::BUFFER_INDEX,
-        self::TOTAL => self::TOTAL_INDEX,
+        self::BUFFER_PROP => self::BUFFER_INDEX,
+        self::TOTAL_PROP => self::TOTAL_INDEX,
     ];
 
     // buffer
-    public const string BUFFER = 'buffer';
+    public const string BUFFER_PROP = 'buffer';
     private const int BUFFER_INDEX = 0;
 
     public ?int $buffer {
@@ -34,7 +34,7 @@ final class AvailabilitiesTransfer extends AbstractTransfer
     }
 
     // total
-    public const string TOTAL = 'total';
+    public const string TOTAL_PROP = 'total';
     private const int TOTAL_INDEX = 1;
 
     public ?int $total {

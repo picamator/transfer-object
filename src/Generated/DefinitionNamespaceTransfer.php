@@ -20,14 +20,14 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
-        self::ALIAS => self::ALIAS_INDEX,
-        self::BASE_NAME => self::BASE_NAME_INDEX,
-        self::FULL_NAME => self::FULL_NAME_INDEX,
-        self::WITHOUT_ALIAS => self::WITHOUT_ALIAS_INDEX,
+        self::ALIAS_PROP => self::ALIAS_INDEX,
+        self::BASE_NAME_PROP => self::BASE_NAME_INDEX,
+        self::FULL_NAME_PROP => self::FULL_NAME_INDEX,
+        self::WITHOUT_ALIAS_PROP => self::WITHOUT_ALIAS_INDEX,
     ];
 
     // alias
-    public const string ALIAS = 'alias';
+    public const string ALIAS_PROP = 'alias';
     private const int ALIAS_INDEX = 0;
 
     public ?string $alias {
@@ -36,7 +36,7 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
     }
 
     // baseName
-    public const string BASE_NAME = 'baseName';
+    public const string BASE_NAME_PROP = 'baseName';
     private const int BASE_NAME_INDEX = 1;
 
     public string $baseName {
@@ -45,7 +45,7 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
     }
 
     // fullName
-    public const string FULL_NAME = 'fullName';
+    public const string FULL_NAME_PROP = 'fullName';
     private const int FULL_NAME_INDEX = 2;
 
     public string $fullName {
@@ -54,7 +54,7 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
     }
 
     // withoutAlias
-    public const string WITHOUT_ALIAS = 'withoutAlias';
+    public const string WITHOUT_ALIAS_PROP = 'withoutAlias';
     private const int WITHOUT_ALIAS_INDEX = 3;
 
     public string $withoutAlias {

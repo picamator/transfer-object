@@ -27,14 +27,14 @@ final class BookTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::BOOKMARKS => self::BOOKMARKS_INDEX,
-        self::DATA => self::DATA_INDEX,
+        self::BOOKMARKS_PROP => self::BOOKMARKS_INDEX,
+        self::DATA_PROP => self::DATA_INDEX,
     ];
 
     // bookmarks
     #[CollectionInitiatorAttribute]
     #[CollectionTransformerAttribute(BookmarkData::class)]
-    public const string BOOKMARKS = 'bookmarks';
+    public const string BOOKMARKS_PROP = 'bookmarks';
     private const int BOOKMARKS_INDEX = 0;
 
     /** @var \ArrayObject<int,TransferInterface&BookmarkData> */
@@ -45,7 +45,7 @@ final class BookTransfer extends AbstractTransfer
 
     // data
     #[TransferTransformerAttribute(BookData::class)]
-    public const string DATA = 'data';
+    public const string DATA_PROP = 'data';
     private const int DATA_INDEX = 1;
 
     public TransferInterface&BookData $data {

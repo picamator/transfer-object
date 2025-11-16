@@ -27,18 +27,18 @@ final class AddressBookTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 6;
 
     protected const array META_DATA = [
-        self::ADDRESSES => self::ADDRESSES_INDEX,
-        self::CATEGORIES => self::CATEGORIES_INDEX,
-        self::LABEL => self::LABEL_INDEX,
-        self::LABEL_ALIAS => self::LABEL_ALIAS_INDEX,
-        self::NAME => self::NAME_INDEX,
-        self::UUID => self::UUID_INDEX,
+        self::ADDRESSES_PROP => self::ADDRESSES_INDEX,
+        self::CATEGORIES_PROP => self::CATEGORIES_INDEX,
+        self::LABEL_PROP => self::LABEL_INDEX,
+        self::LABEL_ALIAS_PROP => self::LABEL_ALIAS_INDEX,
+        self::NAME_PROP => self::NAME_INDEX,
+        self::UUID_PROP => self::UUID_INDEX,
     ];
 
     // addresses
     #[CollectionInitiatorAttribute]
     #[CollectionTransformerAttribute(AddressTransfer::class)]
-    public const string ADDRESSES = 'addresses';
+    public const string ADDRESSES_PROP = 'addresses';
     private const int ADDRESSES_INDEX = 0;
 
     /** @var \ArrayObject<int,AddressTransfer> */
@@ -49,7 +49,7 @@ final class AddressBookTransfer extends AbstractTransfer
 
     // categories
     #[ArrayInitiatorAttribute]
-    public const string CATEGORIES = 'categories';
+    public const string CATEGORIES_PROP = 'categories';
     private const int CATEGORIES_INDEX = 1;
 
     /** @var array<int|string,mixed> */
@@ -60,7 +60,7 @@ final class AddressBookTransfer extends AbstractTransfer
 
     // label
     #[EnumTransformerAttribute(AddressLabelEnum::class)]
-    public const string LABEL = 'label';
+    public const string LABEL_PROP = 'label';
     private const int LABEL_INDEX = 2;
 
     public ?AddressLabelEnum $label {
@@ -70,7 +70,7 @@ final class AddressBookTransfer extends AbstractTransfer
 
     // labelAlias
     #[EnumTransformerAttribute(AliasAddressLabelEnum::class)]
-    public const string LABEL_ALIAS = 'labelAlias';
+    public const string LABEL_ALIAS_PROP = 'labelAlias';
     private const int LABEL_ALIAS_INDEX = 3;
 
     public ?AliasAddressLabelEnum $labelAlias {
@@ -79,7 +79,7 @@ final class AddressBookTransfer extends AbstractTransfer
     }
 
     // name
-    public const string NAME = 'name';
+    public const string NAME_PROP = 'name';
     private const int NAME_INDEX = 4;
 
     public ?string $name {
@@ -88,7 +88,7 @@ final class AddressBookTransfer extends AbstractTransfer
     }
 
     // uuid
-    public const string UUID = 'uuid';
+    public const string UUID_PROP = 'uuid';
     private const int UUID_INDEX = 5;
 
     public ?string $uuid {

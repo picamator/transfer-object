@@ -27,14 +27,14 @@ final class NamespaceTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ITEMS => self::ITEMS_INDEX,
-        self::REQUIRED => self::REQUIRED_INDEX,
+        self::ITEMS_PROP => self::ITEMS_INDEX,
+        self::REQUIRED_PROP => self::REQUIRED_INDEX,
     ];
 
     // items
     #[CollectionInitiatorAttribute]
     #[CollectionTransformerAttribute(ItemTransfer::class)]
-    public const string ITEMS = 'items';
+    public const string ITEMS_PROP = 'items';
     private const int ITEMS_INDEX = 0;
 
     /** @var \ArrayObject<int,TransferInterface&ItemTransfer> */
@@ -45,7 +45,7 @@ final class NamespaceTransfer extends AbstractTransfer
 
     // required
     #[TransferTransformerAttribute(RequiredAlias::class)]
-    public const string REQUIRED = 'required';
+    public const string REQUIRED_PROP = 'required';
     private const int REQUIRED_INDEX = 1;
 
     public TransferInterface&RequiredAlias $required {

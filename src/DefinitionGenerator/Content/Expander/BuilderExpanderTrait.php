@@ -25,8 +25,8 @@ trait BuilderExpanderTrait
         array $content,
     ): DefinitionGeneratorContentTransfer {
         return new DefinitionGeneratorContentTransfer([
-            DefinitionGeneratorContentTransfer::CLASS_NAME => $className,
-            DefinitionGeneratorContentTransfer::CONTENT => $content,
+            DefinitionGeneratorContentTransfer::CLASS_NAME_PROP => $className,
+            DefinitionGeneratorContentTransfer::CONTENT_PROP => $content,
         ]);
     }
 

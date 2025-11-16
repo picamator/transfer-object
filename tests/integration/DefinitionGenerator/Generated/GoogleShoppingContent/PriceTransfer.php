@@ -20,12 +20,12 @@ final class PriceTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::CURRENCY => self::CURRENCY_INDEX,
-        self::VALUE => self::VALUE_INDEX,
+        self::CURRENCY_PROP => self::CURRENCY_INDEX,
+        self::VALUE_PROP => self::VALUE_INDEX,
     ];
 
     // currency
-    public const string CURRENCY = 'currency';
+    public const string CURRENCY_PROP = 'currency';
     private const int CURRENCY_INDEX = 0;
 
     public ?string $currency {
@@ -34,7 +34,7 @@ final class PriceTransfer extends AbstractTransfer
     }
 
     // value
-    public const string VALUE = 'value';
+    public const string VALUE_PROP = 'value';
     private const int VALUE_INDEX = 1;
 
     public ?string $value {

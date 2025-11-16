@@ -21,12 +21,12 @@ final class DefinitionAttributeTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ARGUMENTS => self::ARGUMENTS_INDEX,
-        self::NAMESPACE => self::NAMESPACE_INDEX,
+        self::ARGUMENTS_PROP => self::ARGUMENTS_INDEX,
+        self::NAMESPACE_PROP => self::NAMESPACE_INDEX,
     ];
 
     // arguments
-    public const string ARGUMENTS = 'arguments';
+    public const string ARGUMENTS_PROP = 'arguments';
     private const int ARGUMENTS_INDEX = 0;
 
     public ?string $arguments {
@@ -36,7 +36,7 @@ final class DefinitionAttributeTransfer extends AbstractTransfer
 
     // namespace
     #[TransferTransformerAttribute(DefinitionNamespaceTransfer::class)]
-    public const string NAMESPACE = 'namespace';
+    public const string NAMESPACE_PROP = 'namespace';
     private const int NAMESPACE_INDEX = 1;
 
     public DefinitionNamespaceTransfer $namespace {

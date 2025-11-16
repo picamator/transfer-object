@@ -30,25 +30,25 @@ final class ItemTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 14;
 
     protected const array META_DATA = [
-        self::I_AM_ARRAY => self::I_AM_ARRAY_INDEX,
-        self::I_AM_ARRAY_OBJECT => self::I_AM_ARRAY_OBJECT_INDEX,
-        self::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK => self::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_INDEX,
-        self::I_AM_ARRAY_WITH_DOC_BLOCK => self::I_AM_ARRAY_WITH_DOC_BLOCK_INDEX,
-        self::I_AM_BOOL => self::I_AM_BOOL_INDEX,
-        self::I_AM_DATE_TIME => self::I_AM_DATE_TIME_INDEX,
-        self::I_AM_DATE_TIME_IMMUTABLE => self::I_AM_DATE_TIME_IMMUTABLE_INDEX,
-        self::I_AM_ENUM => self::I_AM_ENUM_INDEX,
-        self::I_AM_FALSE => self::I_AM_FALSE_INDEX,
-        self::I_AM_FLOAT => self::I_AM_FLOAT_INDEX,
-        self::I_AM_INT => self::I_AM_INT_INDEX,
-        self::I_AM_STRING => self::I_AM_STRING_INDEX,
-        self::I_AM_TRUE => self::I_AM_TRUE_INDEX,
-        self::I_AM_WITH_ATTRIBUTE => self::I_AM_WITH_ATTRIBUTE_INDEX,
+        self::I_AM_ARRAY_PROP => self::I_AM_ARRAY_INDEX,
+        self::I_AM_ARRAY_OBJECT_PROP => self::I_AM_ARRAY_OBJECT_INDEX,
+        self::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_PROP => self::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_INDEX,
+        self::I_AM_ARRAY_WITH_DOC_BLOCK_PROP => self::I_AM_ARRAY_WITH_DOC_BLOCK_INDEX,
+        self::I_AM_BOOL_PROP => self::I_AM_BOOL_INDEX,
+        self::I_AM_DATE_TIME_PROP => self::I_AM_DATE_TIME_INDEX,
+        self::I_AM_DATE_TIME_IMMUTABLE_PROP => self::I_AM_DATE_TIME_IMMUTABLE_INDEX,
+        self::I_AM_ENUM_PROP => self::I_AM_ENUM_INDEX,
+        self::I_AM_FALSE_PROP => self::I_AM_FALSE_INDEX,
+        self::I_AM_FLOAT_PROP => self::I_AM_FLOAT_INDEX,
+        self::I_AM_INT_PROP => self::I_AM_INT_INDEX,
+        self::I_AM_STRING_PROP => self::I_AM_STRING_INDEX,
+        self::I_AM_TRUE_PROP => self::I_AM_TRUE_INDEX,
+        self::I_AM_WITH_ATTRIBUTE_PROP => self::I_AM_WITH_ATTRIBUTE_INDEX,
     ];
 
     // iAmArray
     #[ArrayInitiatorAttribute]
-    public const string I_AM_ARRAY = 'iAmArray';
+    public const string I_AM_ARRAY_PROP = 'iAmArray';
     private const int I_AM_ARRAY_INDEX = 0;
 
     /** @var array<int|string,mixed> */
@@ -60,7 +60,7 @@ final class ItemTransfer extends AbstractTransfer
     // iAmArrayObject
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
-    public const string I_AM_ARRAY_OBJECT = 'iAmArrayObject';
+    public const string I_AM_ARRAY_OBJECT_PROP = 'iAmArrayObject';
     private const int I_AM_ARRAY_OBJECT_INDEX = 1;
 
     /** @var \ArrayObject<int|string,mixed> */
@@ -72,7 +72,7 @@ final class ItemTransfer extends AbstractTransfer
     // iAmArrayObjectWithDockBlock
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
-    public const string I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK = 'iAmArrayObjectWithDockBlock';
+    public const string I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_PROP = 'iAmArrayObjectWithDockBlock';
     private const int I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_INDEX = 2;
 
     /** @var \ArrayObject<int,string> */
@@ -83,7 +83,7 @@ final class ItemTransfer extends AbstractTransfer
 
     // iAmArrayWithDocBlock
     #[ArrayInitiatorAttribute]
-    public const string I_AM_ARRAY_WITH_DOC_BLOCK = 'iAmArrayWithDocBlock';
+    public const string I_AM_ARRAY_WITH_DOC_BLOCK_PROP = 'iAmArrayWithDocBlock';
     private const int I_AM_ARRAY_WITH_DOC_BLOCK_INDEX = 3;
 
     /** @var array<int,string> */
@@ -93,7 +93,7 @@ final class ItemTransfer extends AbstractTransfer
     }
 
     // iAmBool
-    public const string I_AM_BOOL = 'iAmBool';
+    public const string I_AM_BOOL_PROP = 'iAmBool';
     private const int I_AM_BOOL_INDEX = 4;
 
     public ?bool $iAmBool {
@@ -103,7 +103,7 @@ final class ItemTransfer extends AbstractTransfer
 
     // iAmDateTime
     #[DateTimeTransformerAttribute(DateTime::class)]
-    public const string I_AM_DATE_TIME = 'iAmDateTime';
+    public const string I_AM_DATE_TIME_PROP = 'iAmDateTime';
     private const int I_AM_DATE_TIME_INDEX = 5;
 
     public ?DateTime $iAmDateTime {
@@ -113,7 +113,7 @@ final class ItemTransfer extends AbstractTransfer
 
     // iAmDateTimeImmutable
     #[DateTimeTransformerAttribute(DateTimeImmutable::class)]
-    public const string I_AM_DATE_TIME_IMMUTABLE = 'iAmDateTimeImmutable';
+    public const string I_AM_DATE_TIME_IMMUTABLE_PROP = 'iAmDateTimeImmutable';
     private const int I_AM_DATE_TIME_IMMUTABLE_INDEX = 6;
 
     public ?DateTimeImmutable $iAmDateTimeImmutable {
@@ -123,7 +123,7 @@ final class ItemTransfer extends AbstractTransfer
 
     // iAmEnum
     #[EnumTransformerAttribute(ImBackedEnum::class)]
-    public const string I_AM_ENUM = 'iAmEnum';
+    public const string I_AM_ENUM_PROP = 'iAmEnum';
     private const int I_AM_ENUM_INDEX = 7;
 
     public ?ImBackedEnum $iAmEnum {
@@ -132,7 +132,7 @@ final class ItemTransfer extends AbstractTransfer
     }
 
     // iAmFalse
-    public const string I_AM_FALSE = 'iAmFalse';
+    public const string I_AM_FALSE_PROP = 'iAmFalse';
     private const int I_AM_FALSE_INDEX = 8;
 
     public ?false $iAmFalse {
@@ -141,7 +141,7 @@ final class ItemTransfer extends AbstractTransfer
     }
 
     // iAmFloat
-    public const string I_AM_FLOAT = 'iAmFloat';
+    public const string I_AM_FLOAT_PROP = 'iAmFloat';
     private const int I_AM_FLOAT_INDEX = 9;
 
     public ?float $iAmFloat {
@@ -150,7 +150,7 @@ final class ItemTransfer extends AbstractTransfer
     }
 
     // iAmInt
-    public const string I_AM_INT = 'iAmInt';
+    public const string I_AM_INT_PROP = 'iAmInt';
     private const int I_AM_INT_INDEX = 10;
 
     public ?int $iAmInt {
@@ -159,7 +159,7 @@ final class ItemTransfer extends AbstractTransfer
     }
 
     // iAmString
-    public const string I_AM_STRING = 'iAmString';
+    public const string I_AM_STRING_PROP = 'iAmString';
     private const int I_AM_STRING_INDEX = 11;
 
     public ?string $iAmString {
@@ -168,7 +168,7 @@ final class ItemTransfer extends AbstractTransfer
     }
 
     // iAmTrue
-    public const string I_AM_TRUE = 'iAmTrue';
+    public const string I_AM_TRUE_PROP = 'iAmTrue';
     private const int I_AM_TRUE_INDEX = 12;
 
     public ?true $iAmTrue {
@@ -178,7 +178,7 @@ final class ItemTransfer extends AbstractTransfer
 
     // iAmWithAttribute
     #[ArrayInitiatorAttribute]
-    public const string I_AM_WITH_ATTRIBUTE = 'iAmWithAttribute';
+    public const string I_AM_WITH_ATTRIBUTE_PROP = 'iAmWithAttribute';
     private const int I_AM_WITH_ATTRIBUTE_INDEX = 13;
 
     /** @var array<string> */

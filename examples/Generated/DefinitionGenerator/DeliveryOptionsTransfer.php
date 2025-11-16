@@ -20,11 +20,11 @@ final class DeliveryOptionsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::NAME => self::NAME_INDEX,
+        self::NAME_PROP => self::NAME_INDEX,
     ];
 
     // name
-    public const string NAME = 'name';
+    public const string NAME_PROP = 'name';
     private const int NAME_INDEX = 0;
 
     public ?string $name {

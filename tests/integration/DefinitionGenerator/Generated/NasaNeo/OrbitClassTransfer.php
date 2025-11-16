@@ -20,13 +20,13 @@ final class OrbitClassTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::ORBIT_CLASS_DESCRIPTION => self::ORBIT_CLASS_DESCRIPTION_INDEX,
-        self::ORBIT_CLASS_RANGE => self::ORBIT_CLASS_RANGE_INDEX,
-        self::ORBIT_CLASS_TYPE => self::ORBIT_CLASS_TYPE_INDEX,
+        self::ORBIT_CLASS_DESCRIPTION_PROP => self::ORBIT_CLASS_DESCRIPTION_INDEX,
+        self::ORBIT_CLASS_RANGE_PROP => self::ORBIT_CLASS_RANGE_INDEX,
+        self::ORBIT_CLASS_TYPE_PROP => self::ORBIT_CLASS_TYPE_INDEX,
     ];
 
     // orbit_class_description
-    public const string ORBIT_CLASS_DESCRIPTION = 'orbit_class_description';
+    public const string ORBIT_CLASS_DESCRIPTION_PROP = 'orbit_class_description';
     private const int ORBIT_CLASS_DESCRIPTION_INDEX = 0;
 
     public ?string $orbit_class_description {
@@ -35,7 +35,7 @@ final class OrbitClassTransfer extends AbstractTransfer
     }
 
     // orbit_class_range
-    public const string ORBIT_CLASS_RANGE = 'orbit_class_range';
+    public const string ORBIT_CLASS_RANGE_PROP = 'orbit_class_range';
     private const int ORBIT_CLASS_RANGE_INDEX = 1;
 
     public ?string $orbit_class_range {
@@ -44,7 +44,7 @@ final class OrbitClassTransfer extends AbstractTransfer
     }
 
     // orbit_class_type
-    public const string ORBIT_CLASS_TYPE = 'orbit_class_type';
+    public const string ORBIT_CLASS_TYPE_PROP = 'orbit_class_type';
     private const int ORBIT_CLASS_TYPE_INDEX = 2;
 
     public ?string $orbit_class_type {

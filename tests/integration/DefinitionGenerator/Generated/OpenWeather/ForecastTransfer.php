@@ -25,24 +25,24 @@ final class ForecastTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 14;
 
     protected const array META_DATA = [
-        self::BASE => self::BASE_INDEX,
-        self::CLOUDS => self::CLOUDS_INDEX,
-        self::COD => self::COD_INDEX,
-        self::COORD => self::COORD_INDEX,
-        self::DT => self::DT_INDEX,
-        self::ID => self::ID_INDEX,
-        self::MAIN => self::MAIN_INDEX,
-        self::NAME => self::NAME_INDEX,
-        self::RAIN => self::RAIN_INDEX,
-        self::SYS => self::SYS_INDEX,
-        self::TIMEZONE => self::TIMEZONE_INDEX,
-        self::VISIBILITY => self::VISIBILITY_INDEX,
-        self::WEATHER => self::WEATHER_INDEX,
-        self::WIND => self::WIND_INDEX,
+        self::BASE_PROP => self::BASE_INDEX,
+        self::CLOUDS_PROP => self::CLOUDS_INDEX,
+        self::COD_PROP => self::COD_INDEX,
+        self::COORD_PROP => self::COORD_INDEX,
+        self::DT_PROP => self::DT_INDEX,
+        self::ID_PROP => self::ID_INDEX,
+        self::MAIN_PROP => self::MAIN_INDEX,
+        self::NAME_PROP => self::NAME_INDEX,
+        self::RAIN_PROP => self::RAIN_INDEX,
+        self::SYS_PROP => self::SYS_INDEX,
+        self::TIMEZONE_PROP => self::TIMEZONE_INDEX,
+        self::VISIBILITY_PROP => self::VISIBILITY_INDEX,
+        self::WEATHER_PROP => self::WEATHER_INDEX,
+        self::WIND_PROP => self::WIND_INDEX,
     ];
 
     // base
-    public const string BASE = 'base';
+    public const string BASE_PROP = 'base';
     private const int BASE_INDEX = 0;
 
     public ?string $base {
@@ -52,7 +52,7 @@ final class ForecastTransfer extends AbstractTransfer
 
     // clouds
     #[TransferTransformerAttribute(CloudsTransfer::class)]
-    public const string CLOUDS = 'clouds';
+    public const string CLOUDS_PROP = 'clouds';
     private const int CLOUDS_INDEX = 1;
 
     public ?CloudsTransfer $clouds {
@@ -61,7 +61,7 @@ final class ForecastTransfer extends AbstractTransfer
     }
 
     // cod
-    public const string COD = 'cod';
+    public const string COD_PROP = 'cod';
     private const int COD_INDEX = 2;
 
     public ?int $cod {
@@ -71,7 +71,7 @@ final class ForecastTransfer extends AbstractTransfer
 
     // coord
     #[TransferTransformerAttribute(CoordTransfer::class)]
-    public const string COORD = 'coord';
+    public const string COORD_PROP = 'coord';
     private const int COORD_INDEX = 3;
 
     public ?CoordTransfer $coord {
@@ -80,7 +80,7 @@ final class ForecastTransfer extends AbstractTransfer
     }
 
     // dt
-    public const string DT = 'dt';
+    public const string DT_PROP = 'dt';
     private const int DT_INDEX = 4;
 
     public ?int $dt {
@@ -89,7 +89,7 @@ final class ForecastTransfer extends AbstractTransfer
     }
 
     // id
-    public const string ID = 'id';
+    public const string ID_PROP = 'id';
     private const int ID_INDEX = 5;
 
     public ?int $id {
@@ -99,7 +99,7 @@ final class ForecastTransfer extends AbstractTransfer
 
     // main
     #[TransferTransformerAttribute(MainTransfer::class)]
-    public const string MAIN = 'main';
+    public const string MAIN_PROP = 'main';
     private const int MAIN_INDEX = 6;
 
     public ?MainTransfer $main {
@@ -108,7 +108,7 @@ final class ForecastTransfer extends AbstractTransfer
     }
 
     // name
-    public const string NAME = 'name';
+    public const string NAME_PROP = 'name';
     private const int NAME_INDEX = 7;
 
     public ?string $name {
@@ -118,7 +118,7 @@ final class ForecastTransfer extends AbstractTransfer
 
     // rain
     #[ArrayInitiatorAttribute]
-    public const string RAIN = 'rain';
+    public const string RAIN_PROP = 'rain';
     private const int RAIN_INDEX = 8;
 
     /** @var array<int|string,mixed> */
@@ -129,7 +129,7 @@ final class ForecastTransfer extends AbstractTransfer
 
     // sys
     #[TransferTransformerAttribute(SysTransfer::class)]
-    public const string SYS = 'sys';
+    public const string SYS_PROP = 'sys';
     private const int SYS_INDEX = 9;
 
     public ?SysTransfer $sys {
@@ -138,7 +138,7 @@ final class ForecastTransfer extends AbstractTransfer
     }
 
     // timezone
-    public const string TIMEZONE = 'timezone';
+    public const string TIMEZONE_PROP = 'timezone';
     private const int TIMEZONE_INDEX = 10;
 
     public ?int $timezone {
@@ -147,7 +147,7 @@ final class ForecastTransfer extends AbstractTransfer
     }
 
     // visibility
-    public const string VISIBILITY = 'visibility';
+    public const string VISIBILITY_PROP = 'visibility';
     private const int VISIBILITY_INDEX = 11;
 
     public ?int $visibility {
@@ -158,7 +158,7 @@ final class ForecastTransfer extends AbstractTransfer
     // weather
     #[CollectionInitiatorAttribute]
     #[CollectionTransformerAttribute(WeatherTransfer::class)]
-    public const string WEATHER = 'weather';
+    public const string WEATHER_PROP = 'weather';
     private const int WEATHER_INDEX = 12;
 
     /** @var \ArrayObject<int,WeatherTransfer> */
@@ -169,7 +169,7 @@ final class ForecastTransfer extends AbstractTransfer
 
     // wind
     #[TransferTransformerAttribute(WindTransfer::class)]
-    public const string WIND = 'wind';
+    public const string WIND_PROP = 'wind';
     private const int WIND_INDEX = 13;
 
     public ?WindTransfer $wind {

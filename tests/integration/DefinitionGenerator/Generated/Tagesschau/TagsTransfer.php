@@ -20,11 +20,11 @@ final class TagsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::TAG => self::TAG_INDEX,
+        self::TAG_PROP => self::TAG_INDEX,
     ];
 
     // tag
-    public const string TAG = 'tag';
+    public const string TAG_PROP = 'tag';
     private const int TAG_INDEX = 0;
 
     public ?string $tag {

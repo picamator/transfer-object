@@ -14,7 +14,7 @@ use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookAuthorData;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookData;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\CountryEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\AuthorTransfer;
-use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ReservedTransfer;
+use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ReservedAdvancedTransfer;
 
 #[Group('transfer')]
 class TransferAdapterTest extends TestCase
@@ -26,8 +26,8 @@ class TransferAdapterTest extends TestCase
         $expected = [
             'title' => 'Lalka',
             'author' => [
-                AuthorTransfer::FIRST_NAME => 'Bolesław',
-                AuthorTransfer::LAST_NAME => 'Prus',
+                AuthorTransfer::FIRST_NAME_PROP => 'Bolesław',
+                AuthorTransfer::LAST_NAME_PROP => 'Prus',
             ],
             'country' => CountryEnum::PL->value,
             'storeData' => [
@@ -74,12 +74,12 @@ class TransferAdapterTest extends TestCase
     {
         // Arrange
         $expected = [
-            ReservedTransfer::DATA => [
+            ReservedAdvancedTransfer::DATA_PROP => [
                 '_data' => 'data',
             ],
         ];
 
-        $reserverPropertyData = new ReservedTransfer()
+        $reserverPropertyData = new ReservedAdvancedTransfer()
             ->fromArray($expected);
 
         // Act
@@ -87,7 +87,7 @@ class TransferAdapterTest extends TestCase
 
         // Assert
         $this->assertSame($expected, $actual);
-        $this->assertSame($expected[ReservedTransfer::DATA]['_data'], $reserverPropertyData->data->_data);
+        $this->assertSame($expected[ReservedAdvancedTransfer::DATA_PROP]['_data'], $reserverPropertyData->data->_data);
     }
 
     #[TestDox('Transfer count')]
@@ -141,8 +141,8 @@ class TransferAdapterTest extends TestCase
         $expected = [
             'title' => 'Lalka',
             'author' => [
-                AuthorTransfer::FIRST_NAME => 'Bolesław',
-                AuthorTransfer::LAST_NAME => 'Prus',
+                AuthorTransfer::FIRST_NAME_PROP => 'Bolesław',
+                AuthorTransfer::LAST_NAME_PROP => 'Prus',
             ],
             'country' => CountryEnum::PL->value,
             'storeData' => [

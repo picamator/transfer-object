@@ -65,10 +65,10 @@ echo <<<'STORY'
 STORY;
 $generatorTransfer = new DefinitionGeneratorTransfer(
     [
-        DefinitionGeneratorTransfer::DEFINITION_PATH => __DIR__ . '/config/definition-generator/definition',
-        DefinitionGeneratorTransfer::CONTENT => [
-            DefinitionGeneratorContentTransfer::CLASS_NAME => 'Product',
-            DefinitionGeneratorContentTransfer::CONTENT => $productData,
+        DefinitionGeneratorTransfer::DEFINITION_PATH_PROP => __DIR__ . '/config/definition-generator/definition',
+        DefinitionGeneratorTransfer::CONTENT_PROP => [
+            DefinitionGeneratorContentTransfer::CLASS_NAME_PROP => 'Product',
+            DefinitionGeneratorContentTransfer::CONTENT_PROP => $productData,
         ],
     ]
 );

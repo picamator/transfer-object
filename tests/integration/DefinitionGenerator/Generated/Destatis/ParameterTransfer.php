@@ -20,16 +20,16 @@ final class ParameterTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 6;
 
     protected const array META_DATA = [
-        self::CATEGORY => self::CATEGORY_INDEX,
-        self::LANGUAGE => self::LANGUAGE_INDEX,
-        self::PAGELENGTH => self::PAGELENGTH_INDEX,
-        self::PASSWORD => self::PASSWORD_INDEX,
-        self::TERM => self::TERM_INDEX,
-        self::USERNAME => self::USERNAME_INDEX,
+        self::CATEGORY_PROP => self::CATEGORY_INDEX,
+        self::LANGUAGE_PROP => self::LANGUAGE_INDEX,
+        self::PAGELENGTH_PROP => self::PAGELENGTH_INDEX,
+        self::PASSWORD_PROP => self::PASSWORD_INDEX,
+        self::TERM_PROP => self::TERM_INDEX,
+        self::USERNAME_PROP => self::USERNAME_INDEX,
     ];
 
     // category
-    public const string CATEGORY = 'category';
+    public const string CATEGORY_PROP = 'category';
     private const int CATEGORY_INDEX = 0;
 
     public ?string $category {
@@ -38,7 +38,7 @@ final class ParameterTransfer extends AbstractTransfer
     }
 
     // language
-    public const string LANGUAGE = 'language';
+    public const string LANGUAGE_PROP = 'language';
     private const int LANGUAGE_INDEX = 1;
 
     public ?string $language {
@@ -47,7 +47,7 @@ final class ParameterTransfer extends AbstractTransfer
     }
 
     // pagelength
-    public const string PAGELENGTH = 'pagelength';
+    public const string PAGELENGTH_PROP = 'pagelength';
     private const int PAGELENGTH_INDEX = 2;
 
     public ?string $pagelength {
@@ -56,7 +56,7 @@ final class ParameterTransfer extends AbstractTransfer
     }
 
     // password
-    public const string PASSWORD = 'password';
+    public const string PASSWORD_PROP = 'password';
     private const int PASSWORD_INDEX = 3;
 
     public ?string $password {
@@ -65,7 +65,7 @@ final class ParameterTransfer extends AbstractTransfer
     }
 
     // term
-    public const string TERM = 'term';
+    public const string TERM_PROP = 'term';
     private const int TERM_INDEX = 4;
 
     public ?string $term {
@@ -74,7 +74,7 @@ final class ParameterTransfer extends AbstractTransfer
     }
 
     // username
-    public const string USERNAME = 'username';
+    public const string USERNAME_PROP = 'username';
     private const int USERNAME_INDEX = 5;
 
     public ?string $username {

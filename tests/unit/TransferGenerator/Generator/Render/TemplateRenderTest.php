@@ -43,7 +43,7 @@ class TemplateRenderTest extends TestCase
         $definitionTransfer = new DefinitionTransfer();
         $definitionTransfer->fileName = 'definition.yml';
         $definitionTransfer->content = new DefinitionContentTransfer([
-            DefinitionContentTransfer::CLASS_NAME => 'CustomerTransfer',
+            DefinitionContentTransfer::CLASS_NAME_PROP => 'CustomerTransfer',
         ]);
 
         $templateTransfer = $this->createTemplateTransfer();
@@ -62,10 +62,10 @@ class TemplateRenderTest extends TestCase
     private function createTemplateTransfer(): TemplateTransfer
     {
         return new TemplateTransfer([
-            TemplateTransfer::DEFINITION_PATH => '\some\path\definition.yml',
-            TemplateTransfer::CLASS_NAMESPACE => '\Default',
-            TemplateTransfer::CLASS_NAME => 'DefaultTransfer',
-            TemplateTransfer::IMPORTS => [
+            TemplateTransfer::DEFINITION_PATH_PROP => '\some\path\definition.yml',
+            TemplateTransfer::CLASS_NAMESPACE_PROP => '\Default',
+            TemplateTransfer::CLASS_NAME_PROP => 'DefaultTransfer',
+            TemplateTransfer::IMPORTS_PROP => [
                 TransferEnum::ABSTRACT_CLASS->value,
             ],
         ]);

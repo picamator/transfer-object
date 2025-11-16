@@ -21,13 +21,13 @@ final class DefinitionGeneratorTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::CONTENT => self::CONTENT_INDEX,
-        self::DEFINITION_PATH => self::DEFINITION_PATH_INDEX,
+        self::CONTENT_PROP => self::CONTENT_INDEX,
+        self::DEFINITION_PATH_PROP => self::DEFINITION_PATH_INDEX,
     ];
 
     // content
     #[TransferTransformerAttribute(DefinitionGeneratorContentTransfer::class)]
-    public const string CONTENT = 'content';
+    public const string CONTENT_PROP = 'content';
     private const int CONTENT_INDEX = 0;
 
     public DefinitionGeneratorContentTransfer $content {
@@ -36,7 +36,7 @@ final class DefinitionGeneratorTransfer extends AbstractTransfer
     }
 
     // definitionPath
-    public const string DEFINITION_PATH = 'definitionPath';
+    public const string DEFINITION_PATH_PROP = 'definitionPath';
     private const int DEFINITION_PATH_INDEX = 1;
 
     public string $definitionPath {

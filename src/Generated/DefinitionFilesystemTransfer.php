@@ -20,13 +20,13 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::CONTENT => self::CONTENT_INDEX,
-        self::DEFINITION_PATH => self::DEFINITION_PATH_INDEX,
-        self::FILE_NAME => self::FILE_NAME_INDEX,
+        self::CONTENT_PROP => self::CONTENT_INDEX,
+        self::DEFINITION_PATH_PROP => self::DEFINITION_PATH_INDEX,
+        self::FILE_NAME_PROP => self::FILE_NAME_INDEX,
     ];
 
     // content
-    public const string CONTENT = 'content';
+    public const string CONTENT_PROP = 'content';
     private const int CONTENT_INDEX = 0;
 
     public string $content {
@@ -35,7 +35,7 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
     }
 
     // definitionPath
-    public const string DEFINITION_PATH = 'definitionPath';
+    public const string DEFINITION_PATH_PROP = 'definitionPath';
     private const int DEFINITION_PATH_INDEX = 1;
 
     public string $definitionPath {
@@ -44,7 +44,7 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
     }
 
     // fileName
-    public const string FILE_NAME = 'fileName';
+    public const string FILE_NAME_PROP = 'fileName';
     private const int FILE_NAME_INDEX = 2;
 
     public string $fileName {

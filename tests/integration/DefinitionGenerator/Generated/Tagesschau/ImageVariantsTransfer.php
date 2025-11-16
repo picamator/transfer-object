@@ -20,11 +20,11 @@ final class ImageVariantsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::ORIGINAL => self::ORIGINAL_INDEX,
+        self::ORIGINAL_PROP => self::ORIGINAL_INDEX,
     ];
 
     // original
-    public const string ORIGINAL = 'original';
+    public const string ORIGINAL_PROP = 'original';
     private const int ORIGINAL_INDEX = 0;
 
     public ?string $original {

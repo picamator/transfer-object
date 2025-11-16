@@ -21,33 +21,33 @@ final class OrbitalDataTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 23;
 
     protected const array META_DATA = [
-        self::APHELION_DISTANCE => self::APHELION_DISTANCE_INDEX,
-        self::ASCENDING_NODE_LONGITUDE => self::ASCENDING_NODE_LONGITUDE_INDEX,
-        self::DATA_ARC_IN_DAYS => self::DATA_ARC_IN_DAYS_INDEX,
-        self::ECCENTRICITY => self::ECCENTRICITY_INDEX,
-        self::EPOCH_OSCULATION => self::EPOCH_OSCULATION_INDEX,
-        self::EQUINOX => self::EQUINOX_INDEX,
-        self::FIRST_OBSERVATION_DATE => self::FIRST_OBSERVATION_DATE_INDEX,
-        self::INCLINATION => self::INCLINATION_INDEX,
-        self::JUPITER_TISSERAND_INVARIANT => self::JUPITER_TISSERAND_INVARIANT_INDEX,
-        self::LAST_OBSERVATION_DATE => self::LAST_OBSERVATION_DATE_INDEX,
-        self::MEAN_ANOMALY => self::MEAN_ANOMALY_INDEX,
-        self::MEAN_MOTION => self::MEAN_MOTION_INDEX,
-        self::MINIMUM_ORBIT_INTERSECTION => self::MINIMUM_ORBIT_INTERSECTION_INDEX,
-        self::OBSERVATIONS_USED => self::OBSERVATIONS_USED_INDEX,
-        self::ORBIT_CLASS => self::ORBIT_CLASS_INDEX,
-        self::ORBIT_DETERMINATION_DATE => self::ORBIT_DETERMINATION_DATE_INDEX,
-        self::ORBIT_ID => self::ORBIT_ID_INDEX,
-        self::ORBIT_UNCERTAINTY => self::ORBIT_UNCERTAINTY_INDEX,
-        self::ORBITAL_PERIOD => self::ORBITAL_PERIOD_INDEX,
-        self::PERIHELION_ARGUMENT => self::PERIHELION_ARGUMENT_INDEX,
-        self::PERIHELION_DISTANCE => self::PERIHELION_DISTANCE_INDEX,
-        self::PERIHELION_TIME => self::PERIHELION_TIME_INDEX,
-        self::SEMI_MAJOR_AXIS => self::SEMI_MAJOR_AXIS_INDEX,
+        self::APHELION_DISTANCE_PROP => self::APHELION_DISTANCE_INDEX,
+        self::ASCENDING_NODE_LONGITUDE_PROP => self::ASCENDING_NODE_LONGITUDE_INDEX,
+        self::DATA_ARC_IN_DAYS_PROP => self::DATA_ARC_IN_DAYS_INDEX,
+        self::ECCENTRICITY_PROP => self::ECCENTRICITY_INDEX,
+        self::EPOCH_OSCULATION_PROP => self::EPOCH_OSCULATION_INDEX,
+        self::EQUINOX_PROP => self::EQUINOX_INDEX,
+        self::FIRST_OBSERVATION_DATE_PROP => self::FIRST_OBSERVATION_DATE_INDEX,
+        self::INCLINATION_PROP => self::INCLINATION_INDEX,
+        self::JUPITER_TISSERAND_INVARIANT_PROP => self::JUPITER_TISSERAND_INVARIANT_INDEX,
+        self::LAST_OBSERVATION_DATE_PROP => self::LAST_OBSERVATION_DATE_INDEX,
+        self::MEAN_ANOMALY_PROP => self::MEAN_ANOMALY_INDEX,
+        self::MEAN_MOTION_PROP => self::MEAN_MOTION_INDEX,
+        self::MINIMUM_ORBIT_INTERSECTION_PROP => self::MINIMUM_ORBIT_INTERSECTION_INDEX,
+        self::OBSERVATIONS_USED_PROP => self::OBSERVATIONS_USED_INDEX,
+        self::ORBIT_CLASS_PROP => self::ORBIT_CLASS_INDEX,
+        self::ORBIT_DETERMINATION_DATE_PROP => self::ORBIT_DETERMINATION_DATE_INDEX,
+        self::ORBIT_ID_PROP => self::ORBIT_ID_INDEX,
+        self::ORBIT_UNCERTAINTY_PROP => self::ORBIT_UNCERTAINTY_INDEX,
+        self::ORBITAL_PERIOD_PROP => self::ORBITAL_PERIOD_INDEX,
+        self::PERIHELION_ARGUMENT_PROP => self::PERIHELION_ARGUMENT_INDEX,
+        self::PERIHELION_DISTANCE_PROP => self::PERIHELION_DISTANCE_INDEX,
+        self::PERIHELION_TIME_PROP => self::PERIHELION_TIME_INDEX,
+        self::SEMI_MAJOR_AXIS_PROP => self::SEMI_MAJOR_AXIS_INDEX,
     ];
 
     // aphelion_distance
-    public const string APHELION_DISTANCE = 'aphelion_distance';
+    public const string APHELION_DISTANCE_PROP = 'aphelion_distance';
     private const int APHELION_DISTANCE_INDEX = 0;
 
     public ?string $aphelion_distance {
@@ -56,7 +56,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // ascending_node_longitude
-    public const string ASCENDING_NODE_LONGITUDE = 'ascending_node_longitude';
+    public const string ASCENDING_NODE_LONGITUDE_PROP = 'ascending_node_longitude';
     private const int ASCENDING_NODE_LONGITUDE_INDEX = 1;
 
     public ?string $ascending_node_longitude {
@@ -65,7 +65,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // data_arc_in_days
-    public const string DATA_ARC_IN_DAYS = 'data_arc_in_days';
+    public const string DATA_ARC_IN_DAYS_PROP = 'data_arc_in_days';
     private const int DATA_ARC_IN_DAYS_INDEX = 2;
 
     public ?int $data_arc_in_days {
@@ -74,7 +74,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // eccentricity
-    public const string ECCENTRICITY = 'eccentricity';
+    public const string ECCENTRICITY_PROP = 'eccentricity';
     private const int ECCENTRICITY_INDEX = 3;
 
     public ?string $eccentricity {
@@ -83,7 +83,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // epoch_osculation
-    public const string EPOCH_OSCULATION = 'epoch_osculation';
+    public const string EPOCH_OSCULATION_PROP = 'epoch_osculation';
     private const int EPOCH_OSCULATION_INDEX = 4;
 
     public ?string $epoch_osculation {
@@ -92,7 +92,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // equinox
-    public const string EQUINOX = 'equinox';
+    public const string EQUINOX_PROP = 'equinox';
     private const int EQUINOX_INDEX = 5;
 
     public ?string $equinox {
@@ -101,7 +101,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // first_observation_date
-    public const string FIRST_OBSERVATION_DATE = 'first_observation_date';
+    public const string FIRST_OBSERVATION_DATE_PROP = 'first_observation_date';
     private const int FIRST_OBSERVATION_DATE_INDEX = 6;
 
     public ?string $first_observation_date {
@@ -110,7 +110,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // inclination
-    public const string INCLINATION = 'inclination';
+    public const string INCLINATION_PROP = 'inclination';
     private const int INCLINATION_INDEX = 7;
 
     public ?string $inclination {
@@ -119,7 +119,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // jupiter_tisserand_invariant
-    public const string JUPITER_TISSERAND_INVARIANT = 'jupiter_tisserand_invariant';
+    public const string JUPITER_TISSERAND_INVARIANT_PROP = 'jupiter_tisserand_invariant';
     private const int JUPITER_TISSERAND_INVARIANT_INDEX = 8;
 
     public ?string $jupiter_tisserand_invariant {
@@ -128,7 +128,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // last_observation_date
-    public const string LAST_OBSERVATION_DATE = 'last_observation_date';
+    public const string LAST_OBSERVATION_DATE_PROP = 'last_observation_date';
     private const int LAST_OBSERVATION_DATE_INDEX = 9;
 
     public ?string $last_observation_date {
@@ -137,7 +137,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // mean_anomaly
-    public const string MEAN_ANOMALY = 'mean_anomaly';
+    public const string MEAN_ANOMALY_PROP = 'mean_anomaly';
     private const int MEAN_ANOMALY_INDEX = 10;
 
     public ?string $mean_anomaly {
@@ -146,7 +146,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // mean_motion
-    public const string MEAN_MOTION = 'mean_motion';
+    public const string MEAN_MOTION_PROP = 'mean_motion';
     private const int MEAN_MOTION_INDEX = 11;
 
     public ?string $mean_motion {
@@ -155,7 +155,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // minimum_orbit_intersection
-    public const string MINIMUM_ORBIT_INTERSECTION = 'minimum_orbit_intersection';
+    public const string MINIMUM_ORBIT_INTERSECTION_PROP = 'minimum_orbit_intersection';
     private const int MINIMUM_ORBIT_INTERSECTION_INDEX = 12;
 
     public ?string $minimum_orbit_intersection {
@@ -164,7 +164,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // observations_used
-    public const string OBSERVATIONS_USED = 'observations_used';
+    public const string OBSERVATIONS_USED_PROP = 'observations_used';
     private const int OBSERVATIONS_USED_INDEX = 13;
 
     public ?int $observations_used {
@@ -174,7 +174,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // orbit_class
     #[TransferTransformerAttribute(OrbitClassTransfer::class)]
-    public const string ORBIT_CLASS = 'orbit_class';
+    public const string ORBIT_CLASS_PROP = 'orbit_class';
     private const int ORBIT_CLASS_INDEX = 14;
 
     public ?OrbitClassTransfer $orbit_class {
@@ -183,7 +183,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // orbit_determination_date
-    public const string ORBIT_DETERMINATION_DATE = 'orbit_determination_date';
+    public const string ORBIT_DETERMINATION_DATE_PROP = 'orbit_determination_date';
     private const int ORBIT_DETERMINATION_DATE_INDEX = 15;
 
     public ?string $orbit_determination_date {
@@ -192,7 +192,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // orbit_id
-    public const string ORBIT_ID = 'orbit_id';
+    public const string ORBIT_ID_PROP = 'orbit_id';
     private const int ORBIT_ID_INDEX = 16;
 
     public ?string $orbit_id {
@@ -201,7 +201,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // orbit_uncertainty
-    public const string ORBIT_UNCERTAINTY = 'orbit_uncertainty';
+    public const string ORBIT_UNCERTAINTY_PROP = 'orbit_uncertainty';
     private const int ORBIT_UNCERTAINTY_INDEX = 17;
 
     public ?string $orbit_uncertainty {
@@ -210,7 +210,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // orbital_period
-    public const string ORBITAL_PERIOD = 'orbital_period';
+    public const string ORBITAL_PERIOD_PROP = 'orbital_period';
     private const int ORBITAL_PERIOD_INDEX = 18;
 
     public ?string $orbital_period {
@@ -219,7 +219,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // perihelion_argument
-    public const string PERIHELION_ARGUMENT = 'perihelion_argument';
+    public const string PERIHELION_ARGUMENT_PROP = 'perihelion_argument';
     private const int PERIHELION_ARGUMENT_INDEX = 19;
 
     public ?string $perihelion_argument {
@@ -228,7 +228,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // perihelion_distance
-    public const string PERIHELION_DISTANCE = 'perihelion_distance';
+    public const string PERIHELION_DISTANCE_PROP = 'perihelion_distance';
     private const int PERIHELION_DISTANCE_INDEX = 20;
 
     public ?string $perihelion_distance {
@@ -237,7 +237,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // perihelion_time
-    public const string PERIHELION_TIME = 'perihelion_time';
+    public const string PERIHELION_TIME_PROP = 'perihelion_time';
     private const int PERIHELION_TIME_INDEX = 21;
 
     public ?string $perihelion_time {
@@ -246,7 +246,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
     }
 
     // semi_major_axis
-    public const string SEMI_MAJOR_AXIS = 'semi_major_axis';
+    public const string SEMI_MAJOR_AXIS_PROP = 'semi_major_axis';
     private const int SEMI_MAJOR_AXIS_INDEX = 22;
 
     public ?string $semi_major_axis {

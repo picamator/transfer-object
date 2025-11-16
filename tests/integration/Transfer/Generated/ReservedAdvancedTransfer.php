@@ -18,17 +18,17 @@ use Picamator\TransferObject\Transfer\TransferInterface;
  *
  * @see /tests/integration/Transfer/data/config/definition/reserved-advanced.transfer.yml Definition file path.
  */
-final class ReservedTransfer extends AbstractTransfer
+final class ReservedAdvancedTransfer extends AbstractTransfer
 {
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::DATA => self::DATA_INDEX,
+        self::DATA_PROP => self::DATA_INDEX,
     ];
 
     // data
     #[TransferTransformerAttribute(ReservedPropertyData::class)]
-    public const string DATA = 'data';
+    public const string DATA_PROP = 'data';
     private const int DATA_INDEX = 0;
 
     public TransferInterface&ReservedPropertyData $data {

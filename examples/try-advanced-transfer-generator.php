@@ -130,18 +130,18 @@ echo <<<'STORY'
 STORY;
 $advancedCustomerTransfer = new AdvancedCustomerTransfer()
     ->fromArray([
-        AdvancedCustomerTransfer::CUSTOMER => [
-            CustomerTransfer::FIRST_NAME => 'Theodor',
-            CustomerTransfer::LAST_NAME => 'Storm',
+        AdvancedCustomerTransfer::CUSTOMER_PROP => [
+            CustomerTransfer::FIRST_NAME_PROP => 'Theodor',
+            CustomerTransfer::LAST_NAME_PROP => 'Storm',
         ],
-        AdvancedCustomerTransfer::ADDRESS => [
+        AdvancedCustomerTransfer::ADDRESS_PROP => [
             'street' => 'Wasserreihe',
             'houseNumber' => '31',
             'city' => 'Husum',
             'postCode' => '25813',
             'country' => 'Deutschland',
         ],
-        AdvancedCustomerTransfer::CREDENTIALS => [
+        AdvancedCustomerTransfer::CREDENTIALS_PROP => [
             'login' => 'theodor.storm',
             'token' => 'Der Schimmelreiter',
         ],

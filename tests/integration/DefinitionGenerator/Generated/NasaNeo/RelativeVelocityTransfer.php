@@ -20,13 +20,13 @@ final class RelativeVelocityTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::KILOMETERS_PER_HOUR => self::KILOMETERS_PER_HOUR_INDEX,
-        self::KILOMETERS_PER_SECOND => self::KILOMETERS_PER_SECOND_INDEX,
-        self::MILES_PER_HOUR => self::MILES_PER_HOUR_INDEX,
+        self::KILOMETERS_PER_HOUR_PROP => self::KILOMETERS_PER_HOUR_INDEX,
+        self::KILOMETERS_PER_SECOND_PROP => self::KILOMETERS_PER_SECOND_INDEX,
+        self::MILES_PER_HOUR_PROP => self::MILES_PER_HOUR_INDEX,
     ];
 
     // kilometers_per_hour
-    public const string KILOMETERS_PER_HOUR = 'kilometers_per_hour';
+    public const string KILOMETERS_PER_HOUR_PROP = 'kilometers_per_hour';
     private const int KILOMETERS_PER_HOUR_INDEX = 0;
 
     public ?string $kilometers_per_hour {
@@ -35,7 +35,7 @@ final class RelativeVelocityTransfer extends AbstractTransfer
     }
 
     // kilometers_per_second
-    public const string KILOMETERS_PER_SECOND = 'kilometers_per_second';
+    public const string KILOMETERS_PER_SECOND_PROP = 'kilometers_per_second';
     private const int KILOMETERS_PER_SECOND_INDEX = 1;
 
     public ?string $kilometers_per_second {
@@ -44,7 +44,7 @@ final class RelativeVelocityTransfer extends AbstractTransfer
     }
 
     // miles_per_hour
-    public const string MILES_PER_HOUR = 'miles_per_hour';
+    public const string MILES_PER_HOUR_PROP = 'miles_per_hour';
     private const int MILES_PER_HOUR_INDEX = 2;
 
     public ?string $miles_per_hour {

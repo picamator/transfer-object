@@ -23,14 +23,14 @@ final class ValidatorTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ERROR_MESSAGES => self::ERROR_MESSAGES_INDEX,
-        self::IS_VALID => self::IS_VALID_INDEX,
+        self::ERROR_MESSAGES_PROP => self::ERROR_MESSAGES_INDEX,
+        self::IS_VALID_PROP => self::IS_VALID_INDEX,
     ];
 
     // errorMessages
     #[CollectionInitiatorAttribute]
     #[CollectionTransformerAttribute(ValidatorMessageTransfer::class)]
-    public const string ERROR_MESSAGES = 'errorMessages';
+    public const string ERROR_MESSAGES_PROP = 'errorMessages';
     private const int ERROR_MESSAGES_INDEX = 0;
 
     /** @var \ArrayObject<int,ValidatorMessageTransfer> */
@@ -40,7 +40,7 @@ final class ValidatorTransfer extends AbstractTransfer
     }
 
     // isValid
-    public const string IS_VALID = 'isValid';
+    public const string IS_VALID_PROP = 'isValid';
     private const int IS_VALID_INDEX = 1;
 
     public bool $isValid {

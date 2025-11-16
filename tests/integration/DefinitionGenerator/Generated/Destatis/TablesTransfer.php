@@ -20,13 +20,13 @@ final class TablesTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::CODE => self::CODE_INDEX,
-        self::CONTENT => self::CONTENT_INDEX,
-        self::TIME => self::TIME_INDEX,
+        self::CODE_PROP => self::CODE_INDEX,
+        self::CONTENT_PROP => self::CONTENT_INDEX,
+        self::TIME_PROP => self::TIME_INDEX,
     ];
 
     // Code
-    public const string CODE = 'Code';
+    public const string CODE_PROP = 'Code';
     private const int CODE_INDEX = 0;
 
     public ?string $Code {
@@ -35,7 +35,7 @@ final class TablesTransfer extends AbstractTransfer
     }
 
     // Content
-    public const string CONTENT = 'Content';
+    public const string CONTENT_PROP = 'Content';
     private const int CONTENT_INDEX = 1;
 
     public ?string $Content {
@@ -44,7 +44,7 @@ final class TablesTransfer extends AbstractTransfer
     }
 
     // Time
-    public const string TIME = 'Time';
+    public const string TIME_PROP = 'Time';
     private const int TIME_INDEX = 2;
 
     public ?string $Time {

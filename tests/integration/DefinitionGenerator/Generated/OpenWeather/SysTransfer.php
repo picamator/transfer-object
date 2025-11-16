@@ -20,15 +20,15 @@ final class SysTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 5;
 
     protected const array META_DATA = [
-        self::COUNTRY => self::COUNTRY_INDEX,
-        self::ID => self::ID_INDEX,
-        self::SUNRISE => self::SUNRISE_INDEX,
-        self::SUNSET => self::SUNSET_INDEX,
-        self::TYPE => self::TYPE_INDEX,
+        self::COUNTRY_PROP => self::COUNTRY_INDEX,
+        self::ID_PROP => self::ID_INDEX,
+        self::SUNRISE_PROP => self::SUNRISE_INDEX,
+        self::SUNSET_PROP => self::SUNSET_INDEX,
+        self::TYPE_PROP => self::TYPE_INDEX,
     ];
 
     // country
-    public const string COUNTRY = 'country';
+    public const string COUNTRY_PROP = 'country';
     private const int COUNTRY_INDEX = 0;
 
     public ?string $country {
@@ -37,7 +37,7 @@ final class SysTransfer extends AbstractTransfer
     }
 
     // id
-    public const string ID = 'id';
+    public const string ID_PROP = 'id';
     private const int ID_INDEX = 1;
 
     public ?int $id {
@@ -46,7 +46,7 @@ final class SysTransfer extends AbstractTransfer
     }
 
     // sunrise
-    public const string SUNRISE = 'sunrise';
+    public const string SUNRISE_PROP = 'sunrise';
     private const int SUNRISE_INDEX = 2;
 
     public ?int $sunrise {
@@ -55,7 +55,7 @@ final class SysTransfer extends AbstractTransfer
     }
 
     // sunset
-    public const string SUNSET = 'sunset';
+    public const string SUNSET_PROP = 'sunset';
     private const int SUNSET_INDEX = 3;
 
     public ?int $sunset {
@@ -64,7 +64,7 @@ final class SysTransfer extends AbstractTransfer
     }
 
     // type
-    public const string TYPE = 'type';
+    public const string TYPE_PROP = 'type';
     private const int TYPE_INDEX = 4;
 
     public ?int $type {

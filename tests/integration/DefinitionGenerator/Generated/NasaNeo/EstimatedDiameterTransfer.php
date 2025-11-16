@@ -21,15 +21,15 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
-        self::FEET => self::FEET_INDEX,
-        self::KILOMETERS => self::KILOMETERS_INDEX,
-        self::METERS => self::METERS_INDEX,
-        self::MILES => self::MILES_INDEX,
+        self::FEET_PROP => self::FEET_INDEX,
+        self::KILOMETERS_PROP => self::KILOMETERS_INDEX,
+        self::METERS_PROP => self::METERS_INDEX,
+        self::MILES_PROP => self::MILES_INDEX,
     ];
 
     // feet
     #[TransferTransformerAttribute(FeetTransfer::class)]
-    public const string FEET = 'feet';
+    public const string FEET_PROP = 'feet';
     private const int FEET_INDEX = 0;
 
     public ?FeetTransfer $feet {
@@ -39,7 +39,7 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
 
     // kilometers
     #[TransferTransformerAttribute(KilometersTransfer::class)]
-    public const string KILOMETERS = 'kilometers';
+    public const string KILOMETERS_PROP = 'kilometers';
     private const int KILOMETERS_INDEX = 1;
 
     public ?KilometersTransfer $kilometers {
@@ -49,7 +49,7 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
 
     // meters
     #[TransferTransformerAttribute(MetersTransfer::class)]
-    public const string METERS = 'meters';
+    public const string METERS_PROP = 'meters';
     private const int METERS_INDEX = 2;
 
     public ?MetersTransfer $meters {
@@ -59,7 +59,7 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
 
     // miles
     #[TransferTransformerAttribute(MilesTransfer::class)]
-    public const string MILES = 'miles';
+    public const string MILES_PROP = 'miles';
     private const int MILES_INDEX = 3;
 
     public ?MilesTransfer $miles {

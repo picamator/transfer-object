@@ -20,12 +20,12 @@ final class CoordTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::LAT => self::LAT_INDEX,
-        self::LON => self::LON_INDEX,
+        self::LAT_PROP => self::LAT_INDEX,
+        self::LON_PROP => self::LON_INDEX,
     ];
 
     // lat
-    public const string LAT = 'lat';
+    public const string LAT_PROP = 'lat';
     private const int LAT_INDEX = 0;
 
     public ?float $lat {
@@ -34,7 +34,7 @@ final class CoordTransfer extends AbstractTransfer
     }
 
     // lon
-    public const string LON = 'lon';
+    public const string LON_PROP = 'lon';
     private const int LON_INDEX = 1;
 
     public ?float $lon {

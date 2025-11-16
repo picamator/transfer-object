@@ -56,19 +56,19 @@ echo <<<'STORY'
 STORY;
 $agentTransfer = new AgentTransfer()
     ->fromArray([
-        AgentTransfer::CUSTOMER => [
-            CustomerTransfer::FIRST_NAME => 'Max',
-            CustomerTransfer::LAST_NAME => 'Mustermann',
+        AgentTransfer::CUSTOMER_PROP => [
+            CustomerTransfer::FIRST_NAME_PROP => 'Max',
+            CustomerTransfer::LAST_NAME_PROP => 'Mustermann',
         ],
-        AgentTransfer::MERCHANTS => [
+        AgentTransfer::MERCHANTS_PROP => [
             [
-                MerchantTransfer::COUNTRY => 'DE',
-                MerchantTransfer::MERCHANT_REFERENCE => 'DE-234-567',
-                MerchantTransfer::IS_ACTIVE => false,
+                MerchantTransfer::COUNTRY_PROP => 'DE',
+                MerchantTransfer::MERCHANT_REFERENCE_PROP => 'DE-234-567',
+                MerchantTransfer::IS_ACTIVE_PROP => false,
             ], [
-                MerchantTransfer::COUNTRY => 'PL',
-                MerchantTransfer::MERCHANT_REFERENCE => 'PL-774-444',
-                MerchantTransfer::IS_ACTIVE => true,
+                MerchantTransfer::COUNTRY_PROP => 'PL',
+                MerchantTransfer::MERCHANT_REFERENCE_PROP => 'PL-774-444',
+                MerchantTransfer::IS_ACTIVE_PROP => true,
             ],
         ],
         'uuid' => '123-123-123-123',
@@ -83,10 +83,10 @@ echo <<<'STORY'
 
 STORY;
 $credentialsTransfer = new CredentialsTransfer([
-    CredentialsTransfer::LOGIN => 'jan.kowalski',
-    CredentialsTransfer::TOKEN => 'some-random-token',
-    CredentialsTransfer::CREATED_AT => '2025-05-02 22:58:00',
-    CredentialsTransfer::UPDATED_AT => new DateTime(),
+    CredentialsTransfer::LOGIN_PROP => 'jan.kowalski',
+    CredentialsTransfer::TOKEN_PROP => 'some-random-token',
+    CredentialsTransfer::CREATED_AT_PROP => '2025-05-02 22:58:00',
+    CredentialsTransfer::UPDATED_AT_PROP => new DateTime(),
 ]);
 
 echo "Login: $credentialsTransfer->login\n";

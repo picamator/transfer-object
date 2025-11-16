@@ -20,11 +20,11 @@ final class LinksTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::SELF => self::SELF_INDEX,
+        self::SELF_PROP => self::SELF_INDEX,
     ];
 
     // self
-    public const string SELF = 'self';
+    public const string SELF_PROP = 'self';
     private const int SELF_INDEX = 0;
 
     public ?string $self {

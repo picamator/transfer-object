@@ -21,16 +21,16 @@ final class CloseApproachDataTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 6;
 
     protected const array META_DATA = [
-        self::CLOSE_APPROACH_DATE => self::CLOSE_APPROACH_DATE_INDEX,
-        self::CLOSE_APPROACH_DATE_FULL => self::CLOSE_APPROACH_DATE_FULL_INDEX,
-        self::EPOCH_DATE_CLOSE_APPROACH => self::EPOCH_DATE_CLOSE_APPROACH_INDEX,
-        self::MISS_DISTANCE => self::MISS_DISTANCE_INDEX,
-        self::ORBITING_BODY => self::ORBITING_BODY_INDEX,
-        self::RELATIVE_VELOCITY => self::RELATIVE_VELOCITY_INDEX,
+        self::CLOSE_APPROACH_DATE_PROP => self::CLOSE_APPROACH_DATE_INDEX,
+        self::CLOSE_APPROACH_DATE_FULL_PROP => self::CLOSE_APPROACH_DATE_FULL_INDEX,
+        self::EPOCH_DATE_CLOSE_APPROACH_PROP => self::EPOCH_DATE_CLOSE_APPROACH_INDEX,
+        self::MISS_DISTANCE_PROP => self::MISS_DISTANCE_INDEX,
+        self::ORBITING_BODY_PROP => self::ORBITING_BODY_INDEX,
+        self::RELATIVE_VELOCITY_PROP => self::RELATIVE_VELOCITY_INDEX,
     ];
 
     // close_approach_date
-    public const string CLOSE_APPROACH_DATE = 'close_approach_date';
+    public const string CLOSE_APPROACH_DATE_PROP = 'close_approach_date';
     private const int CLOSE_APPROACH_DATE_INDEX = 0;
 
     public ?string $close_approach_date {
@@ -39,7 +39,7 @@ final class CloseApproachDataTransfer extends AbstractTransfer
     }
 
     // close_approach_date_full
-    public const string CLOSE_APPROACH_DATE_FULL = 'close_approach_date_full';
+    public const string CLOSE_APPROACH_DATE_FULL_PROP = 'close_approach_date_full';
     private const int CLOSE_APPROACH_DATE_FULL_INDEX = 1;
 
     public ?string $close_approach_date_full {
@@ -48,7 +48,7 @@ final class CloseApproachDataTransfer extends AbstractTransfer
     }
 
     // epoch_date_close_approach
-    public const string EPOCH_DATE_CLOSE_APPROACH = 'epoch_date_close_approach';
+    public const string EPOCH_DATE_CLOSE_APPROACH_PROP = 'epoch_date_close_approach';
     private const int EPOCH_DATE_CLOSE_APPROACH_INDEX = 2;
 
     public ?int $epoch_date_close_approach {
@@ -58,7 +58,7 @@ final class CloseApproachDataTransfer extends AbstractTransfer
 
     // miss_distance
     #[TransferTransformerAttribute(MissDistanceTransfer::class)]
-    public const string MISS_DISTANCE = 'miss_distance';
+    public const string MISS_DISTANCE_PROP = 'miss_distance';
     private const int MISS_DISTANCE_INDEX = 3;
 
     public ?MissDistanceTransfer $miss_distance {
@@ -67,7 +67,7 @@ final class CloseApproachDataTransfer extends AbstractTransfer
     }
 
     // orbiting_body
-    public const string ORBITING_BODY = 'orbiting_body';
+    public const string ORBITING_BODY_PROP = 'orbiting_body';
     private const int ORBITING_BODY_INDEX = 4;
 
     public ?string $orbiting_body {
@@ -77,7 +77,7 @@ final class CloseApproachDataTransfer extends AbstractTransfer
 
     // relative_velocity
     #[TransferTransformerAttribute(RelativeVelocityTransfer::class)]
-    public const string RELATIVE_VELOCITY = 'relative_velocity';
+    public const string RELATIVE_VELOCITY_PROP = 'relative_velocity';
     private const int RELATIVE_VELOCITY_INDEX = 5;
 
     public ?RelativeVelocityTransfer $relative_velocity {

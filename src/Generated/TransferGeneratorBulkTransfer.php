@@ -21,13 +21,13 @@ final class TransferGeneratorBulkTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::PROGRESS => self::PROGRESS_INDEX,
-        self::VALIDATOR => self::VALIDATOR_INDEX,
+        self::PROGRESS_PROP => self::PROGRESS_INDEX,
+        self::VALIDATOR_PROP => self::VALIDATOR_INDEX,
     ];
 
     // progress
     #[TransferTransformerAttribute(FileReaderProgressTransfer::class)]
-    public const string PROGRESS = 'progress';
+    public const string PROGRESS_PROP = 'progress';
     private const int PROGRESS_INDEX = 0;
 
     public FileReaderProgressTransfer $progress {
@@ -37,7 +37,7 @@ final class TransferGeneratorBulkTransfer extends AbstractTransfer
 
     // validator
     #[TransferTransformerAttribute(ValidatorTransfer::class)]
-    public const string VALIDATOR = 'validator';
+    public const string VALIDATOR_PROP = 'validator';
     private const int VALIDATOR_INDEX = 1;
 
     public ValidatorTransfer $validator {

@@ -20,14 +20,14 @@ final class MissDistanceTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
-        self::ASTRONOMICAL => self::ASTRONOMICAL_INDEX,
-        self::KILOMETERS => self::KILOMETERS_INDEX,
-        self::LUNAR => self::LUNAR_INDEX,
-        self::MILES => self::MILES_INDEX,
+        self::ASTRONOMICAL_PROP => self::ASTRONOMICAL_INDEX,
+        self::KILOMETERS_PROP => self::KILOMETERS_INDEX,
+        self::LUNAR_PROP => self::LUNAR_INDEX,
+        self::MILES_PROP => self::MILES_INDEX,
     ];
 
     // astronomical
-    public const string ASTRONOMICAL = 'astronomical';
+    public const string ASTRONOMICAL_PROP = 'astronomical';
     private const int ASTRONOMICAL_INDEX = 0;
 
     public ?string $astronomical {
@@ -36,7 +36,7 @@ final class MissDistanceTransfer extends AbstractTransfer
     }
 
     // kilometers
-    public const string KILOMETERS = 'kilometers';
+    public const string KILOMETERS_PROP = 'kilometers';
     private const int KILOMETERS_INDEX = 1;
 
     public ?string $kilometers {
@@ -45,7 +45,7 @@ final class MissDistanceTransfer extends AbstractTransfer
     }
 
     // lunar
-    public const string LUNAR = 'lunar';
+    public const string LUNAR_PROP = 'lunar';
     private const int LUNAR_INDEX = 2;
 
     public ?string $lunar {
@@ -54,7 +54,7 @@ final class MissDistanceTransfer extends AbstractTransfer
     }
 
     // miles
-    public const string MILES = 'miles';
+    public const string MILES_PROP = 'miles';
     private const int MILES_INDEX = 3;
 
     public ?string $miles {
