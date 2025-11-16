@@ -20,11 +20,17 @@ trait AttributeTrait
     private ?WeakReference $_reflectionObjectReference = null;
 
     /**
-     * @return Generator<string, \ReflectionAttribute<TransformerAttributeInterface>>
+     * @param array<string>|null $propertyNames
+     *
+     * @return Generator<string, TransformerAttributeInterface>
      */
-    final protected function getTransformerReflections(): Generator
+    final protected function getTransformers(?array $propertyNames = null): Generator
     {
-        foreach ($this->getReflectionConstants() as $reflectionConstant) {
+        $reflectionConstants = $propertyNames === null
+            ? $this->getReflectionConstants()
+            : $this->getFilterReflectionConstants($propertyNames);
+
+        foreach ($reflectionConstants as $reflectionConstant) {
             $attributeReflections = $reflectionConstant->getAttributes(
                 name: TransformerAttributeInterface::class,
                 flags: ReflectionAttribute::IS_INSTANCEOF,
@@ -39,7 +45,7 @@ trait AttributeTrait
             /** @var string $propertyName */
             $propertyName = $reflectionConstant->getValue();
 
-            yield $propertyName => $attributeReflection;
+            yield $propertyName => $attributeReflection->newInstance();
         }
     }
 
@@ -70,6 +76,27 @@ trait AttributeTrait
 
             yield $propertyName => $initiators[$initiatorName];
         }
+    }
+
+    /**
+     * @param array<string> $propertyNames
+     *
+     * @return array<\ReflectionClassConstant>
+     */
+    private function getFilterReflectionConstants(array $propertyNames): array
+    {
+        $reflectionConstants = $this->getReflectionConstants();
+        if (count($propertyNames) === count($reflectionConstants)) {
+            return $reflectionConstants;
+        }
+
+        $propertyNames = array_flip($propertyNames);
+
+        return array_filter(
+            $reflectionConstants,
+            /** @phpstan-ignore offsetAccess.invalidOffset */
+            fn(ReflectionClassConstant $reflection): bool => isset($propertyNames[$reflection->getValue()]),
+        );
     }
 
     /**
