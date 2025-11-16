@@ -11,7 +11,7 @@ final class MetaConstantsTemplateExpander extends AbstractTemplateExpander
 {
     private const string META_CONSTANT_SNAKE_CASE_REGEX = '#(?<!^)[A-Z]#';
 
-    private const string META_CONSTANT_ONLY_UPPER_CASE_REGEX = '#^[A-Z]+$#';
+    private const string META_CONSTANT_ONLY_UPPER_CASE_REGEX = '#^[A-Z_]+$#';
 
     /**
      * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
@@ -33,6 +33,10 @@ final class MetaConstantsTemplateExpander extends AbstractTemplateExpander
     {
         if (preg_match(self::META_CONSTANT_ONLY_UPPER_CASE_REGEX, $propertyName) === 1) {
             return $propertyName;
+        }
+
+        if (str_contains($propertyName, '_')) {
+            return strtoupper($propertyName);
         }
 
         /** @var string $propertyName */
