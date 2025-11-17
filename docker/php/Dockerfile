@@ -3,7 +3,7 @@ FROM php:8.5-rc-cli
 ARG GROUP_ID=1000
 ARG USER_ID=1000
 
-RUN apt-get --allow-unauthenticated --allow-insecure-repositories update && \
+RUN apt-get update && \
     apt-get -y install git zip libzip-dev curl libcurl4-openssl-dev && \
     docker-php-ext-configure zip && \
     docker-php-ext-install zip curl bcmath
