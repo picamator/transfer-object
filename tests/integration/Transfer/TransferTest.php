@@ -425,18 +425,43 @@ class TransferTest extends TestCase
     }
 
     #[RequiresPhpExtension('bcmath')]
-    #[TestDox('Transformation BcMath fromArray to toArray')]
-    public function testTransformationBcMathFromToArray(): void
+    #[TestDox('Transformation transfer object BcMath fromArray with $number to toArray expecting $number')]
+    #[TestWith(['12.123', '12.123'], 'Transformation from string to BcMath')]
+    #[TestWith([12, '12'], 'Transformation from integer to BcMath')]
+    #[TestWith([12.123, '12.123'], 'Transformation from float to BcMath')]
+    public function testTransformationBcMathFromToArray(string|int|float $number, string $expected): void
     {
         // Arrange
         static::generateTransfersOrFail(self::GENERATOR_BC_MATH_CONFIG_PATH);
 
         $numberTransfer = new BcMathNumberTransfer();
-        $expected = '12.123';
 
         // Act
         $numberTransfer->fromArray([
-            BcMathNumberTransfer::I_AM_NUMBER_PROP => $expected,
+            BcMathNumberTransfer::I_AM_NUMBER_PROP => $number,
+        ]);
+
+        $actual = $numberTransfer->toArray();
+
+        // Assert
+        $this->assertSame($expected, $actual[BcMathNumberTransfer::I_AM_NUMBER_PROP]);
+    }
+
+    #[RequiresPhpExtension('bcmath')]
+    #[TestDox('Transformation transfer object BcMath fromArray to toArray with BcMath')]
+    public function testTransformationBcMathFromToArrayWhereArrayHasBcMath(): void
+    {
+        // Arrange
+        static::generateTransfersOrFail(self::GENERATOR_BC_MATH_CONFIG_PATH);
+
+        $numberTransfer = new BcMathNumberTransfer();
+
+        $expected = '12.123';
+        $number = new \BcMath\Number($expected);
+
+        // Act
+        $numberTransfer->fromArray([
+            BcMathNumberTransfer::I_AM_NUMBER_PROP => $number,
         ]);
 
         $actual = $numberTransfer->toArray();
