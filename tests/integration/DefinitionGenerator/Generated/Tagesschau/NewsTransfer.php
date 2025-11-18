@@ -7,7 +7,7 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -180,7 +180,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // tags
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(TagsTransfer::class)]
     public const string TAGS_PROP = 'tags';
     private const int TAGS_INDEX = 14;
@@ -220,7 +220,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // tracking
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(TrackingTransfer::class)]
     public const string TRACKING_PROP = 'tracking';
     private const int TRACKING_INDEX = 18;

@@ -8,7 +8,7 @@ use ArrayObject;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookData;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookmarkData;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 use Picamator\TransferObject\Transfer\TransferInterface;
@@ -32,7 +32,7 @@ final class BookTransfer extends AbstractTransfer
     ];
 
     // bookmarks
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(BookmarkData::class)]
     public const string BOOKMARKS_PROP = 'bookmarks';
     private const int BOOKMARKS_INDEX = 0;

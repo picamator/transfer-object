@@ -7,7 +7,7 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 
 /**
@@ -41,7 +41,7 @@ final class ArdNewsTransfer extends AbstractTransfer
     }
 
     // news
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(NewsTransfer::class)]
     public const string NEWS_PROP = 'news';
     private const int NEWS_INDEX = 1;

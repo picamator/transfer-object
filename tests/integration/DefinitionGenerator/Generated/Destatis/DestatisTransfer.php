@@ -6,7 +6,7 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -74,7 +74,7 @@ final class DestatisTransfer extends AbstractTransfer
     }
 
     // Statistics
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(StatisticsTransfer::class)]
     public const string STATISTICS_PROP = 'Statistics';
     private const int STATISTICS_INDEX = 4;
@@ -96,7 +96,7 @@ final class DestatisTransfer extends AbstractTransfer
     }
 
     // Tables
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(TablesTransfer::class)]
     public const string TABLES_PROP = 'Tables';
     private const int TABLES_INDEX = 6;
@@ -117,7 +117,7 @@ final class DestatisTransfer extends AbstractTransfer
     }
 
     // Variables
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(VariablesTransfer::class)]
     public const string VARIABLES_PROP = 'Variables';
     private const int VARIABLES_INDEX = 8;

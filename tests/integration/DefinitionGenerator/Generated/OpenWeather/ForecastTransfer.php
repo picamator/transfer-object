@@ -7,7 +7,7 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -156,7 +156,7 @@ final class ForecastTransfer extends AbstractTransfer
     }
 
     // weather
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(WeatherTransfer::class)]
     public const string WEATHER_PROP = 'weather';
     private const int WEATHER_INDEX = 12;

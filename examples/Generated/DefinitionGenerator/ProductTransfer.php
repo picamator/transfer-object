@@ -7,7 +7,7 @@ namespace Picamator\Examples\TransferObject\Generated\DefinitionGenerator;
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -40,7 +40,7 @@ final class ProductTransfer extends AbstractTransfer
     ];
 
     // availabilities
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(AvailabilitiesTransfer::class)]
     public const string AVAILABILITIES_PROP = 'availabilities';
     private const int AVAILABILITIES_INDEX = 0;
@@ -61,7 +61,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // deliveryOptions
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(DeliveryOptionsTransfer::class)]
     public const string DELIVERY_OPTIONS_PROP = 'deliveryOptions';
     private const int DELIVERY_OPTIONS_INDEX = 2;

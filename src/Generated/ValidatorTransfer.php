@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\Generated;
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 
 /**
@@ -28,7 +28,7 @@ final class ValidatorTransfer extends AbstractTransfer
     ];
 
     // errorMessages
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(ValidatorMessageTransfer::class)]
     public const string ERROR_MESSAGES_PROP = 'errorMessages';
     private const int ERROR_MESSAGES_INDEX = 0;

@@ -9,7 +9,7 @@ use Picamator\Tests\Integration\TransferObject\TransferGenerator\Enum\AddressLab
 use Picamator\Tests\Integration\TransferObject\TransferGenerator\Enum\Alias\AddressLabelEnum as AliasAddressLabelEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\EnumTransformerAttribute;
 
@@ -36,7 +36,7 @@ final class AddressBookTransfer extends AbstractTransfer
     ];
 
     // addresses
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(AddressTransfer::class)]
     public const string ADDRESSES_PROP = 'addresses';
     private const int ADDRESSES_INDEX = 0;

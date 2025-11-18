@@ -6,7 +6,7 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -48,7 +48,7 @@ final class AsteroidTransfer extends AbstractTransfer
     }
 
     // close_approach_data
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(CloseApproachDataTransfer::class)]
     public const string CLOSE_APPROACH_DATA_PROP = 'close_approach_data';
     private const int CLOSE_APPROACH_DATA_INDEX = 1;

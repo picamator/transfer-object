@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\Generated;
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -37,7 +37,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     ];
 
     // attributes
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(DefinitionAttributeTransfer::class)]
     public const string ATTRIBUTES_PROP = 'attributes';
     private const int ATTRIBUTES_INDEX = 0;
