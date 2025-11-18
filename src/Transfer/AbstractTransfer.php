@@ -25,10 +25,6 @@ abstract class AbstractTransfer implements TransferInterface
      */
     protected const array META_DATA = [];
 
-    private const \Closure FILTER_DATA_CALLBACK = static function (mixed $value): bool {
-        return $value !== null;
-    };
-
     /**
      * @var \SplFixedArray<mixed>
      */
@@ -119,8 +115,9 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->initData();
 
-        $data = array_filter($data, callback: self::FILTER_DATA_CALLBACK);
-        $data = array_intersect_key($data, static::META_DATA);
+        $filterCallback = fn(mixed $value, int|string $key): bool => isset(static::META_DATA[$key]) && $value !== null;
+        $data = array_filter($data, callback: $filterCallback, mode: ARRAY_FILTER_USE_BOTH);
+
         if ($data === []) {
             return $this;
         }
