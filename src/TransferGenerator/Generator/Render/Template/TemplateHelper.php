@@ -62,8 +62,6 @@ class TemplateHelper implements TemplateHelperInterface
             return self::EMPTY_STRING;
         }
 
-        natsort($metaAttributes);
-
         $renderedMetaAttributes = '';
         foreach ($metaAttributes as $attribute) {
             $renderedMetaAttributes .= self::PADDING_LEFT . $attribute . PHP_EOL;
