@@ -65,12 +65,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "87ad3ca38e7de6d322a5750a81656731028ba75f"
+                "reference": "4155b9ffec268d2afbaa094dc9b7d039aa3babb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/87ad3ca38e7de6d322a5750a81656731028ba75f",
-                "reference": "87ad3ca38e7de6d322a5750a81656731028ba75f",
+                "url": "https://api.github.com/repos/symfony/console/zipball/4155b9ffec268d2afbaa094dc9b7d039aa3babb9",
+                "reference": "4155b9ffec268d2afbaa094dc9b7d039aa3babb9",
                 "shasum": ""
             },
             "require": {
@@ -155,7 +155,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-14T06:57:14+00:00"
+            "time": "2025-11-21T13:17:08+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -954,16 +954,16 @@
     "packages-dev": [
         {
             "name": "captainhook/captainhook",
-            "version": "5.26.1",
+            "version": "5.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/captainhook-git/captainhook.git",
-                "reference": "799be87f8f4ccb3af0bd0e7518695ac9b21e883e"
+                "reference": "9a05b874f6c4771868a368190d565d33f746ce9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/captainhook-git/captainhook/zipball/799be87f8f4ccb3af0bd0e7518695ac9b21e883e",
-                "reference": "799be87f8f4ccb3af0bd0e7518695ac9b21e883e",
+                "url": "https://api.github.com/repos/captainhook-git/captainhook/zipball/9a05b874f6c4771868a368190d565d33f746ce9b",
+                "reference": "9a05b874f6c4771868a368190d565d33f746ce9b",
                 "shasum": ""
             },
             "require": {
@@ -974,7 +974,7 @@
                 "php": ">=8.0",
                 "sebastianfeldmann/camino": "^0.9.2",
                 "sebastianfeldmann/cli": "^3.3",
-                "sebastianfeldmann/git": "^3.14",
+                "sebastianfeldmann/git": "^3.15.3",
                 "symfony/console": "^2.7 || ^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0",
                 "symfony/filesystem": "^2.7 || ^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0",
                 "symfony/process": "^2.7 || ^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0"
@@ -1026,7 +1026,7 @@
             ],
             "support": {
                 "issues": "https://github.com/captainhook-git/captainhook/issues",
-                "source": "https://github.com/captainhook-git/captainhook/tree/5.26.1"
+                "source": "https://github.com/captainhook-git/captainhook/tree/5.27.0"
             },
             "funding": [
                 {
@@ -1034,7 +1034,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-19T21:03:15+00:00"
+            "time": "2025-11-21T09:49:13+00:00"
         },
         {
             "name": "captainhook/secrets",
@@ -1908,16 +1908,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "12.4.3",
+            "version": "12.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "d8f644d8d9bb904867f7a0aeb1bd306e0d966949"
+                "reference": "9253ec75a672e39fcc9d85bdb61448215b8162c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d8f644d8d9bb904867f7a0aeb1bd306e0d966949",
-                "reference": "d8f644d8d9bb904867f7a0aeb1bd306e0d966949",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9253ec75a672e39fcc9d85bdb61448215b8162c7",
+                "reference": "9253ec75a672e39fcc9d85bdb61448215b8162c7",
                 "shasum": ""
             },
             "require": {
@@ -1985,7 +1985,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.4.3"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.4.4"
             },
             "funding": [
                 {
@@ -2009,7 +2009,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-13T07:20:26+00:00"
+            "time": "2025-11-21T07:39:11+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -3024,16 +3024,16 @@
         },
         {
             "name": "sebastianfeldmann/git",
-            "version": "3.15.1",
+            "version": "3.15.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianfeldmann/git.git",
-                "reference": "90cb5a32f54dbb0d7dcd87d02e664ec2b50c0c96"
+                "reference": "601fd0fbb7d1a784e009a4f8f40975e777ad334a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianfeldmann/git/zipball/90cb5a32f54dbb0d7dcd87d02e664ec2b50c0c96",
-                "reference": "90cb5a32f54dbb0d7dcd87d02e664ec2b50c0c96",
+                "url": "https://api.github.com/repos/sebastianfeldmann/git/zipball/601fd0fbb7d1a784e009a4f8f40975e777ad334a",
+                "reference": "601fd0fbb7d1a784e009a4f8f40975e777ad334a",
                 "shasum": ""
             },
             "require": {
@@ -3074,7 +3074,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianfeldmann/git/issues",
-                "source": "https://github.com/sebastianfeldmann/git/tree/3.15.1"
+                "source": "https://github.com/sebastianfeldmann/git/tree/3.15.3"
             },
             "funding": [
                 {
@@ -3082,7 +3082,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-09-05T08:07:09+00:00"
+            "time": "2025-11-20T21:33:45+00:00"
         },
         {
             "name": "slevomat/coding-standard",
