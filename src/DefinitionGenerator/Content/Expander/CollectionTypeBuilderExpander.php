@@ -13,10 +13,6 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
 {
     use BuilderExpanderTrait;
 
-    private const \Closure SEARCH_IS_ARRAY_CALLBACK = static function (mixed $value): bool {
-        return is_array($value);
-    };
-
     protected function isApplicable(Content $content): bool
     {
         if (!$content->type->isArray() || empty($content->propertyValue)) {
@@ -26,7 +22,7 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
         /** @var array<string, mixed> $propertyValue */
         $propertyValue = $content->propertyValue;
 
-        return array_all($propertyValue, self::SEARCH_IS_ARRAY_CALLBACK);
+        return array_all($propertyValue, $this->isArray(...));
     }
 
     protected function handleExpander(
@@ -35,7 +31,6 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
     ): void {
         $propertyTransfer = $this->createPropertyTransfer($content->propertyName);
         $builderTransfer->definitionContent->properties->append($propertyTransfer);
-
 
         $mergedContent = $this->mergeContent($content);
         $className = $propertyTransfer->collectionType?->name ?: '';
@@ -54,9 +49,9 @@ final class CollectionTypeBuilderExpander extends AbstractBuilderExpander
         $propertyValue = $content->propertyValue ?: [];
 
         foreach ($propertyValue as $contentItem) {
-            $contentItemMixed = array_filter($contentItem, $this->filterNonArray(...));
+            $contentItemMixed = array_filter($contentItem, $this->isNonArray(...));
             /** @var array<int|string, array<int|string,mixed>> $contentItemArray */
-            $contentItemArray = array_filter($contentItem, $this->filterOnlyArray(...));
+            $contentItemArray = array_filter($contentItem, $this->isArray(...));
 
             $this->mergeContentMixed($contentItemMixed, $mergedContent);
             $this->mergeContentArray($contentItemArray, $mergedContent);

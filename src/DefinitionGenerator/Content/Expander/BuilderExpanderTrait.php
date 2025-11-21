@@ -30,12 +30,12 @@ trait BuilderExpanderTrait
         ]);
     }
 
-    final protected function filterOnlyArray(mixed $item): bool
+    final protected function isArray(mixed $item): bool
     {
         return is_array($item);
     }
 
-    final protected function filterNonArray(mixed $item): bool
+    final protected function isNonArray(mixed $item): bool
     {
         return !is_array($item);
     }
