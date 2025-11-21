@@ -102,6 +102,10 @@ abstract class AbstractTransfer implements TransferInterface
             $data[$propertyName] = $transformer->toArray($this->$propertyName);
         }
 
+        if (count($data) === static::META_DATA_SIZE) {
+            return $data;
+        }
+
         $propertyNames = array_diff_key(static::META_DATA, $data);
         $propertyNames = array_keys($propertyNames);
         foreach ($propertyNames as $propertyName) {
