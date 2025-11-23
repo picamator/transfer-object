@@ -20,8 +20,8 @@ trait ConfigNormalizerTrait
             return $defaultConfig;
         }
 
-        $sectionData = $configData[self::CONFIG_SECTION_KEY] ?? [];
-        if ($sectionData === [] || !is_array($sectionData)) {
+        $sectionData = $configData[self::CONFIG_SECTION_KEY] ?? null;
+        if (!is_array($sectionData)) {
             return $defaultConfig;
         }
 

@@ -21,7 +21,7 @@ readonly class JsonReader implements JsonReaderInterface
             $content = $this->filesystem->readFile($path);
 
             /** @var array<string,mixed> $jsonContent */
-            $jsonContent = json_decode($content, true, flags: JSON_THROW_ON_ERROR);
+            $jsonContent = json_decode($content, associative: true, flags: JSON_THROW_ON_ERROR);
 
             return $jsonContent;
         } catch (Throwable $e) {
