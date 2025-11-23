@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "056180237bd9977c1001396d6c8f2319",
+    "content-hash": "05d775c0fd66f2d1d136fd0ea9b7707e",
     "packages": [
         {
             "name": "psr/container",
@@ -61,7 +61,7 @@
         },
         {
             "name": "symfony/console",
-            "version": "7.4.x-dev",
+            "version": "v7.4.0-RC3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -135,7 +135,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/7.4"
+                "source": "https://github.com/symfony/console/tree/v7.4.0-RC3"
             },
             "funding": [
                 {
@@ -226,7 +226,7 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "7.4.x-dev",
+            "version": "v7.4.0-RC1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
@@ -272,7 +272,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/7.4"
+                "source": "https://github.com/symfony/filesystem/tree/v7.4.0-RC1"
             },
             "funding": [
                 {
@@ -296,7 +296,7 @@
         },
         {
             "name": "symfony/finder",
-            "version": "7.4.x-dev",
+            "version": "v7.4.0-RC1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -340,7 +340,7 @@
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/finder/tree/7.4"
+                "source": "https://github.com/symfony/finder/tree/v7.4.0-RC1"
             },
             "funding": [
                 {
@@ -876,7 +876,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "7.4.x-dev",
+            "version": "v7.4.0-RC2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
@@ -928,7 +928,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/7.4"
+                "source": "https://github.com/symfony/yaml/tree/v7.4.0-RC2"
             },
             "funding": [
                 {
@@ -954,16 +954,16 @@
     "packages-dev": [
         {
             "name": "captainhook/captainhook",
-            "version": "5.27.0",
+            "version": "5.27.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/captainhook-git/captainhook.git",
-                "reference": "9a05b874f6c4771868a368190d565d33f746ce9b"
+                "reference": "205857b3f01424ea53bd5054b15a7975240ee39b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/captainhook-git/captainhook/zipball/9a05b874f6c4771868a368190d565d33f746ce9b",
-                "reference": "9a05b874f6c4771868a368190d565d33f746ce9b",
+                "url": "https://api.github.com/repos/captainhook-git/captainhook/zipball/205857b3f01424ea53bd5054b15a7975240ee39b",
+                "reference": "205857b3f01424ea53bd5054b15a7975240ee39b",
                 "shasum": ""
             },
             "require": {
@@ -1026,7 +1026,7 @@
             ],
             "support": {
                 "issues": "https://github.com/captainhook-git/captainhook/issues",
-                "source": "https://github.com/captainhook-git/captainhook/tree/5.27.0"
+                "source": "https://github.com/captainhook-git/captainhook/tree/5.27.2"
             },
             "funding": [
                 {
@@ -1034,7 +1034,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-21T09:49:13+00:00"
+            "time": "2025-11-22T13:27:40+00:00"
         },
         {
             "name": "captainhook/secrets",
@@ -3086,32 +3086,32 @@
         },
         {
             "name": "slevomat/coding-standard",
-            "version": "8.24.0",
+            "version": "8.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slevomat/coding-standard.git",
-                "reference": "08e7989c0351f3f38b82172838195c35d9819efa"
+                "reference": "3ce4dafb4fe2493715f397f21772988ef2122e20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/08e7989c0351f3f38b82172838195c35d9819efa",
-                "reference": "08e7989c0351f3f38b82172838195c35d9819efa",
+                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/3ce4dafb4fe2493715f397f21772988ef2122e20",
+                "reference": "3ce4dafb4fe2493715f397f21772988ef2122e20",
                 "shasum": ""
             },
             "require": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2 || ^0.7 || ^1.1.2",
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2 || ^0.7 || ^1.2.0",
                 "php": "^7.4 || ^8.0",
                 "phpstan/phpdoc-parser": "^2.3.0",
-                "squizlabs/php_codesniffer": "^4.0.0"
+                "squizlabs/php_codesniffer": "^4.0.1"
             },
             "require-dev": {
                 "phing/phing": "3.0.1|3.1.0",
                 "php-parallel-lint/php-parallel-lint": "1.4.0",
-                "phpstan/phpstan": "2.1.29",
+                "phpstan/phpstan": "2.1.32",
                 "phpstan/phpstan-deprecation-rules": "2.0.3",
-                "phpstan/phpstan-phpunit": "2.0.7",
-                "phpstan/phpstan-strict-rules": "2.0.6",
-                "phpunit/phpunit": "9.6.8|10.5.48|11.4.4|11.5.36|12.3.14"
+                "phpstan/phpstan-phpunit": "2.0.8",
+                "phpstan/phpstan-strict-rules": "2.0.7",
+                "phpunit/phpunit": "9.6.8|10.5.48|11.4.4|11.5.36|12.4.4"
             },
             "type": "phpcodesniffer-standard",
             "extra": {
@@ -3135,7 +3135,7 @@
             ],
             "support": {
                 "issues": "https://github.com/slevomat/coding-standard/issues",
-                "source": "https://github.com/slevomat/coding-standard/tree/8.24.0"
+                "source": "https://github.com/slevomat/coding-standard/tree/8.25.0"
             },
             "funding": [
                 {
@@ -3147,7 +3147,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-25T21:37:40+00:00"
+            "time": "2025-11-22T10:33:53+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -3509,7 +3509,7 @@
         },
         {
             "name": "symfony/validator",
-            "version": "7.4.x-dev",
+            "version": "v7.4.0-RC3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
@@ -3589,7 +3589,7 @@
             "description": "Provides tools to validate values",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/validator/tree/7.4"
+                "source": "https://github.com/symfony/validator/tree/v7.4.0-RC3"
             },
             "funding": [
                 {
@@ -3613,7 +3613,7 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "7.4.x-dev",
+            "version": "v7.4.0-RC1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
@@ -3676,7 +3676,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/7.4"
+                "source": "https://github.com/symfony/var-dumper/tree/v7.4.0-RC1"
             },
             "funding": [
                 {
@@ -3752,12 +3752,12 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "symfony/console": 20,
-        "symfony/filesystem": 20,
-        "symfony/finder": 20,
-        "symfony/validator": 20,
-        "symfony/var-dumper": 20,
-        "symfony/yaml": 20
+        "symfony/console": 5,
+        "symfony/filesystem": 5,
+        "symfony/finder": 5,
+        "symfony/validator": 5,
+        "symfony/var-dumper": 5,
+        "symfony/yaml": 5
     },
     "prefer-stable": true,
     "prefer-lowest": false,
