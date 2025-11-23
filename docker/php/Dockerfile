@@ -1,4 +1,4 @@
-FROM php:8.5-rc-cli
+FROM php:8.5-cli
 
 ARG GROUP_ID=1000
 ARG USER_ID=1000
@@ -12,7 +12,7 @@ RUN apt-get update && \
 COPY --from=ghcr.io/php/pie:bin /pie /usr/bin/pie
 
 # xdebug
-RUN pie install xdebug/xdebug:^3.5.0alpha2 && \
+RUN pie install xdebug/xdebug:^3.5.0alpha3 && \
     docker-php-ext-enable xdebug
 
 COPY ./config.d/99-xdebug.ini  /usr/local/etc/php/conf.d/99-xdebug.ini
