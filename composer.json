@@ -46,10 +46,10 @@
     "require": {
         "php": ">=8.5",
         "composer-runtime-api": "^2.2",
-        "symfony/console": "^7.4.0-RC3",
-        "symfony/filesystem": "^7.4.0-RC1",
-        "symfony/finder": "^7.4.0-RC1",
-        "symfony/yaml": "^7.4.0-RC2"
+        "symfony/console": "^8.0",
+        "symfony/filesystem": "^8.0",
+        "symfony/finder": "^8.0",
+        "symfony/yaml": "^8.0"
     },
     "require-dev": {
         "captainhook/captainhook": "^5.27",
@@ -58,8 +58,8 @@
         "phpunit/phpunit": "^12.4",
         "slevomat/coding-standard": "^8.24",
         "squizlabs/php_codesniffer": "^4.0",
-        "symfony/validator": "^7.4.0-RC3",
-        "symfony/var-dumper": "^7.4.0-RC1"
+        "symfony/validator": "^8.0",
+        "symfony/var-dumper": "^8.0"
     },
     "suggest": {
         "ext-bcmath": "Provides support for 'numberType'.",
