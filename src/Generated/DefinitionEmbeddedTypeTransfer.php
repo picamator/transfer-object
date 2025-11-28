@@ -21,12 +21,12 @@ final class DefinitionEmbeddedTypeTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::NAME_INDEX => self::NAME,
-        self::NAMESPACE_INDEX => self::NAMESPACE,
+        self::NAME_PROP => self::NAME_INDEX,
+        self::NAMESPACE_PROP => self::NAMESPACE_INDEX,
     ];
 
     // name
-    public const string NAME = 'name';
+    public const string NAME_PROP = 'name';
     private const int NAME_INDEX = 0;
 
     public string $name {
@@ -36,7 +36,7 @@ final class DefinitionEmbeddedTypeTransfer extends AbstractTransfer
 
     // namespace
     #[TransferTransformerAttribute(DefinitionNamespaceTransfer::class)]
-    public const string NAMESPACE = 'namespace';
+    public const string NAMESPACE_PROP = 'namespace';
     private const int NAMESPACE_INDEX = 1;
 
     public ?DefinitionNamespaceTransfer $namespace {

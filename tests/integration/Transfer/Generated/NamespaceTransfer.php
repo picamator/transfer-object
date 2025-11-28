@@ -8,7 +8,7 @@ use ArrayObject;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\RequiredTransfer as RequiredAlias;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 use Picamator\TransferObject\Transfer\TransferInterface;
@@ -27,14 +27,14 @@ final class NamespaceTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ITEMS_INDEX => self::ITEMS,
-        self::REQUIRED_INDEX => self::REQUIRED,
+        self::ITEMS_PROP => self::ITEMS_INDEX,
+        self::REQUIRED_PROP => self::REQUIRED_INDEX,
     ];
 
     // items
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(ItemTransfer::class)]
-    public const string ITEMS = 'items';
+    public const string ITEMS_PROP = 'items';
     private const int ITEMS_INDEX = 0;
 
     /** @var \ArrayObject<int,TransferInterface&ItemTransfer> */
@@ -45,7 +45,7 @@ final class NamespaceTransfer extends AbstractTransfer
 
     // required
     #[TransferTransformerAttribute(RequiredAlias::class)]
-    public const string REQUIRED = 'required';
+    public const string REQUIRED_PROP = 'required';
     private const int REQUIRED_INDEX = 1;
 
     public TransferInterface&RequiredAlias $required {

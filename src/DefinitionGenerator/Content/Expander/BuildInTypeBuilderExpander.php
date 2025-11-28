@@ -33,12 +33,15 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
     ): void {
         $propertyTransfer = match (true) {
             $content->type->isString() => $this->resolveStringType($content),
+
             $content->type->isNull() => $this->resolveNullType($content),
+
             $content->type->isObject() => $this->resolveObjectType($content),
+
             default => $this->resolveDefaultType($content),
         };
 
-        $builderTransfer->definitionContent->properties[] = $propertyTransfer;
+        $builderTransfer->definitionContent->properties->append($propertyTransfer);
     }
 
     private function resolveDefaultType(Content $content): DefinitionPropertyTransfer
@@ -71,8 +74,9 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
 
     private function resolveStringType(Content $content): DefinitionPropertyTransfer
     {
-        //  @phpstan-ignore argument.type
-        if (DateTime::createFromFormat(DateTimeInterface::ATOM, $content->propertyValue) !== false) {
+        /** @var string $propertyValue */
+        $propertyValue = $content->propertyValue;
+        if (DateTime::createFromFormat(DateTimeInterface::ATOM, $propertyValue) !== false) {
             return $this->createDateTimePropertyTransfer($content->propertyName);
         }
 

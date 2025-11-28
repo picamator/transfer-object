@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\Generated;
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -24,13 +24,13 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::DEFINITION_CONTENT_INDEX => self::DEFINITION_CONTENT,
-        self::GENERATOR_CONTENTS_INDEX => self::GENERATOR_CONTENTS,
+        self::DEFINITION_CONTENT_PROP => self::DEFINITION_CONTENT_INDEX,
+        self::GENERATOR_CONTENTS_PROP => self::GENERATOR_CONTENTS_INDEX,
     ];
 
     // definitionContent
     #[TransferTransformerAttribute(DefinitionContentTransfer::class)]
-    public const string DEFINITION_CONTENT = 'definitionContent';
+    public const string DEFINITION_CONTENT_PROP = 'definitionContent';
     private const int DEFINITION_CONTENT_INDEX = 0;
 
     public DefinitionContentTransfer $definitionContent {
@@ -39,9 +39,9 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
     }
 
     // generatorContents
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(DefinitionGeneratorContentTransfer::class)]
-    public const string GENERATOR_CONTENTS = 'generatorContents';
+    public const string GENERATOR_CONTENTS_PROP = 'generatorContents';
     private const int GENERATOR_CONTENTS_INDEX = 1;
 
     /** @var \ArrayObject<int,DefinitionGeneratorContentTransfer> */

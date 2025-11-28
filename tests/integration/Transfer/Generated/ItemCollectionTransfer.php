@@ -6,7 +6,7 @@ namespace Picamator\Tests\Integration\TransferObject\Transfer\Generated;
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -24,13 +24,13 @@ final class ItemCollectionTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ITEM_INDEX => self::ITEM,
-        self::ITEMS_INDEX => self::ITEMS,
+        self::ITEM_PROP => self::ITEM_INDEX,
+        self::ITEMS_PROP => self::ITEMS_INDEX,
     ];
 
     // item
     #[TransferTransformerAttribute(ItemTransfer::class)]
-    public const string ITEM = 'item';
+    public const string ITEM_PROP = 'item';
     private const int ITEM_INDEX = 0;
 
     public ?ItemTransfer $item {
@@ -39,9 +39,9 @@ final class ItemCollectionTransfer extends AbstractTransfer
     }
 
     // items
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(ItemTransfer::class)]
-    public const string ITEMS = 'items';
+    public const string ITEMS_PROP = 'items';
     private const int ITEMS_INDEX = 1;
 
     /** @var \ArrayObject<int,ItemTransfer> */

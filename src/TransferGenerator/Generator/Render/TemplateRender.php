@@ -23,8 +23,8 @@ readonly class TemplateRender implements TemplateRenderInterface
         $content = $this->template->__invoke($templateTransfer);
 
         return new TransferGeneratorContentTransfer([
-            TransferGeneratorContentTransfer::CLASS_NAME => $definitionTransfer->content->className,
-            TransferGeneratorContentTransfer::CONTENT => $content,
+            TransferGeneratorContentTransfer::CLASS_NAME_PROP => $definitionTransfer->content->className,
+            TransferGeneratorContentTransfer::CONTENT_PROP => $content,
         ]);
     }
 }

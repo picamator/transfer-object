@@ -23,17 +23,17 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 7;
 
     protected const array META_DATA = [
-        self::ADDRESS_BOOK_UUID_INDEX => self::ADDRESS_BOOK_UUID,
-        self::ADDRESS_UUID_INDEX => self::ADDRESS_UUID,
-        self::IS_ACTIVE_INDEX => self::IS_ACTIVE,
-        self::IS_BLOCKED_INDEX => self::IS_BLOCKED,
-        self::ORDER_AVERAGE_INDEX => self::ORDER_AVERAGE,
-        self::ORDER_COUNT_INDEX => self::ORDER_COUNT,
-        self::ORDER_REFERENCES_INDEX => self::ORDER_REFERENCES,
+        self::ADDRESS_BOOK_UUID_PROP => self::ADDRESS_BOOK_UUID_INDEX,
+        self::ADDRESS_UUID_PROP => self::ADDRESS_UUID_INDEX,
+        self::IS_ACTIVE_PROP => self::IS_ACTIVE_INDEX,
+        self::IS_BLOCKED_PROP => self::IS_BLOCKED_INDEX,
+        self::ORDER_AVERAGE_PROP => self::ORDER_AVERAGE_INDEX,
+        self::ORDER_COUNT_PROP => self::ORDER_COUNT_INDEX,
+        self::ORDER_REFERENCES_PROP => self::ORDER_REFERENCES_INDEX,
     ];
 
     // addressBookUuid
-    public const string ADDRESS_BOOK_UUID = 'addressBookUuid';
+    public const string ADDRESS_BOOK_UUID_PROP = 'addressBookUuid';
     private const int ADDRESS_BOOK_UUID_INDEX = 0;
 
     public ?string $addressBookUuid {
@@ -42,7 +42,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     }
 
     // addressUuid
-    public const string ADDRESS_UUID = 'addressUuid';
+    public const string ADDRESS_UUID_PROP = 'addressUuid';
     private const int ADDRESS_UUID_INDEX = 1;
 
     public ?string $addressUuid {
@@ -51,7 +51,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     }
 
     // isActive
-    public const string IS_ACTIVE = 'isActive';
+    public const string IS_ACTIVE_PROP = 'isActive';
     private const int IS_ACTIVE_INDEX = 2;
 
     public ?true $isActive {
@@ -60,7 +60,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     }
 
     // isBlocked
-    public const string IS_BLOCKED = 'isBlocked';
+    public const string IS_BLOCKED_PROP = 'isBlocked';
     private const int IS_BLOCKED_INDEX = 3;
 
     public ?false $isBlocked {
@@ -69,7 +69,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     }
 
     // orderAverage
-    public const string ORDER_AVERAGE = 'orderAverage';
+    public const string ORDER_AVERAGE_PROP = 'orderAverage';
     private const int ORDER_AVERAGE_INDEX = 4;
 
     public ?float $orderAverage {
@@ -78,7 +78,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     }
 
     // orderCount
-    public const string ORDER_COUNT = 'orderCount';
+    public const string ORDER_COUNT_PROP = 'orderCount';
     private const int ORDER_COUNT_INDEX = 5;
 
     public ?int $orderCount {
@@ -89,7 +89,7 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     // orderReferences
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
-    public const string ORDER_REFERENCES = 'orderReferences';
+    public const string ORDER_REFERENCES_PROP = 'orderReferences';
     private const int ORDER_REFERENCES_INDEX = 6;
 
     /** @var \ArrayObject<int|string,mixed> */

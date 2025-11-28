@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Picamator\Tests\Extension\TransferObject\ExecutionTimeReport\Transfer;
 
 use ArrayObject;
+use Countable;
 
-final class TimeReport
+final class TimeReport implements Countable
 {
     /**
      * @param \ArrayObject<string, TimeReportItem> $data
@@ -15,5 +16,10 @@ final class TimeReport
         public readonly TimeReportParameter $parameter,
         public ArrayObject $data = new ArrayObject(),
     ) {
+    }
+
+    public function count(): int
+    {
+        return $this->data->count();
     }
 }

@@ -22,12 +22,12 @@ final class DefinitionBuildInTypeTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::DOCK_BLOCK_INDEX => self::DOCK_BLOCK,
-        self::NAME_INDEX => self::NAME,
+        self::DOCK_BLOCK_PROP => self::DOCK_BLOCK_INDEX,
+        self::NAME_PROP => self::NAME_INDEX,
     ];
 
     // dockBlock
-    public const string DOCK_BLOCK = 'dockBlock';
+    public const string DOCK_BLOCK_PROP = 'dockBlock';
     private const int DOCK_BLOCK_INDEX = 0;
 
     public ?string $dockBlock {
@@ -37,7 +37,7 @@ final class DefinitionBuildInTypeTransfer extends AbstractTransfer
 
     // name
     #[EnumTransformerAttribute(BuildInTypeEnum::class)]
-    public const string NAME = 'name';
+    public const string NAME_PROP = 'name';
     private const int NAME_INDEX = 1;
 
     public BuildInTypeEnum $name {

@@ -27,7 +27,7 @@ final class CollectionTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $initiatorEnum = InitiatorAttributeEnum::COLLECTION;
+        $initiatorEnum = InitiatorAttributeEnum::ARRAY_OBJECT;
         $transformerEnum = TransformerAttributeTemplateEnum::COLLECTION;
 
         $this->expandImports(BuildInTypeEnum::ARRAY_OBJECT->value, $templateTransfer);

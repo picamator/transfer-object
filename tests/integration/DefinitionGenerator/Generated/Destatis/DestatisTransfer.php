@@ -6,7 +6,7 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -24,19 +24,19 @@ final class DestatisTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 9;
 
     protected const array META_DATA = [
-        self::COPYRIGHT_INDEX => self::COPYRIGHT,
-        self::CUBES_INDEX => self::CUBES,
-        self::IDENT_INDEX => self::IDENT,
-        self::PARAMETER_INDEX => self::PARAMETER,
-        self::STATISTICS_INDEX => self::STATISTICS,
-        self::STATUS_INDEX => self::STATUS,
-        self::TABLES_INDEX => self::TABLES,
-        self::TIMESERIES_INDEX => self::TIMESERIES,
-        self::VARIABLES_INDEX => self::VARIABLES,
+        self::COPYRIGHT_PROP => self::COPYRIGHT_INDEX,
+        self::CUBES_PROP => self::CUBES_INDEX,
+        self::IDENT_PROP => self::IDENT_INDEX,
+        self::PARAMETER_PROP => self::PARAMETER_INDEX,
+        self::STATISTICS_PROP => self::STATISTICS_INDEX,
+        self::STATUS_PROP => self::STATUS_INDEX,
+        self::TABLES_PROP => self::TABLES_INDEX,
+        self::TIMESERIES_PROP => self::TIMESERIES_INDEX,
+        self::VARIABLES_PROP => self::VARIABLES_INDEX,
     ];
 
     // Copyright
-    public const string COPYRIGHT = 'Copyright';
+    public const string COPYRIGHT_PROP = 'Copyright';
     private const int COPYRIGHT_INDEX = 0;
 
     public ?string $Copyright {
@@ -45,7 +45,7 @@ final class DestatisTransfer extends AbstractTransfer
     }
 
     // Cubes
-    public const string CUBES = 'Cubes';
+    public const string CUBES_PROP = 'Cubes';
     private const int CUBES_INDEX = 1;
 
     public ?string $Cubes {
@@ -55,7 +55,7 @@ final class DestatisTransfer extends AbstractTransfer
 
     // Ident
     #[TransferTransformerAttribute(IdentTransfer::class)]
-    public const string IDENT = 'Ident';
+    public const string IDENT_PROP = 'Ident';
     private const int IDENT_INDEX = 2;
 
     public ?IdentTransfer $Ident {
@@ -65,7 +65,7 @@ final class DestatisTransfer extends AbstractTransfer
 
     // Parameter
     #[TransferTransformerAttribute(ParameterTransfer::class)]
-    public const string PARAMETER = 'Parameter';
+    public const string PARAMETER_PROP = 'Parameter';
     private const int PARAMETER_INDEX = 3;
 
     public ?ParameterTransfer $Parameter {
@@ -74,9 +74,9 @@ final class DestatisTransfer extends AbstractTransfer
     }
 
     // Statistics
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(StatisticsTransfer::class)]
-    public const string STATISTICS = 'Statistics';
+    public const string STATISTICS_PROP = 'Statistics';
     private const int STATISTICS_INDEX = 4;
 
     /** @var \ArrayObject<int,StatisticsTransfer> */
@@ -87,7 +87,7 @@ final class DestatisTransfer extends AbstractTransfer
 
     // Status
     #[TransferTransformerAttribute(StatusTransfer::class)]
-    public const string STATUS = 'Status';
+    public const string STATUS_PROP = 'Status';
     private const int STATUS_INDEX = 5;
 
     public ?StatusTransfer $Status {
@@ -96,9 +96,9 @@ final class DestatisTransfer extends AbstractTransfer
     }
 
     // Tables
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(TablesTransfer::class)]
-    public const string TABLES = 'Tables';
+    public const string TABLES_PROP = 'Tables';
     private const int TABLES_INDEX = 6;
 
     /** @var \ArrayObject<int,TablesTransfer> */
@@ -108,7 +108,7 @@ final class DestatisTransfer extends AbstractTransfer
     }
 
     // Timeseries
-    public const string TIMESERIES = 'Timeseries';
+    public const string TIMESERIES_PROP = 'Timeseries';
     private const int TIMESERIES_INDEX = 7;
 
     public ?string $Timeseries {
@@ -117,9 +117,9 @@ final class DestatisTransfer extends AbstractTransfer
     }
 
     // Variables
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(VariablesTransfer::class)]
-    public const string VARIABLES = 'Variables';
+    public const string VARIABLES_PROP = 'Variables';
     private const int VARIABLES_INDEX = 8;
 
     /** @var \ArrayObject<int,VariablesTransfer> */

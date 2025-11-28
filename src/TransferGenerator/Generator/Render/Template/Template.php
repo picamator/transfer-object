@@ -51,27 +51,28 @@ TEMPLATE;
     private function renderProperties(TemplateTransfer $templateTransfer): string
     {
         $i = 0;
-        $properties = [];
+        $properties = '';
 
         /**
          * @var string $constant
          * @var string $property
          */
         foreach ($templateTransfer->metaConstants as $constant => $property) {
-            $properties[] = <<<TEMPLATE
+            $properties .= <<<TEMPLATE
 
     // $property{$this->helper->renderMetaAttributes($property)}
-    public const string $constant = '$property';
+    public const string {$constant}_PROP = '$property';
     private const int {$constant}_INDEX = $i;
 {$this->helper->renderDockBlock($property)}{$this->helper->renderPropertyAttributes($property)}
     public{$this->helper->renderPropertyDeclaration($property)} \$$property {
         get => \$this->getData(self::{$constant}_INDEX);
         set => \$this->setData(self::{$constant}_INDEX, \$value);
     }
+
 TEMPLATE;
             $i++;
         }
 
-        return trim(implode(PHP_EOL, $properties));
+        return trim($properties);
     }
 }

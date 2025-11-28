@@ -21,14 +21,14 @@ final class ExchangeRateTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
-        self::AMOUNT_INDEX => self::AMOUNT,
-        self::BASE_INDEX => self::BASE,
-        self::DATE_INDEX => self::DATE,
-        self::RATES_INDEX => self::RATES,
+        self::AMOUNT_PROP => self::AMOUNT_INDEX,
+        self::BASE_PROP => self::BASE_INDEX,
+        self::DATE_PROP => self::DATE_INDEX,
+        self::RATES_PROP => self::RATES_INDEX,
     ];
 
     // amount
-    public const string AMOUNT = 'amount';
+    public const string AMOUNT_PROP = 'amount';
     private const int AMOUNT_INDEX = 0;
 
     public ?int $amount {
@@ -37,7 +37,7 @@ final class ExchangeRateTransfer extends AbstractTransfer
     }
 
     // base
-    public const string BASE = 'base';
+    public const string BASE_PROP = 'base';
     private const int BASE_INDEX = 1;
 
     public ?string $base {
@@ -46,7 +46,7 @@ final class ExchangeRateTransfer extends AbstractTransfer
     }
 
     // date
-    public const string DATE = 'date';
+    public const string DATE_PROP = 'date';
     private const int DATE_INDEX = 2;
 
     public ?string $date {
@@ -56,7 +56,7 @@ final class ExchangeRateTransfer extends AbstractTransfer
 
     // rates
     #[TransferTransformerAttribute(RatesTransfer::class)]
-    public const string RATES = 'rates';
+    public const string RATES_PROP = 'rates';
     private const int RATES_INDEX = 3;
 
     public ?RatesTransfer $rates {

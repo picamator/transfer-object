@@ -2,8 +2,9 @@
 
 [![CI workflow](https://github.com/picamator/transfer-object/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/picamator/transfer-object/actions)
 [![License](https://poser.pugx.org/picamator/transfer-object/license)](https://packagist.org/packages/picamator/transfer-object)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/11465/badge)](https://www.bestpractices.dev/projects/11465)
 [![PHP Version Require](https://poser.pugx.org/picamator/transfer-object/require/php)](https://packagist.org/packages/picamator/transfer-object)
-[![Symfony Compatibility](https://img.shields.io/badge/Symfony-%5E7.3-blue)](https://github.com/picamator/transfer-object/tree/development?tab=readme-ov-file#key-features)
+[![Symfony Compatibility](https://img.shields.io/badge/Symfony-%5E8.0-blue)](https://github.com/picamator/transfer-object/tree/development?tab=readme-ov-file#key-features)
 [![Wiki](https://img.shields.io/badge/wiki-available-brightgreen)](https://github.com/picamator/transfer-object/wiki)
 [![Latest Stable Version](https://poser.pugx.org/picamator/transfer-object/v)](https://packagist.org/packages/picamator/transfer-object)
 
@@ -95,6 +96,11 @@ Composer installation:
 ```console
 $ composer require picamator/transfer-object
 ```
+
+| Version | PHP | Symfony |
+|-------|-----|---------|
+| 4.0.0 | 8.4 | 7.3     |
+| 5.0.0 | 8.5 | 8.0     |
 
 Examples
 ---------

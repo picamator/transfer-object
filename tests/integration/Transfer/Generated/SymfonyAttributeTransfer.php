@@ -22,11 +22,11 @@ final class SymfonyAttributeTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::I_AM_ASSERT_INDEX => self::I_AM_ASSERT,
+        self::I_AM_ASSERT_PROP => self::I_AM_ASSERT_INDEX,
     ];
 
     // iAmAssert
-    public const string I_AM_ASSERT = 'iAmAssert';
+    public const string I_AM_ASSERT_PROP = 'iAmAssert';
     private const int I_AM_ASSERT_INDEX = 0;
 
     #[IsTrue]

@@ -20,13 +20,13 @@ final class FileReaderProgressTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::CONTENT_INDEX => self::CONTENT,
-        self::PROGRESS_BYTES_INDEX => self::PROGRESS_BYTES,
-        self::TOTAL_BYTES_INDEX => self::TOTAL_BYTES,
+        self::CONTENT_PROP => self::CONTENT_INDEX,
+        self::PROGRESS_BYTES_PROP => self::PROGRESS_BYTES_INDEX,
+        self::TOTAL_BYTES_PROP => self::TOTAL_BYTES_INDEX,
     ];
 
     // content
-    public const string CONTENT = 'content';
+    public const string CONTENT_PROP = 'content';
     private const int CONTENT_INDEX = 0;
 
     public string $content {
@@ -35,7 +35,7 @@ final class FileReaderProgressTransfer extends AbstractTransfer
     }
 
     // progressBytes
-    public const string PROGRESS_BYTES = 'progressBytes';
+    public const string PROGRESS_BYTES_PROP = 'progressBytes';
     private const int PROGRESS_BYTES_INDEX = 1;
 
     public int $progressBytes {
@@ -44,7 +44,7 @@ final class FileReaderProgressTransfer extends AbstractTransfer
     }
 
     // totalBytes
-    public const string TOTAL_BYTES = 'totalBytes';
+    public const string TOTAL_BYTES_PROP = 'totalBytes';
     private const int TOTAL_BYTES_INDEX = 2;
 
     public int $totalBytes {

@@ -20,20 +20,20 @@ final class TrackingTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 10;
 
     protected const array META_DATA = [
-        self::AV_FULL_SHOW_INDEX => self::AV_FULL_SHOW,
-        self::BCR_INDEX => self::BCR,
-        self::CID_INDEX => self::CID,
-        self::CTP_INDEX => self::CTP,
-        self::OTP_INDEX => self::OTP,
-        self::PDT_INDEX => self::PDT,
-        self::PTI_INDEX => self::PTI,
-        self::SID_INDEX => self::SID,
-        self::SRC_INDEX => self::SRC,
-        self::TYPE_INDEX => self::TYPE,
+        self::AV_FULL_SHOW_PROP => self::AV_FULL_SHOW_INDEX,
+        self::BCR_PROP => self::BCR_INDEX,
+        self::CID_PROP => self::CID_INDEX,
+        self::CTP_PROP => self::CTP_INDEX,
+        self::OTP_PROP => self::OTP_INDEX,
+        self::PDT_PROP => self::PDT_INDEX,
+        self::PTI_PROP => self::PTI_INDEX,
+        self::SID_PROP => self::SID_INDEX,
+        self::SRC_PROP => self::SRC_INDEX,
+        self::TYPE_PROP => self::TYPE_INDEX,
     ];
 
     // av_full_show
-    public const string AV_FULL_SHOW = 'av_full_show';
+    public const string AV_FULL_SHOW_PROP = 'av_full_show';
     private const int AV_FULL_SHOW_INDEX = 0;
 
     public ?bool $av_full_show {
@@ -42,7 +42,7 @@ final class TrackingTransfer extends AbstractTransfer
     }
 
     // bcr
-    public const string BCR = 'bcr';
+    public const string BCR_PROP = 'bcr';
     private const int BCR_INDEX = 1;
 
     public ?string $bcr {
@@ -51,7 +51,7 @@ final class TrackingTransfer extends AbstractTransfer
     }
 
     // cid
-    public const string CID = 'cid';
+    public const string CID_PROP = 'cid';
     private const int CID_INDEX = 2;
 
     public ?string $cid {
@@ -60,7 +60,7 @@ final class TrackingTransfer extends AbstractTransfer
     }
 
     // ctp
-    public const string CTP = 'ctp';
+    public const string CTP_PROP = 'ctp';
     private const int CTP_INDEX = 3;
 
     public ?string $ctp {
@@ -69,7 +69,7 @@ final class TrackingTransfer extends AbstractTransfer
     }
 
     // otp
-    public const string OTP = 'otp';
+    public const string OTP_PROP = 'otp';
     private const int OTP_INDEX = 4;
 
     public ?string $otp {
@@ -78,7 +78,7 @@ final class TrackingTransfer extends AbstractTransfer
     }
 
     // pdt
-    public const string PDT = 'pdt';
+    public const string PDT_PROP = 'pdt';
     private const int PDT_INDEX = 5;
 
     public ?string $pdt {
@@ -87,7 +87,7 @@ final class TrackingTransfer extends AbstractTransfer
     }
 
     // pti
-    public const string PTI = 'pti';
+    public const string PTI_PROP = 'pti';
     private const int PTI_INDEX = 6;
 
     public ?string $pti {
@@ -96,7 +96,7 @@ final class TrackingTransfer extends AbstractTransfer
     }
 
     // sid
-    public const string SID = 'sid';
+    public const string SID_PROP = 'sid';
     private const int SID_INDEX = 7;
 
     public ?string $sid {
@@ -105,7 +105,7 @@ final class TrackingTransfer extends AbstractTransfer
     }
 
     // src
-    public const string SRC = 'src';
+    public const string SRC_PROP = 'src';
     private const int SRC_INDEX = 8;
 
     public ?string $src {
@@ -114,7 +114,7 @@ final class TrackingTransfer extends AbstractTransfer
     }
 
     // type
-    public const string TYPE = 'type';
+    public const string TYPE_PROP = 'type';
     private const int TYPE_INDEX = 9;
 
     public ?string $type {

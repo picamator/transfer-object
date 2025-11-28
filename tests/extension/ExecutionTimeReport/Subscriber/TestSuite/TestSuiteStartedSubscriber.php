@@ -21,14 +21,14 @@ readonly class TestSuiteStartedSubscriber implements StartedSubscriber
 
     public function notify(Started $event): void
     {
-        $testSuiteName = $this->getTestSuiteName($event);
-        if (!class_exists($testSuiteName)) {
+        $testSuite = $this->getTestSuite($event);
+        if (!class_exists($testSuite)) {
             return;
         }
 
-        $this->timeReport->data[$testSuiteName] ??= new TimeReportItem(
-            group: $this->getGroupName($testSuiteName),
-            testSuite: $testSuiteName,
+        $this->timeReport->data[$testSuite] ??= new TimeReportItem(
+            group: $this->getGroupName($testSuite),
+            testSuite: $testSuite,
             startTime: $event->telemetryInfo()->time(),
         );
     }

@@ -96,7 +96,8 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 
         $destinationPath = $this->config->getTransferPath() . DIRECTORY_SEPARATOR;
         foreach ($finder as $file) {
-            $this->filesystem->copy($file->getRealPath(), $destinationPath . $file->getFilename());
+            $targetFile = $destinationPath . $file->getFilename();
+            $this->filesystem->copy($file->getRealPath(), $targetFile);
         }
     }
 

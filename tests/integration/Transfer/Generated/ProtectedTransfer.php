@@ -20,11 +20,11 @@ final class ProtectedTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::I_AM_PROTECTED_INDEX => self::I_AM_PROTECTED,
+        self::I_AM_PROTECTED_PROP => self::I_AM_PROTECTED_INDEX,
     ];
 
     // iAmProtected
-    public const string I_AM_PROTECTED = 'iAmProtected';
+    public const string I_AM_PROTECTED_PROP = 'iAmProtected';
     private const int I_AM_PROTECTED_INDEX = 0;
 
     public protected(set) ?string $iAmProtected {

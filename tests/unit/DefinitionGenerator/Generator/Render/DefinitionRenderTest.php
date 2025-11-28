@@ -65,9 +65,9 @@ class DefinitionRenderTest extends TestCase
     {
         yield 'transfer object with build in property type' => [
             'propertyData' => [
-                DefinitionPropertyTransfer::PROPERTY_NAME => 'testProperty',
-                DefinitionPropertyTransfer::BUILD_IN_TYPE => [
-                    DefinitionBuildInTypeTransfer::NAME => 'string',
+                DefinitionPropertyTransfer::PROPERTY_NAME_PROP => 'testProperty',
+                DefinitionPropertyTransfer::BUILD_IN_TYPE_PROP => [
+                    DefinitionBuildInTypeTransfer::NAME_PROP => 'string',
                 ],
             ],
             'expected' => <<<'DEFINITION'
@@ -82,9 +82,9 @@ DEFINITION,
 
         yield 'transfer object with transfer property type' => [
             'propertyData' => [
-                DefinitionPropertyTransfer::PROPERTY_NAME => 'testProperty',
-                DefinitionPropertyTransfer::TRANSFER_TYPE => [
-                    DefinitionEmbeddedTypeTransfer::NAME => 'TestItem',
+                DefinitionPropertyTransfer::PROPERTY_NAME_PROP => 'testProperty',
+                DefinitionPropertyTransfer::TRANSFER_TYPE_PROP => [
+                    DefinitionEmbeddedTypeTransfer::NAME_PROP => 'TestItem',
                 ],
             ],
             'expected' => <<<'DEFINITION'
@@ -99,9 +99,9 @@ DEFINITION,
 
         yield 'transfer object with collection property type' => [
             'propertyData' => [
-                DefinitionPropertyTransfer::PROPERTY_NAME => 'testProperty',
-                DefinitionPropertyTransfer::COLLECTION_TYPE => [
-                    DefinitionEmbeddedTypeTransfer::NAME => 'TestItem',
+                DefinitionPropertyTransfer::PROPERTY_NAME_PROP => 'testProperty',
+                DefinitionPropertyTransfer::COLLECTION_TYPE_PROP => [
+                    DefinitionEmbeddedTypeTransfer::NAME_PROP => 'TestItem',
                 ],
             ],
             'expected' => <<<'DEFINITION'

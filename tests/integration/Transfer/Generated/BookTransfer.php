@@ -8,7 +8,7 @@ use ArrayObject;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookData;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookmarkData;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 use Picamator\TransferObject\Transfer\TransferInterface;
@@ -27,14 +27,14 @@ final class BookTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::BOOKMARKS_INDEX => self::BOOKMARKS,
-        self::DATA_INDEX => self::DATA,
+        self::BOOKMARKS_PROP => self::BOOKMARKS_INDEX,
+        self::DATA_PROP => self::DATA_INDEX,
     ];
 
     // bookmarks
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(BookmarkData::class)]
-    public const string BOOKMARKS = 'bookmarks';
+    public const string BOOKMARKS_PROP = 'bookmarks';
     private const int BOOKMARKS_INDEX = 0;
 
     /** @var \ArrayObject<int,TransferInterface&BookmarkData> */
@@ -45,7 +45,7 @@ final class BookTransfer extends AbstractTransfer
 
     // data
     #[TransferTransformerAttribute(BookData::class)]
-    public const string DATA = 'data';
+    public const string DATA_PROP = 'data';
     private const int DATA_INDEX = 1;
 
     public TransferInterface&BookData $data {

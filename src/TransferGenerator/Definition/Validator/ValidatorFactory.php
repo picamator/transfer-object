@@ -32,7 +32,7 @@ class ValidatorFactory
     {
         return $this->getCached(
             key: 'transfer-generator:DefinitionValidator',
-            factory: fn (): DefinitionValidatorInterface => new DefinitionValidator($this->createContentValidators()),
+            factory: fn(): DefinitionValidatorInterface => new DefinitionValidator($this->createContentValidators()),
         );
     }
 

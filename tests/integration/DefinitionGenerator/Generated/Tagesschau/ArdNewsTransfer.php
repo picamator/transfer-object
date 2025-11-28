@@ -7,7 +7,7 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 
 /**
@@ -24,15 +24,15 @@ final class ArdNewsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 5;
 
     protected const array META_DATA = [
-        self::NEW_STORIES_COUNT_LINK_INDEX => self::NEW_STORIES_COUNT_LINK,
-        self::NEWS_INDEX => self::NEWS,
-        self::NEXT_PAGE_INDEX => self::NEXT_PAGE,
-        self::REGIONAL_INDEX => self::REGIONAL,
-        self::TYPE_INDEX => self::TYPE,
+        self::NEW_STORIES_COUNT_LINK_PROP => self::NEW_STORIES_COUNT_LINK_INDEX,
+        self::NEWS_PROP => self::NEWS_INDEX,
+        self::NEXT_PAGE_PROP => self::NEXT_PAGE_INDEX,
+        self::REGIONAL_PROP => self::REGIONAL_INDEX,
+        self::TYPE_PROP => self::TYPE_INDEX,
     ];
 
     // newStoriesCountLink
-    public const string NEW_STORIES_COUNT_LINK = 'newStoriesCountLink';
+    public const string NEW_STORIES_COUNT_LINK_PROP = 'newStoriesCountLink';
     private const int NEW_STORIES_COUNT_LINK_INDEX = 0;
 
     public ?string $newStoriesCountLink {
@@ -41,9 +41,9 @@ final class ArdNewsTransfer extends AbstractTransfer
     }
 
     // news
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(NewsTransfer::class)]
-    public const string NEWS = 'news';
+    public const string NEWS_PROP = 'news';
     private const int NEWS_INDEX = 1;
 
     /** @var \ArrayObject<int,NewsTransfer> */
@@ -53,7 +53,7 @@ final class ArdNewsTransfer extends AbstractTransfer
     }
 
     // nextPage
-    public const string NEXT_PAGE = 'nextPage';
+    public const string NEXT_PAGE_PROP = 'nextPage';
     private const int NEXT_PAGE_INDEX = 2;
 
     public ?string $nextPage {
@@ -63,7 +63,7 @@ final class ArdNewsTransfer extends AbstractTransfer
 
     // regional
     #[ArrayInitiatorAttribute]
-    public const string REGIONAL = 'regional';
+    public const string REGIONAL_PROP = 'regional';
     private const int REGIONAL_INDEX = 3;
 
     /** @var array<int|string,mixed> */
@@ -73,7 +73,7 @@ final class ArdNewsTransfer extends AbstractTransfer
     }
 
     // type
-    public const string TYPE = 'type';
+    public const string TYPE_PROP = 'type';
     private const int TYPE_INDEX = 4;
 
     public ?string $type {

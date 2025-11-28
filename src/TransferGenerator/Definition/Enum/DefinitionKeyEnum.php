@@ -17,6 +17,10 @@ enum DefinitionKeyEnum: string
 
     case ATTRIBUTES = 'attributes';
 
+    private const \Closure FILTER_NORMALIZER_CALLBACK = static function (mixed $value, int|string $key): bool {
+        return is_string($value) && is_int($key);
+    };
+
     /**
      * @return string|array<int,string>|null
      */
@@ -24,8 +28,11 @@ enum DefinitionKeyEnum: string
     {
         return match (true) {
             is_string($value) => $this->normalizeString($value),
+
             is_bool($value) => $this->normalizeBool($value),
+
             is_array($value) => $this->normalizeArray($value),
+
             default => null,
         };
     }
@@ -44,7 +51,7 @@ enum DefinitionKeyEnum: string
         /** @var array<int,string> $value */
         $value = array_filter(
             array: $value,
-            callback: fn (mixed $value, int|string $key): bool => is_string($value) && is_int($key),
+            callback: self::FILTER_NORMALIZER_CALLBACK,
             mode: ARRAY_FILTER_USE_BOTH,
         );
 

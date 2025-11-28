@@ -21,13 +21,13 @@ final class ConfigTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::CONTENT_INDEX => self::CONTENT,
-        self::VALIDATOR_INDEX => self::VALIDATOR,
+        self::CONTENT_PROP => self::CONTENT_INDEX,
+        self::VALIDATOR_PROP => self::VALIDATOR_INDEX,
     ];
 
     // content
     #[TransferTransformerAttribute(ConfigContentTransfer::class)]
-    public const string CONTENT = 'content';
+    public const string CONTENT_PROP = 'content';
     private const int CONTENT_INDEX = 0;
 
     public ConfigContentTransfer $content {
@@ -37,7 +37,7 @@ final class ConfigTransfer extends AbstractTransfer
 
     // validator
     #[TransferTransformerAttribute(ValidatorTransfer::class)]
-    public const string VALIDATOR = 'validator';
+    public const string VALIDATOR_PROP = 'validator';
     private const int VALIDATOR_INDEX = 1;
 
     public ValidatorTransfer $validator {

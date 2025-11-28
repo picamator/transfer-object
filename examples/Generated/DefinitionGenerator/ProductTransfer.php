@@ -7,7 +7,7 @@ namespace Picamator\Examples\TransferObject\Generated\DefinitionGenerator;
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -25,24 +25,24 @@ final class ProductTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 12;
 
     protected const array META_DATA = [
-        self::AVAILABILITIES_INDEX => self::AVAILABILITIES,
-        self::CURRENCY_INDEX => self::CURRENCY,
-        self::DELIVERY_OPTIONS_INDEX => self::DELIVERY_OPTIONS,
-        self::DETAILS_INDEX => self::DETAILS,
-        self::IS_DISCOUNTED_INDEX => self::IS_DISCOUNTED,
-        self::LABELS_INDEX => self::LABELS,
-        self::MEASUREMENT_UNIT_INDEX => self::MEASUREMENT_UNIT,
-        self::NAME_INDEX => self::NAME,
-        self::PRICE_INDEX => self::PRICE,
-        self::SKU_INDEX => self::SKU,
-        self::STOCK_INDEX => self::STOCK,
-        self::STORES_INDEX => self::STORES,
+        self::AVAILABILITIES_PROP => self::AVAILABILITIES_INDEX,
+        self::CURRENCY_PROP => self::CURRENCY_INDEX,
+        self::DELIVERY_OPTIONS_PROP => self::DELIVERY_OPTIONS_INDEX,
+        self::DETAILS_PROP => self::DETAILS_INDEX,
+        self::IS_DISCOUNTED_PROP => self::IS_DISCOUNTED_INDEX,
+        self::LABELS_PROP => self::LABELS_INDEX,
+        self::MEASUREMENT_UNIT_PROP => self::MEASUREMENT_UNIT_INDEX,
+        self::NAME_PROP => self::NAME_INDEX,
+        self::PRICE_PROP => self::PRICE_INDEX,
+        self::SKU_PROP => self::SKU_INDEX,
+        self::STOCK_PROP => self::STOCK_INDEX,
+        self::STORES_PROP => self::STORES_INDEX,
     ];
 
     // availabilities
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(AvailabilitiesTransfer::class)]
-    public const string AVAILABILITIES = 'availabilities';
+    public const string AVAILABILITIES_PROP = 'availabilities';
     private const int AVAILABILITIES_INDEX = 0;
 
     /** @var \ArrayObject<int,AvailabilitiesTransfer> */
@@ -52,7 +52,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // currency
-    public const string CURRENCY = 'currency';
+    public const string CURRENCY_PROP = 'currency';
     private const int CURRENCY_INDEX = 1;
 
     public ?string $currency {
@@ -61,9 +61,9 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // deliveryOptions
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(DeliveryOptionsTransfer::class)]
-    public const string DELIVERY_OPTIONS = 'deliveryOptions';
+    public const string DELIVERY_OPTIONS_PROP = 'deliveryOptions';
     private const int DELIVERY_OPTIONS_INDEX = 2;
 
     /** @var \ArrayObject<int,DeliveryOptionsTransfer> */
@@ -74,7 +74,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // details
     #[TransferTransformerAttribute(DetailsTransfer::class)]
-    public const string DETAILS = 'details';
+    public const string DETAILS_PROP = 'details';
     private const int DETAILS_INDEX = 3;
 
     public ?DetailsTransfer $details {
@@ -83,7 +83,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // isDiscounted
-    public const string IS_DISCOUNTED = 'isDiscounted';
+    public const string IS_DISCOUNTED_PROP = 'isDiscounted';
     private const int IS_DISCOUNTED_INDEX = 4;
 
     public ?bool $isDiscounted {
@@ -93,7 +93,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // labels
     #[TransferTransformerAttribute(LabelsTransfer::class)]
-    public const string LABELS = 'labels';
+    public const string LABELS_PROP = 'labels';
     private const int LABELS_INDEX = 5;
 
     public ?LabelsTransfer $labels {
@@ -103,7 +103,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // measurementUnit
     #[TransferTransformerAttribute(MeasurementUnitTransfer::class)]
-    public const string MEASUREMENT_UNIT = 'measurementUnit';
+    public const string MEASUREMENT_UNIT_PROP = 'measurementUnit';
     private const int MEASUREMENT_UNIT_INDEX = 6;
 
     public ?MeasurementUnitTransfer $measurementUnit {
@@ -112,7 +112,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // name
-    public const string NAME = 'name';
+    public const string NAME_PROP = 'name';
     private const int NAME_INDEX = 7;
 
     public ?string $name {
@@ -121,7 +121,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // price
-    public const string PRICE = 'price';
+    public const string PRICE_PROP = 'price';
     private const int PRICE_INDEX = 8;
 
     public ?float $price {
@@ -130,7 +130,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // sku
-    public const string SKU = 'sku';
+    public const string SKU_PROP = 'sku';
     private const int SKU_INDEX = 9;
 
     public ?string $sku {
@@ -139,7 +139,7 @@ final class ProductTransfer extends AbstractTransfer
     }
 
     // stock
-    public const string STOCK = 'stock';
+    public const string STOCK_PROP = 'stock';
     private const int STOCK_INDEX = 10;
 
     public ?int $stock {
@@ -149,7 +149,7 @@ final class ProductTransfer extends AbstractTransfer
 
     // stores
     #[ArrayInitiatorAttribute]
-    public const string STORES = 'stores';
+    public const string STORES_PROP = 'stores';
     private const int STORES_INDEX = 11;
 
     /** @var array<int|string,mixed> */

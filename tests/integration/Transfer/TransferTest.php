@@ -22,6 +22,7 @@ use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\NamespaceTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ProtectedTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\RequiredTransfer;
+use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ReservedConstantTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\SymfonyAttributeTransfer;
 use Picamator\TransferObject\Transfer\Exception\DataAssertTransferException;
 use ReflectionProperty;
@@ -82,99 +83,99 @@ class TransferTest extends TestCase
     {
         yield 'all transfer object properties are set' => [
             [
-                ItemCollectionTransfer::ITEMS => [
+                ItemCollectionTransfer::ITEMS_PROP => [
                     [
-                        ItemTransfer::I_AM_BOOL => true,
-                        ItemTransfer::I_AM_TRUE => true,
-                        ItemTransfer::I_AM_FALSE => false,
-                        ItemTransfer::I_AM_INT => 1,
-                        ItemTransfer::I_AM_FLOAT => 0.1,
-                        ItemTransfer::I_AM_STRING => 'test string',
-                        ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
-                        ItemTransfer::I_AM_ARRAY_WITH_DOC_BLOCK => ['value'],
-                        ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
-                        ItemTransfer::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK => ['value'],
-                        ItemTransfer::I_AM_ENUM => ImBackedEnum::SOME_CASE->value,
-                        ItemTransfer::I_AM_DATE_TIME => '2025-05-03T20:53:00+02:00',
-                        ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => '2025-05-03T20:53:00+02:00',
-                        ItemTransfer::I_AM_WITH_ATTRIBUTE => ['value'],
+                        ItemTransfer::I_AM_BOOL_PROP => true,
+                        ItemTransfer::I_AM_TRUE_PROP => true,
+                        ItemTransfer::I_AM_FALSE_PROP => false,
+                        ItemTransfer::I_AM_INT_PROP => 1,
+                        ItemTransfer::I_AM_FLOAT_PROP => 0.1,
+                        ItemTransfer::I_AM_STRING_PROP => 'test string',
+                        ItemTransfer::I_AM_ARRAY_PROP => ['key' => 'value'],
+                        ItemTransfer::I_AM_ARRAY_WITH_DOC_BLOCK_PROP => ['value'],
+                        ItemTransfer::I_AM_ARRAY_OBJECT_PROP => ['key' => 'value'],
+                        ItemTransfer::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_PROP => ['value'],
+                        ItemTransfer::I_AM_ENUM_PROP => ImBackedEnum::SOME_CASE->value,
+                        ItemTransfer::I_AM_DATE_TIME_PROP => '2025-05-03T20:53:00+02:00',
+                        ItemTransfer::I_AM_DATE_TIME_IMMUTABLE_PROP => '2025-05-03T20:53:00+02:00',
+                        ItemTransfer::I_AM_WITH_ATTRIBUTE_PROP => ['value'],
                     ],
                 ],
             ],
             [
-                ItemCollectionTransfer::ITEMS => [
+                ItemCollectionTransfer::ITEMS_PROP => [
                     [
-                        ItemTransfer::I_AM_BOOL => true,
-                        ItemTransfer::I_AM_TRUE => true,
-                        ItemTransfer::I_AM_FALSE => false,
-                        ItemTransfer::I_AM_INT => 1,
-                        ItemTransfer::I_AM_FLOAT => 0.1,
-                        ItemTransfer::I_AM_STRING => 'test string',
-                        ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
-                        ItemTransfer::I_AM_ARRAY_WITH_DOC_BLOCK => ['value'],
-                        ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
-                        ItemTransfer::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK => ['value'],
-                        ItemTransfer::I_AM_ENUM => ImBackedEnum::SOME_CASE->value,
-                        ItemTransfer::I_AM_DATE_TIME => '2025-05-03T20:53:00+02:00',
-                        ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => '2025-05-03T20:53:00+02:00',
-                        ItemTransfer::I_AM_WITH_ATTRIBUTE => ['value'],
+                        ItemTransfer::I_AM_BOOL_PROP => true,
+                        ItemTransfer::I_AM_TRUE_PROP => true,
+                        ItemTransfer::I_AM_FALSE_PROP => false,
+                        ItemTransfer::I_AM_INT_PROP => 1,
+                        ItemTransfer::I_AM_FLOAT_PROP => 0.1,
+                        ItemTransfer::I_AM_STRING_PROP => 'test string',
+                        ItemTransfer::I_AM_ARRAY_PROP => ['key' => 'value'],
+                        ItemTransfer::I_AM_ARRAY_WITH_DOC_BLOCK_PROP => ['value'],
+                        ItemTransfer::I_AM_ARRAY_OBJECT_PROP => ['key' => 'value'],
+                        ItemTransfer::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_PROP => ['value'],
+                        ItemTransfer::I_AM_ENUM_PROP => ImBackedEnum::SOME_CASE->value,
+                        ItemTransfer::I_AM_DATE_TIME_PROP => '2025-05-03T20:53:00+02:00',
+                        ItemTransfer::I_AM_DATE_TIME_IMMUTABLE_PROP => '2025-05-03T20:53:00+02:00',
+                        ItemTransfer::I_AM_WITH_ATTRIBUTE_PROP => ['value'],
                     ],
                 ],
-                ItemCollectionTransfer::ITEM => null,
+                ItemCollectionTransfer::ITEM_PROP => null,
             ],
         ];
 
         yield 'all transfer object properties are null should resolve array, array object and enum' => [
             [
-                ItemCollectionTransfer::ITEMS => [
+                ItemCollectionTransfer::ITEMS_PROP => [
                     [
-                        ItemTransfer::I_AM_BOOL => null,
-                        ItemTransfer::I_AM_TRUE => null,
-                        ItemTransfer::I_AM_FALSE => null,
-                        ItemTransfer::I_AM_INT => null,
-                        ItemTransfer::I_AM_FLOAT => null,
-                        ItemTransfer::I_AM_STRING => null,
-                        ItemTransfer::I_AM_ARRAY => null,
-                        ItemTransfer::I_AM_ARRAY_WITH_DOC_BLOCK => null,
-                        ItemTransfer::I_AM_ARRAY_OBJECT => null,
-                        ItemTransfer::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK => null,
-                        ItemTransfer::I_AM_ENUM => null,
-                        ItemTransfer::I_AM_DATE_TIME => null,
-                        ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => null,
-                        ItemTransfer::I_AM_WITH_ATTRIBUTE => null,
+                        ItemTransfer::I_AM_BOOL_PROP => null,
+                        ItemTransfer::I_AM_TRUE_PROP => null,
+                        ItemTransfer::I_AM_FALSE_PROP => null,
+                        ItemTransfer::I_AM_INT_PROP => null,
+                        ItemTransfer::I_AM_FLOAT_PROP => null,
+                        ItemTransfer::I_AM_STRING_PROP => null,
+                        ItemTransfer::I_AM_ARRAY_PROP => null,
+                        ItemTransfer::I_AM_ARRAY_WITH_DOC_BLOCK_PROP => null,
+                        ItemTransfer::I_AM_ARRAY_OBJECT_PROP => null,
+                        ItemTransfer::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_PROP => null,
+                        ItemTransfer::I_AM_ENUM_PROP => null,
+                        ItemTransfer::I_AM_DATE_TIME_PROP => null,
+                        ItemTransfer::I_AM_DATE_TIME_IMMUTABLE_PROP => null,
+                        ItemTransfer::I_AM_WITH_ATTRIBUTE_PROP => null,
                     ],
                 ],
             ],
             [
-                ItemCollectionTransfer::ITEMS => [
+                ItemCollectionTransfer::ITEMS_PROP => [
                     [
-                        ItemTransfer::I_AM_BOOL => null,
-                        ItemTransfer::I_AM_TRUE => null,
-                        ItemTransfer::I_AM_FALSE => null,
-                        ItemTransfer::I_AM_INT => null,
-                        ItemTransfer::I_AM_FLOAT => null,
-                        ItemTransfer::I_AM_STRING => null,
-                        ItemTransfer::I_AM_ARRAY => [],
-                        ItemTransfer::I_AM_ARRAY_WITH_DOC_BLOCK => [],
-                        ItemTransfer::I_AM_ARRAY_OBJECT => [],
-                        ItemTransfer::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK => [],
-                        ItemTransfer::I_AM_ENUM => null,
-                        ItemTransfer::I_AM_DATE_TIME => null,
-                        ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => null,
-                        ItemTransfer::I_AM_WITH_ATTRIBUTE => [],
+                        ItemTransfer::I_AM_BOOL_PROP => null,
+                        ItemTransfer::I_AM_TRUE_PROP => null,
+                        ItemTransfer::I_AM_FALSE_PROP => null,
+                        ItemTransfer::I_AM_INT_PROP => null,
+                        ItemTransfer::I_AM_FLOAT_PROP => null,
+                        ItemTransfer::I_AM_STRING_PROP => null,
+                        ItemTransfer::I_AM_ARRAY_PROP => [],
+                        ItemTransfer::I_AM_ARRAY_WITH_DOC_BLOCK_PROP => [],
+                        ItemTransfer::I_AM_ARRAY_OBJECT_PROP => [],
+                        ItemTransfer::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_PROP => [],
+                        ItemTransfer::I_AM_ENUM_PROP => null,
+                        ItemTransfer::I_AM_DATE_TIME_PROP => null,
+                        ItemTransfer::I_AM_DATE_TIME_IMMUTABLE_PROP => null,
+                        ItemTransfer::I_AM_WITH_ATTRIBUTE_PROP => [],
                     ],
                 ],
-                ItemCollectionTransfer::ITEM => null,
+                ItemCollectionTransfer::ITEM_PROP => null,
             ],
         ];
 
         yield 'collection transfer object is empty array' => [
             [
-                ItemCollectionTransfer::ITEMS => [],
+                ItemCollectionTransfer::ITEMS_PROP => [],
             ],
             [
-                ItemCollectionTransfer::ITEMS => [],
-                ItemCollectionTransfer::ITEM => null,
+                ItemCollectionTransfer::ITEMS_PROP => [],
+                ItemCollectionTransfer::ITEM_PROP => null,
             ],
         ];
 
@@ -183,8 +184,8 @@ class TransferTest extends TestCase
                 'some-property' => 'some-value',
             ],
             [
-                ItemCollectionTransfer::ITEMS => [],
-                ItemCollectionTransfer::ITEM => null,
+                ItemCollectionTransfer::ITEMS_PROP => [],
+                ItemCollectionTransfer::ITEM_PROP => null,
             ],
         ];
     }
@@ -196,20 +197,20 @@ class TransferTest extends TestCase
     #[TestDoxFormatter('fromToArrayTestDoxFormatter')]
     #[TestWith([
         [
-            ItemTransfer::I_AM_DATE_TIME => 1759419659,
-            ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => 1759419659,
+            ItemTransfer::I_AM_DATE_TIME_PROP => 1759419659,
+            ItemTransfer::I_AM_DATE_TIME_IMMUTABLE_PROP => 1759419659,
         ], [
-            ItemTransfer::I_AM_DATE_TIME => '2025-10-02T15:40:59+00:00',
-            ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => '2025-10-02T15:40:59+00:00',
+            ItemTransfer::I_AM_DATE_TIME_PROP => '2025-10-02T15:40:59+00:00',
+            ItemTransfer::I_AM_DATE_TIME_IMMUTABLE_PROP => '2025-10-02T15:40:59+00:00',
         ],
     ], 'Date and date time immutable are integer timestamp')]
     #[TestWith([
         [
-            ItemTransfer::I_AM_DATE_TIME => 1759419693.3584,
-            ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => 1759419693.3584,
+            ItemTransfer::I_AM_DATE_TIME_PROP => 1759419693.3584,
+            ItemTransfer::I_AM_DATE_TIME_IMMUTABLE_PROP => 1759419693.3584,
         ], [
-            ItemTransfer::I_AM_DATE_TIME => '2025-10-02T15:41:33+00:00',
-            ItemTransfer::I_AM_DATE_TIME_IMMUTABLE => '2025-10-02T15:41:33+00:00',
+            ItemTransfer::I_AM_DATE_TIME_PROP => '2025-10-02T15:41:33+00:00',
+            ItemTransfer::I_AM_DATE_TIME_IMMUTABLE_PROP => '2025-10-02T15:41:33+00:00',
         ],
     ], 'Date and date time immutable are float microtime')]
     public function testDateTimeTransformationFromToArray(array $data, array $expected): void
@@ -299,7 +300,7 @@ class TransferTest extends TestCase
 
         // Act
         $itemTransfer->fromArray([
-            ItemTransfer::I_AM_STRING => new ArrayObject(),
+            ItemTransfer::I_AM_STRING_PROP => new ArrayObject(),
         ]);
     }
 
@@ -320,9 +321,9 @@ class TransferTest extends TestCase
     /**
      * @param array<string,mixed> $data
      */
-    #[TestWith([[ItemTransfer::I_AM_ARRAY_OBJECT => true]], 'Expecting type ArrayObject but received boolean')]
-    #[TestWith([[ItemTransfer::I_AM_ENUM => true]], 'Expecting type Enum but received boolean')]
-    #[TestWith([[ItemTransfer::I_AM_DATE_TIME => true]], 'Expecting type DateTime but received boolean')]
+    #[TestWith([[ItemTransfer::I_AM_ARRAY_OBJECT_PROP => true]], 'Expecting type ArrayObject but received boolean')]
+    #[TestWith([[ItemTransfer::I_AM_ENUM_PROP => true]], 'Expecting type Enum but received boolean')]
+    #[TestWith([[ItemTransfer::I_AM_DATE_TIME_PROP => true]], 'Expecting type DateTime but received boolean')]
     public function testItemTransferAttributeTypeMismatchFromArrayShouldThrowException(array $data): void
     {
         // Arrange
@@ -338,7 +339,7 @@ class TransferTest extends TestCase
     /**
      * @param array<string,mixed> $data
      */
-    #[TestWith([[ItemTransfer::I_AM_INT => []]], 'Expecting type int, but received array')]
+    #[TestWith([[ItemTransfer::I_AM_INT_PROP => []]], 'Expecting type int, but received array')]
     public function testItemTransferPropertyTypeMismatchFromArrayShouldThrowException(array $data): void
     {
         // Arrange
@@ -354,10 +355,10 @@ class TransferTest extends TestCase
     /**
      * @param array<string,mixed> $data
      */
-    #[TestWith([[ItemCollectionTransfer::ITEMS => true]], 'Expecting type array of arrays but received boolean')]
-    #[TestWith([[ItemCollectionTransfer::ITEM => true]], 'Expecting type array but received boolean')]
+    #[TestWith([[ItemCollectionTransfer::ITEMS_PROP => true]], 'Expecting type array of arrays but received boolean')]
+    #[TestWith([[ItemCollectionTransfer::ITEM_PROP => true]], 'Expecting type array but received boolean')]
     // phpcs:disable Generic.Files.LineLength
-    #[TestWith([[ItemCollectionTransfer::ITEMS => ['some-string']]], 'Expecting type array of arrays but received array')]
+    #[TestWith([[ItemCollectionTransfer::ITEMS_PROP => ['some-string']]], 'Expecting type array of arrays but received array')]
     public function testItemCollectionTransferAttributeTypeMismatchFromArrayShouldThrowException(array $data): void
     {
         // Arrange
@@ -397,20 +398,20 @@ class TransferTest extends TestCase
     {
         // Arrange
         $itemCollectionTransfer = new ItemCollectionTransfer([
-            ItemCollectionTransfer::ITEMS => [
+            ItemCollectionTransfer::ITEMS_PROP => [
                 [
-                    ItemTransfer::I_AM_BOOL => true,
-                    ItemTransfer::I_AM_TRUE => true,
-                    ItemTransfer::I_AM_FALSE => false,
-                    ItemTransfer::I_AM_INT => 1,
-                    ItemTransfer::I_AM_FLOAT => 0.1,
-                    ItemTransfer::I_AM_STRING => 'test string',
-                    ItemTransfer::I_AM_ARRAY => ['key' => 'value'],
-                    ItemTransfer::I_AM_ARRAY_OBJECT => ['key' => 'value'],
-                    ItemTransfer::I_AM_ENUM => ImBackedEnum::SOME_CASE->value,
+                    ItemTransfer::I_AM_BOOL_PROP => true,
+                    ItemTransfer::I_AM_TRUE_PROP => true,
+                    ItemTransfer::I_AM_FALSE_PROP => false,
+                    ItemTransfer::I_AM_INT_PROP => 1,
+                    ItemTransfer::I_AM_FLOAT_PROP => 0.1,
+                    ItemTransfer::I_AM_STRING_PROP => 'test string',
+                    ItemTransfer::I_AM_ARRAY_PROP => ['key' => 'value'],
+                    ItemTransfer::I_AM_ARRAY_OBJECT_PROP => ['key' => 'value'],
+                    ItemTransfer::I_AM_ENUM_PROP => ImBackedEnum::SOME_CASE->value,
                 ],
             ],
-            ItemCollectionTransfer::ITEM => [],
+            ItemCollectionTransfer::ITEM_PROP => [],
         ]);
 
         // Act
@@ -424,24 +425,49 @@ class TransferTest extends TestCase
     }
 
     #[RequiresPhpExtension('bcmath')]
-    #[TestDox('Transformation BcMath fromArray to toArray')]
-    public function testTransformationBcMathFromToArray(): void
+    #[TestDox('Transformation transfer object BcMath fromArray with $number to toArray expecting $number')]
+    #[TestWith(['12.123', '12.123'], 'Transformation from string to BcMath')]
+    #[TestWith([12, '12'], 'Transformation from integer to BcMath')]
+    #[TestWith([12.123, '12.123'], 'Transformation from float to BcMath')]
+    public function testTransformationBcMathFromToArray(string|int|float $number, string $expected): void
     {
         // Arrange
         static::generateTransfersOrFail(self::GENERATOR_BC_MATH_CONFIG_PATH);
 
         $numberTransfer = new BcMathNumberTransfer();
-        $expected = '12.123';
 
         // Act
         $numberTransfer->fromArray([
-            BcMathNumberTransfer::I_AM_NUMBER => $expected,
+            BcMathNumberTransfer::I_AM_NUMBER_PROP => $number,
         ]);
 
         $actual = $numberTransfer->toArray();
 
         // Assert
-        $this->assertSame($expected, $actual[BcMathNumberTransfer::I_AM_NUMBER]);
+        $this->assertSame($expected, $actual[BcMathNumberTransfer::I_AM_NUMBER_PROP]);
+    }
+
+    #[RequiresPhpExtension('bcmath')]
+    #[TestDox('Transformation transfer object BcMath fromArray to toArray with BcMath')]
+    public function testTransformationBcMathFromToArrayWhereArrayHasBcMath(): void
+    {
+        // Arrange
+        static::generateTransfersOrFail(self::GENERATOR_BC_MATH_CONFIG_PATH);
+
+        $numberTransfer = new BcMathNumberTransfer();
+
+        $expected = '12.123';
+        $number = new \BcMath\Number($expected);
+
+        // Act
+        $numberTransfer->fromArray([
+            BcMathNumberTransfer::I_AM_NUMBER_PROP => $number,
+        ]);
+
+        $actual = $numberTransfer->toArray();
+
+        // Assert
+        $this->assertSame($expected, $actual[BcMathNumberTransfer::I_AM_NUMBER_PROP]);
     }
 
     #[TestDox('Symfony assert attribute')]
@@ -460,5 +486,19 @@ class TransferTest extends TestCase
         // Assert
         $this->assertCount(1, $actual, 'Expected one error message');
         $this->assertSame('This value should not be blank.', $actual[0]?->getMessage());
+    }
+
+    #[TestDox('Reserved constant should not collide with transfer')]
+    public function testReservedConstantShouldNotCollideWithTransfer(): void
+    {
+        // Act
+        $reservedConstantTransfer = new ReservedConstantTransfer([
+            ReservedConstantTransfer::FILTER_DATA_CALLBACK_PROP => 'filter',
+            ReservedConstantTransfer::META_DATA_PROP => 'data',
+            ReservedConstantTransfer::META_DATA_SIZE_PROP => '0',
+        ]);
+
+        // Assert
+        $this->assertInstanceOf(ReservedConstantTransfer::class, $reservedConstantTransfer);
     }
 }

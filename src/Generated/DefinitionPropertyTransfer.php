@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\Generated;
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -24,22 +24,22 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 10;
 
     protected const array META_DATA = [
-        self::ATTRIBUTES_INDEX => self::ATTRIBUTES,
-        self::BUILD_IN_TYPE_INDEX => self::BUILD_IN_TYPE,
-        self::COLLECTION_TYPE_INDEX => self::COLLECTION_TYPE,
-        self::DATE_TIME_TYPE_INDEX => self::DATE_TIME_TYPE,
-        self::ENUM_TYPE_INDEX => self::ENUM_TYPE,
-        self::IS_NULLABLE_INDEX => self::IS_NULLABLE,
-        self::IS_PROTECTED_INDEX => self::IS_PROTECTED,
-        self::NUMBER_TYPE_INDEX => self::NUMBER_TYPE,
-        self::PROPERTY_NAME_INDEX => self::PROPERTY_NAME,
-        self::TRANSFER_TYPE_INDEX => self::TRANSFER_TYPE,
+        self::ATTRIBUTES_PROP => self::ATTRIBUTES_INDEX,
+        self::BUILD_IN_TYPE_PROP => self::BUILD_IN_TYPE_INDEX,
+        self::COLLECTION_TYPE_PROP => self::COLLECTION_TYPE_INDEX,
+        self::DATE_TIME_TYPE_PROP => self::DATE_TIME_TYPE_INDEX,
+        self::ENUM_TYPE_PROP => self::ENUM_TYPE_INDEX,
+        self::IS_NULLABLE_PROP => self::IS_NULLABLE_INDEX,
+        self::IS_PROTECTED_PROP => self::IS_PROTECTED_INDEX,
+        self::NUMBER_TYPE_PROP => self::NUMBER_TYPE_INDEX,
+        self::PROPERTY_NAME_PROP => self::PROPERTY_NAME_INDEX,
+        self::TRANSFER_TYPE_PROP => self::TRANSFER_TYPE_INDEX,
     ];
 
     // attributes
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(DefinitionAttributeTransfer::class)]
-    public const string ATTRIBUTES = 'attributes';
+    public const string ATTRIBUTES_PROP = 'attributes';
     private const int ATTRIBUTES_INDEX = 0;
 
     /** @var \ArrayObject<int,DefinitionAttributeTransfer> */
@@ -50,7 +50,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     // buildInType
     #[TransferTransformerAttribute(DefinitionBuildInTypeTransfer::class)]
-    public const string BUILD_IN_TYPE = 'buildInType';
+    public const string BUILD_IN_TYPE_PROP = 'buildInType';
     private const int BUILD_IN_TYPE_INDEX = 1;
 
     public ?DefinitionBuildInTypeTransfer $buildInType {
@@ -60,7 +60,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     // collectionType
     #[TransferTransformerAttribute(DefinitionEmbeddedTypeTransfer::class)]
-    public const string COLLECTION_TYPE = 'collectionType';
+    public const string COLLECTION_TYPE_PROP = 'collectionType';
     private const int COLLECTION_TYPE_INDEX = 2;
 
     public ?DefinitionEmbeddedTypeTransfer $collectionType {
@@ -70,7 +70,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     // dateTimeType
     #[TransferTransformerAttribute(DefinitionEmbeddedTypeTransfer::class)]
-    public const string DATE_TIME_TYPE = 'dateTimeType';
+    public const string DATE_TIME_TYPE_PROP = 'dateTimeType';
     private const int DATE_TIME_TYPE_INDEX = 3;
 
     public ?DefinitionEmbeddedTypeTransfer $dateTimeType {
@@ -80,7 +80,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     // enumType
     #[TransferTransformerAttribute(DefinitionEmbeddedTypeTransfer::class)]
-    public const string ENUM_TYPE = 'enumType';
+    public const string ENUM_TYPE_PROP = 'enumType';
     private const int ENUM_TYPE_INDEX = 4;
 
     public ?DefinitionEmbeddedTypeTransfer $enumType {
@@ -89,7 +89,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     }
 
     // isNullable
-    public const string IS_NULLABLE = 'isNullable';
+    public const string IS_NULLABLE_PROP = 'isNullable';
     private const int IS_NULLABLE_INDEX = 5;
 
     public bool $isNullable {
@@ -98,7 +98,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     }
 
     // isProtected
-    public const string IS_PROTECTED = 'isProtected';
+    public const string IS_PROTECTED_PROP = 'isProtected';
     private const int IS_PROTECTED_INDEX = 6;
 
     public bool $isProtected {
@@ -108,7 +108,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     // numberType
     #[TransferTransformerAttribute(DefinitionEmbeddedTypeTransfer::class)]
-    public const string NUMBER_TYPE = 'numberType';
+    public const string NUMBER_TYPE_PROP = 'numberType';
     private const int NUMBER_TYPE_INDEX = 7;
 
     public ?DefinitionEmbeddedTypeTransfer $numberType {
@@ -117,7 +117,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     }
 
     // propertyName
-    public const string PROPERTY_NAME = 'propertyName';
+    public const string PROPERTY_NAME_PROP = 'propertyName';
     private const int PROPERTY_NAME_INDEX = 8;
 
     public string $propertyName {
@@ -127,7 +127,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     // transferType
     #[TransferTransformerAttribute(DefinitionEmbeddedTypeTransfer::class)]
-    public const string TRANSFER_TYPE = 'transferType';
+    public const string TRANSFER_TYPE_PROP = 'transferType';
     private const int TRANSFER_TYPE_INDEX = 9;
 
     public ?DefinitionEmbeddedTypeTransfer $transferType {

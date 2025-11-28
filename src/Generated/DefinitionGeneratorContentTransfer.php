@@ -21,12 +21,12 @@ final class DefinitionGeneratorContentTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::CLASS_NAME_INDEX => self::CLASS_NAME,
-        self::CONTENT_INDEX => self::CONTENT,
+        self::CLASS_NAME_PROP => self::CLASS_NAME_INDEX,
+        self::CONTENT_PROP => self::CONTENT_INDEX,
     ];
 
     // className
-    public const string CLASS_NAME = 'className';
+    public const string CLASS_NAME_PROP = 'className';
     private const int CLASS_NAME_INDEX = 0;
 
     public string $className {
@@ -36,7 +36,7 @@ final class DefinitionGeneratorContentTransfer extends AbstractTransfer
 
     // content
     #[ArrayInitiatorAttribute]
-    public const string CONTENT = 'content';
+    public const string CONTENT_PROP = 'content';
     private const int CONTENT_INDEX = 1;
 
     /** @var array<int|string,mixed> */

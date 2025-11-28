@@ -20,12 +20,12 @@ final class PaletteTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ITEMS_INDEX => self::ITEMS,
-        self::TYPE_INDEX => self::TYPE,
+        self::ITEMS_PROP => self::ITEMS_INDEX,
+        self::TYPE_PROP => self::TYPE_INDEX,
     ];
 
     // items
-    public const string ITEMS = 'items';
+    public const string ITEMS_PROP = 'items';
     private const int ITEMS_INDEX = 0;
 
     public ?int $items {
@@ -34,7 +34,7 @@ final class PaletteTransfer extends AbstractTransfer
     }
 
     // type
-    public const string TYPE = 'type';
+    public const string TYPE_PROP = 'type';
     private const int TYPE_INDEX = 1;
 
     public ?string $type {

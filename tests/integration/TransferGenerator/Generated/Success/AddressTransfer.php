@@ -6,7 +6,7 @@ namespace Picamator\Tests\Integration\TransferObject\TransferGenerator\Generated
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 
 /**
@@ -23,20 +23,20 @@ final class AddressTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 10;
 
     protected const array META_DATA = [
-        self::ADDRESS1_INDEX => self::ADDRESS1,
-        self::ADDRESS2_INDEX => self::ADDRESS2,
-        self::ADDRESS3_INDEX => self::ADDRESS3,
-        self::COUNTRY_INDEX => self::COUNTRY,
-        self::FIRST_NAME_INDEX => self::FIRST_NAME,
-        self::IS_ACTIVE_INDEX => self::IS_ACTIVE,
-        self::LAST_NAME_INDEX => self::LAST_NAME,
-        self::PHONE_INDEX => self::PHONE,
-        self::UUID_INDEX => self::UUID,
-        self::ZIP_CODE_INDEX => self::ZIP_CODE,
+        self::ADDRESS1_PROP => self::ADDRESS1_INDEX,
+        self::ADDRESS2_PROP => self::ADDRESS2_INDEX,
+        self::ADDRESS3_PROP => self::ADDRESS3_INDEX,
+        self::COUNTRY_PROP => self::COUNTRY_INDEX,
+        self::FIRST_NAME_PROP => self::FIRST_NAME_INDEX,
+        self::IS_ACTIVE_PROP => self::IS_ACTIVE_INDEX,
+        self::LAST_NAME_PROP => self::LAST_NAME_INDEX,
+        self::PHONE_PROP => self::PHONE_INDEX,
+        self::UUID_PROP => self::UUID_INDEX,
+        self::ZIP_CODE_PROP => self::ZIP_CODE_INDEX,
     ];
 
     // address1
-    public const string ADDRESS1 = 'address1';
+    public const string ADDRESS1_PROP = 'address1';
     private const int ADDRESS1_INDEX = 0;
 
     public ?string $address1 {
@@ -45,7 +45,7 @@ final class AddressTransfer extends AbstractTransfer
     }
 
     // address2
-    public const string ADDRESS2 = 'address2';
+    public const string ADDRESS2_PROP = 'address2';
     private const int ADDRESS2_INDEX = 1;
 
     public ?string $address2 {
@@ -54,7 +54,7 @@ final class AddressTransfer extends AbstractTransfer
     }
 
     // address3
-    public const string ADDRESS3 = 'address3';
+    public const string ADDRESS3_PROP = 'address3';
     private const int ADDRESS3_INDEX = 2;
 
     public ?string $address3 {
@@ -63,9 +63,9 @@ final class AddressTransfer extends AbstractTransfer
     }
 
     // country
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(CountryTransfer::class)]
-    public const string COUNTRY = 'country';
+    public const string COUNTRY_PROP = 'country';
     private const int COUNTRY_INDEX = 3;
 
     /** @var \ArrayObject<int,CountryTransfer> */
@@ -75,7 +75,7 @@ final class AddressTransfer extends AbstractTransfer
     }
 
     // firstName
-    public const string FIRST_NAME = 'firstName';
+    public const string FIRST_NAME_PROP = 'firstName';
     private const int FIRST_NAME_INDEX = 4;
 
     public ?string $firstName {
@@ -84,7 +84,7 @@ final class AddressTransfer extends AbstractTransfer
     }
 
     // isActive
-    public const string IS_ACTIVE = 'isActive';
+    public const string IS_ACTIVE_PROP = 'isActive';
     private const int IS_ACTIVE_INDEX = 5;
 
     public ?bool $isActive {
@@ -93,7 +93,7 @@ final class AddressTransfer extends AbstractTransfer
     }
 
     // lastName
-    public const string LAST_NAME = 'lastName';
+    public const string LAST_NAME_PROP = 'lastName';
     private const int LAST_NAME_INDEX = 6;
 
     public ?string $lastName {
@@ -102,7 +102,7 @@ final class AddressTransfer extends AbstractTransfer
     }
 
     // phone
-    public const string PHONE = 'phone';
+    public const string PHONE_PROP = 'phone';
     private const int PHONE_INDEX = 7;
 
     public ?string $phone {
@@ -111,7 +111,7 @@ final class AddressTransfer extends AbstractTransfer
     }
 
     // uuid
-    public const string UUID = 'uuid';
+    public const string UUID_PROP = 'uuid';
     private const int UUID_INDEX = 8;
 
     public ?string $uuid {
@@ -120,7 +120,7 @@ final class AddressTransfer extends AbstractTransfer
     }
 
     // zipCode
-    public const string ZIP_CODE = 'zipCode';
+    public const string ZIP_CODE_PROP = 'zipCode';
     private const int ZIP_CODE_INDEX = 9;
 
     public ?string $zipCode {

@@ -6,7 +6,7 @@ namespace Picamator\Examples\TransferObject\Generated\TransferGenerator;
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -24,13 +24,13 @@ final class AgentTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::CUSTOMER_INDEX => self::CUSTOMER,
-        self::MERCHANTS_INDEX => self::MERCHANTS,
+        self::CUSTOMER_PROP => self::CUSTOMER_INDEX,
+        self::MERCHANTS_PROP => self::MERCHANTS_INDEX,
     ];
 
     // customer
     #[TransferTransformerAttribute(CustomerTransfer::class)]
-    public const string CUSTOMER = 'customer';
+    public const string CUSTOMER_PROP = 'customer';
     private const int CUSTOMER_INDEX = 0;
 
     public ?CustomerTransfer $customer {
@@ -39,9 +39,9 @@ final class AgentTransfer extends AbstractTransfer
     }
 
     // merchants
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(MerchantTransfer::class)]
-    public const string MERCHANTS = 'merchants';
+    public const string MERCHANTS_PROP = 'merchants';
     private const int MERCHANTS_INDEX = 1;
 
     /** @var \ArrayObject<int,MerchantTransfer> */

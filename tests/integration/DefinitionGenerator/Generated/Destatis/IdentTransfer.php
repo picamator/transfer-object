@@ -20,12 +20,12 @@ final class IdentTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::METHOD_INDEX => self::METHOD,
-        self::SERVICE_INDEX => self::SERVICE,
+        self::METHOD_PROP => self::METHOD_INDEX,
+        self::SERVICE_PROP => self::SERVICE_INDEX,
     ];
 
     // Method
-    public const string METHOD = 'Method';
+    public const string METHOD_PROP = 'Method';
     private const int METHOD_INDEX = 0;
 
     public ?string $Method {
@@ -34,7 +34,7 @@ final class IdentTransfer extends AbstractTransfer
     }
 
     // Service
-    public const string SERVICE = 'Service';
+    public const string SERVICE_PROP = 'Service';
     private const int SERVICE_INDEX = 1;
 
     public ?string $Service {

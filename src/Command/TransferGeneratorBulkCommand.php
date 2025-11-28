@@ -13,12 +13,11 @@ use Symfony\Component\Console\Attribute\Option;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Throwable;
 
 #[AsCommand(
-    name: 'picamator:transfer:generate:bulk',
+    name: 'picamator:transfer:generate:bulk|p:t:g:b',
     description: 'Generates Transfer Objects based on multiple configurations and their definition files.',
-    aliases: ['p:t:g:b'],
-    hidden: false,
     // phpcs:disable Generic.Files.LineLength
     help: <<<HELP
 The <info>%command.name%</info> command generates Transfer Objects from definition files specified by multiple configuration files listed in a TXT file..
@@ -65,23 +64,37 @@ MESSAGE;
     ): int {
         $io->section(self::START_SECTION_NAME);
 
-        $configListPath = $this->getConfigListPath($io, $configListPath);
+        $configListPath = $this->normalizePath($configListPath);
         if ($configListPath === '') {
+            $io->error(self::ERROR_MISSED_OPTION_BULK_MESSAGE);
+
             return Command::FAILURE;
         }
 
         $io->writeln(sprintf(self::CONFIGURATION_LIST_MESSAGE_TEMPLATE, $configListPath));
         $io->newLine();
 
-        if (!$this->generateTransfers($io, $configListPath)) {
+        try {
+            $result = $this->generateTransfers($io, $configListPath);
+        } catch (Throwable $e) {
+            $io->error($e->getMessage());
+
             return Command::FAILURE;
         }
 
-        $io->success(self::SUCCESS_MESSAGE);
+        if ($result) {
+            $io->success(self::SUCCESS_MESSAGE);
 
-        return Command::SUCCESS;
+            return Command::SUCCESS;
+        }
+
+        return Command::FAILURE;
     }
 
+    /**
+     * @throws Throwable
+     * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
+     */
     private function generateTransfers(SymfonyStyle $io, string $configListPath): bool
     {
         $generatorFiber = $this->generatorFacade->getTransferGeneratorBulkFiber();
@@ -148,16 +161,5 @@ MESSAGE;
         foreach ($bulkTransfer->validator->errorMessages as $errorMessage) {
             $io->error($errorMessage->errorMessage);
         }
-    }
-
-    private function getConfigListPath(SymfonyStyle $io, string $configListPath): string
-    {
-        $configListPath = $this->normalizePath($configListPath);
-
-        if ($configListPath === '') {
-            $io->error(self::ERROR_MISSED_OPTION_BULK_MESSAGE);
-        }
-
-        return $configListPath;
     }
 }

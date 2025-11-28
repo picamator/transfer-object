@@ -53,10 +53,10 @@ class TemplateHelperTest extends TestCase
     {
         yield 'property is not nullable should return empty string' => [
             'templateData' => [
-                TemplateTransfer::PROPERTIES => [
+                TemplateTransfer::PROPERTIES_PROP => [
                     'test' => 'TestTransfer',
                 ],
-                TemplateTransfer::NULLABLES => [
+                TemplateTransfer::NULLABLES_PROP => [
                     'test' => false,
                 ],
             ],
@@ -66,10 +66,10 @@ class TemplateHelperTest extends TestCase
 
         yield 'property is nullable but with intersection type should return empty string' => [
             'templateData' => [
-                TemplateTransfer::PROPERTIES => [
+                TemplateTransfer::PROPERTIES_PROP => [
                     'test' => 'TestTransfer&TTransferInterface',
                 ],
-                TemplateTransfer::NULLABLES => [
+                TemplateTransfer::NULLABLES_PROP => [
                     'test' => true,
                 ],
             ],
@@ -79,10 +79,10 @@ class TemplateHelperTest extends TestCase
 
         yield 'property is nullable with union should return union null' => [
             'templateData' => [
-                TemplateTransfer::PROPERTIES => [
+                TemplateTransfer::PROPERTIES_PROP => [
                     'test' => 'TestTransfer|TransferInterface',
                 ],
-                TemplateTransfer::NULLABLES => [
+                TemplateTransfer::NULLABLES_PROP => [
                     'test' => true,
                 ],
             ],
@@ -92,10 +92,10 @@ class TemplateHelperTest extends TestCase
 
         yield 'property is nullable without intersection or union should return null type' => [
             'templateData' => [
-                TemplateTransfer::PROPERTIES => [
+                TemplateTransfer::PROPERTIES_PROP => [
                     'test' => 'TestTransfer',
                 ],
-                TemplateTransfer::NULLABLES => [
+                TemplateTransfer::NULLABLES_PROP => [
                     'test' => true,
                 ],
             ],

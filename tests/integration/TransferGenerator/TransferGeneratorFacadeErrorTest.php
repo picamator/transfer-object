@@ -148,6 +148,11 @@ class TransferGeneratorFacadeErrorTest extends TestCase
             'expectedMessage' => 'Missed Transfer Object definitions.',
         ];
 
+        yield 'definition file is empty' => [
+            'configCaseName' => 'empty-definition',
+            'expectedMessage' => '',
+        ];
+
         yield 'invalid type namespace' => [
             'configCaseName' => 'invalid-type-namespace',
             'expectedMessage' => 'Invalid namespace',
@@ -189,7 +194,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         $this->expectException(TransferGeneratorException::class);
 
         // Act
-        new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
+        (void)new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
     }
 
     private function getConfigPath(string $configCaseName): string

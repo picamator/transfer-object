@@ -25,17 +25,17 @@ trait BuilderExpanderTrait
         array $content,
     ): DefinitionGeneratorContentTransfer {
         return new DefinitionGeneratorContentTransfer([
-            DefinitionGeneratorContentTransfer::CLASS_NAME => $className,
-            DefinitionGeneratorContentTransfer::CONTENT => $content,
+            DefinitionGeneratorContentTransfer::CLASS_NAME_PROP => $className,
+            DefinitionGeneratorContentTransfer::CONTENT_PROP => $content,
         ]);
     }
 
-    final protected function filterOnlyArray(mixed $item): bool
+    final protected function isArray(mixed $item): bool
     {
         return is_array($item);
     }
 
-    final protected function filterNonArray(mixed $item): bool
+    final protected function isNonArray(mixed $item): bool
     {
         return !is_array($item);
     }

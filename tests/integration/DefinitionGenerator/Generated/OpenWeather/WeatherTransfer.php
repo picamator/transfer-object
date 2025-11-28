@@ -20,14 +20,14 @@ final class WeatherTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
-        self::DESCRIPTION_INDEX => self::DESCRIPTION,
-        self::ICON_INDEX => self::ICON,
-        self::ID_INDEX => self::ID,
-        self::MAIN_INDEX => self::MAIN,
+        self::DESCRIPTION_PROP => self::DESCRIPTION_INDEX,
+        self::ICON_PROP => self::ICON_INDEX,
+        self::ID_PROP => self::ID_INDEX,
+        self::MAIN_PROP => self::MAIN_INDEX,
     ];
 
     // description
-    public const string DESCRIPTION = 'description';
+    public const string DESCRIPTION_PROP = 'description';
     private const int DESCRIPTION_INDEX = 0;
 
     public ?string $description {
@@ -36,7 +36,7 @@ final class WeatherTransfer extends AbstractTransfer
     }
 
     // icon
-    public const string ICON = 'icon';
+    public const string ICON_PROP = 'icon';
     private const int ICON_INDEX = 1;
 
     public ?string $icon {
@@ -45,7 +45,7 @@ final class WeatherTransfer extends AbstractTransfer
     }
 
     // id
-    public const string ID = 'id';
+    public const string ID_PROP = 'id';
     private const int ID_INDEX = 2;
 
     public ?int $id {
@@ -54,7 +54,7 @@ final class WeatherTransfer extends AbstractTransfer
     }
 
     // main
-    public const string MAIN = 'main';
+    public const string MAIN_PROP = 'main';
     private const int MAIN_INDEX = 3;
 
     public ?string $main {

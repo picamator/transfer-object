@@ -53,9 +53,7 @@ class ConfigFactory
 
     protected function createConfigBuilder(): ConfigBuilderInterface
     {
-        return new ConfigBuilder(
-            $this->createConfigContentBuilder(),
-        );
+        return new ConfigBuilder();
     }
 
     protected function createConfigValidator(): ConfigValidatorInterface

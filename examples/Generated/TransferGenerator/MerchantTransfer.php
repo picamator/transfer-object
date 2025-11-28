@@ -22,14 +22,14 @@ final class MerchantTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::COUNTRY_INDEX => self::COUNTRY,
-        self::IS_ACTIVE_INDEX => self::IS_ACTIVE,
-        self::MERCHANT_REFERENCE_INDEX => self::MERCHANT_REFERENCE,
+        self::COUNTRY_PROP => self::COUNTRY_INDEX,
+        self::IS_ACTIVE_PROP => self::IS_ACTIVE_INDEX,
+        self::MERCHANT_REFERENCE_PROP => self::MERCHANT_REFERENCE_INDEX,
     ];
 
     // country
     #[EnumTransformerAttribute(CountryEnum::class)]
-    public const string COUNTRY = 'country';
+    public const string COUNTRY_PROP = 'country';
     private const int COUNTRY_INDEX = 0;
 
     public CountryEnum $country {
@@ -38,7 +38,7 @@ final class MerchantTransfer extends AbstractTransfer
     }
 
     // isActive
-    public const string IS_ACTIVE = 'isActive';
+    public const string IS_ACTIVE_PROP = 'isActive';
     private const int IS_ACTIVE_INDEX = 1;
 
     public bool $isActive {
@@ -47,7 +47,7 @@ final class MerchantTransfer extends AbstractTransfer
     }
 
     // merchantReference
-    public const string MERCHANT_REFERENCE = 'merchantReference';
+    public const string MERCHANT_REFERENCE_PROP = 'merchantReference';
     private const int MERCHANT_REFERENCE_INDEX = 2;
 
     public string $merchantReference {

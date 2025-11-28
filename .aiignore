@@ -1,0 +1,6 @@
+# project files
+.idea/
+
+# cache and debug
+var/cache/
+var/xdebug-profile/

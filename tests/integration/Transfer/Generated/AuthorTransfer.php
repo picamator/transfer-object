@@ -20,12 +20,12 @@ final class AuthorTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::FIRST_NAME_INDEX => self::FIRST_NAME,
-        self::LAST_NAME_INDEX => self::LAST_NAME,
+        self::FIRST_NAME_PROP => self::FIRST_NAME_INDEX,
+        self::LAST_NAME_PROP => self::LAST_NAME_INDEX,
     ];
 
     // firstName
-    public const string FIRST_NAME = 'firstName';
+    public const string FIRST_NAME_PROP = 'firstName';
     private const int FIRST_NAME_INDEX = 0;
 
     public string $firstName {
@@ -34,7 +34,7 @@ final class AuthorTransfer extends AbstractTransfer
     }
 
     // lastName
-    public const string LAST_NAME = 'lastName';
+    public const string LAST_NAME_PROP = 'lastName';
     private const int LAST_NAME_INDEX = 1;
 
     public string $lastName {

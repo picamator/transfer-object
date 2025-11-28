@@ -8,9 +8,9 @@ use Picamator\TransferObject\Generated\ConfigContentTransfer;
 
 enum ConfigKeyEnum: string
 {
-    case TRANSFER_NAMESPACE = ConfigContentTransfer::TRANSFER_NAMESPACE;
-    case TRANSFER_PATH = ConfigContentTransfer::TRANSFER_PATH;
-    case DEFINITION_PATH = ConfigContentTransfer::DEFINITION_PATH;
+    case TRANSFER_NAMESPACE = ConfigContentTransfer::TRANSFER_NAMESPACE_PROP;
+    case TRANSFER_PATH = ConfigContentTransfer::TRANSFER_PATH_PROP;
+    case DEFINITION_PATH = ConfigContentTransfer::DEFINITION_PATH_PROP;
 
     /**
      * @return array<string, string>

@@ -45,8 +45,8 @@ class GeneratorFilesystemTest extends TestCase
     {
         // Arrange
         $contentTransfer = new TransferGeneratorContentTransfer([
-            TransferGeneratorContentTransfer::CLASS_NAME => 'CustomerTransfer',
-            TransferGeneratorContentTransfer::CONTENT => 'class TestTransfer {}',
+            TransferGeneratorContentTransfer::CLASS_NAME_PROP => 'CustomerTransfer',
+            TransferGeneratorContentTransfer::CONTENT_PROP => 'class TestTransfer {}',
         ]);
 
         $transferPath = 'some-path';

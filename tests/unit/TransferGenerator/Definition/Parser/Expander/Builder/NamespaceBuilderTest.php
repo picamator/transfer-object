@@ -57,50 +57,50 @@ class NamespaceBuilderTest extends TestCase
         yield 'namespace without alias' => [
             '\Picamator\TransferObject\Generated',
             [
-                DefinitionNamespaceTransfer::FULL_NAME => '\Picamator\TransferObject\Generated',
-                DefinitionNamespaceTransfer::WITHOUT_ALIAS => '\Picamator\TransferObject\Generated',
-                DefinitionNamespaceTransfer::BASE_NAME => 'Generated',
-                DefinitionNamespaceTransfer::ALIAS => null,
+                DefinitionNamespaceTransfer::FULL_NAME_PROP => '\Picamator\TransferObject\Generated',
+                DefinitionNamespaceTransfer::WITHOUT_ALIAS_PROP => '\Picamator\TransferObject\Generated',
+                DefinitionNamespaceTransfer::BASE_NAME_PROP => 'Generated',
+                DefinitionNamespaceTransfer::ALIAS_PROP => null,
             ],
         ];
 
         yield 'namespace with as lowercase' => [
             '\Picamator\TransferObject\Generated as GeneratedAlias',
             [
-                DefinitionNamespaceTransfer::FULL_NAME => '\Picamator\TransferObject\Generated as GeneratedAlias',
-                DefinitionNamespaceTransfer::WITHOUT_ALIAS => '\Picamator\TransferObject\Generated',
-                DefinitionNamespaceTransfer::BASE_NAME => 'Generated',
-                DefinitionNamespaceTransfer::ALIAS => 'GeneratedAlias',
+                DefinitionNamespaceTransfer::FULL_NAME_PROP => '\Picamator\TransferObject\Generated as GeneratedAlias',
+                DefinitionNamespaceTransfer::WITHOUT_ALIAS_PROP => '\Picamator\TransferObject\Generated',
+                DefinitionNamespaceTransfer::BASE_NAME_PROP => 'Generated',
+                DefinitionNamespaceTransfer::ALIAS_PROP => 'GeneratedAlias',
             ],
         ];
 
         yield 'namespace with AS upper case' => [
             '\Picamator\TransferObject\Generated AS GeneratedAlias',
             [
-                DefinitionNamespaceTransfer::FULL_NAME => '\Picamator\TransferObject\Generated as GeneratedAlias',
-                DefinitionNamespaceTransfer::WITHOUT_ALIAS => '\Picamator\TransferObject\Generated',
-                DefinitionNamespaceTransfer::BASE_NAME => 'Generated',
-                DefinitionNamespaceTransfer::ALIAS => 'GeneratedAlias',
+                DefinitionNamespaceTransfer::FULL_NAME_PROP => '\Picamator\TransferObject\Generated as GeneratedAlias',
+                DefinitionNamespaceTransfer::WITHOUT_ALIAS_PROP => '\Picamator\TransferObject\Generated',
+                DefinitionNamespaceTransfer::BASE_NAME_PROP => 'Generated',
+                DefinitionNamespaceTransfer::ALIAS_PROP => 'GeneratedAlias',
             ],
         ];
 
         yield 'namespace with AS upper case and multiple spaces' => [
             '\Picamator\TransferObject\Generated    AS    GeneratedAlias',
             [
-                DefinitionNamespaceTransfer::FULL_NAME => '\Picamator\TransferObject\Generated as GeneratedAlias',
-                DefinitionNamespaceTransfer::WITHOUT_ALIAS => '\Picamator\TransferObject\Generated',
-                DefinitionNamespaceTransfer::BASE_NAME => 'Generated',
-                DefinitionNamespaceTransfer::ALIAS => 'GeneratedAlias',
+                DefinitionNamespaceTransfer::FULL_NAME_PROP => '\Picamator\TransferObject\Generated as GeneratedAlias',
+                DefinitionNamespaceTransfer::WITHOUT_ALIAS_PROP => '\Picamator\TransferObject\Generated',
+                DefinitionNamespaceTransfer::BASE_NAME_PROP => 'Generated',
+                DefinitionNamespaceTransfer::ALIAS_PROP => 'GeneratedAlias',
             ],
         ];
 
         yield 'root namespace' => [
             'DateTime',
             [
-                DefinitionNamespaceTransfer::FULL_NAME => 'DateTime',
-                DefinitionNamespaceTransfer::WITHOUT_ALIAS => 'DateTime',
-                DefinitionNamespaceTransfer::BASE_NAME => 'DateTime',
-                DefinitionNamespaceTransfer::ALIAS => null,
+                DefinitionNamespaceTransfer::FULL_NAME_PROP => 'DateTime',
+                DefinitionNamespaceTransfer::WITHOUT_ALIAS_PROP => 'DateTime',
+                DefinitionNamespaceTransfer::BASE_NAME_PROP => 'DateTime',
+                DefinitionNamespaceTransfer::ALIAS_PROP => null,
             ],
         ];
     }

@@ -7,7 +7,7 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayInitiatorAttribute;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -25,32 +25,32 @@ final class NewsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 21;
 
     protected const array META_DATA = [
-        self::BRANDING_IMAGE_INDEX => self::BRANDING_IMAGE,
-        self::BREAKING_NEWS_INDEX => self::BREAKING_NEWS,
-        self::COMMENTS_INDEX => self::COMMENTS,
-        self::DATE_INDEX => self::DATE,
-        self::DETAILS_INDEX => self::DETAILS,
-        self::DETAILSWEB_INDEX => self::DETAILSWEB,
-        self::EXTERNAL_ID_INDEX => self::EXTERNAL_ID,
-        self::FIRST_SENTENCE_INDEX => self::FIRST_SENTENCE,
-        self::GEOTAGS_INDEX => self::GEOTAGS,
-        self::REGION_ID_INDEX => self::REGION_ID,
-        self::REGION_IDS_INDEX => self::REGION_IDS,
-        self::RESSORT_INDEX => self::RESSORT,
-        self::SHARE_U_R_L_INDEX => self::SHARE_U_R_L,
-        self::SOPHORA_ID_INDEX => self::SOPHORA_ID,
-        self::TAGS_INDEX => self::TAGS,
-        self::TEASER_IMAGE_INDEX => self::TEASER_IMAGE,
-        self::TITLE_INDEX => self::TITLE,
-        self::TOPLINE_INDEX => self::TOPLINE,
-        self::TRACKING_INDEX => self::TRACKING,
-        self::TYPE_INDEX => self::TYPE,
-        self::UPDATE_CHECK_URL_INDEX => self::UPDATE_CHECK_URL,
+        self::BRANDING_IMAGE_PROP => self::BRANDING_IMAGE_INDEX,
+        self::BREAKING_NEWS_PROP => self::BREAKING_NEWS_INDEX,
+        self::COMMENTS_PROP => self::COMMENTS_INDEX,
+        self::DATE_PROP => self::DATE_INDEX,
+        self::DETAILS_PROP => self::DETAILS_INDEX,
+        self::DETAILSWEB_PROP => self::DETAILSWEB_INDEX,
+        self::EXTERNAL_ID_PROP => self::EXTERNAL_ID_INDEX,
+        self::FIRST_SENTENCE_PROP => self::FIRST_SENTENCE_INDEX,
+        self::GEOTAGS_PROP => self::GEOTAGS_INDEX,
+        self::REGION_ID_PROP => self::REGION_ID_INDEX,
+        self::REGION_IDS_PROP => self::REGION_IDS_INDEX,
+        self::RESSORT_PROP => self::RESSORT_INDEX,
+        self::SHARE_U_R_L_PROP => self::SHARE_U_R_L_INDEX,
+        self::SOPHORA_ID_PROP => self::SOPHORA_ID_INDEX,
+        self::TAGS_PROP => self::TAGS_INDEX,
+        self::TEASER_IMAGE_PROP => self::TEASER_IMAGE_INDEX,
+        self::TITLE_PROP => self::TITLE_INDEX,
+        self::TOPLINE_PROP => self::TOPLINE_INDEX,
+        self::TRACKING_PROP => self::TRACKING_INDEX,
+        self::TYPE_PROP => self::TYPE_INDEX,
+        self::UPDATE_CHECK_URL_PROP => self::UPDATE_CHECK_URL_INDEX,
     ];
 
     // brandingImage
     #[TransferTransformerAttribute(BrandingImageTransfer::class)]
-    public const string BRANDING_IMAGE = 'brandingImage';
+    public const string BRANDING_IMAGE_PROP = 'brandingImage';
     private const int BRANDING_IMAGE_INDEX = 0;
 
     public ?BrandingImageTransfer $brandingImage {
@@ -59,7 +59,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // breakingNews
-    public const string BREAKING_NEWS = 'breakingNews';
+    public const string BREAKING_NEWS_PROP = 'breakingNews';
     private const int BREAKING_NEWS_INDEX = 1;
 
     public ?bool $breakingNews {
@@ -68,7 +68,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // comments
-    public const string COMMENTS = 'comments';
+    public const string COMMENTS_PROP = 'comments';
     private const int COMMENTS_INDEX = 2;
 
     public ?string $comments {
@@ -77,7 +77,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // date
-    public const string DATE = 'date';
+    public const string DATE_PROP = 'date';
     private const int DATE_INDEX = 3;
 
     public ?string $date {
@@ -86,7 +86,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // details
-    public const string DETAILS = 'details';
+    public const string DETAILS_PROP = 'details';
     private const int DETAILS_INDEX = 4;
 
     public ?string $details {
@@ -95,7 +95,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // detailsweb
-    public const string DETAILSWEB = 'detailsweb';
+    public const string DETAILSWEB_PROP = 'detailsweb';
     private const int DETAILSWEB_INDEX = 5;
 
     public ?string $detailsweb {
@@ -104,7 +104,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // externalId
-    public const string EXTERNAL_ID = 'externalId';
+    public const string EXTERNAL_ID_PROP = 'externalId';
     private const int EXTERNAL_ID_INDEX = 6;
 
     public ?string $externalId {
@@ -113,7 +113,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // firstSentence
-    public const string FIRST_SENTENCE = 'firstSentence';
+    public const string FIRST_SENTENCE_PROP = 'firstSentence';
     private const int FIRST_SENTENCE_INDEX = 7;
 
     public ?string $firstSentence {
@@ -123,7 +123,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // geotags
     #[ArrayInitiatorAttribute]
-    public const string GEOTAGS = 'geotags';
+    public const string GEOTAGS_PROP = 'geotags';
     private const int GEOTAGS_INDEX = 8;
 
     /** @var array<int|string,mixed> */
@@ -133,7 +133,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // regionId
-    public const string REGION_ID = 'regionId';
+    public const string REGION_ID_PROP = 'regionId';
     private const int REGION_ID_INDEX = 9;
 
     public ?int $regionId {
@@ -143,7 +143,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // regionIds
     #[ArrayInitiatorAttribute]
-    public const string REGION_IDS = 'regionIds';
+    public const string REGION_IDS_PROP = 'regionIds';
     private const int REGION_IDS_INDEX = 10;
 
     /** @var array<int|string,mixed> */
@@ -153,7 +153,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // ressort
-    public const string RESSORT = 'ressort';
+    public const string RESSORT_PROP = 'ressort';
     private const int RESSORT_INDEX = 11;
 
     public ?string $ressort {
@@ -162,7 +162,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // shareURL
-    public const string SHARE_U_R_L = 'shareURL';
+    public const string SHARE_U_R_L_PROP = 'shareURL';
     private const int SHARE_U_R_L_INDEX = 12;
 
     public ?string $shareURL {
@@ -171,7 +171,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // sophoraId
-    public const string SOPHORA_ID = 'sophoraId';
+    public const string SOPHORA_ID_PROP = 'sophoraId';
     private const int SOPHORA_ID_INDEX = 13;
 
     public ?string $sophoraId {
@@ -180,9 +180,9 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // tags
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(TagsTransfer::class)]
-    public const string TAGS = 'tags';
+    public const string TAGS_PROP = 'tags';
     private const int TAGS_INDEX = 14;
 
     /** @var \ArrayObject<int,TagsTransfer> */
@@ -193,7 +193,7 @@ final class NewsTransfer extends AbstractTransfer
 
     // teaserImage
     #[TransferTransformerAttribute(TeaserImageTransfer::class)]
-    public const string TEASER_IMAGE = 'teaserImage';
+    public const string TEASER_IMAGE_PROP = 'teaserImage';
     private const int TEASER_IMAGE_INDEX = 15;
 
     public ?TeaserImageTransfer $teaserImage {
@@ -202,7 +202,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // title
-    public const string TITLE = 'title';
+    public const string TITLE_PROP = 'title';
     private const int TITLE_INDEX = 16;
 
     public ?string $title {
@@ -211,7 +211,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // topline
-    public const string TOPLINE = 'topline';
+    public const string TOPLINE_PROP = 'topline';
     private const int TOPLINE_INDEX = 17;
 
     public ?string $topline {
@@ -220,9 +220,9 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // tracking
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(TrackingTransfer::class)]
-    public const string TRACKING = 'tracking';
+    public const string TRACKING_PROP = 'tracking';
     private const int TRACKING_INDEX = 18;
 
     /** @var \ArrayObject<int,TrackingTransfer> */
@@ -232,7 +232,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // type
-    public const string TYPE = 'type';
+    public const string TYPE_PROP = 'type';
     private const int TYPE_INDEX = 19;
 
     public ?string $type {
@@ -241,7 +241,7 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // updateCheckUrl
-    public const string UPDATE_CHECK_URL = 'updateCheckUrl';
+    public const string UPDATE_CHECK_URL_PROP = 'updateCheckUrl';
     private const int UPDATE_CHECK_URL_INDEX = 20;
 
     public ?string $updateCheckUrl {

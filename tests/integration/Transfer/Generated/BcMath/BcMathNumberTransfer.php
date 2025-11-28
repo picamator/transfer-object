@@ -22,12 +22,12 @@ final class BcMathNumberTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::I_AM_NUMBER_INDEX => self::I_AM_NUMBER,
+        self::I_AM_NUMBER_PROP => self::I_AM_NUMBER_INDEX,
     ];
 
     // iAmNumber
     #[NumberTransformerAttribute(Number::class)]
-    public const string I_AM_NUMBER = 'iAmNumber';
+    public const string I_AM_NUMBER_PROP = 'iAmNumber';
     private const int I_AM_NUMBER_INDEX = 0;
 
     public ?Number $iAmNumber {

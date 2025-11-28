@@ -21,13 +21,13 @@ final class TransferGeneratorTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::CLASS_NAME_INDEX => self::CLASS_NAME,
-        self::FILE_NAME_INDEX => self::FILE_NAME,
-        self::VALIDATOR_INDEX => self::VALIDATOR,
+        self::CLASS_NAME_PROP => self::CLASS_NAME_INDEX,
+        self::FILE_NAME_PROP => self::FILE_NAME_INDEX,
+        self::VALIDATOR_PROP => self::VALIDATOR_INDEX,
     ];
 
     // className
-    public const string CLASS_NAME = 'className';
+    public const string CLASS_NAME_PROP = 'className';
     private const int CLASS_NAME_INDEX = 0;
 
     public ?string $className {
@@ -36,7 +36,7 @@ final class TransferGeneratorTransfer extends AbstractTransfer
     }
 
     // fileName
-    public const string FILE_NAME = 'fileName';
+    public const string FILE_NAME_PROP = 'fileName';
     private const int FILE_NAME_INDEX = 1;
 
     public ?string $fileName {
@@ -46,7 +46,7 @@ final class TransferGeneratorTransfer extends AbstractTransfer
 
     // validator
     #[TransferTransformerAttribute(ValidatorTransfer::class)]
-    public const string VALIDATOR = 'validator';
+    public const string VALIDATOR_PROP = 'validator';
     private const int VALIDATOR_INDEX = 2;
 
     public ValidatorTransfer $validator {

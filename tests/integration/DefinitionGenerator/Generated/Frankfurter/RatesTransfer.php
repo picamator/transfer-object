@@ -20,40 +20,40 @@ final class RatesTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 30;
 
     protected const array META_DATA = [
-        self::AUD_INDEX => self::AUD,
-        self::BGN_INDEX => self::BGN,
-        self::BRL_INDEX => self::BRL,
-        self::CAD_INDEX => self::CAD,
-        self::CHF_INDEX => self::CHF,
-        self::CNY_INDEX => self::CNY,
-        self::CZK_INDEX => self::CZK,
-        self::DKK_INDEX => self::DKK,
-        self::GBP_INDEX => self::GBP,
-        self::HKD_INDEX => self::HKD,
-        self::HUF_INDEX => self::HUF,
-        self::IDR_INDEX => self::IDR,
-        self::ILS_INDEX => self::ILS,
-        self::INR_INDEX => self::INR,
-        self::ISK_INDEX => self::ISK,
-        self::JPY_INDEX => self::JPY,
-        self::KRW_INDEX => self::KRW,
-        self::MXN_INDEX => self::MXN,
-        self::MYR_INDEX => self::MYR,
-        self::NOK_INDEX => self::NOK,
-        self::NZD_INDEX => self::NZD,
-        self::PHP_INDEX => self::PHP,
-        self::PLN_INDEX => self::PLN,
-        self::RON_INDEX => self::RON,
-        self::SEK_INDEX => self::SEK,
-        self::SGD_INDEX => self::SGD,
-        self::THB_INDEX => self::THB,
-        self::TRY_INDEX => self::TRY,
-        self::USD_INDEX => self::USD,
-        self::ZAR_INDEX => self::ZAR,
+        self::AUD_PROP => self::AUD_INDEX,
+        self::BGN_PROP => self::BGN_INDEX,
+        self::BRL_PROP => self::BRL_INDEX,
+        self::CAD_PROP => self::CAD_INDEX,
+        self::CHF_PROP => self::CHF_INDEX,
+        self::CNY_PROP => self::CNY_INDEX,
+        self::CZK_PROP => self::CZK_INDEX,
+        self::DKK_PROP => self::DKK_INDEX,
+        self::GBP_PROP => self::GBP_INDEX,
+        self::HKD_PROP => self::HKD_INDEX,
+        self::HUF_PROP => self::HUF_INDEX,
+        self::IDR_PROP => self::IDR_INDEX,
+        self::ILS_PROP => self::ILS_INDEX,
+        self::INR_PROP => self::INR_INDEX,
+        self::ISK_PROP => self::ISK_INDEX,
+        self::JPY_PROP => self::JPY_INDEX,
+        self::KRW_PROP => self::KRW_INDEX,
+        self::MXN_PROP => self::MXN_INDEX,
+        self::MYR_PROP => self::MYR_INDEX,
+        self::NOK_PROP => self::NOK_INDEX,
+        self::NZD_PROP => self::NZD_INDEX,
+        self::PHP_PROP => self::PHP_INDEX,
+        self::PLN_PROP => self::PLN_INDEX,
+        self::RON_PROP => self::RON_INDEX,
+        self::SEK_PROP => self::SEK_INDEX,
+        self::SGD_PROP => self::SGD_INDEX,
+        self::THB_PROP => self::THB_INDEX,
+        self::TRY_PROP => self::TRY_INDEX,
+        self::USD_PROP => self::USD_INDEX,
+        self::ZAR_PROP => self::ZAR_INDEX,
     ];
 
     // AUD
-    public const string AUD = 'AUD';
+    public const string AUD_PROP = 'AUD';
     private const int AUD_INDEX = 0;
 
     public ?float $AUD {
@@ -62,7 +62,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // BGN
-    public const string BGN = 'BGN';
+    public const string BGN_PROP = 'BGN';
     private const int BGN_INDEX = 1;
 
     public ?float $BGN {
@@ -71,7 +71,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // BRL
-    public const string BRL = 'BRL';
+    public const string BRL_PROP = 'BRL';
     private const int BRL_INDEX = 2;
 
     public ?float $BRL {
@@ -80,7 +80,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // CAD
-    public const string CAD = 'CAD';
+    public const string CAD_PROP = 'CAD';
     private const int CAD_INDEX = 3;
 
     public ?float $CAD {
@@ -89,7 +89,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // CHF
-    public const string CHF = 'CHF';
+    public const string CHF_PROP = 'CHF';
     private const int CHF_INDEX = 4;
 
     public ?float $CHF {
@@ -98,7 +98,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // CNY
-    public const string CNY = 'CNY';
+    public const string CNY_PROP = 'CNY';
     private const int CNY_INDEX = 5;
 
     public ?float $CNY {
@@ -107,7 +107,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // CZK
-    public const string CZK = 'CZK';
+    public const string CZK_PROP = 'CZK';
     private const int CZK_INDEX = 6;
 
     public ?float $CZK {
@@ -116,7 +116,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // DKK
-    public const string DKK = 'DKK';
+    public const string DKK_PROP = 'DKK';
     private const int DKK_INDEX = 7;
 
     public ?float $DKK {
@@ -125,7 +125,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // GBP
-    public const string GBP = 'GBP';
+    public const string GBP_PROP = 'GBP';
     private const int GBP_INDEX = 8;
 
     public ?float $GBP {
@@ -134,7 +134,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // HKD
-    public const string HKD = 'HKD';
+    public const string HKD_PROP = 'HKD';
     private const int HKD_INDEX = 9;
 
     public ?float $HKD {
@@ -143,7 +143,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // HUF
-    public const string HUF = 'HUF';
+    public const string HUF_PROP = 'HUF';
     private const int HUF_INDEX = 10;
 
     public ?float $HUF {
@@ -152,7 +152,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // IDR
-    public const string IDR = 'IDR';
+    public const string IDR_PROP = 'IDR';
     private const int IDR_INDEX = 11;
 
     public ?int $IDR {
@@ -161,7 +161,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // ILS
-    public const string ILS = 'ILS';
+    public const string ILS_PROP = 'ILS';
     private const int ILS_INDEX = 12;
 
     public ?float $ILS {
@@ -170,7 +170,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // INR
-    public const string INR = 'INR';
+    public const string INR_PROP = 'INR';
     private const int INR_INDEX = 13;
 
     public ?float $INR {
@@ -179,7 +179,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // ISK
-    public const string ISK = 'ISK';
+    public const string ISK_PROP = 'ISK';
     private const int ISK_INDEX = 14;
 
     public ?float $ISK {
@@ -188,7 +188,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // JPY
-    public const string JPY = 'JPY';
+    public const string JPY_PROP = 'JPY';
     private const int JPY_INDEX = 15;
 
     public ?float $JPY {
@@ -197,7 +197,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // KRW
-    public const string KRW = 'KRW';
+    public const string KRW_PROP = 'KRW';
     private const int KRW_INDEX = 16;
 
     public ?float $KRW {
@@ -206,7 +206,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // MXN
-    public const string MXN = 'MXN';
+    public const string MXN_PROP = 'MXN';
     private const int MXN_INDEX = 17;
 
     public ?float $MXN {
@@ -215,7 +215,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // MYR
-    public const string MYR = 'MYR';
+    public const string MYR_PROP = 'MYR';
     private const int MYR_INDEX = 18;
 
     public ?float $MYR {
@@ -224,7 +224,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // NOK
-    public const string NOK = 'NOK';
+    public const string NOK_PROP = 'NOK';
     private const int NOK_INDEX = 19;
 
     public ?float $NOK {
@@ -233,7 +233,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // NZD
-    public const string NZD = 'NZD';
+    public const string NZD_PROP = 'NZD';
     private const int NZD_INDEX = 20;
 
     public ?float $NZD {
@@ -242,7 +242,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // PHP
-    public const string PHP = 'PHP';
+    public const string PHP_PROP = 'PHP';
     private const int PHP_INDEX = 21;
 
     public ?float $PHP {
@@ -251,7 +251,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // PLN
-    public const string PLN = 'PLN';
+    public const string PLN_PROP = 'PLN';
     private const int PLN_INDEX = 22;
 
     public ?float $PLN {
@@ -260,7 +260,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // RON
-    public const string RON = 'RON';
+    public const string RON_PROP = 'RON';
     private const int RON_INDEX = 23;
 
     public ?float $RON {
@@ -269,7 +269,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // SEK
-    public const string SEK = 'SEK';
+    public const string SEK_PROP = 'SEK';
     private const int SEK_INDEX = 24;
 
     public ?float $SEK {
@@ -278,7 +278,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // SGD
-    public const string SGD = 'SGD';
+    public const string SGD_PROP = 'SGD';
     private const int SGD_INDEX = 25;
 
     public ?float $SGD {
@@ -287,7 +287,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // THB
-    public const string THB = 'THB';
+    public const string THB_PROP = 'THB';
     private const int THB_INDEX = 26;
 
     public ?float $THB {
@@ -296,7 +296,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // TRY
-    public const string TRY = 'TRY';
+    public const string TRY_PROP = 'TRY';
     private const int TRY_INDEX = 27;
 
     public ?float $TRY {
@@ -305,7 +305,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // USD
-    public const string USD = 'USD';
+    public const string USD_PROP = 'USD';
     private const int USD_INDEX = 28;
 
     public ?float $USD {
@@ -314,7 +314,7 @@ final class RatesTransfer extends AbstractTransfer
     }
 
     // ZAR
-    public const string ZAR = 'ZAR';
+    public const string ZAR_PROP = 'ZAR';
     private const int ZAR_INDEX = 29;
 
     public ?float $ZAR {

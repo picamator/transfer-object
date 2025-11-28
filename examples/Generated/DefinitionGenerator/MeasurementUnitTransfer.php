@@ -21,13 +21,13 @@ final class MeasurementUnitTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::BOX_INDEX => self::BOX,
-        self::PALETTE_INDEX => self::PALETTE,
+        self::BOX_PROP => self::BOX_INDEX,
+        self::PALETTE_PROP => self::PALETTE_INDEX,
     ];
 
     // box
     #[TransferTransformerAttribute(BoxTransfer::class)]
-    public const string BOX = 'box';
+    public const string BOX_PROP = 'box';
     private const int BOX_INDEX = 0;
 
     public ?BoxTransfer $box {
@@ -37,7 +37,7 @@ final class MeasurementUnitTransfer extends AbstractTransfer
 
     // palette
     #[TransferTransformerAttribute(PaletteTransfer::class)]
-    public const string PALETTE = 'palette';
+    public const string PALETTE_PROP = 'palette';
     private const int PALETTE_INDEX = 1;
 
     public ?PaletteTransfer $palette {

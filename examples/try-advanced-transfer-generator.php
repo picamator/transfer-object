@@ -99,18 +99,18 @@ echo <<<'STORY'
 =======================================================
            Generate Transfer Object
                   with notice
-    for demonstration exception handling was skipped
+    for demo the exception handling was skipped
 =======================================================
 
 STORY;
 $configPath = __DIR__ . '/config/advanced-transfer-generator/generator.config.yml';
-new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
+$generatedTransferCount = new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
+
+echo "Generated $generatedTransferCount transfer objects.\n";
 
 echo <<<'STORY'
 =======================================================
         Try newly Generated Transfer Object
-                      and
-                     Debug
 =======================================================
 
 STORY;
@@ -130,18 +130,18 @@ echo <<<'STORY'
 STORY;
 $advancedCustomerTransfer = new AdvancedCustomerTransfer()
     ->fromArray([
-        AdvancedCustomerTransfer::CUSTOMER => [
-            CustomerTransfer::FIRST_NAME => 'Theodor',
-            CustomerTransfer::LAST_NAME => 'Storm',
+        AdvancedCustomerTransfer::CUSTOMER_PROP => [
+            CustomerTransfer::FIRST_NAME_PROP => 'Theodor',
+            CustomerTransfer::LAST_NAME_PROP => 'Storm',
         ],
-        AdvancedCustomerTransfer::ADDRESS => [
+        AdvancedCustomerTransfer::ADDRESS_PROP => [
             'street' => 'Wasserreihe',
             'houseNumber' => '31',
             'city' => 'Husum',
             'postCode' => '25813',
             'country' => 'Deutschland',
         ],
-        AdvancedCustomerTransfer::CREDENTIALS => [
+        AdvancedCustomerTransfer::CREDENTIALS_PROP => [
             'login' => 'theodor.storm',
             'token' => 'Der Schimmelreiter',
         ],

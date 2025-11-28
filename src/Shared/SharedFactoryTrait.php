@@ -33,7 +33,7 @@ trait SharedFactoryTrait
     {
         return $this->getCached(
             key: 'shared:FileAppender',
-            factory: fn (): FileAppenderInterface => new FileAppender(),
+            factory: fn(): FileAppenderInterface => new FileAppender(),
         );
     }
 
@@ -41,7 +41,7 @@ trait SharedFactoryTrait
     {
         return $this->getCached(
             key: 'shared:JsonReader',
-            factory: fn (): JsonReaderInterface => new JsonReader($this->createFilesystem()),
+            factory: fn(): JsonReaderInterface => new JsonReader($this->createFilesystem()),
         );
     }
 
@@ -49,7 +49,7 @@ trait SharedFactoryTrait
     {
         return $this->getCached(
             key: 'shared:ClassNameValidator',
-            factory: fn (): ClassNameValidatorInterface => new ClassNameValidator(),
+            factory: fn(): ClassNameValidatorInterface => new ClassNameValidator(),
         );
     }
 
@@ -57,7 +57,7 @@ trait SharedFactoryTrait
     {
         return $this->getCached(
             key: 'shared:NamespaceValidator',
-            factory: fn (): NamespaceValidatorInterface => new NamespaceValidator(),
+            factory: fn(): NamespaceValidatorInterface => new NamespaceValidator(),
         );
     }
 
@@ -65,7 +65,7 @@ trait SharedFactoryTrait
     {
         return $this->getCached(
             key: 'shared:PathExistValidator',
-            factory: fn (): PathExistValidatorInterface => new PathExistValidator($this->createFilesystem()),
+            factory: fn(): PathExistValidatorInterface => new PathExistValidator($this->createFilesystem()),
         );
     }
 
@@ -73,7 +73,7 @@ trait SharedFactoryTrait
     {
         return $this->getCached(
             key: 'shared:PathLocalValidator',
-            factory: fn (): PathLocalValidatorInterface => new PathLocalValidator(),
+            factory: fn(): PathLocalValidatorInterface => new PathLocalValidator(),
         );
     }
 
@@ -81,7 +81,7 @@ trait SharedFactoryTrait
     {
         return $this->getCached(
             key: 'shared:FileReaderProgress',
-            factory: fn (): FileReaderProgressInterface => new FileReaderProgress($this->createFileReader()),
+            factory: fn(): FileReaderProgressInterface => new FileReaderProgress($this->createFileReader()),
         );
     }
 
@@ -89,7 +89,7 @@ trait SharedFactoryTrait
     {
         return $this->getCached(
             key: 'shared:FileReader',
-            factory: fn (): FileReaderInterface => new FileReader(),
+            factory: fn(): FileReaderInterface => new FileReader(),
         );
     }
 }

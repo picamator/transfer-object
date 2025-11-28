@@ -20,49 +20,83 @@ trait AttributeTrait
     private ?WeakReference $_reflectionObjectReference = null;
 
     /**
-     * @return array<string, \Picamator\TransferObject\Transfer\Attribute\Transformer\TransformerAttributeInterface>
+     * @param array<string>|null $propertyNames
+     *
+     * @return Generator<string, TransformerAttributeInterface>
      */
-    final protected function getTransformerAttributes(): array
+    final protected function getTransformers(?array $propertyNames = null): Generator
     {
-        $attributes = [];
-        foreach ($this->getReflectionConstants() as $reflectionConstant) {
+        $reflectionConstants = $propertyNames === null
+            ? $this->getReflectionConstants()
+            : $this->getFilterReflectionConstants($propertyNames);
+
+        foreach ($reflectionConstants as $reflectionConstant) {
             $attributeReflections = $reflectionConstant->getAttributes(
                 name: TransformerAttributeInterface::class,
                 flags: ReflectionAttribute::IS_INSTANCEOF,
             );
 
-            if (!isset($attributeReflections[0])) {
+            /** @var \ReflectionAttribute<TransformerAttributeInterface>|null $attributeReflection */
+            $attributeReflection = array_first($attributeReflections);
+            if ($attributeReflection === null) {
                 continue;
             }
 
             /** @var string $propertyName */
             $propertyName = $reflectionConstant->getValue();
-            $attributes[$propertyName] = $attributeReflections[0]->newInstance();
-        }
 
-        return $attributes;
+            yield $propertyName => $attributeReflection->newInstance();
+        }
     }
 
     /**
-     * @return Generator<string, \Picamator\TransferObject\Transfer\Attribute\Initiator\InitiatorAttributeInterface>
+     * @return Generator<string, InitiatorAttributeInterface>
      */
-    final protected function getInitiatorAttributes(): Generator
+    final protected function getInitiators(): Generator
     {
+        /** @var array<string, InitiatorAttributeInterface> $initiators */
+        $initiators = [];
         foreach ($this->getReflectionConstants() as $reflectionConstant) {
             $attributeReflections = $reflectionConstant->getAttributes(
                 name: InitiatorAttributeInterface::class,
                 flags: ReflectionAttribute::IS_INSTANCEOF,
             );
 
-            if (!isset($attributeReflections[0])) {
+            /** @var \ReflectionAttribute<InitiatorAttributeInterface>|null $attributeReflection */
+            $attributeReflection = array_first($attributeReflections);
+            if ($attributeReflection === null) {
                 continue;
             }
 
             /** @var string $propertyName */
             $propertyName = $reflectionConstant->getValue();
+            $initiatorName = $attributeReflection->getName();
 
-            yield $propertyName => $attributeReflections[0]->newInstance();
+            $initiators[$initiatorName] ??= $attributeReflection->newInstance();
+
+            yield $propertyName => $initiators[$initiatorName];
         }
+    }
+
+    /**
+     * @param array<string> $propertyNames
+     *
+     * @return array<\ReflectionClassConstant>
+     */
+    private function getFilterReflectionConstants(array $propertyNames): array
+    {
+        $reflectionConstants = $this->getReflectionConstants();
+        if (count($propertyNames) === count($reflectionConstants)) {
+            return $reflectionConstants;
+        }
+
+        $propertyNames = array_flip($propertyNames);
+
+        return array_filter(
+            $reflectionConstants,
+            /** @phpstan-ignore offsetAccess.invalidOffset */
+            fn(ReflectionClassConstant $reflection): bool => isset($propertyNames[$reflection->getValue()]),
+        );
     }
 
     /**

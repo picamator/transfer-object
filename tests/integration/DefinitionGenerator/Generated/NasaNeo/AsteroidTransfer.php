@@ -6,7 +6,7 @@ namespace Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generat
 
 use ArrayObject;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Attribute\Initiator\CollectionInitiatorAttribute;
+use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\CollectionTransformerAttribute;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransferTransformerAttribute;
 
@@ -24,22 +24,22 @@ final class AsteroidTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 12;
 
     protected const array META_DATA = [
-        self::ABSOLUTE_MAGNITUDE_H_INDEX => self::ABSOLUTE_MAGNITUDE_H,
-        self::CLOSE_APPROACH_DATA_INDEX => self::CLOSE_APPROACH_DATA,
-        self::DESIGNATION_INDEX => self::DESIGNATION,
-        self::ESTIMATED_DIAMETER_INDEX => self::ESTIMATED_DIAMETER,
-        self::ID_INDEX => self::ID,
-        self::IS_POTENTIALLY_HAZARDOUS_ASTEROID_INDEX => self::IS_POTENTIALLY_HAZARDOUS_ASTEROID,
-        self::IS_SENTRY_OBJECT_INDEX => self::IS_SENTRY_OBJECT,
-        self::LINKS_INDEX => self::LINKS,
-        self::NAME_INDEX => self::NAME,
-        self::NASA_JPL_URL_INDEX => self::NASA_JPL_URL,
-        self::NEO_REFERENCE_ID_INDEX => self::NEO_REFERENCE_ID,
-        self::ORBITAL_DATA_INDEX => self::ORBITAL_DATA,
+        self::ABSOLUTE_MAGNITUDE_H_PROP => self::ABSOLUTE_MAGNITUDE_H_INDEX,
+        self::CLOSE_APPROACH_DATA_PROP => self::CLOSE_APPROACH_DATA_INDEX,
+        self::DESIGNATION_PROP => self::DESIGNATION_INDEX,
+        self::ESTIMATED_DIAMETER_PROP => self::ESTIMATED_DIAMETER_INDEX,
+        self::ID_PROP => self::ID_INDEX,
+        self::IS_POTENTIALLY_HAZARDOUS_ASTEROID_PROP => self::IS_POTENTIALLY_HAZARDOUS_ASTEROID_INDEX,
+        self::IS_SENTRY_OBJECT_PROP => self::IS_SENTRY_OBJECT_INDEX,
+        self::LINKS_PROP => self::LINKS_INDEX,
+        self::NAME_PROP => self::NAME_INDEX,
+        self::NASA_JPL_URL_PROP => self::NASA_JPL_URL_INDEX,
+        self::NEO_REFERENCE_ID_PROP => self::NEO_REFERENCE_ID_INDEX,
+        self::ORBITAL_DATA_PROP => self::ORBITAL_DATA_INDEX,
     ];
 
     // absolute_magnitude_h
-    public const string ABSOLUTE_MAGNITUDE_H = 'absolute_magnitude_h';
+    public const string ABSOLUTE_MAGNITUDE_H_PROP = 'absolute_magnitude_h';
     private const int ABSOLUTE_MAGNITUDE_H_INDEX = 0;
 
     public ?float $absolute_magnitude_h {
@@ -48,9 +48,9 @@ final class AsteroidTransfer extends AbstractTransfer
     }
 
     // close_approach_data
-    #[CollectionInitiatorAttribute]
+    #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(CloseApproachDataTransfer::class)]
-    public const string CLOSE_APPROACH_DATA = 'close_approach_data';
+    public const string CLOSE_APPROACH_DATA_PROP = 'close_approach_data';
     private const int CLOSE_APPROACH_DATA_INDEX = 1;
 
     /** @var \ArrayObject<int,CloseApproachDataTransfer> */
@@ -60,7 +60,7 @@ final class AsteroidTransfer extends AbstractTransfer
     }
 
     // designation
-    public const string DESIGNATION = 'designation';
+    public const string DESIGNATION_PROP = 'designation';
     private const int DESIGNATION_INDEX = 2;
 
     public ?string $designation {
@@ -70,7 +70,7 @@ final class AsteroidTransfer extends AbstractTransfer
 
     // estimated_diameter
     #[TransferTransformerAttribute(EstimatedDiameterTransfer::class)]
-    public const string ESTIMATED_DIAMETER = 'estimated_diameter';
+    public const string ESTIMATED_DIAMETER_PROP = 'estimated_diameter';
     private const int ESTIMATED_DIAMETER_INDEX = 3;
 
     public ?EstimatedDiameterTransfer $estimated_diameter {
@@ -79,7 +79,7 @@ final class AsteroidTransfer extends AbstractTransfer
     }
 
     // id
-    public const string ID = 'id';
+    public const string ID_PROP = 'id';
     private const int ID_INDEX = 4;
 
     public ?string $id {
@@ -88,7 +88,7 @@ final class AsteroidTransfer extends AbstractTransfer
     }
 
     // is_potentially_hazardous_asteroid
-    public const string IS_POTENTIALLY_HAZARDOUS_ASTEROID = 'is_potentially_hazardous_asteroid';
+    public const string IS_POTENTIALLY_HAZARDOUS_ASTEROID_PROP = 'is_potentially_hazardous_asteroid';
     private const int IS_POTENTIALLY_HAZARDOUS_ASTEROID_INDEX = 5;
 
     public ?bool $is_potentially_hazardous_asteroid {
@@ -97,7 +97,7 @@ final class AsteroidTransfer extends AbstractTransfer
     }
 
     // is_sentry_object
-    public const string IS_SENTRY_OBJECT = 'is_sentry_object';
+    public const string IS_SENTRY_OBJECT_PROP = 'is_sentry_object';
     private const int IS_SENTRY_OBJECT_INDEX = 6;
 
     public ?bool $is_sentry_object {
@@ -107,7 +107,7 @@ final class AsteroidTransfer extends AbstractTransfer
 
     // links
     #[TransferTransformerAttribute(LinksTransfer::class)]
-    public const string LINKS = 'links';
+    public const string LINKS_PROP = 'links';
     private const int LINKS_INDEX = 7;
 
     public ?LinksTransfer $links {
@@ -116,7 +116,7 @@ final class AsteroidTransfer extends AbstractTransfer
     }
 
     // name
-    public const string NAME = 'name';
+    public const string NAME_PROP = 'name';
     private const int NAME_INDEX = 8;
 
     public ?string $name {
@@ -125,7 +125,7 @@ final class AsteroidTransfer extends AbstractTransfer
     }
 
     // nasa_jpl_url
-    public const string NASA_JPL_URL = 'nasa_jpl_url';
+    public const string NASA_JPL_URL_PROP = 'nasa_jpl_url';
     private const int NASA_JPL_URL_INDEX = 9;
 
     public ?string $nasa_jpl_url {
@@ -134,7 +134,7 @@ final class AsteroidTransfer extends AbstractTransfer
     }
 
     // neo_reference_id
-    public const string NEO_REFERENCE_ID = 'neo_reference_id';
+    public const string NEO_REFERENCE_ID_PROP = 'neo_reference_id';
     private const int NEO_REFERENCE_ID_INDEX = 10;
 
     public ?string $neo_reference_id {
@@ -144,7 +144,7 @@ final class AsteroidTransfer extends AbstractTransfer
 
     // orbital_data
     #[TransferTransformerAttribute(OrbitalDataTransfer::class)]
-    public const string ORBITAL_DATA = 'orbital_data';
+    public const string ORBITAL_DATA_PROP = 'orbital_data';
     private const int ORBITAL_DATA_INDEX = 11;
 
     public ?OrbitalDataTransfer $orbital_data {

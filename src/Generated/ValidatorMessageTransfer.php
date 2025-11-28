@@ -20,12 +20,12 @@ final class ValidatorMessageTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::ERROR_MESSAGE_INDEX => self::ERROR_MESSAGE,
-        self::IS_VALID_INDEX => self::IS_VALID,
+        self::ERROR_MESSAGE_PROP => self::ERROR_MESSAGE_INDEX,
+        self::IS_VALID_PROP => self::IS_VALID_INDEX,
     ];
 
     // errorMessage
-    public const string ERROR_MESSAGE = 'errorMessage';
+    public const string ERROR_MESSAGE_PROP = 'errorMessage';
     private const int ERROR_MESSAGE_INDEX = 0;
 
     public protected(set) string $errorMessage {
@@ -34,7 +34,7 @@ final class ValidatorMessageTransfer extends AbstractTransfer
     }
 
     // isValid
-    public const string IS_VALID = 'isValid';
+    public const string IS_VALID_PROP = 'isValid';
     private const int IS_VALID_INDEX = 1;
 
     public protected(set) bool $isValid {

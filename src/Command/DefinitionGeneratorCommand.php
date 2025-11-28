@@ -16,10 +16,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
 
 #[AsCommand(
-    name: 'picamator:definition:generate',
+    name: 'picamator:definition:generate|p:d:g',
     description: 'Generates Transfer Object definition files from a JSON blueprint.',
-    aliases: ['p:d:g'],
-    hidden: false,
     // phpcs:disable Generic.Files.LineLength
     help: <<<HELP
 The <info>%command.name%</info> command generates Transfer Object definition files based on a JSON blueprint.
@@ -92,7 +90,8 @@ readonly class DefinitionGeneratorCommand
     private function createJsonPathQuestion(DefinitionGeneratorBuilderInterface $builder): Question
     {
         return new Question(question: self::QUESTION_JSON_PATH)
-            ->setValidator(function (string $answer) use ($builder) {
+            /** @phpstan-ignore argument.type */
+            ->setValidator(function (string $answer) use ($builder): string {
                 $builder->setJsonPath($answer);
 
                 return $answer;
@@ -104,7 +103,8 @@ readonly class DefinitionGeneratorCommand
     private function createClassNameQuestion(DefinitionGeneratorBuilderInterface $builder): Question
     {
         return new Question(question: self::QUESTION_CLASS_NAME)
-            ->setValidator(function (string $answer) use ($builder) {
+            /** @phpstan-ignore argument.type */
+            ->setValidator(function (string $answer) use ($builder): string {
                 $builder->setClassName($answer);
 
                 return $answer;
@@ -116,7 +116,8 @@ readonly class DefinitionGeneratorCommand
     private function createDefinitionPathQuestion(DefinitionGeneratorBuilderInterface $builder): Question
     {
         return new Question(question: self::QUESTION_DEFINITION_PATH)
-            ->setValidator(function (string $answer) use ($builder) {
+            /** @phpstan-ignore argument.type */
+            ->setValidator(function (string $answer) use ($builder): string {
                 $builder->setDefinitionPath($answer);
 
                 return $answer;

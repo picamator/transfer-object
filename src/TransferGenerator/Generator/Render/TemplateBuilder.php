@@ -39,6 +39,10 @@ readonly class TemplateBuilder implements TemplateBuilderInterface
     {
         $templateTransfer->imports->natsort();
         $templateTransfer->metaConstants->natsort();
+
+        foreach ($templateTransfer->metaAttributes as $metaAttributes) {
+            natsort($metaAttributes);
+        }
     }
 
     private function getDefinitionPath(DefinitionTransfer $definitionTransfer): string

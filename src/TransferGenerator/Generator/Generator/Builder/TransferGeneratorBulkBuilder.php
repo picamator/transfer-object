@@ -33,9 +33,9 @@ readonly class TransferGeneratorBulkBuilder implements TransferGeneratorBulkBuil
     public function createDefaultProgressTransfer(): FileReaderProgressTransfer
     {
         return new FileReaderProgressTransfer([
-            FileReaderProgressTransfer::CONTENT => '',
-            FileReaderProgressTransfer::TOTAL_BYTES => 0,
-            FileReaderProgressTransfer::PROGRESS_BYTES => 0,
+            FileReaderProgressTransfer::CONTENT_PROP => '',
+            FileReaderProgressTransfer::TOTAL_BYTES_PROP => 0,
+            FileReaderProgressTransfer::PROGRESS_BYTES_PROP => 0,
         ]);
     }
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Config\Parser\Builder;
 
 use Picamator\TransferObject\Generated\ConfigContentTransfer;
-use Picamator\TransferObject\TransferGenerator\Config\Enum\ConfigKeyEnum;
 use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRenderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Parser\Filter\ConfigNormalizerTrait;
 
@@ -16,11 +15,6 @@ readonly class ConfigContentBuilder implements ConfigContentBuilderInterface
     public function __construct(
         private ConfigEnvironmentRenderInterface $environmentRender,
     ) {
-    }
-
-    public function createDefaultContentTransfer(): ConfigContentTransfer
-    {
-        return new ConfigContentTransfer(ConfigKeyEnum::getDefaultConfig());
     }
 
     public function createContentTransfer(array $configData): ConfigContentTransfer

@@ -8,8 +8,6 @@ use Picamator\TransferObject\Generated\ConfigContentTransfer;
 
 interface ConfigContentBuilderInterface
 {
-    public function createDefaultContentTransfer(): ConfigContentTransfer;
-
     /**
      * @param array<string, string|null> $configData
      */

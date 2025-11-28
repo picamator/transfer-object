@@ -65,34 +65,36 @@ echo <<<'STORY'
 STORY;
 $generatorTransfer = new DefinitionGeneratorTransfer(
     [
-        DefinitionGeneratorTransfer::DEFINITION_PATH => __DIR__ . '/config/definition-generator/definition',
-        DefinitionGeneratorTransfer::CONTENT => [
-            DefinitionGeneratorContentTransfer::CLASS_NAME => 'Product',
-            DefinitionGeneratorContentTransfer::CONTENT => $productData,
+        DefinitionGeneratorTransfer::DEFINITION_PATH_PROP => __DIR__ . '/config/definition-generator/definition',
+        DefinitionGeneratorTransfer::CONTENT_PROP => [
+            DefinitionGeneratorContentTransfer::CLASS_NAME_PROP => 'Product',
+            DefinitionGeneratorContentTransfer::CONTENT_PROP => $productData,
         ],
     ]
 );
 
-$generatedDefinitions = new DefinitionGeneratorFacade()->generateDefinitionsOrFail($generatorTransfer);
+$generatedDefinitionCount = new DefinitionGeneratorFacade()->generateDefinitionsOrFail($generatorTransfer);
 
-echo "Definitions $generatedDefinitions were successfully generated.\n";
+echo "Definitions $generatedDefinitionCount were successfully generated.\n";
 
 echo <<<'STORY'
 =======================================================
              Generate Transfer Objects
                    with notice
-   for demonstration exception handling was skipped
+   for demo the exception handling was skipped
 =======================================================
 
 STORY;
 $configPath = __DIR__ . '/config/definition-generator/generator.config.yml';
-new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
+$generatedTransferCount = new TransferGeneratorFacade()->generateTransfersOrFail($configPath);
+
+echo "Generated $generatedTransferCount transfer objects.\n";
 
 echo <<<'STORY'
 =======================================================
         Try newly Generated Transfer Objects
                        and
-      validate $productData fits Transfer Object
+     validate how $productData fits Transfer Objects
 =======================================================
 
 STORY;

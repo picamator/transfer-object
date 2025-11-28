@@ -23,21 +23,21 @@ final class TemplateTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 11;
 
     protected const array META_DATA = [
-        self::CLASS_NAME_INDEX => self::CLASS_NAME,
-        self::CLASS_NAMESPACE_INDEX => self::CLASS_NAMESPACE,
-        self::DEFINITION_PATH_INDEX => self::DEFINITION_PATH,
-        self::DOCK_BLOCKS_INDEX => self::DOCK_BLOCKS,
-        self::IMPORTS_INDEX => self::IMPORTS,
-        self::META_ATTRIBUTES_INDEX => self::META_ATTRIBUTES,
-        self::META_CONSTANTS_INDEX => self::META_CONSTANTS,
-        self::NULLABLES_INDEX => self::NULLABLES,
-        self::PROPERTIES_INDEX => self::PROPERTIES,
-        self::PROPERTY_ATTRIBUTES_INDEX => self::PROPERTY_ATTRIBUTES,
-        self::PROTECTS_INDEX => self::PROTECTS,
+        self::CLASS_NAME_PROP => self::CLASS_NAME_INDEX,
+        self::CLASS_NAMESPACE_PROP => self::CLASS_NAMESPACE_INDEX,
+        self::DEFINITION_PATH_PROP => self::DEFINITION_PATH_INDEX,
+        self::DOCK_BLOCKS_PROP => self::DOCK_BLOCKS_INDEX,
+        self::IMPORTS_PROP => self::IMPORTS_INDEX,
+        self::META_ATTRIBUTES_PROP => self::META_ATTRIBUTES_INDEX,
+        self::META_CONSTANTS_PROP => self::META_CONSTANTS_INDEX,
+        self::NULLABLES_PROP => self::NULLABLES_INDEX,
+        self::PROPERTIES_PROP => self::PROPERTIES_INDEX,
+        self::PROPERTY_ATTRIBUTES_PROP => self::PROPERTY_ATTRIBUTES_INDEX,
+        self::PROTECTS_PROP => self::PROTECTS_INDEX,
     ];
 
     // className
-    public const string CLASS_NAME = 'className';
+    public const string CLASS_NAME_PROP = 'className';
     private const int CLASS_NAME_INDEX = 0;
 
     public string $className {
@@ -46,7 +46,7 @@ final class TemplateTransfer extends AbstractTransfer
     }
 
     // classNamespace
-    public const string CLASS_NAMESPACE = 'classNamespace';
+    public const string CLASS_NAMESPACE_PROP = 'classNamespace';
     private const int CLASS_NAMESPACE_INDEX = 1;
 
     public string $classNamespace {
@@ -55,7 +55,7 @@ final class TemplateTransfer extends AbstractTransfer
     }
 
     // definitionPath
-    public const string DEFINITION_PATH = 'definitionPath';
+    public const string DEFINITION_PATH_PROP = 'definitionPath';
     private const int DEFINITION_PATH_INDEX = 2;
 
     public string $definitionPath {
@@ -66,7 +66,7 @@ final class TemplateTransfer extends AbstractTransfer
     // dockBlocks
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
-    public const string DOCK_BLOCKS = 'dockBlocks';
+    public const string DOCK_BLOCKS_PROP = 'dockBlocks';
     private const int DOCK_BLOCKS_INDEX = 3;
 
     /** @var \ArrayObject<string,string> */
@@ -78,7 +78,7 @@ final class TemplateTransfer extends AbstractTransfer
     // imports
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
-    public const string IMPORTS = 'imports';
+    public const string IMPORTS_PROP = 'imports';
     private const int IMPORTS_INDEX = 4;
 
     /** @var \ArrayObject<string,string> */
@@ -90,7 +90,7 @@ final class TemplateTransfer extends AbstractTransfer
     // metaAttributes
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
-    public const string META_ATTRIBUTES = 'metaAttributes';
+    public const string META_ATTRIBUTES_PROP = 'metaAttributes';
     private const int META_ATTRIBUTES_INDEX = 5;
 
     /** @var \ArrayObject<string,array<int,string>> */
@@ -102,7 +102,7 @@ final class TemplateTransfer extends AbstractTransfer
     // metaConstants
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
-    public const string META_CONSTANTS = 'metaConstants';
+    public const string META_CONSTANTS_PROP = 'metaConstants';
     private const int META_CONSTANTS_INDEX = 6;
 
     /** @var \ArrayObject<string,string> */
@@ -114,7 +114,7 @@ final class TemplateTransfer extends AbstractTransfer
     // nullables
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
-    public const string NULLABLES = 'nullables';
+    public const string NULLABLES_PROP = 'nullables';
     private const int NULLABLES_INDEX = 7;
 
     /** @var \ArrayObject<string,bool> */
@@ -126,7 +126,7 @@ final class TemplateTransfer extends AbstractTransfer
     // properties
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
-    public const string PROPERTIES = 'properties';
+    public const string PROPERTIES_PROP = 'properties';
     private const int PROPERTIES_INDEX = 8;
 
     /** @var \ArrayObject<string,string> */
@@ -138,7 +138,7 @@ final class TemplateTransfer extends AbstractTransfer
     // propertyAttributes
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
-    public const string PROPERTY_ATTRIBUTES = 'propertyAttributes';
+    public const string PROPERTY_ATTRIBUTES_PROP = 'propertyAttributes';
     private const int PROPERTY_ATTRIBUTES_INDEX = 9;
 
     /** @var \ArrayObject<string,array<int,string>> */
@@ -150,7 +150,7 @@ final class TemplateTransfer extends AbstractTransfer
     // protects
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
-    public const string PROTECTS = 'protects';
+    public const string PROTECTS_PROP = 'protects';
     private const int PROTECTS_INDEX = 10;
 
     /** @var \ArrayObject<string,bool> */

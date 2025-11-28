@@ -20,14 +20,14 @@ final class StatisticsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
-        self::CODE_INDEX => self::CODE,
-        self::CONTENT_INDEX => self::CONTENT,
-        self::CUBES_INDEX => self::CUBES,
-        self::INFORMATION_INDEX => self::INFORMATION,
+        self::CODE_PROP => self::CODE_INDEX,
+        self::CONTENT_PROP => self::CONTENT_INDEX,
+        self::CUBES_PROP => self::CUBES_INDEX,
+        self::INFORMATION_PROP => self::INFORMATION_INDEX,
     ];
 
     // Code
-    public const string CODE = 'Code';
+    public const string CODE_PROP = 'Code';
     private const int CODE_INDEX = 0;
 
     public ?string $Code {
@@ -36,7 +36,7 @@ final class StatisticsTransfer extends AbstractTransfer
     }
 
     // Content
-    public const string CONTENT = 'Content';
+    public const string CONTENT_PROP = 'Content';
     private const int CONTENT_INDEX = 1;
 
     public ?string $Content {
@@ -45,7 +45,7 @@ final class StatisticsTransfer extends AbstractTransfer
     }
 
     // Cubes
-    public const string CUBES = 'Cubes';
+    public const string CUBES_PROP = 'Cubes';
     private const int CUBES_INDEX = 2;
 
     public ?string $Cubes {
@@ -54,7 +54,7 @@ final class StatisticsTransfer extends AbstractTransfer
     }
 
     // Information
-    public const string INFORMATION = 'Information';
+    public const string INFORMATION_PROP = 'Information';
     private const int INFORMATION_INDEX = 3;
 
     public ?string $Information {

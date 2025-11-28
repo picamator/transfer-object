@@ -20,11 +20,11 @@ final class LabelsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 1;
 
     protected const array META_DATA = [
-        self::SALE_INDEX => self::SALE,
+        self::SALE_PROP => self::SALE_INDEX,
     ];
 
     // sale
-    public const string SALE = 'sale';
+    public const string SALE_PROP = 'sale';
     private const int SALE_INDEX = 0;
 
     public ?string $sale {

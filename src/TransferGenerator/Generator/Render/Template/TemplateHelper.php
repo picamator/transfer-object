@@ -10,8 +10,8 @@ class TemplateHelper implements TemplateHelperInterface
 {
     private TemplateTransfer $templateTransfer;
 
-    private const string IMPORT_TEMPLATE = 'use %s;';
-    private const string META_DATA_TEMPLATE = '        self::%1$s_INDEX => self::%1$s,';
+    private const string IMPORT_TEMPLATE = 'use %s;' . PHP_EOL;
+    private const string META_DATA_TEMPLATE = '        self::%1$s_PROP => self::%1$s_INDEX,' . PHP_EOL;
 
     private const string PADDING_LEFT = '    ';
     private const string PHP_EOL_PADDING_LEFT = PHP_EOL . self::PADDING_LEFT;
@@ -21,7 +21,7 @@ class TemplateHelper implements TemplateHelperInterface
     private const string NULLABLE_UNION = 'null|';
     private const string PROTECTED_SET = ' protected(set)';
 
-    private const string PROPERTY_ATTRIBUTE_TEMPLATE = '    #[%s]';
+    private const string PROPERTY_ATTRIBUTE_TEMPLATE = '    #[%s]' . PHP_EOL;
 
     public function setTemplateTransfer(TemplateTransfer $templateTransfer): self
     {
@@ -32,27 +32,27 @@ class TemplateHelper implements TemplateHelperInterface
 
     public function renderImports(): string
     {
-        $imports = [];
+        $imports = '';
         foreach ($this->templateTransfer->imports as $import) {
-            $imports[] = sprintf(self::IMPORT_TEMPLATE, $import);
+            $imports .= sprintf(self::IMPORT_TEMPLATE, $import);
         }
 
-        return implode(PHP_EOL, $imports);
+        return rtrim($imports, PHP_EOL);
     }
 
     public function renderMetaData(): string
     {
-        $metaData = [];
+        $metaData = '';
 
         $iterator = $this->templateTransfer->metaConstants->getIterator();
         $iterator->rewind();
 
         while ($iterator->valid()) {
-            $metaData[] = sprintf(self::META_DATA_TEMPLATE, $iterator->key());
+            $metaData .= sprintf(self::META_DATA_TEMPLATE, $iterator->key());
             $iterator->next();
         }
 
-        return implode(PHP_EOL, $metaData);
+        return rtrim($metaData, PHP_EOL);
     }
 
     public function renderMetaAttributes(string $property): string
@@ -62,13 +62,12 @@ class TemplateHelper implements TemplateHelperInterface
             return self::EMPTY_STRING;
         }
 
-        natsort($metaAttributes);
-        $metaAttributes = array_map(
-            fn(string $attribute): string => self::PADDING_LEFT . $attribute,
-            $metaAttributes,
-        );
+        $renderedMetaAttributes = '';
+        foreach ($metaAttributes as $attribute) {
+            $renderedMetaAttributes .= self::PADDING_LEFT . $attribute . PHP_EOL;
+        }
 
-        return PHP_EOL . implode(PHP_EOL, $metaAttributes);
+        return PHP_EOL . rtrim($renderedMetaAttributes, PHP_EOL);
     }
 
     public function renderDockBlock(string $property): string
@@ -88,12 +87,12 @@ class TemplateHelper implements TemplateHelperInterface
             return '';
         }
 
-        $attributes = [];
+        $attributes = '';
         foreach ($propertyAttributes as $attribute) {
-            $attributes[] = sprintf(self::PROPERTY_ATTRIBUTE_TEMPLATE, $attribute);
+            $attributes .= sprintf(self::PROPERTY_ATTRIBUTE_TEMPLATE, $attribute);
         }
 
-        return PHP_EOL . implode(PHP_EOL, $attributes);
+        return PHP_EOL . rtrim($attributes, PHP_EOL);
     }
 
     public function renderPropertyDeclaration(string $property): string

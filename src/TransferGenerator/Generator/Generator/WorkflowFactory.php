@@ -19,7 +19,7 @@ class WorkflowFactory
     {
         return $this->getCached(
             key: 'transfer-generator:TransferGeneratorWorkflow',
-            factory: fn (): TransferGeneratorWorkflowInterface =>
+            factory: fn(): TransferGeneratorWorkflowInterface =>
                 new TransferGeneratorWorkflow($this->createGeneratorProcessor()),
         );
     }

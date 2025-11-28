@@ -20,13 +20,13 @@ final class StatusTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
-        self::CODE_INDEX => self::CODE,
-        self::CONTENT_INDEX => self::CONTENT,
-        self::TYPE_INDEX => self::TYPE,
+        self::CODE_PROP => self::CODE_INDEX,
+        self::CONTENT_PROP => self::CONTENT_INDEX,
+        self::TYPE_PROP => self::TYPE_INDEX,
     ];
 
     // Code
-    public const string CODE = 'Code';
+    public const string CODE_PROP = 'Code';
     private const int CODE_INDEX = 0;
 
     public ?int $Code {
@@ -35,7 +35,7 @@ final class StatusTransfer extends AbstractTransfer
     }
 
     // Content
-    public const string CONTENT = 'Content';
+    public const string CONTENT_PROP = 'Content';
     private const int CONTENT_INDEX = 1;
 
     public ?string $Content {
@@ -44,7 +44,7 @@ final class StatusTransfer extends AbstractTransfer
     }
 
     // Type
-    public const string TYPE = 'Type';
+    public const string TYPE_PROP = 'Type';
     private const int TYPE_INDEX = 2;
 
     public ?string $Type {

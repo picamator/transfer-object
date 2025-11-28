@@ -20,18 +20,18 @@ final class MainTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 8;
 
     protected const array META_DATA = [
-        self::FEELS_LIKE_INDEX => self::FEELS_LIKE,
-        self::GRND_LEVEL_INDEX => self::GRND_LEVEL,
-        self::HUMIDITY_INDEX => self::HUMIDITY,
-        self::PRESSURE_INDEX => self::PRESSURE,
-        self::SEA_LEVEL_INDEX => self::SEA_LEVEL,
-        self::TEMP_INDEX => self::TEMP,
-        self::TEMP_MAX_INDEX => self::TEMP_MAX,
-        self::TEMP_MIN_INDEX => self::TEMP_MIN,
+        self::FEELS_LIKE_PROP => self::FEELS_LIKE_INDEX,
+        self::GRND_LEVEL_PROP => self::GRND_LEVEL_INDEX,
+        self::HUMIDITY_PROP => self::HUMIDITY_INDEX,
+        self::PRESSURE_PROP => self::PRESSURE_INDEX,
+        self::SEA_LEVEL_PROP => self::SEA_LEVEL_INDEX,
+        self::TEMP_PROP => self::TEMP_INDEX,
+        self::TEMP_MAX_PROP => self::TEMP_MAX_INDEX,
+        self::TEMP_MIN_PROP => self::TEMP_MIN_INDEX,
     ];
 
     // feels_like
-    public const string FEELS_LIKE = 'feels_like';
+    public const string FEELS_LIKE_PROP = 'feels_like';
     private const int FEELS_LIKE_INDEX = 0;
 
     public ?float $feels_like {
@@ -40,7 +40,7 @@ final class MainTransfer extends AbstractTransfer
     }
 
     // grnd_level
-    public const string GRND_LEVEL = 'grnd_level';
+    public const string GRND_LEVEL_PROP = 'grnd_level';
     private const int GRND_LEVEL_INDEX = 1;
 
     public ?int $grnd_level {
@@ -49,7 +49,7 @@ final class MainTransfer extends AbstractTransfer
     }
 
     // humidity
-    public const string HUMIDITY = 'humidity';
+    public const string HUMIDITY_PROP = 'humidity';
     private const int HUMIDITY_INDEX = 2;
 
     public ?int $humidity {
@@ -58,7 +58,7 @@ final class MainTransfer extends AbstractTransfer
     }
 
     // pressure
-    public const string PRESSURE = 'pressure';
+    public const string PRESSURE_PROP = 'pressure';
     private const int PRESSURE_INDEX = 3;
 
     public ?int $pressure {
@@ -67,7 +67,7 @@ final class MainTransfer extends AbstractTransfer
     }
 
     // sea_level
-    public const string SEA_LEVEL = 'sea_level';
+    public const string SEA_LEVEL_PROP = 'sea_level';
     private const int SEA_LEVEL_INDEX = 4;
 
     public ?int $sea_level {
@@ -76,7 +76,7 @@ final class MainTransfer extends AbstractTransfer
     }
 
     // temp
-    public const string TEMP = 'temp';
+    public const string TEMP_PROP = 'temp';
     private const int TEMP_INDEX = 5;
 
     public ?float $temp {
@@ -85,7 +85,7 @@ final class MainTransfer extends AbstractTransfer
     }
 
     // temp_max
-    public const string TEMP_MAX = 'temp_max';
+    public const string TEMP_MAX_PROP = 'temp_max';
     private const int TEMP_MAX_INDEX = 6;
 
     public ?float $temp_max {
@@ -94,7 +94,7 @@ final class MainTransfer extends AbstractTransfer
     }
 
     // temp_min
-    public const string TEMP_MIN = 'temp_min';
+    public const string TEMP_MIN_PROP = 'temp_min';
     private const int TEMP_MIN_INDEX = 7;
 
     public ?float $temp_min {

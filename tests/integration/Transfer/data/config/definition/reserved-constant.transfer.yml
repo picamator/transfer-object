@@ -1,0 +1,8 @@
+# $schema: ./../../../../../../schema/definition.schema.json
+ReservedConstant:
+  meta_data_size:
+    type: string
+  meta_data:
+    type: string
+  filter_data_callback:
+    type: string

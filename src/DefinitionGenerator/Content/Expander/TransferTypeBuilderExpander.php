@@ -23,9 +23,12 @@ final class TransferTypeBuilderExpander extends AbstractBuilderExpander
 
         /** @var array<int|string, mixed> $propertyValue */
         $propertyValue = $content->propertyValue;
-        $key = array_key_first($propertyValue);
 
-        return is_string($key) && $this->isValidVariable($key);
+        return array_all(
+            $propertyValue,
+            // phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
+            fn(mixed $value, int|string $key): bool => is_string($key) && $this->isValidVariable($key)
+        );
     }
 
     protected function handleExpander(
@@ -33,7 +36,7 @@ final class TransferTypeBuilderExpander extends AbstractBuilderExpander
         DefinitionBuilderTransfer $builderTransfer,
     ): void {
         $propertyTransfer = $this->createPropertyTransfer($content->propertyName);
-        $builderTransfer->definitionContent->properties[] = $propertyTransfer;
+        $builderTransfer->definitionContent->properties->append($propertyTransfer);
 
         /** @var array<int|string, mixed> $propertyValue */
         $propertyValue = $content->propertyValue;
