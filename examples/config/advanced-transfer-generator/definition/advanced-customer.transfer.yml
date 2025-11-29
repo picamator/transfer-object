@@ -1,5 +1,4 @@
 # $schema: https://raw.githubusercontent.com/picamator/transfer-object/main/schema/definition.schema.json
-
 AdvancedCustomer:
   customer:
     type: "Picamator\\Examples\\TransferObject\\Generated\\TransferGenerator\\CustomerTransfer"

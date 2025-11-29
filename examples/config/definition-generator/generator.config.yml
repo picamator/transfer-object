@@ -1,5 +1,4 @@
 # $schema: https://raw.githubusercontent.com/picamator/transfer-object/main/schema/config.schema.json
-
 generator:
   transferNamespace: "Picamator\\Examples\\TransferObject\\Generated\\DefinitionGenerator"
   transferPath: "${PROJECT_ROOT}/examples/Generated/DefinitionGenerator"
