@@ -12,7 +12,7 @@ readonly class FileSizeValidator implements FileSizeValidatorInterface
 
     private const string UNKNOWN_ERROR_MESSAGE_TEMPLATE = 'Failed to get file size for "%s".';
     private const string MAX_SIZE_ERROR_MESSAGE_TEMPLATE = <<<'TEMPLATE'
-File "%s" exceeds the maximum allowed size of "%d" bytes. Please split the file into smaller parts.
+File "%s" ("%d" bytes) exceeds the maximum allowed size of "%d" bytes. Please split the file into smaller parts.
 TEMPLATE;
 
     private const int MAX_FILE_SIZE_BYTES = 10_000_000;
@@ -30,7 +30,8 @@ TEMPLATE;
             $errorMessage = sprintf(
                 self::MAX_SIZE_ERROR_MESSAGE_TEMPLATE,
                 $path,
-                $fileSize - self::MAX_FILE_SIZE_BYTES
+                $fileSize,
+                self::MAX_FILE_SIZE_BYTES
             );
 
             return $this->createErrorMessageTransfer($errorMessage);
