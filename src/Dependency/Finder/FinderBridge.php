@@ -12,14 +12,21 @@ use Throwable;
 
 final readonly class FinderBridge implements FinderInterface
 {
-    public function findFilesInDirectory(string $filePattern, string $dirName): IteratorAggregate&Countable
-    {
+    public function findFilesInDirectory(
+        string $filePattern,
+        string $dirName,
+        ?string $maxFileSize = null,
+    ): IteratorAggregate&Countable {
         try {
             $finder = Finder::create()
                 ->files()
                 ->name($filePattern)
                 ->depth(0)
                 ->in($dirName);
+
+            if ($maxFileSize !== null) {
+                $finder->size('<= ' . $maxFileSize);
+            }
 
             return $this->getFinderBridge($finder);
             // @codeCoverageIgnoreStart
