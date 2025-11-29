@@ -9,6 +9,7 @@ use Picamator\TransferObject\Generated\DefinitionGeneratorContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 use Picamator\TransferObject\Shared\Reader\JsonReaderInterface;
 use Picamator\TransferObject\Shared\Validator\ClassNameValidatorInterface;
+use Picamator\TransferObject\Shared\Validator\FileSizeValidatorInterface;
 use Picamator\TransferObject\Shared\Validator\PathLocalValidatorInterface;
 
 class DefinitionGeneratorBuilder implements DefinitionGeneratorBuilderInterface
@@ -17,6 +18,7 @@ class DefinitionGeneratorBuilder implements DefinitionGeneratorBuilderInterface
 
     public function __construct(
         private readonly PathLocalValidatorInterface $pathLocalValidator,
+        private readonly FileSizeValidatorInterface $fileSizeValidator,
         private readonly ClassNameValidatorInterface $classNameValidator,
         private readonly JsonReaderInterface $jsonReader,
     ) {
@@ -24,16 +26,17 @@ class DefinitionGeneratorBuilder implements DefinitionGeneratorBuilderInterface
 
     public function setDefinitionPath(string $definitionPath): self
     {
-        $messageTransfer = $this->pathLocalValidator->validate($definitionPath);
+        $messageTransfer = $this->pathLocalValidator->validate($definitionPath)
+            ?? $this->fileSizeValidator->validate($definitionPath);
 
-        if ($messageTransfer === null) {
-            $definitionPath = rtrim($definitionPath, '\/');
-            $this->getGeneratorTransfer()->definitionPath = $definitionPath;
-
-            return $this;
+        if ($messageTransfer !== null) {
+            throw new DefinitionGeneratorException($messageTransfer->errorMessage);
         }
 
-        throw new DefinitionGeneratorException($messageTransfer->errorMessage);
+        $definitionPath = rtrim($definitionPath, '\/');
+        $this->getGeneratorTransfer()->definitionPath = $definitionPath;
+
+        return $this;
     }
 
     public function setClassName(string $className): self

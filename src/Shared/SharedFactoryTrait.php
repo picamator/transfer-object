@@ -16,6 +16,8 @@ use Picamator\TransferObject\Shared\Reader\JsonReader;
 use Picamator\TransferObject\Shared\Reader\JsonReaderInterface;
 use Picamator\TransferObject\Shared\Validator\ClassNameValidator;
 use Picamator\TransferObject\Shared\Validator\ClassNameValidatorInterface;
+use Picamator\TransferObject\Shared\Validator\FileSizeValidator;
+use Picamator\TransferObject\Shared\Validator\FileSizeValidatorInterface;
 use Picamator\TransferObject\Shared\Validator\NamespaceValidator;
 use Picamator\TransferObject\Shared\Validator\NamespaceValidatorInterface;
 use Picamator\TransferObject\Shared\Validator\PathExistValidator;
@@ -66,6 +68,14 @@ trait SharedFactoryTrait
         return $this->getCached(
             key: 'shared:PathExistValidator',
             factory: fn(): PathExistValidatorInterface => new PathExistValidator($this->createFilesystem()),
+        );
+    }
+
+    final protected function createFileSizeValidator(): FileSizeValidatorInterface
+    {
+        return $this->getCached(
+            key: 'shared:FileSizeValidator',
+            factory: fn(): FileSizeValidatorInterface => new FileSizeValidator(),
         );
     }
 
