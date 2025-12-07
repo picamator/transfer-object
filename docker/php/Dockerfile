@@ -12,7 +12,7 @@ RUN apt-get update && \
 COPY --from=ghcr.io/php/pie:bin /pie /usr/bin/pie
 
 # xdebug
-RUN pie install xdebug/xdebug:^3.5.0alpha3 && \
+RUN pie install xdebug/xdebug:^3.5.0 && \
     docker-php-ext-enable xdebug
 
 COPY ./config.d/99-xdebug.ini  /usr/local/etc/php/conf.d/99-xdebug.ini
