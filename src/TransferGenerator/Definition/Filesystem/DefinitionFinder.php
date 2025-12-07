@@ -13,6 +13,8 @@ use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorDefini
 
 readonly class DefinitionFinder implements DefinitionFinderInterface
 {
+    private const string MAX_FILE_SIZE = '10M';
+
     private const string FILE_NAME_PATTERN = '*.transfer.yml';
 
     private const string DEFINITIONS_NOT_FOUND_ERROR_MESSAGE = 'Missed Transfer Object definitions.';
@@ -45,6 +47,7 @@ readonly class DefinitionFinder implements DefinitionFinderInterface
         $definitionFinder = $this->finder->findFilesInDirectory(
             filePattern: self::FILE_NAME_PATTERN,
             dirName: $this->config->getDefinitionPath(),
+            maxFileSize: self::MAX_FILE_SIZE,
         );
 
         $fileCount = $definitionFinder->count();

@@ -14,7 +14,11 @@ interface FinderInterface
      *
      * @return Countable&IteratorAggregate<string,SplFileInfoBridge>
      */
-    public function findFilesInDirectory(string $filePattern, string $dirName): IteratorAggregate&Countable;
+    public function findFilesInDirectory(
+        string $filePattern,
+        string $dirName,
+        ?string $maxFileSize = null,
+    ): IteratorAggregate&Countable;
 
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FinderException

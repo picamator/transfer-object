@@ -15,6 +15,7 @@ use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Exception\JsonReaderException;
 use Picamator\TransferObject\Shared\Reader\JsonReaderInterface;
 use Picamator\TransferObject\Shared\Validator\ClassNameValidatorInterface;
+use Picamator\TransferObject\Shared\Validator\FileSizeValidatorInterface;
 use Picamator\TransferObject\Shared\Validator\PathLocalValidatorInterface;
 
 #[Group('definition-generator')]
@@ -24,6 +25,8 @@ class DefinitionGeneratorBuilderTest extends TestCase
 
     private PathLocalValidatorInterface&MockObject $pathValidatorMock;
 
+    private FileSizeValidatorInterface&MockObject $fileSizeValidatorMock;
+
     private ClassNameValidatorInterface&MockObject $classNameValidatorMock;
 
     private JsonReaderInterface&MockObject $jsonReaderMock;
@@ -31,11 +34,13 @@ class DefinitionGeneratorBuilderTest extends TestCase
     protected function setUp(): void
     {
         $this->pathValidatorMock = $this->createMock(PathLocalValidatorInterface::class);
+        $this->fileSizeValidatorMock = $this->createMock(FileSizeValidatorInterface::class);
         $this->classNameValidatorMock = $this->createMock(ClassNameValidatorInterface::class);
         $this->jsonReaderMock = $this->createMock(JsonReaderInterface::class);
 
         $this->builder = new DefinitionGeneratorBuilder(
             $this->pathValidatorMock,
+            $this->fileSizeValidatorMock,
             $this->classNameValidatorMock,
             $this->jsonReaderMock,
         );
@@ -53,6 +58,44 @@ class DefinitionGeneratorBuilderTest extends TestCase
             ->method('validate')
             ->with($definitionPath)
             ->willReturn($messageTransfer);
+
+        $this->fileSizeValidatorMock->expects($this->never())
+            ->method('validate');
+
+        $this->classNameValidatorMock->expects($this->never())
+            ->method('validate');
+
+        $this->jsonReaderMock->expects($this->never())
+            ->method('getJsonContent');
+
+        $this->expectException(DefinitionGeneratorException::class);
+
+        // Act
+        $this->builder->setDefinitionPath($definitionPath);
+    }
+
+    #[TestDox('Definition file exceeds max size limit should throw exception')]
+    public function testDefinitionFileExceedsMaxSizeLimitShouldThrowException(): void
+    {
+        // Arrange
+        $definitionPath = 'https://some-domain.io/definitions';
+        $messageTransfer = $this->createInvalidMessageTransfer();
+
+        // Expect
+        $this->pathValidatorMock->expects($this->once())
+            ->method('validate')
+            ->with($definitionPath);
+
+        $this->fileSizeValidatorMock->expects($this->once())
+            ->method('validate')
+            ->with($definitionPath)
+            ->willReturn($messageTransfer);
+
+        $this->classNameValidatorMock->expects($this->never())
+            ->method('validate');
+
+        $this->jsonReaderMock->expects($this->never())
+            ->method('getJsonContent');
 
         $this->expectException(DefinitionGeneratorException::class);
 
@@ -73,6 +116,15 @@ class DefinitionGeneratorBuilderTest extends TestCase
             ->with($className)
             ->willReturn($messageTransfer);
 
+        $this->pathValidatorMock->expects($this->never())
+            ->method('validate');
+
+        $this->fileSizeValidatorMock->expects($this->never())
+            ->method('validate');
+
+        $this->jsonReaderMock->expects($this->never())
+            ->method('getJsonContent');
+
         $this->expectException(DefinitionGeneratorException::class);
         $this->expectExceptionMessage($messageTransfer->errorMessage);
 
@@ -92,6 +144,15 @@ class DefinitionGeneratorBuilderTest extends TestCase
             ->method('getJsonContent')
             ->with($jsonPath)
             ->willThrowException(new JsonReaderException($messageTransfer->errorMessage));
+
+        $this->classNameValidatorMock->expects($this->never())
+            ->method('validate');
+
+        $this->pathValidatorMock->expects($this->never())
+            ->method('validate');
+
+        $this->fileSizeValidatorMock->expects($this->never())
+            ->method('validate');
 
         $this->expectException(JsonReaderException::class);
         $this->expectExceptionMessage($messageTransfer->errorMessage);

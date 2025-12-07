@@ -47,6 +47,7 @@ class DefinitionGeneratorFactory
             key: 'definition-generator:DefinitionGeneratorBuilder',
             factory: fn(): DefinitionGeneratorBuilderInterface => new DefinitionGeneratorBuilder(
                 $this->createPathLocalValidator(),
+                $this->createFileSizeValidator(),
                 $this->createClassNameValidator(),
                 $this->createJsonReader(),
             ),
