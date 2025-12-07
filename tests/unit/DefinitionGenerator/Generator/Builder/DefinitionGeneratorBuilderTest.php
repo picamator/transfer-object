@@ -62,6 +62,12 @@ class DefinitionGeneratorBuilderTest extends TestCase
         $this->fileSizeValidatorMock->expects($this->never())
             ->method('validate');
 
+        $this->classNameValidatorMock->expects($this->never())
+            ->method('validate');
+
+        $this->jsonReaderMock->expects($this->never())
+            ->method('getJsonContent');
+
         $this->expectException(DefinitionGeneratorException::class);
 
         // Act
@@ -85,6 +91,12 @@ class DefinitionGeneratorBuilderTest extends TestCase
             ->with($definitionPath)
             ->willReturn($messageTransfer);
 
+        $this->classNameValidatorMock->expects($this->never())
+            ->method('validate');
+
+        $this->jsonReaderMock->expects($this->never())
+            ->method('getJsonContent');
+
         $this->expectException(DefinitionGeneratorException::class);
 
         // Act
@@ -103,6 +115,15 @@ class DefinitionGeneratorBuilderTest extends TestCase
             ->method('validate')
             ->with($className)
             ->willReturn($messageTransfer);
+
+        $this->pathValidatorMock->expects($this->never())
+            ->method('validate');
+
+        $this->fileSizeValidatorMock->expects($this->never())
+            ->method('validate');
+
+        $this->jsonReaderMock->expects($this->never())
+            ->method('getJsonContent');
 
         $this->expectException(DefinitionGeneratorException::class);
         $this->expectExceptionMessage($messageTransfer->errorMessage);
@@ -123,6 +144,15 @@ class DefinitionGeneratorBuilderTest extends TestCase
             ->method('getJsonContent')
             ->with($jsonPath)
             ->willThrowException(new JsonReaderException($messageTransfer->errorMessage));
+
+        $this->classNameValidatorMock->expects($this->never())
+            ->method('validate');
+
+        $this->pathValidatorMock->expects($this->never())
+            ->method('validate');
+
+        $this->fileSizeValidatorMock->expects($this->never())
+            ->method('validate');
 
         $this->expectException(JsonReaderException::class);
         $this->expectExceptionMessage($messageTransfer->errorMessage);
