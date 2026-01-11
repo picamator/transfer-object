@@ -24,8 +24,6 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
 
     private const string DOC_BLOCK_TEMPLATE = '%s<%s,%s>';
 
-    private const string DOC_BLOCK_MIXED = 'mixed';
-
     /**
      * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
      */
@@ -89,13 +87,13 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
 
             $valueType = array_first($propertyValue)
                     |> gettype(...)
-                    |> GetTypeEnum::tryFrom(...);
+                    |> GetTypeEnum::from(...);
 
             $type = sprintf(
                 self::DOC_BLOCK_TEMPLATE,
                 $type,
                 $keyType->name,
-                $valueType?->name ?: self::DOC_BLOCK_MIXED,
+                $valueType->name,
             );
         }
 
