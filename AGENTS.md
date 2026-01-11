@@ -91,8 +91,8 @@ Module Structure
 - the facade class and interface name should include the module name with `Facade` suffix
 - the facade is used for communication between modules
 - the facade used factories
-- the facaded should not include any business logic
-- the facade `public` methods should have specification dock-block
+- the facade should not include any business logic
+- the facade `public` methods should have specification doc-block
 
 ### Factory
 
@@ -102,14 +102,14 @@ Module Structure
 - factory class should be used for class wiring
 - factory class should use:
   * `Picamator\TransferObject\Shared\CachedFactoryTrait`
-  * `Picamator\TransferObject\Shared\CachedFactoryTrait`
+  * `Picamator\TransferObject\Shared\SharedFactoryTrait`
 - factory methods should be `public` only when method is used in `Facade` classes, all others should be `protected`
 
 Unit and Integration Tests
 --------------------------
 
 - tests should follow a similar structure to the existing ones
-- separate test implementation by comment sections: `Arrange`, `Expect`, `Act`, `Assert`
+- separate test implementation by comment sections: "Arrange", "Act", "Assert" (optionally with "Expect")
 - use `setUp` method to initialize the tested object's stubs and mocks
 - use `PHPUnit` attributes
 - use [PHP generator](https://www.php.net/manual/en/class.generator.php) for the data providers
