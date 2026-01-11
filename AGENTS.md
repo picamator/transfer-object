@@ -1,8 +1,19 @@
-Documentation
--------------
+Purpose
+-------
 
-- Readme: [README.md](README.md)
-- WIKI: https://github.com/picamator/transfer-object/wiki
+This file is the project index for "agents"
+
+- the modules that generate or use PHP transfer objects.
+- the IDE plugins that helps to develop the project
+- the IDE plugins that helps to integrate PHP transfer object into application
+
+Full HOWTOs and contribution guides are in the canonical destinations:
+
+- README.md
+- CONTRIBUTING.md
+- CODE_OF_CONDUCT.md
+- SECURITY.md
+- [WIKI](https://github.com/picamator/transfer-object/wiki)
 
 Installation
 ------------
