@@ -61,7 +61,6 @@ Directory Structure
 ### Technical
 
 - `.github`: GitHub CI actions, template and README.md images
-- `.junie`: [PHPStorm Junie AI](https://www.jetbrains.com/help/phpstorm/junie.html) configuration
 - `.xdebug`: Xdebug configuration for [Native Path Mapping](https://xdebug.org/funding/001-native-path-mapping)
 - `docker`: [dockerized development environment](https://github.com/picamator/transfer-object/wiki/Development-Environment) configuration with shell helper commands
 
