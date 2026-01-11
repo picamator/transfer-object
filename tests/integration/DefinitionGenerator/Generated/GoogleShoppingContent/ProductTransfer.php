@@ -247,7 +247,7 @@ final class ProductTransfer extends AbstractTransfer
     public const string SIZES_PROP = 'sizes';
     private const int SIZES_INDEX = 21;
 
-    /** @var array<int|string,mixed> */
+    /** @var array<int,string> */
     public array $sizes {
         get => $this->getData(self::SIZES_INDEX);
         set => $this->setData(self::SIZES_INDEX, $value);

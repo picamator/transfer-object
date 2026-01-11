@@ -28,6 +28,12 @@ TEMPLATE;
 
 TEMPLATE;
 
+    private const string TYPE_WITH_DOC_BLOCK_TEMPLATE = <<<'TEMPLATE'
+  %s:
+    type: %s%s
+
+TEMPLATE;
+
     private const string COLLECTION_TYPE_TEMPLATE = <<<'TEMPLATE'
   %s:
     collectionType: %s
@@ -121,10 +127,20 @@ TEMPLATE;
 
     private function renderBuildInType(DefinitionPropertyTransfer $propertyTransfer): string
     {
-        return sprintf(
-            self::TYPE_TEMPLATE,
-            $propertyTransfer->propertyName,
-            $propertyTransfer->buildInType?->name->value ?: '',
-        );
+        /** @var \Picamator\TransferObject\Generated\DefinitionBuildInTypeTransfer $buildInType */
+        $buildInType = $propertyTransfer->buildInType;
+
+        return $buildInType->dockBlock
+            ? sprintf(
+                self::TYPE_WITH_DOC_BLOCK_TEMPLATE,
+                $propertyTransfer->propertyName,
+                $buildInType->name->value,
+                $buildInType->dockBlock,
+            )
+            : sprintf(
+                self::TYPE_TEMPLATE,
+                $propertyTransfer->propertyName,
+                $buildInType->name->value,
+            );
     }
 }

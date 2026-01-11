@@ -121,7 +121,7 @@ final class ForecastTransfer extends AbstractTransfer
     public const string RAIN_PROP = 'rain';
     private const int RAIN_INDEX = 8;
 
-    /** @var array<int|string,mixed> */
+    /** @var array<string,float> */
     public array $rain {
         get => $this->getData(self::RAIN_INDEX);
         set => $this->setData(self::RAIN_INDEX, $value);

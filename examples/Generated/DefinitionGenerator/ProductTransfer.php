@@ -152,7 +152,7 @@ final class ProductTransfer extends AbstractTransfer
     public const string STORES_PROP = 'stores';
     private const int STORES_INDEX = 11;
 
-    /** @var array<int|string,mixed> */
+    /** @var array<int,string> */
     public array $stores {
         get => $this->getData(self::STORES_INDEX);
         set => $this->setData(self::STORES_INDEX, $value);

@@ -146,7 +146,7 @@ final class NewsTransfer extends AbstractTransfer
     public const string REGION_IDS_PROP = 'regionIds';
     private const int REGION_IDS_INDEX = 10;
 
-    /** @var array<int|string,mixed> */
+    /** @var array<int,int> */
     public array $regionIds {
         get => $this->getData(self::REGION_IDS_INDEX);
         set => $this->setData(self::REGION_IDS_INDEX, $value);

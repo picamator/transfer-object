@@ -54,7 +54,7 @@ News:
   geotags:
     type: array
   regionIds:
-    type: array
+    type: array<int,int>
   brandingImage:
     type: BrandingImage
 
@@ -63,7 +63,7 @@ TeaserImage:
   alttext:
     type: string
   imageVariants:
-    type: array
+    type: array<string,string>
   type:
     type: string
   copyright:

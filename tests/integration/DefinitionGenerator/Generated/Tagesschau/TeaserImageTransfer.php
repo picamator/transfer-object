@@ -51,7 +51,7 @@ final class TeaserImageTransfer extends AbstractTransfer
     public const string IMAGE_VARIANTS_PROP = 'imageVariants';
     private const int IMAGE_VARIANTS_INDEX = 2;
 
-    /** @var array<int|string,mixed> */
+    /** @var array<string,string> */
     public array $imageVariants {
         get => $this->getData(self::IMAGE_VARIANTS_INDEX);
         set => $this->setData(self::IMAGE_VARIANTS_INDEX, $value);
