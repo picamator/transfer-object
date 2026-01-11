@@ -70,14 +70,14 @@ class TemplateHelper implements TemplateHelperInterface
         return PHP_EOL . rtrim($renderedMetaAttributes, PHP_EOL);
     }
 
-    public function renderDockBlock(string $property): string
+    public function renderDocBlock(string $property): string
     {
-        $dockBlock = $this->templateTransfer->dockBlocks[$property] ?? null;
-        if ($dockBlock === null) {
+        $docBlock = $this->templateTransfer->docBlocks[$property] ?? null;
+        if ($docBlock === null) {
             return self::EMPTY_STRING;
         }
 
-        return self::PHP_EOL_PADDING_LEFT . $dockBlock;
+        return self::PHP_EOL_PADDING_LEFT . $docBlock;
     }
 
     public function renderPropertyAttributes(string $property): string

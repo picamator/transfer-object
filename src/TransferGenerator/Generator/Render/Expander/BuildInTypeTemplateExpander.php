@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\DockBlockTemplateEnum;
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\DocBlockTemplateEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\InitiatorAttributeEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransformerAttributeEnum;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
@@ -55,8 +55,8 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
             $initiatorEnum->value,
         ];
 
-        $templateTransfer->dockBlocks[$propertyName]
-            = DockBlockTemplateEnum::ARRAY->renderTemplate($propertyTransfer->buildInType?->dockBlock);
+        $templateTransfer->docBlocks[$propertyName]
+            = DocBlockTemplateEnum::ARRAY->renderTemplate($propertyTransfer->buildInType?->docBlock);
 
         $templateTransfer->nullables[$propertyName] = false;
     }
@@ -78,8 +78,8 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
             $transformerEnum->value,
         ];
 
-        $templateTransfer->dockBlocks[$propertyName]
-            = DockBlockTemplateEnum::ARRAY_OBJECT->renderTemplate($propertyTransfer->buildInType?->dockBlock);
+        $templateTransfer->docBlocks[$propertyName]
+            = DocBlockTemplateEnum::ARRAY_OBJECT->renderTemplate($propertyTransfer->buildInType?->docBlock);
 
         $templateTransfer->nullables[$propertyName] = false;
     }

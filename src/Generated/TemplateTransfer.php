@@ -26,7 +26,7 @@ final class TemplateTransfer extends AbstractTransfer
         self::CLASS_NAME_PROP => self::CLASS_NAME_INDEX,
         self::CLASS_NAMESPACE_PROP => self::CLASS_NAMESPACE_INDEX,
         self::DEFINITION_PATH_PROP => self::DEFINITION_PATH_INDEX,
-        self::DOCK_BLOCKS_PROP => self::DOCK_BLOCKS_INDEX,
+        self::DOC_BLOCKS_PROP => self::DOC_BLOCKS_INDEX,
         self::IMPORTS_PROP => self::IMPORTS_INDEX,
         self::META_ATTRIBUTES_PROP => self::META_ATTRIBUTES_INDEX,
         self::META_CONSTANTS_PROP => self::META_CONSTANTS_INDEX,
@@ -63,16 +63,16 @@ final class TemplateTransfer extends AbstractTransfer
         set => $this->setData(self::DEFINITION_PATH_INDEX, $value);
     }
 
-    // dockBlocks
+    // docBlocks
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
-    public const string DOCK_BLOCKS_PROP = 'dockBlocks';
-    private const int DOCK_BLOCKS_INDEX = 3;
+    public const string DOC_BLOCKS_PROP = 'docBlocks';
+    private const int DOC_BLOCKS_INDEX = 3;
 
     /** @var \ArrayObject<string,string> */
-    public ArrayObject $dockBlocks {
-        get => $this->getData(self::DOCK_BLOCKS_INDEX);
-        set => $this->setData(self::DOCK_BLOCKS_INDEX, $value);
+    public ArrayObject $docBlocks {
+        get => $this->getData(self::DOC_BLOCKS_INDEX);
+        set => $this->setData(self::DOC_BLOCKS_INDEX, $value);
     }
 
     // imports

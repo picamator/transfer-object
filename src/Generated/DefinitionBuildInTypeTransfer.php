@@ -22,17 +22,17 @@ final class DefinitionBuildInTypeTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 2;
 
     protected const array META_DATA = [
-        self::DOCK_BLOCK_PROP => self::DOCK_BLOCK_INDEX,
+        self::DOC_BLOCK_PROP => self::DOC_BLOCK_INDEX,
         self::NAME_PROP => self::NAME_INDEX,
     ];
 
-    // dockBlock
-    public const string DOCK_BLOCK_PROP = 'dockBlock';
-    private const int DOCK_BLOCK_INDEX = 0;
+    // docBlock
+    public const string DOC_BLOCK_PROP = 'docBlock';
+    private const int DOC_BLOCK_INDEX = 0;
 
-    public ?string $dockBlock {
-        get => $this->getData(self::DOCK_BLOCK_INDEX);
-        set => $this->setData(self::DOCK_BLOCK_INDEX, $value);
+    public ?string $docBlock {
+        get => $this->getData(self::DOC_BLOCK_INDEX);
+        set => $this->setData(self::DOC_BLOCK_INDEX, $value);
     }
 
     // name

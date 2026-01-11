@@ -56,7 +56,7 @@ final class TypePropertyExpander extends AbstractPropertyExpander
 
         $buildInTypeTransfer = new DefinitionBuildInTypeTransfer();
         $buildInTypeTransfer->name = $type;
-        $buildInTypeTransfer->dockBlock = array_first($tapeWithDocBlock);
+        $buildInTypeTransfer->docBlock = array_first($tapeWithDocBlock);
 
         return $buildInTypeTransfer;
     }

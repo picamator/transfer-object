@@ -63,7 +63,7 @@ TEMPLATE;
     // $property{$this->helper->renderMetaAttributes($property)}
     public const string {$constant}_PROP = '$property';
     private const int {$constant}_INDEX = $i;
-{$this->helper->renderDockBlock($property)}{$this->helper->renderPropertyAttributes($property)}
+{$this->helper->renderDocBlock($property)}{$this->helper->renderPropertyAttributes($property)}
     public{$this->helper->renderPropertyDeclaration($property)} \$$property {
         get => \$this->getData(self::{$constant}_INDEX);
         set => \$this->setData(self::{$constant}_INDEX, \$value);

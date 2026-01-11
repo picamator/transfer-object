@@ -130,12 +130,12 @@ TEMPLATE;
         /** @var \Picamator\TransferObject\Generated\DefinitionBuildInTypeTransfer $buildInType */
         $buildInType = $propertyTransfer->buildInType;
 
-        return $buildInType->dockBlock
+        return $buildInType->docBlock
             ? sprintf(
                 self::TYPE_WITH_DOC_BLOCK_TEMPLATE,
                 $propertyTransfer->propertyName,
                 $buildInType->name->value,
-                $buildInType->dockBlock,
+                $buildInType->docBlock,
             )
             : sprintf(
                 self::TYPE_TEMPLATE,

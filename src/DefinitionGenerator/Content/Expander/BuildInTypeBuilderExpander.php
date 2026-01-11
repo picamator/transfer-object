@@ -142,7 +142,7 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
 
         $buildInTypeTransfer = new DefinitionBuildInTypeTransfer();
         $buildInTypeTransfer->name = $type;
-        $buildInTypeTransfer->dockBlock = $docBlock;
+        $buildInTypeTransfer->docBlock = $docBlock;
 
         $propertyTransfer = new DefinitionPropertyTransfer();
         $propertyTransfer->propertyName = $propertyName;
