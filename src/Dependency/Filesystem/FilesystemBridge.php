@@ -89,11 +89,13 @@ readonly final class FilesystemBridge implements FilesystemInterface
             $this->filesystem->dumpFile($filename, $content);
             // @codeCoverageIgnoreStart
         } catch (Throwable $e) {
+            $content = substr($content, 0, 100) . '...';
+
             throw new FilesystemException(
                 sprintf(
                     'Failed to write content to file "%s". Content: "%s". Error: "%s".',
-                    $content,
                     $filename,
+                    $content,
                     $e->getMessage(),
                 ),
                 previous: $e,
