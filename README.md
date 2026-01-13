@@ -143,6 +143,13 @@ Publications
 
 1. [Sergii Pryz, "Data Transfer Objects and Property Hooks" PHP Architect Magazine, June 2025](https://www.phparch.com/article/2025-06-data-transfer-objects-and-property-hooks/)
 
+Security Commitment
+-------------------
+
+The project follows [OpenSSF Best Practices](https://www.bestpractices.dev/en/projects/11465/passing).
+
+For reporting security vulnerabilities, please follow [security policy](https://github.com/picamator/transfer-object/security/policy).
+
 Acknowledgment
 --------------
 
