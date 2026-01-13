@@ -146,7 +146,7 @@ Publications
 Security Commitment
 -------------------
 
-The project follows [OpenSSF Best Practices](https://www.bestpractices.dev/en/projects/11465/passing).
+The project applies [OpenSSF Best Practices](https://www.bestpractices.dev/en/projects/11465/passing).
 
 For reporting security vulnerabilities, please follow [security policy](https://github.com/picamator/transfer-object/security/policy).
 
