@@ -37,13 +37,11 @@ abstract class AbstractTransfer implements TransferInterface
      */
     final public function __construct(?array $data = null)
     {
-        if ($data === null) {
-            $this->initData();
+        $this->initData();
 
-            return;
+        if ($data !== null) {
+            $this->hydrateData($data);
         }
-
-        $this->fromArray($data);
     }
 
     /**
@@ -114,29 +112,13 @@ abstract class AbstractTransfer implements TransferInterface
         return $data;
     }
 
+
     final public function fromArray(array $data): static
     {
         $this->initData();
 
-        $filterCallback = fn(mixed $value, int|string $key): bool => $value !== null && isset(static::META_DATA[$key]);
-        $data = array_filter($data, callback: $filterCallback, mode: ARRAY_FILTER_USE_BOTH);
-
-        if ($data === []) {
-            return $this;
-        }
-
-        $propertyNames = array_keys($data);
-        foreach ($this->getTransformers($propertyNames) as $propertyName => $transformer) {
-            $value = $data[$propertyName];
-            $index = static::META_DATA[$propertyName];
-
-            $this->setData($index, $transformer->fromArray($value));
-
-            unset($data[$propertyName]);
-        }
-
-        foreach ($data as $propertyName => $value) {
-            $this->$propertyName = $value;
+        if ($data !== []) {
+            $this->hydrateData($data);
         }
 
         return $this;
@@ -152,6 +134,33 @@ abstract class AbstractTransfer implements TransferInterface
         $this->_data->offsetSet($index, $value);
 
         return $value;
+    }
+
+    /**
+     * @param array<string,mixed> $data
+     */
+    private function hydrateData(array $data): void
+    {
+        $filterCallback = fn(mixed $value, int|string $key): bool => $value !== null && isset(static::META_DATA[$key]);
+        $data = array_filter($data, callback: $filterCallback, mode: ARRAY_FILTER_USE_BOTH);
+
+        if ($data === []) {
+            return;
+        }
+
+        $propertyNames = array_keys($data);
+        foreach ($this->getTransformers($propertyNames) as $propertyName => $transformer) {
+            $value = $data[$propertyName];
+            $index = static::META_DATA[$propertyName];
+
+            $this->setData($index, $transformer->fromArray($value));
+
+            unset($data[$propertyName]);
+        }
+
+        foreach ($data as $propertyName => $value) {
+            $this->$propertyName = $value;
+        }
     }
 
     private function initData(): void
