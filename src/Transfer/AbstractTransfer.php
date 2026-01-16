@@ -99,17 +99,16 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $data = [];
         foreach ($this->getTransformers() as $propertyName => $transformer) {
-            $data[$propertyName] = $transformer->toArray($this->$propertyName);
+            $index = static::META_DATA[$propertyName];
+            $data[$propertyName] = $transformer->toArray($this->getData($index));
         }
 
         if (count($data) === static::META_DATA_SIZE) {
             return $data;
         }
 
-        $propertyNames = array_diff_key(static::META_DATA, $data);
-        $propertyNames = array_keys($propertyNames);
-        foreach ($propertyNames as $propertyName) {
-            $data[$propertyName] = $this->$propertyName;
+        foreach (static::META_DATA as $propertyName => $index) {
+            $data[$propertyName] ??= $this->getData($index);
         }
 
         return $data;
