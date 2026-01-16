@@ -118,7 +118,7 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->initData();
 
-        $filterCallback = fn(mixed $value, int|string $key): bool => isset(static::META_DATA[$key]) && $value !== null;
+        $filterCallback = fn(mixed $value, int|string $key): bool => $value !== null && isset(static::META_DATA[$key]);
         $data = array_filter($data, callback: $filterCallback, mode: ARRAY_FILTER_USE_BOTH);
 
         if ($data === []) {
@@ -127,7 +127,11 @@ abstract class AbstractTransfer implements TransferInterface
 
         $propertyNames = array_keys($data);
         foreach ($this->getTransformers($propertyNames) as $propertyName => $transformer) {
-            $this->$propertyName = $transformer->fromArray($data[$propertyName]);
+            $value = $data[$propertyName];
+            $index = static::META_DATA[$propertyName];
+
+            $this->setData($index, $transformer->fromArray($value));
+
             unset($data[$propertyName]);
         }
 
