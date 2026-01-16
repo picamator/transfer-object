@@ -159,7 +159,8 @@ abstract class AbstractTransfer implements TransferInterface
         $this->_data = new SplFixedArray(size: static::META_DATA_SIZE);
 
         foreach ($this->getInitiators() as $propertyName => $initiator) {
-            $this->$propertyName = $initiator->getInitialValue();
+            $index = static::META_DATA[$propertyName];
+            $this->setData($index, $initiator->getInitialValue());
         }
     }
 }
