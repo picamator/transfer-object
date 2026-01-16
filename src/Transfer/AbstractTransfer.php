@@ -83,7 +83,7 @@ abstract class AbstractTransfer implements TransferInterface
     final public function getIterator(): Traversable
     {
         foreach (static::META_DATA as $propertyName => $index) {
-            yield $propertyName => $this->_data[$index];
+            yield $propertyName => $this->_data->offsetGet($index);
         }
     }
 
@@ -141,12 +141,14 @@ abstract class AbstractTransfer implements TransferInterface
 
     final protected function getData(int $index): mixed
     {
-        return $this->_data[$index];
+        return $this->_data->offsetGet($index);
     }
 
     final protected function setData(int $index, mixed $value): mixed
     {
-        return $this->_data[$index] = $value;
+        $this->_data->offsetSet($index, $value);
+
+        return $value;
     }
 
     private function initData(): void
