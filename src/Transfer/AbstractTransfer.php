@@ -141,8 +141,7 @@ abstract class AbstractTransfer implements TransferInterface
      */
     private function hydrateData(array $data): void
     {
-        $filterCallback = fn(mixed $value, int|string $key): bool => $value !== null && isset(static::META_DATA[$key]);
-        $data = array_filter($data, callback: $filterCallback, mode: ARRAY_FILTER_USE_BOTH);
+        $this->filterData($data);
 
         if ($data === []) {
             return;
@@ -160,6 +159,18 @@ abstract class AbstractTransfer implements TransferInterface
 
         foreach ($data as $propertyName => $value) {
             $this->$propertyName = $value;
+        }
+    }
+
+    /**
+     * @param array<string,mixed> $data
+     */
+    private function filterData(array &$data): void
+    {
+        foreach ($data as $propertyName => $value) {
+            if ($value === null || !isset(static::META_DATA[$propertyName])) {
+                unset($data[$propertyName]);
+            }
         }
     }
 
