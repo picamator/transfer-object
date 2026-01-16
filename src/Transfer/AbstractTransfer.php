@@ -90,7 +90,10 @@ abstract class AbstractTransfer implements TransferInterface
      */
     final public function __clone(): void
     {
-        $this->fromArray($this->toArray());
+        /** @var \SplFixedArray<mixed> $data */
+        $data = unserialize(serialize($this->_data));
+
+        $this->_data = $data;
     }
 
     final public function toArray(): array
