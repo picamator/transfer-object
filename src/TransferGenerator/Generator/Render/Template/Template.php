@@ -53,10 +53,6 @@ TEMPLATE;
         $i = 0;
         $properties = '';
 
-        /**
-         * @var string $constant
-         * @var string $property
-         */
         foreach ($templateTransfer->metaConstants as $constant => $property) {
             $properties .= <<<TEMPLATE
 
