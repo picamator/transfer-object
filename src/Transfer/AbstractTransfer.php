@@ -101,7 +101,7 @@ abstract class AbstractTransfer implements TransferInterface
         $data = [];
         foreach ($this->getTransformers() as $propertyName => $transformer) {
             $index = static::META_DATA[$propertyName];
-            $data[$propertyName] = $transformer->toArray($this->getData($index));
+            $data[$propertyName] = $transformer->toArray($this->_data->offsetGet($index));
         }
 
         if (count($data) === static::META_DATA_SIZE) {
@@ -109,7 +109,7 @@ abstract class AbstractTransfer implements TransferInterface
         }
 
         foreach (static::META_DATA as $propertyName => $index) {
-            $data[$propertyName] ??= $this->getData($index);
+            $data[$propertyName] ??= $this->_data->offsetGet($index);
         }
 
         return $data;
@@ -153,7 +153,7 @@ abstract class AbstractTransfer implements TransferInterface
         $propertyNames = array_keys($data);
         foreach ($this->getTransformers($propertyNames) as $propertyName => $transformer) {
             $index = static::META_DATA[$propertyName];
-            $this->setData($index, $transformer->fromArray($data[$propertyName]));
+            $this->_data->offsetSet($index, $transformer->fromArray($data[$propertyName]));
 
             unset($data[$propertyName]);
         }
@@ -181,7 +181,7 @@ abstract class AbstractTransfer implements TransferInterface
 
         foreach ($this->getInitiators() as $propertyName => $initiator) {
             $index = static::META_DATA[$propertyName];
-            $this->setData($index, $initiator->getInitialValue());
+            $this->_data->offsetSet($index, $initiator->getInitialValue());
         }
     }
 }
