@@ -29,6 +29,8 @@ final class LabelsTransfer extends AbstractTransfer
 
     public ?string $sale {
         get => $this->getData(self::SALE_INDEX);
-        set => $this->setData(self::SALE_INDEX, $value);
+        set {
+            $this->setData(self::SALE_INDEX, $value);
+        }
     }
 }

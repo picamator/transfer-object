@@ -15,10 +15,15 @@ use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 use Picamator\TransferObject\Generated\DefinitionBuildInTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
+use Picamator\TransferObject\Shared\Parser\DocBlockParserTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 
 final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
 {
+    use DocBlockParserTrait;
+
+    private const string DOC_BLOCK_TEMPLATE = '%s<%s,%s>';
+
     /**
      * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter
      */
@@ -34,9 +39,11 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
         $propertyTransfer = match (true) {
             $content->type->isString() => $this->resolveStringType($content),
 
-            $content->type->isNull() => $this->resolveNullType($content),
+            $content->type->isArray() => $this->resolveArrayType($content),
 
             $content->type->isObject() => $this->resolveObjectType($content),
+
+            $content->type->isNull() => $this->resolveNullType($content),
 
             default => $this->resolveDefaultType($content),
         };
@@ -65,6 +72,32 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
                 get_debug_type($content->propertyValue),
             ),
         );
+    }
+
+    private function resolveArrayType(Content $content): DefinitionPropertyTransfer
+    {
+        /** @var array<int|string,mixed> $propertyValue */
+        $propertyValue = $content->propertyValue;
+        $type = GetTypeEnum::array->name;
+
+        if (count($propertyValue) > 0) {
+            $keyType = array_key_first($propertyValue)
+                    |> gettype(...)
+                    |> GetTypeEnum::from(...);
+
+            $valueType = array_first($propertyValue)
+                    |> gettype(...)
+                    |> GetTypeEnum::from(...);
+
+            $type = sprintf(
+                self::DOC_BLOCK_TEMPLATE,
+                $type,
+                $keyType->name,
+                $valueType->name,
+            );
+        }
+
+        return $this->createPropertyTransfer($content->propertyName, $type);
     }
 
     private function resolveNullType(Content $content): DefinitionPropertyTransfer
@@ -99,12 +132,21 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
 
     private function createPropertyTransfer(string $propertyName, string $buildInType): DefinitionPropertyTransfer
     {
-        $buildItTypeTransfer = new DefinitionBuildInTypeTransfer();
-        $buildItTypeTransfer->name = BuildInTypeEnum::from($buildInType);
+        $tapeWithDocBlock = $this->parseTypeWithDocBlock($buildInType) ?? [];
+
+        /** @var string $type */
+        $type = array_key_first($tapeWithDocBlock);
+        $type = BuildInTypeEnum::from($type);
+
+        $docBlock = array_first($tapeWithDocBlock);
+
+        $buildInTypeTransfer = new DefinitionBuildInTypeTransfer();
+        $buildInTypeTransfer->name = $type;
+        $buildInTypeTransfer->docBlock = $docBlock;
 
         $propertyTransfer = new DefinitionPropertyTransfer();
         $propertyTransfer->propertyName = $propertyName;
-        $propertyTransfer->buildInType = $buildItTypeTransfer;
+        $propertyTransfer->buildInType = $buildInTypeTransfer;
 
         return $propertyTransfer;
     }

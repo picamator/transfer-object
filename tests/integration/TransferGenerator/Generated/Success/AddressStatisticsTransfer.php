@@ -38,7 +38,9 @@ final class AddressStatisticsTransfer extends AbstractTransfer
 
     public ?string $addressBookUuid {
         get => $this->getData(self::ADDRESS_BOOK_UUID_INDEX);
-        set => $this->setData(self::ADDRESS_BOOK_UUID_INDEX, $value);
+        set {
+            $this->setData(self::ADDRESS_BOOK_UUID_INDEX, $value);
+        }
     }
 
     // addressUuid
@@ -47,7 +49,9 @@ final class AddressStatisticsTransfer extends AbstractTransfer
 
     public ?string $addressUuid {
         get => $this->getData(self::ADDRESS_UUID_INDEX);
-        set => $this->setData(self::ADDRESS_UUID_INDEX, $value);
+        set {
+            $this->setData(self::ADDRESS_UUID_INDEX, $value);
+        }
     }
 
     // isActive
@@ -56,7 +60,9 @@ final class AddressStatisticsTransfer extends AbstractTransfer
 
     public ?true $isActive {
         get => $this->getData(self::IS_ACTIVE_INDEX);
-        set => $this->setData(self::IS_ACTIVE_INDEX, $value);
+        set {
+            $this->setData(self::IS_ACTIVE_INDEX, $value);
+        }
     }
 
     // isBlocked
@@ -65,7 +71,9 @@ final class AddressStatisticsTransfer extends AbstractTransfer
 
     public ?false $isBlocked {
         get => $this->getData(self::IS_BLOCKED_INDEX);
-        set => $this->setData(self::IS_BLOCKED_INDEX, $value);
+        set {
+            $this->setData(self::IS_BLOCKED_INDEX, $value);
+        }
     }
 
     // orderAverage
@@ -74,7 +82,9 @@ final class AddressStatisticsTransfer extends AbstractTransfer
 
     public ?float $orderAverage {
         get => $this->getData(self::ORDER_AVERAGE_INDEX);
-        set => $this->setData(self::ORDER_AVERAGE_INDEX, $value);
+        set {
+            $this->setData(self::ORDER_AVERAGE_INDEX, $value);
+        }
     }
 
     // orderCount
@@ -83,7 +93,9 @@ final class AddressStatisticsTransfer extends AbstractTransfer
 
     public ?int $orderCount {
         get => $this->getData(self::ORDER_COUNT_INDEX);
-        set => $this->setData(self::ORDER_COUNT_INDEX, $value);
+        set {
+            $this->setData(self::ORDER_COUNT_INDEX, $value);
+        }
     }
 
     // orderReferences
@@ -95,6 +107,8 @@ final class AddressStatisticsTransfer extends AbstractTransfer
     /** @var \ArrayObject<int|string,mixed> */
     public ArrayObject $orderReferences {
         get => $this->getData(self::ORDER_REFERENCES_INDEX);
-        set => $this->setData(self::ORDER_REFERENCES_INDEX, $value);
+        set {
+            $this->setData(self::ORDER_REFERENCES_INDEX, $value);
+        }
     }
 }

@@ -30,7 +30,9 @@ final class CoordTransfer extends AbstractTransfer
 
     public ?float $lat {
         get => $this->getData(self::LAT_INDEX);
-        set => $this->setData(self::LAT_INDEX, $value);
+        set {
+            $this->setData(self::LAT_INDEX, $value);
+        }
     }
 
     // lon
@@ -39,6 +41,8 @@ final class CoordTransfer extends AbstractTransfer
 
     public ?float $lon {
         get => $this->getData(self::LON_INDEX);
-        set => $this->setData(self::LON_INDEX, $value);
+        set {
+            $this->setData(self::LON_INDEX, $value);
+        }
     }
 }

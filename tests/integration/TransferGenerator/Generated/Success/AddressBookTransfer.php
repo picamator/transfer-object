@@ -44,7 +44,9 @@ final class AddressBookTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,AddressTransfer> */
     public ArrayObject $addresses {
         get => $this->getData(self::ADDRESSES_INDEX);
-        set => $this->setData(self::ADDRESSES_INDEX, $value);
+        set {
+            $this->setData(self::ADDRESSES_INDEX, $value);
+        }
     }
 
     // categories
@@ -55,7 +57,9 @@ final class AddressBookTransfer extends AbstractTransfer
     /** @var array<int|string,mixed> */
     public array $categories {
         get => $this->getData(self::CATEGORIES_INDEX);
-        set => $this->setData(self::CATEGORIES_INDEX, $value);
+        set {
+            $this->setData(self::CATEGORIES_INDEX, $value);
+        }
     }
 
     // label
@@ -65,7 +69,9 @@ final class AddressBookTransfer extends AbstractTransfer
 
     public ?AddressLabelEnum $label {
         get => $this->getData(self::LABEL_INDEX);
-        set => $this->setData(self::LABEL_INDEX, $value);
+        set {
+            $this->setData(self::LABEL_INDEX, $value);
+        }
     }
 
     // labelAlias
@@ -75,7 +81,9 @@ final class AddressBookTransfer extends AbstractTransfer
 
     public ?AliasAddressLabelEnum $labelAlias {
         get => $this->getData(self::LABEL_ALIAS_INDEX);
-        set => $this->setData(self::LABEL_ALIAS_INDEX, $value);
+        set {
+            $this->setData(self::LABEL_ALIAS_INDEX, $value);
+        }
     }
 
     // name
@@ -84,7 +92,9 @@ final class AddressBookTransfer extends AbstractTransfer
 
     public ?string $name {
         get => $this->getData(self::NAME_INDEX);
-        set => $this->setData(self::NAME_INDEX, $value);
+        set {
+            $this->setData(self::NAME_INDEX, $value);
+        }
     }
 
     // uuid
@@ -93,6 +103,8 @@ final class AddressBookTransfer extends AbstractTransfer
 
     public ?string $uuid {
         get => $this->getData(self::UUID_INDEX);
-        set => $this->setData(self::UUID_INDEX, $value);
+        set {
+            $this->setData(self::UUID_INDEX, $value);
+        }
     }
 }

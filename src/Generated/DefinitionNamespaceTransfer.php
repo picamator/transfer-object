@@ -32,7 +32,9 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
 
     public ?string $alias {
         get => $this->getData(self::ALIAS_INDEX);
-        set => $this->setData(self::ALIAS_INDEX, $value);
+        set {
+            $this->setData(self::ALIAS_INDEX, $value);
+        }
     }
 
     // baseName
@@ -41,7 +43,9 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
 
     public string $baseName {
         get => $this->getData(self::BASE_NAME_INDEX);
-        set => $this->setData(self::BASE_NAME_INDEX, $value);
+        set {
+            $this->setData(self::BASE_NAME_INDEX, $value);
+        }
     }
 
     // fullName
@@ -50,7 +54,9 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
 
     public string $fullName {
         get => $this->getData(self::FULL_NAME_INDEX);
-        set => $this->setData(self::FULL_NAME_INDEX, $value);
+        set {
+            $this->setData(self::FULL_NAME_INDEX, $value);
+        }
     }
 
     // withoutAlias
@@ -59,6 +65,8 @@ final class DefinitionNamespaceTransfer extends AbstractTransfer
 
     public string $withoutAlias {
         get => $this->getData(self::WITHOUT_ALIAS_INDEX);
-        set => $this->setData(self::WITHOUT_ALIAS_INDEX, $value);
+        set {
+            $this->setData(self::WITHOUT_ALIAS_INDEX, $value);
+        }
     }
 }

@@ -40,7 +40,9 @@ final class BookTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,TransferInterface&BookmarkData> */
     public ArrayObject $bookmarks {
         get => $this->getData(self::BOOKMARKS_INDEX);
-        set => $this->setData(self::BOOKMARKS_INDEX, $value);
+        set {
+            $this->setData(self::BOOKMARKS_INDEX, $value);
+        }
     }
 
     // data
@@ -50,6 +52,8 @@ final class BookTransfer extends AbstractTransfer
 
     public TransferInterface&BookData $data {
         get => $this->getData(self::DATA_INDEX);
-        set => $this->setData(self::DATA_INDEX, $value);
+        set {
+            $this->setData(self::DATA_INDEX, $value);
+        }
     }
 }

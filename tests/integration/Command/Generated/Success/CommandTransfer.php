@@ -29,6 +29,8 @@ final class CommandTransfer extends AbstractTransfer
 
     public ?true $run {
         get => $this->getData(self::RUN_INDEX);
-        set => $this->setData(self::RUN_INDEX, $value);
+        set {
+            $this->setData(self::RUN_INDEX, $value);
+        }
     }
 }

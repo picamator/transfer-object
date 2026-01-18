@@ -29,6 +29,8 @@ final class CloudsTransfer extends AbstractTransfer
 
     public ?int $all {
         get => $this->getData(self::ALL_INDEX);
-        set => $this->setData(self::ALL_INDEX, $value);
+        set {
+            $this->setData(self::ALL_INDEX, $value);
+        }
     }
 }

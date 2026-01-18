@@ -35,7 +35,9 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
 
     public DefinitionContentTransfer $definitionContent {
         get => $this->getData(self::DEFINITION_CONTENT_INDEX);
-        set => $this->setData(self::DEFINITION_CONTENT_INDEX, $value);
+        set {
+            $this->setData(self::DEFINITION_CONTENT_INDEX, $value);
+        }
     }
 
     // generatorContents
@@ -47,6 +49,8 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,DefinitionGeneratorContentTransfer> */
     public ArrayObject $generatorContents {
         get => $this->getData(self::GENERATOR_CONTENTS_INDEX);
-        set => $this->setData(self::GENERATOR_CONTENTS_INDEX, $value);
+        set {
+            $this->setData(self::GENERATOR_CONTENTS_INDEX, $value);
+        }
     }
 }

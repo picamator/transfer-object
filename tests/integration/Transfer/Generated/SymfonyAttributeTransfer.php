@@ -33,6 +33,8 @@ final class SymfonyAttributeTransfer extends AbstractTransfer
     #[NotBlank]
     public ?bool $iAmAssert {
         get => $this->getData(self::I_AM_ASSERT_INDEX);
-        set => $this->setData(self::I_AM_ASSERT_INDEX, $value);
+        set {
+            $this->setData(self::I_AM_ASSERT_INDEX, $value);
+        }
     }
 }

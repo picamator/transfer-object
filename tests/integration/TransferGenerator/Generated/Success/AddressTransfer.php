@@ -41,7 +41,9 @@ final class AddressTransfer extends AbstractTransfer
 
     public ?string $address1 {
         get => $this->getData(self::ADDRESS1_INDEX);
-        set => $this->setData(self::ADDRESS1_INDEX, $value);
+        set {
+            $this->setData(self::ADDRESS1_INDEX, $value);
+        }
     }
 
     // address2
@@ -50,7 +52,9 @@ final class AddressTransfer extends AbstractTransfer
 
     public ?string $address2 {
         get => $this->getData(self::ADDRESS2_INDEX);
-        set => $this->setData(self::ADDRESS2_INDEX, $value);
+        set {
+            $this->setData(self::ADDRESS2_INDEX, $value);
+        }
     }
 
     // address3
@@ -59,7 +63,9 @@ final class AddressTransfer extends AbstractTransfer
 
     public ?string $address3 {
         get => $this->getData(self::ADDRESS3_INDEX);
-        set => $this->setData(self::ADDRESS3_INDEX, $value);
+        set {
+            $this->setData(self::ADDRESS3_INDEX, $value);
+        }
     }
 
     // country
@@ -71,7 +77,9 @@ final class AddressTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,CountryTransfer> */
     public ArrayObject $country {
         get => $this->getData(self::COUNTRY_INDEX);
-        set => $this->setData(self::COUNTRY_INDEX, $value);
+        set {
+            $this->setData(self::COUNTRY_INDEX, $value);
+        }
     }
 
     // firstName
@@ -80,7 +88,9 @@ final class AddressTransfer extends AbstractTransfer
 
     public ?string $firstName {
         get => $this->getData(self::FIRST_NAME_INDEX);
-        set => $this->setData(self::FIRST_NAME_INDEX, $value);
+        set {
+            $this->setData(self::FIRST_NAME_INDEX, $value);
+        }
     }
 
     // isActive
@@ -89,7 +99,9 @@ final class AddressTransfer extends AbstractTransfer
 
     public ?bool $isActive {
         get => $this->getData(self::IS_ACTIVE_INDEX);
-        set => $this->setData(self::IS_ACTIVE_INDEX, $value);
+        set {
+            $this->setData(self::IS_ACTIVE_INDEX, $value);
+        }
     }
 
     // lastName
@@ -98,7 +110,9 @@ final class AddressTransfer extends AbstractTransfer
 
     public ?string $lastName {
         get => $this->getData(self::LAST_NAME_INDEX);
-        set => $this->setData(self::LAST_NAME_INDEX, $value);
+        set {
+            $this->setData(self::LAST_NAME_INDEX, $value);
+        }
     }
 
     // phone
@@ -107,7 +121,9 @@ final class AddressTransfer extends AbstractTransfer
 
     public ?string $phone {
         get => $this->getData(self::PHONE_INDEX);
-        set => $this->setData(self::PHONE_INDEX, $value);
+        set {
+            $this->setData(self::PHONE_INDEX, $value);
+        }
     }
 
     // uuid
@@ -116,7 +132,9 @@ final class AddressTransfer extends AbstractTransfer
 
     public ?string $uuid {
         get => $this->getData(self::UUID_INDEX);
-        set => $this->setData(self::UUID_INDEX, $value);
+        set {
+            $this->setData(self::UUID_INDEX, $value);
+        }
     }
 
     // zipCode
@@ -125,6 +143,8 @@ final class AddressTransfer extends AbstractTransfer
 
     public ?string $zipCode {
         get => $this->getData(self::ZIP_CODE_INDEX);
-        set => $this->setData(self::ZIP_CODE_INDEX, $value);
+        set {
+            $this->setData(self::ZIP_CODE_INDEX, $value);
+        }
     }
 }

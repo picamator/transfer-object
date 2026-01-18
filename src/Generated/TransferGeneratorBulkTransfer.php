@@ -32,7 +32,9 @@ final class TransferGeneratorBulkTransfer extends AbstractTransfer
 
     public FileReaderProgressTransfer $progress {
         get => $this->getData(self::PROGRESS_INDEX);
-        set => $this->setData(self::PROGRESS_INDEX, $value);
+        set {
+            $this->setData(self::PROGRESS_INDEX, $value);
+        }
     }
 
     // validator
@@ -42,6 +44,8 @@ final class TransferGeneratorBulkTransfer extends AbstractTransfer
 
     public ValidatorTransfer $validator {
         get => $this->getData(self::VALIDATOR_INDEX);
-        set => $this->setData(self::VALIDATOR_INDEX, $value);
+        set {
+            $this->setData(self::VALIDATOR_INDEX, $value);
+        }
     }
 }

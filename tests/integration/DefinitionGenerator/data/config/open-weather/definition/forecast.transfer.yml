@@ -15,7 +15,7 @@ Forecast:
   wind:
     type: Wind
   rain:
-    type: array
+    type: array<string,float>
   clouds:
     type: Clouds
   dt:

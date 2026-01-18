@@ -44,7 +44,9 @@ final class AsteroidTransfer extends AbstractTransfer
 
     public ?float $absolute_magnitude_h {
         get => $this->getData(self::ABSOLUTE_MAGNITUDE_H_INDEX);
-        set => $this->setData(self::ABSOLUTE_MAGNITUDE_H_INDEX, $value);
+        set {
+            $this->setData(self::ABSOLUTE_MAGNITUDE_H_INDEX, $value);
+        }
     }
 
     // close_approach_data
@@ -56,7 +58,9 @@ final class AsteroidTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,CloseApproachDataTransfer> */
     public ArrayObject $close_approach_data {
         get => $this->getData(self::CLOSE_APPROACH_DATA_INDEX);
-        set => $this->setData(self::CLOSE_APPROACH_DATA_INDEX, $value);
+        set {
+            $this->setData(self::CLOSE_APPROACH_DATA_INDEX, $value);
+        }
     }
 
     // designation
@@ -65,7 +69,9 @@ final class AsteroidTransfer extends AbstractTransfer
 
     public ?string $designation {
         get => $this->getData(self::DESIGNATION_INDEX);
-        set => $this->setData(self::DESIGNATION_INDEX, $value);
+        set {
+            $this->setData(self::DESIGNATION_INDEX, $value);
+        }
     }
 
     // estimated_diameter
@@ -75,7 +81,9 @@ final class AsteroidTransfer extends AbstractTransfer
 
     public ?EstimatedDiameterTransfer $estimated_diameter {
         get => $this->getData(self::ESTIMATED_DIAMETER_INDEX);
-        set => $this->setData(self::ESTIMATED_DIAMETER_INDEX, $value);
+        set {
+            $this->setData(self::ESTIMATED_DIAMETER_INDEX, $value);
+        }
     }
 
     // id
@@ -84,7 +92,9 @@ final class AsteroidTransfer extends AbstractTransfer
 
     public ?string $id {
         get => $this->getData(self::ID_INDEX);
-        set => $this->setData(self::ID_INDEX, $value);
+        set {
+            $this->setData(self::ID_INDEX, $value);
+        }
     }
 
     // is_potentially_hazardous_asteroid
@@ -93,7 +103,9 @@ final class AsteroidTransfer extends AbstractTransfer
 
     public ?bool $is_potentially_hazardous_asteroid {
         get => $this->getData(self::IS_POTENTIALLY_HAZARDOUS_ASTEROID_INDEX);
-        set => $this->setData(self::IS_POTENTIALLY_HAZARDOUS_ASTEROID_INDEX, $value);
+        set {
+            $this->setData(self::IS_POTENTIALLY_HAZARDOUS_ASTEROID_INDEX, $value);
+        }
     }
 
     // is_sentry_object
@@ -102,7 +114,9 @@ final class AsteroidTransfer extends AbstractTransfer
 
     public ?bool $is_sentry_object {
         get => $this->getData(self::IS_SENTRY_OBJECT_INDEX);
-        set => $this->setData(self::IS_SENTRY_OBJECT_INDEX, $value);
+        set {
+            $this->setData(self::IS_SENTRY_OBJECT_INDEX, $value);
+        }
     }
 
     // links
@@ -112,7 +126,9 @@ final class AsteroidTransfer extends AbstractTransfer
 
     public ?LinksTransfer $links {
         get => $this->getData(self::LINKS_INDEX);
-        set => $this->setData(self::LINKS_INDEX, $value);
+        set {
+            $this->setData(self::LINKS_INDEX, $value);
+        }
     }
 
     // name
@@ -121,7 +137,9 @@ final class AsteroidTransfer extends AbstractTransfer
 
     public ?string $name {
         get => $this->getData(self::NAME_INDEX);
-        set => $this->setData(self::NAME_INDEX, $value);
+        set {
+            $this->setData(self::NAME_INDEX, $value);
+        }
     }
 
     // nasa_jpl_url
@@ -130,7 +148,9 @@ final class AsteroidTransfer extends AbstractTransfer
 
     public ?string $nasa_jpl_url {
         get => $this->getData(self::NASA_JPL_URL_INDEX);
-        set => $this->setData(self::NASA_JPL_URL_INDEX, $value);
+        set {
+            $this->setData(self::NASA_JPL_URL_INDEX, $value);
+        }
     }
 
     // neo_reference_id
@@ -139,7 +159,9 @@ final class AsteroidTransfer extends AbstractTransfer
 
     public ?string $neo_reference_id {
         get => $this->getData(self::NEO_REFERENCE_ID_INDEX);
-        set => $this->setData(self::NEO_REFERENCE_ID_INDEX, $value);
+        set {
+            $this->setData(self::NEO_REFERENCE_ID_INDEX, $value);
+        }
     }
 
     // orbital_data
@@ -149,6 +171,8 @@ final class AsteroidTransfer extends AbstractTransfer
 
     public ?OrbitalDataTransfer $orbital_data {
         get => $this->getData(self::ORBITAL_DATA_INDEX);
-        set => $this->setData(self::ORBITAL_DATA_INDEX, $value);
+        set {
+            $this->setData(self::ORBITAL_DATA_INDEX, $value);
+        }
     }
 }

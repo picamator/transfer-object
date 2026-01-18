@@ -20,6 +20,11 @@ trait AttributeTrait
     private ?WeakReference $_reflectionObjectReference = null;
 
     /**
+     * @var array<string, InitiatorAttributeInterface>
+     */
+    private static array $_initiatorAttributeCache;
+
+    /**
      * @param array<string>|null $propertyNames
      *
      * @return Generator<string, TransformerAttributeInterface>
@@ -54,8 +59,6 @@ trait AttributeTrait
      */
     final protected function getInitiators(): Generator
     {
-        /** @var array<string, InitiatorAttributeInterface> $initiators */
-        $initiators = [];
         foreach ($this->getReflectionConstants() as $reflectionConstant) {
             $attributeReflections = $reflectionConstant->getAttributes(
                 name: InitiatorAttributeInterface::class,
@@ -72,9 +75,9 @@ trait AttributeTrait
             $propertyName = $reflectionConstant->getValue();
             $initiatorName = $attributeReflection->getName();
 
-            $initiators[$initiatorName] ??= $attributeReflection->newInstance();
+            self::$_initiatorAttributeCache[$initiatorName] ??= $attributeReflection->newInstance();
 
-            yield $propertyName => $initiators[$initiatorName];
+            yield $propertyName => self::$_initiatorAttributeCache[$initiatorName];
         }
     }
 

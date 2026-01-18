@@ -36,7 +36,9 @@ final class CredentialsTransfer extends AbstractTransfer
 
     public protected(set) DateTimeImmutable $createdAt {
         get => $this->getData(self::CREATED_AT_INDEX);
-        set => $this->setData(self::CREATED_AT_INDEX, $value);
+        set {
+            $this->setData(self::CREATED_AT_INDEX, $value);
+        }
     }
 
     // login
@@ -45,7 +47,9 @@ final class CredentialsTransfer extends AbstractTransfer
 
     public protected(set) string $login {
         get => $this->getData(self::LOGIN_INDEX);
-        set => $this->setData(self::LOGIN_INDEX, $value);
+        set {
+            $this->setData(self::LOGIN_INDEX, $value);
+        }
     }
 
     // token
@@ -54,7 +58,9 @@ final class CredentialsTransfer extends AbstractTransfer
 
     public protected(set) string $token {
         get => $this->getData(self::TOKEN_INDEX);
-        set => $this->setData(self::TOKEN_INDEX, $value);
+        set {
+            $this->setData(self::TOKEN_INDEX, $value);
+        }
     }
 
     // updatedAt
@@ -64,6 +70,8 @@ final class CredentialsTransfer extends AbstractTransfer
 
     public DateTime $updatedAt {
         get => $this->getData(self::UPDATED_AT_INDEX);
-        set => $this->setData(self::UPDATED_AT_INDEX, $value);
+        set {
+            $this->setData(self::UPDATED_AT_INDEX, $value);
+        }
     }
 }

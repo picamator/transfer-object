@@ -41,7 +41,9 @@ final class DestatisTransfer extends AbstractTransfer
 
     public ?string $Copyright {
         get => $this->getData(self::COPYRIGHT_INDEX);
-        set => $this->setData(self::COPYRIGHT_INDEX, $value);
+        set {
+            $this->setData(self::COPYRIGHT_INDEX, $value);
+        }
     }
 
     // Cubes
@@ -50,7 +52,9 @@ final class DestatisTransfer extends AbstractTransfer
 
     public ?string $Cubes {
         get => $this->getData(self::CUBES_INDEX);
-        set => $this->setData(self::CUBES_INDEX, $value);
+        set {
+            $this->setData(self::CUBES_INDEX, $value);
+        }
     }
 
     // Ident
@@ -60,7 +64,9 @@ final class DestatisTransfer extends AbstractTransfer
 
     public ?IdentTransfer $Ident {
         get => $this->getData(self::IDENT_INDEX);
-        set => $this->setData(self::IDENT_INDEX, $value);
+        set {
+            $this->setData(self::IDENT_INDEX, $value);
+        }
     }
 
     // Parameter
@@ -70,7 +76,9 @@ final class DestatisTransfer extends AbstractTransfer
 
     public ?ParameterTransfer $Parameter {
         get => $this->getData(self::PARAMETER_INDEX);
-        set => $this->setData(self::PARAMETER_INDEX, $value);
+        set {
+            $this->setData(self::PARAMETER_INDEX, $value);
+        }
     }
 
     // Statistics
@@ -82,7 +90,9 @@ final class DestatisTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,StatisticsTransfer> */
     public ArrayObject $Statistics {
         get => $this->getData(self::STATISTICS_INDEX);
-        set => $this->setData(self::STATISTICS_INDEX, $value);
+        set {
+            $this->setData(self::STATISTICS_INDEX, $value);
+        }
     }
 
     // Status
@@ -92,7 +102,9 @@ final class DestatisTransfer extends AbstractTransfer
 
     public ?StatusTransfer $Status {
         get => $this->getData(self::STATUS_INDEX);
-        set => $this->setData(self::STATUS_INDEX, $value);
+        set {
+            $this->setData(self::STATUS_INDEX, $value);
+        }
     }
 
     // Tables
@@ -104,7 +116,9 @@ final class DestatisTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,TablesTransfer> */
     public ArrayObject $Tables {
         get => $this->getData(self::TABLES_INDEX);
-        set => $this->setData(self::TABLES_INDEX, $value);
+        set {
+            $this->setData(self::TABLES_INDEX, $value);
+        }
     }
 
     // Timeseries
@@ -113,7 +127,9 @@ final class DestatisTransfer extends AbstractTransfer
 
     public ?string $Timeseries {
         get => $this->getData(self::TIMESERIES_INDEX);
-        set => $this->setData(self::TIMESERIES_INDEX, $value);
+        set {
+            $this->setData(self::TIMESERIES_INDEX, $value);
+        }
     }
 
     // Variables
@@ -125,6 +141,8 @@ final class DestatisTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,VariablesTransfer> */
     public ArrayObject $Variables {
         get => $this->getData(self::VARIABLES_INDEX);
-        set => $this->setData(self::VARIABLES_INDEX, $value);
+        set {
+            $this->setData(self::VARIABLES_INDEX, $value);
+        }
     }
 }

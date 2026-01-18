@@ -30,7 +30,9 @@ final class TransferGeneratorContentTransfer extends AbstractTransfer
 
     public protected(set) string $className {
         get => $this->getData(self::CLASS_NAME_INDEX);
-        set => $this->setData(self::CLASS_NAME_INDEX, $value);
+        set {
+            $this->setData(self::CLASS_NAME_INDEX, $value);
+        }
     }
 
     // content
@@ -39,6 +41,8 @@ final class TransferGeneratorContentTransfer extends AbstractTransfer
 
     public protected(set) string $content {
         get => $this->getData(self::CONTENT_INDEX);
-        set => $this->setData(self::CONTENT_INDEX, $value);
+        set {
+            $this->setData(self::CONTENT_INDEX, $value);
+        }
     }
 }

@@ -6,14 +6,13 @@ namespace Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander;
 
 use Picamator\TransferObject\Generated\DefinitionBuildInTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
+use Picamator\TransferObject\Shared\Parser\DocBlockParserTrait;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builder\EmbeddedTypeBuilderInterface;
 
 final class TypePropertyExpander extends AbstractPropertyExpander
 {
-    private const string TYPE_KEY = 'type';
-
-    private const string BUILD_IN_TYPE_REGEX = '#(?<type>[^<>]*)(?<dockBlock>.*)#';
+    use DocBlockParserTrait;
 
     public function __construct(
         private readonly EmbeddedTypeBuilderInterface $typeBuilder,
@@ -42,11 +41,13 @@ final class TypePropertyExpander extends AbstractPropertyExpander
 
     private function getBuildInTypeTransfer(string $matchedType): ?DefinitionBuildInTypeTransfer
     {
-        if (preg_match(self::BUILD_IN_TYPE_REGEX, $matchedType, $matches) === false) {
+        $tapeWithDocBlock = $this->parseTypeWithDocBlock($matchedType);
+        if ($tapeWithDocBlock === null) {
             return null;
         }
 
-        $type = $matches['type'] ?? '';
+        /** @var string $type */
+        $type = array_key_first($tapeWithDocBlock);
         $type = BuildInTypeEnum::tryFrom($type);
 
         if ($type === null) {
@@ -55,7 +56,7 @@ final class TypePropertyExpander extends AbstractPropertyExpander
 
         $buildInTypeTransfer = new DefinitionBuildInTypeTransfer();
         $buildInTypeTransfer->name = $type;
-        $buildInTypeTransfer->dockBlock = $matches['dockBlock'] ?? null;
+        $buildInTypeTransfer->docBlock = array_first($tapeWithDocBlock);
 
         return $buildInTypeTransfer;
     }

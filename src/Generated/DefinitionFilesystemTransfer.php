@@ -31,7 +31,9 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
 
     public string $content {
         get => $this->getData(self::CONTENT_INDEX);
-        set => $this->setData(self::CONTENT_INDEX, $value);
+        set {
+            $this->setData(self::CONTENT_INDEX, $value);
+        }
     }
 
     // definitionPath
@@ -40,7 +42,9 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
 
     public string $definitionPath {
         get => $this->getData(self::DEFINITION_PATH_INDEX);
-        set => $this->setData(self::DEFINITION_PATH_INDEX, $value);
+        set {
+            $this->setData(self::DEFINITION_PATH_INDEX, $value);
+        }
     }
 
     // fileName
@@ -49,6 +53,8 @@ final class DefinitionFilesystemTransfer extends AbstractTransfer
 
     public string $fileName {
         get => $this->getData(self::FILE_NAME_INDEX);
-        set => $this->setData(self::FILE_NAME_INDEX, $value);
+        set {
+            $this->setData(self::FILE_NAME_INDEX, $value);
+        }
     }
 }

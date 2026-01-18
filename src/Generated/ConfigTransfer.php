@@ -32,7 +32,9 @@ final class ConfigTransfer extends AbstractTransfer
 
     public ConfigContentTransfer $content {
         get => $this->getData(self::CONTENT_INDEX);
-        set => $this->setData(self::CONTENT_INDEX, $value);
+        set {
+            $this->setData(self::CONTENT_INDEX, $value);
+        }
     }
 
     // validator
@@ -42,6 +44,8 @@ final class ConfigTransfer extends AbstractTransfer
 
     public ValidatorTransfer $validator {
         get => $this->getData(self::VALIDATOR_INDEX);
-        set => $this->setData(self::VALIDATOR_INDEX, $value);
+        set {
+            $this->setData(self::VALIDATOR_INDEX, $value);
+        }
     }
 }

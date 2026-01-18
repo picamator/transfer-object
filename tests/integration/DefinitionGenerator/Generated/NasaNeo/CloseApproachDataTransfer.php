@@ -35,7 +35,9 @@ final class CloseApproachDataTransfer extends AbstractTransfer
 
     public ?string $close_approach_date {
         get => $this->getData(self::CLOSE_APPROACH_DATE_INDEX);
-        set => $this->setData(self::CLOSE_APPROACH_DATE_INDEX, $value);
+        set {
+            $this->setData(self::CLOSE_APPROACH_DATE_INDEX, $value);
+        }
     }
 
     // close_approach_date_full
@@ -44,7 +46,9 @@ final class CloseApproachDataTransfer extends AbstractTransfer
 
     public ?string $close_approach_date_full {
         get => $this->getData(self::CLOSE_APPROACH_DATE_FULL_INDEX);
-        set => $this->setData(self::CLOSE_APPROACH_DATE_FULL_INDEX, $value);
+        set {
+            $this->setData(self::CLOSE_APPROACH_DATE_FULL_INDEX, $value);
+        }
     }
 
     // epoch_date_close_approach
@@ -53,7 +57,9 @@ final class CloseApproachDataTransfer extends AbstractTransfer
 
     public ?int $epoch_date_close_approach {
         get => $this->getData(self::EPOCH_DATE_CLOSE_APPROACH_INDEX);
-        set => $this->setData(self::EPOCH_DATE_CLOSE_APPROACH_INDEX, $value);
+        set {
+            $this->setData(self::EPOCH_DATE_CLOSE_APPROACH_INDEX, $value);
+        }
     }
 
     // miss_distance
@@ -63,7 +69,9 @@ final class CloseApproachDataTransfer extends AbstractTransfer
 
     public ?MissDistanceTransfer $miss_distance {
         get => $this->getData(self::MISS_DISTANCE_INDEX);
-        set => $this->setData(self::MISS_DISTANCE_INDEX, $value);
+        set {
+            $this->setData(self::MISS_DISTANCE_INDEX, $value);
+        }
     }
 
     // orbiting_body
@@ -72,7 +80,9 @@ final class CloseApproachDataTransfer extends AbstractTransfer
 
     public ?string $orbiting_body {
         get => $this->getData(self::ORBITING_BODY_INDEX);
-        set => $this->setData(self::ORBITING_BODY_INDEX, $value);
+        set {
+            $this->setData(self::ORBITING_BODY_INDEX, $value);
+        }
     }
 
     // relative_velocity
@@ -82,6 +92,8 @@ final class CloseApproachDataTransfer extends AbstractTransfer
 
     public ?RelativeVelocityTransfer $relative_velocity {
         get => $this->getData(self::RELATIVE_VELOCITY_INDEX);
-        set => $this->setData(self::RELATIVE_VELOCITY_INDEX, $value);
+        set {
+            $this->setData(self::RELATIVE_VELOCITY_INDEX, $value);
+        }
     }
 }

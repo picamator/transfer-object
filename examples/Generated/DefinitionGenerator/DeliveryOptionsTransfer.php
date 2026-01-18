@@ -29,6 +29,8 @@ final class DeliveryOptionsTransfer extends AbstractTransfer
 
     public ?string $name {
         get => $this->getData(self::NAME_INDEX);
-        set => $this->setData(self::NAME_INDEX, $value);
+        set {
+            $this->setData(self::NAME_INDEX, $value);
+        }
     }
 }

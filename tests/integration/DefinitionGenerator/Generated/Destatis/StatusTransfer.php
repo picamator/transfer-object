@@ -31,7 +31,9 @@ final class StatusTransfer extends AbstractTransfer
 
     public ?int $Code {
         get => $this->getData(self::CODE_INDEX);
-        set => $this->setData(self::CODE_INDEX, $value);
+        set {
+            $this->setData(self::CODE_INDEX, $value);
+        }
     }
 
     // Content
@@ -40,7 +42,9 @@ final class StatusTransfer extends AbstractTransfer
 
     public ?string $Content {
         get => $this->getData(self::CONTENT_INDEX);
-        set => $this->setData(self::CONTENT_INDEX, $value);
+        set {
+            $this->setData(self::CONTENT_INDEX, $value);
+        }
     }
 
     // Type
@@ -49,6 +53,8 @@ final class StatusTransfer extends AbstractTransfer
 
     public ?string $Type {
         get => $this->getData(self::TYPE_INDEX);
-        set => $this->setData(self::TYPE_INDEX, $value);
+        set {
+            $this->setData(self::TYPE_INDEX, $value);
+        }
     }
 }

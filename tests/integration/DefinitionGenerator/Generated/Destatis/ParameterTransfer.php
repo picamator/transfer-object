@@ -34,7 +34,9 @@ final class ParameterTransfer extends AbstractTransfer
 
     public ?string $category {
         get => $this->getData(self::CATEGORY_INDEX);
-        set => $this->setData(self::CATEGORY_INDEX, $value);
+        set {
+            $this->setData(self::CATEGORY_INDEX, $value);
+        }
     }
 
     // language
@@ -43,7 +45,9 @@ final class ParameterTransfer extends AbstractTransfer
 
     public ?string $language {
         get => $this->getData(self::LANGUAGE_INDEX);
-        set => $this->setData(self::LANGUAGE_INDEX, $value);
+        set {
+            $this->setData(self::LANGUAGE_INDEX, $value);
+        }
     }
 
     // pagelength
@@ -52,7 +56,9 @@ final class ParameterTransfer extends AbstractTransfer
 
     public ?string $pagelength {
         get => $this->getData(self::PAGELENGTH_INDEX);
-        set => $this->setData(self::PAGELENGTH_INDEX, $value);
+        set {
+            $this->setData(self::PAGELENGTH_INDEX, $value);
+        }
     }
 
     // password
@@ -61,7 +67,9 @@ final class ParameterTransfer extends AbstractTransfer
 
     public ?string $password {
         get => $this->getData(self::PASSWORD_INDEX);
-        set => $this->setData(self::PASSWORD_INDEX, $value);
+        set {
+            $this->setData(self::PASSWORD_INDEX, $value);
+        }
     }
 
     // term
@@ -70,7 +78,9 @@ final class ParameterTransfer extends AbstractTransfer
 
     public ?string $term {
         get => $this->getData(self::TERM_INDEX);
-        set => $this->setData(self::TERM_INDEX, $value);
+        set {
+            $this->setData(self::TERM_INDEX, $value);
+        }
     }
 
     // username
@@ -79,6 +89,8 @@ final class ParameterTransfer extends AbstractTransfer
 
     public ?string $username {
         get => $this->getData(self::USERNAME_INDEX);
-        set => $this->setData(self::USERNAME_INDEX, $value);
+        set {
+            $this->setData(self::USERNAME_INDEX, $value);
+        }
     }
 }

@@ -31,7 +31,9 @@ final class DefinitionGeneratorContentTransfer extends AbstractTransfer
 
     public string $className {
         get => $this->getData(self::CLASS_NAME_INDEX);
-        set => $this->setData(self::CLASS_NAME_INDEX, $value);
+        set {
+            $this->setData(self::CLASS_NAME_INDEX, $value);
+        }
     }
 
     // content
@@ -42,6 +44,8 @@ final class DefinitionGeneratorContentTransfer extends AbstractTransfer
     /** @var array<int|string,mixed> */
     public array $content {
         get => $this->getData(self::CONTENT_INDEX);
-        set => $this->setData(self::CONTENT_INDEX, $value);
+        set {
+            $this->setData(self::CONTENT_INDEX, $value);
+        }
     }
 }

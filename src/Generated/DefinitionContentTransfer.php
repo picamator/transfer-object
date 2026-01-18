@@ -33,7 +33,9 @@ final class DefinitionContentTransfer extends AbstractTransfer
 
     public string $className {
         get => $this->getData(self::CLASS_NAME_INDEX);
-        set => $this->setData(self::CLASS_NAME_INDEX, $value);
+        set {
+            $this->setData(self::CLASS_NAME_INDEX, $value);
+        }
     }
 
     // properties
@@ -45,6 +47,8 @@ final class DefinitionContentTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,DefinitionPropertyTransfer> */
     public ArrayObject $properties {
         get => $this->getData(self::PROPERTIES_INDEX);
-        set => $this->setData(self::PROPERTIES_INDEX, $value);
+        set {
+            $this->setData(self::PROPERTIES_INDEX, $value);
+        }
     }
 }

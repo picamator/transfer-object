@@ -37,7 +37,9 @@ final class ArdNewsTransfer extends AbstractTransfer
 
     public ?string $newStoriesCountLink {
         get => $this->getData(self::NEW_STORIES_COUNT_LINK_INDEX);
-        set => $this->setData(self::NEW_STORIES_COUNT_LINK_INDEX, $value);
+        set {
+            $this->setData(self::NEW_STORIES_COUNT_LINK_INDEX, $value);
+        }
     }
 
     // news
@@ -49,7 +51,9 @@ final class ArdNewsTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,NewsTransfer> */
     public ArrayObject $news {
         get => $this->getData(self::NEWS_INDEX);
-        set => $this->setData(self::NEWS_INDEX, $value);
+        set {
+            $this->setData(self::NEWS_INDEX, $value);
+        }
     }
 
     // nextPage
@@ -58,7 +62,9 @@ final class ArdNewsTransfer extends AbstractTransfer
 
     public ?string $nextPage {
         get => $this->getData(self::NEXT_PAGE_INDEX);
-        set => $this->setData(self::NEXT_PAGE_INDEX, $value);
+        set {
+            $this->setData(self::NEXT_PAGE_INDEX, $value);
+        }
     }
 
     // regional
@@ -69,7 +75,9 @@ final class ArdNewsTransfer extends AbstractTransfer
     /** @var array<int|string,mixed> */
     public array $regional {
         get => $this->getData(self::REGIONAL_INDEX);
-        set => $this->setData(self::REGIONAL_INDEX, $value);
+        set {
+            $this->setData(self::REGIONAL_INDEX, $value);
+        }
     }
 
     // type
@@ -78,6 +86,8 @@ final class ArdNewsTransfer extends AbstractTransfer
 
     public ?string $type {
         get => $this->getData(self::TYPE_INDEX);
-        set => $this->setData(self::TYPE_INDEX, $value);
+        set {
+            $this->setData(self::TYPE_INDEX, $value);
+        }
     }
 }

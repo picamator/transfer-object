@@ -51,7 +51,7 @@ Product:
   price:
     type: Price
   sizes:
-    type: array
+    type: array<int,string>
 
 # Price
 Price:

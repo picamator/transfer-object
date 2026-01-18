@@ -37,13 +37,11 @@ abstract class AbstractTransfer implements TransferInterface
      */
     final public function __construct(?array $data = null)
     {
-        if ($data === null) {
-            $this->initData();
+        $this->initData();
 
-            return;
+        if ($data !== null) {
+            $this->hydrateData($data);
         }
-
-        $this->fromArray($data);
     }
 
     /**
@@ -83,7 +81,7 @@ abstract class AbstractTransfer implements TransferInterface
     final public function getIterator(): Traversable
     {
         foreach (static::META_DATA as $propertyName => $index) {
-            yield $propertyName => $this->_data[$index];
+            yield $propertyName => $this->_data->offsetGet($index);
         }
     }
 
@@ -92,48 +90,38 @@ abstract class AbstractTransfer implements TransferInterface
      */
     final public function __clone(): void
     {
-        $this->fromArray($this->toArray());
+        /** @var \SplFixedArray<mixed> $data */
+        $data = unserialize(serialize($this->_data));
+
+        $this->_data = $data;
     }
 
     final public function toArray(): array
     {
         $data = [];
         foreach ($this->getTransformers() as $propertyName => $transformer) {
-            $data[$propertyName] = $transformer->toArray($this->$propertyName);
+            $index = static::META_DATA[$propertyName];
+            $data[$propertyName] = $transformer->toArray($this->_data->offsetGet($index));
         }
 
         if (count($data) === static::META_DATA_SIZE) {
             return $data;
         }
 
-        $propertyNames = array_diff_key(static::META_DATA, $data);
-        $propertyNames = array_keys($propertyNames);
-        foreach ($propertyNames as $propertyName) {
-            $data[$propertyName] = $this->$propertyName;
+        foreach (static::META_DATA as $propertyName => $index) {
+            $data[$propertyName] ??= $this->_data->offsetGet($index);
         }
 
         return $data;
     }
 
+
     final public function fromArray(array $data): static
     {
         $this->initData();
 
-        $filterCallback = fn(mixed $value, int|string $key): bool => isset(static::META_DATA[$key]) && $value !== null;
-        $data = array_filter($data, callback: $filterCallback, mode: ARRAY_FILTER_USE_BOTH);
-
-        if ($data === []) {
-            return $this;
-        }
-
-        $propertyNames = array_keys($data);
-        foreach ($this->getTransformers($propertyNames) as $propertyName => $transformer) {
-            $this->$propertyName = $transformer->fromArray($data[$propertyName]);
-            unset($data[$propertyName]);
-        }
-
-        foreach ($data as $propertyName => $value) {
-            $this->$propertyName = $value;
+        if ($data !== []) {
+            $this->hydrateData($data);
         }
 
         return $this;
@@ -141,12 +129,48 @@ abstract class AbstractTransfer implements TransferInterface
 
     final protected function getData(int $index): mixed
     {
-        return $this->_data[$index];
+        return $this->_data->offsetGet($index);
     }
 
-    final protected function setData(int $index, mixed $value): mixed
+    final protected function setData(int $index, mixed $value): void
     {
-        return $this->_data[$index] = $value;
+        $this->_data->offsetSet($index, $value);
+    }
+
+    /**
+     * @param array<string,mixed> $data
+     */
+    private function hydrateData(array $data): void
+    {
+        $this->filterData($data);
+
+        if ($data === []) {
+            return;
+        }
+
+        $propertyNames = array_keys($data);
+        foreach ($this->getTransformers($propertyNames) as $propertyName => $transformer) {
+            $index = static::META_DATA[$propertyName];
+            $this->_data->offsetSet($index, $transformer->fromArray($data[$propertyName]));
+
+            unset($data[$propertyName]);
+        }
+
+        foreach ($data as $propertyName => $value) {
+            $this->$propertyName = $value;
+        }
+    }
+
+    /**
+     * @param array<string,mixed> $data
+     */
+    private function filterData(array &$data): void
+    {
+        foreach ($data as $propertyName => $value) {
+            if ($value === null || !isset(static::META_DATA[$propertyName])) {
+                unset($data[$propertyName]);
+            }
+        }
     }
 
     private function initData(): void
@@ -154,7 +178,8 @@ abstract class AbstractTransfer implements TransferInterface
         $this->_data = new SplFixedArray(size: static::META_DATA_SIZE);
 
         foreach ($this->getInitiators() as $propertyName => $initiator) {
-            $this->$propertyName = $initiator->getInitialValue();
+            $index = static::META_DATA[$propertyName];
+            $this->_data->offsetSet($index, $initiator->getInitialValue());
         }
     }
 }

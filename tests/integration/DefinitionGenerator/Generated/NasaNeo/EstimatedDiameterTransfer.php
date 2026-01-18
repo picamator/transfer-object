@@ -34,7 +34,9 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
 
     public ?FeetTransfer $feet {
         get => $this->getData(self::FEET_INDEX);
-        set => $this->setData(self::FEET_INDEX, $value);
+        set {
+            $this->setData(self::FEET_INDEX, $value);
+        }
     }
 
     // kilometers
@@ -44,7 +46,9 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
 
     public ?KilometersTransfer $kilometers {
         get => $this->getData(self::KILOMETERS_INDEX);
-        set => $this->setData(self::KILOMETERS_INDEX, $value);
+        set {
+            $this->setData(self::KILOMETERS_INDEX, $value);
+        }
     }
 
     // meters
@@ -54,7 +58,9 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
 
     public ?MetersTransfer $meters {
         get => $this->getData(self::METERS_INDEX);
-        set => $this->setData(self::METERS_INDEX, $value);
+        set {
+            $this->setData(self::METERS_INDEX, $value);
+        }
     }
 
     // miles
@@ -64,6 +70,8 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
 
     public ?MilesTransfer $miles {
         get => $this->getData(self::MILES_INDEX);
-        set => $this->setData(self::MILES_INDEX, $value);
+        set {
+            $this->setData(self::MILES_INDEX, $value);
+        }
     }
 }

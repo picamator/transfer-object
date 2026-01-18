@@ -53,20 +53,18 @@ TEMPLATE;
         $i = 0;
         $properties = '';
 
-        /**
-         * @var string $constant
-         * @var string $property
-         */
         foreach ($templateTransfer->metaConstants as $constant => $property) {
             $properties .= <<<TEMPLATE
 
     // $property{$this->helper->renderMetaAttributes($property)}
     public const string {$constant}_PROP = '$property';
     private const int {$constant}_INDEX = $i;
-{$this->helper->renderDockBlock($property)}{$this->helper->renderPropertyAttributes($property)}
+{$this->helper->renderDocBlock($property)}{$this->helper->renderPropertyAttributes($property)}
     public{$this->helper->renderPropertyDeclaration($property)} \$$property {
         get => \$this->getData(self::{$constant}_INDEX);
-        set => \$this->setData(self::{$constant}_INDEX, \$value);
+        set {
+            \$this->setData(self::{$constant}_INDEX, \$value);
+        }
     }
 
 TEMPLATE;

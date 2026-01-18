@@ -19,7 +19,7 @@ Product:
   details:
     type: Details
   stores:
-    type: array
+    type: array<int,string>
   labels:
     type: Labels
   availabilities:

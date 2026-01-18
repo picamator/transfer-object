@@ -75,7 +75,7 @@ DefinitionBuildInType:
   name:
     enumType: "Picamator\\TransferObject\\TransferGenerator\\Definition\\Enum\\BuildInTypeEnum"
     required:
-  dockBlock:
+  docBlock:
     type: string
 
 DefinitionEmbeddedType:

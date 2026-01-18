@@ -29,6 +29,8 @@ final class ImageVariantsTransfer extends AbstractTransfer
 
     public ?string $original {
         get => $this->getData(self::ORIGINAL_INDEX);
-        set => $this->setData(self::ORIGINAL_INDEX, $value);
+        set {
+            $this->setData(self::ORIGINAL_INDEX, $value);
+        }
     }
 }

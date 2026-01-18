@@ -33,6 +33,8 @@ final class ReservedAdvancedTransfer extends AbstractTransfer
 
     public TransferInterface&ReservedPropertyData $data {
         get => $this->getData(self::DATA_INDEX);
-        set => $this->setData(self::DATA_INDEX, $value);
+        set {
+            $this->setData(self::DATA_INDEX, $value);
+        }
     }
 }

@@ -19,7 +19,7 @@ Template:
     type: ArrayObject<string,string>
   metaAttributes:
     type: ArrayObject<string,array<int,string>>
-  dockBlocks:
+  docBlocks:
     type: ArrayObject<string,string>
   nullables:
     type: ArrayObject<string,bool>

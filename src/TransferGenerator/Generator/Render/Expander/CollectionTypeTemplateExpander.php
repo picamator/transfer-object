@@ -10,13 +10,13 @@ use Picamator\TransferObject\Generated\TemplateTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\InitiatorAttributeEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransformerAttributeTemplateEnum;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\DockBlockTemplateEnum;
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\DocBlockTemplateEnum;
 
 final class CollectionTypeTemplateExpander extends AbstractTemplateExpander
 {
     use TemplateExpanderTrait;
 
-    private const string DOCK_BLOCK_TEMPLATE = '<int,%s>';
+    private const string DOC_BLOCK_TEMPLATE = '<int,%s>';
 
     protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
@@ -39,7 +39,7 @@ final class CollectionTypeTemplateExpander extends AbstractTemplateExpander
 
         $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->properties[$propertyName] = BuildInTypeEnum::ARRAY_OBJECT->value;
-        $templateTransfer->dockBlocks[$propertyName] = $this->getPropertyDockBlock($typeTransfer);
+        $templateTransfer->docBlocks[$propertyName] = $this->getPropertyDocBlock($typeTransfer);
         $templateTransfer->nullables[$propertyName] = false;
 
         $templateTransfer->metaAttributes[$propertyName] = [
@@ -48,7 +48,7 @@ final class CollectionTypeTemplateExpander extends AbstractTemplateExpander
         ];
     }
 
-    private function getPropertyDockBlock(DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer): string
+    private function getPropertyDocBlock(DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer): string
     {
         $propertyType = $embeddedTypeTransfer->name;
 
@@ -56,8 +56,8 @@ final class CollectionTypeTemplateExpander extends AbstractTemplateExpander
             $propertyType = $this->enforceTransferInterface($propertyType);
         }
 
-        $dockBlock = sprintf(self::DOCK_BLOCK_TEMPLATE, $propertyType);
+        $docBlock = sprintf(self::DOC_BLOCK_TEMPLATE, $propertyType);
 
-        return DockBlockTemplateEnum::ARRAY_OBJECT->renderTemplate($dockBlock);
+        return DocBlockTemplateEnum::ARRAY_OBJECT->renderTemplate($docBlock);
     }
 }

@@ -47,7 +47,9 @@ final class ForecastTransfer extends AbstractTransfer
 
     public ?string $base {
         get => $this->getData(self::BASE_INDEX);
-        set => $this->setData(self::BASE_INDEX, $value);
+        set {
+            $this->setData(self::BASE_INDEX, $value);
+        }
     }
 
     // clouds
@@ -57,7 +59,9 @@ final class ForecastTransfer extends AbstractTransfer
 
     public ?CloudsTransfer $clouds {
         get => $this->getData(self::CLOUDS_INDEX);
-        set => $this->setData(self::CLOUDS_INDEX, $value);
+        set {
+            $this->setData(self::CLOUDS_INDEX, $value);
+        }
     }
 
     // cod
@@ -66,7 +70,9 @@ final class ForecastTransfer extends AbstractTransfer
 
     public ?int $cod {
         get => $this->getData(self::COD_INDEX);
-        set => $this->setData(self::COD_INDEX, $value);
+        set {
+            $this->setData(self::COD_INDEX, $value);
+        }
     }
 
     // coord
@@ -76,7 +82,9 @@ final class ForecastTransfer extends AbstractTransfer
 
     public ?CoordTransfer $coord {
         get => $this->getData(self::COORD_INDEX);
-        set => $this->setData(self::COORD_INDEX, $value);
+        set {
+            $this->setData(self::COORD_INDEX, $value);
+        }
     }
 
     // dt
@@ -85,7 +93,9 @@ final class ForecastTransfer extends AbstractTransfer
 
     public ?int $dt {
         get => $this->getData(self::DT_INDEX);
-        set => $this->setData(self::DT_INDEX, $value);
+        set {
+            $this->setData(self::DT_INDEX, $value);
+        }
     }
 
     // id
@@ -94,7 +104,9 @@ final class ForecastTransfer extends AbstractTransfer
 
     public ?int $id {
         get => $this->getData(self::ID_INDEX);
-        set => $this->setData(self::ID_INDEX, $value);
+        set {
+            $this->setData(self::ID_INDEX, $value);
+        }
     }
 
     // main
@@ -104,7 +116,9 @@ final class ForecastTransfer extends AbstractTransfer
 
     public ?MainTransfer $main {
         get => $this->getData(self::MAIN_INDEX);
-        set => $this->setData(self::MAIN_INDEX, $value);
+        set {
+            $this->setData(self::MAIN_INDEX, $value);
+        }
     }
 
     // name
@@ -113,7 +127,9 @@ final class ForecastTransfer extends AbstractTransfer
 
     public ?string $name {
         get => $this->getData(self::NAME_INDEX);
-        set => $this->setData(self::NAME_INDEX, $value);
+        set {
+            $this->setData(self::NAME_INDEX, $value);
+        }
     }
 
     // rain
@@ -121,10 +137,12 @@ final class ForecastTransfer extends AbstractTransfer
     public const string RAIN_PROP = 'rain';
     private const int RAIN_INDEX = 8;
 
-    /** @var array<int|string,mixed> */
+    /** @var array<string,float> */
     public array $rain {
         get => $this->getData(self::RAIN_INDEX);
-        set => $this->setData(self::RAIN_INDEX, $value);
+        set {
+            $this->setData(self::RAIN_INDEX, $value);
+        }
     }
 
     // sys
@@ -134,7 +152,9 @@ final class ForecastTransfer extends AbstractTransfer
 
     public ?SysTransfer $sys {
         get => $this->getData(self::SYS_INDEX);
-        set => $this->setData(self::SYS_INDEX, $value);
+        set {
+            $this->setData(self::SYS_INDEX, $value);
+        }
     }
 
     // timezone
@@ -143,7 +163,9 @@ final class ForecastTransfer extends AbstractTransfer
 
     public ?int $timezone {
         get => $this->getData(self::TIMEZONE_INDEX);
-        set => $this->setData(self::TIMEZONE_INDEX, $value);
+        set {
+            $this->setData(self::TIMEZONE_INDEX, $value);
+        }
     }
 
     // visibility
@@ -152,7 +174,9 @@ final class ForecastTransfer extends AbstractTransfer
 
     public ?int $visibility {
         get => $this->getData(self::VISIBILITY_INDEX);
-        set => $this->setData(self::VISIBILITY_INDEX, $value);
+        set {
+            $this->setData(self::VISIBILITY_INDEX, $value);
+        }
     }
 
     // weather
@@ -164,7 +188,9 @@ final class ForecastTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,WeatherTransfer> */
     public ArrayObject $weather {
         get => $this->getData(self::WEATHER_INDEX);
-        set => $this->setData(self::WEATHER_INDEX, $value);
+        set {
+            $this->setData(self::WEATHER_INDEX, $value);
+        }
     }
 
     // wind
@@ -174,6 +200,8 @@ final class ForecastTransfer extends AbstractTransfer
 
     public ?WindTransfer $wind {
         get => $this->getData(self::WIND_INDEX);
-        set => $this->setData(self::WIND_INDEX, $value);
+        set {
+            $this->setData(self::WIND_INDEX, $value);
+        }
     }
 }

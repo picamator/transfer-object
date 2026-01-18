@@ -32,7 +32,9 @@ final class StatisticsTransfer extends AbstractTransfer
 
     public ?string $Code {
         get => $this->getData(self::CODE_INDEX);
-        set => $this->setData(self::CODE_INDEX, $value);
+        set {
+            $this->setData(self::CODE_INDEX, $value);
+        }
     }
 
     // Content
@@ -41,7 +43,9 @@ final class StatisticsTransfer extends AbstractTransfer
 
     public ?string $Content {
         get => $this->getData(self::CONTENT_INDEX);
-        set => $this->setData(self::CONTENT_INDEX, $value);
+        set {
+            $this->setData(self::CONTENT_INDEX, $value);
+        }
     }
 
     // Cubes
@@ -50,7 +54,9 @@ final class StatisticsTransfer extends AbstractTransfer
 
     public ?string $Cubes {
         get => $this->getData(self::CUBES_INDEX);
-        set => $this->setData(self::CUBES_INDEX, $value);
+        set {
+            $this->setData(self::CUBES_INDEX, $value);
+        }
     }
 
     // Information
@@ -59,6 +65,8 @@ final class StatisticsTransfer extends AbstractTransfer
 
     public ?string $Information {
         get => $this->getData(self::INFORMATION_INDEX);
-        set => $this->setData(self::INFORMATION_INDEX, $value);
+        set {
+            $this->setData(self::INFORMATION_INDEX, $value);
+        }
     }
 }

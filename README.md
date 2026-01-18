@@ -136,7 +136,7 @@ For detailed information, please check [DefinitionGeneratorFacadeTest](/tests/in
 Documentation
 -------------
 
-For more details, please visit [project's wiki](https://github.com/picamator/transfer-object/wiki).
+For more details, please visit [Project's Wiki](https://github.com/picamator/transfer-object/wiki).
 
 Publications
 ------------
@@ -161,9 +161,15 @@ If you have suggestions for improvements or new features, feel free to:
 
 Here is a [Contribution Guide](CONTRIBUTING.md).
 
-
 This project is released with a [Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in this project and its community, you agree to abide by those terms.
+
+Security Commitment
+-------------------
+
+The project applies [OpenSSF Best Practices](https://www.bestpractices.dev/en/projects/11465/passing).
+
+For reporting security vulnerabilities, please follow [Security Policy](https://github.com/picamator/transfer-object/security/policy).
 
 License
 -------
