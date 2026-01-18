@@ -1,9 +1,16 @@
 * eol=lf
 * text=auto
+
+# diff
 *.php diff=php
+*.md diff=markdown
+*.sh diff=bash
+
+# binary
 *.jpg binary
 *.png binary
 
+# export ignore
 /.idea                  export-ignore
 /.github                export-ignore
 /.xdebug                export-ignore
@@ -27,6 +34,7 @@
 /phpunit.xml            export-ignore
 /SECURITY.md            export-ignore
 
+# ignore form language statistics and hide in diffs
 /src/Generated/**           linguist-generated=true
 /examples/Generated/**      linguist-generated=true
 /tests/**/Generated/**      linguist-generated=true
