@@ -50,7 +50,7 @@ readonly class NumberTypePropertyValidator implements PropertyValidatorInterface
     {
         return sprintf(
             self::INVALID_NUMBER_TYPE_ERROR_MESSAGE_TEMPLATE,
-            $propertyTransfer->propertyName ?? '',
+            $propertyTransfer->propertyName,
             $propertyTransfer->numberType?->namespace->withoutAlias ?? '',
         );
     }

@@ -31,7 +31,9 @@ final class TablesTransfer extends AbstractTransfer
 
     public ?string $Code {
         get => $this->getData(self::CODE_INDEX);
-        set => $this->setData(self::CODE_INDEX, $value);
+        set {
+            $this->setData(self::CODE_INDEX, $value);
+        }
     }
 
     // Content
@@ -40,7 +42,9 @@ final class TablesTransfer extends AbstractTransfer
 
     public ?string $Content {
         get => $this->getData(self::CONTENT_INDEX);
-        set => $this->setData(self::CONTENT_INDEX, $value);
+        set {
+            $this->setData(self::CONTENT_INDEX, $value);
+        }
     }
 
     // Time
@@ -49,6 +53,8 @@ final class TablesTransfer extends AbstractTransfer
 
     public ?string $Time {
         get => $this->getData(self::TIME_INDEX);
-        set => $this->setData(self::TIME_INDEX, $value);
+        set {
+            $this->setData(self::TIME_INDEX, $value);
+        }
     }
 }

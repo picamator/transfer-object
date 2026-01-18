@@ -58,7 +58,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $AUD {
         get => $this->getData(self::AUD_INDEX);
-        set => $this->setData(self::AUD_INDEX, $value);
+        set {
+            $this->setData(self::AUD_INDEX, $value);
+        }
     }
 
     // BGN
@@ -67,7 +69,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $BGN {
         get => $this->getData(self::BGN_INDEX);
-        set => $this->setData(self::BGN_INDEX, $value);
+        set {
+            $this->setData(self::BGN_INDEX, $value);
+        }
     }
 
     // BRL
@@ -76,7 +80,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $BRL {
         get => $this->getData(self::BRL_INDEX);
-        set => $this->setData(self::BRL_INDEX, $value);
+        set {
+            $this->setData(self::BRL_INDEX, $value);
+        }
     }
 
     // CAD
@@ -85,7 +91,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $CAD {
         get => $this->getData(self::CAD_INDEX);
-        set => $this->setData(self::CAD_INDEX, $value);
+        set {
+            $this->setData(self::CAD_INDEX, $value);
+        }
     }
 
     // CHF
@@ -94,7 +102,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $CHF {
         get => $this->getData(self::CHF_INDEX);
-        set => $this->setData(self::CHF_INDEX, $value);
+        set {
+            $this->setData(self::CHF_INDEX, $value);
+        }
     }
 
     // CNY
@@ -103,7 +113,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $CNY {
         get => $this->getData(self::CNY_INDEX);
-        set => $this->setData(self::CNY_INDEX, $value);
+        set {
+            $this->setData(self::CNY_INDEX, $value);
+        }
     }
 
     // CZK
@@ -112,7 +124,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $CZK {
         get => $this->getData(self::CZK_INDEX);
-        set => $this->setData(self::CZK_INDEX, $value);
+        set {
+            $this->setData(self::CZK_INDEX, $value);
+        }
     }
 
     // DKK
@@ -121,7 +135,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $DKK {
         get => $this->getData(self::DKK_INDEX);
-        set => $this->setData(self::DKK_INDEX, $value);
+        set {
+            $this->setData(self::DKK_INDEX, $value);
+        }
     }
 
     // GBP
@@ -130,7 +146,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $GBP {
         get => $this->getData(self::GBP_INDEX);
-        set => $this->setData(self::GBP_INDEX, $value);
+        set {
+            $this->setData(self::GBP_INDEX, $value);
+        }
     }
 
     // HKD
@@ -139,7 +157,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $HKD {
         get => $this->getData(self::HKD_INDEX);
-        set => $this->setData(self::HKD_INDEX, $value);
+        set {
+            $this->setData(self::HKD_INDEX, $value);
+        }
     }
 
     // HUF
@@ -148,7 +168,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $HUF {
         get => $this->getData(self::HUF_INDEX);
-        set => $this->setData(self::HUF_INDEX, $value);
+        set {
+            $this->setData(self::HUF_INDEX, $value);
+        }
     }
 
     // IDR
@@ -157,7 +179,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?int $IDR {
         get => $this->getData(self::IDR_INDEX);
-        set => $this->setData(self::IDR_INDEX, $value);
+        set {
+            $this->setData(self::IDR_INDEX, $value);
+        }
     }
 
     // ILS
@@ -166,7 +190,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $ILS {
         get => $this->getData(self::ILS_INDEX);
-        set => $this->setData(self::ILS_INDEX, $value);
+        set {
+            $this->setData(self::ILS_INDEX, $value);
+        }
     }
 
     // INR
@@ -175,7 +201,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $INR {
         get => $this->getData(self::INR_INDEX);
-        set => $this->setData(self::INR_INDEX, $value);
+        set {
+            $this->setData(self::INR_INDEX, $value);
+        }
     }
 
     // ISK
@@ -184,7 +212,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $ISK {
         get => $this->getData(self::ISK_INDEX);
-        set => $this->setData(self::ISK_INDEX, $value);
+        set {
+            $this->setData(self::ISK_INDEX, $value);
+        }
     }
 
     // JPY
@@ -193,7 +223,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $JPY {
         get => $this->getData(self::JPY_INDEX);
-        set => $this->setData(self::JPY_INDEX, $value);
+        set {
+            $this->setData(self::JPY_INDEX, $value);
+        }
     }
 
     // KRW
@@ -202,7 +234,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $KRW {
         get => $this->getData(self::KRW_INDEX);
-        set => $this->setData(self::KRW_INDEX, $value);
+        set {
+            $this->setData(self::KRW_INDEX, $value);
+        }
     }
 
     // MXN
@@ -211,7 +245,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $MXN {
         get => $this->getData(self::MXN_INDEX);
-        set => $this->setData(self::MXN_INDEX, $value);
+        set {
+            $this->setData(self::MXN_INDEX, $value);
+        }
     }
 
     // MYR
@@ -220,7 +256,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $MYR {
         get => $this->getData(self::MYR_INDEX);
-        set => $this->setData(self::MYR_INDEX, $value);
+        set {
+            $this->setData(self::MYR_INDEX, $value);
+        }
     }
 
     // NOK
@@ -229,7 +267,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $NOK {
         get => $this->getData(self::NOK_INDEX);
-        set => $this->setData(self::NOK_INDEX, $value);
+        set {
+            $this->setData(self::NOK_INDEX, $value);
+        }
     }
 
     // NZD
@@ -238,7 +278,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $NZD {
         get => $this->getData(self::NZD_INDEX);
-        set => $this->setData(self::NZD_INDEX, $value);
+        set {
+            $this->setData(self::NZD_INDEX, $value);
+        }
     }
 
     // PHP
@@ -247,7 +289,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $PHP {
         get => $this->getData(self::PHP_INDEX);
-        set => $this->setData(self::PHP_INDEX, $value);
+        set {
+            $this->setData(self::PHP_INDEX, $value);
+        }
     }
 
     // PLN
@@ -256,7 +300,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $PLN {
         get => $this->getData(self::PLN_INDEX);
-        set => $this->setData(self::PLN_INDEX, $value);
+        set {
+            $this->setData(self::PLN_INDEX, $value);
+        }
     }
 
     // RON
@@ -265,7 +311,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $RON {
         get => $this->getData(self::RON_INDEX);
-        set => $this->setData(self::RON_INDEX, $value);
+        set {
+            $this->setData(self::RON_INDEX, $value);
+        }
     }
 
     // SEK
@@ -274,7 +322,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $SEK {
         get => $this->getData(self::SEK_INDEX);
-        set => $this->setData(self::SEK_INDEX, $value);
+        set {
+            $this->setData(self::SEK_INDEX, $value);
+        }
     }
 
     // SGD
@@ -283,7 +333,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $SGD {
         get => $this->getData(self::SGD_INDEX);
-        set => $this->setData(self::SGD_INDEX, $value);
+        set {
+            $this->setData(self::SGD_INDEX, $value);
+        }
     }
 
     // THB
@@ -292,7 +344,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $THB {
         get => $this->getData(self::THB_INDEX);
-        set => $this->setData(self::THB_INDEX, $value);
+        set {
+            $this->setData(self::THB_INDEX, $value);
+        }
     }
 
     // TRY
@@ -301,7 +355,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $TRY {
         get => $this->getData(self::TRY_INDEX);
-        set => $this->setData(self::TRY_INDEX, $value);
+        set {
+            $this->setData(self::TRY_INDEX, $value);
+        }
     }
 
     // USD
@@ -310,7 +366,9 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $USD {
         get => $this->getData(self::USD_INDEX);
-        set => $this->setData(self::USD_INDEX, $value);
+        set {
+            $this->setData(self::USD_INDEX, $value);
+        }
     }
 
     // ZAR
@@ -319,6 +377,8 @@ final class RatesTransfer extends AbstractTransfer
 
     public ?float $ZAR {
         get => $this->getData(self::ZAR_INDEX);
-        set => $this->setData(self::ZAR_INDEX, $value);
+        set {
+            $this->setData(self::ZAR_INDEX, $value);
+        }
     }
 }

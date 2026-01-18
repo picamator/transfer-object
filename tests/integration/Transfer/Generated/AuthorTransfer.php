@@ -30,7 +30,9 @@ final class AuthorTransfer extends AbstractTransfer
 
     public string $firstName {
         get => $this->getData(self::FIRST_NAME_INDEX);
-        set => $this->setData(self::FIRST_NAME_INDEX, $value);
+        set {
+            $this->setData(self::FIRST_NAME_INDEX, $value);
+        }
     }
 
     // lastName
@@ -39,6 +41,8 @@ final class AuthorTransfer extends AbstractTransfer
 
     public string $lastName {
         get => $this->getData(self::LAST_NAME_INDEX);
-        set => $this->setData(self::LAST_NAME_INDEX, $value);
+        set {
+            $this->setData(self::LAST_NAME_INDEX, $value);
+        }
     }
 }

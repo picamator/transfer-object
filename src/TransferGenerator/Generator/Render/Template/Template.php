@@ -66,7 +66,9 @@ TEMPLATE;
 {$this->helper->renderDocBlock($property)}{$this->helper->renderPropertyAttributes($property)}
     public{$this->helper->renderPropertyDeclaration($property)} \$$property {
         get => \$this->getData(self::{$constant}_INDEX);
-        set => \$this->setData(self::{$constant}_INDEX, \$value);
+        set {
+            \$this->setData(self::{$constant}_INDEX, \$value);
+        }
     }
 
 TEMPLATE;

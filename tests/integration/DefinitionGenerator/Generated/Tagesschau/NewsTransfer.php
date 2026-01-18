@@ -55,7 +55,9 @@ final class NewsTransfer extends AbstractTransfer
 
     public ?BrandingImageTransfer $brandingImage {
         get => $this->getData(self::BRANDING_IMAGE_INDEX);
-        set => $this->setData(self::BRANDING_IMAGE_INDEX, $value);
+        set {
+            $this->setData(self::BRANDING_IMAGE_INDEX, $value);
+        }
     }
 
     // breakingNews
@@ -64,7 +66,9 @@ final class NewsTransfer extends AbstractTransfer
 
     public ?bool $breakingNews {
         get => $this->getData(self::BREAKING_NEWS_INDEX);
-        set => $this->setData(self::BREAKING_NEWS_INDEX, $value);
+        set {
+            $this->setData(self::BREAKING_NEWS_INDEX, $value);
+        }
     }
 
     // comments
@@ -73,7 +77,9 @@ final class NewsTransfer extends AbstractTransfer
 
     public ?string $comments {
         get => $this->getData(self::COMMENTS_INDEX);
-        set => $this->setData(self::COMMENTS_INDEX, $value);
+        set {
+            $this->setData(self::COMMENTS_INDEX, $value);
+        }
     }
 
     // date
@@ -82,7 +88,9 @@ final class NewsTransfer extends AbstractTransfer
 
     public ?string $date {
         get => $this->getData(self::DATE_INDEX);
-        set => $this->setData(self::DATE_INDEX, $value);
+        set {
+            $this->setData(self::DATE_INDEX, $value);
+        }
     }
 
     // details
@@ -91,7 +99,9 @@ final class NewsTransfer extends AbstractTransfer
 
     public ?string $details {
         get => $this->getData(self::DETAILS_INDEX);
-        set => $this->setData(self::DETAILS_INDEX, $value);
+        set {
+            $this->setData(self::DETAILS_INDEX, $value);
+        }
     }
 
     // detailsweb
@@ -100,7 +110,9 @@ final class NewsTransfer extends AbstractTransfer
 
     public ?string $detailsweb {
         get => $this->getData(self::DETAILSWEB_INDEX);
-        set => $this->setData(self::DETAILSWEB_INDEX, $value);
+        set {
+            $this->setData(self::DETAILSWEB_INDEX, $value);
+        }
     }
 
     // externalId
@@ -109,7 +121,9 @@ final class NewsTransfer extends AbstractTransfer
 
     public ?string $externalId {
         get => $this->getData(self::EXTERNAL_ID_INDEX);
-        set => $this->setData(self::EXTERNAL_ID_INDEX, $value);
+        set {
+            $this->setData(self::EXTERNAL_ID_INDEX, $value);
+        }
     }
 
     // firstSentence
@@ -118,7 +132,9 @@ final class NewsTransfer extends AbstractTransfer
 
     public ?string $firstSentence {
         get => $this->getData(self::FIRST_SENTENCE_INDEX);
-        set => $this->setData(self::FIRST_SENTENCE_INDEX, $value);
+        set {
+            $this->setData(self::FIRST_SENTENCE_INDEX, $value);
+        }
     }
 
     // geotags
@@ -129,7 +145,9 @@ final class NewsTransfer extends AbstractTransfer
     /** @var array<int|string,mixed> */
     public array $geotags {
         get => $this->getData(self::GEOTAGS_INDEX);
-        set => $this->setData(self::GEOTAGS_INDEX, $value);
+        set {
+            $this->setData(self::GEOTAGS_INDEX, $value);
+        }
     }
 
     // regionId
@@ -138,7 +156,9 @@ final class NewsTransfer extends AbstractTransfer
 
     public ?int $regionId {
         get => $this->getData(self::REGION_ID_INDEX);
-        set => $this->setData(self::REGION_ID_INDEX, $value);
+        set {
+            $this->setData(self::REGION_ID_INDEX, $value);
+        }
     }
 
     // regionIds
@@ -149,7 +169,9 @@ final class NewsTransfer extends AbstractTransfer
     /** @var array<int,int> */
     public array $regionIds {
         get => $this->getData(self::REGION_IDS_INDEX);
-        set => $this->setData(self::REGION_IDS_INDEX, $value);
+        set {
+            $this->setData(self::REGION_IDS_INDEX, $value);
+        }
     }
 
     // ressort
@@ -158,7 +180,9 @@ final class NewsTransfer extends AbstractTransfer
 
     public ?string $ressort {
         get => $this->getData(self::RESSORT_INDEX);
-        set => $this->setData(self::RESSORT_INDEX, $value);
+        set {
+            $this->setData(self::RESSORT_INDEX, $value);
+        }
     }
 
     // shareURL
@@ -167,7 +191,9 @@ final class NewsTransfer extends AbstractTransfer
 
     public ?string $shareURL {
         get => $this->getData(self::SHARE_U_R_L_INDEX);
-        set => $this->setData(self::SHARE_U_R_L_INDEX, $value);
+        set {
+            $this->setData(self::SHARE_U_R_L_INDEX, $value);
+        }
     }
 
     // sophoraId
@@ -176,7 +202,9 @@ final class NewsTransfer extends AbstractTransfer
 
     public ?string $sophoraId {
         get => $this->getData(self::SOPHORA_ID_INDEX);
-        set => $this->setData(self::SOPHORA_ID_INDEX, $value);
+        set {
+            $this->setData(self::SOPHORA_ID_INDEX, $value);
+        }
     }
 
     // tags
@@ -188,7 +216,9 @@ final class NewsTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,TagsTransfer> */
     public ArrayObject $tags {
         get => $this->getData(self::TAGS_INDEX);
-        set => $this->setData(self::TAGS_INDEX, $value);
+        set {
+            $this->setData(self::TAGS_INDEX, $value);
+        }
     }
 
     // teaserImage
@@ -198,7 +228,9 @@ final class NewsTransfer extends AbstractTransfer
 
     public ?TeaserImageTransfer $teaserImage {
         get => $this->getData(self::TEASER_IMAGE_INDEX);
-        set => $this->setData(self::TEASER_IMAGE_INDEX, $value);
+        set {
+            $this->setData(self::TEASER_IMAGE_INDEX, $value);
+        }
     }
 
     // title
@@ -207,7 +239,9 @@ final class NewsTransfer extends AbstractTransfer
 
     public ?string $title {
         get => $this->getData(self::TITLE_INDEX);
-        set => $this->setData(self::TITLE_INDEX, $value);
+        set {
+            $this->setData(self::TITLE_INDEX, $value);
+        }
     }
 
     // topline
@@ -216,7 +250,9 @@ final class NewsTransfer extends AbstractTransfer
 
     public ?string $topline {
         get => $this->getData(self::TOPLINE_INDEX);
-        set => $this->setData(self::TOPLINE_INDEX, $value);
+        set {
+            $this->setData(self::TOPLINE_INDEX, $value);
+        }
     }
 
     // tracking
@@ -228,7 +264,9 @@ final class NewsTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,TrackingTransfer> */
     public ArrayObject $tracking {
         get => $this->getData(self::TRACKING_INDEX);
-        set => $this->setData(self::TRACKING_INDEX, $value);
+        set {
+            $this->setData(self::TRACKING_INDEX, $value);
+        }
     }
 
     // type
@@ -237,7 +275,9 @@ final class NewsTransfer extends AbstractTransfer
 
     public ?string $type {
         get => $this->getData(self::TYPE_INDEX);
-        set => $this->setData(self::TYPE_INDEX, $value);
+        set {
+            $this->setData(self::TYPE_INDEX, $value);
+        }
     }
 
     // updateCheckUrl
@@ -246,6 +286,8 @@ final class NewsTransfer extends AbstractTransfer
 
     public ?string $updateCheckUrl {
         get => $this->getData(self::UPDATE_CHECK_URL_INDEX);
-        set => $this->setData(self::UPDATE_CHECK_URL_INDEX, $value);
+        set {
+            $this->setData(self::UPDATE_CHECK_URL_INDEX, $value);
+        }
     }
 }

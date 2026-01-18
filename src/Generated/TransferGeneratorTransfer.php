@@ -32,7 +32,9 @@ final class TransferGeneratorTransfer extends AbstractTransfer
 
     public ?string $className {
         get => $this->getData(self::CLASS_NAME_INDEX);
-        set => $this->setData(self::CLASS_NAME_INDEX, $value);
+        set {
+            $this->setData(self::CLASS_NAME_INDEX, $value);
+        }
     }
 
     // fileName
@@ -41,7 +43,9 @@ final class TransferGeneratorTransfer extends AbstractTransfer
 
     public ?string $fileName {
         get => $this->getData(self::FILE_NAME_INDEX);
-        set => $this->setData(self::FILE_NAME_INDEX, $value);
+        set {
+            $this->setData(self::FILE_NAME_INDEX, $value);
+        }
     }
 
     // validator
@@ -51,6 +55,8 @@ final class TransferGeneratorTransfer extends AbstractTransfer
 
     public ValidatorTransfer $validator {
         get => $this->getData(self::VALIDATOR_INDEX);
-        set => $this->setData(self::VALIDATOR_INDEX, $value);
+        set {
+            $this->setData(self::VALIDATOR_INDEX, $value);
+        }
     }
 }

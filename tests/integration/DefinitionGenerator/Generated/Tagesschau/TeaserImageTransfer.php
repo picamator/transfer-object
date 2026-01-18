@@ -34,7 +34,9 @@ final class TeaserImageTransfer extends AbstractTransfer
 
     public ?string $alttext {
         get => $this->getData(self::ALTTEXT_INDEX);
-        set => $this->setData(self::ALTTEXT_INDEX, $value);
+        set {
+            $this->setData(self::ALTTEXT_INDEX, $value);
+        }
     }
 
     // copyright
@@ -43,7 +45,9 @@ final class TeaserImageTransfer extends AbstractTransfer
 
     public ?string $copyright {
         get => $this->getData(self::COPYRIGHT_INDEX);
-        set => $this->setData(self::COPYRIGHT_INDEX, $value);
+        set {
+            $this->setData(self::COPYRIGHT_INDEX, $value);
+        }
     }
 
     // imageVariants
@@ -54,7 +58,9 @@ final class TeaserImageTransfer extends AbstractTransfer
     /** @var array<string,string> */
     public array $imageVariants {
         get => $this->getData(self::IMAGE_VARIANTS_INDEX);
-        set => $this->setData(self::IMAGE_VARIANTS_INDEX, $value);
+        set {
+            $this->setData(self::IMAGE_VARIANTS_INDEX, $value);
+        }
     }
 
     // title
@@ -63,7 +69,9 @@ final class TeaserImageTransfer extends AbstractTransfer
 
     public ?string $title {
         get => $this->getData(self::TITLE_INDEX);
-        set => $this->setData(self::TITLE_INDEX, $value);
+        set {
+            $this->setData(self::TITLE_INDEX, $value);
+        }
     }
 
     // type
@@ -72,6 +80,8 @@ final class TeaserImageTransfer extends AbstractTransfer
 
     public ?string $type {
         get => $this->getData(self::TYPE_INDEX);
-        set => $this->setData(self::TYPE_INDEX, $value);
+        set {
+            $this->setData(self::TYPE_INDEX, $value);
+        }
     }
 }

@@ -30,7 +30,9 @@ final class AvailabilitiesTransfer extends AbstractTransfer
 
     public ?int $buffer {
         get => $this->getData(self::BUFFER_INDEX);
-        set => $this->setData(self::BUFFER_INDEX, $value);
+        set {
+            $this->setData(self::BUFFER_INDEX, $value);
+        }
     }
 
     // total
@@ -39,6 +41,8 @@ final class AvailabilitiesTransfer extends AbstractTransfer
 
     public ?int $total {
         get => $this->getData(self::TOTAL_INDEX);
-        set => $this->setData(self::TOTAL_INDEX, $value);
+        set {
+            $this->setData(self::TOTAL_INDEX, $value);
+        }
     }
 }

@@ -32,7 +32,9 @@ final class DefinitionBuildInTypeTransfer extends AbstractTransfer
 
     public ?string $docBlock {
         get => $this->getData(self::DOC_BLOCK_INDEX);
-        set => $this->setData(self::DOC_BLOCK_INDEX, $value);
+        set {
+            $this->setData(self::DOC_BLOCK_INDEX, $value);
+        }
     }
 
     // name
@@ -42,6 +44,8 @@ final class DefinitionBuildInTypeTransfer extends AbstractTransfer
 
     public BuildInTypeEnum $name {
         get => $this->getData(self::NAME_INDEX);
-        set => $this->setData(self::NAME_INDEX, $value);
+        set {
+            $this->setData(self::NAME_INDEX, $value);
+        }
     }
 }

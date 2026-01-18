@@ -132,11 +132,9 @@ abstract class AbstractTransfer implements TransferInterface
         return $this->_data->offsetGet($index);
     }
 
-    final protected function setData(int $index, mixed $value): mixed
+    final protected function setData(int $index, mixed $value): void
     {
         $this->_data->offsetSet($index, $value);
-
-        return $value;
     }
 
     /**

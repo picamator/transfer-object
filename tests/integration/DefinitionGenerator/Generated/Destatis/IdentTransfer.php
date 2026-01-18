@@ -30,7 +30,9 @@ final class IdentTransfer extends AbstractTransfer
 
     public ?string $Method {
         get => $this->getData(self::METHOD_INDEX);
-        set => $this->setData(self::METHOD_INDEX, $value);
+        set {
+            $this->setData(self::METHOD_INDEX, $value);
+        }
     }
 
     // Service
@@ -39,6 +41,8 @@ final class IdentTransfer extends AbstractTransfer
 
     public ?string $Service {
         get => $this->getData(self::SERVICE_INDEX);
-        set => $this->setData(self::SERVICE_INDEX, $value);
+        set {
+            $this->setData(self::SERVICE_INDEX, $value);
+        }
     }
 }

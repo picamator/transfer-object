@@ -31,7 +31,9 @@ final class DefinitionAttributeTransfer extends AbstractTransfer
 
     public ?string $arguments {
         get => $this->getData(self::ARGUMENTS_INDEX);
-        set => $this->setData(self::ARGUMENTS_INDEX, $value);
+        set {
+            $this->setData(self::ARGUMENTS_INDEX, $value);
+        }
     }
 
     // namespace
@@ -41,6 +43,8 @@ final class DefinitionAttributeTransfer extends AbstractTransfer
 
     public DefinitionNamespaceTransfer $namespace {
         get => $this->getData(self::NAMESPACE_INDEX);
-        set => $this->setData(self::NAMESPACE_INDEX, $value);
+        set {
+            $this->setData(self::NAMESPACE_INDEX, $value);
+        }
     }
 }

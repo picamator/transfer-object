@@ -35,7 +35,9 @@ final class AgentTransfer extends AbstractTransfer
 
     public ?CustomerTransfer $customer {
         get => $this->getData(self::CUSTOMER_INDEX);
-        set => $this->setData(self::CUSTOMER_INDEX, $value);
+        set {
+            $this->setData(self::CUSTOMER_INDEX, $value);
+        }
     }
 
     // merchants
@@ -47,6 +49,8 @@ final class AgentTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,MerchantTransfer> */
     public ArrayObject $merchants {
         get => $this->getData(self::MERCHANTS_INDEX);
-        set => $this->setData(self::MERCHANTS_INDEX, $value);
+        set {
+            $this->setData(self::MERCHANTS_INDEX, $value);
+        }
     }
 }

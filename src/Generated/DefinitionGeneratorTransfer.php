@@ -32,7 +32,9 @@ final class DefinitionGeneratorTransfer extends AbstractTransfer
 
     public DefinitionGeneratorContentTransfer $content {
         get => $this->getData(self::CONTENT_INDEX);
-        set => $this->setData(self::CONTENT_INDEX, $value);
+        set {
+            $this->setData(self::CONTENT_INDEX, $value);
+        }
     }
 
     // definitionPath
@@ -41,6 +43,8 @@ final class DefinitionGeneratorTransfer extends AbstractTransfer
 
     public string $definitionPath {
         get => $this->getData(self::DEFINITION_PATH_INDEX);
-        set => $this->setData(self::DEFINITION_PATH_INDEX, $value);
+        set {
+            $this->setData(self::DEFINITION_PATH_INDEX, $value);
+        }
     }
 }

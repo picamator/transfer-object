@@ -33,7 +33,9 @@ final class DefinitionTransfer extends AbstractTransfer
 
     public DefinitionContentTransfer $content {
         get => $this->getData(self::CONTENT_INDEX);
-        set => $this->setData(self::CONTENT_INDEX, $value);
+        set {
+            $this->setData(self::CONTENT_INDEX, $value);
+        }
     }
 
     // fileName
@@ -42,7 +44,9 @@ final class DefinitionTransfer extends AbstractTransfer
 
     public string $fileName {
         get => $this->getData(self::FILE_NAME_INDEX);
-        set => $this->setData(self::FILE_NAME_INDEX, $value);
+        set {
+            $this->setData(self::FILE_NAME_INDEX, $value);
+        }
     }
 
     // validator
@@ -52,6 +56,8 @@ final class DefinitionTransfer extends AbstractTransfer
 
     public ValidatorTransfer $validator {
         get => $this->getData(self::VALIDATOR_INDEX);
-        set => $this->setData(self::VALIDATOR_INDEX, $value);
+        set {
+            $this->setData(self::VALIDATOR_INDEX, $value);
+        }
     }
 }

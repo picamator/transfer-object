@@ -29,6 +29,8 @@ final class TagsTransfer extends AbstractTransfer
 
     public ?string $tag {
         get => $this->getData(self::TAG_INDEX);
-        set => $this->setData(self::TAG_INDEX, $value);
+        set {
+            $this->setData(self::TAG_INDEX, $value);
+        }
     }
 }

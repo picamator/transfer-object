@@ -29,6 +29,8 @@ final class LinksTransfer extends AbstractTransfer
 
     public ?string $self {
         get => $this->getData(self::SELF_INDEX);
-        set => $this->setData(self::SELF_INDEX, $value);
+        set {
+            $this->setData(self::SELF_INDEX, $value);
+        }
     }
 }

@@ -45,7 +45,9 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,DefinitionAttributeTransfer> */
     public ArrayObject $attributes {
         get => $this->getData(self::ATTRIBUTES_INDEX);
-        set => $this->setData(self::ATTRIBUTES_INDEX, $value);
+        set {
+            $this->setData(self::ATTRIBUTES_INDEX, $value);
+        }
     }
 
     // buildInType
@@ -55,7 +57,9 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     public ?DefinitionBuildInTypeTransfer $buildInType {
         get => $this->getData(self::BUILD_IN_TYPE_INDEX);
-        set => $this->setData(self::BUILD_IN_TYPE_INDEX, $value);
+        set {
+            $this->setData(self::BUILD_IN_TYPE_INDEX, $value);
+        }
     }
 
     // collectionType
@@ -65,7 +69,9 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     public ?DefinitionEmbeddedTypeTransfer $collectionType {
         get => $this->getData(self::COLLECTION_TYPE_INDEX);
-        set => $this->setData(self::COLLECTION_TYPE_INDEX, $value);
+        set {
+            $this->setData(self::COLLECTION_TYPE_INDEX, $value);
+        }
     }
 
     // dateTimeType
@@ -75,7 +81,9 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     public ?DefinitionEmbeddedTypeTransfer $dateTimeType {
         get => $this->getData(self::DATE_TIME_TYPE_INDEX);
-        set => $this->setData(self::DATE_TIME_TYPE_INDEX, $value);
+        set {
+            $this->setData(self::DATE_TIME_TYPE_INDEX, $value);
+        }
     }
 
     // enumType
@@ -85,7 +93,9 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     public ?DefinitionEmbeddedTypeTransfer $enumType {
         get => $this->getData(self::ENUM_TYPE_INDEX);
-        set => $this->setData(self::ENUM_TYPE_INDEX, $value);
+        set {
+            $this->setData(self::ENUM_TYPE_INDEX, $value);
+        }
     }
 
     // isNullable
@@ -94,7 +104,9 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     public bool $isNullable {
         get => $this->getData(self::IS_NULLABLE_INDEX);
-        set => $this->setData(self::IS_NULLABLE_INDEX, $value);
+        set {
+            $this->setData(self::IS_NULLABLE_INDEX, $value);
+        }
     }
 
     // isProtected
@@ -103,7 +115,9 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     public bool $isProtected {
         get => $this->getData(self::IS_PROTECTED_INDEX);
-        set => $this->setData(self::IS_PROTECTED_INDEX, $value);
+        set {
+            $this->setData(self::IS_PROTECTED_INDEX, $value);
+        }
     }
 
     // numberType
@@ -113,7 +127,9 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     public ?DefinitionEmbeddedTypeTransfer $numberType {
         get => $this->getData(self::NUMBER_TYPE_INDEX);
-        set => $this->setData(self::NUMBER_TYPE_INDEX, $value);
+        set {
+            $this->setData(self::NUMBER_TYPE_INDEX, $value);
+        }
     }
 
     // propertyName
@@ -122,7 +138,9 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     public string $propertyName {
         get => $this->getData(self::PROPERTY_NAME_INDEX);
-        set => $this->setData(self::PROPERTY_NAME_INDEX, $value);
+        set {
+            $this->setData(self::PROPERTY_NAME_INDEX, $value);
+        }
     }
 
     // transferType
@@ -132,6 +150,8 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     public ?DefinitionEmbeddedTypeTransfer $transferType {
         get => $this->getData(self::TRANSFER_TYPE_INDEX);
-        set => $this->setData(self::TRANSFER_TYPE_INDEX, $value);
+        set {
+            $this->setData(self::TRANSFER_TYPE_INDEX, $value);
+        }
     }
 }

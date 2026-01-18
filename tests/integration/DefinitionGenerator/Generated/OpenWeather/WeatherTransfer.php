@@ -32,7 +32,9 @@ final class WeatherTransfer extends AbstractTransfer
 
     public ?string $description {
         get => $this->getData(self::DESCRIPTION_INDEX);
-        set => $this->setData(self::DESCRIPTION_INDEX, $value);
+        set {
+            $this->setData(self::DESCRIPTION_INDEX, $value);
+        }
     }
 
     // icon
@@ -41,7 +43,9 @@ final class WeatherTransfer extends AbstractTransfer
 
     public ?string $icon {
         get => $this->getData(self::ICON_INDEX);
-        set => $this->setData(self::ICON_INDEX, $value);
+        set {
+            $this->setData(self::ICON_INDEX, $value);
+        }
     }
 
     // id
@@ -50,7 +54,9 @@ final class WeatherTransfer extends AbstractTransfer
 
     public ?int $id {
         get => $this->getData(self::ID_INDEX);
-        set => $this->setData(self::ID_INDEX, $value);
+        set {
+            $this->setData(self::ID_INDEX, $value);
+        }
     }
 
     // main
@@ -59,6 +65,8 @@ final class WeatherTransfer extends AbstractTransfer
 
     public ?string $main {
         get => $this->getData(self::MAIN_INDEX);
-        set => $this->setData(self::MAIN_INDEX, $value);
+        set {
+            $this->setData(self::MAIN_INDEX, $value);
+        }
     }
 }

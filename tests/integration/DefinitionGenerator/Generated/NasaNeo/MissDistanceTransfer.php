@@ -32,7 +32,9 @@ final class MissDistanceTransfer extends AbstractTransfer
 
     public ?string $astronomical {
         get => $this->getData(self::ASTRONOMICAL_INDEX);
-        set => $this->setData(self::ASTRONOMICAL_INDEX, $value);
+        set {
+            $this->setData(self::ASTRONOMICAL_INDEX, $value);
+        }
     }
 
     // kilometers
@@ -41,7 +43,9 @@ final class MissDistanceTransfer extends AbstractTransfer
 
     public ?string $kilometers {
         get => $this->getData(self::KILOMETERS_INDEX);
-        set => $this->setData(self::KILOMETERS_INDEX, $value);
+        set {
+            $this->setData(self::KILOMETERS_INDEX, $value);
+        }
     }
 
     // lunar
@@ -50,7 +54,9 @@ final class MissDistanceTransfer extends AbstractTransfer
 
     public ?string $lunar {
         get => $this->getData(self::LUNAR_INDEX);
-        set => $this->setData(self::LUNAR_INDEX, $value);
+        set {
+            $this->setData(self::LUNAR_INDEX, $value);
+        }
     }
 
     // miles
@@ -59,6 +65,8 @@ final class MissDistanceTransfer extends AbstractTransfer
 
     public ?string $miles {
         get => $this->getData(self::MILES_INDEX);
-        set => $this->setData(self::MILES_INDEX, $value);
+        set {
+            $this->setData(self::MILES_INDEX, $value);
+        }
     }
 }

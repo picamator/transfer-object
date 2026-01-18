@@ -31,7 +31,9 @@ final class FileReaderProgressTransfer extends AbstractTransfer
 
     public string $content {
         get => $this->getData(self::CONTENT_INDEX);
-        set => $this->setData(self::CONTENT_INDEX, $value);
+        set {
+            $this->setData(self::CONTENT_INDEX, $value);
+        }
     }
 
     // progressBytes
@@ -40,7 +42,9 @@ final class FileReaderProgressTransfer extends AbstractTransfer
 
     public int $progressBytes {
         get => $this->getData(self::PROGRESS_BYTES_INDEX);
-        set => $this->setData(self::PROGRESS_BYTES_INDEX, $value);
+        set {
+            $this->setData(self::PROGRESS_BYTES_INDEX, $value);
+        }
     }
 
     // totalBytes
@@ -49,6 +53,8 @@ final class FileReaderProgressTransfer extends AbstractTransfer
 
     public int $totalBytes {
         get => $this->getData(self::TOTAL_BYTES_INDEX);
-        set => $this->setData(self::TOTAL_BYTES_INDEX, $value);
+        set {
+            $this->setData(self::TOTAL_BYTES_INDEX, $value);
+        }
     }
 }

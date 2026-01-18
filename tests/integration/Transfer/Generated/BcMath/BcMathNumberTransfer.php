@@ -32,6 +32,8 @@ final class BcMathNumberTransfer extends AbstractTransfer
 
     public ?Number $iAmNumber {
         get => $this->getData(self::I_AM_NUMBER_INDEX);
-        set => $this->setData(self::I_AM_NUMBER_INDEX, $value);
+        set {
+            $this->setData(self::I_AM_NUMBER_INDEX, $value);
+        }
     }
 }

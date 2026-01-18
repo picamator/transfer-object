@@ -48,7 +48,9 @@ final class ProductTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,AvailabilitiesTransfer> */
     public ArrayObject $availabilities {
         get => $this->getData(self::AVAILABILITIES_INDEX);
-        set => $this->setData(self::AVAILABILITIES_INDEX, $value);
+        set {
+            $this->setData(self::AVAILABILITIES_INDEX, $value);
+        }
     }
 
     // currency
@@ -57,7 +59,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $currency {
         get => $this->getData(self::CURRENCY_INDEX);
-        set => $this->setData(self::CURRENCY_INDEX, $value);
+        set {
+            $this->setData(self::CURRENCY_INDEX, $value);
+        }
     }
 
     // deliveryOptions
@@ -69,7 +73,9 @@ final class ProductTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,DeliveryOptionsTransfer> */
     public ArrayObject $deliveryOptions {
         get => $this->getData(self::DELIVERY_OPTIONS_INDEX);
-        set => $this->setData(self::DELIVERY_OPTIONS_INDEX, $value);
+        set {
+            $this->setData(self::DELIVERY_OPTIONS_INDEX, $value);
+        }
     }
 
     // details
@@ -79,7 +85,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?DetailsTransfer $details {
         get => $this->getData(self::DETAILS_INDEX);
-        set => $this->setData(self::DETAILS_INDEX, $value);
+        set {
+            $this->setData(self::DETAILS_INDEX, $value);
+        }
     }
 
     // isDiscounted
@@ -88,7 +96,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?bool $isDiscounted {
         get => $this->getData(self::IS_DISCOUNTED_INDEX);
-        set => $this->setData(self::IS_DISCOUNTED_INDEX, $value);
+        set {
+            $this->setData(self::IS_DISCOUNTED_INDEX, $value);
+        }
     }
 
     // labels
@@ -98,7 +108,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?LabelsTransfer $labels {
         get => $this->getData(self::LABELS_INDEX);
-        set => $this->setData(self::LABELS_INDEX, $value);
+        set {
+            $this->setData(self::LABELS_INDEX, $value);
+        }
     }
 
     // measurementUnit
@@ -108,7 +120,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?MeasurementUnitTransfer $measurementUnit {
         get => $this->getData(self::MEASUREMENT_UNIT_INDEX);
-        set => $this->setData(self::MEASUREMENT_UNIT_INDEX, $value);
+        set {
+            $this->setData(self::MEASUREMENT_UNIT_INDEX, $value);
+        }
     }
 
     // name
@@ -117,7 +131,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $name {
         get => $this->getData(self::NAME_INDEX);
-        set => $this->setData(self::NAME_INDEX, $value);
+        set {
+            $this->setData(self::NAME_INDEX, $value);
+        }
     }
 
     // price
@@ -126,7 +142,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?float $price {
         get => $this->getData(self::PRICE_INDEX);
-        set => $this->setData(self::PRICE_INDEX, $value);
+        set {
+            $this->setData(self::PRICE_INDEX, $value);
+        }
     }
 
     // sku
@@ -135,7 +153,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $sku {
         get => $this->getData(self::SKU_INDEX);
-        set => $this->setData(self::SKU_INDEX, $value);
+        set {
+            $this->setData(self::SKU_INDEX, $value);
+        }
     }
 
     // stock
@@ -144,7 +164,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?int $stock {
         get => $this->getData(self::STOCK_INDEX);
-        set => $this->setData(self::STOCK_INDEX, $value);
+        set {
+            $this->setData(self::STOCK_INDEX, $value);
+        }
     }
 
     // stores
@@ -155,6 +177,8 @@ final class ProductTransfer extends AbstractTransfer
     /** @var array<int,string> */
     public array $stores {
         get => $this->getData(self::STORES_INDEX);
-        set => $this->setData(self::STORES_INDEX, $value);
+        set {
+            $this->setData(self::STORES_INDEX, $value);
+        }
     }
 }

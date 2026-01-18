@@ -30,7 +30,9 @@ final class CountryTransfer extends AbstractTransfer
 
     public ?string $iso2Code {
         get => $this->getData(self::ISO2_CODE_INDEX);
-        set => $this->setData(self::ISO2_CODE_INDEX, $value);
+        set {
+            $this->setData(self::ISO2_CODE_INDEX, $value);
+        }
     }
 
     // name
@@ -39,6 +41,8 @@ final class CountryTransfer extends AbstractTransfer
 
     public ?string $name {
         get => $this->getData(self::NAME_INDEX);
-        set => $this->setData(self::NAME_INDEX, $value);
+        set {
+            $this->setData(self::NAME_INDEX, $value);
+        }
     }
 }

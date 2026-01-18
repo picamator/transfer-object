@@ -37,7 +37,9 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
 
     public TransferInterface&AddressData $address {
         get => $this->getData(self::ADDRESS_INDEX);
-        set => $this->setData(self::ADDRESS_INDEX, $value);
+        set {
+            $this->setData(self::ADDRESS_INDEX, $value);
+        }
     }
 
     // credentials
@@ -47,7 +49,9 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
 
     public TransferInterface&CredentialsData $credentials {
         get => $this->getData(self::CREDENTIALS_INDEX);
-        set => $this->setData(self::CREDENTIALS_INDEX, $value);
+        set {
+            $this->setData(self::CREDENTIALS_INDEX, $value);
+        }
     }
 
     // customer
@@ -57,6 +61,8 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
 
     public TransferInterface&CustomerTransfer $customer {
         get => $this->getData(self::CUSTOMER_INDEX);
-        set => $this->setData(self::CUSTOMER_INDEX, $value);
+        set {
+            $this->setData(self::CUSTOMER_INDEX, $value);
+        }
     }
 }

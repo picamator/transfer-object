@@ -36,7 +36,9 @@ final class ValidatorTransfer extends AbstractTransfer
     /** @var \ArrayObject<int,ValidatorMessageTransfer> */
     public ArrayObject $errorMessages {
         get => $this->getData(self::ERROR_MESSAGES_INDEX);
-        set => $this->setData(self::ERROR_MESSAGES_INDEX, $value);
+        set {
+            $this->setData(self::ERROR_MESSAGES_INDEX, $value);
+        }
     }
 
     // isValid
@@ -45,6 +47,8 @@ final class ValidatorTransfer extends AbstractTransfer
 
     public bool $isValid {
         get => $this->getData(self::IS_VALID_INDEX);
-        set => $this->setData(self::IS_VALID_INDEX, $value);
+        set {
+            $this->setData(self::IS_VALID_INDEX, $value);
+        }
     }
 }

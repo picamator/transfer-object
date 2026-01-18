@@ -36,7 +36,9 @@ final class MainTransfer extends AbstractTransfer
 
     public ?float $feels_like {
         get => $this->getData(self::FEELS_LIKE_INDEX);
-        set => $this->setData(self::FEELS_LIKE_INDEX, $value);
+        set {
+            $this->setData(self::FEELS_LIKE_INDEX, $value);
+        }
     }
 
     // grnd_level
@@ -45,7 +47,9 @@ final class MainTransfer extends AbstractTransfer
 
     public ?int $grnd_level {
         get => $this->getData(self::GRND_LEVEL_INDEX);
-        set => $this->setData(self::GRND_LEVEL_INDEX, $value);
+        set {
+            $this->setData(self::GRND_LEVEL_INDEX, $value);
+        }
     }
 
     // humidity
@@ -54,7 +58,9 @@ final class MainTransfer extends AbstractTransfer
 
     public ?int $humidity {
         get => $this->getData(self::HUMIDITY_INDEX);
-        set => $this->setData(self::HUMIDITY_INDEX, $value);
+        set {
+            $this->setData(self::HUMIDITY_INDEX, $value);
+        }
     }
 
     // pressure
@@ -63,7 +69,9 @@ final class MainTransfer extends AbstractTransfer
 
     public ?int $pressure {
         get => $this->getData(self::PRESSURE_INDEX);
-        set => $this->setData(self::PRESSURE_INDEX, $value);
+        set {
+            $this->setData(self::PRESSURE_INDEX, $value);
+        }
     }
 
     // sea_level
@@ -72,7 +80,9 @@ final class MainTransfer extends AbstractTransfer
 
     public ?int $sea_level {
         get => $this->getData(self::SEA_LEVEL_INDEX);
-        set => $this->setData(self::SEA_LEVEL_INDEX, $value);
+        set {
+            $this->setData(self::SEA_LEVEL_INDEX, $value);
+        }
     }
 
     // temp
@@ -81,7 +91,9 @@ final class MainTransfer extends AbstractTransfer
 
     public ?float $temp {
         get => $this->getData(self::TEMP_INDEX);
-        set => $this->setData(self::TEMP_INDEX, $value);
+        set {
+            $this->setData(self::TEMP_INDEX, $value);
+        }
     }
 
     // temp_max
@@ -90,7 +102,9 @@ final class MainTransfer extends AbstractTransfer
 
     public ?float $temp_max {
         get => $this->getData(self::TEMP_MAX_INDEX);
-        set => $this->setData(self::TEMP_MAX_INDEX, $value);
+        set {
+            $this->setData(self::TEMP_MAX_INDEX, $value);
+        }
     }
 
     // temp_min
@@ -99,6 +113,8 @@ final class MainTransfer extends AbstractTransfer
 
     public ?float $temp_min {
         get => $this->getData(self::TEMP_MIN_INDEX);
-        set => $this->setData(self::TEMP_MIN_INDEX, $value);
+        set {
+            $this->setData(self::TEMP_MIN_INDEX, $value);
+        }
     }
 }

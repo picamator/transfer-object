@@ -52,7 +52,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $aphelion_distance {
         get => $this->getData(self::APHELION_DISTANCE_INDEX);
-        set => $this->setData(self::APHELION_DISTANCE_INDEX, $value);
+        set {
+            $this->setData(self::APHELION_DISTANCE_INDEX, $value);
+        }
     }
 
     // ascending_node_longitude
@@ -61,7 +63,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $ascending_node_longitude {
         get => $this->getData(self::ASCENDING_NODE_LONGITUDE_INDEX);
-        set => $this->setData(self::ASCENDING_NODE_LONGITUDE_INDEX, $value);
+        set {
+            $this->setData(self::ASCENDING_NODE_LONGITUDE_INDEX, $value);
+        }
     }
 
     // data_arc_in_days
@@ -70,7 +74,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?int $data_arc_in_days {
         get => $this->getData(self::DATA_ARC_IN_DAYS_INDEX);
-        set => $this->setData(self::DATA_ARC_IN_DAYS_INDEX, $value);
+        set {
+            $this->setData(self::DATA_ARC_IN_DAYS_INDEX, $value);
+        }
     }
 
     // eccentricity
@@ -79,7 +85,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $eccentricity {
         get => $this->getData(self::ECCENTRICITY_INDEX);
-        set => $this->setData(self::ECCENTRICITY_INDEX, $value);
+        set {
+            $this->setData(self::ECCENTRICITY_INDEX, $value);
+        }
     }
 
     // epoch_osculation
@@ -88,7 +96,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $epoch_osculation {
         get => $this->getData(self::EPOCH_OSCULATION_INDEX);
-        set => $this->setData(self::EPOCH_OSCULATION_INDEX, $value);
+        set {
+            $this->setData(self::EPOCH_OSCULATION_INDEX, $value);
+        }
     }
 
     // equinox
@@ -97,7 +107,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $equinox {
         get => $this->getData(self::EQUINOX_INDEX);
-        set => $this->setData(self::EQUINOX_INDEX, $value);
+        set {
+            $this->setData(self::EQUINOX_INDEX, $value);
+        }
     }
 
     // first_observation_date
@@ -106,7 +118,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $first_observation_date {
         get => $this->getData(self::FIRST_OBSERVATION_DATE_INDEX);
-        set => $this->setData(self::FIRST_OBSERVATION_DATE_INDEX, $value);
+        set {
+            $this->setData(self::FIRST_OBSERVATION_DATE_INDEX, $value);
+        }
     }
 
     // inclination
@@ -115,7 +129,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $inclination {
         get => $this->getData(self::INCLINATION_INDEX);
-        set => $this->setData(self::INCLINATION_INDEX, $value);
+        set {
+            $this->setData(self::INCLINATION_INDEX, $value);
+        }
     }
 
     // jupiter_tisserand_invariant
@@ -124,7 +140,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $jupiter_tisserand_invariant {
         get => $this->getData(self::JUPITER_TISSERAND_INVARIANT_INDEX);
-        set => $this->setData(self::JUPITER_TISSERAND_INVARIANT_INDEX, $value);
+        set {
+            $this->setData(self::JUPITER_TISSERAND_INVARIANT_INDEX, $value);
+        }
     }
 
     // last_observation_date
@@ -133,7 +151,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $last_observation_date {
         get => $this->getData(self::LAST_OBSERVATION_DATE_INDEX);
-        set => $this->setData(self::LAST_OBSERVATION_DATE_INDEX, $value);
+        set {
+            $this->setData(self::LAST_OBSERVATION_DATE_INDEX, $value);
+        }
     }
 
     // mean_anomaly
@@ -142,7 +162,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $mean_anomaly {
         get => $this->getData(self::MEAN_ANOMALY_INDEX);
-        set => $this->setData(self::MEAN_ANOMALY_INDEX, $value);
+        set {
+            $this->setData(self::MEAN_ANOMALY_INDEX, $value);
+        }
     }
 
     // mean_motion
@@ -151,7 +173,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $mean_motion {
         get => $this->getData(self::MEAN_MOTION_INDEX);
-        set => $this->setData(self::MEAN_MOTION_INDEX, $value);
+        set {
+            $this->setData(self::MEAN_MOTION_INDEX, $value);
+        }
     }
 
     // minimum_orbit_intersection
@@ -160,7 +184,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $minimum_orbit_intersection {
         get => $this->getData(self::MINIMUM_ORBIT_INTERSECTION_INDEX);
-        set => $this->setData(self::MINIMUM_ORBIT_INTERSECTION_INDEX, $value);
+        set {
+            $this->setData(self::MINIMUM_ORBIT_INTERSECTION_INDEX, $value);
+        }
     }
 
     // observations_used
@@ -169,7 +195,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?int $observations_used {
         get => $this->getData(self::OBSERVATIONS_USED_INDEX);
-        set => $this->setData(self::OBSERVATIONS_USED_INDEX, $value);
+        set {
+            $this->setData(self::OBSERVATIONS_USED_INDEX, $value);
+        }
     }
 
     // orbit_class
@@ -179,7 +207,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?OrbitClassTransfer $orbit_class {
         get => $this->getData(self::ORBIT_CLASS_INDEX);
-        set => $this->setData(self::ORBIT_CLASS_INDEX, $value);
+        set {
+            $this->setData(self::ORBIT_CLASS_INDEX, $value);
+        }
     }
 
     // orbit_determination_date
@@ -188,7 +218,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $orbit_determination_date {
         get => $this->getData(self::ORBIT_DETERMINATION_DATE_INDEX);
-        set => $this->setData(self::ORBIT_DETERMINATION_DATE_INDEX, $value);
+        set {
+            $this->setData(self::ORBIT_DETERMINATION_DATE_INDEX, $value);
+        }
     }
 
     // orbit_id
@@ -197,7 +229,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $orbit_id {
         get => $this->getData(self::ORBIT_ID_INDEX);
-        set => $this->setData(self::ORBIT_ID_INDEX, $value);
+        set {
+            $this->setData(self::ORBIT_ID_INDEX, $value);
+        }
     }
 
     // orbit_uncertainty
@@ -206,7 +240,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $orbit_uncertainty {
         get => $this->getData(self::ORBIT_UNCERTAINTY_INDEX);
-        set => $this->setData(self::ORBIT_UNCERTAINTY_INDEX, $value);
+        set {
+            $this->setData(self::ORBIT_UNCERTAINTY_INDEX, $value);
+        }
     }
 
     // orbital_period
@@ -215,7 +251,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $orbital_period {
         get => $this->getData(self::ORBITAL_PERIOD_INDEX);
-        set => $this->setData(self::ORBITAL_PERIOD_INDEX, $value);
+        set {
+            $this->setData(self::ORBITAL_PERIOD_INDEX, $value);
+        }
     }
 
     // perihelion_argument
@@ -224,7 +262,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $perihelion_argument {
         get => $this->getData(self::PERIHELION_ARGUMENT_INDEX);
-        set => $this->setData(self::PERIHELION_ARGUMENT_INDEX, $value);
+        set {
+            $this->setData(self::PERIHELION_ARGUMENT_INDEX, $value);
+        }
     }
 
     // perihelion_distance
@@ -233,7 +273,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $perihelion_distance {
         get => $this->getData(self::PERIHELION_DISTANCE_INDEX);
-        set => $this->setData(self::PERIHELION_DISTANCE_INDEX, $value);
+        set {
+            $this->setData(self::PERIHELION_DISTANCE_INDEX, $value);
+        }
     }
 
     // perihelion_time
@@ -242,7 +284,9 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $perihelion_time {
         get => $this->getData(self::PERIHELION_TIME_INDEX);
-        set => $this->setData(self::PERIHELION_TIME_INDEX, $value);
+        set {
+            $this->setData(self::PERIHELION_TIME_INDEX, $value);
+        }
     }
 
     // semi_major_axis
@@ -251,6 +295,8 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     public ?string $semi_major_axis {
         get => $this->getData(self::SEMI_MAJOR_AXIS_INDEX);
-        set => $this->setData(self::SEMI_MAJOR_AXIS_INDEX, $value);
+        set {
+            $this->setData(self::SEMI_MAJOR_AXIS_INDEX, $value);
+        }
     }
 }

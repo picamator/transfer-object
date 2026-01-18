@@ -42,7 +42,9 @@ final class TemplateTransfer extends AbstractTransfer
 
     public string $className {
         get => $this->getData(self::CLASS_NAME_INDEX);
-        set => $this->setData(self::CLASS_NAME_INDEX, $value);
+        set {
+            $this->setData(self::CLASS_NAME_INDEX, $value);
+        }
     }
 
     // classNamespace
@@ -51,7 +53,9 @@ final class TemplateTransfer extends AbstractTransfer
 
     public string $classNamespace {
         get => $this->getData(self::CLASS_NAMESPACE_INDEX);
-        set => $this->setData(self::CLASS_NAMESPACE_INDEX, $value);
+        set {
+            $this->setData(self::CLASS_NAMESPACE_INDEX, $value);
+        }
     }
 
     // definitionPath
@@ -60,7 +64,9 @@ final class TemplateTransfer extends AbstractTransfer
 
     public string $definitionPath {
         get => $this->getData(self::DEFINITION_PATH_INDEX);
-        set => $this->setData(self::DEFINITION_PATH_INDEX, $value);
+        set {
+            $this->setData(self::DEFINITION_PATH_INDEX, $value);
+        }
     }
 
     // docBlocks
@@ -72,7 +78,9 @@ final class TemplateTransfer extends AbstractTransfer
     /** @var \ArrayObject<string,string> */
     public ArrayObject $docBlocks {
         get => $this->getData(self::DOC_BLOCKS_INDEX);
-        set => $this->setData(self::DOC_BLOCKS_INDEX, $value);
+        set {
+            $this->setData(self::DOC_BLOCKS_INDEX, $value);
+        }
     }
 
     // imports
@@ -84,7 +92,9 @@ final class TemplateTransfer extends AbstractTransfer
     /** @var \ArrayObject<string,string> */
     public ArrayObject $imports {
         get => $this->getData(self::IMPORTS_INDEX);
-        set => $this->setData(self::IMPORTS_INDEX, $value);
+        set {
+            $this->setData(self::IMPORTS_INDEX, $value);
+        }
     }
 
     // metaAttributes
@@ -96,7 +106,9 @@ final class TemplateTransfer extends AbstractTransfer
     /** @var \ArrayObject<string,array<int,string>> */
     public ArrayObject $metaAttributes {
         get => $this->getData(self::META_ATTRIBUTES_INDEX);
-        set => $this->setData(self::META_ATTRIBUTES_INDEX, $value);
+        set {
+            $this->setData(self::META_ATTRIBUTES_INDEX, $value);
+        }
     }
 
     // metaConstants
@@ -108,7 +120,9 @@ final class TemplateTransfer extends AbstractTransfer
     /** @var \ArrayObject<string,string> */
     public ArrayObject $metaConstants {
         get => $this->getData(self::META_CONSTANTS_INDEX);
-        set => $this->setData(self::META_CONSTANTS_INDEX, $value);
+        set {
+            $this->setData(self::META_CONSTANTS_INDEX, $value);
+        }
     }
 
     // nullables
@@ -120,7 +134,9 @@ final class TemplateTransfer extends AbstractTransfer
     /** @var \ArrayObject<string,bool> */
     public ArrayObject $nullables {
         get => $this->getData(self::NULLABLES_INDEX);
-        set => $this->setData(self::NULLABLES_INDEX, $value);
+        set {
+            $this->setData(self::NULLABLES_INDEX, $value);
+        }
     }
 
     // properties
@@ -132,7 +148,9 @@ final class TemplateTransfer extends AbstractTransfer
     /** @var \ArrayObject<string,string> */
     public ArrayObject $properties {
         get => $this->getData(self::PROPERTIES_INDEX);
-        set => $this->setData(self::PROPERTIES_INDEX, $value);
+        set {
+            $this->setData(self::PROPERTIES_INDEX, $value);
+        }
     }
 
     // propertyAttributes
@@ -144,7 +162,9 @@ final class TemplateTransfer extends AbstractTransfer
     /** @var \ArrayObject<string,array<int,string>> */
     public ArrayObject $propertyAttributes {
         get => $this->getData(self::PROPERTY_ATTRIBUTES_INDEX);
-        set => $this->setData(self::PROPERTY_ATTRIBUTES_INDEX, $value);
+        set {
+            $this->setData(self::PROPERTY_ATTRIBUTES_INDEX, $value);
+        }
     }
 
     // protects
@@ -156,6 +176,8 @@ final class TemplateTransfer extends AbstractTransfer
     /** @var \ArrayObject<string,bool> */
     public ArrayObject $protects {
         get => $this->getData(self::PROTECTS_INDEX);
-        set => $this->setData(self::PROTECTS_INDEX, $value);
+        set {
+            $this->setData(self::PROTECTS_INDEX, $value);
+        }
     }
 }

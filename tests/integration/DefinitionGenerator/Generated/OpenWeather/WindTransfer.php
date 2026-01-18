@@ -31,7 +31,9 @@ final class WindTransfer extends AbstractTransfer
 
     public ?int $deg {
         get => $this->getData(self::DEG_INDEX);
-        set => $this->setData(self::DEG_INDEX, $value);
+        set {
+            $this->setData(self::DEG_INDEX, $value);
+        }
     }
 
     // gust
@@ -40,7 +42,9 @@ final class WindTransfer extends AbstractTransfer
 
     public ?float $gust {
         get => $this->getData(self::GUST_INDEX);
-        set => $this->setData(self::GUST_INDEX, $value);
+        set {
+            $this->setData(self::GUST_INDEX, $value);
+        }
     }
 
     // speed
@@ -49,6 +53,8 @@ final class WindTransfer extends AbstractTransfer
 
     public ?float $speed {
         get => $this->getData(self::SPEED_INDEX);
-        set => $this->setData(self::SPEED_INDEX, $value);
+        set {
+            $this->setData(self::SPEED_INDEX, $value);
+        }
     }
 }

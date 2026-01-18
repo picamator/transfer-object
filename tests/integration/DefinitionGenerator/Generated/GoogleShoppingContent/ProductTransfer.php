@@ -57,7 +57,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $ageGroup {
         get => $this->getData(self::AGE_GROUP_INDEX);
-        set => $this->setData(self::AGE_GROUP_INDEX, $value);
+        set {
+            $this->setData(self::AGE_GROUP_INDEX, $value);
+        }
     }
 
     // availability
@@ -66,7 +68,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $availability {
         get => $this->getData(self::AVAILABILITY_INDEX);
-        set => $this->setData(self::AVAILABILITY_INDEX, $value);
+        set {
+            $this->setData(self::AVAILABILITY_INDEX, $value);
+        }
     }
 
     // availabilityDate
@@ -76,7 +80,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?DateTime $availabilityDate {
         get => $this->getData(self::AVAILABILITY_DATE_INDEX);
-        set => $this->setData(self::AVAILABILITY_DATE_INDEX, $value);
+        set {
+            $this->setData(self::AVAILABILITY_DATE_INDEX, $value);
+        }
     }
 
     // brand
@@ -85,7 +91,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $brand {
         get => $this->getData(self::BRAND_INDEX);
-        set => $this->setData(self::BRAND_INDEX, $value);
+        set {
+            $this->setData(self::BRAND_INDEX, $value);
+        }
     }
 
     // channel
@@ -94,7 +102,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $channel {
         get => $this->getData(self::CHANNEL_INDEX);
-        set => $this->setData(self::CHANNEL_INDEX, $value);
+        set {
+            $this->setData(self::CHANNEL_INDEX, $value);
+        }
     }
 
     // color
@@ -103,7 +113,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $color {
         get => $this->getData(self::COLOR_INDEX);
-        set => $this->setData(self::COLOR_INDEX, $value);
+        set {
+            $this->setData(self::COLOR_INDEX, $value);
+        }
     }
 
     // condition
@@ -112,7 +124,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $condition {
         get => $this->getData(self::CONDITION_INDEX);
-        set => $this->setData(self::CONDITION_INDEX, $value);
+        set {
+            $this->setData(self::CONDITION_INDEX, $value);
+        }
     }
 
     // contentLanguage
@@ -121,7 +135,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $contentLanguage {
         get => $this->getData(self::CONTENT_LANGUAGE_INDEX);
-        set => $this->setData(self::CONTENT_LANGUAGE_INDEX, $value);
+        set {
+            $this->setData(self::CONTENT_LANGUAGE_INDEX, $value);
+        }
     }
 
     // description
@@ -130,7 +146,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $description {
         get => $this->getData(self::DESCRIPTION_INDEX);
-        set => $this->setData(self::DESCRIPTION_INDEX, $value);
+        set {
+            $this->setData(self::DESCRIPTION_INDEX, $value);
+        }
     }
 
     // feedLabel
@@ -139,7 +157,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $feedLabel {
         get => $this->getData(self::FEED_LABEL_INDEX);
-        set => $this->setData(self::FEED_LABEL_INDEX, $value);
+        set {
+            $this->setData(self::FEED_LABEL_INDEX, $value);
+        }
     }
 
     // gender
@@ -148,7 +168,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $gender {
         get => $this->getData(self::GENDER_INDEX);
-        set => $this->setData(self::GENDER_INDEX, $value);
+        set {
+            $this->setData(self::GENDER_INDEX, $value);
+        }
     }
 
     // googleProductCategory
@@ -157,7 +179,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $googleProductCategory {
         get => $this->getData(self::GOOGLE_PRODUCT_CATEGORY_INDEX);
-        set => $this->setData(self::GOOGLE_PRODUCT_CATEGORY_INDEX, $value);
+        set {
+            $this->setData(self::GOOGLE_PRODUCT_CATEGORY_INDEX, $value);
+        }
     }
 
     // gtin
@@ -166,7 +190,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $gtin {
         get => $this->getData(self::GTIN_INDEX);
-        set => $this->setData(self::GTIN_INDEX, $value);
+        set {
+            $this->setData(self::GTIN_INDEX, $value);
+        }
     }
 
     // id
@@ -175,7 +201,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $id {
         get => $this->getData(self::ID_INDEX);
-        set => $this->setData(self::ID_INDEX, $value);
+        set {
+            $this->setData(self::ID_INDEX, $value);
+        }
     }
 
     // imageLink
@@ -184,7 +212,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $imageLink {
         get => $this->getData(self::IMAGE_LINK_INDEX);
-        set => $this->setData(self::IMAGE_LINK_INDEX, $value);
+        set {
+            $this->setData(self::IMAGE_LINK_INDEX, $value);
+        }
     }
 
     // itemGroupId
@@ -193,7 +223,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $itemGroupId {
         get => $this->getData(self::ITEM_GROUP_ID_INDEX);
-        set => $this->setData(self::ITEM_GROUP_ID_INDEX, $value);
+        set {
+            $this->setData(self::ITEM_GROUP_ID_INDEX, $value);
+        }
     }
 
     // kind
@@ -202,7 +234,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $kind {
         get => $this->getData(self::KIND_INDEX);
-        set => $this->setData(self::KIND_INDEX, $value);
+        set {
+            $this->setData(self::KIND_INDEX, $value);
+        }
     }
 
     // link
@@ -211,7 +245,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $link {
         get => $this->getData(self::LINK_INDEX);
-        set => $this->setData(self::LINK_INDEX, $value);
+        set {
+            $this->setData(self::LINK_INDEX, $value);
+        }
     }
 
     // mpn
@@ -220,7 +256,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $mpn {
         get => $this->getData(self::MPN_INDEX);
-        set => $this->setData(self::MPN_INDEX, $value);
+        set {
+            $this->setData(self::MPN_INDEX, $value);
+        }
     }
 
     // offerId
@@ -229,7 +267,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $offerId {
         get => $this->getData(self::OFFER_ID_INDEX);
-        set => $this->setData(self::OFFER_ID_INDEX, $value);
+        set {
+            $this->setData(self::OFFER_ID_INDEX, $value);
+        }
     }
 
     // price
@@ -239,7 +279,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?PriceTransfer $price {
         get => $this->getData(self::PRICE_INDEX);
-        set => $this->setData(self::PRICE_INDEX, $value);
+        set {
+            $this->setData(self::PRICE_INDEX, $value);
+        }
     }
 
     // sizes
@@ -250,7 +292,9 @@ final class ProductTransfer extends AbstractTransfer
     /** @var array<int,string> */
     public array $sizes {
         get => $this->getData(self::SIZES_INDEX);
-        set => $this->setData(self::SIZES_INDEX, $value);
+        set {
+            $this->setData(self::SIZES_INDEX, $value);
+        }
     }
 
     // source
@@ -259,7 +303,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $source {
         get => $this->getData(self::SOURCE_INDEX);
-        set => $this->setData(self::SOURCE_INDEX, $value);
+        set {
+            $this->setData(self::SOURCE_INDEX, $value);
+        }
     }
 
     // targetCountry
@@ -268,7 +314,9 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $targetCountry {
         get => $this->getData(self::TARGET_COUNTRY_INDEX);
-        set => $this->setData(self::TARGET_COUNTRY_INDEX, $value);
+        set {
+            $this->setData(self::TARGET_COUNTRY_INDEX, $value);
+        }
     }
 
     // title
@@ -277,6 +325,8 @@ final class ProductTransfer extends AbstractTransfer
 
     public ?string $title {
         get => $this->getData(self::TITLE_INDEX);
-        set => $this->setData(self::TITLE_INDEX, $value);
+        set {
+            $this->setData(self::TITLE_INDEX, $value);
+        }
     }
 }

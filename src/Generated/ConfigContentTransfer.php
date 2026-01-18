@@ -32,7 +32,9 @@ final class ConfigContentTransfer extends AbstractTransfer
 
     public string $definitionPath {
         get => $this->getData(self::DEFINITION_PATH_INDEX);
-        set => $this->setData(self::DEFINITION_PATH_INDEX, $value);
+        set {
+            $this->setData(self::DEFINITION_PATH_INDEX, $value);
+        }
     }
 
     // relativeDefinitionPath
@@ -41,7 +43,9 @@ final class ConfigContentTransfer extends AbstractTransfer
 
     public string $relativeDefinitionPath {
         get => $this->getData(self::RELATIVE_DEFINITION_PATH_INDEX);
-        set => $this->setData(self::RELATIVE_DEFINITION_PATH_INDEX, $value);
+        set {
+            $this->setData(self::RELATIVE_DEFINITION_PATH_INDEX, $value);
+        }
     }
 
     // transferNamespace
@@ -50,7 +54,9 @@ final class ConfigContentTransfer extends AbstractTransfer
 
     public string $transferNamespace {
         get => $this->getData(self::TRANSFER_NAMESPACE_INDEX);
-        set => $this->setData(self::TRANSFER_NAMESPACE_INDEX, $value);
+        set {
+            $this->setData(self::TRANSFER_NAMESPACE_INDEX, $value);
+        }
     }
 
     // transferPath
@@ -59,6 +65,8 @@ final class ConfigContentTransfer extends AbstractTransfer
 
     public string $transferPath {
         get => $this->getData(self::TRANSFER_PATH_INDEX);
-        set => $this->setData(self::TRANSFER_PATH_INDEX, $value);
+        set {
+            $this->setData(self::TRANSFER_PATH_INDEX, $value);
+        }
     }
 }

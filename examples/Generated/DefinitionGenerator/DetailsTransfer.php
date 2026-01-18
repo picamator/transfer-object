@@ -30,7 +30,9 @@ final class DetailsTransfer extends AbstractTransfer
 
     public ?string $description {
         get => $this->getData(self::DESCRIPTION_INDEX);
-        set => $this->setData(self::DESCRIPTION_INDEX, $value);
+        set {
+            $this->setData(self::DESCRIPTION_INDEX, $value);
+        }
     }
 
     // isRegional
@@ -39,6 +41,8 @@ final class DetailsTransfer extends AbstractTransfer
 
     public ?bool $isRegional {
         get => $this->getData(self::IS_REGIONAL_INDEX);
-        set => $this->setData(self::IS_REGIONAL_INDEX, $value);
+        set {
+            $this->setData(self::IS_REGIONAL_INDEX, $value);
+        }
     }
 }

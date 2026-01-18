@@ -31,7 +31,9 @@ final class ReservedConstantTransfer extends AbstractTransfer
 
     public ?string $filter_data_callback {
         get => $this->getData(self::FILTER_DATA_CALLBACK_INDEX);
-        set => $this->setData(self::FILTER_DATA_CALLBACK_INDEX, $value);
+        set {
+            $this->setData(self::FILTER_DATA_CALLBACK_INDEX, $value);
+        }
     }
 
     // meta_data
@@ -40,7 +42,9 @@ final class ReservedConstantTransfer extends AbstractTransfer
 
     public ?string $meta_data {
         get => $this->getData(self::META_DATA_INDEX);
-        set => $this->setData(self::META_DATA_INDEX, $value);
+        set {
+            $this->setData(self::META_DATA_INDEX, $value);
+        }
     }
 
     // meta_data_size
@@ -49,6 +53,8 @@ final class ReservedConstantTransfer extends AbstractTransfer
 
     public ?string $meta_data_size {
         get => $this->getData(self::META_DATA_SIZE_INDEX);
-        set => $this->setData(self::META_DATA_SIZE_INDEX, $value);
+        set {
+            $this->setData(self::META_DATA_SIZE_INDEX, $value);
+        }
     }
 }

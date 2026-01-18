@@ -30,7 +30,9 @@ final class PriceTransfer extends AbstractTransfer
 
     public ?string $currency {
         get => $this->getData(self::CURRENCY_INDEX);
-        set => $this->setData(self::CURRENCY_INDEX, $value);
+        set {
+            $this->setData(self::CURRENCY_INDEX, $value);
+        }
     }
 
     // value
@@ -39,6 +41,8 @@ final class PriceTransfer extends AbstractTransfer
 
     public ?string $value {
         get => $this->getData(self::VALUE_INDEX);
-        set => $this->setData(self::VALUE_INDEX, $value);
+        set {
+            $this->setData(self::VALUE_INDEX, $value);
+        }
     }
 }
