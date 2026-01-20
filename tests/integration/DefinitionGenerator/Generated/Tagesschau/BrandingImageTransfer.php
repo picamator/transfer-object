@@ -28,6 +28,10 @@ final class BrandingImageTransfer extends AbstractTransfer
         self::TYPE_PROP => self::TYPE_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::IMAGE_VARIANTS_PROP => 'IMAGE_VARIANTS_PROP',
+    ];
+
     // alttext
     public const string ALTTEXT_PROP = 'alttext';
     private const int ALTTEXT_INDEX = 0;

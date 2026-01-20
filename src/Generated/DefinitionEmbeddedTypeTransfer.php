@@ -25,6 +25,10 @@ final class DefinitionEmbeddedTypeTransfer extends AbstractTransfer
         self::NAMESPACE_PROP => self::NAMESPACE_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::NAMESPACE_PROP => 'NAMESPACE_PROP',
+    ];
+
     // name
     public const string NAME_PROP = 'name';
     private const int NAME_INDEX = 0;

@@ -28,8 +28,12 @@ final class EnumTypeTemplateExpander extends AbstractTemplateExpander
         $typeTransfer = $propertyTransfer->enumType;
         $this->expandEmbeddedType($propertyTransfer, $typeTransfer, $templateTransfer);
 
-        $templateTransfer->metaAttributes[$propertyTransfer->propertyName] = [
+        $propertyName = $propertyTransfer->propertyName;
+
+        $templateTransfer->metaAttributes[$propertyName] = [
             $transformerEnum->renderTemplate($typeTransfer),
         ];
+
+        $templateTransfer->metaTransformers[] = $propertyName;
     }
 }

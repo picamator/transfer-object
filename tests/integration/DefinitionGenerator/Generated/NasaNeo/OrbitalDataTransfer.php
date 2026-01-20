@@ -46,6 +46,10 @@ final class OrbitalDataTransfer extends AbstractTransfer
         self::SEMI_MAJOR_AXIS_PROP => self::SEMI_MAJOR_AXIS_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::ORBIT_CLASS_PROP => 'ORBIT_CLASS_PROP',
+    ];
+
     // aphelion_distance
     public const string APHELION_DISTANCE_PROP = 'aphelion_distance';
     private const int APHELION_DISTANCE_INDEX = 0;

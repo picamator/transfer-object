@@ -55,6 +55,8 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
             $initiatorEnum->value,
         ];
 
+        $templateTransfer->metaInitiators[] = $propertyName;
+
         $templateTransfer->docBlocks[$propertyName]
             = DocBlockTemplateEnum::ARRAY->renderTemplate($propertyTransfer->buildInType?->docBlock);
 
@@ -77,6 +79,9 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
             $initiatorEnum->value,
             $transformerEnum->value,
         ];
+
+        $templateTransfer->metaInitiators[] = $propertyName;
+        $templateTransfer->metaTransformers[] = $propertyName;
 
         $templateTransfer->docBlocks[$propertyName]
             = DocBlockTemplateEnum::ARRAY_OBJECT->renderTemplate($propertyTransfer->buildInType?->docBlock);

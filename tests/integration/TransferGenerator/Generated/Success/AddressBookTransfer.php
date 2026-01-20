@@ -35,6 +35,17 @@ final class AddressBookTransfer extends AbstractTransfer
         self::UUID_PROP => self::UUID_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::ADDRESSES_PROP => 'ADDRESSES_PROP',
+        self::CATEGORIES_PROP => 'CATEGORIES_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::ADDRESSES_PROP => 'ADDRESSES_PROP',
+        self::LABEL_PROP => 'LABEL_PROP',
+        self::LABEL_ALIAS_PROP => 'LABEL_ALIAS_PROP',
+    ];
+
     // addresses
     #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(AddressTransfer::class)]

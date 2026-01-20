@@ -35,6 +35,8 @@ final class TransferTypeTemplateExpander extends AbstractTemplateExpander
         $templateTransfer->metaAttributes[$propertyName] = [
             $transformerEnum->renderTemplate($typeTransfer),
         ];
+
+        $templateTransfer->metaTransformers[] = $propertyName;
     }
 
     private function getPropertyType(DefinitionEmbeddedTypeTransfer $typeTransfer): string

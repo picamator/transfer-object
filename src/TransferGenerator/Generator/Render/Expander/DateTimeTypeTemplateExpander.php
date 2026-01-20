@@ -28,8 +28,12 @@ final class DateTimeTypeTemplateExpander extends AbstractTemplateExpander
         $typeTransfer = $propertyTransfer->dateTimeType;
         $this->expandEmbeddedType($propertyTransfer, $typeTransfer, $templateTransfer);
 
-        $templateTransfer->metaAttributes[$propertyTransfer->propertyName] = [
+        $propertyName = $propertyTransfer->propertyName;
+
+        $templateTransfer->metaAttributes[$propertyName] = [
             $transformerEnum->renderTemplate($typeTransfer),
         ];
+
+        $templateTransfer->metaTransformers[] = $propertyName;
     }
 }

@@ -27,6 +27,14 @@ final class ValidatorTransfer extends AbstractTransfer
         self::IS_VALID_PROP => self::IS_VALID_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::ERROR_MESSAGES_PROP => 'ERROR_MESSAGES_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::ERROR_MESSAGES_PROP => 'ERROR_MESSAGES_PROP',
+    ];
+
     // errorMessages
     #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(ValidatorMessageTransfer::class)]

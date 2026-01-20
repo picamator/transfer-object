@@ -26,6 +26,10 @@ final class TransferGeneratorTransfer extends AbstractTransfer
         self::VALIDATOR_PROP => self::VALIDATOR_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::VALIDATOR_PROP => 'VALIDATOR_PROP',
+    ];
+
     // className
     public const string CLASS_NAME_PROP = 'className';
     private const int CLASS_NAME_INDEX = 0;

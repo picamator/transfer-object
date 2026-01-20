@@ -27,6 +27,13 @@ final class EstimatedDiameterTransfer extends AbstractTransfer
         self::MILES_PROP => self::MILES_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::FEET_PROP => 'FEET_PROP',
+        self::KILOMETERS_PROP => 'KILOMETERS_PROP',
+        self::METERS_PROP => 'METERS_PROP',
+        self::MILES_PROP => 'MILES_PROP',
+    ];
+
     // feet
     #[TransferTransformerAttribute(FeetTransfer::class)]
     public const string FEET_PROP = 'feet';

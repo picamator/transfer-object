@@ -40,6 +40,14 @@ readonly class TemplateBuilder implements TemplateBuilderInterface
         $templateTransfer->imports->natsort();
         $templateTransfer->metaConstants->natsort();
 
+        if ($templateTransfer->metaInitiators->count() > 0) {
+            $templateTransfer->metaInitiators->natsort();
+        }
+
+        if ($templateTransfer->metaTransformers->count() > 0) {
+            $templateTransfer->metaTransformers->natsort();
+        }
+
         foreach ($templateTransfer->metaAttributes as $metaAttributes) {
             natsort($metaAttributes);
         }

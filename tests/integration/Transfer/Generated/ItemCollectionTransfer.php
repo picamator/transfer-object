@@ -28,6 +28,15 @@ final class ItemCollectionTransfer extends AbstractTransfer
         self::ITEMS_PROP => self::ITEMS_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::ITEMS_PROP => 'ITEMS_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::ITEM_PROP => 'ITEM_PROP',
+        self::ITEMS_PROP => 'ITEMS_PROP',
+    ];
+
     // item
     #[TransferTransformerAttribute(ItemTransfer::class)]
     public const string ITEM_PROP = 'item';

@@ -46,6 +46,9 @@ final class CollectionTypeTemplateExpander extends AbstractTemplateExpander
             $initiatorEnum->value,
             $transformerEnum->renderTemplate($typeTransfer),
         ];
+
+        $templateTransfer->metaInitiators[] = $propertyName;
+        $templateTransfer->metaTransformers[] = $propertyName;
     }
 
     private function getPropertyDocBlock(DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer): string

@@ -48,6 +48,20 @@ final class NewsTransfer extends AbstractTransfer
         self::UPDATE_CHECK_URL_PROP => self::UPDATE_CHECK_URL_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::GEOTAGS_PROP => 'GEOTAGS_PROP',
+        self::REGION_IDS_PROP => 'REGION_IDS_PROP',
+        self::TAGS_PROP => 'TAGS_PROP',
+        self::TRACKING_PROP => 'TRACKING_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::BRANDING_IMAGE_PROP => 'BRANDING_IMAGE_PROP',
+        self::TAGS_PROP => 'TAGS_PROP',
+        self::TEASER_IMAGE_PROP => 'TEASER_IMAGE_PROP',
+        self::TRACKING_PROP => 'TRACKING_PROP',
+    ];
+
     // brandingImage
     #[TransferTransformerAttribute(BrandingImageTransfer::class)]
     public const string BRANDING_IMAGE_PROP = 'brandingImage';

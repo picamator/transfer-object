@@ -32,6 +32,14 @@ final class AddressStatisticsTransfer extends AbstractTransfer
         self::ORDER_REFERENCES_PROP => self::ORDER_REFERENCES_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::ORDER_REFERENCES_PROP => 'ORDER_REFERENCES_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::ORDER_REFERENCES_PROP => 'ORDER_REFERENCES_PROP',
+    ];
+
     // addressBookUuid
     public const string ADDRESS_BOOK_UUID_PROP = 'addressBookUuid';
     private const int ADDRESS_BOOK_UUID_INDEX = 0;

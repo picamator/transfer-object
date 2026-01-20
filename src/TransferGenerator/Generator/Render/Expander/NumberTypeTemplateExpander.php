@@ -28,8 +28,12 @@ final class NumberTypeTemplateExpander extends AbstractTemplateExpander
         $typeTransfer = $propertyTransfer->numberType;
         $this->expandEmbeddedType($propertyTransfer, $typeTransfer, $templateTransfer);
 
-        $templateTransfer->metaAttributes[$propertyTransfer->propertyName] = [
+        $propertyName = $propertyTransfer->propertyName;
+
+        $templateTransfer->metaAttributes[$propertyName] = [
             $transformerEnum->renderTemplate($typeTransfer),
         ];
+
+        $templateTransfer->metaTransformers[] = $propertyName;
     }
 }

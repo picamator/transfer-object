@@ -25,6 +25,10 @@ final class DefinitionAttributeTransfer extends AbstractTransfer
         self::NAMESPACE_PROP => self::NAMESPACE_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::NAMESPACE_PROP => 'NAMESPACE_PROP',
+    ];
+
     // arguments
     public const string ARGUMENTS_PROP = 'arguments';
     private const int ARGUMENTS_INDEX = 0;

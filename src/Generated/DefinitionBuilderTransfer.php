@@ -28,6 +28,15 @@ final class DefinitionBuilderTransfer extends AbstractTransfer
         self::GENERATOR_CONTENTS_PROP => self::GENERATOR_CONTENTS_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::GENERATOR_CONTENTS_PROP => 'GENERATOR_CONTENTS_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::DEFINITION_CONTENT_PROP => 'DEFINITION_CONTENT_PROP',
+        self::GENERATOR_CONTENTS_PROP => 'GENERATOR_CONTENTS_PROP',
+    ];
+
     // definitionContent
     #[TransferTransformerAttribute(DefinitionContentTransfer::class)]
     public const string DEFINITION_CONTENT_PROP = 'definitionContent';

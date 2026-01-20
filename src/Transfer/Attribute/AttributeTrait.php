@@ -4,116 +4,92 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Transfer\Attribute;
 
-use Generator;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\InitiatorAttributeInterface;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\TransformerAttributeInterface;
+use Picamator\TransferObject\Transfer\Exception\AttributeTransferException;
 use ReflectionAttribute;
 use ReflectionClassConstant;
-use ReflectionObject;
-use WeakReference;
 
 trait AttributeTrait
 {
-    /**
-     * @var \WeakReference<\ReflectionObject>|null
-     */
-    private ?WeakReference $_reflectionObjectReference = null;
-
     /**
      * @var array<string, InitiatorAttributeInterface>
      */
     private static array $_initiatorAttributeCache;
 
     /**
-     * @param array<string>|null $propertyNames
-     *
-     * @return Generator<string, TransformerAttributeInterface>
+     * @var array<string, TransformerAttributeInterface>
      */
-    final protected function getTransformers(?array $propertyNames = null): Generator
-    {
-        $reflectionConstants = $propertyNames === null
-            ? $this->getReflectionConstants()
-            : $this->getFilterReflectionConstants($propertyNames);
-
-        foreach ($reflectionConstants as $reflectionConstant) {
-            $attributeReflections = $reflectionConstant->getAttributes(
-                name: TransformerAttributeInterface::class,
-                flags: ReflectionAttribute::IS_INSTANCEOF,
-            );
-
-            /** @var \ReflectionAttribute<TransformerAttributeInterface>|null $attributeReflection */
-            $attributeReflection = array_first($attributeReflections);
-            if ($attributeReflection === null) {
-                continue;
-            }
-
-            /** @var string $propertyName */
-            $propertyName = $reflectionConstant->getValue();
-
-            yield $propertyName => $attributeReflection->newInstance();
-        }
-    }
+    private static array $_transformerAttributeCache;
 
     /**
-     * @return Generator<string, InitiatorAttributeInterface>
+     * @throws \Picamator\TransferObject\Transfer\Exception\AttributeTransferException
      */
-    final protected function getInitiators(): Generator
+    final protected function getInitiatorAttribute(string $constantName): InitiatorAttributeInterface
     {
-        foreach ($this->getReflectionConstants() as $reflectionConstant) {
-            $attributeReflections = $reflectionConstant->getAttributes(
-                name: InitiatorAttributeInterface::class,
-                flags: ReflectionAttribute::IS_INSTANCEOF,
-            );
-
-            /** @var \ReflectionAttribute<InitiatorAttributeInterface>|null $attributeReflection */
-            $attributeReflection = array_first($attributeReflections);
-            if ($attributeReflection === null) {
-                continue;
-            }
-
-            /** @var string $propertyName */
-            $propertyName = $reflectionConstant->getValue();
-            $initiatorName = $attributeReflection->getName();
-
-            self::$_initiatorAttributeCache[$initiatorName] ??= $attributeReflection->newInstance();
-
-            yield $propertyName => self::$_initiatorAttributeCache[$initiatorName];
-        }
-    }
-
-    /**
-     * @param array<string> $propertyNames
-     *
-     * @return array<\ReflectionClassConstant>
-     */
-    private function getFilterReflectionConstants(array $propertyNames): array
-    {
-        $reflectionConstants = $this->getReflectionConstants();
-        if (count($propertyNames) === count($reflectionConstants)) {
-            return $reflectionConstants;
+        $cacheKey = $this->getCacheKey($constantName);
+        if (isset(self::$_initiatorAttributeCache[$cacheKey])) {
+            return self::$_initiatorAttributeCache[$cacheKey];
         }
 
-        $propertyNames = array_flip($propertyNames);
-
-        return array_filter(
-            $reflectionConstants,
-            /** @phpstan-ignore offsetAccess.invalidOffset */
-            fn(ReflectionClassConstant $reflection): bool => isset($propertyNames[$reflection->getValue()]),
+        /** @var \ReflectionAttribute<InitiatorAttributeInterface> $reflectionAttribute */
+        $reflectionAttribute = $this->getConstantReflection(
+            constantName: $constantName,
+            attributeName: InitiatorAttributeInterface::class
         );
+        $attributeName = $reflectionAttribute->getName();
+
+        self::$_initiatorAttributeCache[$attributeName] ??= $reflectionAttribute->newInstance();
+        self::$_initiatorAttributeCache[$cacheKey] = self::$_initiatorAttributeCache[$reflectionAttribute->getName()];
+
+        return self::$_initiatorAttributeCache[$cacheKey];
     }
 
     /**
-     * @return array<\ReflectionClassConstant>
+     * @throws \Picamator\TransferObject\Transfer\Exception\AttributeTransferException
      */
-    private function getReflectionConstants(): array
+    final protected function getTransformerAttribute(string $constantName): TransformerAttributeInterface
     {
-        $reflectionObject = $this->_reflectionObjectReference?->get();
-
-        if ($reflectionObject === null) {
-            $reflectionObject = new ReflectionObject($this);
-            $this->_reflectionObjectReference = WeakReference::create($reflectionObject);
+        $cacheKey = $this->getCacheKey($constantName);
+        if (isset(self::$_transformerAttributeCache[$cacheKey])) {
+            return self::$_transformerAttributeCache[$cacheKey];
         }
 
-        return $reflectionObject->getReflectionConstants(filter: ReflectionClassConstant::IS_PUBLIC);
+        /** @var \ReflectionAttribute<TransformerAttributeInterface> $reflectionAttribute */
+        $reflectionAttribute = $this->getConstantReflection(
+            constantName: $constantName,
+            attributeName: TransformerAttributeInterface::class
+        );
+
+        self::$_transformerAttributeCache[$cacheKey] = $reflectionAttribute->newInstance();
+
+        return self::$_transformerAttributeCache[$cacheKey];
+    }
+
+    /**
+     * @return \ReflectionAttribute<TransformerAttributeInterface|InitiatorAttributeInterface>
+     */
+    private function getConstantReflection(string $constantName, string $attributeName): ReflectionAttribute
+    {
+        $reflectionConstant = new ReflectionClassConstant($this, $constantName);
+        $reflectionAttributes = $reflectionConstant->getAttributes(
+            name: $attributeName,
+            flags: ReflectionAttribute::IS_INSTANCEOF,
+        );
+
+        /** @var \ReflectionAttribute<TransformerAttributeInterface|InitiatorAttributeInterface>|null $firstReflectionAttribute */
+        $firstReflectionAttribute = array_first($reflectionAttributes);
+        if ($firstReflectionAttribute === null) {
+            throw new AttributeTransferException(
+                sprintf('Constant\'s "%s" attribute "%s" not found.', $constantName, $attributeName),
+            );
+        }
+
+        return $firstReflectionAttribute;
+    }
+
+    private function getCacheKey(string $constantName): string
+    {
+        return static::class . '::' . $constantName;
     }
 }

@@ -19,6 +19,10 @@ Template:
     type: ArrayObject<string,string>
   metaAttributes:
     type: ArrayObject<string,array<int,string>>
+  metaInitiators:
+    type: ArrayObject<int,string>
+  metaTransformers:
+    type: ArrayObject<int,string>
   docBlocks:
     type: ArrayObject<string,string>
   nullables:

@@ -28,6 +28,15 @@ final class AgentTransfer extends AbstractTransfer
         self::MERCHANTS_PROP => self::MERCHANTS_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::MERCHANTS_PROP => 'MERCHANTS_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::CUSTOMER_PROP => 'CUSTOMER_PROP',
+        self::MERCHANTS_PROP => 'MERCHANTS_PROP',
+    ];
+
     // customer
     #[TransferTransformerAttribute(CustomerTransfer::class)]
     public const string CUSTOMER_PROP = 'customer';

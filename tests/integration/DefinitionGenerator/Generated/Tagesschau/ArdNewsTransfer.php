@@ -31,6 +31,15 @@ final class ArdNewsTransfer extends AbstractTransfer
         self::TYPE_PROP => self::TYPE_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::NEWS_PROP => 'NEWS_PROP',
+        self::REGIONAL_PROP => 'REGIONAL_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::NEWS_PROP => 'NEWS_PROP',
+    ];
+
     // newStoriesCountLink
     public const string NEW_STORIES_COUNT_LINK_PROP = 'newStoriesCountLink';
     private const int NEW_STORIES_COUNT_LINK_INDEX = 0;

@@ -39,6 +39,20 @@ final class ProductTransfer extends AbstractTransfer
         self::STORES_PROP => self::STORES_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::AVAILABILITIES_PROP => 'AVAILABILITIES_PROP',
+        self::DELIVERY_OPTIONS_PROP => 'DELIVERY_OPTIONS_PROP',
+        self::STORES_PROP => 'STORES_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::AVAILABILITIES_PROP => 'AVAILABILITIES_PROP',
+        self::DELIVERY_OPTIONS_PROP => 'DELIVERY_OPTIONS_PROP',
+        self::DETAILS_PROP => 'DETAILS_PROP',
+        self::LABELS_PROP => 'LABELS_PROP',
+        self::MEASUREMENT_UNIT_PROP => 'MEASUREMENT_UNIT_PROP',
+    ];
+
     // availabilities
     #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(AvailabilitiesTransfer::class)]

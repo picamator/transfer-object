@@ -29,6 +29,11 @@ final class CredentialsTransfer extends AbstractTransfer
         self::UPDATED_AT_PROP => self::UPDATED_AT_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::CREATED_AT_PROP => 'CREATED_AT_PROP',
+        self::UPDATED_AT_PROP => 'UPDATED_AT_PROP',
+    ];
+
     // createdAt
     #[DateTimeTransformerAttribute(DateTimeImmutable::class)]
     public const string CREATED_AT_PROP = 'createdAt';

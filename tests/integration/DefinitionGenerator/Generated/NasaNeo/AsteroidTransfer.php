@@ -38,6 +38,17 @@ final class AsteroidTransfer extends AbstractTransfer
         self::ORBITAL_DATA_PROP => self::ORBITAL_DATA_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::CLOSE_APPROACH_DATA_PROP => 'CLOSE_APPROACH_DATA_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::CLOSE_APPROACH_DATA_PROP => 'CLOSE_APPROACH_DATA_PROP',
+        self::ESTIMATED_DIAMETER_PROP => 'ESTIMATED_DIAMETER_PROP',
+        self::LINKS_PROP => 'LINKS_PROP',
+        self::ORBITAL_DATA_PROP => 'ORBITAL_DATA_PROP',
+    ];
+
     // absolute_magnitude_h
     public const string ABSOLUTE_MAGNITUDE_H_PROP = 'absolute_magnitude_h';
     private const int ABSOLUTE_MAGNITUDE_H_INDEX = 0;

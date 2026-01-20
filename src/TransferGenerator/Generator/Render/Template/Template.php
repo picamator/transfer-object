@@ -40,7 +40,7 @@ final class $templateTransfer->className extends AbstractTransfer
 
     protected const array META_DATA = [
 {$this->helper->renderMetaData()}
-    ];
+    ];{$this->helper->renderMetaInitiators()}{$this->helper->renderMetaTransformers()}
 
     {$this->renderProperties($templateTransfer)}
 }

@@ -25,6 +25,10 @@ final class BcMathNumberTransfer extends AbstractTransfer
         self::I_AM_NUMBER_PROP => self::I_AM_NUMBER_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::I_AM_NUMBER_PROP => 'I_AM_NUMBER_PROP',
+    ];
+
     // iAmNumber
     #[NumberTransformerAttribute(Number::class)]
     public const string I_AM_NUMBER_PROP = 'iAmNumber';

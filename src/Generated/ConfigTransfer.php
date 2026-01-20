@@ -25,6 +25,11 @@ final class ConfigTransfer extends AbstractTransfer
         self::VALIDATOR_PROP => self::VALIDATOR_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::CONTENT_PROP => 'CONTENT_PROP',
+        self::VALIDATOR_PROP => 'VALIDATOR_PROP',
+    ];
+
     // content
     #[TransferTransformerAttribute(ConfigContentTransfer::class)]
     public const string CONTENT_PROP = 'content';

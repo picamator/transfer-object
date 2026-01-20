@@ -25,6 +25,11 @@ final class MeasurementUnitTransfer extends AbstractTransfer
         self::PALETTE_PROP => self::PALETTE_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::BOX_PROP => 'BOX_PROP',
+        self::PALETTE_PROP => 'PALETTE_PROP',
+    ];
+
     // box
     #[TransferTransformerAttribute(BoxTransfer::class)]
     public const string BOX_PROP = 'box';

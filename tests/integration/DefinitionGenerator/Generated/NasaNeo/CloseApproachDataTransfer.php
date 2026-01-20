@@ -29,6 +29,11 @@ final class CloseApproachDataTransfer extends AbstractTransfer
         self::RELATIVE_VELOCITY_PROP => self::RELATIVE_VELOCITY_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::MISS_DISTANCE_PROP => 'MISS_DISTANCE_PROP',
+        self::RELATIVE_VELOCITY_PROP => 'RELATIVE_VELOCITY_PROP',
+    ];
+
     // close_approach_date
     public const string CLOSE_APPROACH_DATE_PROP = 'close_approach_date';
     private const int CLOSE_APPROACH_DATE_INDEX = 0;
