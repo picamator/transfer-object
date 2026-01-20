@@ -40,7 +40,7 @@ trait AttributeTrait
         $attributeName = $reflectionAttribute->getName();
 
         self::$_initiatorAttributeCache[$attributeName] ??= $reflectionAttribute->newInstance();
-        self::$_initiatorAttributeCache[$cacheKey] = self::$_initiatorAttributeCache[$reflectionAttribute->getName()];
+        self::$_initiatorAttributeCache[$cacheKey] = self::$_initiatorAttributeCache[$attributeName];
 
         return self::$_initiatorAttributeCache[$cacheKey];
     }
