@@ -18,8 +18,8 @@ use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\NumberT
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\ProtectedTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TemplateExpanderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TransferTypeTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Helper\TemplateHelper;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Template;
-use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelper;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelperInterface;
 
 class RenderFactory
