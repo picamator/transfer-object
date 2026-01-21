@@ -91,7 +91,7 @@ abstract class AbstractTransfer implements TransferInterface
     final public function getIterator(): Traversable
     {
         foreach (static::META_DATA as $propertyName => $index) {
-            yield $propertyName => $this->_data->offsetGet($index);
+            yield $propertyName => $this->_data[$index];
         }
     }
 
@@ -113,14 +113,14 @@ abstract class AbstractTransfer implements TransferInterface
 
         foreach (static::META_TRANSFORMERS as $propertyName => $constantName) {
             $index = $metaData[$propertyName];
-            $value = $this->_data->offsetGet($index);
+            $value = $this->_data[$index];
 
             $data[$propertyName] = $this->getTransformerAttribute($constantName)->toArray($value);
             unset($metaData[$propertyName]);
         }
 
         foreach ($metaData as $propertyName => $index) {
-            $data[$propertyName] = $this->_data->offsetGet($index);
+            $data[$propertyName] = $this->_data[$index];
         }
 
         return $data;
@@ -140,12 +140,12 @@ abstract class AbstractTransfer implements TransferInterface
 
     final protected function getData(int $index): mixed
     {
-        return $this->_data->offsetGet($index);
+        return $this->_data[$index];
     }
 
     final protected function setData(int $index, mixed $value): void
     {
-        $this->_data->offsetSet($index, $value);
+        $this->_data[$index] = $value;
     }
 
     /**
@@ -167,7 +167,7 @@ abstract class AbstractTransfer implements TransferInterface
             $index = static::META_DATA[$propertyName];
             $value = $this->getTransformerAttribute($constantName)->fromArray($data[$propertyName]);
 
-            $this->_data->offsetSet($index, $value);
+            $this->_data[$index] = $value;
             unset($data[$propertyName]);
         }
 
@@ -196,7 +196,7 @@ abstract class AbstractTransfer implements TransferInterface
             $index = static::META_DATA[$propertyName];
             $value = $this->getInitiatorAttribute($constantName)->getInitialValue();
 
-            $this->_data->offsetSet($index, $value);
+            $this->_data[$index] = $value;
         }
     }
 }
