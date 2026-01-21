@@ -15,12 +15,17 @@ trait AttributeTrait
     /**
      * @var array<string, InitiatorAttributeInterface>
      */
-    private static array $_initiatorAttributeCache;
+    private static array $_initiatorAttributeCache = [];
 
     /**
      * @var array<string, TransformerAttributeInterface>
      */
-    private static array $_transformerAttributeCache;
+    private static array $_transformerAttributeCache = [];
+
+    /**
+     * @var array<string, TransformerAttributeInterface|InitiatorAttributeInterface>
+     */
+    private static array $_attributeCache = [];
 
     /**
      * @throws \Picamator\TransferObject\Transfer\Exception\AttributeTransferException
@@ -37,10 +42,10 @@ trait AttributeTrait
             constantName: $constantName,
             attributeName: InitiatorAttributeInterface::class
         );
-        $attributeName = $reflectionAttribute->getName();
 
-        self::$_initiatorAttributeCache[$attributeName] ??= $reflectionAttribute->newInstance();
-        self::$_initiatorAttributeCache[$cacheKey] = self::$_initiatorAttributeCache[$attributeName];
+        /** @var InitiatorAttributeInterface $attributeInstance */
+        $attributeInstance = $this->getAttributeInstance($reflectionAttribute);
+        self::$_initiatorAttributeCache[$cacheKey] = $attributeInstance;
 
         return self::$_initiatorAttributeCache[$cacheKey];
     }
@@ -61,9 +66,27 @@ trait AttributeTrait
             attributeName: TransformerAttributeInterface::class
         );
 
-        self::$_transformerAttributeCache[$cacheKey] = $reflectionAttribute->newInstance();
+        /** @var TransformerAttributeInterface $attributeInstance */
+        $attributeInstance = $this->getAttributeInstance($reflectionAttribute);
+        self::$_transformerAttributeCache[$cacheKey] = $attributeInstance;
 
         return self::$_transformerAttributeCache[$cacheKey];
+    }
+
+    /**
+     * @param \ReflectionAttribute<TransformerAttributeInterface|InitiatorAttributeInterface> $reflectionAttribute
+     */
+    private function getAttributeInstance(
+        ReflectionAttribute $reflectionAttribute,
+    ): TransformerAttributeInterface|InitiatorAttributeInterface {
+        if (count($reflectionAttribute->getArguments()) !== 0) {
+            return $reflectionAttribute->newInstance();
+        }
+
+        $attributeName = $reflectionAttribute->getName();
+        self::$_attributeCache[$attributeName] ??= $reflectionAttribute->newInstance();
+
+        return self::$_attributeCache[$attributeName];
     }
 
     /**
