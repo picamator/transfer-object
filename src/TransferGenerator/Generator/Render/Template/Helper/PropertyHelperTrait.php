@@ -9,8 +9,6 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Template\H
  */
 trait PropertyHelperTrait
 {
-    private const string EMPTY_STRING = '';
-
     private const string NULLABLE_TYPE = '?';
     private const string NULLABLE_UNION = 'null|';
     private const string PROTECTED_SET = ' protected(set)';
@@ -30,7 +28,7 @@ trait PropertyHelperTrait
         $isNullable = $this->templateTransfer->nullables[$property];
 
         if (!$isNullable || str_contains($propertyType, '&')) {
-            return self::EMPTY_STRING;
+            return '';
         }
 
         if (str_contains($propertyType, '|')) {
@@ -42,6 +40,6 @@ trait PropertyHelperTrait
 
     private function renderProtected(string $property): string
     {
-        return $this->templateTransfer->protects[$property] ? self::PROTECTED_SET : self::EMPTY_STRING;
+        return $this->templateTransfer->protects[$property] ? self::PROTECTED_SET : '';
     }
 }

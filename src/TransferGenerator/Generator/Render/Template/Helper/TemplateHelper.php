@@ -14,12 +14,9 @@ class TemplateHelper implements TemplateHelperInterface
 
     private TemplateTransfer $templateTransfer;
 
-    private const string EMPTY_STRING = '';
-    private const string PADDING_LEFT = '    ';
-    private const string PHP_EOL_PADDING_LEFT = PHP_EOL . self::PADDING_LEFT;
-
     private const string IMPORT_TEMPLATE = 'use %s;' . PHP_EOL;
     private const string META_ATTRIBUTE_TEMPLATE = '    %s' . PHP_EOL;
+    private const string DOC_BLOCK_TEMPLATE = PHP_EOL . '    %s';
     private const string PROPERTY_ATTRIBUTE_TEMPLATE = '    #[%s]' . PHP_EOL;
 
     public function setTemplateTransfer(TemplateTransfer $templateTransfer): self
@@ -40,7 +37,7 @@ class TemplateHelper implements TemplateHelperInterface
     public function renderMetaAttributes(string $property): string
     {
         if (!$this->templateTransfer->metaAttributes->offsetExists($property)) {
-            return self::EMPTY_STRING;
+            return '';
         }
 
         $metaAttributes = $this->renderIterable(
@@ -55,16 +52,19 @@ class TemplateHelper implements TemplateHelperInterface
     public function renderDocBlock(string $property): string
     {
         if (!$this->templateTransfer->docBlocks->offsetExists($property)) {
-            return self::EMPTY_STRING;
+            return '';
         }
 
-        return self::PHP_EOL_PADDING_LEFT . $this->templateTransfer->docBlocks[$property];
+        return sprintf(
+            self::DOC_BLOCK_TEMPLATE,
+            $this->templateTransfer->docBlocks[$property],
+        );
     }
 
     public function renderPropertyAttributes(string $property): string
     {
         if (!$this->templateTransfer->propertyAttributes->offsetExists($property)) {
-            return self::EMPTY_STRING;
+            return '';
         }
 
         $attributes = $this->renderIterable(
