@@ -27,7 +27,7 @@ final readonly class NumberTransformerAttribute implements TransformerAttributeI
         return match (true) {
             is_float($data) => new $this->typeName((string)$data),
 
-            is_string($data) || is_int($data) => new $this->typeName($data),
+            is_numeric($data) => new $this->typeName($data),
 
             $data instanceof Number => $data,
 
