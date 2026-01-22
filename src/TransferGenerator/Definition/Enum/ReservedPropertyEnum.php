@@ -12,16 +12,6 @@ enum ReservedPropertyEnum: string
     case DATA = '_data';
 
     /**
-     * @uses \Picamator\TransferObject\Transfer\Attribute\AttributeTrait::$_initiatorAttributeCache
-     */
-    case INITIATOR_ATTRIBUTE_CACHE = '_initiatorAttributeCache';
-
-    /**
-     * @uses \Picamator\TransferObject\Transfer\Attribute\AttributeTrait::$_transformerAttributeCache
-     */
-    case TRANSFORMER_ATTRIBUTE_CACHE = '_transformerAttributeCache';
-
-    /**
      * @uses \Picamator\TransferObject\Transfer\Attribute\AttributeTrait::$_attributeCache
      */
     case ATTRIBUTE_CACHE = '_attributeCache';

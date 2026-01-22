@@ -13,30 +13,12 @@ use ReflectionClassConstant;
 trait AttributeTrait
 {
     /**
-     * @var array<string, InitiatorAttributeInterface>
-     */
-    private static array $_initiatorAttributeCache = [];
-
-    /**
-     * @var array<string, TransformerAttributeInterface>
-     */
-    private static array $_transformerAttributeCache = [];
-
-    /**
      * @var array<string, TransformerAttributeInterface|InitiatorAttributeInterface>
      */
     private static array $_attributeCache = [];
 
-    /**
-     * @throws \Picamator\TransferObject\Transfer\Exception\AttributeTransferException
-     */
     final protected function getInitiatorAttribute(string $constantName): InitiatorAttributeInterface
     {
-        $cacheKey = $this->getCacheKey($constantName);
-        if (isset(self::$_initiatorAttributeCache[$cacheKey])) {
-            return self::$_initiatorAttributeCache[$cacheKey];
-        }
-
         /** @var \ReflectionAttribute<InitiatorAttributeInterface> $reflectionAttribute */
         $reflectionAttribute = $this->getConstantReflection(
             constantName: $constantName,
@@ -45,9 +27,8 @@ trait AttributeTrait
 
         /** @var InitiatorAttributeInterface $attributeInstance */
         $attributeInstance = $this->getAttributeInstance($reflectionAttribute);
-        self::$_initiatorAttributeCache[$cacheKey] = $attributeInstance;
 
-        return self::$_initiatorAttributeCache[$cacheKey];
+        return $attributeInstance;
     }
 
     /**
@@ -55,11 +36,6 @@ trait AttributeTrait
      */
     final protected function getTransformerAttribute(string $constantName): TransformerAttributeInterface
     {
-        $cacheKey = $this->getCacheKey($constantName);
-        if (isset(self::$_transformerAttributeCache[$cacheKey])) {
-            return self::$_transformerAttributeCache[$cacheKey];
-        }
-
         /** @var \ReflectionAttribute<TransformerAttributeInterface> $reflectionAttribute */
         $reflectionAttribute = $this->getConstantReflection(
             constantName: $constantName,
@@ -68,9 +44,8 @@ trait AttributeTrait
 
         /** @var TransformerAttributeInterface $attributeInstance */
         $attributeInstance = $this->getAttributeInstance($reflectionAttribute);
-        self::$_transformerAttributeCache[$cacheKey] = $attributeInstance;
 
-        return self::$_transformerAttributeCache[$cacheKey];
+        return $attributeInstance;
     }
 
     /**
@@ -109,10 +84,5 @@ trait AttributeTrait
         }
 
         return $firstReflectionAttribute;
-    }
-
-    private function getCacheKey(string $constantName): string
-    {
-        return static::class . '::' . $constantName;
     }
 }
