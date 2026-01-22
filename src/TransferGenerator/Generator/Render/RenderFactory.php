@@ -19,8 +19,8 @@ use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\Protect
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TemplateExpanderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TransferTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Helper\TemplateHelper;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Helper\TemplateHelperInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Template;
-use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelperInterface;
 
 class RenderFactory
 {

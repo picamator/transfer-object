@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Template;
 
 use Picamator\TransferObject\Generated\TemplateTransfer;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Helper\TemplateHelperInterface;
 
 readonly class Template
 {
@@ -53,7 +54,7 @@ TEMPLATE;
         $i = 0;
         $properties = '';
 
-        foreach ($templateTransfer->metaConstants as $constant => $property) {
+        foreach ($templateTransfer->metaConstants as $property => $constant) {
             $properties .= <<<TEMPLATE
 
     // $property{$this->helper->renderMetaAttributes($property)}

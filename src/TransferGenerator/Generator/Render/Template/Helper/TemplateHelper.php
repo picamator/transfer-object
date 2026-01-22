@@ -5,24 +5,21 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Helper;
 
 use Picamator\TransferObject\Generated\TemplateTransfer;
-use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelperInterface;
 
 class TemplateHelper implements TemplateHelperInterface
 {
-    use MetaConstantHelperTrait;
+    use MetaHelperTrait;
+    use IterableHelperTrait;
+    use PropertyHelperTrait;
 
     private TemplateTransfer $templateTransfer;
 
-    private const string IMPORT_TEMPLATE = 'use %s;' . PHP_EOL;
-
+    private const string EMPTY_STRING = '';
     private const string PADDING_LEFT = '    ';
     private const string PHP_EOL_PADDING_LEFT = PHP_EOL . self::PADDING_LEFT;
 
-    private const string EMPTY_STRING = '';
-    private const string NULLABLE_TYPE = '?';
-    private const string NULLABLE_UNION = 'null|';
-    private const string PROTECTED_SET = ' protected(set)';
-
+    private const string IMPORT_TEMPLATE = 'use %s;' . PHP_EOL;
+    private const string META_ATTRIBUTE_TEMPLATE = '    %s' . PHP_EOL;
     private const string PROPERTY_ATTRIBUTE_TEMPLATE = '    #[%s]' . PHP_EOL;
 
     public function setTemplateTransfer(TemplateTransfer $templateTransfer): self
@@ -34,81 +31,46 @@ class TemplateHelper implements TemplateHelperInterface
 
     public function renderImports(): string
     {
-        $imports = '';
-        foreach ($this->templateTransfer->imports as $import) {
-            $imports .= sprintf(self::IMPORT_TEMPLATE, $import);
-        }
-
-        return rtrim($imports, PHP_EOL);
+        return $this->renderIterable(
+            iterable: $this->templateTransfer->imports,
+            template: self::IMPORT_TEMPLATE,
+        );
     }
 
     public function renderMetaAttributes(string $property): string
     {
-        $metaAttributes = $this->templateTransfer->metaAttributes[$property] ?? null;
-        if ($metaAttributes === null) {
+        if (!$this->templateTransfer->metaAttributes->offsetExists($property)) {
             return self::EMPTY_STRING;
         }
 
-        $renderedMetaAttributes = '';
-        foreach ($metaAttributes as $attribute) {
-            $renderedMetaAttributes .= self::PADDING_LEFT . $attribute . PHP_EOL;
-        }
+        $metaAttributes = $this->renderIterable(
+            iterable: $this->templateTransfer->metaAttributes[$property] ?? [],
+            template: self::META_ATTRIBUTE_TEMPLATE,
+        );
 
-        return PHP_EOL . rtrim($renderedMetaAttributes, PHP_EOL);
+        return PHP_EOL . $metaAttributes;
     }
 
     public function renderDocBlock(string $property): string
     {
-        $docBlock = $this->templateTransfer->docBlocks[$property] ?? null;
-        if ($docBlock === null) {
+        if (!$this->templateTransfer->docBlocks->offsetExists($property)) {
             return self::EMPTY_STRING;
         }
 
-        return self::PHP_EOL_PADDING_LEFT . $docBlock;
+        return self::PHP_EOL_PADDING_LEFT . $this->templateTransfer->docBlocks[$property];
     }
 
     public function renderPropertyAttributes(string $property): string
     {
-        $propertyAttributes = $this->templateTransfer->propertyAttributes[$property] ?? null;
-        if ($propertyAttributes === null) {
+        if (!$this->templateTransfer->propertyAttributes->offsetExists($property)) {
             return self::EMPTY_STRING;
         }
 
-        $attributes = '';
-        foreach ($propertyAttributes as $attribute) {
-            $attributes .= sprintf(self::PROPERTY_ATTRIBUTE_TEMPLATE, $attribute);
-        }
+        $attributes = $this->renderIterable(
+            iterable: $this->templateTransfer->propertyAttributes[$property] ?? [],
+            template: self::PROPERTY_ATTRIBUTE_TEMPLATE,
+        );
 
-        return PHP_EOL . rtrim($attributes, PHP_EOL);
-    }
-
-    public function renderPropertyDeclaration(string $property): string
-    {
-        /** @var string $propertyType */
-        $propertyType = $this->templateTransfer->properties[$property];
-
-        return "{$this->renderProtected($property)} {$this->renderNullable($property)}$propertyType";
-    }
-
-    public function renderNullable(string $property): string
-    {
-        /** @var string $propertyType */
-        $propertyType = $this->templateTransfer->properties[$property];
-        $isNullable = $this->templateTransfer->nullables[$property];
-
-        if (!$isNullable || str_contains($propertyType, '&')) {
-            return self::EMPTY_STRING;
-        }
-
-        if (str_contains($propertyType, '|')) {
-            return self::NULLABLE_UNION;
-        }
-
-        return self::NULLABLE_TYPE;
-    }
-
-    private function renderProtected(string $property): string
-    {
-        return $this->templateTransfer->protects[$property] ? self::PROTECTED_SET : self::EMPTY_STRING;
+        return PHP_EOL . $attributes;
     }
 }

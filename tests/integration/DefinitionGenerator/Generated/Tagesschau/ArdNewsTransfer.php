@@ -24,8 +24,8 @@ final class ArdNewsTransfer extends AbstractTransfer
     protected const int META_DATA_SIZE = 5;
 
     protected const array META_DATA = [
-        self::NEW_STORIES_COUNT_LINK_PROP => self::NEW_STORIES_COUNT_LINK_INDEX,
         self::NEWS_PROP => self::NEWS_INDEX,
+        self::NEW_STORIES_COUNT_LINK_PROP => self::NEW_STORIES_COUNT_LINK_INDEX,
         self::NEXT_PAGE_PROP => self::NEXT_PAGE_INDEX,
         self::REGIONAL_PROP => self::REGIONAL_INDEX,
         self::TYPE_PROP => self::TYPE_INDEX,
@@ -40,28 +40,28 @@ final class ArdNewsTransfer extends AbstractTransfer
         self::NEWS_PROP => 'NEWS_PROP',
     ];
 
-    // newStoriesCountLink
-    public const string NEW_STORIES_COUNT_LINK_PROP = 'newStoriesCountLink';
-    private const int NEW_STORIES_COUNT_LINK_INDEX = 0;
-
-    public ?string $newStoriesCountLink {
-        get => $this->getData(self::NEW_STORIES_COUNT_LINK_INDEX);
-        set {
-            $this->setData(self::NEW_STORIES_COUNT_LINK_INDEX, $value);
-        }
-    }
-
     // news
     #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(NewsTransfer::class)]
     public const string NEWS_PROP = 'news';
-    private const int NEWS_INDEX = 1;
+    private const int NEWS_INDEX = 0;
 
     /** @var \ArrayObject<int,NewsTransfer> */
     public ArrayObject $news {
         get => $this->getData(self::NEWS_INDEX);
         set {
             $this->setData(self::NEWS_INDEX, $value);
+        }
+    }
+
+    // newStoriesCountLink
+    public const string NEW_STORIES_COUNT_LINK_PROP = 'newStoriesCountLink';
+    private const int NEW_STORIES_COUNT_LINK_INDEX = 1;
+
+    public ?string $newStoriesCountLink {
+        get => $this->getData(self::NEW_STORIES_COUNT_LINK_INDEX);
+        set {
+            $this->setData(self::NEW_STORIES_COUNT_LINK_INDEX, $value);
         }
     }
 
