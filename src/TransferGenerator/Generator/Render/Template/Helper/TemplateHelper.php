@@ -44,7 +44,8 @@ class TemplateHelper implements TemplateHelperInterface
         }
 
         $metaAttributes = $this->renderIterable(
-            iterable: $this->templateTransfer->metaAttributes[$property] ?? [],
+            /** @phpstan-ignore argument.type */
+            iterable: $this->templateTransfer->metaAttributes[$property],
             template: self::META_ATTRIBUTE_TEMPLATE,
         );
 
@@ -67,7 +68,8 @@ class TemplateHelper implements TemplateHelperInterface
         }
 
         $attributes = $this->renderIterable(
-            iterable: $this->templateTransfer->propertyAttributes[$property] ?? [],
+            /** @phpstan-ignore argument.type */
+            iterable: $this->templateTransfer->propertyAttributes[$property],
             template: self::PROPERTY_ATTRIBUTE_TEMPLATE,
         );
 
