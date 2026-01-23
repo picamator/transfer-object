@@ -11,6 +11,8 @@ use ArrayObject;
  */
 trait MetaHelperTrait
 {
+    use IterableHelperTrait;
+
     private const string META_DATA_TEMPLATE = '        self::%1$s_PROP => self::%1$s_INDEX,' . PHP_EOL;
 
     private const string META_INITIATORS = 'META_INITIATORS';
@@ -28,17 +30,10 @@ TEMPLATE;
 
     public function renderMetaData(): string
     {
-        $metaData = '';
-
-        $iterator = $this->templateTransfer->metaConstants->getIterator();
-        $iterator->rewind();
-
-        while ($iterator->valid()) {
-            $metaData .= sprintf(self::META_DATA_TEMPLATE, $iterator->current());
-            $iterator->next();
-        }
-
-        return rtrim($metaData, PHP_EOL);
+        return $this->renderIterable(
+            iterable: $this->templateTransfer->metaConstants,
+            template: self::META_DATA_TEMPLATE,
+        );
     }
 
     public function renderMetaInitiators(): string
@@ -70,19 +65,8 @@ TEMPLATE;
         }
 
         $renderedMeta = '';
-
-        $iterator = $meta->getIterator();
-        $iterator->rewind();
-
-        while ($iterator->valid()) {
-            /** @var string $propertyName */
-            $propertyName = $iterator->current();
+        foreach ($meta as $propertyName) {
             $renderedMeta .= sprintf(self::META_ITEM_TEMPLATE, $metaConstants[$propertyName]);
-            $iterator->next();
-        }
-
-        if ($renderedMeta === '') {
-            return '';
         }
 
         $renderedMeta = rtrim($renderedMeta, PHP_EOL);
