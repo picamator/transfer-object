@@ -62,7 +62,7 @@ shift $((OPTIND -1))
 # arguments
 case $1 in
   build)
-    docker compose build
+    docker compose build --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g)
     ;;
   start)
     if [ "$XDEBUG_MODE" == "" ]; then
