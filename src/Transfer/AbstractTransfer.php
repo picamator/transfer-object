@@ -49,7 +49,7 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->initData();
 
-        if ($data !== null) {
+        if ($data !== null && count($data) > 0) {
             $this->hydrateData($data);
         }
     }
@@ -131,7 +131,7 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->initData();
 
-        if ($data !== []) {
+        if (count($data) > 0) {
             $this->hydrateData($data);
         }
 
@@ -155,7 +155,7 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->filterData($data);
 
-        if ($data === []) {
+        if (count($data) === 0) {
             return;
         }
 
