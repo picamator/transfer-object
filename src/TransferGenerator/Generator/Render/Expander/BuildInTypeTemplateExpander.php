@@ -46,46 +46,52 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $initiatorEnum = InitiatorAttributeEnum::ARRAY;
+        $this->expandInitiatorAttribute(
+            propertyTransfer: $propertyTransfer,
+            initiatorEnum: InitiatorAttributeEnum::ARRAY,
+            templateTransfer: $templateTransfer,
+        );
 
-        $this->expandImports($initiatorEnum->getImport(), $templateTransfer);
-
-        $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->metaAttributes[$propertyName] = [
-            $initiatorEnum->value,
-        ];
-
-        $templateTransfer->metaInitiators[] = $propertyName;
-
-        $templateTransfer->docBlocks[$propertyName]
-            = DocBlockTemplateEnum::ARRAY->renderTemplate($propertyTransfer->buildInType?->docBlock);
-
-        $templateTransfer->nullables[$propertyName] = false;
+        $this->expandDocBlocs(
+            propertyTransfer: $propertyTransfer,
+            docBlockEnum: DocBlockTemplateEnum::ARRAY,
+            templateTransfer: $templateTransfer,
+        );
     }
 
     private function expandArrayObjectType(
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $initiatorEnum = InitiatorAttributeEnum::ARRAY_OBJECT;
-        $transformerEnum = TransformerAttributeEnum::ARRAY_OBJECT;
-
         $this->expandImports(BuildInTypeEnum::ARRAY_OBJECT->value, $templateTransfer);
-        $this->expandImports($initiatorEnum->getImport(), $templateTransfer);
-        $this->expandImports($transformerEnum->getImport(), $templateTransfer);
 
+        $this->expandInitiatorAttribute(
+            propertyTransfer: $propertyTransfer,
+            initiatorEnum: InitiatorAttributeEnum::ARRAY_OBJECT,
+            templateTransfer: $templateTransfer,
+        );
+
+        $this->expandTransformerAttribute(
+            propertyTransfer: $propertyTransfer,
+            transformerEnum: TransformerAttributeEnum::ARRAY_OBJECT,
+            templateTransfer: $templateTransfer,
+        );
+
+        $this->expandDocBlocs(
+            propertyTransfer: $propertyTransfer,
+            docBlockEnum: DocBlockTemplateEnum::ARRAY_OBJECT,
+            templateTransfer: $templateTransfer,
+        );
+    }
+
+    private function expandDocBlocs(
+        DefinitionPropertyTransfer $propertyTransfer,
+        DocBlockTemplateEnum $docBlockEnum,
+        TemplateTransfer $templateTransfer,
+    ): void {
+        $docBlock = $propertyTransfer->buildInType?->docBlock;
         $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->metaAttributes[$propertyName] = [
-            $initiatorEnum->value,
-            $transformerEnum->value,
-        ];
 
-        $templateTransfer->metaInitiators[] = $propertyName;
-        $templateTransfer->metaTransformers[] = $propertyName;
-
-        $templateTransfer->docBlocks[$propertyName]
-            = DocBlockTemplateEnum::ARRAY_OBJECT->renderTemplate($propertyTransfer->buildInType?->docBlock);
-
-        $templateTransfer->nullables[$propertyName] = false;
+        $templateTransfer->docBlocks[$propertyName] = $docBlockEnum->renderTemplate($docBlock);
     }
 }

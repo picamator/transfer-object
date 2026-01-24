@@ -21,19 +21,16 @@ final class DateTimeTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $transformerEnum = TransformerAttributeTemplateEnum::DATE_TIME;
-        $this->expandImports($transformerEnum->getImport(), $templateTransfer);
-
         /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $typeTransfer */
         $typeTransfer = $propertyTransfer->dateTimeType;
         $this->expandEmbeddedType($propertyTransfer, $typeTransfer, $templateTransfer);
 
-        $propertyName = $propertyTransfer->propertyName;
-
-        $templateTransfer->metaAttributes[$propertyName] = [
-            $transformerEnum->renderTemplate($typeTransfer),
-        ];
-
-        $templateTransfer->metaTransformers[] = $propertyName;
+        $transformerEnum = TransformerAttributeTemplateEnum::DATE_TIME;
+        $this->expandTransformerAttribute(
+            propertyTransfer: $propertyTransfer,
+            transformerEnum: $transformerEnum,
+            templateTransfer: $templateTransfer,
+            renderTemplate: fn(): string => $transformerEnum->renderTemplate($typeTransfer),
+        );
     }
 }

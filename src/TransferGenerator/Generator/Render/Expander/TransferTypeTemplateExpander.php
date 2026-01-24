@@ -22,9 +22,6 @@ final class TransferTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $transformerEnum = TransformerAttributeTemplateEnum::TRANSFER;
-        $this->expandImports($transformerEnum->getImport(), $templateTransfer);
-
         /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $typeTransfer */
         $typeTransfer = $propertyTransfer->transferType;
 
@@ -32,11 +29,13 @@ final class TransferTypeTemplateExpander extends AbstractTemplateExpander
         $templateTransfer->properties[$propertyName] = $this->getPropertyType($typeTransfer);
         $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
 
-        $templateTransfer->metaAttributes[$propertyName] = [
-            $transformerEnum->renderTemplate($typeTransfer),
-        ];
-
-        $templateTransfer->metaTransformers[] = $propertyName;
+        $transformerEnum = TransformerAttributeTemplateEnum::TRANSFER;
+        $this->expandTransformerAttribute(
+            propertyTransfer: $propertyTransfer,
+            transformerEnum: $transformerEnum,
+            templateTransfer: $templateTransfer,
+            renderTemplate: fn(): string => $transformerEnum->renderTemplate($typeTransfer),
+        );
     }
 
     private function getPropertyType(DefinitionEmbeddedTypeTransfer $typeTransfer): string
