@@ -31,6 +31,15 @@ final class NamespaceTransfer extends AbstractTransfer
         self::REQUIRED_PROP => self::REQUIRED_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::ITEMS_PROP => 'ITEMS_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::ITEMS_PROP => 'ITEMS_PROP',
+        self::REQUIRED_PROP => 'REQUIRED_PROP',
+    ];
+
     // items
     #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(ItemTransfer::class)]

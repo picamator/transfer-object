@@ -46,6 +46,22 @@ final class ItemTransfer extends AbstractTransfer
         self::I_AM_WITH_ATTRIBUTE_PROP => self::I_AM_WITH_ATTRIBUTE_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::I_AM_ARRAY_PROP => 'I_AM_ARRAY_PROP',
+        self::I_AM_ARRAY_OBJECT_PROP => 'I_AM_ARRAY_OBJECT_PROP',
+        self::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_PROP => 'I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_PROP',
+        self::I_AM_ARRAY_WITH_DOC_BLOCK_PROP => 'I_AM_ARRAY_WITH_DOC_BLOCK_PROP',
+        self::I_AM_WITH_ATTRIBUTE_PROP => 'I_AM_WITH_ATTRIBUTE_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::I_AM_ARRAY_OBJECT_PROP => 'I_AM_ARRAY_OBJECT_PROP',
+        self::I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_PROP => 'I_AM_ARRAY_OBJECT_WITH_DOCK_BLOCK_PROP',
+        self::I_AM_DATE_TIME_PROP => 'I_AM_DATE_TIME_PROP',
+        self::I_AM_DATE_TIME_IMMUTABLE_PROP => 'I_AM_DATE_TIME_IMMUTABLE_PROP',
+        self::I_AM_ENUM_PROP => 'I_AM_ENUM_PROP',
+    ];
+
     // iAmArray
     #[ArrayInitiatorAttribute]
     public const string I_AM_ARRAY_PROP = 'iAmArray';

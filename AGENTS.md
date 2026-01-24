@@ -124,3 +124,16 @@ Unit and Integration Tests
 - use `setUp` method to initialize the tested object's stubs and mocks
 - use `PHPUnit` attributes
 - use [PHP generator](https://www.php.net/manual/en/class.generator.php) for the data providers
+
+How To Run PHPUnit Tests
+------------------------
+
+All tests can be run with the following command:
+```console
+docker/sdk phpunit
+```
+
+A Specific test group can be run with the following command:
+```console
+docker/sdk phpunit-group <group>
+```

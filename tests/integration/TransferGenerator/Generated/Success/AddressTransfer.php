@@ -35,6 +35,14 @@ final class AddressTransfer extends AbstractTransfer
         self::ZIP_CODE_PROP => self::ZIP_CODE_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::COUNTRY_PROP => 'COUNTRY_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::COUNTRY_PROP => 'COUNTRY_PROP',
+    ];
+
     // address1
     public const string ADDRESS1_PROP = 'address1';
     private const int ADDRESS1_INDEX = 0;

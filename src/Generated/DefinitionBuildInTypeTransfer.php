@@ -26,6 +26,10 @@ final class DefinitionBuildInTypeTransfer extends AbstractTransfer
         self::NAME_PROP => self::NAME_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::NAME_PROP => 'NAME_PROP',
+    ];
+
     // docBlock
     public const string DOC_BLOCK_PROP = 'docBlock';
     private const int DOC_BLOCK_INDEX = 0;

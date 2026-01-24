@@ -26,7 +26,7 @@ final class MetaConstantsTemplateExpander extends AbstractTemplateExpander
         TemplateTransfer $templateTransfer,
     ): void {
         $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->metaConstants[$this->getMetaConstant($propertyName)] = $propertyName;
+        $templateTransfer->metaConstants[$propertyName] = $this->getMetaConstant($propertyName);
     }
 
     private function getMetaConstant(string $propertyName): string

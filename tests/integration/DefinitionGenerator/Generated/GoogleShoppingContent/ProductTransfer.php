@@ -51,6 +51,15 @@ final class ProductTransfer extends AbstractTransfer
         self::TITLE_PROP => self::TITLE_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::SIZES_PROP => 'SIZES_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::AVAILABILITY_DATE_PROP => 'AVAILABILITY_DATE_PROP',
+        self::PRICE_PROP => 'PRICE_PROP',
+    ];
+
     // ageGroup
     public const string AGE_GROUP_PROP = 'ageGroup';
     private const int AGE_GROUP_INDEX = 0;

@@ -20,7 +20,7 @@ use Picamator\TransferObject\Transfer\Attribute\Transformer\ArrayObjectTransform
  */
 final class TemplateTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 11;
+    protected const int META_DATA_SIZE = 13;
 
     protected const array META_DATA = [
         self::CLASS_NAME_PROP => self::CLASS_NAME_INDEX,
@@ -30,10 +30,38 @@ final class TemplateTransfer extends AbstractTransfer
         self::IMPORTS_PROP => self::IMPORTS_INDEX,
         self::META_ATTRIBUTES_PROP => self::META_ATTRIBUTES_INDEX,
         self::META_CONSTANTS_PROP => self::META_CONSTANTS_INDEX,
+        self::META_INITIATORS_PROP => self::META_INITIATORS_INDEX,
+        self::META_TRANSFORMERS_PROP => self::META_TRANSFORMERS_INDEX,
         self::NULLABLES_PROP => self::NULLABLES_INDEX,
         self::PROPERTIES_PROP => self::PROPERTIES_INDEX,
         self::PROPERTY_ATTRIBUTES_PROP => self::PROPERTY_ATTRIBUTES_INDEX,
         self::PROTECTS_PROP => self::PROTECTS_INDEX,
+    ];
+
+    protected const array META_INITIATORS = [
+        self::DOC_BLOCKS_PROP => 'DOC_BLOCKS_PROP',
+        self::IMPORTS_PROP => 'IMPORTS_PROP',
+        self::META_ATTRIBUTES_PROP => 'META_ATTRIBUTES_PROP',
+        self::META_CONSTANTS_PROP => 'META_CONSTANTS_PROP',
+        self::META_INITIATORS_PROP => 'META_INITIATORS_PROP',
+        self::META_TRANSFORMERS_PROP => 'META_TRANSFORMERS_PROP',
+        self::NULLABLES_PROP => 'NULLABLES_PROP',
+        self::PROPERTIES_PROP => 'PROPERTIES_PROP',
+        self::PROPERTY_ATTRIBUTES_PROP => 'PROPERTY_ATTRIBUTES_PROP',
+        self::PROTECTS_PROP => 'PROTECTS_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::DOC_BLOCKS_PROP => 'DOC_BLOCKS_PROP',
+        self::IMPORTS_PROP => 'IMPORTS_PROP',
+        self::META_ATTRIBUTES_PROP => 'META_ATTRIBUTES_PROP',
+        self::META_CONSTANTS_PROP => 'META_CONSTANTS_PROP',
+        self::META_INITIATORS_PROP => 'META_INITIATORS_PROP',
+        self::META_TRANSFORMERS_PROP => 'META_TRANSFORMERS_PROP',
+        self::NULLABLES_PROP => 'NULLABLES_PROP',
+        self::PROPERTIES_PROP => 'PROPERTIES_PROP',
+        self::PROPERTY_ATTRIBUTES_PROP => 'PROPERTY_ATTRIBUTES_PROP',
+        self::PROTECTS_PROP => 'PROTECTS_PROP',
     ];
 
     // className
@@ -125,11 +153,39 @@ final class TemplateTransfer extends AbstractTransfer
         }
     }
 
+    // metaInitiators
+    #[ArrayObjectInitiatorAttribute]
+    #[ArrayObjectTransformerAttribute]
+    public const string META_INITIATORS_PROP = 'metaInitiators';
+    private const int META_INITIATORS_INDEX = 7;
+
+    /** @var \ArrayObject<int,string> */
+    public ArrayObject $metaInitiators {
+        get => $this->getData(self::META_INITIATORS_INDEX);
+        set {
+            $this->setData(self::META_INITIATORS_INDEX, $value);
+        }
+    }
+
+    // metaTransformers
+    #[ArrayObjectInitiatorAttribute]
+    #[ArrayObjectTransformerAttribute]
+    public const string META_TRANSFORMERS_PROP = 'metaTransformers';
+    private const int META_TRANSFORMERS_INDEX = 8;
+
+    /** @var \ArrayObject<int,string> */
+    public ArrayObject $metaTransformers {
+        get => $this->getData(self::META_TRANSFORMERS_INDEX);
+        set {
+            $this->setData(self::META_TRANSFORMERS_INDEX, $value);
+        }
+    }
+
     // nullables
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
     public const string NULLABLES_PROP = 'nullables';
-    private const int NULLABLES_INDEX = 7;
+    private const int NULLABLES_INDEX = 9;
 
     /** @var \ArrayObject<string,bool> */
     public ArrayObject $nullables {
@@ -143,7 +199,7 @@ final class TemplateTransfer extends AbstractTransfer
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
     public const string PROPERTIES_PROP = 'properties';
-    private const int PROPERTIES_INDEX = 8;
+    private const int PROPERTIES_INDEX = 10;
 
     /** @var \ArrayObject<string,string> */
     public ArrayObject $properties {
@@ -157,7 +213,7 @@ final class TemplateTransfer extends AbstractTransfer
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
     public const string PROPERTY_ATTRIBUTES_PROP = 'propertyAttributes';
-    private const int PROPERTY_ATTRIBUTES_INDEX = 9;
+    private const int PROPERTY_ATTRIBUTES_INDEX = 11;
 
     /** @var \ArrayObject<string,array<int,string>> */
     public ArrayObject $propertyAttributes {
@@ -171,7 +227,7 @@ final class TemplateTransfer extends AbstractTransfer
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
     public const string PROTECTS_PROP = 'protects';
-    private const int PROTECTS_INDEX = 10;
+    private const int PROTECTS_INDEX = 12;
 
     /** @var \ArrayObject<string,bool> */
     public ArrayObject $protects {

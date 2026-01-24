@@ -25,6 +25,11 @@ final class TransferGeneratorBulkTransfer extends AbstractTransfer
         self::VALIDATOR_PROP => self::VALIDATOR_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::PROGRESS_PROP => 'PROGRESS_PROP',
+        self::VALIDATOR_PROP => 'VALIDATOR_PROP',
+    ];
+
     // progress
     #[TransferTransformerAttribute(FileReaderProgressTransfer::class)]
     public const string PROGRESS_PROP = 'progress';

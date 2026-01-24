@@ -167,7 +167,7 @@ trait TransferAdapterTrait
             return DateTimeImmutable::createFromTimestamp($value);
         }
 
-        if ($this->isBcMathLoaded() && $type === Number::class) {
+        if ($this->isBcMathType($type)) {
             return new Number($value);
         }
 
@@ -188,7 +188,7 @@ trait TransferAdapterTrait
             return $type::tryFrom($value);
         }
 
-        if ($this->isBcMathLoaded() && $type === Number::class) {
+        if (is_numeric($value) && $this->isBcMathType($type)) {
             return new Number($value);
         }
 
@@ -253,6 +253,11 @@ trait TransferAdapterTrait
         }
 
         return $reflectionObject->getProperties(filter: ReflectionProperty::IS_PUBLIC);
+    }
+
+    private function isBcMathType(mixed $type): bool
+    {
+        return $this->isBcMathLoaded() && $type === Number::class;
     }
 
     private function isBcMathLoaded(): bool

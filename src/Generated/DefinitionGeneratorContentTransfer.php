@@ -25,6 +25,10 @@ final class DefinitionGeneratorContentTransfer extends AbstractTransfer
         self::CONTENT_PROP => self::CONTENT_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::CONTENT_PROP => 'CONTENT_PROP',
+    ];
+
     // className
     public const string CLASS_NAME_PROP = 'className';
     private const int CLASS_NAME_INDEX = 0;

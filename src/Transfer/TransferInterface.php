@@ -9,6 +9,8 @@ use IteratorAggregate;
 use JsonSerializable;
 
 /**
+ * @api
+ *
  * @extends \IteratorAggregate<string, mixed>
  */
 interface TransferInterface extends IteratorAggregate, JsonSerializable, Countable
@@ -33,7 +35,7 @@ interface TransferInterface extends IteratorAggregate, JsonSerializable, Countab
      *
      * @param array<string,mixed> $data
      *
-     * @throws \Picamator\TransferObject\Transfer\Exception\DataAssertTransferException
+     * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
      */
     public function fromArray(array $data): static;
 }

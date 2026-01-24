@@ -26,6 +26,16 @@ abstract class AbstractTransfer implements TransferInterface
     protected const array META_DATA = [];
 
     /**
+     * @var array<string, string>
+     */
+    protected const array META_INITIATORS = [];
+
+    /**
+     * @var array<string, string>
+     */
+    protected const array META_TRANSFORMERS = [];
+
+    /**
      * @var \SplFixedArray<mixed>
      */
     private SplFixedArray $_data;
@@ -39,7 +49,7 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->initData();
 
-        if ($data !== null) {
+        if ($data !== null && count($data) > 0) {
             $this->hydrateData($data);
         }
     }
@@ -81,7 +91,7 @@ abstract class AbstractTransfer implements TransferInterface
     final public function getIterator(): Traversable
     {
         foreach (static::META_DATA as $propertyName => $index) {
-            yield $propertyName => $this->_data->offsetGet($index);
+            yield $propertyName => $this->_data[$index];
         }
     }
 
@@ -99,17 +109,18 @@ abstract class AbstractTransfer implements TransferInterface
     final public function toArray(): array
     {
         $data = [];
-        foreach ($this->getTransformers() as $propertyName => $transformer) {
-            $index = static::META_DATA[$propertyName];
-            $data[$propertyName] = $transformer->toArray($this->_data->offsetGet($index));
+        $metaData = static::META_DATA;
+
+        foreach (static::META_TRANSFORMERS as $propertyName => $constantName) {
+            $index = $metaData[$propertyName];
+            $value = $this->_data[$index];
+
+            $data[$propertyName] = $this->getTransformerAttribute($constantName)->toArray($value);
+            unset($metaData[$propertyName]);
         }
 
-        if (count($data) === static::META_DATA_SIZE) {
-            return $data;
-        }
-
-        foreach (static::META_DATA as $propertyName => $index) {
-            $data[$propertyName] ??= $this->_data->offsetGet($index);
+        foreach ($metaData as $propertyName => $index) {
+            $data[$propertyName] = $this->_data[$index];
         }
 
         return $data;
@@ -120,7 +131,7 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->initData();
 
-        if ($data !== []) {
+        if (count($data) > 0) {
             $this->hydrateData($data);
         }
 
@@ -129,12 +140,12 @@ abstract class AbstractTransfer implements TransferInterface
 
     final protected function getData(int $index): mixed
     {
-        return $this->_data->offsetGet($index);
+        return $this->_data[$index];
     }
 
     final protected function setData(int $index, mixed $value): void
     {
-        $this->_data->offsetSet($index, $value);
+        $this->_data[$index] = $value;
     }
 
     /**
@@ -144,15 +155,19 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->filterData($data);
 
-        if ($data === []) {
+        if (count($data) === 0) {
             return;
         }
 
-        $propertyNames = array_keys($data);
-        foreach ($this->getTransformers($propertyNames) as $propertyName => $transformer) {
-            $index = static::META_DATA[$propertyName];
-            $this->_data->offsetSet($index, $transformer->fromArray($data[$propertyName]));
+        foreach (static::META_TRANSFORMERS as $propertyName => $constantName) {
+            if (!isset($data[$propertyName])) {
+                continue;
+            }
 
+            $index = static::META_DATA[$propertyName];
+            $value = $this->getTransformerAttribute($constantName)->fromArray($data[$propertyName]);
+
+            $this->_data[$index] = $value;
             unset($data[$propertyName]);
         }
 
@@ -177,9 +192,11 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->_data = new SplFixedArray(size: static::META_DATA_SIZE);
 
-        foreach ($this->getInitiators() as $propertyName => $initiator) {
+        foreach (static::META_INITIATORS as $propertyName => $constantName) {
             $index = static::META_DATA[$propertyName];
-            $this->_data->offsetSet($index, $initiator->getInitialValue());
+            $value = $this->getInitiatorAttribute($constantName)->getInitialValue();
+
+            $this->_data[$index] = $value;
         }
     }
 }

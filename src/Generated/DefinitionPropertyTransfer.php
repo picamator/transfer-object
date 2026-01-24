@@ -36,6 +36,20 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
         self::TRANSFER_TYPE_PROP => self::TRANSFER_TYPE_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::ATTRIBUTES_PROP => 'ATTRIBUTES_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::ATTRIBUTES_PROP => 'ATTRIBUTES_PROP',
+        self::BUILD_IN_TYPE_PROP => 'BUILD_IN_TYPE_PROP',
+        self::COLLECTION_TYPE_PROP => 'COLLECTION_TYPE_PROP',
+        self::DATE_TIME_TYPE_PROP => 'DATE_TIME_TYPE_PROP',
+        self::ENUM_TYPE_PROP => 'ENUM_TYPE_PROP',
+        self::NUMBER_TYPE_PROP => 'NUMBER_TYPE_PROP',
+        self::TRANSFER_TYPE_PROP => 'TRANSFER_TYPE_PROP',
+    ];
+
     // attributes
     #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(DefinitionAttributeTransfer::class)]

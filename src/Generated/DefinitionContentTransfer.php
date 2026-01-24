@@ -27,6 +27,14 @@ final class DefinitionContentTransfer extends AbstractTransfer
         self::PROPERTIES_PROP => self::PROPERTIES_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::PROPERTIES_PROP => 'PROPERTIES_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::PROPERTIES_PROP => 'PROPERTIES_PROP',
+    ];
+
     // className
     public const string CLASS_NAME_PROP = 'className';
     private const int CLASS_NAME_INDEX = 0;

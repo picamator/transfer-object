@@ -27,12 +27,7 @@ final class CollectionTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $initiatorEnum = InitiatorAttributeEnum::ARRAY_OBJECT;
-        $transformerEnum = TransformerAttributeTemplateEnum::COLLECTION;
-
         $this->expandImports(BuildInTypeEnum::ARRAY_OBJECT->value, $templateTransfer);
-        $this->expandImports($initiatorEnum->getImport(), $templateTransfer);
-        $this->expandImports($transformerEnum->getImport(), $templateTransfer);
 
         /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $typeTransfer */
         $typeTransfer = $propertyTransfer->collectionType;
@@ -40,12 +35,20 @@ final class CollectionTypeTemplateExpander extends AbstractTemplateExpander
         $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->properties[$propertyName] = BuildInTypeEnum::ARRAY_OBJECT->value;
         $templateTransfer->docBlocks[$propertyName] = $this->getPropertyDocBlock($typeTransfer);
-        $templateTransfer->nullables[$propertyName] = false;
 
-        $templateTransfer->metaAttributes[$propertyName] = [
-            $initiatorEnum->value,
-            $transformerEnum->renderTemplate($typeTransfer),
-        ];
+        $this->expandInitiatorAttribute(
+            propertyTransfer: $propertyTransfer,
+            initiatorEnum: InitiatorAttributeEnum::ARRAY_OBJECT,
+            templateTransfer: $templateTransfer,
+        );
+
+        $transformerEnum = TransformerAttributeTemplateEnum::COLLECTION;
+        $this->expandTransformerAttribute(
+            propertyTransfer: $propertyTransfer,
+            transformerEnum: $transformerEnum,
+            templateTransfer: $templateTransfer,
+            renderTemplate: fn(): string => $transformerEnum->renderTemplate($typeTransfer),
+        );
     }
 
     private function getPropertyDocBlock(DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer): string

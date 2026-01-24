@@ -26,6 +26,10 @@ final class ReservedAdvancedTransfer extends AbstractTransfer
         self::DATA_PROP => self::DATA_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::DATA_PROP => 'DATA_PROP',
+    ];
+
     // data
     #[TransferTransformerAttribute(ReservedPropertyData::class)]
     public const string DATA_PROP = 'data';

@@ -21,15 +21,16 @@ final class EnumTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $transformerEnum = TransformerAttributeTemplateEnum::ENUM;
-        $this->expandImports($transformerEnum->getImport(), $templateTransfer);
-
         /** @var \Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer $typeTransfer */
         $typeTransfer = $propertyTransfer->enumType;
         $this->expandEmbeddedType($propertyTransfer, $typeTransfer, $templateTransfer);
 
-        $templateTransfer->metaAttributes[$propertyTransfer->propertyName] = [
-            $transformerEnum->renderTemplate($typeTransfer),
-        ];
+        $transformerEnum = TransformerAttributeTemplateEnum::ENUM;
+        $this->expandTransformerAttribute(
+            propertyTransfer: $propertyTransfer,
+            transformerEnum: $transformerEnum,
+            templateTransfer: $templateTransfer,
+            renderTemplate: fn(): string => $transformerEnum->renderTemplate($typeTransfer),
+        );
     }
 }

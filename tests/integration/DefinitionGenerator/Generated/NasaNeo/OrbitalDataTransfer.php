@@ -35,15 +35,19 @@ final class OrbitalDataTransfer extends AbstractTransfer
         self::MEAN_MOTION_PROP => self::MEAN_MOTION_INDEX,
         self::MINIMUM_ORBIT_INTERSECTION_PROP => self::MINIMUM_ORBIT_INTERSECTION_INDEX,
         self::OBSERVATIONS_USED_PROP => self::OBSERVATIONS_USED_INDEX,
+        self::ORBITAL_PERIOD_PROP => self::ORBITAL_PERIOD_INDEX,
         self::ORBIT_CLASS_PROP => self::ORBIT_CLASS_INDEX,
         self::ORBIT_DETERMINATION_DATE_PROP => self::ORBIT_DETERMINATION_DATE_INDEX,
         self::ORBIT_ID_PROP => self::ORBIT_ID_INDEX,
         self::ORBIT_UNCERTAINTY_PROP => self::ORBIT_UNCERTAINTY_INDEX,
-        self::ORBITAL_PERIOD_PROP => self::ORBITAL_PERIOD_INDEX,
         self::PERIHELION_ARGUMENT_PROP => self::PERIHELION_ARGUMENT_INDEX,
         self::PERIHELION_DISTANCE_PROP => self::PERIHELION_DISTANCE_INDEX,
         self::PERIHELION_TIME_PROP => self::PERIHELION_TIME_INDEX,
         self::SEMI_MAJOR_AXIS_PROP => self::SEMI_MAJOR_AXIS_INDEX,
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::ORBIT_CLASS_PROP => 'ORBIT_CLASS_PROP',
     ];
 
     // aphelion_distance
@@ -200,10 +204,21 @@ final class OrbitalDataTransfer extends AbstractTransfer
         }
     }
 
+    // orbital_period
+    public const string ORBITAL_PERIOD_PROP = 'orbital_period';
+    private const int ORBITAL_PERIOD_INDEX = 14;
+
+    public ?string $orbital_period {
+        get => $this->getData(self::ORBITAL_PERIOD_INDEX);
+        set {
+            $this->setData(self::ORBITAL_PERIOD_INDEX, $value);
+        }
+    }
+
     // orbit_class
     #[TransferTransformerAttribute(OrbitClassTransfer::class)]
     public const string ORBIT_CLASS_PROP = 'orbit_class';
-    private const int ORBIT_CLASS_INDEX = 14;
+    private const int ORBIT_CLASS_INDEX = 15;
 
     public ?OrbitClassTransfer $orbit_class {
         get => $this->getData(self::ORBIT_CLASS_INDEX);
@@ -214,7 +229,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // orbit_determination_date
     public const string ORBIT_DETERMINATION_DATE_PROP = 'orbit_determination_date';
-    private const int ORBIT_DETERMINATION_DATE_INDEX = 15;
+    private const int ORBIT_DETERMINATION_DATE_INDEX = 16;
 
     public ?string $orbit_determination_date {
         get => $this->getData(self::ORBIT_DETERMINATION_DATE_INDEX);
@@ -225,7 +240,7 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // orbit_id
     public const string ORBIT_ID_PROP = 'orbit_id';
-    private const int ORBIT_ID_INDEX = 16;
+    private const int ORBIT_ID_INDEX = 17;
 
     public ?string $orbit_id {
         get => $this->getData(self::ORBIT_ID_INDEX);
@@ -236,23 +251,12 @@ final class OrbitalDataTransfer extends AbstractTransfer
 
     // orbit_uncertainty
     public const string ORBIT_UNCERTAINTY_PROP = 'orbit_uncertainty';
-    private const int ORBIT_UNCERTAINTY_INDEX = 17;
+    private const int ORBIT_UNCERTAINTY_INDEX = 18;
 
     public ?string $orbit_uncertainty {
         get => $this->getData(self::ORBIT_UNCERTAINTY_INDEX);
         set {
             $this->setData(self::ORBIT_UNCERTAINTY_INDEX, $value);
-        }
-    }
-
-    // orbital_period
-    public const string ORBITAL_PERIOD_PROP = 'orbital_period';
-    private const int ORBITAL_PERIOD_INDEX = 18;
-
-    public ?string $orbital_period {
-        get => $this->getData(self::ORBITAL_PERIOD_INDEX);
-        set {
-            $this->setData(self::ORBITAL_PERIOD_INDEX, $value);
         }
     }
 

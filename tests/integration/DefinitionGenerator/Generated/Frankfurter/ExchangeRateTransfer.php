@@ -27,6 +27,10 @@ final class ExchangeRateTransfer extends AbstractTransfer
         self::RATES_PROP => self::RATES_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::RATES_PROP => 'RATES_PROP',
+    ];
+
     // amount
     public const string AMOUNT_PROP = 'amount';
     private const int AMOUNT_INDEX = 0;

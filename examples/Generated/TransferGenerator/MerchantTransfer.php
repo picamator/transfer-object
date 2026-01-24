@@ -27,6 +27,10 @@ final class MerchantTransfer extends AbstractTransfer
         self::MERCHANT_REFERENCE_PROP => self::MERCHANT_REFERENCE_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::COUNTRY_PROP => 'COUNTRY_PROP',
+    ];
+
     // country
     #[EnumTransformerAttribute(CountryEnum::class)]
     public const string COUNTRY_PROP = 'country';

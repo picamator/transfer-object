@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDoxFormatter;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\TemplateTransfer;
-use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateHelper;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Helper\TemplateHelper;
 
 #[Group('transfer-generator')]
 class TemplateHelperTest extends TestCase

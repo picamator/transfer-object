@@ -41,6 +41,20 @@ final class ForecastTransfer extends AbstractTransfer
         self::WIND_PROP => self::WIND_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::RAIN_PROP => 'RAIN_PROP',
+        self::WEATHER_PROP => 'WEATHER_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::CLOUDS_PROP => 'CLOUDS_PROP',
+        self::COORD_PROP => 'COORD_PROP',
+        self::MAIN_PROP => 'MAIN_PROP',
+        self::SYS_PROP => 'SYS_PROP',
+        self::WEATHER_PROP => 'WEATHER_PROP',
+        self::WIND_PROP => 'WIND_PROP',
+    ];
+
     // base
     public const string BASE_PROP = 'base';
     private const int BASE_INDEX = 0;

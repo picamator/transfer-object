@@ -30,6 +30,12 @@ final class AdvancedCustomerTransfer extends AbstractTransfer
         self::CUSTOMER_PROP => self::CUSTOMER_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::ADDRESS_PROP => 'ADDRESS_PROP',
+        self::CREDENTIALS_PROP => 'CREDENTIALS_PROP',
+        self::CUSTOMER_PROP => 'CUSTOMER_PROP',
+    ];
+
     // address
     #[TransferTransformerAttribute(AddressData::class)]
     public const string ADDRESS_PROP = 'address';

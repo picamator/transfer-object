@@ -25,6 +25,10 @@ final class DefinitionGeneratorTransfer extends AbstractTransfer
         self::DEFINITION_PATH_PROP => self::DEFINITION_PATH_INDEX,
     ];
 
+    protected const array META_TRANSFORMERS = [
+        self::CONTENT_PROP => 'CONTENT_PROP',
+    ];
+
     // content
     #[TransferTransformerAttribute(DefinitionGeneratorContentTransfer::class)]
     public const string CONTENT_PROP = 'content';

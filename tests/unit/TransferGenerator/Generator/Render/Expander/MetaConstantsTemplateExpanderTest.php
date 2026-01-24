@@ -41,6 +41,6 @@ class MetaConstantsTemplateExpanderTest extends TestCase
 
         // Assert
         $this->assertCount(1, $templateTransfer->metaConstants);
-        $this->assertSame($expected, $templateTransfer->metaConstants->getIterator()->key());
+        $this->assertSame($expected, $templateTransfer->metaConstants->getIterator()->current());
     }
 }

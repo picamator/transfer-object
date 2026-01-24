@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Template;
+namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Helper;
 
 use Picamator\TransferObject\Generated\TemplateTransfer;
 
@@ -13,6 +13,10 @@ interface TemplateHelperInterface
     public function renderImports(): string;
 
     public function renderMetaData(): string;
+
+    public function renderMetaInitiators(): string;
+
+    public function renderMetaTransformers(): string;
 
     public function renderMetaAttributes(string $property): string;
 

@@ -8,7 +8,7 @@ RUN apt-get update && \
     docker-php-ext-configure zip && \
     docker-php-ext-install zip curl bcmath
 
-# pie https://github.com/php/pie/blob/main/docs/usage.md#docker-installation
+# pie https://github.com/php/pie/blob/1.4.x/docs/usage.md#docker-installation
 COPY --from=ghcr.io/php/pie:bin /pie /usr/bin/pie
 
 # xdebug

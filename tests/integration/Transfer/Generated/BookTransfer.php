@@ -31,6 +31,15 @@ final class BookTransfer extends AbstractTransfer
         self::DATA_PROP => self::DATA_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::BOOKMARKS_PROP => 'BOOKMARKS_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::BOOKMARKS_PROP => 'BOOKMARKS_PROP',
+        self::DATA_PROP => 'DATA_PROP',
+    ];
+
     // bookmarks
     #[ArrayObjectInitiatorAttribute]
     #[CollectionTransformerAttribute(BookmarkData::class)]

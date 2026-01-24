@@ -35,6 +35,21 @@ final class DestatisTransfer extends AbstractTransfer
         self::VARIABLES_PROP => self::VARIABLES_INDEX,
     ];
 
+    protected const array META_INITIATORS = [
+        self::STATISTICS_PROP => 'STATISTICS_PROP',
+        self::TABLES_PROP => 'TABLES_PROP',
+        self::VARIABLES_PROP => 'VARIABLES_PROP',
+    ];
+
+    protected const array META_TRANSFORMERS = [
+        self::IDENT_PROP => 'IDENT_PROP',
+        self::PARAMETER_PROP => 'PARAMETER_PROP',
+        self::STATISTICS_PROP => 'STATISTICS_PROP',
+        self::STATUS_PROP => 'STATUS_PROP',
+        self::TABLES_PROP => 'TABLES_PROP',
+        self::VARIABLES_PROP => 'VARIABLES_PROP',
+    ];
+
     // Copyright
     public const string COPYRIGHT_PROP = 'Copyright';
     private const int COPYRIGHT_INDEX = 0;
