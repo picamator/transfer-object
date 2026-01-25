@@ -1,7 +1,9 @@
 FROM php:8.5-cli
 
-ARG GROUP_ID=1000
-ARG USER_ID=1000
+ARG GROUP_ID
+ARG USER_ID
+
+RUN echo "USER_ID=${USER_ID} GROUP_ID=${GROUP_ID}"
 
 # -e (errexit): exit the shell immediately if a simple command returns non‑zero.
 # -u (nounset): treat use of an unset variable as an error and exit.
