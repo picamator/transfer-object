@@ -15,18 +15,22 @@ function show_usage() {
   wrap_in_green "==================================="
   wrap_in_green "    Transfer Object (Docker SDK)   "
   wrap_in_green "==================================="
-  echo -e "Usage: $(wrap_in_yellow "$0 [-x | -xp] <argument>")"
-  echo "Arguments:"
-  echo -e "  $(wrap_in_yellow "-x")                         Enable Xdebug with coverage and debug mode on start"
-  echo -e "  $(wrap_in_yellow "-p")                         Enable Xdebug with profiler mode on start"
+  echo -n "Usage: "
+  wrap_in_yellow "$0 [-x] [-p] <command> [args]"
+  echo
+  echo "Options:"
+  echo -e "  $(wrap_in_yellow "-x")    Enable Xdebug with debug + coverage mode when starting containers"
+  echo -e "  $(wrap_in_yellow "-p")    Enable Xdebug with profiler mode when starting containers"
+  echo
+  echo "Commands:"
   echo -e "  $(wrap_in_yellow "build")                      Build Docker containers"
-  echo -e "  $(wrap_in_yellow "start")                      Start Docker containers"
+  echo -e "  $(wrap_in_yellow "start")                      Start Docker containers (honors -x / -p)"
   echo -e "  $(wrap_in_yellow "stop")                       Stop Docker containers"
   echo -e "  $(wrap_in_yellow "cli")                        Open container shell"
   echo -e "  $(wrap_in_yellow "composer <command>")         Run composer command"
   echo -e "  $(wrap_in_yellow "phpstan")                    Run PHPStan"
   echo -e "  $(wrap_in_yellow "phpunit")                    Run PHPUnit"
-  echo -e "  $(wrap_in_yellow "phpunit-group <group>")      Run PHPUnit test assigned to the group"
+  echo -e "  $(wrap_in_yellow "phpunit-group <group>")      Run PHPUnit tests assigned to the group"
   echo -e "  $(wrap_in_yellow "phpcs")                      Run PHP CodeSniffer"
   echo -e "  $(wrap_in_yellow "phpcbf")                     Run PHP Code Beautifier and Fixer"
   echo -e "  $(wrap_in_yellow "hook-install")               Install CaptainHook"
@@ -34,6 +38,11 @@ function show_usage() {
   echo -e "  $(wrap_in_yellow "to-generate")                Generate internal transfer objects"
   echo -e "  $(wrap_in_yellow "to-generate-bulk")           Generate bulk internal transfer objects"
   echo -e "  $(wrap_in_yellow "df-generate")                Generate definition"
+  echo
+  echo "Examples:"
+  echo -e "  $(wrap_in_yellow "$0 -x start")                Start containers with Xdebug (debug + coverage)"
+  echo -e "  $(wrap_in_yellow "$0 -p start")                Start containers with Xdebug profiler"
+  echo -e "  $(wrap_in_yellow "$0 composer install")        Run composer install inside container"
 }
 
 # vars
@@ -78,7 +87,9 @@ case $1 in
     $DOCKER_EXEC bash
     ;;
   composer)
-    if [ -n "$4" ]; then
+    if [ -n "$5" ]; then
+      $DOCKER_EXEC composer "$2" "$3" "$4" "$5"
+    elif [ -n "$4" ]; then
       $DOCKER_EXEC composer "$2" "$3" "$4"
     elif [ -n "$3" ]; then
       $DOCKER_EXEC composer "$2" "$3"
@@ -108,10 +119,18 @@ case $1 in
     $DOCKER_EXEC composer captainhook $2
     ;;
   to-generate)
-     $DOCKER_EXEC composer transfer-generate -- -c ./config/generator.config.yml -v
+    if [ -n "$2" ]; then
+      $DOCKER_EXEC composer transfer-generate -- -c $2 -v
+    else
+      DOCKER_EXEC composer transfer-generate -- -c ./config/generator.config.yml -v
+    fi
     ;;
   to-generate-bulk)
-     $DOCKER_EXEC composer transfer-generate-bulk -- -b ./var/config/config.list.txt
+    if [ -n "$2" ]; then
+      $DOCKER_EXEC composer transfer-generate-bulk -- -b $2
+    else
+      $DOCKER_EXEC composer transfer-generate-bulk -- -b ./var/config/config.list.txt
+    fi
     ;;
   df-generate)
      $DOCKER_EXEC composer definition-generate
