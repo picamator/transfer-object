@@ -122,7 +122,7 @@ case $1 in
     if [ -n "$2" ]; then
       $DOCKER_EXEC composer transfer-generate -- -c $2 -v
     else
-      DOCKER_EXEC composer transfer-generate -- -c ./config/generator.config.yml -v
+      $DOCKER_EXEC composer transfer-generate -- -c ./config/generator.config.yml -v
     fi
     ;;
   to-generate-bulk)
