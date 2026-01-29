@@ -32,8 +32,19 @@ COPY ./config.d/99-php.ini  /usr/local/etc/php/conf.d/99-php.ini
 COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
 
 # group and user
-RUN groupadd -g ${GROUP_ID} generator && \
-    useradd -m -u ${USER_ID} -g generator transfer
+RUN set -euxo pipefail; \
+  if getent group ${GROUP_ID}; then \
+    GROUP_NAME=$(getent group ${GROUP_ID} | cut -d: -f1); \
+    groupmod -n generator "$GROUP_NAME"; \
+  else \
+    groupadd -g ${GROUP_ID} generator; \
+  fi && \
+  if getent passwd ${USER_ID}; then \
+    USER_NAME=$(getent passwd ${USER_ID} | cut -d: -f1); \
+    usermod -l transfer -g generator -m -d /home/transfer "$USER_NAME"; \
+  else \
+    useradd -m -u ${USER_ID} -g generator transfer; \
+  fi
 
 # working directory
 RUN mkdir /home/transfer/transfer-object
