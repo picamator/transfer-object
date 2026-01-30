@@ -29,7 +29,7 @@ function show_usage() {
   echo -e "  $(wrap_in_yellow "cli")                        Open container shell"
   echo -e "  $(wrap_in_yellow "composer <command>")         Run composer command"
   echo -e "  $(wrap_in_yellow "phpstan")                    Run PHPStan"
-  echo -e "  $(wrap_in_yellow "phpunit")                    Run all PHPUnit tests or concrete test case when it's full qualified name is provided as an argument"
+  echo -e "  $(wrap_in_yellow "phpunit")                    Run all PHPUnit tests or concrete test case when full qualified name provided as an argument"
   echo -e "  $(wrap_in_yellow "phpunit-group <group>")      Run PHPUnit tests assigned to the group"
   echo -e "  $(wrap_in_yellow "phpcs")                      Run PHP CodeSniffer"
   echo -e "  $(wrap_in_yellow "phpcbf")                     Run PHP Code Beautifier and Fixer"
