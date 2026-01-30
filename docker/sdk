@@ -29,14 +29,14 @@ function show_usage() {
   echo -e "  $(wrap_in_yellow "cli")                        Open container shell"
   echo -e "  $(wrap_in_yellow "composer <command>")         Run composer command"
   echo -e "  $(wrap_in_yellow "phpstan")                    Run PHPStan"
-  echo -e "  $(wrap_in_yellow "phpunit")                    Run PHPUnit"
+  echo -e "  $(wrap_in_yellow "phpunit")                    Run all PHPUnit tests or concrete test case when it's full qualified name is provided as an argument"
   echo -e "  $(wrap_in_yellow "phpunit-group <group>")      Run PHPUnit tests assigned to the group"
   echo -e "  $(wrap_in_yellow "phpcs")                      Run PHP CodeSniffer"
   echo -e "  $(wrap_in_yellow "phpcbf")                     Run PHP Code Beautifier and Fixer"
   echo -e "  $(wrap_in_yellow "hook-install")               Install CaptainHook"
   echo -e "  $(wrap_in_yellow "hook <command>")             Run CaptainHook command"
-  echo -e "  $(wrap_in_yellow "to-generate")                Generate internal transfer objects"
-  echo -e "  $(wrap_in_yellow "to-generate-bulk")           Generate bulk internal transfer objects"
+  echo -e "  $(wrap_in_yellow "to-generate")                Generate internal transfer objects or externals when configuration path provided as an argument"
+  echo -e "  $(wrap_in_yellow "to-generate-bulk")           Generate bulk internal transfer objects or externals when configuration path provided as an argument"
   echo -e "  $(wrap_in_yellow "df-generate")                Generate definition"
   echo
   echo "Examples:"
@@ -101,7 +101,11 @@ case $1 in
     $DOCKER_EXEC composer phpstan
     ;;
   phpunit)
-    $DOCKER_EXEC composer phpunit
+    if [ -n "$2" ]; then
+      $DOCKER_EXEC composer phpunit -- --filter $2
+    else
+      $DOCKER_EXEC composer phpunit
+    fi
     ;;
   phpunit-group)
     $DOCKER_EXEC composer phpunit-group $2

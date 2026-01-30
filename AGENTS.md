@@ -128,12 +128,29 @@ Unit and Integration Tests
 How To Run PHPUnit Tests
 ------------------------
 
+### All Tests
+
 All tests can be run with the following command:
 ```console
 docker/sdk phpunit
 ```
 
-A Specific test group can be run with the following command:
+### Specific Group
+
+A test group can be run with the following command:
 ```console
 docker/sdk phpunit-group <group>
+```
+
+### Specific Test Case
+
+A test case can be run with the following command:
+```console
+docker/sdk phpunit '<test-case-full-qualifided-name>'
+```
+
+For instance, the test case `Picamator\Tests\Unit\TransferObject\Command\Helper\InputNormalizerTest`
+can be run with the following command:
+```console
+docker/sdk phpunit 'Picamator\\Tests\\Unit\\TransferObject\\Command\\Helper\\InputNormalizerTest'
 ```
