@@ -203,7 +203,7 @@ docker/sdk phpstan
 ```
 
 How To Run PHP CodeSniffer
-------------------
+--------------------------
 
 PHP CodeSniffer can be run with the following command:
 ```console
