@@ -19,11 +19,11 @@ use Throwable;
     name: 'picamator:transfer:generate:bulk|p:t:g:b',
     description: 'Generates Transfer Objects based on multiple configurations and their definition files.',
     // phpcs:disable Generic.Files.LineLength
-    help: <<<HELP
+    help: <<<'HELP'
 The <info>%command.name%</info> command generates Transfer Objects from definition files specified by multiple configuration files listed in a TXT file..
 
 <options=bold>The configuration list specifies:</>
-  -  Each line contains the path to a configuration file in YML format.
+  — Each line contains the path to a configuration file in YML format.
 
 <options=bold>Documentation:</>
 For more details, please visit "<href=https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate-bulk>project's Wiki</>".

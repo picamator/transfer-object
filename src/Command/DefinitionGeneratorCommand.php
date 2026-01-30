@@ -19,13 +19,13 @@ use Throwable;
     name: 'picamator:definition:generate|p:d:g',
     description: 'Generates Transfer Object definition files from a JSON blueprint.',
     // phpcs:disable Generic.Files.LineLength
-    help: <<<HELP
+    help: <<<'HELP'
 The <info>%command.name%</info> command generates Transfer Object definition files based on a JSON blueprint.
 
 <options=bold>Interactive prompt options:</>
-  - Specify the directory path where the definition files will be saved.
-  - Provide the class name for the Transfer Object.
-  - Enter the local path to the JSON file or API resource that serves as the blueprint.
+  — Specify the directory path where the definition files will be saved.
+  — Provide the class name for the Transfer Object.
+  — Enter the local path to the JSON file or API resource that serves as the blueprint.
 
 <options=bold>Documentation:</>
 For more details, please visit "<href=https://github.com/picamator/transfer-object/wiki/Console-Commands#definition-generate>project's Wiki</>".
