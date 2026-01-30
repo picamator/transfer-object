@@ -25,9 +25,12 @@ trait ConfigNormalizerTrait
             return $defaultConfig;
         }
 
-        $filteredData = array_intersect_key($sectionData, $defaultConfig);
-        $filteredData = array_filter($filteredData, 'is_string');
+        $filteredData = [];
+        foreach ($defaultConfig as $key => $defaultValue) {
+            $sectionValue = $sectionData[$key] ?? null;
+            $filteredData[$key] = is_string($sectionValue) ? $sectionValue : $defaultValue;
+        }
 
-        return $filteredData + $defaultConfig;
+        return $filteredData;
     }
 }
