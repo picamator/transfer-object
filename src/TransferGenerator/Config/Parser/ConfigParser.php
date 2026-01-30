@@ -22,8 +22,8 @@ readonly class ConfigParser implements ConfigParserInterface
     public function parseConfig(string $configPath): ConfigContentTransfer
     {
         $configData = $this->parser->parseFile($configPath);
-        $filteredConfigData = $this->normalizeConfig($configData);
+        $normalizedConfigData = $this->normalizeConfig($configData);
 
-        return $this->builder->createContentTransfer($filteredConfigData);
+        return $this->builder->createContentTransfer($normalizedConfigData);
     }
 }

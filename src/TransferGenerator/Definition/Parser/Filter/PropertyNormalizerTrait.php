@@ -17,13 +17,13 @@ trait PropertyNormalizerTrait
             return [];
         }
 
-        /** @var array<string,array<string,string|null>> $filteredProperties */
-        $filteredProperties = array_map(
+        /** @var array<string,array<string,string|null>> $normalizedProperties */
+        $normalizedProperties = array_map(
             fn(mixed $property): array => is_array($property) ? $this->normalizeProperty($property) : [],
             $properties,
         );
 
-        return $filteredProperties;
+        return $normalizedProperties;
     }
 
     /**
@@ -33,8 +33,8 @@ trait PropertyNormalizerTrait
      */
     private function normalizeProperty(array $property): array
     {
-        /** @var array<string,string|array<int,string>|null> $filteredProperty */
-        $filteredProperty = [];
+        /** @var array<string,string|array<int,string>|null> $normalizedProperty */
+        $normalizedProperty = [];
         foreach ($property as $key => $value) {
             if (is_int($key)) {
                 continue;
@@ -45,9 +45,9 @@ trait PropertyNormalizerTrait
                 continue;
             }
 
-            $filteredProperty[$key] = $keyEnum->normalizeValue($value);
+            $normalizedProperty[$key] = $keyEnum->normalizeValue($value);
         }
 
-        return $filteredProperty;
+        return $normalizedProperty;
     }
 }
