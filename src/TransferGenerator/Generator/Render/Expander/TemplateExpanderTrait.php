@@ -33,7 +33,6 @@ trait TemplateExpanderTrait
 
         $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->properties[$propertyName] = $embeddedTypeTransfer->name;
-        $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
     }
 
     final protected function expandInitiatorAttribute(
@@ -46,8 +45,6 @@ trait TemplateExpanderTrait
         $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->metaAttributes[$propertyName][] = $initiatorEnum->value;
         $templateTransfer->metaInitiators[] = $propertyName;
-
-        $templateTransfer->nullables[$propertyName] = false;
     }
 
     /**

@@ -29,7 +29,6 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
 
         $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->properties[$propertyName] = $buildInTypeTransfer->name->value;
-        $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
 
         if ($buildInTypeTransfer->name->isArrayObject()) {
             $this->expandArrayObjectType($propertyTransfer, $templateTransfer);

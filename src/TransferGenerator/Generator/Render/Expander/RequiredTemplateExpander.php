@@ -7,17 +7,17 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 
-final class ProtectedTemplateExpander extends AbstractTemplateExpander
+final class RequiredTemplateExpander extends AbstractTemplateExpander
 {
     protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        return $propertyTransfer->isProtected;
+        return $propertyTransfer->isRequired;
     }
 
     protected function handleExpander(
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $templateTransfer->protects[$propertyTransfer->propertyName] = true;
+        $templateTransfer->requires[$propertyTransfer->propertyName] = true;
     }
 }

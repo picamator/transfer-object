@@ -55,7 +55,7 @@ DefinitionProperty:
     type: DefinitionEmbeddedType
   numberType:
     type: DefinitionEmbeddedType
-  isNullable:
+  isRequired:
     type: bool
     required:
   isProtected:

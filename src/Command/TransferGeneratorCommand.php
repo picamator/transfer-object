@@ -18,8 +18,8 @@ use Throwable;
     name: 'picamator:transfer:generate|p:t:g',
     description: 'Generates Transfer Objects from definition files specified by configuration.',
     // phpcs:disable Generic.Files.LineLength
-    help: <<<HELP
-The <info>%command.name%</info> command generates Transfer Objects based on configuration file in YML format.
+    help: <<<'HELP'
+The <info>%command.name%</info> command generates Transfer Objects based on the configuration file in YML format.
 
 <options=bold>The configuration specifies:</>
   - The directory containing the definition files.

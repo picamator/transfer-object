@@ -19,7 +19,7 @@ use Throwable;
     name: 'picamator:definition:generate|p:d:g',
     description: 'Generates Transfer Object definition files from a JSON blueprint.',
     // phpcs:disable Generic.Files.LineLength
-    help: <<<HELP
+    help: <<<'HELP'
 The <info>%command.name%</info> command generates Transfer Object definition files based on a JSON blueprint.
 
 <options=bold>Interactive prompt options:</>

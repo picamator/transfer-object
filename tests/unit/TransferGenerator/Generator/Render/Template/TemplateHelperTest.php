@@ -18,16 +18,16 @@ class TemplateHelperTest extends TestCase
     /**
      * @param array<string,mixed> $templateData
      */
-    #[DataProvider('getNullableDataProvider')]
-    #[TestDoxFormatter('getNullableTestDoxFormatter')]
-    public function testGetNullable(array $templateData, string $property, string $expected): void
+    #[DataProvider('getRequiredDataProvider')]
+    #[TestDoxFormatter('getRequiredTestDoxFormatter')]
+    public function testGetRequired(array $templateData, string $property, string $expected): void
     {
         // Arrange
         $templateTransfer = new TemplateTransfer()->fromArray($templateData);
         $templateHelper = new TemplateHelper()->setTemplateTransfer($templateTransfer);
 
         // Act
-        $actual = $templateHelper->renderNullable($property);
+        $actual = $templateHelper->renderRequired($property);
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -36,10 +36,10 @@ class TemplateHelperTest extends TestCase
     /**
      * @param array<string,mixed> $templateData
      */
-    public static function getNullableTestDoxFormatter(array $templateData, string $property, string $expected): string
+    public static function getRequiredTestDoxFormatter(array $templateData, string $property, string $expected): string
     {
         return sprintf(
-            'Template data "%s" expect property "%s" nullable rendered as "%s"',
+            'Template data "%s" expect property "%s" required rendered as "%s"',
             json_encode($templateData),
             $property,
             $expected,
@@ -49,15 +49,15 @@ class TemplateHelperTest extends TestCase
     /**
      * @return Generator<string,mixed>
      */
-    public static function getNullableDataProvider(): Generator
+    public static function getRequiredDataProvider(): Generator
     {
-        yield 'property is not nullable should return empty string' => [
+        yield 'property is required should return empty string' => [
             'templateData' => [
                 TemplateTransfer::PROPERTIES_PROP => [
                     'test' => 'TestTransfer',
                 ],
-                TemplateTransfer::NULLABLES_PROP => [
-                    'test' => false,
+                TemplateTransfer::REQUIRES_PROP => [
+                    'test' => true,
                 ],
             ],
             'property' => 'test',
@@ -69,8 +69,8 @@ class TemplateHelperTest extends TestCase
                 TemplateTransfer::PROPERTIES_PROP => [
                     'test' => 'TestTransfer&TTransferInterface',
                 ],
-                TemplateTransfer::NULLABLES_PROP => [
-                    'test' => true,
+                TemplateTransfer::REQUIRES_PROP => [
+                    'test' => false,
                 ],
             ],
             'property' => 'test',
@@ -82,8 +82,8 @@ class TemplateHelperTest extends TestCase
                 TemplateTransfer::PROPERTIES_PROP => [
                     'test' => 'TestTransfer|TransferInterface',
                 ],
-                TemplateTransfer::NULLABLES_PROP => [
-                    'test' => true,
+                TemplateTransfer::REQUIRES_PROP => [
+                    'test' => false,
                 ],
             ],
             'property' => 'test',
@@ -95,8 +95,8 @@ class TemplateHelperTest extends TestCase
                 TemplateTransfer::PROPERTIES_PROP => [
                     'test' => 'TestTransfer',
                 ],
-                TemplateTransfer::NULLABLES_PROP => [
-                    'test' => true,
+                TemplateTransfer::REQUIRES_PROP => [
+                    'test' => false,
                 ],
             ],
             'property' => 'test',

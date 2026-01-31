@@ -27,5 +27,6 @@ final class CollectionTypePropertyExpander extends AbstractPropertyExpander
     protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
     {
         $propertyTransfer->collectionType = $this->typeBuilder->createPrefixTypeTransfer($matchedType);
+        $propertyTransfer->isRequired = true;
     }
 }

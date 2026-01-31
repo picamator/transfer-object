@@ -25,7 +25,7 @@ Template:
     type: ArrayObject<int,string>
   docBlocks:
     type: ArrayObject<string,string>
-  nullables:
-    type: ArrayObject<string,bool>
+  requires:
+    type: ArrayObject<string,true>
   protects:
-    type: ArrayObject<string,bool>
+    type: ArrayObject<string,true>

@@ -26,5 +26,5 @@ interface TemplateHelperInterface
 
     public function renderPropertyDeclaration(string $property): string;
 
-    public function renderNullable(string $property): string;
+    public function renderRequired(string $property): string;
 }
