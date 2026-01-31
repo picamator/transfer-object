@@ -18,16 +18,16 @@ trait PropertyHelperTrait
         /** @var string $propertyType */
         $propertyType = $this->templateTransfer->properties[$property];
 
-        return "{$this->renderProtected($property)} {$this->renderNullable($property)}$propertyType";
+        return "{$this->renderProtected($property)} {$this->renderRequired($property)}$propertyType";
     }
 
-    public function renderNullable(string $property): string
+    public function renderRequired(string $property): string
     {
         /** @var string $propertyType */
         $propertyType = $this->templateTransfer->properties[$property];
-        $isNullable = $this->templateTransfer->nullables[$property];
+        $isRequired = $this->templateTransfer->requires[$property] ?? false;
 
-        if (!$isNullable || str_contains($propertyType, '&')) {
+        if ($isRequired || str_contains($propertyType, '&')) {
             return '';
         }
 
@@ -40,6 +40,8 @@ trait PropertyHelperTrait
 
     private function renderProtected(string $property): string
     {
-        return $this->templateTransfer->protects[$property] ? self::PROTECTED_SET : '';
+        $isProtected = $this->templateTransfer->protects[$property] ?? false;
+
+        return $isProtected ? self::PROTECTED_SET : '';
     }
 }

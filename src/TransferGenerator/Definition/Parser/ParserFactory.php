@@ -16,10 +16,10 @@ use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builde
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\CollectionTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\DateTimeTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\EnumTypePropertyExpander;
-use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\NullablePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\NumberTypePropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\PropertyExpanderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\ProtectedPropertyExpander;
+use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\RequiredPropertyExpander;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\TypePropertyExpander;
 
 class ParserFactory
@@ -46,18 +46,23 @@ class ParserFactory
 
     protected function createPropertyExpander(): PropertyExpanderInterface
     {
-        $propertyExpander = $this->createNullablePropertyExpander();
+        $propertyExpander = $this->createProtectedPropertyExpander();
 
         $propertyExpander
             ->setNextExpander($this->createCollectionTypePropertyExpander())
             ->setNextExpander($this->createTypePropertyExpander())
             ->setNextExpander($this->createEnumTypePropertyExpander())
-            ->setNextExpander($this->createProtectedPropertyExpander())
             ->setNextExpander($this->createDateTimeTypePropertyExpander())
             ->setNextExpander($this->createNumberTypePropertyExpander())
-            ->setNextExpander($this->createAttributesPropertyExpander());
+            ->setNextExpander($this->createAttributesPropertyExpander())
+            ->setNextExpander($this->createRequiredPropertyExpander());
 
         return $propertyExpander;
+    }
+
+    protected function createRequiredPropertyExpander(): PropertyExpanderInterface
+    {
+        return new RequiredPropertyExpander();
     }
 
     protected function createAttributesPropertyExpander(): PropertyExpanderInterface
@@ -90,11 +95,6 @@ class ParserFactory
         return new DateTimeTypePropertyExpander($this->createEmbeddedTypeBuilder());
     }
 
-    protected function createProtectedPropertyExpander(): PropertyExpanderInterface
-    {
-        return new ProtectedPropertyExpander();
-    }
-
     protected function createEnumTypePropertyExpander(): PropertyExpanderInterface
     {
         return new EnumTypePropertyExpander($this->createEmbeddedTypeBuilder());
@@ -110,8 +110,8 @@ class ParserFactory
         return new CollectionTypePropertyExpander($this->createEmbeddedTypeBuilder());
     }
 
-    protected function createNullablePropertyExpander(): PropertyExpanderInterface
+    protected function createProtectedPropertyExpander(): PropertyExpanderInterface
     {
-        return new NullablePropertyExpander();
+        return new ProtectedPropertyExpander();
     }
 }

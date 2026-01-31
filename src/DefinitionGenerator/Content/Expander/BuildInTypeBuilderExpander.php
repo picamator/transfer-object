@@ -124,7 +124,7 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
         $propertyTransfer = new DefinitionPropertyTransfer();
         $propertyTransfer->propertyName = $propertyName;
         $propertyTransfer->dateTimeType = $typeTransfer;
-        $propertyTransfer->isNullable = true;
+        $propertyTransfer->isRequired = false;
         $propertyTransfer->isProtected = false;
 
         return $propertyTransfer;

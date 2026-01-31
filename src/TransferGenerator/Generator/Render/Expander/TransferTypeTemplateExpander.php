@@ -27,7 +27,6 @@ final class TransferTypeTemplateExpander extends AbstractTemplateExpander
 
         $propertyName = $propertyTransfer->propertyName;
         $templateTransfer->properties[$propertyName] = $this->getPropertyType($typeTransfer);
-        $templateTransfer->nullables[$propertyName] = $propertyTransfer->isNullable;
 
         $transformerEnum = TransformerAttributeTemplateEnum::TRANSFER;
         $this->expandTransformerAttribute(

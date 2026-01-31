@@ -16,6 +16,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\MetaCon
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\NamespaceTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\NumberTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\ProtectedTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\RequiredTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TemplateExpanderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TransferTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Helper\TemplateHelper;
@@ -73,6 +74,7 @@ class RenderFactory
             ->setNextExpander($this->createNamespaceTemplateExpander())
             ->setNextExpander($this->createMetaConstantsTemplateExpander())
             ->setNextExpander($this->createProtectedTemplateExpander())
+            ->setNextExpander($this->createRequiredTemplateExpander())
             ->setNextExpander($this->createDateTimeTypeTemplateExpander())
             ->setNextExpander($this->createNumberTypeTemplateExpander())
             ->setNextExpander($this->createAttributesTemplateExpander());
@@ -93,6 +95,11 @@ class RenderFactory
     protected function createDateTimeTypeTemplateExpander(): TemplateExpanderInterface
     {
         return new DateTimeTypeTemplateExpander();
+    }
+
+    protected function createRequiredTemplateExpander(): TemplateExpanderInterface
+    {
+        return new RequiredTemplateExpander();
     }
 
     protected function createProtectedTemplateExpander(): TemplateExpanderInterface

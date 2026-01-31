@@ -29,8 +29,8 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
         self::COLLECTION_TYPE_PROP => self::COLLECTION_TYPE_INDEX,
         self::DATE_TIME_TYPE_PROP => self::DATE_TIME_TYPE_INDEX,
         self::ENUM_TYPE_PROP => self::ENUM_TYPE_INDEX,
-        self::IS_NULLABLE_PROP => self::IS_NULLABLE_INDEX,
         self::IS_PROTECTED_PROP => self::IS_PROTECTED_INDEX,
+        self::IS_REQUIRED_PROP => self::IS_REQUIRED_INDEX,
         self::NUMBER_TYPE_PROP => self::NUMBER_TYPE_INDEX,
         self::PROPERTY_NAME_PROP => self::PROPERTY_NAME_INDEX,
         self::TRANSFER_TYPE_PROP => self::TRANSFER_TYPE_INDEX,
@@ -112,25 +112,25 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
         }
     }
 
-    // isNullable
-    public const string IS_NULLABLE_PROP = 'isNullable';
-    private const int IS_NULLABLE_INDEX = 5;
-
-    public bool $isNullable {
-        get => $this->getData(self::IS_NULLABLE_INDEX);
-        set {
-            $this->setData(self::IS_NULLABLE_INDEX, $value);
-        }
-    }
-
     // isProtected
     public const string IS_PROTECTED_PROP = 'isProtected';
-    private const int IS_PROTECTED_INDEX = 6;
+    private const int IS_PROTECTED_INDEX = 5;
 
     public bool $isProtected {
         get => $this->getData(self::IS_PROTECTED_INDEX);
         set {
             $this->setData(self::IS_PROTECTED_INDEX, $value);
+        }
+    }
+
+    // isRequired
+    public const string IS_REQUIRED_PROP = 'isRequired';
+    private const int IS_REQUIRED_INDEX = 6;
+
+    public bool $isRequired {
+        get => $this->getData(self::IS_REQUIRED_INDEX);
+        set {
+            $this->setData(self::IS_REQUIRED_INDEX, $value);
         }
     }
 

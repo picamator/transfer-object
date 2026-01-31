@@ -32,10 +32,10 @@ final class TemplateTransfer extends AbstractTransfer
         self::META_CONSTANTS_PROP => self::META_CONSTANTS_INDEX,
         self::META_INITIATORS_PROP => self::META_INITIATORS_INDEX,
         self::META_TRANSFORMERS_PROP => self::META_TRANSFORMERS_INDEX,
-        self::NULLABLES_PROP => self::NULLABLES_INDEX,
         self::PROPERTIES_PROP => self::PROPERTIES_INDEX,
         self::PROPERTY_ATTRIBUTES_PROP => self::PROPERTY_ATTRIBUTES_INDEX,
         self::PROTECTS_PROP => self::PROTECTS_INDEX,
+        self::REQUIRES_PROP => self::REQUIRES_INDEX,
     ];
 
     protected const array META_INITIATORS = [
@@ -45,10 +45,10 @@ final class TemplateTransfer extends AbstractTransfer
         self::META_CONSTANTS_PROP => 'META_CONSTANTS_PROP',
         self::META_INITIATORS_PROP => 'META_INITIATORS_PROP',
         self::META_TRANSFORMERS_PROP => 'META_TRANSFORMERS_PROP',
-        self::NULLABLES_PROP => 'NULLABLES_PROP',
         self::PROPERTIES_PROP => 'PROPERTIES_PROP',
         self::PROPERTY_ATTRIBUTES_PROP => 'PROPERTY_ATTRIBUTES_PROP',
         self::PROTECTS_PROP => 'PROTECTS_PROP',
+        self::REQUIRES_PROP => 'REQUIRES_PROP',
     ];
 
     protected const array META_TRANSFORMERS = [
@@ -58,10 +58,10 @@ final class TemplateTransfer extends AbstractTransfer
         self::META_CONSTANTS_PROP => 'META_CONSTANTS_PROP',
         self::META_INITIATORS_PROP => 'META_INITIATORS_PROP',
         self::META_TRANSFORMERS_PROP => 'META_TRANSFORMERS_PROP',
-        self::NULLABLES_PROP => 'NULLABLES_PROP',
         self::PROPERTIES_PROP => 'PROPERTIES_PROP',
         self::PROPERTY_ATTRIBUTES_PROP => 'PROPERTY_ATTRIBUTES_PROP',
         self::PROTECTS_PROP => 'PROTECTS_PROP',
+        self::REQUIRES_PROP => 'REQUIRES_PROP',
     ];
 
     // className
@@ -181,25 +181,11 @@ final class TemplateTransfer extends AbstractTransfer
         }
     }
 
-    // nullables
-    #[ArrayObjectInitiatorAttribute]
-    #[ArrayObjectTransformerAttribute]
-    public const string NULLABLES_PROP = 'nullables';
-    private const int NULLABLES_INDEX = 9;
-
-    /** @var \ArrayObject<string,bool> */
-    public ArrayObject $nullables {
-        get => $this->getData(self::NULLABLES_INDEX);
-        set {
-            $this->setData(self::NULLABLES_INDEX, $value);
-        }
-    }
-
     // properties
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
     public const string PROPERTIES_PROP = 'properties';
-    private const int PROPERTIES_INDEX = 10;
+    private const int PROPERTIES_INDEX = 9;
 
     /** @var \ArrayObject<string,string> */
     public ArrayObject $properties {
@@ -213,7 +199,7 @@ final class TemplateTransfer extends AbstractTransfer
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
     public const string PROPERTY_ATTRIBUTES_PROP = 'propertyAttributes';
-    private const int PROPERTY_ATTRIBUTES_INDEX = 11;
+    private const int PROPERTY_ATTRIBUTES_INDEX = 10;
 
     /** @var \ArrayObject<string,array<int,string>> */
     public ArrayObject $propertyAttributes {
@@ -227,13 +213,27 @@ final class TemplateTransfer extends AbstractTransfer
     #[ArrayObjectInitiatorAttribute]
     #[ArrayObjectTransformerAttribute]
     public const string PROTECTS_PROP = 'protects';
-    private const int PROTECTS_INDEX = 12;
+    private const int PROTECTS_INDEX = 11;
 
-    /** @var \ArrayObject<string,bool> */
+    /** @var \ArrayObject<string,true> */
     public ArrayObject $protects {
         get => $this->getData(self::PROTECTS_INDEX);
         set {
             $this->setData(self::PROTECTS_INDEX, $value);
+        }
+    }
+
+    // requires
+    #[ArrayObjectInitiatorAttribute]
+    #[ArrayObjectTransformerAttribute]
+    public const string REQUIRES_PROP = 'requires';
+    private const int REQUIRES_INDEX = 12;
+
+    /** @var \ArrayObject<string,true> */
+    public ArrayObject $requires {
+        get => $this->getData(self::REQUIRES_INDEX);
+        set {
+            $this->setData(self::REQUIRES_INDEX, $value);
         }
     }
 }
