@@ -26,9 +26,14 @@ $ composer require picamator/transfer-object
 Directory Structure
 -------------------
 
-### Endpoints
+### Console commands
 
-- `bin`: project's endpoints, include transfer object's console commands
+- `bin`: project's console commands:
+  * `transfer-generate`: generate transfer objects from configuration files
+  * `transfer-generate-bulk`: generate transfer objects by the list of configuration files
+  * `definition-generate`: generate definition files
+
+> Installing the project by composer, the console commands are available in the vendor's bin directory.
 
 ### Config
 
@@ -51,7 +56,7 @@ Directory Structure
   * each transfer object generator run will overwrite all the files in the directory
   * can be used across modules
 - `src/Generated/_tmp`: temporary directory includes newly generated transfer objects before they are finally moved to the `src/Generated`
-  * in case of an unexpected error, it is possible that directory is not deleted
+  * in case of an unexpected error, the directory might not be deleted
 - `src/Shared`: contains code shared across modules
   * can be used across modules
 - `src/Transfer`: transfer object module
@@ -74,9 +79,9 @@ Directory Structure
 Code Style
 ----------
 
-- code style should follow [PSR12](https://www.php-fig.org/psr/psr-12/)
+- code style should follow [PER Coding Style 3.0](https://www.php-fig.org/per/coding-style/)
 - each exception should implement `Picamator\TransferObject\Shared\Exception\TransferExceptionInterface`
-- exception messages should follow the same text style and structure across modules
+- exception messages should follow the same text and structure across all modules
 
 ### Classes
 
@@ -151,7 +156,7 @@ The all project transfer objects (generator's, examples, tests) can be generated
 docker/sdk to-generate-bulk
 ```
 
-In order to generate only generator's transfer objects, please run the following command:
+To generate only generator's transfer objects, please run the following command:
 ```console
 docker/sdk to-generate
 ```
