@@ -23,9 +23,9 @@ use Throwable;
 The <info>%command.name%</info> command generates Transfer Object definition files based on a JSON blueprint.
 
 <options=bold>Interactive prompt options:</>
-  — Specify the directory path where the definition files will be saved.
-  — Provide the class name for the Transfer Object.
-  — Enter the local path to the JSON file or API resource that serves as the blueprint.
+  - Specify the directory path where the definition files will be saved.
+  - Provide the class name for the Transfer Object.
+  - Enter the local path to the JSON file or API resource that serves as the blueprint.
 
 <options=bold>Documentation:</>
 For more details, please visit "<href=https://github.com/picamator/transfer-object/wiki/Console-Commands#definition-generate>project's Wiki</>".

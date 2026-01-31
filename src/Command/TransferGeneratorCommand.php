@@ -22,13 +22,13 @@ use Throwable;
 The <info>%command.name%</info> command generates Transfer Objects based on the configuration file in YML format.
 
 <options=bold>The configuration specifies:</>
-  — The directory containing the definition files.
-  — The namespace for the Transfer Objects.
-  — The output directory where the generated Transfer Objects will be saved.
+  - The directory containing the definition files.
+  - The namespace for the Transfer Objects.
+  - The output directory where the generated Transfer Objects will be saved.
 
 <options=bold>Schema:</>
-  — The configuration file should follow "<href=https://raw.githubusercontent.com/picamator/transfer-object/main/schema/config.schema.json>config.schema.json</>".
-  — The definition files should follow "<href=https://raw.githubusercontent.com/picamator/transfer-object/main/schema/definition.schema.json>definition.schema.json</>".
+  - The configuration file should follow "<href=https://raw.githubusercontent.com/picamator/transfer-object/main/schema/config.schema.json>config.schema.json</>".
+  - The definition files should follow "<href=https://raw.githubusercontent.com/picamator/transfer-object/main/schema/definition.schema.json>definition.schema.json</>".
 
 <options=bold>Verbosity:</>
 The command supports the first verbosity level to display additional details about the generated Transfer Objects.
