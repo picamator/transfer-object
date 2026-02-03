@@ -22,7 +22,7 @@ trait AttributeTrait
         /** @var \ReflectionAttribute<InitiatorAttributeInterface> $reflectionAttribute */
         $reflectionAttribute = $this->getConstantReflection(
             constantName: $constantName,
-            attributeName: InitiatorAttributeInterface::class
+            attributeName: InitiatorAttributeInterface::class,
         );
 
         /** @var InitiatorAttributeInterface $attributeInstance */
@@ -39,7 +39,7 @@ trait AttributeTrait
         /** @var \ReflectionAttribute<TransformerAttributeInterface> $reflectionAttribute */
         $reflectionAttribute = $this->getConstantReflection(
             constantName: $constantName,
-            attributeName: TransformerAttributeInterface::class
+            attributeName: TransformerAttributeInterface::class,
         );
 
         /** @var TransformerAttributeInterface $attributeInstance */
