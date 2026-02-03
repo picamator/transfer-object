@@ -76,7 +76,7 @@ trait AttributeTrait
         );
 
         /** @var \ReflectionAttribute<TransformerAttributeInterface|InitiatorAttributeInterface>|null $firstReflectionAttribute */
-        $firstReflectionAttribute = \array_first($reflectionAttributes);
+        $firstReflectionAttribute = $reflectionAttributes[0] ?? null;
         if ($firstReflectionAttribute === null) {
             throw new AttributeTransferException(
                 \sprintf('Constant\'s "%s" attribute "%s" not found.', $constantName, $attributeName),
