@@ -20,7 +20,7 @@ trait DataAssertTrait
         throw new DataAssertTransferException(
             \sprintf(
                 'Data must be of type array, "%s" given.',
-                get_debug_type($data),
+                \get_debug_type($data),
             ),
         );
     }
@@ -49,7 +49,7 @@ trait DataAssertTrait
         }
 
         throw new DataAssertTransferException(
-            sprintf(
+            \sprintf(
                 'Data must be of type string or integer, "%s" given.',
                 \get_debug_type($data),
             ),
