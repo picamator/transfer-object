@@ -29,7 +29,7 @@ trait DummyTransferAdapterTrait
 
     public function count(): int
     {
-        return iterator_count($this);
+        return \iterator_count($this);
     }
 
     /**
