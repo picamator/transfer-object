@@ -25,9 +25,9 @@ final readonly class NumberTransformerAttribute implements TransformerAttributeI
     public function fromArray(mixed $data): Number
     {
         return match (true) {
-            is_float($data) => new $this->typeName((string)$data),
+            \is_float($data) => new $this->typeName((string)$data),
 
-            is_numeric($data) => new $this->typeName($data),
+            \is_numeric($data) => new $this->typeName($data),
 
             $data instanceof Number => $data,
 

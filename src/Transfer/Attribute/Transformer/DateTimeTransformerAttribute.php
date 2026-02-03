@@ -27,9 +27,9 @@ final readonly class DateTimeTransformerAttribute implements TransformerAttribut
     public function fromArray(mixed $data): DateTimeInterface
     {
         return match (true) {
-            is_string($data) => new $this->typeName($data),
+            \is_string($data) => new $this->typeName($data),
 
-            is_int($data) || is_float($data) => $this->typeName::createFromTimestamp($data),
+            \is_int($data) || \is_float($data) => $this->typeName::createFromTimestamp($data),
 
             $data instanceof DateTimeInterface => $data,
 

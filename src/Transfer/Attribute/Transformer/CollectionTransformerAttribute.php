@@ -50,7 +50,7 @@ final readonly class CollectionTransformerAttribute implements TransformerAttrib
      */
     public function toArray(mixed $data): array
     {
-        return array_map(
+        return \array_map(
             fn(TransferInterface $transfer): array => $transfer->toArray(),
             $data->getArrayCopy()
         );
