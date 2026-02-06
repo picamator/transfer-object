@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Transfer\Attribute\Transformer;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Picamator\TransferObject\Transfer\Exception\DataAssertTransferException;
 use Picamator\TransferObject\Transfer\TransferInterface;
 use ReflectionClass;
 
@@ -20,6 +19,8 @@ use ReflectionClass;
  */
 trait TransferBuilderTrait
 {
+    use ArrayAssertTrait;
+
     final protected function createTransfer(mixed $data): TransferInterface
     {
         $this->assertArray($data);
@@ -61,22 +62,5 @@ trait TransferBuilderTrait
         });
 
         return $transfer;
-    }
-
-    /**
-     * @throws \Picamator\TransferObject\Transfer\Exception\DataAssertTransferException
-     */
-    private function assertArray(mixed $data): void
-    {
-        if (\is_array($data)) {
-            return;
-        }
-
-        throw new DataAssertTransferException(
-            \sprintf(
-                'Data must be of type array, "%s" given.',
-                \get_debug_type($data),
-            ),
-        );
     }
 }

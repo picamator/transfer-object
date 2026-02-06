@@ -6,7 +6,6 @@ namespace Picamator\TransferObject\Transfer\Attribute\Transformer;
 
 use ArrayObject;
 use Attribute;
-use Picamator\TransferObject\Transfer\Exception\DataAssertTransferException;
 
 /**
  * @api
@@ -14,6 +13,8 @@ use Picamator\TransferObject\Transfer\Exception\DataAssertTransferException;
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
 final readonly class ArrayObjectTransformerAttribute implements TransformerAttributeInterface
 {
+    use ArrayAssertTrait;
+
     /**
      * @inheritDoc
      *
@@ -35,22 +36,5 @@ final readonly class ArrayObjectTransformerAttribute implements TransformerAttri
     public function toArray(mixed $data): array
     {
         return $data->getArrayCopy();
-    }
-
-    /**
-     * @throws \Picamator\TransferObject\Transfer\Exception\DataAssertTransferException
-     */
-    private function assertArray(mixed $data): void
-    {
-        if (\is_array($data)) {
-            return;
-        }
-
-        throw new DataAssertTransferException(
-            \sprintf(
-                'Data must be of type array, "%s" given.',
-                \get_debug_type($data),
-            ),
-        );
     }
 }

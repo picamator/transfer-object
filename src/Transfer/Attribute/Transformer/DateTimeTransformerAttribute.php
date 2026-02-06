@@ -6,7 +6,6 @@ namespace Picamator\TransferObject\Transfer\Attribute\Transformer;
 
 use Attribute;
 use DateTimeInterface;
-use Picamator\TransferObject\Transfer\Exception\DataAssertTransferException;
 
 /**
  * @api
@@ -14,6 +13,8 @@ use Picamator\TransferObject\Transfer\Exception\DataAssertTransferException;
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
 final readonly class DateTimeTransformerAttribute implements TransformerAttributeInterface
 {
+    use InvalidTypeAssertTrait;
+
     private const string DATE_TIME_FORMAT = DateTimeInterface::ATOM;
 
     /**
@@ -49,19 +50,5 @@ final readonly class DateTimeTransformerAttribute implements TransformerAttribut
     public function toArray(mixed $data): ?string
     {
         return $data?->format(self::DATE_TIME_FORMAT);
-    }
-
-    /**
-     * @throws \Picamator\TransferObject\Transfer\Exception\DataAssertTransferException
-     */
-    private function assertInvalidType(mixed $data): never
-    {
-        throw new DataAssertTransferException(
-            \sprintf(
-                'Data must be of type %s, "%s" given.',
-                $this->typeName,
-                \get_debug_type($data),
-            ),
-        );
     }
 }
