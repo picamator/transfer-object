@@ -6,6 +6,7 @@ namespace Picamator\TransferObject\Transfer\Attribute\Transformer;
 
 use Attribute;
 use DateTimeInterface;
+use Picamator\TransferObject\Transfer\Exception\DataAssertTransferException;
 
 /**
  * @api
@@ -13,8 +14,6 @@ use DateTimeInterface;
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
 final readonly class DateTimeTransformerAttribute implements TransformerAttributeInterface
 {
-    use DataAssertTrait;
-
     private const string DATE_TIME_FORMAT = DateTimeInterface::ATOM;
 
     /**
@@ -26,15 +25,22 @@ final readonly class DateTimeTransformerAttribute implements TransformerAttribut
 
     public function fromArray(mixed $data): DateTimeInterface
     {
-        return match (true) {
-            \is_string($data) => new $this->typeName($data),
+        $type = \gettype($data);
+        if ($type === 'string') {
+            /** @var string $data */
+            return new $this->typeName($data);
+        }
 
-            \is_int($data) || \is_float($data) => $this->typeName::createFromTimestamp($data),
+        if ($type === 'integer' || $type === 'double') {
+            /** @var int|float $data */
+            return $this->typeName::createFromTimestamp($data);
+        }
 
-            $data instanceof DateTimeInterface => $data,
+        if ($type === 'object' && $data instanceof DateTimeInterface) {
+            return $data;
+        }
 
-            default => $this->assertInvalidType($data, $this->typeName),
-        };
+        $this->assertInvalidType($data);
     }
 
     /**
@@ -43,5 +49,19 @@ final readonly class DateTimeTransformerAttribute implements TransformerAttribut
     public function toArray(mixed $data): ?string
     {
         return $data?->format(self::DATE_TIME_FORMAT);
+    }
+
+    /**
+     * @throws \Picamator\TransferObject\Transfer\Exception\DataAssertTransferException
+     */
+    private function assertInvalidType(mixed $data): never
+    {
+        throw new DataAssertTransferException(
+            \sprintf(
+                'Data must be of type %s, "%s" given.',
+                $this->typeName,
+                \get_debug_type($data),
+            ),
+        );
     }
 }

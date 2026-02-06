@@ -6,7 +6,7 @@ namespace Picamator\TransferObject\Transfer\Attribute\Transformer;
 
 use ArrayObject;
 use Attribute;
-use Picamator\TransferObject\Transfer\TransferInterface;
+use Picamator\TransferObject\Transfer\Exception\DataAssertTransferException;
 
 /**
  * @api
@@ -17,7 +17,9 @@ final readonly class CollectionTransformerAttribute implements TransformerAttrib
     use TransferBuilderTrait;
 
     /**
-     * @param class-string<\Picamator\TransferObject\Transfer\AbstractTransfer|TransferInterface> $typeName
+     * phpcs:disable Generic.Files.LineLength
+     *
+     * @param class-string<\Picamator\TransferObject\Transfer\AbstractTransfer|\Picamator\TransferObject\Transfer\TransferInterface> $typeName
      */
     public function __construct(private string $typeName)
     {
@@ -37,22 +39,41 @@ final readonly class CollectionTransformerAttribute implements TransformerAttrib
 
         /** @var array<string|int, mixed> $data */
         foreach ($data as $key => $item) {
-            $collection->offsetSet($key, $this->createTransfer($item));
+            $collection[$key] = $this->createTransfer($item);
         }
 
         return $collection;
     }
 
     /**
-     * @param \ArrayObject<string|int,TransferInterface> $data
+     * @param \ArrayObject<string|int, \Picamator\TransferObject\Transfer\TransferInterface> $data
      *
      * @return array<string|int,mixed>
      */
     public function toArray(mixed $data): array
     {
-        return \array_map(
-            fn(TransferInterface $transfer): array => $transfer->toArray(),
-            $data->getArrayCopy()
+        $collection = [];
+        foreach ($data as $key => $transfer) {
+            $collection[$key] = $transfer->toArray();
+        }
+
+        return $collection;
+    }
+
+    /**
+     * @throws \Picamator\TransferObject\Transfer\Exception\DataAssertTransferException
+     */
+    private function assertArray(mixed $data): void
+    {
+        if (\is_array($data)) {
+            return;
+        }
+
+        throw new DataAssertTransferException(
+            \sprintf(
+                'Data must be of type array, "%s" given.',
+                \get_debug_type($data),
+            ),
         );
     }
 }
