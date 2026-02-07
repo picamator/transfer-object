@@ -425,10 +425,14 @@ class TransferTest extends TestCase
         // Arrange
         $namespaceTransfer = new NamespaceTransfer();
         $namespaceTransfer->items[] = new ItemTransfer();
+        $namespaceTransfer->itemsWithAlias[] = new ItemTransfer();
+
         $namespaceTransfer->required = new RequiredTransfer();
+        $namespaceTransfer->requiredWithAlias = new RequiredTransfer();
 
         // Act
         $this->assertCount(1, $namespaceTransfer->items);
+        $this->assertCount(1, $namespaceTransfer->itemsWithAlias);
     }
 
     #[TestDox('Protected property')]

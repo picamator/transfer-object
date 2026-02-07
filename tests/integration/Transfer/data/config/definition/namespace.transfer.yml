@@ -2,5 +2,9 @@
 Namespace:
   items:
     collectionType: "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Generated\\ItemTransfer"
+  itemsWithAlias:
+    collectionType: "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Generated\\ItemTransfer as ItemAlias"
   required:
+    type: "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Generated\\RequiredTransfer"
+  requiredWithAlias:
     type: "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Generated\\RequiredTransfer as RequiredAlias"
