@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Generated;
 
-use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
+use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuiltInTypeEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\EnumTransformerAttribute;
 
@@ -17,7 +17,7 @@ use Picamator\TransferObject\Transfer\Attribute\Transformer\EnumTransformerAttri
  *
  * @see /config/definition/transfer-generator.transfer.yml Definition file path.
  */
-final class DefinitionBuildInTypeTransfer extends AbstractTransfer
+final class DefinitionBuiltInTypeTransfer extends AbstractTransfer
 {
     protected const int META_DATA_SIZE = 2;
 
@@ -42,11 +42,11 @@ final class DefinitionBuildInTypeTransfer extends AbstractTransfer
     }
 
     // name
-    #[EnumTransformerAttribute(BuildInTypeEnum::class)]
+    #[EnumTransformerAttribute(BuiltInTypeEnum::class)]
     public const string NAME_PROP = 'name';
     private const int NAME_INDEX = 1;
 
-    public BuildInTypeEnum $name {
+    public BuiltInTypeEnum $name {
         get => $this->getData(self::NAME_INDEX);
         set {
             $this->setData(self::NAME_INDEX, $value);

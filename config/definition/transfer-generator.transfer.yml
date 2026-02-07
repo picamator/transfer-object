@@ -43,8 +43,8 @@ DefinitionProperty:
   propertyName:
     type: string
     required:
-  buildInType:
-    type: DefinitionBuildInType
+  builtInType:
+    type: DefinitionBuiltInType
   transferType:
     type: DefinitionEmbeddedType
   collectionType:
@@ -71,9 +71,9 @@ DefinitionAttribute:
     type: DefinitionNamespace
     required:
 
-DefinitionBuildInType:
+DefinitionBuiltInType:
   name:
-    enumType: "Picamator\\TransferObject\\TransferGenerator\\Definition\\Enum\\BuildInTypeEnum"
+    enumType: "Picamator\\TransferObject\\TransferGenerator\\Definition\\Enum\\BuiltInTypeEnum"
     required:
   docBlock:
     type: string

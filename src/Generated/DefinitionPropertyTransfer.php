@@ -25,7 +25,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     protected const array META_DATA = [
         self::ATTRIBUTES_PROP => self::ATTRIBUTES_INDEX,
-        self::BUILD_IN_TYPE_PROP => self::BUILD_IN_TYPE_INDEX,
+        self::BUILT_IN_TYPE_PROP => self::BUILT_IN_TYPE_INDEX,
         self::COLLECTION_TYPE_PROP => self::COLLECTION_TYPE_INDEX,
         self::DATE_TIME_TYPE_PROP => self::DATE_TIME_TYPE_INDEX,
         self::ENUM_TYPE_PROP => self::ENUM_TYPE_INDEX,
@@ -42,7 +42,7 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
 
     protected const array META_TRANSFORMERS = [
         self::ATTRIBUTES_PROP => 'ATTRIBUTES_PROP',
-        self::BUILD_IN_TYPE_PROP => 'BUILD_IN_TYPE_PROP',
+        self::BUILT_IN_TYPE_PROP => 'BUILT_IN_TYPE_PROP',
         self::COLLECTION_TYPE_PROP => 'COLLECTION_TYPE_PROP',
         self::DATE_TIME_TYPE_PROP => 'DATE_TIME_TYPE_PROP',
         self::ENUM_TYPE_PROP => 'ENUM_TYPE_PROP',
@@ -64,15 +64,15 @@ final class DefinitionPropertyTransfer extends AbstractTransfer
         }
     }
 
-    // buildInType
-    #[TransferTransformerAttribute(DefinitionBuildInTypeTransfer::class)]
-    public const string BUILD_IN_TYPE_PROP = 'buildInType';
-    private const int BUILD_IN_TYPE_INDEX = 1;
+    // builtInType
+    #[TransferTransformerAttribute(DefinitionBuiltInTypeTransfer::class)]
+    public const string BUILT_IN_TYPE_PROP = 'builtInType';
+    private const int BUILT_IN_TYPE_INDEX = 1;
 
-    public ?DefinitionBuildInTypeTransfer $buildInType {
-        get => $this->getData(self::BUILD_IN_TYPE_INDEX);
+    public ?DefinitionBuiltInTypeTransfer $builtInType {
+        get => $this->getData(self::BUILT_IN_TYPE_INDEX);
         set {
-            $this->setData(self::BUILD_IN_TYPE_INDEX, $value);
+            $this->setData(self::BUILT_IN_TYPE_INDEX, $value);
         }
     }
 

@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Render\TemplateRender;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Render\TemplateRenderInterface;
-use Picamator\TransferObject\Generated\DefinitionBuildInTypeTransfer;
+use Picamator\TransferObject\Generated\DefinitionBuiltInTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionContentTransfer;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
@@ -66,8 +66,8 @@ class DefinitionRenderTest extends TestCase
         yield 'transfer object with build in property type' => [
             'propertyData' => [
                 DefinitionPropertyTransfer::PROPERTY_NAME_PROP => 'testProperty',
-                DefinitionPropertyTransfer::BUILD_IN_TYPE_PROP => [
-                    DefinitionBuildInTypeTransfer::NAME_PROP => 'string',
+                DefinitionPropertyTransfer::BUILT_IN_TYPE_PROP => [
+                    DefinitionBuiltInTypeTransfer::NAME_PROP => 'string',
                 ],
             ],
             'expected' => <<<'DEFINITION'

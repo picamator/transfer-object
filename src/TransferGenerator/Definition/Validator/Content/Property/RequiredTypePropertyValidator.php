@@ -16,7 +16,7 @@ readonly class RequiredTypePropertyValidator implements PropertyValidatorInterfa
         = 'Property "%s" type definition is missing or set multiple times.';
 
     private const array TYPE_KEYS = [
-        DefinitionPropertyTransfer::BUILD_IN_TYPE_PROP,
+        DefinitionPropertyTransfer::BUILT_IN_TYPE_PROP,
         DefinitionPropertyTransfer::TRANSFER_TYPE_PROP,
         DefinitionPropertyTransfer::COLLECTION_TYPE_PROP,
         DefinitionPropertyTransfer::ENUM_TYPE_PROP,

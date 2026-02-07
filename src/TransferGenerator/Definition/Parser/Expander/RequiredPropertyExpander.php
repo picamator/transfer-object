@@ -28,8 +28,8 @@ final class RequiredPropertyExpander extends AbstractPropertyExpander
 
     private function isNullableAllowed(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        $buildInType = $propertyTransfer->buildInType?->name;
-        if ($buildInType !== null && ($buildInType->isArray() || $buildInType->isArrayObject())) {
+        $builtInType = $propertyTransfer->builtInType?->name;
+        if ($builtInType !== null && ($builtInType->isArray() || $builtInType->isArrayObject())) {
             return false;
         }
 

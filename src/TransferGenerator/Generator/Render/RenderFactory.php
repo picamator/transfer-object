@@ -8,7 +8,7 @@ use Picamator\TransferObject\Shared\CachedFactoryTrait;
 use Picamator\TransferObject\Shared\Initializer\LazyGhostInitializerTrait;
 use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\AttributesTemplateExpander;
-use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\BuildInTypeTemplateExpander;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\BuiltInTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\CollectionTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\DateTimeTypeTemplateExpander;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\EnumTypeTemplateExpander;
@@ -69,7 +69,7 @@ class RenderFactory
 
         $templateExpander
             ->setNextExpander($this->createTransferTypeTemplateExpander())
-            ->setNextExpander($this->createBuildInTypeTemplateExpander())
+            ->setNextExpander($this->createBuiltInTypeTemplateExpander())
             ->setNextExpander($this->createEnumTypeTemplateExpander())
             ->setNextExpander($this->createNamespaceTemplateExpander())
             ->setNextExpander($this->createMetaConstantsTemplateExpander())
@@ -122,9 +122,9 @@ class RenderFactory
         return new EnumTypeTemplateExpander();
     }
 
-    protected function createBuildInTypeTemplateExpander(): TemplateExpanderInterface
+    protected function createBuiltInTypeTemplateExpander(): TemplateExpanderInterface
     {
-        return new BuildInTypeTemplateExpander();
+        return new BuiltInTypeTemplateExpander();
     }
 
     protected function createTransferTypeTemplateExpander(): TemplateExpanderInterface
