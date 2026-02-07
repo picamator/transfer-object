@@ -36,7 +36,7 @@ final readonly class NumberTransformerAttribute implements TransformerAttributeI
             return $data;
         }
 
-        $this->assertInvalidType($data);
+        $this->throwInvalidType($data);
     }
 
     /**

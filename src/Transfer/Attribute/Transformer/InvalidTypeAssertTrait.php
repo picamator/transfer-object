@@ -14,7 +14,7 @@ trait InvalidTypeAssertTrait
     /**
      * @throws \Picamator\TransferObject\Transfer\Exception\DataAssertTransferException
      */
-    final protected function assertInvalidType(mixed $data): never
+    final protected function throwInvalidType(mixed $data): never
     {
         throw new DataAssertTransferException(
             \sprintf(

@@ -17,6 +17,11 @@ trait ArrayAssertTrait
             return;
         }
 
+        $this->throwInvalidArray($data);
+    }
+
+    final protected function throwInvalidArray(mixed $data): never
+    {
         throw new DataAssertTransferException(
             \sprintf(
                 'Data must be of type array, "%s" given.',

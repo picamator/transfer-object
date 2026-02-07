@@ -41,7 +41,7 @@ final readonly class DateTimeTransformerAttribute implements TransformerAttribut
             return $data;
         }
 
-        $this->assertInvalidType($data);
+        $this->throwInvalidType($data);
     }
 
     /**

@@ -38,6 +38,10 @@ final readonly class CollectionTransformerAttribute implements TransformerAttrib
 
         /** @var array<string|int, mixed> $data */
         foreach ($data as $key => $item) {
+            if ($item === null) {
+                continue;
+            }
+
             $collection[$key] = $this->createTransfer($item);
         }
 
