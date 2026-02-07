@@ -16,8 +16,11 @@ use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorTrait;
+use Picamator\Tests\Integration\TransferObject\Transfer\Enum\CountryEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
+use Picamator\Tests\Integration\TransferObject\Transfer\Enum\YesNoEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\BcMath\BcMathNumberTransfer;
+use Picamator\Tests\Integration\TransferObject\Transfer\Generated\EnumTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemCollectionTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\NamespaceTransfer;
@@ -240,6 +243,24 @@ class TransferTest extends TestCase
 
         $actual = $itemTransfer->toArray();
         $actual = array_filter($actual);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+
+    #[TestDox('Enum transformation from and to array')]
+    public function testEnumTransformationFromToArray(): void
+    {
+        // Arrange
+        $expected = [
+            EnumTransfer::COUNTRY_PROP => CountryEnum::PL->value,
+            EnumTransfer::YES_NO_PROP => YesNoEnum::YES->value,
+        ];
+
+        $enumTransfer = new EnumTransfer($expected);
+
+        // Act
+        $actual = $enumTransfer->toArray();
 
         // Assert
         $this->assertSame($expected, $actual);
