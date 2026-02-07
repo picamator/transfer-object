@@ -57,7 +57,7 @@ $customerTransfer->lastName = 'Kowalski';
 Key Features
 ------------
 
-**Symfony Compatability:**
+**Symfony Compatibility:**
 
  * Provides Symfony console command:
    * [TransferGeneratorCommand](/src/Command/TransferGeneratorCommand.php)

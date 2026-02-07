@@ -77,8 +77,8 @@ class GeneratorFactory
 
     protected function createGeneratorFilesystem(): GeneratorFilesystemInterface
     {
-        /** @var GeneratorFilesystemInterface $generatorFileSystem */
-        $generatorFileSystem = $this->getLazyGhost(
+        /** @var GeneratorFilesystemInterface $generatorFilesystem */
+        $generatorFilesystem = $this->getLazyGhost(
             className: GeneratorFilesystem::class,
             initializer: function (GeneratorFilesystem $ghost): void {
                 $ghost->__construct(
@@ -89,7 +89,7 @@ class GeneratorFactory
             }
         );
 
-        return $generatorFileSystem;
+        return $generatorFilesystem;
     }
 
     protected function createTransferGeneratorBuilder(): TransferGeneratorBuilderInterface
