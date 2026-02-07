@@ -199,6 +199,16 @@ class TransferTest extends TestCase
             ],
         ];
 
+        yield 'collection transfer object is an array with one null item' => [
+            [
+                ItemCollectionTransfer::ITEMS_PROP => [null],
+            ],
+            [
+                ItemCollectionTransfer::ITEMS_PROP => [],
+                ItemCollectionTransfer::ITEM_PROP => null,
+            ],
+        ];
+
         yield 'data does not have any matched to transfer object properties' => [
             [
                 'some-property' => 'some-value',
