@@ -24,12 +24,12 @@ final class EnumTransfer extends AbstractTransfer
 
     protected const array META_DATA = [
         self::COUNTRY_PROP => self::COUNTRY_INDEX,
-        self::YES_NO_PROP => self::YES_NO_INDEX,
+        self::IS_ACTIVE_PROP => self::IS_ACTIVE_INDEX,
     ];
 
     protected const array META_TRANSFORMERS = [
         self::COUNTRY_PROP => 'COUNTRY_PROP',
-        self::YES_NO_PROP => 'YES_NO_PROP',
+        self::IS_ACTIVE_PROP => 'IS_ACTIVE_PROP',
     ];
 
     // country
@@ -44,15 +44,15 @@ final class EnumTransfer extends AbstractTransfer
         }
     }
 
-    // yesNo
+    // isActive
     #[EnumTransformerAttribute(YesNoEnum::class)]
-    public const string YES_NO_PROP = 'yesNo';
-    private const int YES_NO_INDEX = 1;
+    public const string IS_ACTIVE_PROP = 'isActive';
+    private const int IS_ACTIVE_INDEX = 1;
 
-    public ?YesNoEnum $yesNo {
-        get => $this->getData(self::YES_NO_INDEX);
+    public ?YesNoEnum $isActive {
+        get => $this->getData(self::IS_ACTIVE_INDEX);
         set {
-            $this->setData(self::YES_NO_INDEX, $value);
+            $this->setData(self::IS_ACTIVE_INDEX, $value);
         }
     }
 }

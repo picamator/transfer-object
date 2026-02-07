@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\Tests\Integration\TransferObject\Transfer\Adapter;
 
+use ArrayObject;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -13,6 +14,7 @@ use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BcMathBookData;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookAuthorData;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookData;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\CountryEnum;
+use Picamator\Tests\Integration\TransferObject\Transfer\Enum\YesNoEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\AuthorTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ReservedAdvancedTransfer;
 
@@ -40,11 +42,18 @@ class TransferAdapterTest extends TestCase
                 'title' => 'wishlist',
             ],
             'bookmarkPage' => null,
+            'isActive' => YesNoEnum::YES->value,
+            'price' => 12.34,
+            'publishYear' => 1889,
+            'inventory' => [1, 2, 3],
             'reference' => 'some reference',
         ];
 
+        $data = $expected;
+        $data['labels'] = new ArrayObject($expected['labels']);
+
         $bookData = new BookData()
-            ->fromArray($expected);
+            ->fromArray($data);
 
         // Act
         $actual = $bookData->toArray();
@@ -155,6 +164,10 @@ class TransferAdapterTest extends TestCase
                 'title' => 'wishlist',
             ],
             'bookmarkPage' => null,
+            'isActive' => YesNoEnum::YES->value,
+            'price' => 12.34,
+            'publishYear' => 1889,
+            'inventory' => [1, 2, 3],
             'reference' => 'some reference',
         ];
 

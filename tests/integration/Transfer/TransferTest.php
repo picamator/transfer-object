@@ -264,7 +264,7 @@ class TransferTest extends TestCase
         // Arrange
         $expected = [
             EnumTransfer::COUNTRY_PROP => CountryEnum::PL->value,
-            EnumTransfer::YES_NO_PROP => YesNoEnum::YES->value,
+            EnumTransfer::IS_ACTIVE_PROP => YesNoEnum::YES->value,
         ];
 
         $enumTransfer = new EnumTransfer($expected);

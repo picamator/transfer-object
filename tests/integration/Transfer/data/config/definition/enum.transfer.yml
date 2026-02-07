@@ -2,5 +2,5 @@
 Enum:
   country:
     enumType: "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Enum\\CountryEnum"
-  yesNo:
+  isActive:
     enumType: "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Enum\\YesNoEnum"
