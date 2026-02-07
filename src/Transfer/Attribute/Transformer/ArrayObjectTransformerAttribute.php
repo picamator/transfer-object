@@ -13,7 +13,7 @@ use Attribute;
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
 final readonly class ArrayObjectTransformerAttribute implements TransformerAttributeInterface
 {
-    use DataAssertTrait;
+    use ArrayAssertTrait;
 
     /**
      * @inheritDoc

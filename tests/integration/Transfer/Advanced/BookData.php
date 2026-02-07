@@ -8,6 +8,7 @@ use ArrayObject;
 use DateTime;
 use DateTimeImmutable;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\CountryEnum;
+use Picamator\Tests\Integration\TransferObject\Transfer\Enum\YesNoEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\AuthorTransfer;
 use Picamator\TransferObject\Transfer\Adapter\TransferAdapterTrait;
 use Picamator\TransferObject\Transfer\TransferInterface;
@@ -19,6 +20,7 @@ class BookData implements TransferInterface
 
     /**
      * @param \ArrayObject<string,mixed>|null $labels
+     * @param array<int, int> $inventory
      * @param string|null $reference
      */
     public function __construct(
@@ -31,6 +33,10 @@ class BookData implements TransferInterface
         public ?DateTimeImmutable $createdAt = null,
         public ?stdClass $notes = null,
         public ?int $bookmarkPage = 1,
+        public ?YesNoEnum $isActive = null,
+        public ?float $price = null,
+        public ?int $publishYear = null,
+        public ?array $inventory = [],
         public $reference = null,
     ) {
     }

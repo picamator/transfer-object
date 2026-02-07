@@ -1,0 +1,5 @@
+AddressStatistics:
+  addressBookUuid:
+    type: string
+    enumType: "Picamator\\Tests\\Integration\\TransferObject\\TransferGenerator\\Enum\\AddressLabelEnum"
+

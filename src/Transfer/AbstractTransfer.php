@@ -49,7 +49,7 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->initData();
 
-        if ($data !== null && count($data) > 0) {
+        if ($data !== null && \count($data) > 0) {
             $this->hydrateData($data);
         }
     }
@@ -101,7 +101,7 @@ abstract class AbstractTransfer implements TransferInterface
     final public function __clone(): void
     {
         /** @var \SplFixedArray<mixed> $data */
-        $data = unserialize(serialize($this->_data));
+        $data = \unserialize(\serialize($this->_data));
 
         $this->_data = $data;
     }
@@ -131,7 +131,7 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->initData();
 
-        if (count($data) > 0) {
+        if (\count($data) > 0) {
             $this->hydrateData($data);
         }
 
@@ -155,7 +155,7 @@ abstract class AbstractTransfer implements TransferInterface
     {
         $this->filterData($data);
 
-        if (count($data) === 0) {
+        if (\count($data) === 0) {
             return;
         }
 

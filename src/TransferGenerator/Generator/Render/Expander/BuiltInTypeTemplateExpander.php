@@ -4,39 +4,39 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
-use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
+use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuiltInTypeEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\DocBlockTemplateEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\InitiatorAttributeEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransformerAttributeEnum;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 
-final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
+final class BuiltInTypeTemplateExpander extends AbstractTemplateExpander
 {
     use TemplateExpanderTrait;
 
     protected function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        return $propertyTransfer->buildInType !== null;
+        return $propertyTransfer->builtInType !== null;
     }
 
     protected function handleExpander(
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        /** @var \Picamator\TransferObject\Generated\DefinitionBuildInTypeTransfer $buildInTypeTransfer */
-        $buildInTypeTransfer = $propertyTransfer->buildInType;
+        /** @var \Picamator\TransferObject\Generated\DefinitionBuiltInTypeTransfer $builtInTypeTransfer */
+        $builtInTypeTransfer = $propertyTransfer->builtInType;
 
         $propertyName = $propertyTransfer->propertyName;
-        $templateTransfer->properties[$propertyName] = $buildInTypeTransfer->name->value;
+        $templateTransfer->properties[$propertyName] = $builtInTypeTransfer->name->value;
 
-        if ($buildInTypeTransfer->name->isArrayObject()) {
+        if ($builtInTypeTransfer->name->isArrayObject()) {
             $this->expandArrayObjectType($propertyTransfer, $templateTransfer);
 
             return;
         }
 
-        if ($buildInTypeTransfer->name->isArray()) {
+        if ($builtInTypeTransfer->name->isArray()) {
             $this->expandArrayType($propertyTransfer, $templateTransfer);
         }
     }
@@ -62,7 +62,7 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
         DefinitionPropertyTransfer $propertyTransfer,
         TemplateTransfer $templateTransfer,
     ): void {
-        $this->expandImports(BuildInTypeEnum::ARRAY_OBJECT->value, $templateTransfer);
+        $this->expandImports(BuiltInTypeEnum::ARRAY_OBJECT->value, $templateTransfer);
 
         $this->expandInitiatorAttribute(
             propertyTransfer: $propertyTransfer,
@@ -88,7 +88,7 @@ final class BuildInTypeTemplateExpander extends AbstractTemplateExpander
         DocBlockTemplateEnum $docBlockEnum,
         TemplateTransfer $templateTransfer,
     ): void {
-        $docBlock = $propertyTransfer->buildInType?->docBlock;
+        $docBlock = $propertyTransfer->builtInType?->docBlock;
         $propertyName = $propertyTransfer->propertyName;
 
         $templateTransfer->docBlocks[$propertyName] = $docBlockEnum->renderTemplate($docBlock);

@@ -6,6 +6,8 @@ namespace Picamator\Tests\Integration\TransferObject\Transfer\Generated;
 
 use ArrayObject;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer;
+use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer as ItemAlias;
+use Picamator\Tests\Integration\TransferObject\Transfer\Generated\RequiredTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\RequiredTransfer as RequiredAlias;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Initiator\ArrayObjectInitiatorAttribute;
@@ -24,20 +26,25 @@ use Picamator\TransferObject\Transfer\TransferInterface;
  */
 final class NamespaceTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 2;
+    protected const int META_DATA_SIZE = 4;
 
     protected const array META_DATA = [
         self::ITEMS_PROP => self::ITEMS_INDEX,
+        self::ITEMS_WITH_ALIAS_PROP => self::ITEMS_WITH_ALIAS_INDEX,
         self::REQUIRED_PROP => self::REQUIRED_INDEX,
+        self::REQUIRED_WITH_ALIAS_PROP => self::REQUIRED_WITH_ALIAS_INDEX,
     ];
 
     protected const array META_INITIATORS = [
         self::ITEMS_PROP => 'ITEMS_PROP',
+        self::ITEMS_WITH_ALIAS_PROP => 'ITEMS_WITH_ALIAS_PROP',
     ];
 
     protected const array META_TRANSFORMERS = [
         self::ITEMS_PROP => 'ITEMS_PROP',
+        self::ITEMS_WITH_ALIAS_PROP => 'ITEMS_WITH_ALIAS_PROP',
         self::REQUIRED_PROP => 'REQUIRED_PROP',
+        self::REQUIRED_WITH_ALIAS_PROP => 'REQUIRED_WITH_ALIAS_PROP',
     ];
 
     // items
@@ -54,15 +61,41 @@ final class NamespaceTransfer extends AbstractTransfer
         }
     }
 
-    // required
-    #[TransferTransformerAttribute(RequiredAlias::class)]
-    public const string REQUIRED_PROP = 'required';
-    private const int REQUIRED_INDEX = 1;
+    // itemsWithAlias
+    #[ArrayObjectInitiatorAttribute]
+    #[CollectionTransformerAttribute(ItemAlias::class)]
+    public const string ITEMS_WITH_ALIAS_PROP = 'itemsWithAlias';
+    private const int ITEMS_WITH_ALIAS_INDEX = 1;
 
-    public TransferInterface&RequiredAlias $required {
+    /** @var \ArrayObject<int,TransferInterface&ItemAlias> */
+    public ArrayObject $itemsWithAlias {
+        get => $this->getData(self::ITEMS_WITH_ALIAS_INDEX);
+        set {
+            $this->setData(self::ITEMS_WITH_ALIAS_INDEX, $value);
+        }
+    }
+
+    // required
+    #[TransferTransformerAttribute(RequiredTransfer::class)]
+    public const string REQUIRED_PROP = 'required';
+    private const int REQUIRED_INDEX = 2;
+
+    public TransferInterface&RequiredTransfer $required {
         get => $this->getData(self::REQUIRED_INDEX);
         set {
             $this->setData(self::REQUIRED_INDEX, $value);
+        }
+    }
+
+    // requiredWithAlias
+    #[TransferTransformerAttribute(RequiredAlias::class)]
+    public const string REQUIRED_WITH_ALIAS_PROP = 'requiredWithAlias';
+    private const int REQUIRED_WITH_ALIAS_INDEX = 3;
+
+    public TransferInterface&RequiredAlias $requiredWithAlias {
+        get => $this->getData(self::REQUIRED_WITH_ALIAS_INDEX);
+        set {
+            $this->setData(self::REQUIRED_WITH_ALIAS_INDEX, $value);
         }
     }
 }

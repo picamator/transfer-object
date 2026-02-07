@@ -13,7 +13,7 @@ use BcMath\Number;
 #[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
 final readonly class NumberTransformerAttribute implements TransformerAttributeInterface
 {
-    use DataAssertTrait;
+    use InvalidTypeAssertTrait;
 
     /**
      * @param class-string<\BcMath\Number> $typeName
@@ -24,15 +24,19 @@ final readonly class NumberTransformerAttribute implements TransformerAttributeI
 
     public function fromArray(mixed $data): Number
     {
-        return match (true) {
-            is_float($data) => new $this->typeName((string)$data),
+        if (\is_float($data)) {
+            return new $this->typeName((string)$data);
+        }
 
-            is_numeric($data) => new $this->typeName($data),
+        if (\is_numeric($data)) {
+            return new $this->typeName($data);
+        }
 
-            $data instanceof Number => $data,
+        if ($data instanceof Number) {
+            return $data;
+        }
 
-            default => $this->assertInvalidType($data, $this->typeName),
-        };
+        $this->throwInvalidType($data);
     }
 
     /**

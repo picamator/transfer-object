@@ -22,7 +22,7 @@ trait AttributeTrait
         /** @var \ReflectionAttribute<InitiatorAttributeInterface> $reflectionAttribute */
         $reflectionAttribute = $this->getConstantReflection(
             constantName: $constantName,
-            attributeName: InitiatorAttributeInterface::class
+            attributeName: InitiatorAttributeInterface::class,
         );
 
         /** @var InitiatorAttributeInterface $attributeInstance */
@@ -39,7 +39,7 @@ trait AttributeTrait
         /** @var \ReflectionAttribute<TransformerAttributeInterface> $reflectionAttribute */
         $reflectionAttribute = $this->getConstantReflection(
             constantName: $constantName,
-            attributeName: TransformerAttributeInterface::class
+            attributeName: TransformerAttributeInterface::class,
         );
 
         /** @var TransformerAttributeInterface $attributeInstance */
@@ -54,7 +54,7 @@ trait AttributeTrait
     private function getAttributeInstance(
         ReflectionAttribute $reflectionAttribute,
     ): TransformerAttributeInterface|InitiatorAttributeInterface {
-        if (count($reflectionAttribute->getArguments()) !== 0) {
+        if (\count($reflectionAttribute->getArguments()) !== 0) {
             return $reflectionAttribute->newInstance();
         }
 
@@ -76,10 +76,10 @@ trait AttributeTrait
         );
 
         /** @var \ReflectionAttribute<TransformerAttributeInterface|InitiatorAttributeInterface>|null $firstReflectionAttribute */
-        $firstReflectionAttribute = array_first($reflectionAttributes);
+        $firstReflectionAttribute = $reflectionAttributes[0] ?? null;
         if ($firstReflectionAttribute === null) {
             throw new AttributeTransferException(
-                sprintf('Constant\'s "%s" attribute "%s" not found.', $constantName, $attributeName),
+                \sprintf('Constant\'s "%s" attribute "%s" not found.', $constantName, $attributeName),
             );
         }
 

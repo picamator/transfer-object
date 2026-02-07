@@ -7,7 +7,7 @@ namespace Picamator\TransferObject\DefinitionGenerator\Content;
 use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentBuilder;
 use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentBuilderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Content\Expander\BuilderExpanderInterface;
-use Picamator\TransferObject\DefinitionGenerator\Content\Expander\BuildInTypeBuilderExpander;
+use Picamator\TransferObject\DefinitionGenerator\Content\Expander\BuiltInTypeBuilderExpander;
 use Picamator\TransferObject\DefinitionGenerator\Content\Expander\CollectionTypeBuilderExpander;
 use Picamator\TransferObject\DefinitionGenerator\Content\Expander\TransferTypeBuilderExpander;
 use Picamator\TransferObject\DefinitionGenerator\Content\Reader\ContentReader;
@@ -40,14 +40,14 @@ class DefinitionContentFactory
 
         $builderExpander
             ->setNextExpander($this->createCollectionTypeBuilderExpander())
-            ->setNextExpander($this->createBuildInTypeBuilderExpander());
+            ->setNextExpander($this->createBuiltInTypeBuilderExpander());
 
         return $builderExpander;
     }
 
-    protected function createBuildInTypeBuilderExpander(): BuilderExpanderInterface
+    protected function createBuiltInTypeBuilderExpander(): BuilderExpanderInterface
     {
-        return new BuildInTypeBuilderExpander();
+        return new BuiltInTypeBuilderExpander();
     }
 
     protected function createCollectionTypeBuilderExpander(): BuilderExpanderInterface

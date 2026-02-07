@@ -58,10 +58,10 @@ final class AttributesPropertyExpander implements PropertyExpanderInterface
         $namespace = $matches['namespace'] ?? '';
         $namespaceTransfer = $this->namespaceBuilder->createNamespaceTransfer($namespace);
 
-        $buildInTypeTransfer = new DefinitionAttributeTransfer();
-        $buildInTypeTransfer->arguments = $matches['arguments'] ?? null;
-        $buildInTypeTransfer->namespace = $namespaceTransfer;
+        $builtInTypeTransfer = new DefinitionAttributeTransfer();
+        $builtInTypeTransfer->arguments = $matches['arguments'] ?? null;
+        $builtInTypeTransfer->namespace = $namespaceTransfer;
 
-        return $buildInTypeTransfer;
+        return $builtInTypeTransfer;
     }
 }

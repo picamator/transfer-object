@@ -12,13 +12,13 @@ use Picamator\TransferObject\DefinitionGenerator\Content\Enum\GetTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Content\Enum\ObjectTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
-use Picamator\TransferObject\Generated\DefinitionBuildInTypeTransfer;
+use Picamator\TransferObject\Generated\DefinitionBuiltInTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Shared\Parser\DocBlockParserTrait;
-use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuildInTypeEnum;
+use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuiltInTypeEnum;
 
-final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
+final class BuiltInTypeBuilderExpander extends AbstractBuilderExpander
 {
     use DocBlockParserTrait;
 
@@ -130,23 +130,23 @@ final class BuildInTypeBuilderExpander extends AbstractBuilderExpander
         return $propertyTransfer;
     }
 
-    private function createPropertyTransfer(string $propertyName, string $buildInType): DefinitionPropertyTransfer
+    private function createPropertyTransfer(string $propertyName, string $builtInType): DefinitionPropertyTransfer
     {
-        $tapeWithDocBlock = $this->parseTypeWithDocBlock($buildInType) ?? [];
+        $tapeWithDocBlock = $this->parseTypeWithDocBlock($builtInType) ?? [];
 
         /** @var string $type */
         $type = array_key_first($tapeWithDocBlock);
-        $type = BuildInTypeEnum::from($type);
+        $type = BuiltInTypeEnum::from($type);
 
         $docBlock = array_first($tapeWithDocBlock);
 
-        $buildInTypeTransfer = new DefinitionBuildInTypeTransfer();
-        $buildInTypeTransfer->name = $type;
-        $buildInTypeTransfer->docBlock = $docBlock;
+        $builtInTypeTransfer = new DefinitionBuiltInTypeTransfer();
+        $builtInTypeTransfer->name = $type;
+        $builtInTypeTransfer->docBlock = $docBlock;
 
         $propertyTransfer = new DefinitionPropertyTransfer();
         $propertyTransfer->propertyName = $propertyName;
-        $propertyTransfer->buildInType = $buildInTypeTransfer;
+        $propertyTransfer->builtInType = $builtInTypeTransfer;
 
         return $propertyTransfer;
     }

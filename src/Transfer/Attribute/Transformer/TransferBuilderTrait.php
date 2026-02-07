@@ -19,7 +19,7 @@ use ReflectionClass;
  */
 trait TransferBuilderTrait
 {
-    use DataAssertTrait;
+    use ArrayAssertTrait;
 
     final protected function createTransfer(mixed $data): TransferInterface
     {

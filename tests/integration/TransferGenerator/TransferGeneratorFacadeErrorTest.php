@@ -182,6 +182,11 @@ class TransferGeneratorFacadeErrorTest extends TestCase
             'configCaseName' => 'invalid-attribute-target',
             'expectedMessage' => 'is not allowed',
         ];
+
+        yield 'duplicate type definition' => [
+            'configCaseName' => 'duplicate-type-definition',
+            'expectedMessage' => 'type definition is missing or set multiple times.',
+        ];
     }
 
     #[TestDox('Fail generate transfer objects')]

@@ -7,6 +7,7 @@ namespace Picamator\Tests\Integration\TransferObject\Transfer;
 use ArrayObject;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -15,8 +16,11 @@ use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorTrait;
+use Picamator\Tests\Integration\TransferObject\Transfer\Enum\CountryEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
+use Picamator\Tests\Integration\TransferObject\Transfer\Enum\YesNoEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\BcMath\BcMathNumberTransfer;
+use Picamator\Tests\Integration\TransferObject\Transfer\Generated\EnumTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemCollectionTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\NamespaceTransfer;
@@ -40,6 +44,22 @@ class TransferTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         static::generateTransfersOrFail(self::GENERATOR_CONFIG_PATH);
+    }
+
+    /**
+     * @param array<string, mixed>|null $data
+     */
+    #[TestWith([null], 'Create transfer without data')]
+    #[TestWith([[]], 'Create transfer with empty array data')]
+    #[TestWith([[null]], 'Create transfer with array data containing null')]
+    #[TestWith([['something' => 'unknown']], 'Create transfer with array data containing unknown property')]
+    public function testCreateTransfer(?array $data): void
+    {
+        // Act
+        $itemTransfer = new ItemTransfer($data);
+
+        // Assert
+        $this->assertNull($itemTransfer->iAmBool);
     }
 
     /**
@@ -179,6 +199,16 @@ class TransferTest extends TestCase
             ],
         ];
 
+        yield 'collection transfer object is an array with one null item' => [
+            [
+                ItemCollectionTransfer::ITEMS_PROP => [null],
+            ],
+            [
+                ItemCollectionTransfer::ITEMS_PROP => [],
+                ItemCollectionTransfer::ITEM_PROP => null,
+            ],
+        ];
+
         yield 'data does not have any matched to transfer object properties' => [
             [
                 'some-property' => 'some-value',
@@ -223,6 +253,24 @@ class TransferTest extends TestCase
 
         $actual = $itemTransfer->toArray();
         $actual = array_filter($actual);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+
+    #[TestDox('Enum transformation from and to array')]
+    public function testEnumTransformationFromToArray(): void
+    {
+        // Arrange
+        $expected = [
+            EnumTransfer::COUNTRY_PROP => CountryEnum::PL->value,
+            EnumTransfer::IS_ACTIVE_PROP => YesNoEnum::YES->value,
+        ];
+
+        $enumTransfer = new EnumTransfer($expected);
+
+        // Act
+        $actual = $enumTransfer->toArray();
 
         // Assert
         $this->assertSame($expected, $actual);
@@ -377,10 +425,14 @@ class TransferTest extends TestCase
         // Arrange
         $namespaceTransfer = new NamespaceTransfer();
         $namespaceTransfer->items[] = new ItemTransfer();
+        $namespaceTransfer->itemsWithAlias[] = new ItemTransfer();
+
         $namespaceTransfer->required = new RequiredTransfer();
+        $namespaceTransfer->requiredWithAlias = new RequiredTransfer();
 
         // Act
         $this->assertCount(1, $namespaceTransfer->items);
+        $this->assertCount(1, $namespaceTransfer->itemsWithAlias);
     }
 
     #[TestDox('Protected property')]
@@ -425,6 +477,21 @@ class TransferTest extends TestCase
     }
 
     #[RequiresPhpExtension('bcmath')]
+    #[TestDox('Generate transfer object BcMath')]
+    public function testGenerateBcMathTransfer(): void
+    {
+        // Arrange
+        static::generateTransfersOrFail(self::GENERATOR_BC_MATH_CONFIG_PATH);
+
+        // Act
+        $numberTransfer = new BcMathNumberTransfer();
+
+        // Assert
+        $this->assertNull($numberTransfer->iAmNumber);
+    }
+
+    #[RequiresPhpExtension('bcmath')]
+    #[Depends('testGenerateBcMathTransfer')]
     #[TestDox('Transformation transfer object BcMath fromArray with $number to toArray expecting $number')]
     #[TestWith(['12.123', '12.123'], 'Transformation from string to BcMath')]
     #[TestWith([12, '12'], 'Transformation from integer to BcMath')]
@@ -432,8 +499,6 @@ class TransferTest extends TestCase
     public function testTransformationBcMathFromToArray(string|int|float $number, string $expected): void
     {
         // Arrange
-        static::generateTransfersOrFail(self::GENERATOR_BC_MATH_CONFIG_PATH);
-
         $numberTransfer = new BcMathNumberTransfer();
 
         // Act
@@ -448,12 +513,28 @@ class TransferTest extends TestCase
     }
 
     #[RequiresPhpExtension('bcmath')]
+    #[Depends('testGenerateBcMathTransfer')]
+    #[TestDox('Transformation transfer object BcMath fromArray with invalid type should throw exception')]
+    public function testTransformationBcMathFromToArrayWithInvalidTypeShouldThrowException(): void
+    {
+        // Arrange
+        $numberTransfer = new BcMathNumberTransfer();
+
+        // Expect
+        $this->expectException(DataAssertTransferException::class);
+
+        // Act
+        $numberTransfer->fromArray([
+            BcMathNumberTransfer::I_AM_NUMBER_PROP => new ArrayObject(),
+        ]);
+    }
+
+    #[RequiresPhpExtension('bcmath')]
+    #[Depends('testGenerateBcMathTransfer')]
     #[TestDox('Transformation transfer object BcMath fromArray to toArray with BcMath')]
     public function testTransformationBcMathFromToArrayWhereArrayHasBcMath(): void
     {
         // Arrange
-        static::generateTransfersOrFail(self::GENERATOR_BC_MATH_CONFIG_PATH);
-
         $numberTransfer = new BcMathNumberTransfer();
 
         $expected = '12.123';

@@ -1,0 +1,6 @@
+# $schema: ./../../../../../../schema/definition.schema.json
+Enum:
+  country:
+    enumType: "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Enum\\CountryEnum"
+  isActive:
+    enumType: "Picamator\\Tests\\Integration\\TransferObject\\Transfer\\Enum\\YesNoEnum"

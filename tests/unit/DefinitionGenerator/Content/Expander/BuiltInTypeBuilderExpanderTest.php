@@ -10,19 +10,19 @@ use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\DefinitionGenerator\Content\Builder\Content;
 use Picamator\TransferObject\DefinitionGenerator\Content\Enum\GetTypeEnum;
 use Picamator\TransferObject\DefinitionGenerator\Content\Expander\BuilderExpanderInterface;
-use Picamator\TransferObject\DefinitionGenerator\Content\Expander\BuildInTypeBuilderExpander;
+use Picamator\TransferObject\DefinitionGenerator\Content\Expander\BuiltInTypeBuilderExpander;
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 use stdClass;
 
 #[Group('definition-generator')]
-class BuildInTypeBuilderExpanderTest extends TestCase
+class BuiltInTypeBuilderExpanderTest extends TestCase
 {
     private BuilderExpanderInterface $expander;
 
     protected function setUp(): void
     {
-        $this->expander = new BuildInTypeBuilderExpander();
+        $this->expander = new BuiltInTypeBuilderExpander();
     }
 
     #[TestDox('Unsupported type should throw exception')]

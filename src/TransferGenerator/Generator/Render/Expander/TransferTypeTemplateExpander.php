@@ -37,12 +37,14 @@ final class TransferTypeTemplateExpander extends AbstractTemplateExpander
         );
     }
 
-    private function getPropertyType(DefinitionEmbeddedTypeTransfer $typeTransfer): string
+    private function getPropertyType(DefinitionEmbeddedTypeTransfer $embeddedTypeTransfer): string
     {
-        if ($typeTransfer->namespace === null) {
-            return $typeTransfer->name;
+        $propertyType = $embeddedTypeTransfer->name;
+
+        if ($embeddedTypeTransfer->namespace !== null) {
+            return $this->enforceTransferInterface($propertyType);
         }
 
-        return $this->enforceTransferInterface($typeTransfer->name);
+        return $propertyType;
     }
 }

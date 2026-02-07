@@ -69,8 +69,8 @@ TEMPLATE;
     private function renderProperty(DefinitionPropertyTransfer $propertyTransfer): string
     {
         return match (true) {
-            $propertyTransfer->buildInType !== null
-                => $this->renderBuildInType($propertyTransfer),
+            $propertyTransfer->builtInType !== null
+                => $this->renderBuiltInType($propertyTransfer),
 
             $propertyTransfer->transferType !== null
                 => $this->renderTransferType($propertyTransfer),
@@ -125,22 +125,22 @@ TEMPLATE;
         );
     }
 
-    private function renderBuildInType(DefinitionPropertyTransfer $propertyTransfer): string
+    private function renderBuiltInType(DefinitionPropertyTransfer $propertyTransfer): string
     {
-        /** @var \Picamator\TransferObject\Generated\DefinitionBuildInTypeTransfer $buildInType */
-        $buildInType = $propertyTransfer->buildInType;
+        /** @var \Picamator\TransferObject\Generated\DefinitionBuiltInTypeTransfer $builtInType */
+        $builtInType = $propertyTransfer->builtInType;
 
-        return $buildInType->docBlock
+        return $builtInType->docBlock
             ? sprintf(
                 self::TYPE_WITH_DOC_BLOCK_TEMPLATE,
                 $propertyTransfer->propertyName,
-                $buildInType->name->value,
-                $buildInType->docBlock,
+                $builtInType->name->value,
+                $builtInType->docBlock,
             )
             : sprintf(
                 self::TYPE_TEMPLATE,
                 $propertyTransfer->propertyName,
-                $buildInType->name->value,
+                $builtInType->name->value,
             );
     }
 }

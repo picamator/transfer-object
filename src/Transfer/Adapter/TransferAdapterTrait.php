@@ -61,7 +61,7 @@ trait TransferAdapterTrait
      */
     public function count(): int
     {
-        return count($this->getPublicProperties());
+        return \count($this->getPublicProperties());
     }
 
     /**
@@ -119,21 +119,21 @@ trait TransferAdapterTrait
 
     private function resolveValue(string $typeReflection, mixed $value): mixed
     {
-        $type = str_replace('?', '', $typeReflection);
+        $type = \str_replace('?', '', $typeReflection);
 
-        if (is_string($value)) {
+        if (\is_string($value)) {
             return $this->resolveStringValue($type, $value);
         }
 
-        if (is_int($value)) {
+        if (\is_int($value)) {
             return $this->resolveIntValue($type, $value);
         }
 
-        if (is_array($value)) {
+        if (\is_array($value)) {
             return $this->resolveArrayValue($type, $value);
         }
 
-        if (is_float($value)) {
+        if (\is_float($value)) {
             return $this->resolveFloatValue($type, $value);
         }
 
@@ -155,7 +155,7 @@ trait TransferAdapterTrait
 
     private function resolveIntValue(string $type, int $value): object|int|null
     {
-        if (is_subclass_of($type, BackedEnum::class)) {
+        if (\is_subclass_of($type, BackedEnum::class)) {
             return $type::tryFrom($value);
         }
 
@@ -184,11 +184,11 @@ trait TransferAdapterTrait
             return new DateTimeImmutable($value);
         }
 
-        if (is_subclass_of($type, BackedEnum::class)) {
+        if (\is_subclass_of($type, BackedEnum::class)) {
             return $type::tryFrom($value);
         }
 
-        if (is_numeric($value) && $this->isBcMathType($type)) {
+        if (\is_numeric($value) && $this->isBcMathType($type)) {
             return new Number($value);
         }
 
@@ -202,11 +202,11 @@ trait TransferAdapterTrait
      */
     private function resolveArrayValue(string $type, array $value): object|array
     {
-        if (is_subclass_of($type, AbstractTransfer::class)) {
+        if (\is_subclass_of($type, AbstractTransfer::class)) {
             return new $type($value);
         }
 
-        if (is_subclass_of($type, TransferInterface::class)) {
+        if (\is_subclass_of($type, TransferInterface::class)) {
             /** @var array<string, mixed> $value */
             return new $type()->fromArray($value);
         }
@@ -263,7 +263,7 @@ trait TransferAdapterTrait
     private function isBcMathLoaded(): bool
     {
         /** @var bool $isLoaded */
-        static $isLoaded = extension_loaded('bcmath');
+        static $isLoaded = \extension_loaded('bcmath');
 
         return $isLoaded;
     }

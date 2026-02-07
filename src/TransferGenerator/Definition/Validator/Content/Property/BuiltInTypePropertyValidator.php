@@ -8,7 +8,7 @@ use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
-class BuildInTypePropertyValidator implements PropertyValidatorInterface
+class BuiltInTypePropertyValidator implements PropertyValidatorInterface
 {
     use ValidatorMessageTrait;
 
@@ -21,18 +21,18 @@ class BuildInTypePropertyValidator implements PropertyValidatorInterface
 
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
-        $buildInType = $propertyTransfer->buildInType;
+        $builtInType = $propertyTransfer->builtInType;
 
-        return $buildInType !== null && !isset(self::$successCache[$buildInType->name->value]);
+        return $builtInType !== null && !isset(self::$successCache[$builtInType->name->value]);
     }
 
     public function validate(DefinitionPropertyTransfer $propertyTransfer): ?ValidatorMessageTransfer
     {
-        /** @var \Picamator\TransferObject\Generated\DefinitionBuildInTypeTransfer $buildInTypeTransfer */
-        $buildInTypeTransfer = $propertyTransfer->buildInType;
+        /** @var \Picamator\TransferObject\Generated\DefinitionBuiltInTypeTransfer $builtInTypeTransfer */
+        $builtInTypeTransfer = $propertyTransfer->builtInType;
 
-        if ($buildInTypeTransfer->name->isAllowed()) {
-            self::$successCache[$buildInTypeTransfer->name->value] = true;
+        if ($builtInTypeTransfer->name->isAllowed()) {
+            self::$successCache[$builtInTypeTransfer->name->value] = true;
 
             return null;
         }
@@ -47,7 +47,7 @@ class BuildInTypePropertyValidator implements PropertyValidatorInterface
         return sprintf(
             self::UNSUPPORTED_TYPE_ERROR_MESSAGE_TEMPLATE,
             $propertyTransfer->propertyName,
-            $propertyTransfer->buildInType?->name->value ?? '',
+            $propertyTransfer->builtInType?->name->value ?? '',
         );
     }
 }
