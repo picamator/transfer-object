@@ -5,7 +5,6 @@
          colors="true"
          stderr="true"
          requireSealedMockObjects="true"
-         beStrictAboutTestsThatDoNotTestAnything="false"
          displayDetailsOnPhpunitDeprecations="true"
          displayDetailsOnTestsThatTriggerDeprecations="true"
          displayDetailsOnTestsThatTriggerErrors="true"
