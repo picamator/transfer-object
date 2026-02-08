@@ -36,7 +36,8 @@ class JsonReaderTest extends TestCase
         // Expect
         $this->filesystemStub
             ->method('readFile')
-            ->willThrowException(new FilesystemException());
+            ->willThrowException(new FilesystemException())
+            ->seal();
 
         $this->expectException(JsonReaderException::class);
 
@@ -54,7 +55,8 @@ class JsonReaderTest extends TestCase
         // Expect
         $this->filesystemStub
             ->method('readFile')
-            ->willReturn($jsonString);
+            ->willReturn($jsonString)
+            ->seal();
 
         // Act
         $actual = $this->reader->getJsonContent(self::FILE_PATH);

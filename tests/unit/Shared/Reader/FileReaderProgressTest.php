@@ -52,7 +52,8 @@ class FileReaderProgressTest extends TestCase
         $this->fileReaderMock->expects($this->once())
             ->method('readFile')
             ->with($filename)
-            ->willReturn($contentGenerator());
+            ->willReturn($contentGenerator())
+            ->seal();
 
         $this->fileReaderProgressMock->expects($this->once())
             ->method('fileExists')
@@ -62,7 +63,8 @@ class FileReaderProgressTest extends TestCase
         $this->fileReaderProgressMock->expects($this->once())
             ->method('filesize')
             ->with($filename)
-            ->willReturn($filesize);
+            ->willReturn($filesize)
+            ->seal();
 
         // Act
         $actual = $this->fileReaderProgressMock->readFile($filename)->current();
@@ -84,7 +86,8 @@ class FileReaderProgressTest extends TestCase
 
         // Expect
         $this->fileReaderMock->expects($this->never())
-            ->method('readFile');
+            ->method('readFile')
+            ->seal();
 
         $this->fileReaderProgressMock->expects($this->once())
             ->method('fileExists')
@@ -94,7 +97,8 @@ class FileReaderProgressTest extends TestCase
         $this->fileReaderProgressMock->expects($this->once())
             ->method('filesize')
             ->with($filename)
-            ->willReturn($filesize);
+            ->willReturn($filesize)
+            ->seal();
 
         // Expect
         $this->expectException(FileReaderException::class);
@@ -111,7 +115,8 @@ class FileReaderProgressTest extends TestCase
 
         // Expect
         $this->fileReaderMock->expects($this->never())
-            ->method('readFile');
+            ->method('readFile')
+            ->seal();
 
         $this->fileReaderProgressMock->expects($this->once())
             ->method('fileExists')
@@ -119,7 +124,8 @@ class FileReaderProgressTest extends TestCase
             ->willReturn(false);
 
         $this->fileReaderProgressMock->expects($this->never())
-            ->method('filesize');
+            ->method('filesize')
+            ->seal();
 
         // Expect
         $this->expectException(FileReaderException::class);

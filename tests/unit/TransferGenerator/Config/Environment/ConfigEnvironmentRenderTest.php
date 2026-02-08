@@ -39,7 +39,8 @@ class ConfigEnvironmentRenderTest extends TestCase
             ->willReturn($envProjectRoot);
 
         $this->renderMock->expects($this->never())
-            ->method('getWorkingDir');
+            ->method('getWorkingDir')
+            ->seal();
 
         // Act
         $this->renderMock->renderProjectRoot($configPath);
@@ -64,7 +65,8 @@ class ConfigEnvironmentRenderTest extends TestCase
 
         $this->renderMock->expects($this->once())
             ->method('getWorkingDir')
-            ->willReturn($workingDirectory);
+            ->willReturn($workingDirectory)
+            ->seal();
 
         // Act
         $actual = $this->renderMock->renderProjectRoot($configPath);

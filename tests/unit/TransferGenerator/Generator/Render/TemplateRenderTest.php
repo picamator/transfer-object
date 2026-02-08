@@ -50,7 +50,8 @@ class TemplateRenderTest extends TestCase
 
         $this->builderStub
             ->method('createTemplateTransfer')
-            ->willReturn($templateTransfer);
+            ->willReturn($templateTransfer)
+            ->seal();
 
         // Act
         $actual = $this->render->renderTemplate($definitionTransfer);

@@ -53,11 +53,13 @@ class PreProcessCommandTest extends TestCase
 
         $this->configLoaderStub
             ->method('loadConfig')
-            ->willReturn($configTransfer);
+            ->willReturn($configTransfer)
+            ->seal();
 
         $this->filesystemStub
             ->method('createTempDir')
-            ->willThrowException(new FilesystemException());
+            ->willThrowException(new FilesystemException())
+            ->seal();
 
         // Act
         $actual = $this->command->preProcess($configPath);

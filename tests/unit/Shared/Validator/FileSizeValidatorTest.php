@@ -35,7 +35,8 @@ class FileSizeValidatorTest extends TestCase
         $this->validatorMock->expects($this->once())
             ->method('filesize')
             ->with($path)
-            ->willReturn(false);
+            ->willReturn(false)
+            ->seal();
 
         // Act
         $actual = $this->validatorMock->validate($path);
@@ -55,7 +56,8 @@ class FileSizeValidatorTest extends TestCase
         $this->validatorMock->expects($this->once())
             ->method('filesize')
             ->with($path)
-            ->willReturn(self::MAX_FILE_SIZE_BYTES + 10);
+            ->willReturn(self::MAX_FILE_SIZE_BYTES + 10)
+            ->seal();
 
         // Act
         $actual = $this->validatorMock->validate($path);

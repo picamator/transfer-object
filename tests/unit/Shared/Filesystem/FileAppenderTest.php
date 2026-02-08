@@ -44,7 +44,8 @@ class FileAppenderTest extends TestCase
         $this->fileAppenderMock->expects($this->once())
             ->method('fopen')
             ->with(self::FILE_NAME)
-            ->willReturn(false);
+            ->willReturn(false)
+            ->seal();
 
         $this->expectException(FileAppenderException::class);
 
@@ -67,7 +68,8 @@ class FileAppenderTest extends TestCase
         $this->fileAppenderMock->expects($this->once())
             ->method('fwrite')
             ->with($this->isResource(), self::FILE_CONTENT)
-            ->willReturn(false);
+            ->willReturn(false)
+            ->seal();
 
         $this->expectException(FileAppenderException::class);
 
@@ -90,7 +92,8 @@ class FileAppenderTest extends TestCase
         $this->fileAppenderMock->expects($this->exactly(2))
             ->method('fwrite')
             ->with($this->isResource(), self::FILE_CONTENT)
-            ->willReturn(1);
+            ->willReturn(1)
+            ->seal();
 
         // Act
         $this->fileAppenderMock->appendToFile(self::FILE_NAME, self::FILE_CONTENT);
@@ -116,7 +119,8 @@ class FileAppenderTest extends TestCase
 
         $this->fileAppenderMock->expects($this->once())
             ->method('fclose')
-            ->willReturn(true);
+            ->willReturn(true)
+            ->seal();
 
         // Act
         $this->fileAppenderMock->appendToFile(self::FILE_NAME, self::FILE_CONTENT);
@@ -131,7 +135,8 @@ class FileAppenderTest extends TestCase
 
         // Expect
         $this->fileAppenderMock->expects($this->never())
-            ->method('fclose');
+            ->method('fclose')
+            ->seal();
 
         // Act
         $this->fileAppenderMock->closeFile($fileName);
@@ -156,7 +161,8 @@ class FileAppenderTest extends TestCase
 
         $this->fileAppenderMock->expects($this->once())
             ->method('fclose')
-            ->willReturn(false);
+            ->willReturn(false)
+            ->seal();
 
         $this->expectException(FileAppenderException::class);
 

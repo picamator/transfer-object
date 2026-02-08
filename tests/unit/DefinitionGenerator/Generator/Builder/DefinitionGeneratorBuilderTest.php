@@ -57,16 +57,20 @@ class DefinitionGeneratorBuilderTest extends TestCase
         $this->pathValidatorMock->expects($this->once())
             ->method('validate')
             ->with($definitionPath)
-            ->willReturn($messageTransfer);
+            ->willReturn($messageTransfer)
+            ->seal();
 
         $this->fileSizeValidatorMock->expects($this->never())
-            ->method('validate');
+            ->method('validate')
+            ->seal();
 
         $this->classNameValidatorMock->expects($this->never())
-            ->method('validate');
+            ->method('validate')
+            ->seal();
 
         $this->jsonReaderMock->expects($this->never())
-            ->method('getJsonContent');
+            ->method('getJsonContent')
+            ->seal();
 
         $this->expectException(DefinitionGeneratorException::class);
 
@@ -84,18 +88,22 @@ class DefinitionGeneratorBuilderTest extends TestCase
         // Expect
         $this->pathValidatorMock->expects($this->once())
             ->method('validate')
-            ->with($definitionPath);
+            ->with($definitionPath)
+            ->seal();
 
         $this->fileSizeValidatorMock->expects($this->once())
             ->method('validate')
             ->with($definitionPath)
-            ->willReturn($messageTransfer);
+            ->willReturn($messageTransfer)
+            ->seal();
 
         $this->classNameValidatorMock->expects($this->never())
-            ->method('validate');
+            ->method('validate')
+            ->seal();
 
         $this->jsonReaderMock->expects($this->never())
-            ->method('getJsonContent');
+            ->method('getJsonContent')
+            ->seal();
 
         $this->expectException(DefinitionGeneratorException::class);
 
@@ -114,16 +122,20 @@ class DefinitionGeneratorBuilderTest extends TestCase
         $this->classNameValidatorMock->expects($this->once())
             ->method('validate')
             ->with($className)
-            ->willReturn($messageTransfer);
+            ->willReturn($messageTransfer)
+            ->seal();
 
         $this->pathValidatorMock->expects($this->never())
-            ->method('validate');
+            ->method('validate')
+            ->seal();
 
         $this->fileSizeValidatorMock->expects($this->never())
-            ->method('validate');
+            ->method('validate')
+            ->seal();
 
         $this->jsonReaderMock->expects($this->never())
-            ->method('getJsonContent');
+            ->method('getJsonContent')
+            ->seal();
 
         $this->expectException(DefinitionGeneratorException::class);
         $this->expectExceptionMessage($messageTransfer->errorMessage);
@@ -143,16 +155,20 @@ class DefinitionGeneratorBuilderTest extends TestCase
         $this->jsonReaderMock->expects($this->once())
             ->method('getJsonContent')
             ->with($jsonPath)
-            ->willThrowException(new JsonReaderException($messageTransfer->errorMessage));
+            ->willThrowException(new JsonReaderException($messageTransfer->errorMessage))
+            ->seal();
 
         $this->classNameValidatorMock->expects($this->never())
-            ->method('validate');
+            ->method('validate')
+            ->seal();
 
         $this->pathValidatorMock->expects($this->never())
-            ->method('validate');
+            ->method('validate')
+            ->seal();
 
         $this->fileSizeValidatorMock->expects($this->never())
-            ->method('validate');
+            ->method('validate')
+            ->seal();
 
         $this->expectException(JsonReaderException::class);
         $this->expectExceptionMessage($messageTransfer->errorMessage);

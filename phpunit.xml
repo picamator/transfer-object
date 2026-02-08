@@ -4,6 +4,7 @@
          bootstrap="./vendor/autoload.php"
          colors="true"
          stderr="true"
+         requireSealedMockObjects="true"
          beStrictAboutTestsThatDoNotTestAnything="false"
          displayDetailsOnPhpunitDeprecations="true"
          displayDetailsOnTestsThatTriggerDeprecations="true"

@@ -112,7 +112,8 @@ class TransferGeneratorBulkCommandTest extends TestCase
         // Expect
         $generatorFacadeMock->expects($this->once())
             ->method('getTransferGeneratorBulkFiber')
-            ->willReturn($fiber);
+            ->willReturn($fiber)
+            ->seal();
 
         // Act
         $commandTester->execute(

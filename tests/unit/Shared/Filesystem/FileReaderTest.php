@@ -53,7 +53,8 @@ class FileReaderTest extends TestCase
             ->method('feof');
 
         $this->fileReaderMock->expects($this->never())
-            ->method('fclose');
+            ->method('fclose')
+            ->seal();
 
         $this->expectException(FileReaderException::class);
 
@@ -86,7 +87,8 @@ class FileReaderTest extends TestCase
         $this->fileReaderMock->expects($this->once())
             ->method('fclose')
             ->with($this->isResource())
-            ->willReturn(true);
+            ->willReturn(true)
+            ->seal();
 
         $this->expectException(FileReaderException::class);
 
@@ -119,7 +121,8 @@ class FileReaderTest extends TestCase
         $this->fileReaderMock->expects($this->once())
             ->method('fclose')
             ->with($this->isResource())
-            ->willReturn(false);
+            ->willReturn(false)
+            ->seal();
 
         $this->expectException(FileReaderException::class);
 
@@ -153,7 +156,8 @@ class FileReaderTest extends TestCase
         $this->fileReaderMock->expects($this->once())
             ->method('fclose')
             ->with($this->isResource())
-            ->willReturn(true);
+            ->willReturn(true)
+            ->seal();
 
         // Act
         $actual = $this->fileReaderMock->readFile(self::FILE_NAME);

@@ -53,11 +53,13 @@ class GeneratorFilesystemTest extends TestCase
 
         $this->configStub
             ->method('getTransferPath')
-            ->willReturn($transferPath);
+            ->willReturn($transferPath)
+            ->seal();
 
         $this->filesystemStub
             ->method('exists')
-            ->willReturn(true);
+            ->willReturn(true)
+            ->seal();
 
         // Expect
         $this->expectException(TransferGeneratorException::class);

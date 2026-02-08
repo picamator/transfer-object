@@ -36,7 +36,8 @@ class NumberTypePropertyValidatorTest extends TestCase
         // Expect
         $this->validatorMock->expects($this->once())
             ->method('isBcMathLoaded')
-            ->willReturn(false);
+            ->willReturn(false)
+            ->seal();
 
         // Act
         $actual = $this->validatorMock->validate($propertyTransfer);
@@ -69,7 +70,8 @@ class NumberTypePropertyValidatorTest extends TestCase
         // Expect
         $this->validatorMock->expects($this->once())
             ->method('isBcMathLoaded')
-            ->willReturn(true);
+            ->willReturn(true)
+            ->seal();
 
         // Act
         $actual = $this->validatorMock->validate($propertyTransfer);
