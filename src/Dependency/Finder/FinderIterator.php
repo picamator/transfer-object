@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Dependency\Finder;
 
-use IteratorAggregate;
 use Countable;
+use IteratorAggregate;
 use Symfony\Component\Finder\Finder;
 use Traversable;
 

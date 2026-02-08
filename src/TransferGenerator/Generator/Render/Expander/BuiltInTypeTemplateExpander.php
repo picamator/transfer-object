@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
+use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
+use Picamator\TransferObject\Generated\TemplateTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuiltInTypeEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\DocBlockTemplateEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\InitiatorAttributeEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransformerAttributeEnum;
-use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
-use Picamator\TransferObject\Generated\TemplateTransfer;
 
 final class BuiltInTypeTemplateExpander extends AbstractTemplateExpander
 {

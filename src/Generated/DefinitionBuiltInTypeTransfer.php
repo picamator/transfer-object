@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\Generated;
 
-use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuiltInTypeEnum;
 use Picamator\TransferObject\Transfer\AbstractTransfer;
 use Picamator\TransferObject\Transfer\Attribute\Transformer\EnumTransformerAttribute;
+use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuiltInTypeEnum;
 
 /**
  * Specification:

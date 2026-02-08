@@ -8,9 +8,9 @@ use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Enum\BuiltInTypeEnum;
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\DocBlockTemplateEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\InitiatorAttributeEnum;
 use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransformerAttributeTemplateEnum;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\DocBlockTemplateEnum;
 
 final class CollectionTypeTemplateExpander extends AbstractTemplateExpander
 {
