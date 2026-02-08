@@ -71,27 +71,21 @@ class FileReaderTest extends TestCase
         $this->fileReaderMock->expects($this->once())
             ->method('fopen')
             ->with(self::FILE_NAME)
-            ->id('fopen')
             ->willReturn($file);
 
         $this->fileReaderMock->expects($this->once())
             ->method('fgets')
             ->with($this->isResource())
-            ->id('fgets')
-            ->after('fopen')
             ->willReturn(false);
 
         $this->fileReaderMock->expects($this->once())
             ->method('feof')
             ->with($this->isResource())
-            ->id('feof')
-            ->after('fgets')
             ->willReturn(false);
 
         $this->fileReaderMock->expects($this->once())
             ->method('fclose')
             ->with($this->isResource())
-            ->after('feof')
             ->willReturn(true);
 
         $this->expectException(FileReaderException::class);
@@ -110,27 +104,21 @@ class FileReaderTest extends TestCase
         $this->fileReaderMock->expects($this->once())
             ->method('fopen')
             ->with(self::FILE_NAME)
-            ->id('fopen')
             ->willReturn($file);
 
         $this->fileReaderMock->expects($this->once())
             ->method('fgets')
             ->with($this->isResource())
-            ->id('fgets')
-            ->after('fopen')
             ->willReturn(false);
 
         $this->fileReaderMock->expects($this->once())
             ->method('feof')
             ->with($this->isResource())
-            ->id('feof')
-            ->after('fgets')
             ->willReturn(true);
 
         $this->fileReaderMock->expects($this->once())
             ->method('fclose')
             ->with($this->isResource())
-            ->after('feof')
             ->willReturn(false);
 
         $this->expectException(FileReaderException::class);
@@ -150,27 +138,21 @@ class FileReaderTest extends TestCase
         $this->fileReaderMock->expects($this->once())
             ->method('fopen')
             ->with(self::FILE_NAME)
-            ->id('fopen')
             ->willReturn($file);
 
         $this->fileReaderMock->expects($this->exactly(3))
             ->method('fgets')
             ->with($this->isResource())
-            ->id('fgets')
-            ->after('fopen')
             ->willReturn('', $expected[0], false);
 
         $this->fileReaderMock->expects($this->once())
             ->method('feof')
             ->with($this->isResource())
-            ->id('feof')
-            ->after('fgets')
             ->willReturn(true);
 
         $this->fileReaderMock->expects($this->once())
             ->method('fclose')
             ->with($this->isResource())
-            ->after('feof')
             ->willReturn(true);
 
         // Act
