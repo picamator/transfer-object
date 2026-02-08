@@ -132,7 +132,7 @@ class FileReaderTest extends TestCase
 
         $this->fileReaderMock->expects($this->exactly(3))
             ->method('fgets')
-            ->willReturnOnConsecutiveCalls('', $expected[0], false);
+            ->willReturn('', $expected[0], false);
 
         $this->fileReaderMock->expects($this->once())
             ->method('feof')
