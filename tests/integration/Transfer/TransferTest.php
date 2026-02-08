@@ -255,7 +255,7 @@ class TransferTest extends TestCase
         $actual = array_filter($actual);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        $this->assertArraysAreIdentical($expected, $actual);
     }
 
     #[TestDox('Enum transformation from and to array')]
@@ -273,7 +273,7 @@ class TransferTest extends TestCase
         $actual = $enumTransfer->toArray();
 
         // Assert
-        $this->assertSame($expected, $actual);
+        $this->assertArraysAreIdentical($expected, $actual);
     }
 
     #[TestDox('Transfer serialize')]

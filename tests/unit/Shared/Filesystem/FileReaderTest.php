@@ -146,6 +146,6 @@ class FileReaderTest extends TestCase
         $actual = $this->fileReaderMock->readFile(self::FILE_NAME);
 
         // Assert
-        $this->assertSame($expected, iterator_to_array($actual));
+        $this->assertArraysAreIdentical($expected, iterator_to_array($actual));
     }
 }

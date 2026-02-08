@@ -60,6 +60,6 @@ class JsonReaderTest extends TestCase
         $actual = $this->reader->getJsonContent(self::FILE_PATH);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        $this->assertArraysAreIdentical($expected, $actual);
     }
 }

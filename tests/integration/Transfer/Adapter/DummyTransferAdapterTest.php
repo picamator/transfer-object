@@ -32,7 +32,7 @@ class DummyTransferAdapterTest extends TestCase
         $actual = $bookmarkData->toArray();
 
         // Assert
-        $this->assertSame([], $actual);
+        $this->assertArraysAreIdentical([], $actual);
     }
 
     #[TestDox('Transfer count')]
@@ -52,7 +52,7 @@ class DummyTransferAdapterTest extends TestCase
         $actual = iterator_to_array($this->bookmarkData);
 
         // Assert
-        $this->assertSame([], $actual);
+        $this->assertArraysAreIdentical([], $actual);
     }
 
     #[TestDox('Transfer debugInfo')]
@@ -62,7 +62,7 @@ class DummyTransferAdapterTest extends TestCase
         $actual = $this->bookmarkData->__debugInfo();
 
         // Assert
-        $this->assertSame([], $actual);
+        $this->assertArraysAreIdentical([], $actual);
     }
 
     #[TestDox('Transfer jsonSerialize')]

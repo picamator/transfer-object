@@ -59,7 +59,7 @@ class TransferAdapterTest extends TestCase
         $actual = $bookData->toArray();
 
         // Assert
-        $this->assertSame($expected, $actual);
+        $this->assertArraysAreIdentical($expected, $actual);
     }
 
     #[TestDox('Transformation fromArray on partly initialized properties')]
@@ -75,7 +75,7 @@ class TransferAdapterTest extends TestCase
         $actual = $bookAuthorData->toArray();
 
         // Assert
-        $this->assertSame($expected, $actual);
+        $this->assertArraysAreIdentical($expected, $actual);
     }
 
     #[TestDox('Transformation fromArray and toArray with reserved properties')]
@@ -95,7 +95,7 @@ class TransferAdapterTest extends TestCase
         $actual = $reserverPropertyData->toArray();
 
         // Assert
-        $this->assertSame($expected, $actual);
+        $this->assertArraysAreIdentical($expected, $actual);
         $this->assertSame($expected[ReservedAdvancedTransfer::DATA_PROP]['_data'], $reserverPropertyData->data->_data);
     }
 
@@ -124,7 +124,7 @@ class TransferAdapterTest extends TestCase
         $actual = iterator_to_array($bookData);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        $this->assertArraysAreIdentical($expected, $actual);
     }
 
     #[TestDox('Iterator on partly initialized properties')]
@@ -140,7 +140,7 @@ class TransferAdapterTest extends TestCase
         $actual = iterator_to_array($bookAuthorData);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        $this->assertArraysAreIdentical($expected, $actual);
     }
 
     #[TestDox('Transfer clone')]
@@ -178,7 +178,7 @@ class TransferAdapterTest extends TestCase
         $clonedBookData = clone $bookData;
 
         // Assert
-        $this->assertSame($expected, $clonedBookData->toArray());
+        $this->assertArraysAreIdentical($expected, $clonedBookData->toArray());
         $this->assertSame($bookData->country, $clonedBookData->country);
         $this->assertNotSame($bookData, $clonedBookData);
         $this->assertNotSame($bookData->author, $clonedBookData->author);
@@ -200,7 +200,7 @@ class TransferAdapterTest extends TestCase
         $actual = $bookData->__debugInfo();
 
         // Assert
-        $this->assertSame($expected, $actual);
+        $this->assertArraysAreIdentical($expected, $actual);
     }
 
     #[TestDox('Transfer jsonSerialize')]
@@ -211,11 +211,13 @@ class TransferAdapterTest extends TestCase
         $expected = $bookData->toArray();
 
         // Act
-        $actual = json_encode($bookData, flags: JSON_THROW_ON_ERROR);
-        $actual = json_decode($actual, associative: true, flags: JSON_THROW_ON_ERROR);
+        $encodedBookData = json_encode($bookData, flags: JSON_THROW_ON_ERROR);
+        /** @var array<mixed> $actual */
+        $actual = json_decode($encodedBookData, associative: true, flags: JSON_THROW_ON_ERROR);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        $this->assertNotEmpty($actual);
+        $this->assertArraysAreIdentical($expected, $actual);
     }
 
     #[TestDox('Transformation date time $dateTime to $expected by toArray')]
