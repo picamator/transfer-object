@@ -63,7 +63,7 @@ class DefinitionRenderTest extends TestCase
 
     public static function successfulRenderDataProvider(): Generator
     {
-        yield 'transfer object with build in property type' => [
+        yield 'transfer object with built-in property type' => [
             'propertyData' => [
                 DefinitionPropertyTransfer::PROPERTY_NAME_PROP => 'testProperty',
                 DefinitionPropertyTransfer::BUILT_IN_TYPE_PROP => [

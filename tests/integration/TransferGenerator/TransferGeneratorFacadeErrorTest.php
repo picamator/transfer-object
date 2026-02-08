@@ -113,7 +113,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
             'expectedMessage' => 'Invalid class name',
         ];
 
-        yield 'missed property type should return error' => [
+        yield 'missing property type should return error' => [
             'configCaseName' => 'missed-type',
             'expectedMessage' => 'Property "addressUuid" type definition is missing or set multiple times.',
         ];
@@ -143,7 +143,7 @@ class TransferGeneratorFacadeErrorTest extends TestCase
             'expectedMessage' => 'Properties for class "AddressStatisticsTransfer" are not defined.',
         ];
 
-        yield 'definitions not found should return error' => [
+        yield 'definitions were not found should return error' => [
             'configCaseName' => 'empty-definition-directory',
             'expectedMessage' => 'Missing Transfer Object definitions.',
         ];

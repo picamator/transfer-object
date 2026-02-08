@@ -58,7 +58,7 @@ class TransferTypeBuilderExpanderTest extends TestCase
      */
     public static function applicableTransferTypeDataProvider(): Generator
     {
-        yield 'type is array and property value is an array with key valid variable name should expect true' => [
+        yield 'type is array and property value is an array with a valid variable name key should expect true' => [
             'type' => GetTypeEnum::array,
             'propertyValue' => [
                 'product' => ['sku' => 123],
@@ -86,7 +86,7 @@ class TransferTypeBuilderExpanderTest extends TestCase
             'expected' => false,
         ];
 
-        yield 'type is array and property value is an array with key is invalid variable name should expect false' => [
+        yield 'type is array and property value is an array with an invalid variable name key should expect false' => [
             'type' => GetTypeEnum::array,
             'propertyValue' => [
                 '2024-12-26' => ['sku' => 123],

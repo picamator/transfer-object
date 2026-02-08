@@ -64,7 +64,7 @@ class TemplateHelperTest extends TestCase
             'expected' => '',
         ];
 
-        yield 'property is nullable but with intersection type should return empty string' => [
+        yield 'property is nullable but with an intersection type should return an empty string' => [
             'templateData' => [
                 TemplateTransfer::PROPERTIES_PROP => [
                     'test' => 'TestTransfer&TTransferInterface',
@@ -90,7 +90,7 @@ class TemplateHelperTest extends TestCase
             'expected' => 'null|',
         ];
 
-        yield 'property is nullable without intersection or union should return null type' => [
+        yield 'property is nullable without intersection or union should return the null type' => [
             'templateData' => [
                 TemplateTransfer::PROPERTIES_PROP => [
                     'test' => 'TestTransfer',
