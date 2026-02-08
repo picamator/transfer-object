@@ -189,8 +189,8 @@ class TransferGeneratorFacadeErrorTest extends TestCase
         ];
     }
 
-    #[TestDox('Fail generate transfer objects')]
-    public function testFailGenerateTransferObjects(): void
+    #[TestDox('Failed to generate transfer objects')]
+    public function testFailedToGenerateTransferObjects(): void
     {
         // Arrange
         $configPath = $this->getConfigPath('invalid-class-name');

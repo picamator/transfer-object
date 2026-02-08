@@ -78,7 +78,7 @@ class FileReaderProgressTest extends TestCase
 
     #[TestWith([0])]
     #[TestWith([false])]
-    #[TestDox('Empty file size "$filesize" should throw exception')]
+    #[TestDox('Empty file "$filesize" should throw exception')]
     public function testEmptyFileShouldThrowException(int|false $filesize): void
     {
         // Arrange
@@ -107,8 +107,8 @@ class FileReaderProgressTest extends TestCase
         $this->fileReaderProgressMock->readFile($filename)->current();
     }
 
-    #[TestDox('File not exist should throw exception')]
-    public function testFileNotExistShouldThrowException(): void
+    #[TestDox('File does not exist should throw exception')]
+    public function testFileDoesNotExistShouldThrowException(): void
     {
         // Arrange
         $filename = 'some-path/test.txt';

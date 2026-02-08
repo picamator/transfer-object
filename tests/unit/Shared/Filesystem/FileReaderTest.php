@@ -37,8 +37,8 @@ class FileReaderTest extends TestCase
         self::closeFile();
     }
 
-    #[TestDox('Failed open file should throw exception')]
-    public function testFailOpenFileShouldThrowException(): void
+    #[TestDox('Failed to open file should throw exception')]
+    public function testFailedToOpenFileShouldThrowException(): void
     {
         // Expect
         $this->fileReaderMock->expects($this->once())
@@ -62,8 +62,8 @@ class FileReaderTest extends TestCase
         $this->fileReaderMock->readFile(self::FILE_NAME)->current();
     }
 
-    #[TestDox('Failed read file should throw exception')]
-    public function testFailedReadFileShouldThrowException(): void
+    #[TestDox('Failed to read file should throw exception')]
+    public function testFailedToReadFileShouldThrowException(): void
     {
         // Arrange
         $file = self::openFile();
@@ -96,8 +96,8 @@ class FileReaderTest extends TestCase
         $this->fileReaderMock->readFile(self::FILE_NAME)->current();
     }
 
-    #[TestDox('Failed close file should throw exception')]
-    public function testFailedCloseFileShouldThrowException(): void
+    #[TestDox('Failed to close file should throw exception')]
+    public function testFailedToCloseFileShouldThrowException(): void
     {
         // Arrange
         $file = self::openFile();

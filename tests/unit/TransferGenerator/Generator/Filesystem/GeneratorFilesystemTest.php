@@ -40,8 +40,8 @@ class GeneratorFilesystemTest extends TestCase
         );
     }
 
-    #[TestDox('Duplication file write should throw exception')]
-    public function testDuplicationFileWriteShouldThrowException(): void
+    #[TestDox('Duplicate file write should throw exception')]
+    public function testDuplicateFileWriteShouldThrowException(): void
     {
         // Arrange
         $contentTransfer = new TransferGeneratorContentTransfer([

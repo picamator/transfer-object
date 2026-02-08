@@ -30,8 +30,8 @@ class JsonReaderTest extends TestCase
         $this->reader = new JsonReader($this->filesystemStub);
     }
 
-    #[TestDox('Failed getJsonContent should throw exception')]
-    public function testFailedGetJsonContentShouldThrowException(): void
+    #[TestDox('Failed to getJsonContent should throw exception')]
+    public function testFailedToGetJsonContentShouldThrowException(): void
     {
         // Expect
         $this->filesystemStub

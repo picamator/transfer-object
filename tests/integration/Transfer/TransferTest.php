@@ -352,8 +352,8 @@ class TransferTest extends TestCase
         ]);
     }
 
-    #[TestDox('Access required property before initialising should throw exception')]
-    public function testAccessRequiredPropertyBeforeInitialisingShouldThrowException(): void
+    #[TestDox('Access required property before initializing should throw exception')]
+    public function testAccessRequiredPropertyBeforeInitializingShouldThrowException(): void
     {
         // Arrange
         $requiredTransfer = new RequiredTransfer();
