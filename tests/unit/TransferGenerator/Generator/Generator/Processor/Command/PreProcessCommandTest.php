@@ -53,7 +53,6 @@ class PreProcessCommandTest extends TestCase
 
         $this->configLoaderStub
             ->method('loadConfig')
-            ->with($configPath)
             ->willReturn($configTransfer);
 
         $this->filesystemStub

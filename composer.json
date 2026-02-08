@@ -55,7 +55,7 @@
         "captainhook/captainhook": "^5.27",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-strict-rules": "^2.0",
-        "phpunit/phpunit": "^12.4",
+        "phpunit/phpunit": "^13.0",
         "slevomat/coding-standard": "^8.24",
         "squizlabs/php_codesniffer": "^4.0",
         "symfony/validator": "^8.0",
