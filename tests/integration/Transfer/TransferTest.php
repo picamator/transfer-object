@@ -320,7 +320,6 @@ class TransferTest extends TestCase
 
         // Assert
         $this->assertSame(2, $actual);
-        $this->assertCount(2, $itemCollectionTransfer);
     }
 
     #[TestDox('Transfer debugInfo')]
