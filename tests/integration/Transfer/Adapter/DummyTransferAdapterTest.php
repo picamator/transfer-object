@@ -19,7 +19,7 @@ class DummyTransferAdapterTest extends TestCase
         $this->bookmarkData = new BookmarkData();
     }
 
-    #[TestDox('Transformation fromArray and toArray')]
+    #[TestDox('Transformation fromArray() and toArray()')]
     public function testTransformationFromArrayToArray(): void
     {
         // Arrange
@@ -35,7 +35,7 @@ class DummyTransferAdapterTest extends TestCase
         $this->assertArraysAreIdentical([], $actual);
     }
 
-    #[TestDox('Transfer count')]
+    #[TestDox('Transfer count()')]
     public function testTransferCount(): void
     {
         // Act
@@ -55,7 +55,7 @@ class DummyTransferAdapterTest extends TestCase
         $this->assertArraysAreIdentical([], $actual);
     }
 
-    #[TestDox('Transfer debugInfo')]
+    #[TestDox('Transfer debugInfo()')]
     public function testTransferDebugInfo(): void
     {
         // Act

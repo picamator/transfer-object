@@ -17,7 +17,7 @@ readonly class DefinitionFinder implements DefinitionFinderInterface
 
     private const string FILE_NAME_PATTERN = '*.transfer.yml';
 
-    private const string DEFINITIONS_NOT_FOUND_ERROR_MESSAGE = 'Missed Transfer Object definitions.';
+    private const string DEFINITIONS_NOT_FOUND_ERROR_MESSAGE = 'Missing Transfer Object definitions.';
 
     public function __construct(
         private FinderInterface $finder,

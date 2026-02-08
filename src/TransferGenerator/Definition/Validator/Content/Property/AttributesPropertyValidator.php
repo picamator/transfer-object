@@ -18,7 +18,7 @@ readonly class AttributesPropertyValidator implements PropertyValidatorInterface
     private const string ATTRIBUTE_NOT_FOUND_ERROR_MESSAGE_TEMPLATE = 'Attribute "%s" not found.';
     private const string INVALID_ATTRIBUTE_ERROR_MESSAGE_TEMPLATE = 'Class "%s" is not an attribute.';
     private const string INVALID_ATTRIBUTE_TARGET_ERROR_MESSAGE_TEMPLATE
-        = 'Attribute "%s" is not allowed to target on properties.';
+        = 'Attribute "%s" is not allowed to target properties.';
 
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {

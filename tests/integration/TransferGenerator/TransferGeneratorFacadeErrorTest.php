@@ -140,12 +140,12 @@ class TransferGeneratorFacadeErrorTest extends TestCase
 
         yield 'definition file include class without properties should return error' => [
             'configCaseName' => 'empty-property-definition',
-            'expectedMessage' => 'Class "AddressStatisticsTransfer" properties were not defined.',
+            'expectedMessage' => 'Properties for class "AddressStatisticsTransfer" are not defined.',
         ];
 
         yield 'definitions not found should return error' => [
             'configCaseName' => 'empty-definition-directory',
-            'expectedMessage' => 'Missed Transfer Object definitions.',
+            'expectedMessage' => 'Missing Transfer Object definitions.',
         ];
 
         yield 'definition file is empty' => [

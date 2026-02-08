@@ -258,7 +258,7 @@ class TransferTest extends TestCase
         $this->assertArraysAreIdentical($expected, $actual);
     }
 
-    #[TestDox('Enum transformation from and to array')]
+    #[TestDox('Enum transformation fromArray() and toArray()')]
     public function testEnumTransformationFromToArray(): void
     {
         // Arrange
@@ -308,7 +308,7 @@ class TransferTest extends TestCase
         $this->assertArraysAreEqual($itemCollectionTransfer->toArray(), $decoded);
     }
 
-    #[TestDox('Transfer count')]
+    #[TestDox('Transfer count()')]
     public function testTransferCount(): void
     {
         // Arrange
@@ -322,7 +322,7 @@ class TransferTest extends TestCase
         $this->assertSame(2, $actual);
     }
 
-    #[TestDox('Transfer debugInfo')]
+    #[TestDox('Transfer debugInfo()')]
     public function testTransferDebugInfo(): void
     {
         // Arrange
@@ -337,7 +337,7 @@ class TransferTest extends TestCase
     }
 
     #[WithoutErrorHandler]
-    #[TestDox('Type mismatch fromArray should fail with error')]
+    #[TestDox('Type mismatch fromArray() should fail with error')]
     public function testTypeMismatchFromArrayShouldFailWithError(): void
     {
         // Arrange
@@ -531,7 +531,7 @@ class TransferTest extends TestCase
 
     #[RequiresPhpExtension('bcmath')]
     #[Depends('testGenerateBcMathTransfer')]
-    #[TestDox('Transformation transfer object BcMath fromArray to toArray with BcMath')]
+    #[TestDox('Transformation transfer object fromArray() and toArray() with BcMath')]
     public function testTransformationBcMathFromToArrayWhereArrayHasBcMath(): void
     {
         // Arrange

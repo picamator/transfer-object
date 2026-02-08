@@ -46,14 +46,14 @@ readonly class FileReaderProgress implements FileReaderProgressInterface
     {
         if (!$this->fileExists($filename)) {
             throw new FileReaderException(
-                sprintf('File "%s" is not exist.', $filename),
+                sprintf('File "%s" does not exist.', $filename),
             );
         }
 
         $fileSize = $this->filesize($filename);
         if ($fileSize === 0) {
             throw new FileReaderException(
-                sprintf('File size "%s" is empty.', $filename),
+                sprintf('File "%s" is empty.', $filename),
             );
         }
 

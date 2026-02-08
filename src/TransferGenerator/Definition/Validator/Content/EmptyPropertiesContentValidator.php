@@ -12,7 +12,7 @@ readonly class EmptyPropertiesContentValidator implements ContentValidatorInterf
 {
     use ValidatorMessageTrait;
 
-    private const string PROPERTY_ERROR_MESSAGE_TEMPLATE = 'Class "%s" properties were not defined.';
+    private const string PROPERTY_ERROR_MESSAGE_TEMPLATE = 'Properties for class "%s" are not defined.';
 
     public function validate(DefinitionContentTransfer $contentTransfer): ?ValidatorMessageTransfer
     {

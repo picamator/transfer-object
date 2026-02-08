@@ -21,7 +21,7 @@ use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ReservedAdvanc
 #[Group('transfer')]
 class TransferAdapterTest extends TestCase
 {
-    #[TestDox('Transformation fromArray and toArray')]
+    #[TestDox('Transformation fromArray() and toArray()')]
     public function testTransformationFromArrayToArray(): void
     {
         // Arrange
@@ -62,7 +62,7 @@ class TransferAdapterTest extends TestCase
         $this->assertArraysAreIdentical($expected, $actual);
     }
 
-    #[TestDox('Transformation fromArray on partly initialized properties')]
+    #[TestDox('Transformation fromArray() on partly initialized properties')]
     public function testTransformationFromArrayOnPartlyInitializedProperties(): void
     {
         // Arrange
@@ -99,7 +99,7 @@ class TransferAdapterTest extends TestCase
         $this->assertSame($expected[ReservedAdvancedTransfer::DATA_PROP]['_data'], $reserverPropertyData->data->_data);
     }
 
-    #[TestDox('Transfer count')]
+    #[TestDox('Transfer count()')]
     public function testTransferCount(): void
     {
         // Arrange
@@ -189,7 +189,7 @@ class TransferAdapterTest extends TestCase
         $this->assertNotSame($bookData->notes, $clonedBookData->notes);
     }
 
-    #[TestDox('Transfer debugInfo')]
+    #[TestDox('Transfer debugInfo()')]
     public function testDebugInfo(): void
     {
         // Arrange

@@ -81,7 +81,7 @@ class TransferGeneratorBulkCommandTest extends TestCase
 
         // Assert
         $this->assertSame(1, $this->commandTester->getStatusCode());
-        $this->assertStringContainsString('[ERROR] File size', $output);
+        $this->assertStringContainsString('empty', $output);
     }
 
     #[TestDox('Run command with valid configuration but invalid definition should show error message')]

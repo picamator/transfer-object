@@ -20,7 +20,7 @@ class FileAppender implements FileAppenderInterface
 
         if ($writeResult === false) {
             throw new FileAppenderException(
-                sprintf('Failed to write content "%s" into the file "%s".', $content, $filename),
+                sprintf('Failed to write content into the file "%s".', $filename),
             );
         }
     }
