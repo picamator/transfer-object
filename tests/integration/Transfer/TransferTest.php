@@ -80,7 +80,7 @@ class TransferTest extends TestCase
         // Assert
         // @phpstan-ignore method.alreadyNarrowedType
         $this->assertContainsOnlyInstancesOf(ItemTransfer::class, $itemCollectionTransfer->items);
-        $this->assertEquals($expected, $actual);
+        $this->assertArraysAreEqual($expected, $actual);
     }
 
     /**
@@ -289,7 +289,7 @@ class TransferTest extends TestCase
 
         // Assert
         $this->assertInstanceOf(ItemCollectionTransfer::class, $unserialized);
-        $this->assertEquals($itemCollectionTransfer->toArray(), $unserialized->toArray());
+        $this->assertArraysAreEqual($itemCollectionTransfer->toArray(), $unserialized->toArray());
     }
 
     #[TestDox('Transfer jsonSerialize')]
@@ -301,10 +301,11 @@ class TransferTest extends TestCase
 
         // Act
         $encoded = json_encode($itemCollectionTransfer, flags: JSON_THROW_ON_ERROR);
+        /** @var array<mixed> $decoded */
         $decoded = json_decode($encoded, true, flags: JSON_THROW_ON_ERROR);
 
         // Assert
-        $this->assertEquals($itemCollectionTransfer->toArray(), $decoded);
+        $this->assertArraysAreEqual($itemCollectionTransfer->toArray(), $decoded);
     }
 
     #[TestDox('Transfer count')]
@@ -318,7 +319,7 @@ class TransferTest extends TestCase
         $actual = $itemCollectionTransfer->count();
 
         // Assert
-        $this->assertEquals(2, $actual);
+        $this->assertSame(2, $actual);
         $this->assertCount(2, $itemCollectionTransfer);
     }
 
@@ -333,7 +334,7 @@ class TransferTest extends TestCase
         $actual = $itemCollectionTransfer->__debugInfo();
 
         // Assert
-        $this->assertEquals($itemCollectionTransfer->toArray(), $actual);
+        $this->assertArraysAreEqual($itemCollectionTransfer->toArray(), $actual);
     }
 
     #[WithoutErrorHandler]

@@ -34,7 +34,7 @@ class NamespaceBuilderTest extends TestCase
         $actual = $this->builder->createNamespaceTransfer($namespace);
 
         // Assert
-        $this->assertEquals($expected, $actual->toArray());
+        $this->assertArraysAreEqual($expected, $actual->toArray());
     }
 
     /**

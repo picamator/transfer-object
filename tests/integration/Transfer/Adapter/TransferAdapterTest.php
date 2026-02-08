@@ -258,6 +258,6 @@ class TransferAdapterTest extends TestCase
         $actual = $bookData->toArray();
 
         // Assert
-        $this->assertEquals($expected, $actual);
+        $this->assertArraysAreEqual($expected, $actual);
     }
 }
