@@ -24,6 +24,11 @@
     <rule ref="SlevomatCodingStandard.Classes.TraitUseDeclaration"/>
 
     <rule ref="SlevomatCodingStandard.TypeHints.ClassConstantTypeHint"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
+        <properties>
+            <property name="spacesCountAroundEqualsSign" value="0"/>
+        </properties>
+    </rule>
     <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint"/>
     <rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue"/>
 
@@ -61,7 +66,12 @@
     <rule ref="SlevomatCodingStandard.ControlStructures.UselessIfConditionWithReturn"/>
     <rule ref="SlevomatCodingStandard.ControlStructures.UselessTernaryOperator"/>
     <rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition"/>
-    <rule ref="SlevomatCodingStandard.Complexity.Cognitive"/>
+    <rule ref="SlevomatCodingStandard.Complexity.Cognitive">
+        <properties>
+            <property name="warningThreshold" value="6"/>
+            <property name="errorThreshold" value="7"/>
+        </properties>
+    </rule>
 
     <file>bin</file>
     <file>examples</file>
