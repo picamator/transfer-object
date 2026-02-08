@@ -30,14 +30,14 @@ class JsonReaderTest extends TestCase
         $this->reader = new JsonReader($this->filesystemStub);
     }
 
-    #[TestDox('Failed getJsonContent should throw exception')]
-    public function testFailedGetJsonContentShouldThrowException(): void
+    #[TestDox('Failed to getJsonContent should throw exception')]
+    public function testFailedToGetJsonContentShouldThrowException(): void
     {
         // Expect
         $this->filesystemStub
             ->method('readFile')
-            ->with(self::FILE_PATH)
-            ->willThrowException(new FilesystemException());
+            ->willThrowException(new FilesystemException())
+            ->seal();
 
         $this->expectException(JsonReaderException::class);
 
@@ -55,13 +55,13 @@ class JsonReaderTest extends TestCase
         // Expect
         $this->filesystemStub
             ->method('readFile')
-            ->with(self::FILE_PATH)
-            ->willReturn($jsonString);
+            ->willReturn($jsonString)
+            ->seal();
 
         // Act
         $actual = $this->reader->getJsonContent(self::FILE_PATH);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        $this->assertArraysAreIdentical($expected, $actual);
     }
 }

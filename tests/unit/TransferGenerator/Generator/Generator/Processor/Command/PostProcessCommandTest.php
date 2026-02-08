@@ -39,7 +39,8 @@ class PostProcessCommandTest extends TestCase
         // Arrange
         $this->filesystemStub
             ->method('rotateTempDir')
-            ->willThrowException(new FilesystemException());
+            ->willThrowException(new FilesystemException())
+            ->seal();
 
         // Act
         $actual = $this->command->postProcess(true);
@@ -54,7 +55,8 @@ class PostProcessCommandTest extends TestCase
         // Arrange
         $this->filesystemStub
             ->method('deleteTempDir')
-            ->willThrowException(new FilesystemException());
+            ->willThrowException(new FilesystemException())
+            ->seal();
 
         // Act
         $actual = $this->command->postProcess(false);

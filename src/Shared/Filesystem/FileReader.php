@@ -43,7 +43,7 @@ readonly class FileReader implements FileReaderInterface
         }
 
         throw new FileReaderException(
-            sprintf('Failed to close "%s" file.', $filename),
+            sprintf('Failed to close file "%s".', $filename),
         );
     }
 

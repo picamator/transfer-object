@@ -80,7 +80,7 @@ class TransferTest extends TestCase
         // Assert
         // @phpstan-ignore method.alreadyNarrowedType
         $this->assertContainsOnlyInstancesOf(ItemTransfer::class, $itemCollectionTransfer->items);
-        $this->assertEquals($expected, $actual);
+        $this->assertArraysAreEqual($expected, $actual);
     }
 
     /**
@@ -255,10 +255,10 @@ class TransferTest extends TestCase
         $actual = array_filter($actual);
 
         // Assert
-        $this->assertSame($expected, $actual);
+        $this->assertArraysAreIdentical($expected, $actual);
     }
 
-    #[TestDox('Enum transformation from and to array')]
+    #[TestDox('Enum transformation fromArray() and toArray()')]
     public function testEnumTransformationFromToArray(): void
     {
         // Arrange
@@ -273,7 +273,7 @@ class TransferTest extends TestCase
         $actual = $enumTransfer->toArray();
 
         // Assert
-        $this->assertSame($expected, $actual);
+        $this->assertArraysAreIdentical($expected, $actual);
     }
 
     #[TestDox('Transfer serialize')]
@@ -289,7 +289,7 @@ class TransferTest extends TestCase
 
         // Assert
         $this->assertInstanceOf(ItemCollectionTransfer::class, $unserialized);
-        $this->assertEquals($itemCollectionTransfer->toArray(), $unserialized->toArray());
+        $this->assertArraysAreEqual($itemCollectionTransfer->toArray(), $unserialized->toArray());
     }
 
     #[TestDox('Transfer jsonSerialize')]
@@ -301,13 +301,14 @@ class TransferTest extends TestCase
 
         // Act
         $encoded = json_encode($itemCollectionTransfer, flags: JSON_THROW_ON_ERROR);
+        /** @var array<mixed> $decoded */
         $decoded = json_decode($encoded, true, flags: JSON_THROW_ON_ERROR);
 
         // Assert
-        $this->assertEquals($itemCollectionTransfer->toArray(), $decoded);
+        $this->assertArraysAreEqual($itemCollectionTransfer->toArray(), $decoded);
     }
 
-    #[TestDox('Transfer count')]
+    #[TestDox('Transfer count()')]
     public function testTransferCount(): void
     {
         // Arrange
@@ -318,11 +319,10 @@ class TransferTest extends TestCase
         $actual = $itemCollectionTransfer->count();
 
         // Assert
-        $this->assertEquals(2, $actual);
-        $this->assertCount(2, $itemCollectionTransfer);
+        $this->assertSame(2, $actual);
     }
 
-    #[TestDox('Transfer debugInfo')]
+    #[TestDox('Transfer debugInfo()')]
     public function testTransferDebugInfo(): void
     {
         // Arrange
@@ -333,11 +333,11 @@ class TransferTest extends TestCase
         $actual = $itemCollectionTransfer->__debugInfo();
 
         // Assert
-        $this->assertEquals($itemCollectionTransfer->toArray(), $actual);
+        $this->assertArraysAreEqual($itemCollectionTransfer->toArray(), $actual);
     }
 
     #[WithoutErrorHandler]
-    #[TestDox('Type mismatch fromArray should fail with error')]
+    #[TestDox('Type mismatch fromArray() should fail with error')]
     public function testTypeMismatchFromArrayShouldFailWithError(): void
     {
         // Arrange
@@ -352,8 +352,8 @@ class TransferTest extends TestCase
         ]);
     }
 
-    #[TestDox('Access required property before initialising should throw exception')]
-    public function testAccessRequiredPropertyBeforeInitialisingShouldThrowException(): void
+    #[TestDox('Access required property before initializing should throw exception')]
+    public function testAccessRequiredPropertyBeforeInitializingShouldThrowException(): void
     {
         // Arrange
         $requiredTransfer = new RequiredTransfer();
@@ -531,7 +531,7 @@ class TransferTest extends TestCase
 
     #[RequiresPhpExtension('bcmath')]
     #[Depends('testGenerateBcMathTransfer')]
-    #[TestDox('Transformation transfer object BcMath fromArray to toArray with BcMath')]
+    #[TestDox('Transformation transfer object fromArray() and toArray() with BcMath')]
     public function testTransformationBcMathFromToArrayWhereArrayHasBcMath(): void
     {
         // Arrange

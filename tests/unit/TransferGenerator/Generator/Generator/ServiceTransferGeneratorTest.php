@@ -38,7 +38,8 @@ class ServiceTransferGeneratorTest extends TestCase
 
         $this->generatorStub
             ->method('generateTransfers')
-            ->willReturnCallback(fn() => yield $generatorTransfer);
+            ->willReturnCallback(fn() => yield $generatorTransfer)
+            ->seal();
 
         // Expect
         $this->expectException(TransferGeneratorException::class);

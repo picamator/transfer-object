@@ -50,7 +50,7 @@ final class ConfigProxy implements ConfigInterface
         }
 
         throw new TransferGeneratorConfigNotFoundException(
-            'Transfer Object generator configuration not found. Please load configuration first.'
+            'Transfer Object generator configuration not found. Please load the configuration first.'
         );
     }
 }

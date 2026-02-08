@@ -183,7 +183,7 @@ class DefinitionGeneratorFacadeTest extends TestCase
         $actual = $transfer->toArray();
 
         // Assert
-        $this->assertEquals($sampleContent, $actual);
+        $this->assertArraysAreEqual($sampleContent, $actual);
     }
 
     /**
@@ -241,7 +241,7 @@ class DefinitionGeneratorFacadeTest extends TestCase
         $actual = $this->filterArrayRecursive($transfer->toArray(), $filterCallback);
 
         // Assert
-        $this->assertEquals($sampleContent, $actual);
+        $this->assertArraysAreEqual($sampleContent, $actual);
     }
 
     /**

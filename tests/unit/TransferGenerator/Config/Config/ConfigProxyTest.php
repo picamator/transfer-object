@@ -21,8 +21,8 @@ class ConfigProxyTest extends TestCase
         $this->proxy = new ConfigProxy();
     }
 
-    #[TestDox('Get transfer namespace without loading config first should throw exception')]
-    public function testGetTransferNamespaceWithoutLoadingConfigFirstShouldThrowException(): void
+    #[TestDox('Get transfer namespace without loading the config first should throw exception')]
+    public function testGetTransferNamespaceWithoutLoadingTheConfigFirstShouldThrowException(): void
     {
         // Arrange
         ConfigProxy::resetConfig();

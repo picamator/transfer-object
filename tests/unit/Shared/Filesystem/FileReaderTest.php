@@ -37,12 +37,13 @@ class FileReaderTest extends TestCase
         self::closeFile();
     }
 
-    #[TestDox('Failed open file should throw exception')]
-    public function testFailOpenFileShouldThrowException(): void
+    #[TestDox('Failed to open file should throw exception')]
+    public function testFailedToOpenFileShouldThrowException(): void
     {
         // Expect
         $this->fileReaderMock->expects($this->once())
             ->method('fopen')
+            ->with(self::FILE_NAME)
             ->willReturn(false);
 
         $this->fileReaderMock->expects($this->never())
@@ -52,7 +53,8 @@ class FileReaderTest extends TestCase
             ->method('feof');
 
         $this->fileReaderMock->expects($this->never())
-            ->method('fclose');
+            ->method('fclose')
+            ->seal();
 
         $this->expectException(FileReaderException::class);
 
@@ -60,8 +62,8 @@ class FileReaderTest extends TestCase
         $this->fileReaderMock->readFile(self::FILE_NAME)->current();
     }
 
-    #[TestDox('Failed read file should throw exception')]
-    public function testFailedReadFileShouldThrowException(): void
+    #[TestDox('Failed to read file should throw exception')]
+    public function testFailedToReadFileShouldThrowException(): void
     {
         // Arrange
         $file = self::openFile();
@@ -69,19 +71,24 @@ class FileReaderTest extends TestCase
         // Expect
         $this->fileReaderMock->expects($this->once())
             ->method('fopen')
+            ->with(self::FILE_NAME)
             ->willReturn($file);
 
         $this->fileReaderMock->expects($this->once())
             ->method('fgets')
+            ->with($this->isResource())
             ->willReturn(false);
 
         $this->fileReaderMock->expects($this->once())
             ->method('feof')
+            ->with($this->isResource())
             ->willReturn(false);
 
         $this->fileReaderMock->expects($this->once())
             ->method('fclose')
-            ->willReturn(true);
+            ->with($this->isResource())
+            ->willReturn(true)
+            ->seal();
 
         $this->expectException(FileReaderException::class);
 
@@ -89,8 +96,8 @@ class FileReaderTest extends TestCase
         $this->fileReaderMock->readFile(self::FILE_NAME)->current();
     }
 
-    #[TestDox('Failed close file should throw exception')]
-    public function testFailedCloseFileShouldThrowException(): void
+    #[TestDox('Failed to close file should throw exception')]
+    public function testFailedToCloseFileShouldThrowException(): void
     {
         // Arrange
         $file = self::openFile();
@@ -98,19 +105,24 @@ class FileReaderTest extends TestCase
         // Expect
         $this->fileReaderMock->expects($this->once())
             ->method('fopen')
+            ->with(self::FILE_NAME)
             ->willReturn($file);
 
         $this->fileReaderMock->expects($this->once())
             ->method('fgets')
+            ->with($this->isResource())
             ->willReturn(false);
 
         $this->fileReaderMock->expects($this->once())
             ->method('feof')
+            ->with($this->isResource())
             ->willReturn(true);
 
         $this->fileReaderMock->expects($this->once())
             ->method('fclose')
-            ->willReturn(false);
+            ->with($this->isResource())
+            ->willReturn(false)
+            ->seal();
 
         $this->expectException(FileReaderException::class);
 
@@ -128,24 +140,29 @@ class FileReaderTest extends TestCase
         // Expect
         $this->fileReaderMock->expects($this->once())
             ->method('fopen')
+            ->with(self::FILE_NAME)
             ->willReturn($file);
 
         $this->fileReaderMock->expects($this->exactly(3))
             ->method('fgets')
-            ->willReturnOnConsecutiveCalls('', $expected[0], false);
+            ->with($this->isResource())
+            ->willReturn('', $expected[0], false);
 
         $this->fileReaderMock->expects($this->once())
             ->method('feof')
+            ->with($this->isResource())
             ->willReturn(true);
 
         $this->fileReaderMock->expects($this->once())
             ->method('fclose')
-            ->willReturn(true);
+            ->with($this->isResource())
+            ->willReturn(true)
+            ->seal();
 
         // Act
         $actual = $this->fileReaderMock->readFile(self::FILE_NAME);
 
         // Assert
-        $this->assertSame($expected, iterator_to_array($actual));
+        $this->assertArraysAreIdentical($expected, iterator_to_array($actual));
     }
 }

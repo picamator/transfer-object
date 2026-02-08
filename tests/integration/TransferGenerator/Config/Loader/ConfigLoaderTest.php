@@ -45,11 +45,11 @@ class ConfigLoaderTest extends TestCase
     {
         yield 'config file does not exist' => ['config-file-does-not-exist.config.yml'];
 
-        yield 'missed required keys' => ['missed-required-keys.config.yml'];
+        yield 'missing required keys' => ['missed-required-keys.config.yml'];
 
-        yield 'definition path is not local' => ['definition-path-is-not-exist.config.yml'];
+        yield 'definition path does not exist' => ['definition-path-does-not-exist.config.yml'];
 
-        yield 'definition path is not exist' => ['definition-path-is-not-local.config.yml'];
+        yield 'definition path is not local' => ['definition-path-is-not-local.config.yml'];
 
         yield 'invalid namespace' => ['invalid-transfer-namespace.config.yml'];
 
@@ -59,6 +59,6 @@ class ConfigLoaderTest extends TestCase
 
         yield 'invalid definition root key' => ['invalid-definition-root-key.config.yml'];
 
-        yield 'transfer path is not exist' => ['transfer-path-is-not-local.config.yml'];
+        yield 'transfer path is not local' => ['transfer-path-is-not-local.config.yml'];
     }
 }

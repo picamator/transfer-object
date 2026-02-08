@@ -40,8 +40,8 @@ class GeneratorFilesystemTest extends TestCase
         );
     }
 
-    #[TestDox('Duplication file write should throw exception')]
-    public function testDuplicationFileWriteShouldThrowException(): void
+    #[TestDox('Duplicate file write should throw exception')]
+    public function testDuplicateFileWriteShouldThrowException(): void
     {
         // Arrange
         $contentTransfer = new TransferGeneratorContentTransfer([
@@ -53,11 +53,13 @@ class GeneratorFilesystemTest extends TestCase
 
         $this->configStub
             ->method('getTransferPath')
-            ->willReturn($transferPath);
+            ->willReturn($transferPath)
+            ->seal();
 
         $this->filesystemStub
             ->method('exists')
-            ->willReturn(true);
+            ->willReturn(true)
+            ->seal();
 
         // Expect
         $this->expectException(TransferGeneratorException::class);

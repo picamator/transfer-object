@@ -81,7 +81,7 @@ class TransferGeneratorBulkCommandTest extends TestCase
 
         // Assert
         $this->assertSame(1, $this->commandTester->getStatusCode());
-        $this->assertStringContainsString('[ERROR] File size', $output);
+        $this->assertStringContainsString('empty', $output);
     }
 
     #[TestDox('Run command with valid configuration but invalid definition should show error message')]
@@ -112,7 +112,8 @@ class TransferGeneratorBulkCommandTest extends TestCase
         // Expect
         $generatorFacadeMock->expects($this->once())
             ->method('getTransferGeneratorBulkFiber')
-            ->willReturn($fiber);
+            ->willReturn($fiber)
+            ->seal();
 
         // Act
         $commandTester->execute(

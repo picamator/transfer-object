@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Expander;
 
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransformerAttributeTemplateEnum;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\TemplateTransfer;
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\TransformerAttributeTemplateEnum;
 
 final class DateTimeTypeTemplateExpander extends AbstractTemplateExpander
 {
