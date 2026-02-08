@@ -60,10 +60,12 @@ class ConfigEnvironmentRenderTest extends TestCase
         // Expect
         $this->renderMock->expects($this->once())
             ->method('getEnvironment')
+            ->id('getEnvironment')
             ->willReturn('');
 
         $this->renderMock->expects($this->once())
             ->method('getWorkingDir')
+            ->after('getEnvironment')
             ->willReturn($workingDirectory);
 
         // Act

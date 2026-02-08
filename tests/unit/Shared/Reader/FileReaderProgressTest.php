@@ -57,10 +57,13 @@ class FileReaderProgressTest extends TestCase
         $this->fileReaderProgressMock->expects($this->once())
             ->method('fileExists')
             ->with($filename)
+            ->id('fileExists')
             ->willReturn(true);
 
         $this->fileReaderProgressMock->expects($this->once())
             ->method('filesize')
+            ->id('filesize')
+            ->after('fileExists')
             ->with($filename)
             ->willReturn($filesize);
 
@@ -89,11 +92,13 @@ class FileReaderProgressTest extends TestCase
         $this->fileReaderProgressMock->expects($this->once())
             ->method('fileExists')
             ->with($filename)
+            ->id('fileExists')
             ->willReturn(true);
 
         $this->fileReaderProgressMock->expects($this->once())
             ->method('filesize')
             ->with($filename)
+            ->after('fileExists')
             ->willReturn($filesize);
 
         // Expect

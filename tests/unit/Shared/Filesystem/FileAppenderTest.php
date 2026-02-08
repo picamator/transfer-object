@@ -62,10 +62,13 @@ class FileAppenderTest extends TestCase
         $this->fileAppenderMock->expects($this->once())
             ->method('fopen')
             ->with(self::FILE_NAME)
+            ->id('fopen')
             ->willReturn($file);
 
         $this->fileAppenderMock->expects($this->once())
             ->method('fwrite')
+            ->with($this->isResource(), self::FILE_CONTENT)
+            ->after('fopen')
             ->willReturn(false);
 
         $this->expectException(FileAppenderException::class);
@@ -84,10 +87,13 @@ class FileAppenderTest extends TestCase
         $this->fileAppenderMock->expects($this->once())
             ->method('fopen')
             ->with(self::FILE_NAME)
+            ->id('fopen')
             ->willReturn($file);
 
         $this->fileAppenderMock->expects($this->exactly(2))
             ->method('fwrite')
+            ->with($this->isResource(), self::FILE_CONTENT)
+            ->after('fopen')
             ->willReturn(1);
 
         // Act
@@ -105,14 +111,19 @@ class FileAppenderTest extends TestCase
         $this->fileAppenderMock->expects($this->once())
             ->method('fopen')
             ->with(self::FILE_NAME)
+            ->id('fopen')
             ->willReturn($file);
 
         $this->fileAppenderMock->expects($this->once())
             ->method('fwrite')
+            ->with($this->isResource(), self::FILE_CONTENT)
+            ->id('fwrite')
+            ->after('fopen')
             ->willReturn(1);
 
         $this->fileAppenderMock->expects($this->once())
             ->method('fclose')
+            ->after('fwrite')
             ->willReturn(true);
 
         // Act
@@ -144,14 +155,19 @@ class FileAppenderTest extends TestCase
         $this->fileAppenderMock->expects($this->once())
             ->method('fopen')
             ->with(self::FILE_NAME)
+            ->id('fopen')
             ->willReturn($file);
 
         $this->fileAppenderMock->expects($this->once())
             ->method('fwrite')
+            ->with($this->isResource(), self::FILE_CONTENT)
+            ->id('fwrite')
+            ->after('fopen')
             ->willReturn(1);
 
         $this->fileAppenderMock->expects($this->once())
             ->method('fclose')
+            ->after('fwrite')
             ->willReturn(false);
 
         $this->expectException(FileAppenderException::class);
