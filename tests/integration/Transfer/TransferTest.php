@@ -7,9 +7,7 @@ namespace Picamator\Tests\Integration\TransferObject\Transfer;
 use ArrayObject;
 use Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\Attributes\Group;
-use PHPUnit\Framework\Attributes\RequiresPhpExtension;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\TestDoxFormatter;
 use PHPUnit\Framework\Attributes\TestWith;
@@ -19,7 +17,6 @@ use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorTrait;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\CountryEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\ImBackedEnum;
 use Picamator\Tests\Integration\TransferObject\Transfer\Enum\YesNoEnum;
-use Picamator\Tests\Integration\TransferObject\Transfer\Generated\BcMath\BcMathNumberTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\EnumTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemCollectionTransfer;
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ItemTransfer;
@@ -39,7 +36,6 @@ class TransferTest extends TestCase
     use TransferGeneratorTrait;
 
     private const string GENERATOR_CONFIG_PATH = __DIR__ . '/data/config/generator.config.yml';
-    private const string GENERATOR_BC_MATH_CONFIG_PATH = __DIR__ . '/data/config/bcmath/generator.config.yml';
 
     public static function setUpBeforeClass(): void
     {
@@ -474,81 +470,6 @@ class TransferTest extends TestCase
         $this->assertNotSame($itemCollectionTransfer->item, $clonedItemCollectionTransfer->item);
         $this->assertNotSame($itemCollectionTransfer->items, $clonedItemCollectionTransfer->items);
         $this->assertNotSame($itemCollectionTransfer->items[0], $clonedItemCollectionTransfer->items[0]);
-    }
-
-    #[RequiresPhpExtension('bcmath')]
-    #[TestDox('Generate transfer object BcMath')]
-    public function testGenerateBcMathTransfer(): void
-    {
-        // Arrange
-        static::generateTransfersOrFail(self::GENERATOR_BC_MATH_CONFIG_PATH);
-
-        // Act
-        $numberTransfer = new BcMathNumberTransfer();
-
-        // Assert
-        $this->assertNull($numberTransfer->iAmNumber);
-    }
-
-    #[RequiresPhpExtension('bcmath')]
-    #[Depends('testGenerateBcMathTransfer')]
-    #[TestDox('Transformation transfer object BcMath fromArray with $number to toArray expecting $number')]
-    #[TestWith(['12.123', '12.123'], 'Transformation from string to BcMath')]
-    #[TestWith([12, '12'], 'Transformation from integer to BcMath')]
-    #[TestWith([12.123, '12.123'], 'Transformation from float to BcMath')]
-    public function testTransformationBcMathFromToArray(string|int|float $number, string $expected): void
-    {
-        // Arrange
-        $numberTransfer = new BcMathNumberTransfer();
-
-        // Act
-        $numberTransfer->fromArray([
-            BcMathNumberTransfer::I_AM_NUMBER_PROP => $number,
-        ]);
-
-        $actual = $numberTransfer->toArray();
-
-        // Assert
-        $this->assertSame($expected, $actual[BcMathNumberTransfer::I_AM_NUMBER_PROP]);
-    }
-
-    #[RequiresPhpExtension('bcmath')]
-    #[Depends('testGenerateBcMathTransfer')]
-    #[TestDox('Transformation transfer object BcMath fromArray with invalid type should throw exception')]
-    public function testTransformationBcMathFromToArrayWithInvalidTypeShouldThrowException(): void
-    {
-        // Arrange
-        $numberTransfer = new BcMathNumberTransfer();
-
-        // Expect
-        $this->expectException(DataAssertTransferException::class);
-
-        // Act
-        $numberTransfer->fromArray([
-            BcMathNumberTransfer::I_AM_NUMBER_PROP => new ArrayObject(),
-        ]);
-    }
-
-    #[RequiresPhpExtension('bcmath')]
-    #[Depends('testGenerateBcMathTransfer')]
-    #[TestDox('Transformation transfer object fromArray() and toArray() with BcMath')]
-    public function testTransformationBcMathFromToArrayWhereArrayHasBcMath(): void
-    {
-        // Arrange
-        $numberTransfer = new BcMathNumberTransfer();
-
-        $expected = '12.123';
-        $number = new \BcMath\Number($expected);
-
-        // Act
-        $numberTransfer->fromArray([
-            BcMathNumberTransfer::I_AM_NUMBER_PROP => $number,
-        ]);
-
-        $actual = $numberTransfer->toArray();
-
-        // Assert
-        $this->assertSame($expected, $actual[BcMathNumberTransfer::I_AM_NUMBER_PROP]);
     }
 
     #[TestDox('Symfony assert attribute')]
