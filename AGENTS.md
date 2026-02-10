@@ -148,6 +148,19 @@ Docker Environment can be stopped by running the following command:
 docker/sdk stop
 ```
 
+How to Run PHP Script
+---------------------
+
+The PHP script can be run by command:
+```console
+docker/sdk cli [path-to-script]
+```
+
+For instance, the `./examples/try-transfer-generator.php`:
+```console
+docker/sdk cli ./examples/try-transfer-generator.php
+```
+
 How to Generate Internal Transfer Objects
 -----------------------------------------
 

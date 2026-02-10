@@ -26,7 +26,7 @@ function show_usage() {
   echo -e "  $(wrap_in_yellow "build")                      Build Docker containers"
   echo -e "  $(wrap_in_yellow "start")                      Start Docker containers (honors -x / -p)"
   echo -e "  $(wrap_in_yellow "stop")                       Stop Docker containers"
-  echo -e "  $(wrap_in_yellow "cli")                        Open container shell"
+  echo -e "  $(wrap_in_yellow "cli")                        Open container shell or execute the PHP script when provided as an argument"
   echo -e "  $(wrap_in_yellow "composer <command>")         Run composer command"
   echo -e "  $(wrap_in_yellow "phpstan")                    Run PHPStan"
   echo -e "  $(wrap_in_yellow "phpunit")                    Run all PHPUnit tests or concrete test case when full qualified name provided as an argument"
@@ -84,7 +84,11 @@ case $1 in
     docker compose stop
     ;;
   cli)
-    $DOCKER_EXEC bash
+    if [ -n "$2" ]; then
+      $DOCKER_EXEC php -f $2
+    else
+      $DOCKER_EXEC bash
+    fi
     ;;
   composer)
     if [ -n "$5" ]; then
