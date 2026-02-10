@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Shared\Validator\NamespaceValidatorTrait;
 
 #[Group('shared')]
-class NamespaceValidatorTest extends TestCase
+final class NamespaceValidatorTest extends TestCase
 {
     private NamespaceValidatorInterface $validator;
 

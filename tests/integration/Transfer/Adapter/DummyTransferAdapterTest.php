@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Transfer\Advanced\BookmarkData;
 
 #[Group('transfer')]
-class DummyTransferAdapterTest extends TestCase
+final class DummyTransferAdapterTest extends TestCase
 {
     private BookmarkData $bookmarkData;
 

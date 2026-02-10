@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Command\Helper\InputNormalizerTrait;
 
 #[Group('command')]
-class InputNormalizerTest extends TestCase
+final class InputNormalizerTest extends TestCase
 {
     private InputNormalizerInterface $inputNormalizer;
 

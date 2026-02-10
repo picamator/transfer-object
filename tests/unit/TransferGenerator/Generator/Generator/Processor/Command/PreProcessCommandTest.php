@@ -18,7 +18,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Com
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command\PreProcessCommandInterface;
 
 #[Group('transfer-generator')]
-class PreProcessCommandTest extends TestCase
+final class PreProcessCommandTest extends TestCase
 {
     private PreProcessCommandInterface $command;
 

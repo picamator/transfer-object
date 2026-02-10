@@ -19,7 +19,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRender;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderInterface;
 
 #[Group('transfer-generator')]
-class TemplateRenderTest extends TestCase
+final class TemplateRenderTest extends TestCase
 {
     private TemplateRenderInterface $render;
 

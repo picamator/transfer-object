@@ -13,7 +13,7 @@ use Picamator\TransferObject\Shared\Exception\FileAppenderException;
 use Picamator\TransferObject\Shared\Filesystem\FileAppender;
 
 #[Group('shared')]
-class FileAppenderTest extends TestCase
+final class FileAppenderTest extends TestCase
 {
     use FileTrait;
 

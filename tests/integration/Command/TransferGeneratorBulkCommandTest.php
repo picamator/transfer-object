@@ -13,7 +13,7 @@ use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacadeInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 
 #[Group('command')]
-class TransferGeneratorBulkCommandTest extends TestCase
+final class TransferGeneratorBulkCommandTest extends TestCase
 {
     use FailedFiberTrait;
 

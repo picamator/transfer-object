@@ -19,7 +19,7 @@ use Picamator\TransferObject\Shared\Validator\FileSizeValidatorInterface;
 use Picamator\TransferObject\Shared\Validator\PathLocalValidatorInterface;
 
 #[Group('definition-generator')]
-class DefinitionGeneratorBuilderTest extends TestCase
+final class DefinitionGeneratorBuilderTest extends TestCase
 {
     private DefinitionGeneratorBuilderInterface $builder;
 

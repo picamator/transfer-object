@@ -16,7 +16,7 @@ use Picamator\TransferObject\DefinitionGenerator\Content\Expander\TransferTypeBu
 use ReflectionMethod;
 
 #[Group('definition-generator')]
-class TransferTypeBuilderExpanderTest extends TestCase
+final class TransferTypeBuilderExpanderTest extends TestCase
 {
     private BuilderExpanderInterface $expander;
 

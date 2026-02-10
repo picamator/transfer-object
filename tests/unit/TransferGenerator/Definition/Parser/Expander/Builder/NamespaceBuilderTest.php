@@ -14,7 +14,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builde
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builder\NamespaceBuilderInterface;
 
 #[Group('transfer-generator')]
-class NamespaceBuilderTest extends TestCase
+final class NamespaceBuilderTest extends TestCase
 {
     private NamespaceBuilderInterface $builder;
 

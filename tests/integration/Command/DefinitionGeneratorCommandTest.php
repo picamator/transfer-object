@@ -11,7 +11,7 @@ use Picamator\TransferObject\Command\DefinitionGeneratorCommand;
 use Symfony\Component\Console\Tester\CommandTester;
 
 #[Group('command')]
-class DefinitionGeneratorCommandTest extends TestCase
+final class DefinitionGeneratorCommandTest extends TestCase
 {
     private CommandTester $commandTester;
 

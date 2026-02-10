@@ -13,7 +13,7 @@ use Picamator\TransferObject\DefinitionGenerator\Content\Builder\ContentBuilderI
 use Picamator\TransferObject\DefinitionGenerator\Exception\DefinitionGeneratorException;
 
 #[Group('definition-generator')]
-class DefinitionContentBuilderTest extends TestCase
+final class DefinitionContentBuilderTest extends TestCase
 {
     use FileTrait;
 

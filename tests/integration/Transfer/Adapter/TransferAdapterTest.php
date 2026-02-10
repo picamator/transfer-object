@@ -19,7 +19,7 @@ use Picamator\Tests\Integration\TransferObject\Transfer\Generated\AuthorTransfer
 use Picamator\Tests\Integration\TransferObject\Transfer\Generated\ReservedAdvancedTransfer;
 
 #[Group('transfer')]
-class TransferAdapterTest extends TestCase
+final class TransferAdapterTest extends TestCase
 {
     #[TestDox('Transformation fromArray() and toArray()')]
     public function testTransformationFromArrayToArray(): void

@@ -12,7 +12,7 @@ use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigProxy;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException;
 
 #[Group('transfer-generator')]
-class ConfigProxyTest extends TestCase
+final class ConfigProxyTest extends TestCase
 {
     private ConfigInterface $proxy;
 

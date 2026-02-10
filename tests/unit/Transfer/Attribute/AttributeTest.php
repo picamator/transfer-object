@@ -11,7 +11,7 @@ use Picamator\TransferObject\Transfer\Attribute\AttributeTrait;
 use Picamator\TransferObject\Transfer\Exception\AttributeTransferException;
 
 #[Group('transfer')]
-class AttributeTest extends TestCase
+final class AttributeTest extends TestCase
 {
     private AttributeInterface $attribute;
 

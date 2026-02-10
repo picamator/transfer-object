@@ -25,7 +25,7 @@ use Picamator\TransferObject\DefinitionGenerator\DefinitionGeneratorFacadeInterf
 
 #[Large]
 #[Group('definition-generator')]
-class DefinitionGeneratorFacadeTest extends TestCase
+final class DefinitionGeneratorFacadeTest extends TestCase
 {
     use DefinitionGeneratorTrait;
     use TransferGeneratorTrait;

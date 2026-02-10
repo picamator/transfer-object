@@ -14,7 +14,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\MetaCon
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\TemplateExpanderInterface;
 
 #[Group('transfer-generator')]
-class MetaConstantsTemplateExpanderTest extends TestCase
+final class MetaConstantsTemplateExpanderTest extends TestCase
 {
     private TemplateExpanderInterface $expander;
 

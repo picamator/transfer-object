@@ -17,7 +17,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFil
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
 
 #[Group('transfer-generator')]
-class GeneratorFilesystemTest extends TestCase
+final class GeneratorFilesystemTest extends TestCase
 {
     private GeneratorFilesystemInterface $generatorFilesystem;
 

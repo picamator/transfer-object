@@ -20,7 +20,10 @@ class TransferGeneratorFactory
 {
     use SharedFactoryTrait;
 
-    private static WorkflowFactory $workflowFactory;
+    public function __construct(
+        private readonly WorkflowFactory $workflowFactory = new WorkflowFactory(),
+    ) {
+    }
 
     public function createTransferGeneratorFiber(): TransferGeneratorFiberInterface
     {
@@ -60,12 +63,7 @@ class TransferGeneratorFactory
 
     protected function createTransferGeneratorWorkflow(): TransferGeneratorWorkflowInterface
     {
-        return $this->getWorkflowFactory()
+        return $this->workflowFactory
             ->createTransferGeneratorWorkflow();
-    }
-
-    protected function getWorkflowFactory(): WorkflowFactory
-    {
-        return self::$workflowFactory ??= new WorkflowFactory();
     }
 }

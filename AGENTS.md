@@ -98,6 +98,10 @@ Code Style
   * **validator** classes should have `public` methods prefixed by `validate`
   * methods returning `bool` should be prefixed by `is`
 
+### Tests
+
+- all tests classes should be a `final`
+
 Module Structure
 ----------------
 
@@ -146,6 +150,19 @@ docker/sdk start
 Docker Environment can be stopped by running the following command:
 ```console
 docker/sdk stop
+```
+
+How to Run PHP Script
+---------------------
+
+The PHP script can be run by command:
+```console
+docker/sdk cli [path-to-script]
+```
+
+For instance, the `./examples/try-transfer-generator.php`:
+```console
+docker/sdk cli ./examples/try-transfer-generator.php
 ```
 
 How to Generate Internal Transfer Objects
