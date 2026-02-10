@@ -6,13 +6,13 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Render;
 
 use Picamator\TransferObject\Generated\DefinitionTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorContentTransfer;
-use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Template;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateInterface;
 
 readonly class TemplateRender implements TemplateRenderInterface
 {
     public function __construct(
         private TemplateBuilderInterface $templateBuilder,
-        private Template $template,
+        private TemplateInterface $template,
     ) {
     }
 
@@ -20,7 +20,7 @@ readonly class TemplateRender implements TemplateRenderInterface
     {
         $templateTransfer = $this->templateBuilder->createTemplateTransfer($definitionTransfer);
 
-        $content = $this->template->__invoke($templateTransfer);
+        $content = $this->template->render($templateTransfer);
 
         return new TransferGeneratorContentTransfer([
             TransferGeneratorContentTransfer::CLASS_NAME_PROP => $definitionTransfer->content->className,

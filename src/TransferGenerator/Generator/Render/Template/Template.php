@@ -7,13 +7,13 @@ namespace Picamator\TransferObject\TransferGenerator\Generator\Render\Template;
 use Picamator\TransferObject\Generated\TemplateTransfer;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Helper\TemplateHelperInterface;
 
-readonly class Template
+readonly class Template implements TemplateInterface
 {
     public function __construct(private TemplateHelperInterface $helper)
     {
     }
 
-    public function __invoke(TemplateTransfer $templateTransfer): string
+    public function render(TemplateTransfer $templateTransfer): string
     {
         $this->helper->setTemplateTransfer($templateTransfer);
 

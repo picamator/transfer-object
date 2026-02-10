@@ -22,6 +22,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Render\Expander\Transfe
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Helper\TemplateHelper;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Helper\TemplateHelperInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Template;
+use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\TemplateInterface;
 
 class RenderFactory
 {
@@ -45,7 +46,7 @@ class RenderFactory
         return $templateRender;
     }
 
-    protected function createTemplate(): Template
+    protected function createTemplate(): TemplateInterface
     {
         return new Template($this->createTemplateHelper());
     }
