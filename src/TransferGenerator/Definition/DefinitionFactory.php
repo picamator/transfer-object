@@ -20,9 +20,11 @@ class DefinitionFactory
     use ConfigFactoryTrait;
     use SharedFactoryTrait;
 
-    private static ValidatorFactory $validatorFactory;
-
-    private static ParserFactory $parserFactory;
+    public function __construct(
+        private readonly ValidatorFactory $validatorFactory = new ValidatorFactory(),
+        private readonly ParserFactory $parserFactory = new ParserFactory(),
+    ) {
+    }
 
     public function createDefinitionReader(): DefinitionReaderInterface
     {
@@ -39,7 +41,7 @@ class DefinitionFactory
 
     protected function createDefinitionValidator(): DefinitionValidatorInterface
     {
-        return $this->getValidatorFactory()->createDefinitionValidator();
+        return $this->validatorFactory->createDefinitionValidator();
     }
 
     protected function createDefinitionFinder(): DefinitionFinderInterface
@@ -52,16 +54,6 @@ class DefinitionFactory
 
     protected function createDefinitionParser(): DefinitionParserInterface
     {
-        return $this->getParserFactory()->createDefinitionParser();
-    }
-
-    protected function getValidatorFactory(): ValidatorFactory
-    {
-        return self::$validatorFactory ??= new ValidatorFactory();
-    }
-
-    protected function getParserFactory(): ParserFactory
-    {
-        return self::$parserFactory ??= new ParserFactory();
+        return $this->parserFactory->createDefinitionParser();
     }
 }

@@ -8,9 +8,12 @@ use Fiber;
 use NoDiscard;
 use Picamator\TransferObject\TransferGenerator\Generator\TransferGeneratorFactory;
 
-class TransferGeneratorFacade implements TransferGeneratorFacadeInterface
+readonly class TransferGeneratorFacade implements TransferGeneratorFacadeInterface
 {
-    private static TransferGeneratorFactory $factory;
+    public function __construct(
+        private TransferGeneratorFactory $factory = new TransferGeneratorFactory(),
+    ) {
+    }
 
     /**
      * @return \Fiber<string,null,bool,\Picamator\TransferObject\Generated\TransferGeneratorTransfer>
@@ -18,7 +21,7 @@ class TransferGeneratorFacade implements TransferGeneratorFacadeInterface
     #[NoDiscard]
     public function getTransferGeneratorFiber(): Fiber
     {
-        return $this->getFactory()
+        return $this->factory
             ->createTransferGeneratorFiber()
             ->getTransferGeneratorFiber();
     }
@@ -29,7 +32,7 @@ class TransferGeneratorFacade implements TransferGeneratorFacadeInterface
     #[NoDiscard]
     public function getTransferGeneratorBulkFiber(): Fiber
     {
-        return $this->getFactory()
+        return $this->factory
             ->createTransferGeneratorBulkFiber()
             ->getTransferGeneratorFiber();
     }
@@ -37,13 +40,8 @@ class TransferGeneratorFacade implements TransferGeneratorFacadeInterface
     #[NoDiscard('The result should be used to validate how many definitions were generated.')]
     public function generateTransfersOrFail(string $configPath): int
     {
-        return $this->getFactory()
+        return $this->factory
             ->createTransferGeneratorService()
             ->generateTransfersOrFail($configPath);
-    }
-
-    private function getFactory(): TransferGeneratorFactory
-    {
-        return self::$factory ??= new TransferGeneratorFactory();
     }
 }

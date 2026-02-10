@@ -29,7 +29,10 @@ class DefinitionGeneratorFactory
 {
     use SharedFactoryTrait;
 
-    private static DefinitionContentFactory $definitionContentFactory;
+    public function __construct(
+        private readonly DefinitionContentFactory $definitionContentFactory = new DefinitionContentFactory(),
+    ) {
+    }
 
     public function createDefinitionGeneratorService(): DefinitionGeneratorServiceInterface
     {
@@ -117,12 +120,7 @@ class DefinitionGeneratorFactory
 
     protected function createContentReader(): ContentReaderInterface
     {
-        return $this->getDefinitionContentFactory()
+        return $this->definitionContentFactory
             ->createContentReader();
-    }
-
-    protected function getDefinitionContentFactory(): DefinitionContentFactory
-    {
-        return self::$definitionContentFactory ??= new DefinitionContentFactory();
     }
 }

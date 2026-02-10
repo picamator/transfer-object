@@ -9,14 +9,17 @@ use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGen
 use Picamator\TransferObject\DefinitionGenerator\Generator\DefinitionGeneratorFactory;
 use Picamator\TransferObject\Generated\DefinitionGeneratorTransfer;
 
-class DefinitionGeneratorFacade implements DefinitionGeneratorFacadeInterface
+readonly class DefinitionGeneratorFacade implements DefinitionGeneratorFacadeInterface
 {
-    private static DefinitionGeneratorFactory $factory;
+    public function __construct(
+        private DefinitionGeneratorFactory $factory = new DefinitionGeneratorFactory(),
+    ) {
+    }
 
     #[NoDiscard('The result should be used to validate how many definitions were generated.')]
     public function generateDefinitionsOrFail(DefinitionGeneratorTransfer $generatorTransfer): int
     {
-        return $this->getFactory()
+        return $this->factory
             ->createDefinitionGeneratorService()
             ->generateDefinitionsOrFail($generatorTransfer);
     }
@@ -24,12 +27,7 @@ class DefinitionGeneratorFacade implements DefinitionGeneratorFacadeInterface
     #[NoDiscard('The builder should be used to create DefinitionGeneratorTransfer.')]
     public function createDefinitionGeneratorBuilder(): DefinitionGeneratorBuilderInterface
     {
-        return $this->getFactory()
+        return $this->factory
             ->createDefinitionGeneratorBuilder();
-    }
-
-    private function getFactory(): DefinitionGeneratorFactory
-    {
-        return self::$factory ??= new DefinitionGeneratorFactory();
     }
 }

@@ -13,7 +13,10 @@ class WorkflowFactory
 {
     use SharedFactoryTrait;
 
-    private static GeneratorFactory $generatorFactory;
+    public function __construct(
+        private readonly GeneratorFactory $generatorFactory = new GeneratorFactory(),
+    ) {
+    }
 
     public function createTransferGeneratorWorkflow(): TransferGeneratorWorkflowInterface
     {
@@ -26,11 +29,6 @@ class WorkflowFactory
 
     protected function createGeneratorProcessor(): GeneratorProcessorInterface
     {
-        return $this->getGeneratorFactory()->createGeneratorProcessor();
-    }
-
-    protected function getGeneratorFactory(): GeneratorFactory
-    {
-        return self::$generatorFactory ??= new GeneratorFactory();
+        return $this->generatorFactory->createGeneratorProcessor();
     }
 }
