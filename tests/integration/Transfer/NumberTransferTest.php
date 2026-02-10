@@ -16,7 +16,7 @@ use Picamator\TransferObject\Transfer\Exception\DataAssertTransferException;
 
 #[Group('transfer')]
 #[RequiresPhpExtension('bcmath')]
-class NumberTransferTest extends TestCase
+final class NumberTransferTest extends TestCase
 {
     use TransferGeneratorTrait;
 

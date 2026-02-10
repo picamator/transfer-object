@@ -19,7 +19,7 @@ use Picamator\TransferObject\Generated\DefinitionEmbeddedTypeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 
 #[Group('definition-generator')]
-class DefinitionRenderTest extends TestCase
+final class DefinitionRenderTest extends TestCase
 {
     private const string TEST_CLASS_NAME = 'TestClass';
 

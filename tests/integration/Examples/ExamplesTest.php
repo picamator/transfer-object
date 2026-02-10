@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\OutputBufferTrait;
 
 #[Group('examples')]
-class ExamplesTest extends TestCase
+final class ExamplesTest extends TestCase
 {
     use OutputBufferTrait;
 

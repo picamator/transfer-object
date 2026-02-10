@@ -16,7 +16,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGener
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Workflow\TransferGeneratorWorkflowInterface;
 
 #[Group('transfer-generator')]
-class ServiceTransferGeneratorTest extends TestCase
+final class ServiceTransferGeneratorTest extends TestCase
 {
     private TransferGeneratorServiceInterface $serviceGenerator;
 

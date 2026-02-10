@@ -15,7 +15,7 @@ use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorExcept
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacade;
 
 #[Group('transfer-generator')]
-class TransferGeneratorFacadeErrorTest extends TestCase
+final class TransferGeneratorFacadeErrorTest extends TestCase
 {
     use TransferGeneratorTrait;
 

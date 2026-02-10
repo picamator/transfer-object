@@ -9,7 +9,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Shared\Validator\FileSizeValidator;
 
-class FileSizeValidatorTest extends TestCase
+final class FileSizeValidatorTest extends TestCase
 {
     /**
      * @see \Picamator\TransferObject\Shared\Validator\FileSizeValidator::MAX_FILE_SIZE_BYTES

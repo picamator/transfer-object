@@ -13,7 +13,7 @@ use Picamator\TransferObject\Generated\TemplateTransfer;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\Template\Helper\TemplateHelper;
 
 #[Group('transfer-generator')]
-class TemplateHelperTest extends TestCase
+final class TemplateHelperTest extends TestCase
 {
     /**
      * @param array<string,mixed> $templateData

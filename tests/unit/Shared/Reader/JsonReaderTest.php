@@ -15,7 +15,7 @@ use Picamator\TransferObject\Shared\Reader\JsonReader;
 use Picamator\TransferObject\Shared\Reader\JsonReaderInterface;
 
 #[Group('shared')]
-class JsonReaderTest extends TestCase
+final class JsonReaderTest extends TestCase
 {
     private const string FILE_PATH = 'test.json';
 

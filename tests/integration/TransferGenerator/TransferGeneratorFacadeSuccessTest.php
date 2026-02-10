@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorTrait;
 
 #[Group('transfer-generator')]
-class TransferGeneratorFacadeSuccessTest extends TestCase
+final class TransferGeneratorFacadeSuccessTest extends TestCase
 {
     use TransferGeneratorTrait;
 

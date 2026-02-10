@@ -13,7 +13,7 @@ use Picamator\TransferObject\Shared\Exception\FileReaderException;
 use Picamator\TransferObject\Shared\Filesystem\FileReader;
 
 #[Group('shared')]
-class FileReaderTest extends TestCase
+final class FileReaderTest extends TestCase
 {
     use FileTrait;
 

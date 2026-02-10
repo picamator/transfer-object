@@ -16,7 +16,7 @@ use Picamator\TransferObject\Generated\DefinitionBuilderTransfer;
 use stdClass;
 
 #[Group('definition-generator')]
-class BuiltInTypeBuilderExpanderTest extends TestCase
+final class BuiltInTypeBuilderExpanderTest extends TestCase
 {
     private BuilderExpanderInterface $expander;
 

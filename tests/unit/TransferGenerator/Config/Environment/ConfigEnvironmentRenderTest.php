@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRender;
 
 #[Group('transfer-generator')]
-class ConfigEnvironmentRenderTest extends TestCase
+final class ConfigEnvironmentRenderTest extends TestCase
 {
     private ConfigEnvironmentRender&MockObject $renderMock;
 

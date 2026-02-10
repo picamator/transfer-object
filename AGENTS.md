@@ -98,6 +98,10 @@ Code Style
   * **validator** classes should have `public` methods prefixed by `validate`
   * methods returning `bool` should be prefixed by `is`
 
+### Tests
+
+- all tests classes should be a `final`
+
 Module Structure
 ----------------
 

@@ -31,7 +31,7 @@ use Symfony\Component\Validator\Validation;
 use TypeError;
 
 #[Group('transfer')]
-class TransferTest extends TestCase
+final class TransferTest extends TestCase
 {
     use TransferGeneratorTrait;
 

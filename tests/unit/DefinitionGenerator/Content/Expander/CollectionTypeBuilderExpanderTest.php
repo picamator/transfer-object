@@ -16,7 +16,7 @@ use Picamator\TransferObject\DefinitionGenerator\Content\Expander\CollectionType
 use ReflectionMethod;
 
 #[Group('definition-generator')]
-class CollectionTypeBuilderExpanderTest extends TestCase
+final class CollectionTypeBuilderExpanderTest extends TestCase
 {
     private BuilderExpanderInterface $expander;
 

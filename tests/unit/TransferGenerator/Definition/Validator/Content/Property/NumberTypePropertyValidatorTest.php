@@ -16,7 +16,7 @@ use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Prop
 use Picamator\TransferObject\TransferGenerator\Definition\Validator\Content\Property\PropertyValidatorInterface;
 
 #[Group('transfer-generator')]
-class NumberTypePropertyValidatorTest extends TestCase
+final class NumberTypePropertyValidatorTest extends TestCase
 {
     private PropertyValidatorInterface&MockObject $validatorMock;
 

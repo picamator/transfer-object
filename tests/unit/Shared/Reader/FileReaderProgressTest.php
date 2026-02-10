@@ -16,7 +16,7 @@ use Picamator\TransferObject\Shared\Filesystem\FileReaderInterface;
 use Picamator\TransferObject\Shared\Reader\FileReaderProgress;
 
 #[Group('shared')]
-class FileReaderProgressTest extends TestCase
+final class FileReaderProgressTest extends TestCase
 {
     private FileReaderProgress&MockObject $fileReaderProgressMock;
 
