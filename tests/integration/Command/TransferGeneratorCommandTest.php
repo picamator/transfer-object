@@ -65,7 +65,8 @@ final class TransferGeneratorCommandTest extends TestCase
 
         // Assert
         $this->commandTester->assertCommandIsSuccessful();
-        $this->assertStringContainsString('command.transfer.yml: CommandTransfer', $output);
+        $this->assertStringContainsString('command.first.transfer.yml: CommandFirstTransfer', $output);
+        $this->assertStringContainsString('command.second.transfer.yml: CommandSecondTransfer', $output);
         $this->assertStringContainsString('All Transfer Objects were generated successfully!', $output);
     }
 
