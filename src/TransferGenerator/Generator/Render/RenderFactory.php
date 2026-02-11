@@ -60,6 +60,7 @@ class RenderFactory
     {
         return new TemplateBuilder(
             $this->getConfig(),
+            $this->createTemplateSorter(),
             $this->createTemplateExpander(),
         );
     }
@@ -136,5 +137,10 @@ class RenderFactory
     protected function createCollectionTypeTemplateExpander(): TemplateExpanderInterface
     {
         return new CollectionTypeTemplateExpander();
+    }
+
+    protected function createTemplateSorter(): TemplateSorterInterface
+    {
+        return new TemplateSorter();
     }
 }
