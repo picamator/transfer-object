@@ -42,13 +42,9 @@ final class TypePropertyExpander extends AbstractPropertyExpander
     private function getBuiltInTypeTransfer(string $matchedType): ?DefinitionBuiltInTypeTransfer
     {
         $typeWithDocBlock = $this->parseTypeWithDocBlock($matchedType);
-        if ($typeWithDocBlock === null) {
-            return null;
-        }
 
-        /** @var string $type */
         $type = array_key_first($typeWithDocBlock);
-        $type = BuiltInTypeEnum::tryFrom($type);
+        $type = BuiltInTypeEnum::tryFrom((string)$type);
 
         if ($type === null) {
             return null;

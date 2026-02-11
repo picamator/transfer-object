@@ -132,11 +132,10 @@ final class BuiltInTypeBuilderExpander extends AbstractBuilderExpander
 
     private function createPropertyTransfer(string $propertyName, string $builtInType): DefinitionPropertyTransfer
     {
-        $tapeWithDocBlock = $this->parseTypeWithDocBlock($builtInType) ?? [];
+        $tapeWithDocBlock = $this->parseTypeWithDocBlock($builtInType);
 
-        /** @var string $type */
         $type = array_key_first($tapeWithDocBlock);
-        $type = BuiltInTypeEnum::from($type);
+        $type = BuiltInTypeEnum::from((string)$type);
 
         $docBlock = array_first($tapeWithDocBlock);
 
