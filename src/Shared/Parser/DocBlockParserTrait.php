@@ -13,16 +13,16 @@ trait DocBlockParserTrait
     private const string TYPE_REGEX = '#(?<type>[^<>]*)(?<docBlock>.*)#';
 
     /**
-     * @return array<string,string|null>|null
+     * @return array<string,string>|null
      */
     final protected function parseTypeWithDocBlock(string $type): ?array
     {
-        if (preg_match(self::TYPE_REGEX, $type, $matches) === false) {
+        if (preg_match(self::TYPE_REGEX, $type, $matches) !== 1) {
             return null;
         }
 
-        $type = $matches[self::TYPE_KEY] ?? '';
-        $docBlock = $matches[self::DOC_BLOCK_KEY] ?? null;
+        $type = $matches[self::TYPE_KEY];
+        $docBlock = $matches[self::DOC_BLOCK_KEY];
 
         return [$type => $docBlock];
     }

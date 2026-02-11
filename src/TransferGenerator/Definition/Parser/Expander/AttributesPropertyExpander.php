@@ -51,15 +51,15 @@ final class AttributesPropertyExpander implements PropertyExpanderInterface
 
     private function getAttributeTransfer(string $attribute): ?DefinitionAttributeTransfer
     {
-        if (preg_match(self::ATTRIBUTES_REGEX, $attribute, $matches) === false) {
+        if (preg_match(self::ATTRIBUTES_REGEX, $attribute, $matches) !== 1) {
             return null;
         }
 
-        $namespace = $matches['namespace'] ?? '';
+        $namespace = $matches['namespace'];
         $namespaceTransfer = $this->namespaceBuilder->createNamespaceTransfer($namespace);
 
         $builtInTypeTransfer = new DefinitionAttributeTransfer();
-        $builtInTypeTransfer->arguments = $matches['arguments'] ?? null;
+        $builtInTypeTransfer->arguments = $matches['arguments'];
         $builtInTypeTransfer->namespace = $namespaceTransfer;
 
         return $builtInTypeTransfer;
