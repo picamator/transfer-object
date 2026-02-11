@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\Generated\ValidatorMessageTransfer;
 use Picamator\TransferObject\Shared\Validator\ValidatorMessageTrait;
 
-readonly class NumberTypePropertyValidator implements PropertyValidatorInterface
+class NumberTypePropertyValidator implements PropertyValidatorInterface
 {
     use ValidatorMessageTrait;
 
@@ -18,6 +18,8 @@ readonly class NumberTypePropertyValidator implements PropertyValidatorInterface
 
     private const string EXTENSION_IS_NOT_LOADED_ERROR
         = 'PHP extension BCMath was not loaded. Please install and load extension.';
+
+    private static bool $isBcMathLoaded;
 
     public function isApplicable(DefinitionPropertyTransfer $propertyTransfer): bool
     {
@@ -57,9 +59,8 @@ readonly class NumberTypePropertyValidator implements PropertyValidatorInterface
 
     protected function isBcMathLoaded(): bool
     {
-        /** @var bool $isLoaded */
-        static $isLoaded = extension_loaded('bcmath');
+        self::$isBcMathLoaded ??= extension_loaded('bcmath');
 
-        return $isLoaded;
+        return self::$isBcMathLoaded;
     }
 }

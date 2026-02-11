@@ -40,6 +40,8 @@ trait TransferAdapterTrait
      */
     private ?WeakReference $_reflectionObjectReference = null;
 
+    private static bool $_isBcMathLoaded;
+
     /**
      * @return \Traversable<string, mixed>
      */
@@ -262,9 +264,8 @@ trait TransferAdapterTrait
 
     private function isBcMathLoaded(): bool
     {
-        /** @var bool $isLoaded */
-        static $isLoaded = \extension_loaded('bcmath');
+        self::$_isBcMathLoaded ??= extension_loaded('bcmath');
 
-        return $isLoaded;
+        return self::$_isBcMathLoaded;
     }
 }
