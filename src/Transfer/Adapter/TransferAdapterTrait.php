@@ -264,7 +264,7 @@ trait TransferAdapterTrait
 
     private function isBcMathLoaded(): bool
     {
-        self::$_isBcMathLoaded ??= extension_loaded('bcmath');
+        self::$_isBcMathLoaded ??= \extension_loaded('bcmath');
 
         return self::$_isBcMathLoaded;
     }
