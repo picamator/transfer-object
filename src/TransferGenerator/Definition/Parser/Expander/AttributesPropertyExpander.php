@@ -14,7 +14,7 @@ final class AttributesPropertyExpander implements PropertyExpanderInterface
 
     private const string ATTRIBUTES_KEY = 'attributes';
 
-    private const string ATTRIBUTES_REGEX = '#(?<namespace>[^()]*)(?<arguments>.*)#';
+    private const string ATTRIBUTES_REGEX = '#^(?<namespace>[^()]+)\s*(?<arguments>.*)$#';
 
     public function __construct(
         private readonly NamespaceBuilderInterface $namespaceBuilder,
