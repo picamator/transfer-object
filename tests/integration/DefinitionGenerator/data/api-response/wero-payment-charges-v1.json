@@ -1,0 +1,18 @@
+{
+    "paymentMethod": "WERO",
+    "amount": {
+        "value": 1000,
+        "currency": "EUR"
+    },
+    "consumer": {
+        "country": "DE"
+    },
+    "authenticationSettings": [
+        {
+            "type": "REDIRECT",
+            "settings": {
+                "returnUrl": "https://www.webshop.com/order-results-page"
+            }
+        }
+    ]
+}

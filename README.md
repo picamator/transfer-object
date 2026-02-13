@@ -116,10 +116,11 @@ Definition Files and Transfer Object generators have been tested against the fol
 
 * [NASA Open Api](https://api.nasa.gov/neo/rest/v1/neo/2465633?api_key=DEMO_KEY)
 * [OpenWeather](https://openweathermap.org/current?collection=current_forecast#example_JSON)
-* [Content API for Shopping](https://developers.google.com/shopping-content/guides/products/products-api?hl=en)
-* [Frankfurter is a free, open-source currency data API](https://api.frankfurter.dev/v1/latest)
+* [Google Content API for Shopping](https://developers.google.com/shopping-content/guides/products/products-api?hl=en)
+* [Frankfurter - open-source currency data API](https://api.frankfurter.dev/v1/latest)
 * [Tagesschau API](https://tagesschau.api.bund.dev)
 * [Statistisches Bundesamt (Destatis)](https://www-genesis.destatis.de/genesisWS/swagger-ui/index.html#/find/findPost)
+* [Wero - Digital Payment Wallet](https://developerhub.ppro.com/global-api/docs/wero)
 
 ### Scenario
 

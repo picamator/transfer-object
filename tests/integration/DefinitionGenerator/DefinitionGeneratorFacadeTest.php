@@ -17,6 +17,7 @@ use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Goo
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\NasaNeo\AsteroidTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\OpenWeather\ForecastTransfer;
 use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Tagesschau\ArdNewsTransfer;
+use Picamator\Tests\Integration\TransferObject\DefinitionGenerator\Generated\Wero\PaymentChargesTransfer;
 use Picamator\Tests\Integration\TransferObject\Helper\DefinitionGeneratorTrait;
 use Picamator\Tests\Integration\TransferObject\Helper\FilterArrayTrait;
 use Picamator\Tests\Integration\TransferObject\Helper\TransferGeneratorTrait;
@@ -113,6 +114,12 @@ final class DefinitionGeneratorFacadeTest extends TestCase
             'sampleFileName' => 'genesis-destatis-find.json',
             'definitionFileName' => 'destatis.transfer.yml',
         ];
+
+        yield 'Wero' => [
+            'className' => 'PaymentCharges',
+            'sampleFileName' => 'wero-payment-charges-v1.json',
+            'definitionFileName' => 'paymentCharges.transfer.yml',
+        ];
     }
 
     #[DataProvider('configPathDataProvider')]
@@ -159,6 +166,10 @@ final class DefinitionGeneratorFacadeTest extends TestCase
 
         yield 'Destatis' => [
             'genesis-destatis-find.json',
+        ];
+
+        yield 'Wero' => [
+            'wero-payment-charges-v1.json',
         ];
     }
 
@@ -214,6 +225,11 @@ final class DefinitionGeneratorFacadeTest extends TestCase
         yield 'Destatis' => [
             DestatisTransfer::class,
             'genesis-destatis-find.json',
+        ];
+
+        yield 'Wero' => [
+            PaymentChargesTransfer::class,
+            'wero-payment-charges-v1.json',
         ];
     }
 
