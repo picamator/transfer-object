@@ -61,7 +61,7 @@ readonly class FileReader implements FileReaderInterface
         $this->fclose($file);
 
         throw new FileReaderException(
-            sprintf('Failed to read file "%s" line "%d".', $filename, $fileLine),
+            sprintf('Failed to read file "%s" at line "%d".', $filename, $fileLine),
         );
     }
 
