@@ -1,0 +1,37 @@
+# $schema: https://raw.githubusercontent.com/picamator/transfer-object/main/schema/definition.schema.json
+
+# PaymentCharges
+PaymentCharges:
+  paymentMethod:
+    type: string
+  amount:
+    type: Amount
+  consumer:
+    type: Consumer
+  authenticationSettings:
+    collectionType: AuthenticationSettings
+
+# Amount
+Amount:
+  value:
+    type: int
+  currency:
+    type: string
+
+# Consumer
+Consumer:
+  country:
+    type: string
+
+# AuthenticationSettings
+AuthenticationSettings:
+  type:
+    type: string
+  settings:
+    type: Settings
+
+# Settings
+Settings:
+  returnUrl:
+    type: string
+

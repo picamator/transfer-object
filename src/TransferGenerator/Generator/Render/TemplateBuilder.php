@@ -14,6 +14,7 @@ readonly class TemplateBuilder implements TemplateBuilderInterface
 {
     public function __construct(
         private ConfigInterface $config,
+        private TemplateSorterInterface $templateSorter,
         private TemplateExpanderInterface $templateExpander,
     ) {
     }
@@ -26,30 +27,19 @@ readonly class TemplateBuilder implements TemplateBuilderInterface
         $templateTransfer->className = $definitionTransfer->content->className;
         $templateTransfer->imports[TransferEnum::ABSTRACT_CLASS->value] = TransferEnum::ABSTRACT_CLASS->value;
 
-        foreach ($definitionTransfer->content->properties as $propertyTransfer) {
-            $this->templateExpander->expandTemplateTransfer($propertyTransfer, $templateTransfer);
-        }
+        $this->expandProperties($definitionTransfer, $templateTransfer);
 
-        $this->sortTemplate($templateTransfer);
+        $this->templateSorter->sortTemplateTransfer($templateTransfer);
 
         return $templateTransfer;
     }
 
-    private function sortTemplate(TemplateTransfer $templateTransfer): void
-    {
-        $templateTransfer->imports->natsort();
-        $templateTransfer->metaConstants->natsort();
-
-        if ($templateTransfer->metaInitiators->count() > 0) {
-            $templateTransfer->metaInitiators->natsort();
-        }
-
-        if ($templateTransfer->metaTransformers->count() > 0) {
-            $templateTransfer->metaTransformers->natsort();
-        }
-
-        foreach ($templateTransfer->metaAttributes as $metaAttributes) {
-            natsort($metaAttributes);
+    private function expandProperties(
+        DefinitionTransfer $definitionTransfer,
+        TemplateTransfer $templateTransfer,
+    ): void {
+        foreach ($definitionTransfer->content->properties as $propertyTransfer) {
+            $this->templateExpander->expandTemplateTransfer($propertyTransfer, $templateTransfer);
         }
     }
 

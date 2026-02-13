@@ -20,7 +20,7 @@ class FileAppender implements FileAppenderInterface
 
         if ($writeResult === false) {
             throw new FileAppenderException(
-                sprintf('Failed to write content into the file "%s".', $filename),
+                sprintf('Failed to write content to file "%s".', $filename),
             );
         }
     }
@@ -35,7 +35,7 @@ class FileAppender implements FileAppenderInterface
         $isClosed = $this->fclose($file);
         if ($isClosed === false) {
             throw new FileAppenderException(
-                sprintf('Failed to close the file "%s".', $filename),
+                sprintf('Failed to close file "%s".', $filename),
             );
         }
 

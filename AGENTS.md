@@ -100,7 +100,8 @@ Code Style
 
 ### Tests
 
-- all tests classes should be a `final`
+- tests classes should be a `final`
+- tests should have at least one test group
 
 Module Structure
 ----------------

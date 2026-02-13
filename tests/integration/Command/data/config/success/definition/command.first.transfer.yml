@@ -1,4 +1,4 @@
 # $schema: ./../../../../../../../schema/definition.schema.json
-Command:
+CommandFirst:
   run:
     type: true

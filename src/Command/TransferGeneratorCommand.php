@@ -122,27 +122,22 @@ MESSAGE;
             }
 
             $this->writelnErrorMessages($io, $generatorTransfer);
-            $this->writelnDebugMessages($io, $generatorTransfer);
+            if ($this->isDebugMessages($io, $generatorTransfer)) {
+                $lastFileName ??= $generatorTransfer->fileName;
+                $this->writelnDebugMessages($io, $generatorTransfer, $lastFileName);
+            }
         }
 
         return $generatorFiber->getReturn();
     }
 
-    private function writelnDebugMessages(SymfonyStyle $io, TransferGeneratorTransfer $generatorTransfer): void
-    {
-        if (
-            !$io->isVerbose()
-            || $generatorTransfer->validator->isValid === false
-            || $generatorTransfer->fileName === null
-            || $generatorTransfer->className === null
-        ) {
-            return;
-        }
-
-        static $fileName = $generatorTransfer->fileName;
-
-        if ($fileName !== $generatorTransfer->fileName) {
-            $fileName = $generatorTransfer->fileName;
+    private function writelnDebugMessages(
+        SymfonyStyle $io,
+        TransferGeneratorTransfer $generatorTransfer,
+        ?string &$lastFileName,
+    ): void {
+        if ($lastFileName !== $generatorTransfer->fileName) {
+            $lastFileName = $generatorTransfer->fileName;
 
             $io->newLine();
         }
@@ -154,6 +149,14 @@ MESSAGE;
                 $generatorTransfer->className,
             )
         );
+    }
+
+    private function isDebugMessages(SymfonyStyle $io, TransferGeneratorTransfer $generatorTransfer): bool
+    {
+        return $io->isVerbose()
+            && $generatorTransfer->validator->isValid === true
+            && $generatorTransfer->fileName !== null
+            && $generatorTransfer->className !== null;
     }
 
     private function writelnErrorMessages(SymfonyStyle $io, TransferGeneratorTransfer $generatorTransfer): void

@@ -84,8 +84,14 @@ case $1 in
     docker compose stop
     ;;
   cli)
-    if [ -n "$2" ]; then
-      $DOCKER_EXEC php -f $2
+    if [ -n "$5" ]; then
+      $DOCKER_EXEC php "$2" "$3" "$4" "$5"
+    elif [ -n "$4" ]; then
+      $DOCKER_EXEC php "$2" "$3" "$4"
+    elif [ -n "$3" ]; then
+      $DOCKER_EXEC php "$2" "$3"
+    elif [ -n "$2" ]; then
+      $DOCKER_EXEC php $2
     else
       $DOCKER_EXEC bash
     fi

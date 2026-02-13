@@ -60,9 +60,9 @@ readonly class FileReaderProgress implements FileReaderProgressInterface
         if ($fileSize === false) {
             throw new FileReaderException(
                 sprintf(
-                    'Failed to get file size "%s". Error: "%s".',
+                    'Failed to get size for file "%s". Error: "%s".',
                     $filename,
-                    error_get_last()['message'] ?? '',
+                    error_get_last()['message'] ?? 'Unknown error.',
                 ),
             );
         }

@@ -14,7 +14,7 @@ final class AttributesPropertyExpander implements PropertyExpanderInterface
 
     private const string ATTRIBUTES_KEY = 'attributes';
 
-    private const string ATTRIBUTES_REGEX = '#(?<namespace>[^()]*)(?<arguments>.*)#';
+    private const string ATTRIBUTES_REGEX = '#^(?<namespace>[^()]+)\s*(?<arguments>.*)$#';
 
     public function __construct(
         private readonly NamespaceBuilderInterface $namespaceBuilder,
@@ -51,15 +51,14 @@ final class AttributesPropertyExpander implements PropertyExpanderInterface
 
     private function getAttributeTransfer(string $attribute): ?DefinitionAttributeTransfer
     {
-        if (preg_match(self::ATTRIBUTES_REGEX, $attribute, $matches) === false) {
+        if (preg_match(self::ATTRIBUTES_REGEX, $attribute, $matches) !== 1) {
             return null;
         }
 
-        $namespace = $matches['namespace'] ?? '';
-        $namespaceTransfer = $this->namespaceBuilder->createNamespaceTransfer($namespace);
+        $namespaceTransfer = $this->namespaceBuilder->createNamespaceTransfer($matches['namespace']);
 
         $builtInTypeTransfer = new DefinitionAttributeTransfer();
-        $builtInTypeTransfer->arguments = $matches['arguments'] ?? null;
+        $builtInTypeTransfer->arguments = $matches['arguments'];
         $builtInTypeTransfer->namespace = $namespaceTransfer;
 
         return $builtInTypeTransfer;

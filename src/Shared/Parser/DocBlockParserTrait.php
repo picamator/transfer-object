@@ -6,24 +6,17 @@ namespace Picamator\TransferObject\Shared\Parser;
 
 trait DocBlockParserTrait
 {
-    private const string TYPE_KEY = 'type';
+    private const string DOCK_BLOCK_REGEX = '#^(?<type>[^<> ]+)\s*(?<docBlock><.+>)$#';
 
-    private const string DOC_BLOCK_KEY = 'docBlock';
-
-    private const string TYPE_REGEX = '#(?<type>[^<>]*)(?<docBlock>.*)#';
-
-    /**
-     * @return array<string,string|null>|null
-     */
-    final protected function parseTypeWithDocBlock(string $type): ?array
+    final protected function parseTypeWithDocBlock(string $type): TypeDocBlock
     {
-        if (preg_match(self::TYPE_REGEX, $type, $matches) === false) {
-            return null;
+        if (!str_contains($type, '<') || preg_match(self::DOCK_BLOCK_REGEX, $type, $matches) !== 1) {
+            return new TypeDocBlock(type: $type);
         }
 
-        $type = $matches[self::TYPE_KEY] ?? '';
-        $docBlock = $matches[self::DOC_BLOCK_KEY] ?? null;
-
-        return [$type => $docBlock];
+        return new TypeDocBlock(
+            type: $matches['type'],
+            docBlock: $matches['docBlock'],
+        );
     }
 }
