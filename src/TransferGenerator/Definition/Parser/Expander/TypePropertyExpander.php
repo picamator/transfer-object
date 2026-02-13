@@ -14,6 +14,8 @@ final class TypePropertyExpander extends AbstractPropertyExpander
 {
     use DocBlockParserTrait;
 
+    private const string TYPE_KEY = 'type';
+
     public function __construct(
         private readonly EmbeddedTypeBuilderInterface $typeBuilder,
     ) {
@@ -41,10 +43,8 @@ final class TypePropertyExpander extends AbstractPropertyExpander
 
     private function getBuiltInTypeTransfer(string $matchedType): ?DefinitionBuiltInTypeTransfer
     {
-        $typeWithDocBlock = $this->parseTypeWithDocBlock($matchedType);
-
-        $type = array_key_first($typeWithDocBlock);
-        $type = BuiltInTypeEnum::tryFrom((string)$type);
+        $typeDocBlock = $this->parseTypeWithDocBlock($matchedType);
+        $type = BuiltInTypeEnum::tryFrom($typeDocBlock->type);
 
         if ($type === null) {
             return null;
@@ -52,7 +52,7 @@ final class TypePropertyExpander extends AbstractPropertyExpander
 
         $builtInTypeTransfer = new DefinitionBuiltInTypeTransfer();
         $builtInTypeTransfer->name = $type;
-        $builtInTypeTransfer->docBlock = array_first($typeWithDocBlock);
+        $builtInTypeTransfer->docBlock = $typeDocBlock->docBlock;
 
         return $builtInTypeTransfer;
     }

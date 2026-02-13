@@ -70,6 +70,6 @@ final class BuiltInTypeBuilderExpanderTest extends TestCase
         $propertyTransfer = $builderTransfer->definitionContent->properties[0];
         $this->assertSame($content->propertyName, $propertyTransfer->propertyName);
         $this->assertSame(BuiltInTypeEnum::ARRAY_OBJECT, $propertyTransfer->builtInType?->name);
-        $this->assertSame('', $propertyTransfer->builtInType->docBlock);
+        $this->assertNull($propertyTransfer->builtInType->docBlock);
     }
 }
