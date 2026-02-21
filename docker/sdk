@@ -23,6 +23,7 @@ function show_usage() {
   echo -e "  $(wrap_in_yellow "-p")    Enable Xdebug with profiler mode when starting containers"
   echo
   echo "Commands:"
+  echo -e "  $(wrap_in_yellow "install")                    Install Development Environment"
   echo -e "  $(wrap_in_yellow "build")                      Build Docker containers"
   echo -e "  $(wrap_in_yellow "start")                      Start Docker containers (honors -x / -p)"
   echo -e "  $(wrap_in_yellow "stop")                       Stop Docker containers"
@@ -70,6 +71,9 @@ shift $((OPTIND -1))
 
 # arguments
 case $1 in
+  install)
+    $0 build && $0 start && $0 composer install
+    ;;
   build)
     USER_ID=$(id -u) GROUP_ID=$(id -g) docker compose build
     ;;
@@ -84,41 +88,27 @@ case $1 in
     docker compose stop
     ;;
   cli)
-    if [ -n "$5" ]; then
-      $DOCKER_EXEC php "$2" "$3" "$4" "$5"
-    elif [ -n "$4" ]; then
-      $DOCKER_EXEC php "$2" "$3" "$4"
-    elif [ -n "$3" ]; then
-      $DOCKER_EXEC php "$2" "$3"
-    elif [ -n "$2" ]; then
-      $DOCKER_EXEC php $2
-    else
+    if [ -z "$2" ]; then
       $DOCKER_EXEC bash
+    else
+      $DOCKER_EXEC php "${@:2}"
     fi
     ;;
   composer)
-    if [ -n "$5" ]; then
-      $DOCKER_EXEC composer "$2" "$3" "$4" "$5"
-    elif [ -n "$4" ]; then
-      $DOCKER_EXEC composer "$2" "$3" "$4"
-    elif [ -n "$3" ]; then
-      $DOCKER_EXEC composer "$2" "$3"
-    else
-      $DOCKER_EXEC composer "$2"
-    fi
+    $DOCKER_EXEC composer "${@:2}"
     ;;
   phpstan)
     $DOCKER_EXEC composer phpstan
     ;;
   phpunit)
     if [ -n "$2" ]; then
-      $DOCKER_EXEC composer phpunit -- --filter $2
+      $DOCKER_EXEC composer phpunit -- --filter "$2"
     else
       $DOCKER_EXEC composer phpunit
     fi
     ;;
   phpunit-group)
-    $DOCKER_EXEC composer phpunit-group $2
+    $DOCKER_EXEC composer phpunit-group "$2"
     ;;
   phpcs)
     $DOCKER_EXEC composer phpcs
@@ -130,21 +120,13 @@ case $1 in
     $DOCKER_EXEC composer captainhook install --only-enabled --run-mode=docker --run-exec="docker exec -i $DOCKER_CONTAINER_NAME"
     ;;
   hook)
-    $DOCKER_EXEC composer captainhook $2
+    $DOCKER_EXEC composer captainhook "${@:2}"
     ;;
   to-generate)
-    if [ -n "$2" ]; then
-      $DOCKER_EXEC composer transfer-generate -- -c $2 -v
-    else
-      $DOCKER_EXEC composer transfer-generate -- -c ./config/generator.config.yml -v
-    fi
+    $DOCKER_EXEC composer transfer-generate -- -c "${2:-./config/generator.config.yml}" -v
     ;;
   to-generate-bulk)
-    if [ -n "$2" ]; then
-      $DOCKER_EXEC composer transfer-generate-bulk -- -b $2
-    else
-      $DOCKER_EXEC composer transfer-generate-bulk -- -b ./var/config/config.list.txt
-    fi
+    $DOCKER_EXEC composer transfer-generate-bulk -- -b "${2:-./var/config/config.list.txt}"
     ;;
   df-generate)
      $DOCKER_EXEC composer definition-generate
