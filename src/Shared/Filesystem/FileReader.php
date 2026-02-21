@@ -72,6 +72,12 @@ readonly class FileReader implements FileReaderInterface
      */
     private function getFile(string $filename)
     {
+        if (!$this->fileExists($filename)) {
+            throw new FileReaderException(
+                sprintf('File "%s" does not exist.', $filename),
+            );
+        }
+
         $file = $this->fopen($filename);
         if ($file === false) {
             throw new FileReaderException(
@@ -87,11 +93,12 @@ readonly class FileReader implements FileReaderInterface
      */
     protected function fopen(string $filename)
     {
-        if (!file_exists($filename)) {
-            return false;
-        }
-
         return fopen($filename, 'r');
+    }
+
+    protected function fileExists(string $filename): bool
+    {
+        return file_exists($filename);
     }
 
     /**

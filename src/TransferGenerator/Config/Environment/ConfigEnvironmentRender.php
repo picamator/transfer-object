@@ -37,14 +37,19 @@ class ConfigEnvironmentRender implements ConfigEnvironmentRenderInterface
         return $this->projectRootCache = $projectRoot;
     }
 
-    protected function getWorkingDir(): string
+    private function getWorkingDir(): string
     {
-        return getcwd() ?: '';
+        return $this->getcwd() ?: '';
     }
 
-    protected function getEnvironment(): string
+    protected function getcwd(): false|string
     {
-        $envValue = getenv(static::ENVIRONMENT_KEY);
+        return getcwd();
+    }
+
+    private function getEnvironment(): string
+    {
+        $envValue = $this->getenv(static::ENVIRONMENT_KEY);
         if (!is_string($envValue)) {
             return '';
         }
@@ -52,6 +57,14 @@ class ConfigEnvironmentRender implements ConfigEnvironmentRenderInterface
         return $envValue
             |> trim(...)
             |> $this->rtrimPath(...);
+    }
+
+    /**
+     * @return array<int, string>|false|string
+     */
+    protected function getenv(string $name): array|false|string
+    {
+        return getenv($name);
     }
 
     private function rtrimPath(string $path): string

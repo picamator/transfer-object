@@ -2,16 +2,13 @@
     "name": "picamator/transfer-object",
     "description": "A modern Symfony-compatible Transfer Object Generator with property hooks, FixedArray, and asymmetric visibilities.",
     "keywords": [
-        "transfer-object",
         "data-transfer-object",
-        "transfer-object-generator",
+        "data-transfer-object-generator",
         "dto",
         "dto-generator",
-        "definition-generator",
-        "symfony",
-        "symfony-console",
         "generator",
-        "automation"
+        "symfony",
+        "symfony-console"
     ],
     "license": "MIT",
     "authors": [
@@ -78,25 +75,28 @@
     },
     "prefer-stable": true,
     "scripts": {
-        "phpunit": "./vendor/bin/phpunit --no-progress",
-        "phpunit-group": "./vendor/bin/phpunit --testdox --group",
-        "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon --no-progress --memory-limit=512M",
-        "transfer-generate": "php ./bin/transfer-generate",
-        "transfer-generate-bulk": "php ./bin/transfer-generate-bulk",
-        "definition-generate": "php ./bin/definition-generate",
-        "captainhook": "./vendor/bin/captainhook",
-        "phpcs": "./vendor/bin/phpcs -q --colors",
-        "phpcbf": "./vendor/bin/phpcbf -q --colors"
+        "captainhook": "captainhook",
+        "definition-generate": "@php ./bin/definition-generate",
+        "phpcbf": "phpcbf -q --colors",
+        "phpcs": "phpcs -q --colors",
+        "phpstan": "phpstan analyse -c phpstan.neon --no-progress --memory-limit=512M",
+        "phpunit": "phpunit --no-progress",
+        "phpunit-group": "@phpunit --testdox --group",
+        "transfer-generate": "@php ./bin/transfer-generate",
+        "transfer-generate-bulk": "@php ./bin/transfer-generate-bulk"
+    },
+    "scripts-aliases": {
+        "phpunit": ["test"]
     },
     "scripts-descriptions": {
+        "captainhook": "Manage and execute Git hooks.",
+        "definition-generate": "Create Transfer Object definition files based on JSON blueprints.",
+        "phpcbf": "Automatically fix coding style issues with PHP Code Beautifier and Fixer.",
+        "phpcs": "Analyze code style using PHP CodeSniffer.",
+        "phpstan": "Perform static code analysis using PHPStan.",
         "phpunit": "Run unit and integration tests.",
         "phpunit-group": "Run unit and integration tests assigned to the group.",
-        "phpstan": "Perform static code analysis using PHPStan.",
         "transfer-generate": "Generate Transfer Objects from YML definition templates.",
-        "transfer-generate-bulk": "Generate Transfer Objects based on configuration list.",
-        "definition-generate": "Create Transfer Object definition files based on JSON blueprints.",
-        "captainhook": "Manage and execute Git hooks.",
-        "phpcs": "Analyze code style using PHP CodeSniffer.",
-        "phpcbf": "Automatically fix coding style issues with PHP Code Beautifier and Fixer."
+        "transfer-generate-bulk": "Generate Transfer Objects based on configuration list."
     }
 }

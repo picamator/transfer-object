@@ -10,6 +10,16 @@ function wrap_in_yellow() {
   echo -e "\e[33m$1\e[0m"
 }
 
+# function to print a command/option with its description
+function print_command() {
+  printf "  %-35s %s\n" "$(wrap_in_yellow "$1")" "$2"
+}
+
+# function to print an example with its description
+function print_example() {
+  printf "  %-40s %s\n" "$(wrap_in_yellow "$1")" "$2"
+}
+
 # function to display usage
 function show_usage() {
   wrap_in_green "==================================="
@@ -19,30 +29,31 @@ function show_usage() {
   wrap_in_yellow "$0 [-x] [-p] <command> [args]"
   echo
   echo "Options:"
-  echo -e "  $(wrap_in_yellow "-x")    Enable Xdebug with debug + coverage mode when starting containers"
-  echo -e "  $(wrap_in_yellow "-p")    Enable Xdebug with profiler mode when starting containers"
+  print_command "-x" "Enable Xdebug (debug, coverage)"
+  print_command "-p" "Enable Xdebug (profiler)"
   echo
   echo "Commands:"
-  echo -e "  $(wrap_in_yellow "build")                      Build Docker containers"
-  echo -e "  $(wrap_in_yellow "start")                      Start Docker containers (honors -x / -p)"
-  echo -e "  $(wrap_in_yellow "stop")                       Stop Docker containers"
-  echo -e "  $(wrap_in_yellow "cli")                        Open container shell or execute the PHP script when provided as an argument"
-  echo -e "  $(wrap_in_yellow "composer <command>")         Run composer command"
-  echo -e "  $(wrap_in_yellow "phpstan")                    Run PHPStan"
-  echo -e "  $(wrap_in_yellow "phpunit")                    Run all PHPUnit tests or concrete test case when full qualified name provided as an argument"
-  echo -e "  $(wrap_in_yellow "phpunit-group <group>")      Run PHPUnit tests assigned to the group"
-  echo -e "  $(wrap_in_yellow "phpcs")                      Run PHP CodeSniffer"
-  echo -e "  $(wrap_in_yellow "phpcbf")                     Run PHP Code Beautifier and Fixer"
-  echo -e "  $(wrap_in_yellow "hook-install")               Install CaptainHook"
-  echo -e "  $(wrap_in_yellow "hook <command>")             Run CaptainHook command"
-  echo -e "  $(wrap_in_yellow "to-generate")                Generate internal transfer objects or externals when configuration path provided as an argument"
-  echo -e "  $(wrap_in_yellow "to-generate-bulk")           Generate bulk internal transfer objects or externals when configuration path provided as an argument"
-  echo -e "  $(wrap_in_yellow "df-generate")                Generate definition"
+  print_command "install" "Install development environment"
+  print_command "build" "Build Docker containers"
+  print_command "start" "Start Docker containers (honors -x / -p)"
+  print_command "stop" "Stop Docker containers"
+  print_command "cli [script]" "Open container shell or execute PHP script"
+  print_command "composer <cmd>" "Run composer command"
+  print_command "phpstan" "Run PHPStan"
+  print_command "phpunit [filter]" "Run PHPUnit tests"
+  print_command "phpunit-group <g>" "Run PHPUnit tests by group"
+  print_command "phpcs" "Run PHP CodeSniffer"
+  print_command "phpcbf" "Run PHP Code Beautifier and Fixer"
+  print_command "hook-install" "Install CaptainHook"
+  print_command "hook <cmd>" "Run CaptainHook command"
+  print_command "to-generate [c]" "Generate transfer objects"
+  print_command "to-generate-bulk [b]" "Generate bulk transfer objects"
+  print_command "df-generate" "Generate definitions"
   echo
   echo "Examples:"
-  echo -e "  $(wrap_in_yellow "$0 -x start")                Start containers with Xdebug (debug + coverage)"
-  echo -e "  $(wrap_in_yellow "$0 -p start")                Start containers with Xdebug profiler"
-  echo -e "  $(wrap_in_yellow "$0 composer install")        Run composer install inside container"
+  print_example "$0 -x start" "Start containers (Xdebug: debug, coverage)"
+  print_example "$0 -p start" "Start containers (Xdebug: profiler)"
+  print_example "$0 composer install" "Run composer install inside container"
 }
 
 # vars
@@ -70,6 +81,9 @@ shift $((OPTIND -1))
 
 # arguments
 case $1 in
+  install)
+    $0 build && $0 start && $0 composer install
+    ;;
   build)
     USER_ID=$(id -u) GROUP_ID=$(id -g) docker compose build
     ;;
@@ -84,41 +98,27 @@ case $1 in
     docker compose stop
     ;;
   cli)
-    if [ -n "$5" ]; then
-      $DOCKER_EXEC php "$2" "$3" "$4" "$5"
-    elif [ -n "$4" ]; then
-      $DOCKER_EXEC php "$2" "$3" "$4"
-    elif [ -n "$3" ]; then
-      $DOCKER_EXEC php "$2" "$3"
-    elif [ -n "$2" ]; then
-      $DOCKER_EXEC php $2
-    else
+    if [ -z "$2" ]; then
       $DOCKER_EXEC bash
+    else
+      $DOCKER_EXEC php "${@:2}"
     fi
     ;;
   composer)
-    if [ -n "$5" ]; then
-      $DOCKER_EXEC composer "$2" "$3" "$4" "$5"
-    elif [ -n "$4" ]; then
-      $DOCKER_EXEC composer "$2" "$3" "$4"
-    elif [ -n "$3" ]; then
-      $DOCKER_EXEC composer "$2" "$3"
-    else
-      $DOCKER_EXEC composer "$2"
-    fi
+    $DOCKER_EXEC composer "${@:2}"
     ;;
   phpstan)
     $DOCKER_EXEC composer phpstan
     ;;
   phpunit)
     if [ -n "$2" ]; then
-      $DOCKER_EXEC composer phpunit -- --filter $2
+      $DOCKER_EXEC composer phpunit -- --filter "$2"
     else
       $DOCKER_EXEC composer phpunit
     fi
     ;;
   phpunit-group)
-    $DOCKER_EXEC composer phpunit-group $2
+    $DOCKER_EXEC composer phpunit-group "$2"
     ;;
   phpcs)
     $DOCKER_EXEC composer phpcs
@@ -130,21 +130,13 @@ case $1 in
     $DOCKER_EXEC composer captainhook install --only-enabled --run-mode=docker --run-exec="docker exec -i $DOCKER_CONTAINER_NAME"
     ;;
   hook)
-    $DOCKER_EXEC composer captainhook $2
+    $DOCKER_EXEC composer captainhook "${@:2}"
     ;;
   to-generate)
-    if [ -n "$2" ]; then
-      $DOCKER_EXEC composer transfer-generate -- -c $2 -v
-    else
-      $DOCKER_EXEC composer transfer-generate -- -c ./config/generator.config.yml -v
-    fi
+    $DOCKER_EXEC composer transfer-generate -- -c "${2:-./config/generator.config.yml}" -v
     ;;
   to-generate-bulk)
-    if [ -n "$2" ]; then
-      $DOCKER_EXEC composer transfer-generate-bulk -- -b $2
-    else
-      $DOCKER_EXEC composer transfer-generate-bulk -- -b ./var/config/config.list.txt
-    fi
+    $DOCKER_EXEC composer transfer-generate-bulk -- -b "${2:-./var/config/config.list.txt}"
     ;;
   df-generate)
      $DOCKER_EXEC composer definition-generate
