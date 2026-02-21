@@ -25,6 +25,7 @@ final class FileReaderTest extends TestCase
     {
         $this->fileReaderMock = $this->getMockBuilder(FileReader::class)
             ->onlyMethods([
+                'fileExists',
                 'fopen',
                 'fgets',
                 'feof',
@@ -37,10 +38,44 @@ final class FileReaderTest extends TestCase
         self::closeFile();
     }
 
+    #[TestDox('File does not exist should throw exception')]
+    public function testFileDoesNotExistShouldThrowException(): void
+    {
+        // Expect
+        $this->fileReaderMock->expects($this->once())
+            ->method('fileExists')
+            ->with(self::FILE_NAME)
+            ->willReturn(false);
+
+        $this->fileReaderMock->expects($this->never())
+            ->method('fopen')
+            ->with(self::FILE_NAME);
+
+        $this->fileReaderMock->expects($this->never())
+            ->method('fgets');
+
+        $this->fileReaderMock->expects($this->never())
+            ->method('feof');
+
+        $this->fileReaderMock->expects($this->never())
+            ->method('fclose')
+            ->seal();
+
+        $this->expectException(FileReaderException::class);
+
+        // Act
+        $this->fileReaderMock->readFile(self::FILE_NAME)->current();
+    }
+
     #[TestDox('Failed to open file should throw exception')]
     public function testFailedToOpenFileShouldThrowException(): void
     {
         // Expect
+        $this->fileReaderMock->expects($this->once())
+            ->method('fileExists')
+            ->with(self::FILE_NAME)
+            ->willReturn(true);
+
         $this->fileReaderMock->expects($this->once())
             ->method('fopen')
             ->with(self::FILE_NAME)
@@ -69,6 +104,11 @@ final class FileReaderTest extends TestCase
         $file = self::openFile();
 
         // Expect
+        $this->fileReaderMock->expects($this->once())
+            ->method('fileExists')
+            ->with(self::FILE_NAME)
+            ->willReturn(true);
+
         $this->fileReaderMock->expects($this->once())
             ->method('fopen')
             ->with(self::FILE_NAME)
@@ -104,6 +144,11 @@ final class FileReaderTest extends TestCase
 
         // Expect
         $this->fileReaderMock->expects($this->once())
+            ->method('fileExists')
+            ->with(self::FILE_NAME)
+            ->willReturn(true);
+
+        $this->fileReaderMock->expects($this->once())
             ->method('fopen')
             ->with(self::FILE_NAME)
             ->willReturn($file);
@@ -138,6 +183,11 @@ final class FileReaderTest extends TestCase
         $expected = ['some.config.yml'];
 
         // Expect
+        $this->fileReaderMock->expects($this->once())
+            ->method('fileExists')
+            ->with(self::FILE_NAME)
+            ->willReturn(true);
+
         $this->fileReaderMock->expects($this->once())
             ->method('fopen')
             ->with(self::FILE_NAME)
