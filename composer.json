@@ -75,15 +75,18 @@
     },
     "prefer-stable": true,
     "scripts": {
-        "captainhook": "./vendor/bin/captainhook",
+        "captainhook": "captainhook",
         "definition-generate": "@php ./bin/definition-generate",
-        "phpcbf": "./vendor/bin/phpcbf -q --colors",
-        "phpcs": "./vendor/bin/phpcs -q --colors",
-        "phpstan": "./vendor/bin/phpstan analyse -c phpstan.neon --no-progress --memory-limit=512M",
-        "phpunit": "./vendor/bin/phpunit --no-progress",
+        "phpcbf": "phpcbf -q --colors",
+        "phpcs": "phpcs -q --colors",
+        "phpstan": "phpstan analyse -c phpstan.neon --no-progress --memory-limit=512M",
+        "phpunit": "phpunit --no-progress",
         "phpunit-group": "@phpunit --testdox --group",
         "transfer-generate": "@php ./bin/transfer-generate",
         "transfer-generate-bulk": "@php ./bin/transfer-generate-bulk"
+    },
+    "scripts-aliases": {
+        "phpunit": ["test"]
     },
     "scripts-descriptions": {
         "captainhook": "Manage and execute Git hooks.",
