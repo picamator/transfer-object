@@ -2,16 +2,13 @@
     "name": "picamator/transfer-object",
     "description": "A modern Symfony-compatible Transfer Object Generator with property hooks, FixedArray, and asymmetric visibilities.",
     "keywords": [
-        "transfer-object",
         "data-transfer-object",
-        "transfer-object-generator",
+        "data-transfer-object-generator",
         "dto",
         "dto-generator",
-        "definition-generator",
-        "symfony",
-        "symfony-console",
         "generator",
-        "automation"
+        "symfony",
+        "symfony-console"
     ],
     "license": "MIT",
     "authors": [
