@@ -19,8 +19,8 @@ final class ConfigEnvironmentRenderTest extends TestCase
     {
         $this->renderMock = $this->getMockBuilder(ConfigEnvironmentRender::class)
             ->onlyMethods([
-                'getWorkingDir',
-                'getEnvironment',
+                'getenv',
+                'getcwd',
             ])
             ->getMock();
     }
@@ -35,11 +35,11 @@ final class ConfigEnvironmentRenderTest extends TestCase
 
         // Expect
         $this->renderMock->expects($this->once())
-            ->method('getEnvironment')
+            ->method('getenv')
             ->willReturn($envProjectRoot);
 
         $this->renderMock->expects($this->never())
-            ->method('getWorkingDir')
+            ->method('getcwd')
             ->seal();
 
         // Act
@@ -60,12 +60,36 @@ final class ConfigEnvironmentRenderTest extends TestCase
 
         // Expect
         $this->renderMock->expects($this->once())
-            ->method('getEnvironment')
-            ->willReturn('');
+            ->method('getenv')
+            ->willReturn(false);
 
         $this->renderMock->expects($this->once())
-            ->method('getWorkingDir')
+            ->method('getcwd')
             ->willReturn($workingDirectory)
+            ->seal();
+
+        // Act
+        $actual = $this->renderMock->renderProjectRoot($configPath);
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+
+    #[TestDox('Environment variable working directory is not set and failed to get working directory')]
+    public function testEnvironmentVariableIsNotSetAndWorkingDirectoryIsFailedShouldFallbackToEmpty(): void
+    {
+        // Arrange
+        $configPath = '${PROJECT_ROOT}/some-config-path.yml';
+        $expected = '/some-config-path.yml';
+
+        // Expect
+        $this->renderMock->expects($this->once())
+            ->method('getenv')
+            ->willReturn(false);
+
+        $this->renderMock->expects($this->once())
+            ->method('getcwd')
+            ->willReturn(false)
             ->seal();
 
         // Act
