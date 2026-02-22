@@ -13,7 +13,10 @@ use Traversable;
  */
 abstract class AbstractTransfer implements TransferInterface
 {
-    use AttributeTrait;
+    use AttributeTrait {
+        getInitiatorAttribute as private;
+        getTransformerAttribute as private;
+    }
 
     /**
      * @var int<0, max>
@@ -114,6 +117,10 @@ abstract class AbstractTransfer implements TransferInterface
         foreach (static::META_TRANSFORMERS as $propertyName => $constantName) {
             $index = $metaData[$propertyName];
             $value = $this->_data[$index];
+
+            if ($value === null) {
+                continue;
+            }
 
             $data[$propertyName] = $this->getTransformerAttribute($constantName)->toArray($value);
             unset($metaData[$propertyName]);

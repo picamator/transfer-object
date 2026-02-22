@@ -45,10 +45,10 @@ final readonly class DateTimeTransformerAttribute implements TransformerAttribut
     }
 
     /**
-     * @param DateTimeInterface|null $data
+     * @param DateTimeInterface $data
      */
-    public function toArray(mixed $data): ?string
+    public function toArray(mixed $data): string
     {
-        return $data?->format(self::DATE_TIME_FORMAT);
+        return $data->format(self::DATE_TIME_FORMAT);
     }
 }

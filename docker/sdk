@@ -12,7 +12,7 @@ function wrap_in_yellow() {
 
 # function to print a command/option with its description
 function print_command() {
-  printf "  %-35s %s\n" "$(wrap_in_yellow "$1")" "$2"
+  printf "  %-40s %s\n" "$(wrap_in_yellow "$1")" "$2"
 }
 
 # function to print an example with its description
@@ -30,7 +30,7 @@ function show_usage() {
   echo
   echo "Options:"
   print_command "-x" "Enable Xdebug (debug, coverage)"
-  print_command "-p" "Enable Xdebug (profiler)"
+  print_command "-p" "Enable Xdebug (profile)"
   echo
   echo "Commands:"
   print_command "install" "Install development environment"
@@ -39,20 +39,20 @@ function show_usage() {
   print_command "stop" "Stop Docker containers"
   print_command "cli [script]" "Open container shell or execute PHP script"
   print_command "composer <cmd>" "Run composer command"
-  print_command "phpstan" "Run PHPStan"
+  print_command "phpstan [file]" "Run PHPStan for all project's files or for specified one"
   print_command "phpunit [filter]" "Run PHPUnit tests"
-  print_command "phpunit-group <g>" "Run PHPUnit tests by group"
-  print_command "phpcs" "Run PHP CodeSniffer"
-  print_command "phpcbf" "Run PHP Code Beautifier and Fixer"
+  print_command "phpunit-group [group]" "Run PHPUnit tests by group"
+  print_command "phpcs [file]" "Run PHP CodeSniffer for all project's files or for specified one"
+  print_command "phpcbf [file]" "Run PHP Code Beautifier and Fixer for all project's files or for specified one"
   print_command "hook-install" "Install CaptainHook"
-  print_command "hook <cmd>" "Run CaptainHook command"
-  print_command "to-generate [c]" "Generate transfer objects"
-  print_command "to-generate-bulk [b]" "Generate bulk transfer objects"
-  print_command "df-generate" "Generate definitions"
+  print_command "hook [cmd]" "Run CaptainHook command"
+  print_command "to-generate [config]" "Generate Transfer Objects from YML definitions"
+  print_command "to-generate-bulk [bulk]" "Generate Transfer Objects in bulk from a config list"
+  print_command "df-generate" "Generate definition files from JSON blueprints"
   echo
   echo "Examples:"
   print_example "$0 -x start" "Start containers (Xdebug: debug, coverage)"
-  print_example "$0 -p start" "Start containers (Xdebug: profiler)"
+  print_example "$0 -p start" "Start containers (Xdebug: profile)"
   print_example "$0 composer install" "Run composer install inside container"
 }
 
@@ -91,7 +91,7 @@ case $1 in
     if [ "$XDEBUG_MODE" == "" ]; then
       docker compose up -d --remove-orphans
     else
-      XDEBUG_MODE={$XDEBUG_MODE} docker compose up -d --remove-orphans
+      XDEBUG_MODE=${XDEBUG_MODE} docker compose up -d --remove-orphans
     fi
     ;;
   stop)
@@ -108,7 +108,7 @@ case $1 in
     $DOCKER_EXEC composer "${@:2}"
     ;;
   phpstan)
-    $DOCKER_EXEC composer phpstan
+    $DOCKER_EXEC composer phpstan "${@:2}"
     ;;
   phpunit)
     if [ -n "$2" ]; then
@@ -118,13 +118,13 @@ case $1 in
     fi
     ;;
   phpunit-group)
-    $DOCKER_EXEC composer phpunit-group "$2"
+    $DOCKER_EXEC composer phpunit-group "${@:2}"
     ;;
   phpcs)
-    $DOCKER_EXEC composer phpcs
+    $DOCKER_EXEC composer phpcs "${@:2}"
     ;;
   phpcbf)
-    $DOCKER_EXEC composer phpcbf
+    $DOCKER_EXEC composer phpcbf "${@:2}"
     ;;
   hook-install)
     $DOCKER_EXEC composer captainhook install --only-enabled --run-mode=docker --run-exec="docker exec -i $DOCKER_CONTAINER_NAME"

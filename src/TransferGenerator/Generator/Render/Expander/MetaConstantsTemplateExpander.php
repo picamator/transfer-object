@@ -9,9 +9,9 @@ use Picamator\TransferObject\Generated\TemplateTransfer;
 
 final class MetaConstantsTemplateExpander extends AbstractTemplateExpander
 {
-    private const string META_CONSTANT_SNAKE_CASE_REGEX = '#(?<!^)[A-Z]#';
+    private const string META_CONSTANT_SNAKE_CASE_REGEX = '#(?<!^)(?<![A-Z])[A-Z]|(?<!^)[A-Z](?=[a-z])#';
 
-    private const string META_CONSTANT_ONLY_UPPER_CASE_REGEX = '#^[A-Z_]+$#';
+    private const string META_CONSTANT_ONLY_UPPER_CASE_REGEX = '#^[A-Z\d_]+$#';
 
     /**
      * phpcs:disable SlevomatCodingStandard.Functions.UnusedParameter

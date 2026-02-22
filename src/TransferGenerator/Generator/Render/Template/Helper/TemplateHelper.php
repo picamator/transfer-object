@@ -36,43 +36,41 @@ class TemplateHelper implements TemplateHelperInterface
 
     public function renderMetaAttributes(string $property): string
     {
-        if (!$this->templateTransfer->metaAttributes->offsetExists($property)) {
+        $metaAttributes = $this->templateTransfer->metaAttributes[$property] ?? null;
+        if ($metaAttributes === null) {
             return '';
         }
 
-        $metaAttributes = $this->renderIterable(
-            /** @phpstan-ignore argument.type */
-            iterable: $this->templateTransfer->metaAttributes[$property],
+        $renderedMetaAttributes = $this->renderIterable(
+            iterable: $metaAttributes,
             template: self::META_ATTRIBUTE_TEMPLATE,
         );
 
-        return PHP_EOL . $metaAttributes;
+        return PHP_EOL . $renderedMetaAttributes;
     }
 
     public function renderDocBlock(string $property): string
     {
-        if (!$this->templateTransfer->docBlocks->offsetExists($property)) {
+        $docBlocks = $this->templateTransfer->docBlocks[$property] ?? null;
+        if ($docBlocks === null) {
             return '';
         }
 
-        return sprintf(
-            self::DOC_BLOCK_TEMPLATE,
-            $this->templateTransfer->docBlocks[$property],
-        );
+        return sprintf(self::DOC_BLOCK_TEMPLATE, $docBlocks);
     }
 
     public function renderPropertyAttributes(string $property): string
     {
-        if (!$this->templateTransfer->propertyAttributes->offsetExists($property)) {
+        $attributes = $this->templateTransfer->propertyAttributes[$property] ?? null;
+        if ($attributes === null) {
             return '';
         }
 
-        $attributes = $this->renderIterable(
-            /** @phpstan-ignore argument.type */
-            iterable: $this->templateTransfer->propertyAttributes[$property],
+        $renderedAttributes = $this->renderIterable(
+            iterable: $attributes,
             template: self::PROPERTY_ATTRIBUTE_TEMPLATE,
         );
 
-        return PHP_EOL . $attributes;
+        return PHP_EOL . $renderedAttributes;
     }
 }

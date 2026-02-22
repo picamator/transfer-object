@@ -38,8 +38,9 @@ readonly class DefinitionReader implements DefinitionReaderInterface
 
                 yield from $contentGenerator;
 
-                /** @phpstan-ignore assignOp.invalid */
-                $count += $contentGenerator->getReturn();
+                /** @var int $contentGeneratorReturn */
+                $contentGeneratorReturn = $contentGenerator->getReturn();
+                $count += $contentGeneratorReturn;
             }
         } catch (FinderException | TransferGeneratorDefinitionException | YmlParserException $e) {
             yield $this->createErrorDefinitionTransfer($e, fileName: $fileName ?? '');

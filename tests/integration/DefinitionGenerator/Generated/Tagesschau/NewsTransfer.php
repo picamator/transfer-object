@@ -37,7 +37,7 @@ final class NewsTransfer extends AbstractTransfer
         self::REGION_ID_PROP => self::REGION_ID_INDEX,
         self::REGION_IDS_PROP => self::REGION_IDS_INDEX,
         self::RESSORT_PROP => self::RESSORT_INDEX,
-        self::SHARE_U_R_L_PROP => self::SHARE_U_R_L_INDEX,
+        self::SHARE_URL_PROP => self::SHARE_URL_INDEX,
         self::SOPHORA_ID_PROP => self::SOPHORA_ID_INDEX,
         self::TAGS_PROP => self::TAGS_INDEX,
         self::TEASER_IMAGE_PROP => self::TEASER_IMAGE_INDEX,
@@ -200,13 +200,13 @@ final class NewsTransfer extends AbstractTransfer
     }
 
     // shareURL
-    public const string SHARE_U_R_L_PROP = 'shareURL';
-    private const int SHARE_U_R_L_INDEX = 12;
+    public const string SHARE_URL_PROP = 'shareURL';
+    private const int SHARE_URL_INDEX = 12;
 
     public ?string $shareURL {
-        get => $this->getData(self::SHARE_U_R_L_INDEX);
+        get => $this->getData(self::SHARE_URL_INDEX);
         set {
-            $this->setData(self::SHARE_U_R_L_INDEX, $value);
+            $this->setData(self::SHARE_URL_INDEX, $value);
         }
     }
 

@@ -15,7 +15,10 @@ final class RequiredPropertyExpander extends AbstractPropertyExpander
         return array_key_exists(self::REQUIRED_KEY, $propertyType) ? '1' : '0';
     }
 
-    protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
+    /**
+     * @param string $matchedType
+     */
+    protected function handleExpander(mixed $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
     {
         if (!$this->isNullableAllowed($propertyTransfer)) {
             $propertyTransfer->isRequired = true;
@@ -33,11 +36,6 @@ final class RequiredPropertyExpander extends AbstractPropertyExpander
             return false;
         }
 
-        // phpcs:disable SlevomatCodingStandard.ControlStructures.UselessIfConditionWithReturn
-        if ($propertyTransfer->collectionType !== null) {
-            return false;
-        }
-
-        return true;
+        return $propertyTransfer->collectionType === null;
     }
 }

@@ -4,3 +4,6 @@
 # cache and debug
 var/cache/
 var/xdebug-profile/
+
+# secret
+.env

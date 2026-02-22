@@ -24,7 +24,10 @@ final class DateTimeTypePropertyExpander extends AbstractPropertyExpander
         return $matchType;
     }
 
-    protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
+    /**
+     * @param string $matchedType
+     */
+    protected function handleExpander(mixed $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
     {
         $propertyTransfer->dateTimeType = $this->typeBuilder->createTypeTransfer($matchedType);
     }
