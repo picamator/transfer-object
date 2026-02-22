@@ -8,7 +8,7 @@ use Picamator\TransferObject\Generated\DefinitionAttributeTransfer;
 use Picamator\TransferObject\Generated\DefinitionPropertyTransfer;
 use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builder\NamespaceBuilderInterface;
 
-final class AttributesPropertyExpander implements PropertyExpanderInterface
+final class AttributesPropertyExpander extends AbstractPropertyExpander implements PropertyExpanderInterface
 {
     use PropertyExpanderTrait;
 
@@ -37,7 +37,7 @@ final class AttributesPropertyExpander implements PropertyExpanderInterface
     /**
      * @param array<int,string> $matchedType
      */
-    protected function handleExpander(array $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
+    protected function handleExpander(mixed $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
     {
         foreach ($matchedType as $attribute) {
             $attributeTransfer = $this->getAttributeTransfer($attribute);

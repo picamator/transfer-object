@@ -12,8 +12,10 @@ abstract class AbstractPropertyExpander implements PropertyExpanderInterface
 
     /**
      * @param array<string,string|array<int,string>|null> $propertyType
+     *
+     * @return string|array<string, string|array<int,string>|null>|null
      */
-    abstract protected function matchType(array $propertyType): ?string;
+    abstract protected function matchType(array $propertyType): string|array|null;
 
-    abstract protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void;
+    abstract protected function handleExpander(mixed $matchedType, DefinitionPropertyTransfer $propertyTransfer): void;
 }

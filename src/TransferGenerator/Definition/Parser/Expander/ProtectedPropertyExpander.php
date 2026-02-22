@@ -15,7 +15,10 @@ final class ProtectedPropertyExpander extends AbstractPropertyExpander
         return array_key_exists(self::PROTECTED_KEY, $propertyType) ? '1' : '0';
     }
 
-    protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
+    /**
+     * @param string $matchedType
+     */
+    protected function handleExpander(mixed $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
     {
         $propertyTransfer->isProtected = $matchedType === '1';
     }

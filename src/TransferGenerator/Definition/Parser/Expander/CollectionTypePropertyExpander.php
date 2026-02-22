@@ -24,7 +24,10 @@ final class CollectionTypePropertyExpander extends AbstractPropertyExpander
         return $matchType;
     }
 
-    protected function handleExpander(string $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
+    /**
+     * @param string $matchedType
+     */
+    protected function handleExpander(mixed $matchedType, DefinitionPropertyTransfer $propertyTransfer): void
     {
         $propertyTransfer->collectionType = $this->typeBuilder->createPrefixTypeTransfer($matchedType);
         $propertyTransfer->isRequired = true;
