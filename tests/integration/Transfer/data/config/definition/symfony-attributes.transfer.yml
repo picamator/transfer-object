@@ -1,7 +1,8 @@
 # $schema: ./../../../../../../schema/definition.schema.json
 SymfonyAttribute:
   iAmAssert:
-    type: bool
+    type: string
+    required:
     attributes:
-      - "sf-assert: IsTrue"
       - "sf-assert:NotBlank"
+      - "sf-assert:Length(min: 50)"

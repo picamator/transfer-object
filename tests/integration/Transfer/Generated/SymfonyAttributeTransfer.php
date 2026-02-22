@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Picamator\Tests\Integration\TransferObject\Transfer\Generated;
 
 use Picamator\TransferObject\Transfer\AbstractTransfer;
-use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
@@ -29,9 +29,9 @@ final class SymfonyAttributeTransfer extends AbstractTransfer
     public const string I_AM_ASSERT_PROP = 'iAmAssert';
     private const int I_AM_ASSERT_INDEX = 0;
 
-    #[IsTrue]
     #[NotBlank]
-    public ?bool $iAmAssert {
+    #[Length(min: 50)]
+    public string $iAmAssert {
         get => $this->getData(self::I_AM_ASSERT_INDEX);
         set {
             $this->setData(self::I_AM_ASSERT_INDEX, $value);

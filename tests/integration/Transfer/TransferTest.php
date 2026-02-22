@@ -477,6 +477,7 @@ final class TransferTest extends TestCase
     {
         // Arrange
         $symfonyAttributeTransfer = new SymfonyAttributeTransfer();
+        $symfonyAttributeTransfer->iAmAssert = 'Short text';
 
         $validator = Validation::createValidatorBuilder()
             ->enableAttributeMapping()
@@ -487,7 +488,10 @@ final class TransferTest extends TestCase
 
         // Assert
         $this->assertCount(1, $actual, 'Expected one error message');
-        $this->assertSame('This value should not be blank.', $actual[0]?->getMessage());
+
+        /** @var string $message */
+        $message = $actual[0]?->getMessage() ?? '';
+        $this->assertStringStartsWith('This value is too short.', $message);
     }
 
     #[TestDox('Reserved constant should not collide with transfer')]
