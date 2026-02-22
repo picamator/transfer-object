@@ -12,7 +12,7 @@ readonly class AttributesNamespaceBuilder implements NamespaceBuilderInterface
      * @var array<string, string>
      */
     protected const array SHORTCUT_PATTERN_MAP = [
-        '#^(sf-assert:\s*)(.+)$#' => 'Symfony\Component\Validator\Constraints\\\${2}',
+        '#^(?<shortcut>sf-assert:\s*)(?<className>.+)$#' => 'Symfony\Component\Validator\Constraints\\',
     ];
 
     public function __construct(
@@ -30,14 +30,11 @@ readonly class AttributesNamespaceBuilder implements NamespaceBuilderInterface
     private function renderShortcut(string $namespace): string
     {
         foreach (static::SHORTCUT_PATTERN_MAP as $pattern => $replacement) {
-            if (preg_match($pattern, $namespace) !== 1) {
+            if (preg_match($pattern, $namespace, $matches) !== 1) {
                 continue;
             }
 
-            /** @var string $namespace */
-            $namespace = preg_replace($pattern, $replacement, $namespace);
-
-            return $namespace;
+            return $replacement . $matches['className'];
         }
 
         return $namespace;
