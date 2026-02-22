@@ -13,7 +13,10 @@ use Traversable;
  */
 abstract class AbstractTransfer implements TransferInterface
 {
-    use AttributeTrait;
+    use AttributeTrait {
+        getInitiatorAttribute as private;
+        getTransformerAttribute as private;
+    }
 
     /**
      * @var int<0, max>

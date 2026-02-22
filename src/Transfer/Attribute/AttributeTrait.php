@@ -17,7 +17,7 @@ trait AttributeTrait
      */
     private static array $_attributeCache = [];
 
-    final protected function getInitiatorAttribute(string $constantName): InitiatorAttributeInterface
+    protected function getInitiatorAttribute(string $constantName): InitiatorAttributeInterface
     {
         /** @var \ReflectionAttribute<InitiatorAttributeInterface> $reflectionAttribute */
         $reflectionAttribute = $this->getConstantReflection(
@@ -34,7 +34,7 @@ trait AttributeTrait
     /**
      * @throws \Picamator\TransferObject\Transfer\Exception\AttributeTransferException
      */
-    final protected function getTransformerAttribute(string $constantName): TransformerAttributeInterface
+    protected function getTransformerAttribute(string $constantName): TransformerAttributeInterface
     {
         /** @var \ReflectionAttribute<TransformerAttributeInterface> $reflectionAttribute */
         $reflectionAttribute = $this->getConstantReflection(
