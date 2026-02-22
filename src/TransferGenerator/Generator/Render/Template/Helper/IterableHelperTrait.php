@@ -11,11 +11,11 @@ trait IterableHelperTrait
      */
     final protected function renderIterable(iterable $iterable, string $template): string
     {
-        $rendered = '';
+        $renderedIterable = '';
         foreach ($iterable as $item) {
-            $rendered .= sprintf($template, $item);
+            $renderedIterable .= sprintf($template, $item);
         }
 
-        return rtrim($rendered, PHP_EOL);
+        return rtrim($renderedIterable, PHP_EOL);
     }
 }
