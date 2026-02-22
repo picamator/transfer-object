@@ -36,11 +36,6 @@ final class RequiredPropertyExpander extends AbstractPropertyExpander
             return false;
         }
 
-        // phpcs:disable SlevomatCodingStandard.ControlStructures.UselessIfConditionWithReturn
-        if ($propertyTransfer->collectionType !== null) {
-            return false;
-        }
-
-        return true;
+        return $propertyTransfer->collectionType === null;
     }
 }
