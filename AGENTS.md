@@ -135,20 +135,28 @@ Unit and Integration Tests
 - use `PHPUnit` attributes.
 - use [PHP generator](https://www.php.net/manual/en/class.generator.php) for the data providers.
 
+How To Install Project
+----------------------
+
+The project is installed by running the following command:
+```console
+docker/sdk install
+```
+
 How To Build/Start/Stop Docker Environment
 -------------------------------------------
 
-Docker Environment can be built by running the following command:
+Docker Environment is built by running the following command:
 ```console
 docker/sdk build
 ```
 
-Docker Environment can be started by running the following command:
+Docker Environment is started by running the following command:
 ```console
 docker/sdk start
 ```
 
-Docker Environment can be stopped by running the following command:
+Docker Environment is stopped by running the following command:
 ```console
 docker/sdk stop
 ```
