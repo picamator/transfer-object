@@ -28,6 +28,12 @@ final class MetaConstantsTemplateExpanderTest extends TestCase
     #[TestWith(['UPPERCASE', 'UPPERCASE'])]
     #[TestWith(['UPPER_CASE', 'UPPER_CASE'])]
     #[TestWith(['Mixed_CaSE', 'MIXED_CASE'])]
+    #[TestWith(['snake_case', 'SNAKE_CASE'])]
+    #[TestWith(['PascalCase', 'PASCAL_CASE'])]
+    #[TestWith(['property1', 'PROPERTY1'])]
+    #[TestWith(['HTTPResponse', 'HTTP_RESPONSE'])]
+    #[TestWith(['myAPIKey', 'MY_API_KEY'])]
+    #[TestWith(['XMLHttpRequest', 'XML_HTTP_REQUEST'])]
     public function testExpandTemplateTransfer(string $propertyName, string $expected): void
     {
         // Arrange
