@@ -118,6 +118,10 @@ abstract class AbstractTransfer implements TransferInterface
             $index = $metaData[$propertyName];
             $value = $this->_data[$index];
 
+            if ($value === null) {
+                continue;
+            }
+
             $data[$propertyName] = $this->getTransformerAttribute($constantName)->toArray($value);
             unset($metaData[$propertyName]);
         }

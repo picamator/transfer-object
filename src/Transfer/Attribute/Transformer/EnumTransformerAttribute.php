@@ -35,11 +35,11 @@ final readonly class EnumTransformerAttribute implements TransformerAttributeInt
     }
 
     /**
-     * @param BackedEnum|null $data
+     * @param BackedEnum $data
      */
-    public function toArray(mixed $data): string|int|null
+    public function toArray(mixed $data): string|int
     {
-        return $data?->value;
+        return $data->value;
     }
 
     /**

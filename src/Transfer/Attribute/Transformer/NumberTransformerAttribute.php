@@ -40,10 +40,10 @@ final readonly class NumberTransformerAttribute implements TransformerAttributeI
     }
 
     /**
-     * @param \BcMath\Number|null $data
+     * @param \BcMath\Number $data
      */
-    public function toArray(mixed $data): ?string
+    public function toArray(mixed $data): string
     {
-        return $data?->__toString();
+        return $data->__toString();
     }
 }

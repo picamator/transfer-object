@@ -28,12 +28,12 @@ final readonly class TransferTransformerAttribute implements TransformerAttribut
     }
 
     /**
-     * @param \Picamator\TransferObject\Transfer\TransferInterface|null $data
+     * @param \Picamator\TransferObject\Transfer\TransferInterface $data
      *
-     * @return array<int|string,mixed>|null
+     * @return array<int|string,mixed>
      */
-    public function toArray(mixed $data): ?array
+    public function toArray(mixed $data): array
     {
-        return $data?->toArray();
+        return $data->toArray();
     }
 }
