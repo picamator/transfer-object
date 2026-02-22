@@ -8,8 +8,11 @@ use Picamator\TransferObject\Generated\DefinitionNamespaceTransfer;
 
 readonly class AttributesNamespaceBuilder implements NamespaceBuilderInterface
 {
-    protected const array SHORTCUT_MAP = [
-        'sf-assert:' => 'Symfony\Component\Validator\Constraints\\',
+    /**
+     * @var array<string, string>
+     */
+    protected const array SHORTCUT_PATTERN_MAP = [
+        '#^(sf-assert:\s*)(.+)$#' => 'Symfony\Component\Validator\Constraints\\\${2}',
     ];
 
     public function __construct(
@@ -24,17 +27,17 @@ readonly class AttributesNamespaceBuilder implements NamespaceBuilderInterface
         return $this->namespaceBuilder->createNamespaceTransfer($namespace);
     }
 
-    public static function renderShortcut(string $namespace): string
+    private function renderShortcut(string $namespace): string
     {
-        foreach (static::SHORTCUT_MAP as $shortcut => $fullName) {
-            if (!str_starts_with($namespace, $shortcut)) {
+        foreach (static::SHORTCUT_PATTERN_MAP as $pattern => $replacement) {
+            if (preg_match($pattern, $namespace) !== 1) {
                 continue;
             }
 
-            /** @var string $fullName */
-            $namespace = str_replace($shortcut, $fullName, $namespace);
+            /** @var string $namespace */
+            $namespace = preg_replace($pattern, $replacement, $namespace);
 
-            return str_replace(' ', '', $namespace);
+            return $namespace;
         }
 
         return $namespace;

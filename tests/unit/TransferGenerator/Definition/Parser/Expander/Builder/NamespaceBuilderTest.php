@@ -26,9 +26,9 @@ final class NamespaceBuilderTest extends TestCase
     /**
      * @param array<string,mixed> $expected
      */
-    #[DataProvider('definitionNamespaceDataProvider')]
-    #[TestDoxFormatter('definitionNamespaceTestDoxFormatter')]
-    public function testCreateDefinitionNamespaceTransfer(string $namespace, array $expected): void
+    #[DataProvider('namespaceDataProvider')]
+    #[TestDoxFormatter('namespaceTestDoxFormatter')]
+    public function testCreateNamespaceTransfer(string $namespace, array $expected): void
     {
         // Act
         $actual = $this->builder->createNamespaceTransfer($namespace);
@@ -40,7 +40,7 @@ final class NamespaceBuilderTest extends TestCase
     /**
      * @param array<string,mixed> $expected
      */
-    public static function definitionNamespaceTestDoxFormatter(string $namespace, array $expected): string
+    public static function namespaceTestDoxFormatter(string $namespace, array $expected): string
     {
         return sprintf(
             'Definition namespace "%s" expected "%s"',
@@ -52,7 +52,7 @@ final class NamespaceBuilderTest extends TestCase
     /**
      * @return Generator<string,mixed>
      */
-    public static function definitionNamespaceDataProvider(): Generator
+    public static function namespaceDataProvider(): Generator
     {
         yield 'namespace without alias' => [
             '\Picamator\TransferObject\Generated',
