@@ -14,9 +14,9 @@ Type of Change
 Please delete options that are not relevant:
 
 - [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] Improvements (non-breaking change such as refactoring, performance etc.)
+- [ ] Improvements (non-breaking changes such as refactoring, performance optimization, etc.)
 - [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (bug fix, new feature, dependency upgrade etc.)
+- [ ] Breaking change (bug fix, new feature, dependency upgrade, etc.)
 - [ ] Documentation update
 - [ ] Other (please specify):
 
