@@ -10,8 +10,6 @@ use Picamator\TransferObject\TransferGenerator\Definition\Parser\Expander\Builde
 
 final class AttributesPropertyExpander extends AbstractPropertyExpander implements PropertyExpanderInterface
 {
-    use PropertyExpanderTrait;
-
     private const string ATTRIBUTES_KEY = 'attributes';
 
     private const string ATTRIBUTES_REGEX = '#^(?<namespace>[^()]+)\s*(?<arguments>.*)$#';
