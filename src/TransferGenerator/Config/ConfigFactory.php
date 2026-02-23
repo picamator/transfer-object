@@ -14,8 +14,6 @@ use Picamator\TransferObject\TransferGenerator\Config\Parser\Builder\ConfigConte
 use Picamator\TransferObject\TransferGenerator\Config\Parser\Builder\ConfigContentBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Parser\ConfigParser;
 use Picamator\TransferObject\TransferGenerator\Config\Parser\ConfigParserInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Parser\Render\ProjectRootRender;
-use Picamator\TransferObject\TransferGenerator\Config\Parser\Render\ProjectRootRenderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Reader\ConfigReader;
 use Picamator\TransferObject\TransferGenerator\Config\Reader\ConfigReaderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\BulkContentValidator;
@@ -134,11 +132,6 @@ class ConfigFactory
 
     protected function createConfigContentBuilder(): ConfigContentBuilderInterface
     {
-        return new ConfigContentBuilder($this->createProjectRootRender());
-    }
-
-    protected function createProjectRootRender(): ProjectRootRenderInterface
-    {
-        return new ProjectRootRender($this->createEnvironmentReader());
+        return new ConfigContentBuilder($this->createEnvironmentReader());
     }
 }

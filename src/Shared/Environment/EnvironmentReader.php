@@ -15,9 +15,8 @@ readonly class EnvironmentReader implements EnvironmentReaderInterface
             return $this->getcwd() ?: '';
         }
 
-        $projectRoot = trim($projectRoot);
-
-        return rtrim($projectRoot, '\/');
+        return trim($projectRoot)
+                |> $this->filterPath(...);
     }
 
     private function getEnvironment(EnvironmentEnum $environment): string
@@ -28,6 +27,11 @@ readonly class EnvironmentReader implements EnvironmentReaderInterface
         }
 
         return $environment->getDefault();
+    }
+
+    private function filterPath(string $path): string
+    {
+        return rtrim($path, '\/');
     }
 
     /**
