@@ -5,16 +5,12 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Config\Parser\Builder;
 
 use Picamator\TransferObject\Generated\ConfigContentTransfer;
-use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRenderInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Parser\Filter\ConfigNormalizerTrait;
+use Picamator\TransferObject\TransferGenerator\Config\Parser\Render\ProjectRootRenderInterface;
 
 readonly class ConfigContentBuilder implements ConfigContentBuilderInterface
 {
-    use ConfigNormalizerTrait;
-
-    public function __construct(
-        private ConfigEnvironmentRenderInterface $environmentRender,
-    ) {
+    public function __construct(private ProjectRootRenderInterface $environmentRender)
+    {
     }
 
     public function createContentTransfer(array $configData): ConfigContentTransfer

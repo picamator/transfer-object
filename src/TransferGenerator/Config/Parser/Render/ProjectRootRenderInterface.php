@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Picamator\TransferObject\TransferGenerator\Config\Environment;
+namespace Picamator\TransferObject\TransferGenerator\Config\Parser\Render;
 
-interface ConfigEnvironmentRenderInterface
+interface ProjectRootRenderInterface
 {
     public function renderProjectRoot(string $path): string;
 
