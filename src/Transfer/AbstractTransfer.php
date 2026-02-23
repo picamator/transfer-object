@@ -10,6 +10,8 @@ use Traversable;
 
 /**
  * @api
+ *
+ * @phpstan-consistent-constructor
  */
 abstract class AbstractTransfer implements TransferInterface
 {
