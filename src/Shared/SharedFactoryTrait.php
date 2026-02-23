@@ -77,7 +77,7 @@ trait SharedFactoryTrait
     {
         return $this->getCached(
             key: 'shared:FileSizeValidator',
-            factory: fn(): FileSizeValidatorInterface => new FileSizeValidator(),
+            factory: fn(): FileSizeValidatorInterface => new FileSizeValidator($this->createEnvironmentReader()),
         );
     }
 

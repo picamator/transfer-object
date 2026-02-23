@@ -48,6 +48,7 @@ class DefinitionFactory
     {
         return new DefinitionFinder(
             $this->createFinder(),
+            $this->createEnvironmentReader(),
             $this->getConfig(),
         );
     }

@@ -8,19 +8,19 @@ use Countable;
 use Generator;
 use IteratorAggregate;
 use Picamator\TransferObject\Dependency\Finder\FinderInterface;
+use Picamator\TransferObject\Shared\Environment\EnvironmentReaderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorDefinitionException;
 
 readonly class DefinitionFinder implements DefinitionFinderInterface
 {
-    private const string MAX_FILE_SIZE = '10M';
-
     private const string FILE_NAME_PATTERN = '*.transfer.yml';
 
     private const string DEFINITIONS_NOT_FOUND_ERROR_MESSAGE = 'Missing Transfer Object definitions.';
 
     public function __construct(
         private FinderInterface $finder,
+        private EnvironmentReaderInterface $environmentReader,
         private ConfigInterface $config,
     ) {
     }
@@ -44,10 +44,12 @@ readonly class DefinitionFinder implements DefinitionFinderInterface
      */
     private function findDefinitionFiles(): IteratorAggregate&Countable
     {
+        $maxFileSize = $this->environmentReader->getMaxFileSizeMegabytes() . 'M';
+
         $definitionFinder = $this->finder->findFilesInDirectory(
             filePattern: self::FILE_NAME_PATTERN,
             dirName: $this->config->getDefinitionPath(),
-            maxFileSize: self::MAX_FILE_SIZE,
+            maxFileSize: $maxFileSize,
         );
 
         $fileCount = $definitionFinder->count();

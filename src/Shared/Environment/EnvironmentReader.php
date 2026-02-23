@@ -10,13 +10,21 @@ readonly class EnvironmentReader implements EnvironmentReaderInterface
 {
     public function getProjectRoot(): string
     {
-        $projectRoot = $this->getEnvironment(EnvironmentEnum::PROJECT_ROOT);
+        $projectRoot = $this->getEnvironment(EnvironmentEnum::PROJECT_ROOT)
+            ?: $this->getEnvironment(EnvironmentEnum::PROJECT_ROOT_ALIAS);
+
         if ($projectRoot === '') {
             return $this->getcwd() ?: '';
         }
 
-        return trim($projectRoot)
-                |> $this->filterPath(...);
+        $projectRoot = trim($projectRoot);
+
+        return rtrim($projectRoot, '\/');
+    }
+
+    public function getMaxFileSizeMegabytes(): string
+    {
+        return $this->getEnvironment(EnvironmentEnum::MAX_FILE_SIZE_MB);
     }
 
     private function getEnvironment(EnvironmentEnum $environment): string
@@ -27,11 +35,6 @@ readonly class EnvironmentReader implements EnvironmentReaderInterface
         }
 
         return $environment->getDefault();
-    }
-
-    private function filterPath(string $path): string
-    {
-        return rtrim($path, '\/');
     }
 
     /**
