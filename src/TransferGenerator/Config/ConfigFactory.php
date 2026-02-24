@@ -6,8 +6,6 @@ namespace Picamator\TransferObject\TransferGenerator\Config;
 
 use ArrayObject;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
-use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRender;
-use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRenderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoader;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoaderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Parser\Builder\ConfigBuilder;
@@ -134,11 +132,6 @@ class ConfigFactory
 
     protected function createConfigContentBuilder(): ConfigContentBuilderInterface
     {
-        return new ConfigContentBuilder($this->createConfigEnvironmentRender());
-    }
-
-    protected function createConfigEnvironmentRender(): ConfigEnvironmentRenderInterface
-    {
-        return new ConfigEnvironmentRender();
+        return new ConfigContentBuilder($this->createEnvironmentReader());
     }
 }

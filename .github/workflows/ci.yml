@@ -158,10 +158,10 @@ jobs:
 
       - name: Generate Transfer Objects
         env:
-          PROJECT_ROOT: ${{ github.workspace }}
+          PICAMATOR_TRANSFER_OBJECT_PROJECT_ROOT: ${{ github.workspace }}
         run: composer transfer-generate -- -c ./config/generator.config.yml
 
       - name: Run PHPUnit
         env:
-          PROJECT_ROOT: ${{ github.workspace }}
+          PICAMATOR_TRANSFER_OBJECT_PROJECT_ROOT: ${{ github.workspace }}
         run: composer phpunit

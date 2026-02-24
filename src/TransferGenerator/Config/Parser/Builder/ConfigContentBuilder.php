@@ -5,36 +5,41 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Config\Parser\Builder;
 
 use Picamator\TransferObject\Generated\ConfigContentTransfer;
-use Picamator\TransferObject\TransferGenerator\Config\Environment\ConfigEnvironmentRenderInterface;
-use Picamator\TransferObject\TransferGenerator\Config\Parser\Filter\ConfigNormalizerTrait;
+use Picamator\TransferObject\Shared\Environment\EnvironmentReaderInterface;
 
 readonly class ConfigContentBuilder implements ConfigContentBuilderInterface
 {
-    use ConfigNormalizerTrait;
+    protected const string PLACEHOLDER = '${PROJECT_ROOT}';
 
-    public function __construct(
-        private ConfigEnvironmentRenderInterface $environmentRender,
-    ) {
+    public function __construct(private EnvironmentReaderInterface $environmentReader)
+    {
     }
 
     public function createContentTransfer(array $configData): ConfigContentTransfer
     {
         $contentTransfer = new ConfigContentTransfer($configData);
 
-        return $this->renderPathKeys($contentTransfer);
-    }
+        $relativeDefinitionPath = $this->filterPath($contentTransfer->definitionPath);
+        $contentTransfer->relativeDefinitionPath = $this->replacePlaceholder($relativeDefinitionPath, '');
 
-    private function renderPathKeys(ConfigContentTransfer $contentTransfer): ConfigContentTransfer
-    {
-        $contentTransfer->relativeDefinitionPath =
-            $this->environmentRender->renderRelativeProjectRoot($contentTransfer->definitionPath);
+        $projectRoot = $this->environmentReader->getProjectRoot();
 
-        $contentTransfer->definitionPath =
-            $this->environmentRender->renderProjectRoot($contentTransfer->definitionPath);
+        $definitionPath = $this->replacePlaceholder($contentTransfer->definitionPath, $projectRoot);
+        $contentTransfer->definitionPath = $definitionPath;
 
-        $contentTransfer->transferPath =
-            $this->environmentRender->renderProjectRoot($contentTransfer->transferPath);
+        $transferPath = $this->replacePlaceholder($contentTransfer->transferPath, $projectRoot);
+        $contentTransfer->transferPath = $transferPath;
 
         return $contentTransfer;
+    }
+
+    private function filterPath(string $path): string
+    {
+        return rtrim($path, '\/');
+    }
+
+    private function replacePlaceholder(string $path, string $replace): string
+    {
+        return str_replace(static::PLACEHOLDER, $replace, $path);
     }
 }

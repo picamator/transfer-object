@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\Shared;
 
 use Picamator\TransferObject\Dependency\DependencyFactoryTrait;
+use Picamator\TransferObject\Shared\Environment\EnvironmentReader;
+use Picamator\TransferObject\Shared\Environment\EnvironmentReaderInterface;
 use Picamator\TransferObject\Shared\Filesystem\FileAppender;
 use Picamator\TransferObject\Shared\Filesystem\FileAppenderInterface;
 use Picamator\TransferObject\Shared\Filesystem\FileReader;
@@ -75,7 +77,7 @@ trait SharedFactoryTrait
     {
         return $this->getCached(
             key: 'shared:FileSizeValidator',
-            factory: fn(): FileSizeValidatorInterface => new FileSizeValidator(),
+            factory: fn(): FileSizeValidatorInterface => new FileSizeValidator($this->createEnvironmentReader()),
         );
     }
 
@@ -100,6 +102,14 @@ trait SharedFactoryTrait
         return $this->getCached(
             key: 'shared:FileReader',
             factory: fn(): FileReaderInterface => new FileReader(),
+        );
+    }
+
+    final protected function createEnvironmentReader(): EnvironmentReaderInterface
+    {
+        return $this->getCached(
+            key: 'shared:EnvironmentReader',
+            factory: fn(): EnvironmentReaderInterface => new EnvironmentReader(),
         );
     }
 }
