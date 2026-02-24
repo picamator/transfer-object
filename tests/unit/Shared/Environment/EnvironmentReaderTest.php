@@ -16,7 +16,7 @@ use Picamator\TransferObject\Shared\Environment\EnvironmentReaderInterface;
 
 #[Group('shared')]
 #[IgnoreDeprecations]
-class EnvironmentReaderTest extends TestCase
+final class EnvironmentReaderTest extends TestCase
 {
     private EnvironmentReaderInterface&MockObject $readerMock;
 
