@@ -12,7 +12,7 @@ use Picamator\TransferObject\Shared\Validator\FileSizeValidator;
 
 final class FileSizeValidatorTest extends TestCase
 {
-    private const string MAX_FILE_SIZE_MEGABYTES = '1';
+    private const int MAX_FILE_SIZE_BYTES = 10;
 
     private FileSizeValidator&MockObject $validatorMock;
 
@@ -20,8 +20,8 @@ final class FileSizeValidatorTest extends TestCase
     {
         $environmentReaderStub = $this->createStub(EnvironmentReaderInterface::class);
         $environmentReaderStub
-            ->method('getMaxFileSizeMegabytes')
-            ->willReturn(self::MAX_FILE_SIZE_MEGABYTES)
+            ->method('getMaxFileSizeBytes')
+            ->willReturn(self::MAX_FILE_SIZE_BYTES)
             ->seal();
 
         $this->validatorMock = $this->getMockBuilder(FileSizeValidator::class)
@@ -56,7 +56,7 @@ final class FileSizeValidatorTest extends TestCase
     {
         // Arrange
         $path = '/some-path.txt';
-        $fileSize = (int)self::MAX_FILE_SIZE_MEGABYTES * 1_000_000 + 10;
+        $fileSize = self::MAX_FILE_SIZE_BYTES + 1;
 
         // Expect
         $this->validatorMock->expects($this->once())

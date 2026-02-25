@@ -16,8 +16,6 @@ readonly class FileSizeValidator implements FileSizeValidatorInterface
 File "%s" ("%d" bytes) exceeds the maximum allowed size of "%d" bytes. Please split the file into smaller parts.
 TEMPLATE;
 
-    private const int MAX_FILE_SIZE_BYTE_MULTIPLIER = 1_000_000;
-
     public function __construct(private EnvironmentReaderInterface $environmentReader)
     {
     }
@@ -49,7 +47,7 @@ TEMPLATE;
 
     private function getMaxFileSizeBytes(): int
     {
-        return (int)$this->environmentReader->getMaxFileSizeMegabytes() * self::MAX_FILE_SIZE_BYTE_MULTIPLIER;
+        return $this->environmentReader->getMaxFileSizeBytes();
     }
 
     protected function filesize(string $path): int|false

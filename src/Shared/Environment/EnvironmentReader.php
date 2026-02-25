@@ -10,8 +10,8 @@ readonly class EnvironmentReader implements EnvironmentReaderInterface
 {
     public function getProjectRoot(): string
     {
-        $projectRoot = $this->getEnvironment(EnvironmentEnum::PROJECT_ROOT)
-            ?: $this->getEnvironment(EnvironmentEnum::PROJECT_ROOT_ALIAS);
+        $projectRoot = $this->getEnvironment(@EnvironmentEnum::PROJECT_ROOT)
+            ?: $this->getEnvironment(@EnvironmentEnum::PROJECT_ROOT_ALIAS);
 
         if ($projectRoot === '') {
             return $this->getcwd() ?: '';
@@ -22,9 +22,24 @@ readonly class EnvironmentReader implements EnvironmentReaderInterface
         return rtrim($projectRoot, '\/');
     }
 
-    public function getMaxFileSizeMegabytes(): string
+    public function getMaxFileSizeMegabytes(): int
     {
-        return $this->getEnvironment(EnvironmentEnum::MAX_FILE_SIZE_MB);
+        $environment = EnvironmentEnum::MAX_FILE_SIZE_MB;
+        $maxFileSize = (int)$this->getEnvironment($environment);
+
+        if ($maxFileSize === 0) {
+            $maxFileSize = (int)$environment->getDefault();
+        }
+
+        /** @var int $maxFileSize */
+        $maxFileSize = min($maxFileSize, 1024);
+
+        return $maxFileSize;
+    }
+
+    public function getMaxFileSizeBytes(): int
+    {
+        return $this->getMaxFileSizeMegabytes() * 1_000_000;
     }
 
     private function getEnvironment(EnvironmentEnum $environment): string
