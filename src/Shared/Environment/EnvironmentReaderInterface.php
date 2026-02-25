@@ -8,5 +8,7 @@ interface EnvironmentReaderInterface
 {
     public function getProjectRoot(): string;
 
-    public function getMaxFileSizeMegabytes(): string;
+    public function getMaxFileSizeMegabytes(): int;
+
+    public function getMaxFileSizeBytes(): int;
 }
