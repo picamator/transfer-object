@@ -10,8 +10,8 @@ readonly class EnvironmentReader implements EnvironmentReaderInterface
 {
     public function getProjectRoot(): string
     {
-        $projectRoot = $this->getEnvironment(EnvironmentEnum::PROJECT_ROOT)
-            ?: $this->getEnvironment(EnvironmentEnum::PROJECT_ROOT_ALIAS);
+        $projectRoot = $this->getEnvironment(@EnvironmentEnum::PROJECT_ROOT)
+            ?: $this->getEnvironment(@EnvironmentEnum::PROJECT_ROOT_ALIAS);
 
         if ($projectRoot === '') {
             return $this->getcwd() ?: '';
