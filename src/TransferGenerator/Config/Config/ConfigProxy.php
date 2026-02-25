@@ -30,6 +30,11 @@ final class ConfigProxy implements ConfigInterface
         return $this->getConfig()->getRelativeDefinitionPath();
     }
 
+    public function getUuid(): string
+    {
+        return $this->getConfig()->getUuid();
+    }
+
     public static function loadConfig(ConfigInterface $config): void
     {
         self::$config = $config;

@@ -9,13 +9,16 @@ use Picamator\TransferObject\Dependency\Finder\FinderInterface;
 use Picamator\TransferObject\Generated\TransferGeneratorContentTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
+use Picamator\TransferObject\TransferGenerator\Generator\Enum\FilesystemEnum;
 
 readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 {
-    private const string TEMPORARY_DIR = '_tmp';
+    use FilesystemTrait;
 
-    private const string FILE_EXTENSION = '.php';
-    private const string FILE_NAME_PATTERN = '*Transfer.php';
+    private const string TRANSFER_FILE_EXTENSION = FilesystemEnum::TRANSFER_FILE_EXTENSION->value;
+    private const string TRANSFER_FILE_NAME_PATTERN = FilesystemEnum::TRANSFER_FILE_NAME_PATTERN->value;
+
+    private const string CACHE_FILE_NAME = FilesystemEnum::CACHE_FILE_NAME->value;
 
     public function __construct(
         private FilesystemInterface $filesystem,
@@ -43,9 +46,12 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
         }
     }
 
-    public function rotateTempDir(): void
+    public function rotateTempDir(array $deleteClassNames): void
     {
-        $this->deleteOldFiles();
+        if (count($deleteClassNames) !== 0) {
+            $this->deleteOldFiles($deleteClassNames);
+        }
+
         $this->copyTempFiles();
         $this->deleteTempDir();
     }
@@ -55,7 +61,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
         $filePath = $this->getTemporaryPath()
             . DIRECTORY_SEPARATOR
             . $contentTransfer->className
-            . self::FILE_EXTENSION;
+            . self::TRANSFER_FILE_EXTENSION;
 
         if ($this->filesystem->exists($filePath)) {
             throw new TransferGeneratorException(
@@ -67,19 +73,22 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
     }
 
     /**
+     * @param array<int, string> $deleteClassNames
+     *
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
      * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
      */
-    private function deleteOldFiles(): void
+    private function deleteOldFiles(array $deleteClassNames): void
     {
-        $finder = $this->finder->findFilesInDirectoryExclude(
-            filePattern: self::FILE_NAME_PATTERN,
-            dirName: $this->config->getTransferPath(),
-            exclude: self::TEMPORARY_DIR,
+        /** @var array<string,mixed> $deleteFiles */
+        $deleteFiles = array_map(
+            fn (string $className): string
+                => $this->config->getTransferPath() . DIRECTORY_SEPARATOR . $className . self::TRANSFER_FILE_EXTENSION,
+            $deleteClassNames,
         );
 
-        $this->filesystem->remove($finder);
+        $this->filesystem->remove($deleteFiles);
     }
 
     /**
@@ -90,7 +99,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
     private function copyTempFiles(): void
     {
         $finder = $this->finder->findFilesInDirectory(
-            filePattern: self::FILE_NAME_PATTERN,
+            filePattern: self::TRANSFER_FILE_NAME_PATTERN,
             dirName: $this->getTemporaryPath(),
         );
 
@@ -99,13 +108,10 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
             $targetFile = $destinationPath . $file->getFilename();
             $this->filesystem->copy($file->getRealPath(), $targetFile);
         }
-    }
 
-    /**
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
-     */
-    private function getTemporaryPath(): string
-    {
-        return $this->config->getTransferPath() . DIRECTORY_SEPARATOR . self::TEMPORARY_DIR;
+        $this->filesystem->copy(
+            $this->getTemporaryPath(self::CACHE_FILE_NAME),
+            $this->getTransferPath(self::CACHE_FILE_NAME),
+        );
     }
 }

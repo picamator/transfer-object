@@ -32,4 +32,9 @@ final readonly class Config implements ConfigInterface
     {
         return $this->configTransfer->relativeDefinitionPath;
     }
+
+    public function getUuid(): string
+    {
+        return $this->configTransfer->uuid;
+    }
 }

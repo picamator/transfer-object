@@ -17,8 +17,21 @@ readonly class ConfigContentBuilder implements ConfigContentBuilderInterface
 
     public function createContentTransfer(array $configData): ConfigContentTransfer
     {
+        $configData[ConfigContentTransfer::UUID_PROP] = $this->getUuid();
         $contentTransfer = new ConfigContentTransfer($configData);
 
+        $this->parseContentPath($contentTransfer);
+
+        return $contentTransfer;
+    }
+
+    private function getUuid(): string
+    {
+        return uniqid('', true);
+    }
+
+    private function parseContentPath(ConfigContentTransfer $contentTransfer): void
+    {
         $relativeDefinitionPath = $this->filterPath($contentTransfer->definitionPath);
         $contentTransfer->relativeDefinitionPath = $this->replacePlaceholder($relativeDefinitionPath, '');
 
@@ -29,8 +42,6 @@ readonly class ConfigContentBuilder implements ConfigContentBuilderInterface
 
         $transferPath = $this->replacePlaceholder($contentTransfer->transferPath, $projectRoot);
         $contentTransfer->transferPath = $transferPath;
-
-        return $contentTransfer;
     }
 
     private function filterPath(string $path): string

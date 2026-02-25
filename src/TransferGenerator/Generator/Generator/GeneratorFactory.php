@@ -10,6 +10,8 @@ use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoaderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\DefinitionFactory;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\CacheFilesystem;
+use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\CacheFilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystem;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilder;
@@ -45,6 +47,7 @@ class GeneratorFactory
     {
         return new PostProcessCommand(
             $this->createTransferGeneratorBuilder(),
+            $this->createCacheFilesystem(),
             $this->createGeneratorFilesystem(),
         );
     }
@@ -62,6 +65,7 @@ class GeneratorFactory
         return new ProcessCommand(
             $this->createTransferGeneratorBuilder(),
             $this->createTemplateRender(),
+            $this->createCacheFilesystem(),
             $this->createGeneratorFilesystem(),
         );
     }
@@ -97,6 +101,18 @@ class GeneratorFactory
         return $this->getCached(
             key: 'transfer-generator:TransferGeneratorBuilder',
             factory: fn() => new TransferGeneratorBuilder(),
+        );
+    }
+
+    protected function createCacheFilesystem(): CacheFilesystemInterface
+    {
+        return $this->getCached(
+            key: 'transfer-generator:CacheFilesystem',
+            factory: fn() => new CacheFilesystem(
+                $this->createFileCacheReader(),
+                $this->createFileCacheAppender(),
+                $this->getConfig(),
+            ),
         );
     }
 

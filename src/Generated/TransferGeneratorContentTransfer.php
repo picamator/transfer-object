@@ -17,11 +17,12 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  */
 final class TransferGeneratorContentTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 2;
+    protected const int META_DATA_SIZE = 3;
 
     protected const array META_DATA = [
         self::CLASS_NAME_PROP => self::CLASS_NAME_INDEX,
         self::CONTENT_PROP => self::CONTENT_INDEX,
+        self::HASH_PROP => self::HASH_INDEX,
     ];
 
     // className
@@ -43,6 +44,17 @@ final class TransferGeneratorContentTransfer extends AbstractTransfer
         get => $this->getData(self::CONTENT_INDEX);
         set {
             $this->setData(self::CONTENT_INDEX, $value);
+        }
+    }
+
+    // hash
+    public const string HASH_PROP = 'hash';
+    private const int HASH_INDEX = 2;
+
+    public protected(set) string $hash {
+        get => $this->getData(self::HASH_INDEX);
+        set {
+            $this->setData(self::HASH_INDEX, $value);
         }
     }
 }

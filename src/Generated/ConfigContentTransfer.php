@@ -17,13 +17,14 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  */
 final class ConfigContentTransfer extends AbstractTransfer
 {
-    protected const int META_DATA_SIZE = 4;
+    protected const int META_DATA_SIZE = 5;
 
     protected const array META_DATA = [
         self::DEFINITION_PATH_PROP => self::DEFINITION_PATH_INDEX,
         self::RELATIVE_DEFINITION_PATH_PROP => self::RELATIVE_DEFINITION_PATH_INDEX,
         self::TRANSFER_NAMESPACE_PROP => self::TRANSFER_NAMESPACE_INDEX,
         self::TRANSFER_PATH_PROP => self::TRANSFER_PATH_INDEX,
+        self::UUID_PROP => self::UUID_INDEX,
     ];
 
     // definitionPath
@@ -67,6 +68,17 @@ final class ConfigContentTransfer extends AbstractTransfer
         get => $this->getData(self::TRANSFER_PATH_INDEX);
         set {
             $this->setData(self::TRANSFER_PATH_INDEX, $value);
+        }
+    }
+
+    // uuid
+    public const string UUID_PROP = 'uuid';
+    private const int UUID_INDEX = 4;
+
+    public protected(set) string $uuid {
+        get => $this->getData(self::UUID_INDEX);
+        set {
+            $this->setData(self::UUID_INDEX, $value);
         }
     }
 }

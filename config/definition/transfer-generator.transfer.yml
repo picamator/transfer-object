@@ -20,6 +20,10 @@ ConfigContent:
   relativeDefinitionPath:
     type: string
     required:
+  uuid:
+    type: string
+    required:
+    protected:
 
 Definition:
   fileName:
@@ -113,6 +117,10 @@ TransferGeneratorContent:
     required:
     protected:
   content:
+    type: string
+    required:
+    protected:
+  hash:
     type: string
     required:
     protected:

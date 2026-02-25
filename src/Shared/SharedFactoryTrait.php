@@ -9,9 +9,13 @@ use Picamator\TransferObject\Shared\Environment\EnvironmentReader;
 use Picamator\TransferObject\Shared\Environment\EnvironmentReaderInterface;
 use Picamator\TransferObject\Shared\Filesystem\FileAppender;
 use Picamator\TransferObject\Shared\Filesystem\FileAppenderInterface;
+use Picamator\TransferObject\Shared\Filesystem\FileCacheAppender;
+use Picamator\TransferObject\Shared\Filesystem\FileCacheAppenderInterface;
 use Picamator\TransferObject\Shared\Filesystem\FileReader;
 use Picamator\TransferObject\Shared\Filesystem\FileReaderInterface;
 use Picamator\TransferObject\Shared\Initializer\LazyGhostInitializerTrait;
+use Picamator\TransferObject\Shared\Reader\FileCacheReader;
+use Picamator\TransferObject\Shared\Reader\FileCacheReaderInterface;
 use Picamator\TransferObject\Shared\Reader\FileReaderProgress;
 use Picamator\TransferObject\Shared\Reader\FileReaderProgressInterface;
 use Picamator\TransferObject\Shared\Reader\JsonReader;
@@ -110,6 +114,22 @@ trait SharedFactoryTrait
         return $this->getCached(
             key: 'shared:EnvironmentReader',
             factory: fn(): EnvironmentReaderInterface => new EnvironmentReader(),
+        );
+    }
+
+    final protected function createFileCacheReader(): FileCacheReaderInterface
+    {
+        return $this->getCached(
+            key: 'shared:FileCacheReader',
+            factory: fn(): FileCacheReaderInterface => new FileCacheReader($this->createFileReader()),
+        );
+    }
+
+    final protected function createFileCacheAppender(): FileCacheAppenderInterface
+    {
+        return $this->getCached(
+            key: 'shared:FileCacheAppender',
+            factory: fn(): FileCacheAppenderInterface => new FileCacheAppender($this->createFileAppender()),
         );
     }
 }

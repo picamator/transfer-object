@@ -19,11 +19,13 @@ interface GeneratorFilesystemInterface
     public function deleteTempDir(): void;
 
     /**
+     * @param array<int, string> $deleteClassNames
+     *
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
      * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
      */
-    public function rotateTempDir(): void;
+    public function rotateTempDir(array $deleteClassNames): void;
 
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException

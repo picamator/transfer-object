@@ -19,12 +19,18 @@ readonly class TemplateRender implements TemplateRenderInterface
     public function renderTemplate(DefinitionTransfer $definitionTransfer): TransferGeneratorContentTransfer
     {
         $templateTransfer = $this->templateBuilder->createTemplateTransfer($definitionTransfer);
-
         $content = $this->template->render($templateTransfer);
+        $hash = $this->getContentHash($content);
 
         return new TransferGeneratorContentTransfer([
             TransferGeneratorContentTransfer::CLASS_NAME_PROP => $definitionTransfer->content->className,
             TransferGeneratorContentTransfer::CONTENT_PROP => $content,
+            TransferGeneratorContentTransfer::HASH_PROP => $hash,
         ]);
+    }
+
+    private function getContentHash(string $content): string
+    {
+        return hash('sha256', $content);
     }
 }
