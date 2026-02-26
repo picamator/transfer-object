@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command;
 
 use Picamator\TransferObject\Dependency\Exception\FilesystemException;
-use Picamator\TransferObject\Dependency\Exception\FinderException;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
-use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Writer\TransferRotatorInterface;
+use Throwable;
 
 readonly class PostProcessCommand implements PostProcessCommandInterface
 {
@@ -34,12 +33,14 @@ readonly class PostProcessCommand implements PostProcessCommandInterface
     {
         try {
             $this->transferRotator->rotateFiles();
+            $generatorTransfer = $this->builder->createSuccessGeneratorTransfer();
+        } catch (Throwable $e) {
+            $generatorTransfer = $this->builder->createErrorGeneratorTransfer($e->getMessage());
+        } finally {
             $this->filesystem->deleteTempDir();
-        } catch (FilesystemException | FinderException | TransferGeneratorConfigNotFoundException $e) {
-            return $this->builder->createErrorGeneratorTransfer($e->getMessage());
         }
 
-        return $this->builder->createSuccessGeneratorTransfer();
+        return $generatorTransfer;
     }
 
     private function postProcessError(): TransferGeneratorTransfer

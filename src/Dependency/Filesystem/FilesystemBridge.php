@@ -34,6 +34,25 @@ readonly final class FilesystemBridge implements FilesystemInterface
         // @codeCoverageIgnoreEnd
     }
 
+    public function rename(string $origin, string $target, bool $overwrite = false): void
+    {
+        try {
+            $this->filesystem->rename($origin, $target, $overwrite);
+            // @codeCoverageIgnoreStart
+        } catch (Throwable $e) {
+            throw new FilesystemException(
+                sprintf(
+                    'Failed to rename "%s" to "%s". Error: "%s".',
+                    $origin,
+                    $target,
+                    $e->getMessage(),
+                ),
+                previous: $e,
+            );
+        }
+        // @codeCoverageIgnoreEnd
+    }
+
     public function mkdir(string $dir): void
     {
         try {

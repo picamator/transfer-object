@@ -45,12 +45,12 @@ final class PostProcessCommandTest extends TestCase
         // Arrange
         $this->filesystemStub
             ->method('deleteTempDir')
-            ->willThrowException(new FilesystemException())
             ->seal();
 
         // Expect
         $this->transferRotatorMock->expects($this->once())
             ->method('rotateFiles')
+            ->willThrowException(new FilesystemException())
             ->seal();
 
         // Act

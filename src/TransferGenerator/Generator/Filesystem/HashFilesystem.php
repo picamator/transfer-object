@@ -23,24 +23,17 @@ readonly class HashFilesystem implements HashFilesystemInterface
     public function rotateHashFile(ArrayObject $hashes): void
     {
         $this->writeHashTmpFile($hashes);
-        $this->copyHashTmpFile();
-        $this->deleteHashTmpFile();
+        $this->renameHashTmpFile();
     }
 
-    private function copyHashTmpFile(): void
+    private function renameHashTmpFile(): void
     {
         $fileName = $this->config->getHashFileName();
 
         $originalFile = $this->getTemporaryPath($fileName);
         $targetFile = $this->getTransferPath($fileName);
 
-        $this->filesystem->copy($originalFile, $targetFile);
-    }
-
-    private function deleteHashTmpFile(): void
-    {
-        $filePath = $this->getTemporaryPath($this->config->getHashFileName());
-        $this->filesystem->remove($filePath);
+        $this->filesystem->rename($originalFile, $targetFile, overwrite: true);
     }
 
     /**
