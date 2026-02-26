@@ -9,13 +9,13 @@ use Picamator\TransferObject\Shared\Environment\EnvironmentReader;
 use Picamator\TransferObject\Shared\Environment\EnvironmentReaderInterface;
 use Picamator\TransferObject\Shared\Filesystem\FileAppender;
 use Picamator\TransferObject\Shared\Filesystem\FileAppenderInterface;
-use Picamator\TransferObject\Shared\Filesystem\FileCacheAppender;
-use Picamator\TransferObject\Shared\Filesystem\FileCacheAppenderInterface;
 use Picamator\TransferObject\Shared\Filesystem\FileReader;
 use Picamator\TransferObject\Shared\Filesystem\FileReaderInterface;
+use Picamator\TransferObject\Shared\Hash\HashFileReader;
+use Picamator\TransferObject\Shared\Hash\HashFileReaderInterface;
+use Picamator\TransferObject\Shared\Hash\HashFileWriter;
+use Picamator\TransferObject\Shared\Hash\HashFileWriterInterface;
 use Picamator\TransferObject\Shared\Initializer\LazyGhostInitializerTrait;
-use Picamator\TransferObject\Shared\Reader\FileCacheReader;
-use Picamator\TransferObject\Shared\Reader\FileCacheReaderInterface;
 use Picamator\TransferObject\Shared\Reader\FileReaderProgress;
 use Picamator\TransferObject\Shared\Reader\FileReaderProgressInterface;
 use Picamator\TransferObject\Shared\Reader\JsonReader;
@@ -117,19 +117,19 @@ trait SharedFactoryTrait
         );
     }
 
-    final protected function createFileCacheReader(): FileCacheReaderInterface
+    final protected function createHashFileReader(): HashFileReaderInterface
     {
         return $this->getCached(
-            key: 'shared:FileCacheReader',
-            factory: fn(): FileCacheReaderInterface => new FileCacheReader($this->createFileReader()),
+            key: 'shared:HashFileReader',
+            factory: fn(): HashFileReaderInterface => new HashFileReader($this->createFileReader()),
         );
     }
 
-    final protected function createFileCacheAppender(): FileCacheAppenderInterface
+    final protected function createHashFileWriter(): HashFileWriterInterface
     {
         return $this->getCached(
-            key: 'shared:FileCacheAppender',
-            factory: fn(): FileCacheAppenderInterface => new FileCacheAppender($this->createFileAppender()),
+            key: 'shared:HashFileWriter',
+            factory: fn(): HashFileWriterInterface => new HashFileWriter($this->createFilesystem()),
         );
     }
 }

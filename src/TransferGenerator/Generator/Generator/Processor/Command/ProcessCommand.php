@@ -9,18 +9,16 @@ use Picamator\TransferObject\Generated\DefinitionTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorContentTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
-use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\CacheFilesystemInterface;
-use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Writer\TransferWriterInterface;
 
 readonly class ProcessCommand implements ProcessCommandInterface
 {
     public function __construct(
         private TransferGeneratorBuilderInterface $builder,
         private TemplateRenderInterface $render,
-        private CacheFilesystemInterface $cacheFilesystem,
-        private GeneratorFilesystemInterface $filesystem,
+        private TransferWriterInterface $transferWriter,
     ) {
     }
 
@@ -47,14 +45,7 @@ readonly class ProcessCommand implements ProcessCommandInterface
 
     private function saveContent(TransferGeneratorContentTransfer $contentTransfer): void
     {
-        $this->cacheFilesystem->appendToTempCache($contentTransfer->className, $contentTransfer->hash);
-
-        $cachedContentHash = $this->cacheFilesystem->readFromCache()[$contentTransfer->className] ?? null;
-        if ($cachedContentHash !== null && hash_equals($cachedContentHash, $contentTransfer->hash)) {
-            return;
-        }
-
-        $this->filesystem->writeFile($contentTransfer);
+        $this->transferWriter->writeFile($contentTransfer);
     }
 
     private function renderContent(DefinitionTransfer $definitionTransfer): TransferGeneratorContentTransfer

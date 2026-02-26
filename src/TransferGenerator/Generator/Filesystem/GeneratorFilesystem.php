@@ -4,25 +4,20 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Filesystem;
 
+use ArrayObject;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
-use Picamator\TransferObject\Dependency\Finder\FinderInterface;
 use Picamator\TransferObject\Generated\TransferGeneratorContentTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
-use Picamator\TransferObject\TransferGenerator\Generator\Enum\FilesystemEnum;
 
 readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 {
     use FilesystemTrait;
 
-    private const string TRANSFER_FILE_EXTENSION = FilesystemEnum::TRANSFER_FILE_EXTENSION->value;
-    private const string TRANSFER_FILE_NAME_PATTERN = FilesystemEnum::TRANSFER_FILE_NAME_PATTERN->value;
-
-    private const string CACHE_FILE_NAME = FilesystemEnum::CACHE_FILE_NAME->value;
+    private const string TRANSFER_FILE_EXTENSION = '.php';
 
     public function __construct(
         private FilesystemInterface $filesystem,
-        private FinderInterface $finder,
         private ConfigInterface $config,
     ) {
     }
@@ -46,22 +41,10 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
         }
     }
 
-    public function rotateTempDir(array $deleteClassNames): void
+    public function writeTempFile(TransferGeneratorContentTransfer $contentTransfer): void
     {
-        if (count($deleteClassNames) !== 0) {
-            $this->deleteOldFiles($deleteClassNames);
-        }
-
-        $this->copyTempFiles();
-        $this->deleteTempDir();
-    }
-
-    public function writeFile(TransferGeneratorContentTransfer $contentTransfer): void
-    {
-        $filePath = $this->getTemporaryPath()
-            . DIRECTORY_SEPARATOR
-            . $contentTransfer->className
-            . self::TRANSFER_FILE_EXTENSION;
+        $fileName = $this->getFileName($contentTransfer->className);
+        $filePath = $this->getTemporaryPath($fileName);
 
         if ($this->filesystem->exists($filePath)) {
             throw new TransferGeneratorException(
@@ -72,46 +55,73 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
         $this->filesystem->dumpFile($filePath, $contentTransfer->content);
     }
 
-    /**
-     * @param array<int, string> $deleteClassNames
-     *
-     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
-     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
-     */
-    private function deleteOldFiles(array $deleteClassNames): void
+    public function rotateFiles(ArrayObject $toCopyClassNames, ArrayObject $toDeleteClassNames): void
     {
-        /** @var array<string,mixed> $deleteFiles */
-        $deleteFiles = array_map(
-            fn (string $className): string
-                => $this->config->getTransferPath() . DIRECTORY_SEPARATOR . $className . self::TRANSFER_FILE_EXTENSION,
-            $deleteClassNames,
-        );
+        if ($toCopyClassNames->count() > 0) {
+            $this->copyTempFiles($toCopyClassNames);
+            $this->deleteTempFiles($toCopyClassNames);
+        }
 
-        $this->filesystem->remove($deleteFiles);
+        if ($toDeleteClassNames->count() > 0) {
+            $this->deleteFiles($toDeleteClassNames);
+        }
     }
 
     /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
-     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
+     * @param \ArrayObject<int, string> $classNames
      */
-    private function copyTempFiles(): void
+    private function deleteFiles(ArrayObject $classNames): void
     {
-        $finder = $this->finder->findFilesInDirectory(
-            filePattern: self::TRANSFER_FILE_NAME_PATTERN,
-            dirName: $this->getTemporaryPath(),
-        );
+        $fileNames = $this->getFileNames($classNames);
+        foreach ($fileNames as $fileName) {
+            $filePath = $this->getTransferPath($fileName);
+            $this->filesystem->remove($filePath);
+        }
+    }
 
-        $destinationPath = $this->config->getTransferPath() . DIRECTORY_SEPARATOR;
-        foreach ($finder as $file) {
-            $targetFile = $destinationPath . $file->getFilename();
-            $this->filesystem->copy($file->getRealPath(), $targetFile);
+    /**
+     * @param \ArrayObject<int, string> $classNames
+     */
+    private function copyTempFiles(ArrayObject $classNames): void
+    {
+        $fileNames = $this->getFileNames($classNames);
+        foreach ($fileNames as $fileName) {
+            $originalFile = $this->getTemporaryPath($fileName);
+            $targetFile = $this->getTransferPath($fileName);
+
+            $this->filesystem->copy($originalFile, $targetFile);
+        }
+    }
+
+    /**
+     * @param \ArrayObject<int, string> $classNames
+     */
+    private function deleteTempFiles(ArrayObject $classNames): void
+    {
+        $fileNames = $this->getFileNames($classNames);
+        foreach ($fileNames as $fileName) {
+            $filePath = $this->getTemporaryPath($fileName);
+            $this->filesystem->remove($filePath);
+        }
+    }
+
+    /**
+     * @param \ArrayObject<int, string> $classNames
+     *
+     * @return array<int, string>
+     */
+    private function getFileNames(ArrayObject $classNames): array
+    {
+        $fileNames = [];
+        foreach ($classNames as $className) {
+            $fileNames[] = $this->getFileName($className);
         }
 
-        $this->filesystem->copy(
-            $this->getTemporaryPath(self::CACHE_FILE_NAME),
-            $this->getTransferPath(self::CACHE_FILE_NAME),
-        );
+        return $fileNames;
+    }
+
+    private function getFileName(string $className): string
+    {
+        return $className . self::TRANSFER_FILE_EXTENSION;
     }
 }

@@ -37,4 +37,9 @@ final readonly class Config implements ConfigInterface
     {
         return $this->configTransfer->uuid;
     }
+
+    public function getHashFileName(): string
+    {
+        return $this->configTransfer->hashFileName;
+    }
 }

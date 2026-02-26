@@ -35,6 +35,11 @@ final class ConfigProxy implements ConfigInterface
         return $this->getConfig()->getUuid();
     }
 
+    public function getHashFileName(): string
+    {
+        return $this->getConfig()->getHashFileName();
+    }
+
     public static function loadConfig(ConfigInterface $config): void
     {
         self::$config = $config;

@@ -10,10 +10,10 @@ use Picamator\TransferObject\TransferGenerator\Config\ConfigFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoaderInterface;
 use Picamator\TransferObject\TransferGenerator\Definition\DefinitionFactory;
 use Picamator\TransferObject\TransferGenerator\Definition\Reader\DefinitionReaderInterface;
-use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\CacheFilesystem;
-use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\CacheFilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystem;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\HashFilesystem;
+use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\HashFilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilder;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command\BulkProcessCommand;
@@ -26,8 +26,14 @@ use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Com
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command\ProcessCommandInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\GeneratorProcessor;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\GeneratorProcessorInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Reader\TransferHashReader;
+use Picamator\TransferObject\TransferGenerator\Generator\Reader\TransferHashReaderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\RenderFactory;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Writer\TransferRotator;
+use Picamator\TransferObject\TransferGenerator\Generator\Writer\TransferRotatorInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Writer\TransferWriter;
+use Picamator\TransferObject\TransferGenerator\Generator\Writer\TransferWriterInterface;
 
 class GeneratorFactory
 {
@@ -47,8 +53,8 @@ class GeneratorFactory
     {
         return new PostProcessCommand(
             $this->createTransferGeneratorBuilder(),
-            $this->createCacheFilesystem(),
             $this->createGeneratorFilesystem(),
+            $this->createTransferRotator(),
         );
     }
 
@@ -65,8 +71,7 @@ class GeneratorFactory
         return new ProcessCommand(
             $this->createTransferGeneratorBuilder(),
             $this->createTemplateRender(),
-            $this->createCacheFilesystem(),
-            $this->createGeneratorFilesystem(),
+            $this->createTransferWriter(),
         );
     }
 
@@ -87,13 +92,24 @@ class GeneratorFactory
             initializer: function (GeneratorFilesystem $ghost): void {
                 $ghost->__construct(
                     $this->createFilesystem(),
-                    $this->createFinder(),
                     $this->getConfig(),
                 );
             }
         );
 
         return $generatorFilesystem;
+    }
+
+    protected function createTransferRotator(): TransferRotatorInterface
+    {
+        return $this->getCached(
+            key: 'transfer-generator:TransferRotator',
+            factory: fn(): TransferRotatorInterface => new TransferRotator(
+                $this->createTransferHashReader(),
+                $this->createHashFilesystem(),
+                $this->createGeneratorFilesystem(),
+            ),
+        );
     }
 
     protected function createTransferGeneratorBuilder(): TransferGeneratorBuilderInterface
@@ -104,13 +120,35 @@ class GeneratorFactory
         );
     }
 
-    protected function createCacheFilesystem(): CacheFilesystemInterface
+    protected function createHashFilesystem(): HashFilesystemInterface
     {
         return $this->getCached(
-            key: 'transfer-generator:CacheFilesystem',
-            factory: fn() => new CacheFilesystem(
-                $this->createFileCacheReader(),
-                $this->createFileCacheAppender(),
+            key: 'transfer-generator:HashFilesystem',
+            factory: fn() => new HashFilesystem(
+                $this->createFilesystem(),
+                $this->createHashFileWriter(),
+                $this->getConfig(),
+            ),
+        );
+    }
+
+    protected function createTransferWriter(): TransferWriterInterface
+    {
+        return $this->getCached(
+            key: 'transfer-generator:TransferWriter',
+            factory: fn(): TransferWriterInterface => new TransferWriter(
+                $this->createTransferHashReader(),
+                $this->createGeneratorFilesystem(),
+            ),
+        );
+    }
+
+    protected function createTransferHashReader(): TransferHashReaderInterface
+    {
+        return $this->getCached(
+            key: 'transfer-generator:TransferHashReader',
+            factory: fn(): TransferHashReaderInterface => new TransferHashReader(
+                $this->createHashFileReader(),
                 $this->getConfig(),
             ),
         );

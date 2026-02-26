@@ -18,6 +18,8 @@ enum ConfigKeyEnum: string
     public static function getDefaultConfig(): array
     {
         $defaultContent[ConfigContentTransfer::UUID_PROP] = '';
+        $defaultContent[ConfigContentTransfer::HASH_FILE_NAME_PROP] = '';
+
         foreach (self::cases() as $keyEnum) {
             $defaultContent[$keyEnum->value] = '';
         }
