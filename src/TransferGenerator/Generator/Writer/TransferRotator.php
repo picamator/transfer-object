@@ -39,13 +39,15 @@ readonly class TransferRotator implements TransferRotatorInterface
     {
         /** @var \ArrayObject<int, string> $classesNames */
         $classesNames = new ArrayObject();
-        // phpcs:disable SlevomatCodingStandard.Variables.UnusedVariable
-        foreach ($hashTransfer->hashes as $className => $hash) {
-            if (isset($hashTransfer->actualHashes[$className])) {
-                continue;
-            }
+        $hashesIterator = $hashTransfer->hashes->getIterator();
 
-            $classesNames[] = $className;
+        while ($hashesIterator->valid()) {
+            $className = $hashesIterator->key();
+            $hashesIterator->next();
+
+            if (!isset($hashTransfer->actualHashes[$className])) {
+                $classesNames[] = $className;
+            }
         }
 
         return $classesNames;
