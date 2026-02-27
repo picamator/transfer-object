@@ -20,6 +20,7 @@ final class TransferGeneratorCommandTest extends TestCase
 
     private const string SUCCESS_CONFIG_PATH
         = '/tests/integration/Command/data/config/success/generator.first.config.yml';
+
     private const string ERROR_CONFIG_PATH = '/tests/integration/Command/data/config/error/generator.config.yml';
 
     private CommandTester $commandTester;
