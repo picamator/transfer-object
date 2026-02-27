@@ -1,4 +1,4 @@
-# $schema: ./../../../../../../../../schema/config.schema.json
+# $schema: ./../../../../../../schema/config.schema.json
 generator:
   transferNamespace: "Picamator\\Tests\\Integration\\TransferObject\\Command\\Generated\\Success"
   transferPath: "${PROJECT_ROOT}/tests/integration/Command/Generated/Success"
