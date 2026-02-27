@@ -37,7 +37,7 @@ final class TransferGeneratorCommandTest extends TestCase
         $output = $this->commandTester->getDisplay();
 
         // Assert
-        $this->assertSame(1, $this->commandTester->getStatusCode());
+        $this->assertSame(2, $this->commandTester->getStatusCode());
         $this->assertStringContainsString('The required -c option is missing.', $output);
     }
 
