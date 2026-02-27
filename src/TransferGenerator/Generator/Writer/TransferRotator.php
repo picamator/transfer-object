@@ -45,9 +45,13 @@ readonly class TransferRotator implements TransferRotatorInterface
             $className = $hashesIterator->key();
             $hashesIterator->next();
 
-            if (!isset($hashTransfer->actualHashes[$className])) {
-                $classesNames[] = $className;
+            if (isset($hashTransfer->actualHashes[$className])) {
+                continue;
             }
+
+            /** @var string $className */
+            $className = pathinfo($className, flags: PATHINFO_BASENAME);
+            $classesNames[] = $className;
         }
 
         return $classesNames;

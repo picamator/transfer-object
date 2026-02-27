@@ -20,10 +20,6 @@ readonly class HashFileReader implements HashFileReaderInterface
 
         $content = [];
         foreach ($this->fileReader->readFile($path) as $line) {
-            if ($line === '') {
-                continue;
-            }
-
             $content += $this->parseLine($line);
         }
 
@@ -40,14 +36,8 @@ readonly class HashFileReader implements HashFileReaderInterface
             return [];
         }
 
-        $className = substr($line, 0, $separatorPos)
-            |>trim(...);
-
-        /** @var string $className */
-        $className = pathinfo($className, flags: PATHINFO_BASENAME);
-
-        $hash = substr($line, $separatorPos + 1)
-            |>trim(...);
+        $className = substr($line, 0, $separatorPos);
+        $hash = substr($line, $separatorPos + 1);
 
         return [$className => $hash];
     }

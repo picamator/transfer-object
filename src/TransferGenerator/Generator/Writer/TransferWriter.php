@@ -37,6 +37,7 @@ readonly class TransferWriter implements TransferWriterInterface
     ): bool {
         $previousHash = $hashTransfer->hashes[$contentTransfer->className] ?? null;
 
-        return $previousHash === null || !hash_equals($previousHash, $contentTransfer->hash);
+        return $previousHash === null
+            || !hash_equals(known_string: $contentTransfer->hash, user_string: $previousHash);
     }
 }
