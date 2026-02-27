@@ -44,7 +44,8 @@ trait ConfigNormalizerTrait
         $configKey = ConfigKeyEnum::HASH_FILE_NAME;
 
         /** @var string $hashFileName */
-        $hashFileName = $configData[$configKey->value] ?: $configKey->getDefaultValue();
+        $hashFileName = $configData[$configKey->value] ?? null;
+        $hashFileName = $hashFileName ?: $configKey->getDefaultValue();
 
         /** @var string $hashFileName */
         $hashFileName = pathinfo($hashFileName, flags: PATHINFO_BASENAME);
