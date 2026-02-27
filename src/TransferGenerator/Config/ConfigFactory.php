@@ -24,6 +24,7 @@ use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigValidator;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\ConfigValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\ContentValidatorInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\DefinitionPathContentValidator;
+use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\HashFileNameContentValidator;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\RequiredContentValidator;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\TransferNamespaceContentValidator;
 use Picamator\TransferObject\TransferGenerator\Config\Validator\Content\TransferPathContentValidator;
@@ -86,7 +87,13 @@ class ConfigFactory
             $this->createDefinitionPathConfigContentValidator(),
             $this->createTransferPathConfigContentValidator(),
             $this->createTransferNamespaceConfigContentValidator(),
+            $this->createHashFileNameContentValidator(),
         ]);
+    }
+
+    protected function createHashFileNameContentValidator(): ContentValidatorInterface
+    {
+        return new HashFileNameContentValidator();
     }
 
     protected function createTransferNamespaceConfigContentValidator(): ContentValidatorInterface

@@ -15,43 +15,30 @@ trait ConfigNormalizerTrait
      */
     final protected function normalizeConfig(mixed $configData): array
     {
-        $defaultConfig = ConfigKeyEnum::getDefaultConfig();
         if (!is_array($configData)) {
-            return $defaultConfig;
+            return ConfigKeyEnum::getDefaultConfig();
         }
 
         $sectionData = $configData[self::CONFIG_SECTION_KEY] ?? null;
-        if (!is_array($sectionData)) {
-            return $defaultConfig;
-        }
 
+        return is_array($sectionData)
+            ? $this->filterSectionData($sectionData)
+            : ConfigKeyEnum::getDefaultConfig();
+    }
+
+    /**
+     * @param array<string|int, mixed> $sectionData
+     *
+     * @return array<string,string|bool>
+     */
+    private function filterSectionData(array $sectionData): array
+    {
         $filteredData = [];
-        foreach ($defaultConfig as $key => $defaultValue) {
+        foreach (ConfigKeyEnum::getDefaultConfig() as $key => $defaultValue) {
             $sectionValue = $sectionData[$key] ?? null;
             $filteredData[$key] = is_string($sectionValue) ? $sectionValue : $defaultValue;
         }
 
         return $filteredData;
-    }
-
-    /**
-     * @param array<string,string|bool> $configData
-     *
-     * @return array<string,string|bool>
-     */
-    final protected function normalizeHashFileName(array $configData): array
-    {
-        $configKey = ConfigKeyEnum::HASH_FILE_NAME;
-
-        /** @var string $hashFileName */
-        $hashFileName = $configData[$configKey->value] ?? null;
-        $hashFileName = $hashFileName ?: $configKey->getDefaultValue();
-
-        /** @var string $hashFileName */
-        $hashFileName = pathinfo($hashFileName, flags: PATHINFO_BASENAME);
-
-        $configData[$configKey->value] = $hashFileName;
-
-        return $configData;
     }
 }

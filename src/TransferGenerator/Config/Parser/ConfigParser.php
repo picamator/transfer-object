@@ -25,7 +25,6 @@ readonly class ConfigParser implements ConfigParserInterface
     {
         $configData = $this->parser->parseFile($configPath)
                 |> $this->normalizeConfig(...)
-                |> $this->normalizeHashFileName(...)
                 |> $this->expandConfig(...);
 
         return $this->builder->createContentTransfer($configData);

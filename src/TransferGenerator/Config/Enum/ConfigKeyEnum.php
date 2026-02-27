@@ -34,9 +34,4 @@ enum ConfigKeyEnum: string
 
         return $defaultContent;
     }
-
-    public function getDefaultValue(): string
-    {
-        return self::DEFAULT_VALUES[$this->name];
-    }
 }

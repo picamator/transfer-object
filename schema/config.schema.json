@@ -21,7 +21,8 @@
                 },
                 "hashFileName": {
                     "type": "string",
-                    "description": "File name where Transfer Object content hashes are saved for change detection. Optional. Default: transfer-object.list.csv"
+                    "description": "File name where Transfer Object content hashes are saved for change detection. Optional. Default: transfer-object.list.csv",
+                    "pattern": "^[a-zA-Z0-9._-]+\\.csv$"
                 }
             },
             "required": ["transferNamespace", "transferPath", "definitionPath"],
