@@ -11,28 +11,16 @@ readonly class ConfigContentBuilder implements ConfigContentBuilderInterface
 {
     protected const string PLACEHOLDER = '${PROJECT_ROOT}';
 
-    protected const string HASH_FILE_NAME = 'transfer-object.list.csv';
-
     public function __construct(private EnvironmentReaderInterface $environmentReader)
     {
     }
 
     public function createContentTransfer(array $configData): ConfigContentTransfer
     {
-        $configData[ConfigContentTransfer::UUID_PROP] = $this->getUuid();
-        $configData[ConfigContentTransfer::HASH_FILE_NAME_PROP] = static::HASH_FILE_NAME;
-        $configData[ConfigContentTransfer::IS_CACHE_ENABLED_PROP] = $this->environmentReader->getIsCacheEnabled();
-
         $contentTransfer = new ConfigContentTransfer($configData);
-
         $this->parseContentPath($contentTransfer);
 
         return $contentTransfer;
-    }
-
-    private function getUuid(): string
-    {
-        return uniqid(more_entropy: true);
     }
 
     private function parseContentPath(ConfigContentTransfer $contentTransfer): void

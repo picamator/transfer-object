@@ -18,6 +18,10 @@
                 "definitionPath": {
                     "type": "string",
                     "description": "Path to the Definition Files."
+                },
+                "hashFileName": {
+                    "type": "string",
+                    "description": "File name where Transfer Object content hashes are saved for change detection. Optional. Default: transfer-object.list.csv"
                 }
             },
             "required": ["transferNamespace", "transferPath", "definitionPath"],

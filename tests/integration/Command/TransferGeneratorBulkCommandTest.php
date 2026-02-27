@@ -74,7 +74,7 @@ final class TransferGeneratorBulkCommandTest extends TestCase
         $output = $this->commandTester->getDisplay();
 
         // Assert
-        $this->commandTester->assertCommandIsSuccessful();
+        $this->commandTester->assertCommandIsSuccessful($output);
         $this->assertStringContainsString('All Transfer Objects were generated successfully!', $output);
     }
 

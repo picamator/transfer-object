@@ -44,11 +44,11 @@ readonly class EnvironmentReader implements EnvironmentReaderInterface
 
     public function getIsCacheEnabled(): bool
     {
-        $invalidateCache = $this->getEnvironment(EnvironmentEnum::IS_CACHE_ENABLED);
+        $isCacheEnabled = $this->getEnvironment(EnvironmentEnum::IS_CACHE_ENABLED);
 
-        return $invalidateCache === '1'
-            || $invalidateCache === 'true'
-            || $invalidateCache === 'TRUE';
+        return $isCacheEnabled === '1'
+            || $isCacheEnabled === 'true'
+            || $isCacheEnabled === 'TRUE';
     }
 
     private function getEnvironment(EnvironmentEnum $environment): string

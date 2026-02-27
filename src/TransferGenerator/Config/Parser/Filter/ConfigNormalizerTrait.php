@@ -33,4 +33,24 @@ trait ConfigNormalizerTrait
 
         return $filteredData;
     }
+
+    /**
+     * @param array<string,string|bool> $configData
+     *
+     * @return array<string,string|bool>
+     */
+    final protected function normalizeHashFileName(array $configData): array
+    {
+        $configKey = ConfigKeyEnum::HASH_FILE_NAME;
+
+        /** @var string $hashFileName */
+        $hashFileName = $configData[$configKey->value] ?: $configKey->getDefaultValue();
+
+        /** @var string $hashFileName */
+        $hashFileName = pathinfo($hashFileName, flags: PATHINFO_BASENAME);
+
+        $configData[$configKey->value] = $hashFileName;
+
+        return $configData;
+    }
 }
