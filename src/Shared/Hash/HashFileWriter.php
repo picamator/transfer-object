@@ -28,9 +28,12 @@ readonly class HashFileWriter implements HashFileWriterInterface
     {
         $content = '';
         foreach ($data as $key => $value) {
-            $content .= $key . ',' . $value . PHP_EOL;
+            $content .= <<<CONTENT
+$key,$value
+
+CONTENT;
         }
 
-        return $content;
+        return rtrim($content, PHP_EOL);
     }
 }
