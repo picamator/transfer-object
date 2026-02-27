@@ -6,6 +6,7 @@ services:
     environment:
       XDEBUG_MODE: ${XDEBUG_MODE:-off}
       PICAMATOR_TRANSFER_OBJECT_PROJECT_ROOT: ${PICAMATOR_TRANSFER_OBJECT_PROJECT_ROOT:-/home/transfer/transfer-object}
+      PICAMATOR_TRANSFER_OBJECT_IS_CACHE_ENABLED: ${PICAMATOR_TRANSFER_OBJECT_IS_CACHE_ENABLED:-true}
     build:
       context: docker/php
       args:

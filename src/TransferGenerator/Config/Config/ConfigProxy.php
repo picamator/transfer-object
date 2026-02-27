@@ -40,6 +40,11 @@ final class ConfigProxy implements ConfigInterface
         return $this->getConfig()->getHashFileName();
     }
 
+    public function getIsCacheEnabled(): bool
+    {
+        return $this->getConfig()->getIsCacheEnabled();
+    }
+
     public static function loadConfig(ConfigInterface $config): void
     {
         self::$config = $config;

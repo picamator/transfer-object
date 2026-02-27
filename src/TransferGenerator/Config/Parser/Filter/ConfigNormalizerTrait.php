@@ -11,7 +11,7 @@ trait ConfigNormalizerTrait
     private const string CONFIG_SECTION_KEY = 'generator';
 
     /**
-     * @return array<string,string>
+     * @return array<string,string|bool>
      */
     final protected function normalizeConfig(mixed $configData): array
     {

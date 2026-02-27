@@ -11,4 +11,6 @@ interface EnvironmentReaderInterface
     public function getMaxFileSizeMegabytes(): int;
 
     public function getMaxFileSizeBytes(): int;
+
+    public function getIsCacheEnabled(): bool;
 }

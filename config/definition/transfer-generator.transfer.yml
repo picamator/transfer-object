@@ -28,6 +28,10 @@ ConfigContent:
     type: string
     required:
     protected:
+  isCacheEnabled:
+    type: bool
+    required:
+    protected:
 
 Definition:
   fileName:

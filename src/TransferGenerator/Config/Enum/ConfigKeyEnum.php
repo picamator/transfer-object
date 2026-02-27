@@ -13,12 +13,13 @@ enum ConfigKeyEnum: string
     case DEFINITION_PATH = ConfigContentTransfer::DEFINITION_PATH_PROP;
 
     /**
-     * @return array<string, string>
+     * @return array<string, string|bool>
      */
     public static function getDefaultConfig(): array
     {
         $defaultContent[ConfigContentTransfer::UUID_PROP] = '';
         $defaultContent[ConfigContentTransfer::HASH_FILE_NAME_PROP] = '';
+        $defaultContent[ConfigContentTransfer::IS_CACHE_ENABLED_PROP] = true;
 
         foreach (self::cases() as $keyEnum) {
             $defaultContent[$keyEnum->value] = '';

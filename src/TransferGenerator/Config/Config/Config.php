@@ -42,4 +42,9 @@ final readonly class Config implements ConfigInterface
     {
         return $this->configTransfer->hashFileName;
     }
+
+    public function getIsCacheEnabled(): bool
+    {
+        return $this->configTransfer->isCacheEnabled;
+    }
 }

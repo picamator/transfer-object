@@ -9,6 +9,7 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\FailedFiberTrait;
 use Picamator\TransferObject\Command\TransferGeneratorBulkCommand;
+use Picamator\TransferObject\Shared\Environment\Enum\EnvironmentEnum;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacadeInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -24,7 +25,14 @@ final class TransferGeneratorBulkCommandTest extends TestCase
 
     private const string ERROR_CONFIG_LIST_PATH = '/tests/integration/Command/data/config/error/config.list.txt';
 
+    private const string IS_CACHE_ENABLED = EnvironmentEnum::IS_CACHE_ENABLED->value;
+
     private CommandTester $commandTester;
+
+    public static function setUpBeforeClass(): void
+    {
+        putenv(self::IS_CACHE_ENABLED . '=0');
+    }
 
     protected function setUp(): void
     {

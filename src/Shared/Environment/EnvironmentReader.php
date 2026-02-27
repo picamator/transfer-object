@@ -42,6 +42,15 @@ readonly class EnvironmentReader implements EnvironmentReaderInterface
         return $this->getMaxFileSizeMegabytes() * 1_000_000;
     }
 
+    public function getIsCacheEnabled(): bool
+    {
+        $invalidateCache = $this->getEnvironment(EnvironmentEnum::IS_CACHE_ENABLED);
+
+        return $invalidateCache === '1'
+            || $invalidateCache === 'true'
+            || $invalidateCache === 'TRUE';
+    }
+
     private function getEnvironment(EnvironmentEnum $environment): string
     {
         $value = $this->getenv($environment->value);

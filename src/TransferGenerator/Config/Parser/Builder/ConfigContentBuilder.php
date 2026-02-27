@@ -21,6 +21,7 @@ readonly class ConfigContentBuilder implements ConfigContentBuilderInterface
     {
         $configData[ConfigContentTransfer::UUID_PROP] = $this->getUuid();
         $configData[ConfigContentTransfer::HASH_FILE_NAME_PROP] = static::HASH_FILE_NAME;
+        $configData[ConfigContentTransfer::IS_CACHE_ENABLED_PROP] = $this->environmentReader->getIsCacheEnabled();
 
         $contentTransfer = new ConfigContentTransfer($configData);
 
@@ -31,7 +32,7 @@ readonly class ConfigContentBuilder implements ConfigContentBuilderInterface
 
     private function getUuid(): string
     {
-        return uniqid('', true);
+        return uniqid(more_entropy: true);
     }
 
     private function parseContentPath(ConfigContentTransfer $contentTransfer): void
