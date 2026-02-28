@@ -9,7 +9,6 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\FailedFiberTrait;
 use Picamator\TransferObject\Command\TransferGeneratorBulkCommand;
-use Picamator\TransferObject\Shared\Environment\Enum\EnvironmentEnum;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacadeInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -20,19 +19,20 @@ final class TransferGeneratorBulkCommandTest extends TestCase
 
     private const string SUCCESS_CONFIG_LIST_PATH = '/tests/integration/Command/data/config/success/config.list.txt';
 
+    private const array SUCCESS_GENERATED_FILES = [
+        'Generated/Success/CommandBulkFirstTransfer.php',
+        'Generated/Success/CommandBulkSecondTransfer.php',
+        'Generated/Success/CommandBulkThirdTransfer.php',
+        'Generated/Success/transfer-object.bulk.first.list.csv',
+        'Generated/Success/transfer-object.bulk.second.list.csv',
+    ];
+
     private const string ERROR_CONFIG_EMPTY_LIST_PATH
         = '/tests/integration/Command/data/config/error/config.empty.list.txt';
 
     private const string ERROR_CONFIG_LIST_PATH = '/tests/integration/Command/data/config/error/config.list.txt';
 
-    private const string IS_CACHE_ENABLED = EnvironmentEnum::IS_CACHE_ENABLED->value;
-
     private CommandTester $commandTester;
-
-    public static function setUpBeforeClass(): void
-    {
-        putenv(self::IS_CACHE_ENABLED . '=0');
-    }
 
     protected function setUp(): void
     {
@@ -76,6 +76,10 @@ final class TransferGeneratorBulkCommandTest extends TestCase
         // Assert
         $this->commandTester->assertCommandIsSuccessful($output);
         $this->assertStringContainsString('All Transfer Objects were generated successfully!', $output);
+
+        foreach (self::SUCCESS_GENERATED_FILES as $file) {
+            $this->assertFileExists(__DIR__ . '/' . $file);
+        }
     }
 
     #[TestDox('Run command with empty configuration should show error message')]

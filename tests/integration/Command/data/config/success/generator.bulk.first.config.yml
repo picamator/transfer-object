@@ -2,5 +2,5 @@
 generator:
   transferNamespace: "Picamator\\Tests\\Integration\\TransferObject\\Command\\Generated\\Success"
   transferPath: "${PROJECT_ROOT}/tests/integration/Command/Generated/Success"
-  definitionPath: "${PROJECT_ROOT}/tests/integration/Command/data/config/success/definition-second"
-  hashFileName: "transfer-object.second.list.csv"
+  definitionPath: "${PROJECT_ROOT}/tests/integration/Command/data/config/success/definition-bulk-first"
+  hashFileName: "transfer-object.bulk.first.list.csv"

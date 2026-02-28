@@ -139,6 +139,7 @@ class GeneratorFactory
             factory: fn(): TransferWriterInterface => new TransferWriter(
                 $this->createTransferHashReader(),
                 $this->createGeneratorFilesystem(),
+                $this->getConfig(),
             ),
         );
     }

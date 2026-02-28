@@ -13,9 +13,9 @@ use Picamator\TransferObject\Transfer\AbstractTransfer;
  *
  * Note: Do not manually edit this file, as changes will be overwritten.
  *
- * @see /tests/integration/Command/data/config/success/definition-second/command.third.transfer.yml Definition file path.
+ * @see /tests/integration/Command/data/config/success/definition-cache-disabled/command.transfer.yml Definition file path.
  */
-final class CommandThirdTransfer extends AbstractTransfer
+final class CommandCacheDisabledFirstTransfer extends AbstractTransfer
 {
     protected const int META_DATA_SIZE = 1;
 

@@ -1,0 +1,6 @@
+# $schema: ./../../../../../../schema/config.schema.json
+generator:
+  transferNamespace: "Picamator\\Tests\\Integration\\TransferObject\\Command\\Generated\\Success"
+  transferPath: "${PROJECT_ROOT}/tests/integration/Command/Generated/Success"
+  definitionPath: "${PROJECT_ROOT}/tests/integration/Command/data/config/success/definition-cache-disabled"
+  hashFileName: "transfer-object.cache.disabled.list.csv"

@@ -29,9 +29,8 @@ class TransferHashReader implements TransferHashReaderInterface
 
     private function reloadHashFileCache(): void
     {
-        $hashes = $this->config->getIsCacheEnabled()
-            ? $this->fileReader->readFile($this->getFilePath())
-            : [];
+        $filePath = $this->getFilePath();
+        $hashes = $this->fileReader->readFile($filePath);
 
         $this->hashTransfer = new TransferHashTransfer([
             TransferHashTransfer::HASHES_PROP => $hashes,

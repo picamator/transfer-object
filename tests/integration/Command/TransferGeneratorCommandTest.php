@@ -19,7 +19,7 @@ final class TransferGeneratorCommandTest extends TestCase
     use FailedFiberTrait;
 
     private const string SUCCESS_CONFIG_PATH
-        = '/tests/integration/Command/data/config/success/generator.first.config.yml';
+        = '/tests/integration/Command/data/config/success/generator.config.yml';
 
     private const string ERROR_CONFIG_PATH = '/tests/integration/Command/data/config/error/generator.config.yml';
 
@@ -67,8 +67,7 @@ final class TransferGeneratorCommandTest extends TestCase
 
         // Assert
         $this->commandTester->assertCommandIsSuccessful($output);
-        $this->assertStringContainsString('command.first.transfer.yml: CommandFirstTransfer', $output);
-        $this->assertStringContainsString('command.second.transfer.yml: CommandSecondTransfer', $output);
+        $this->assertStringContainsString('command.transfer.yml: CommandFirstTransfer', $output);
         $this->assertStringContainsString('All Transfer Objects were generated successfully!', $output);
     }
 
