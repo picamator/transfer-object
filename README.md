@@ -60,14 +60,14 @@ Key Features
 **Symfony Compatibility:**
 
  * Provides Symfony console command:
-   * [TransferGeneratorCommand](/src/Command/TransferGeneratorCommand.php)
-   * [TransferGeneratorBulkCommand](/src/Command/TransferGeneratorBulkCommand.php)
-   * [DefinitionGeneratorCommand](/src/Command/DefinitionGeneratorCommand.php)
+   * [TransferGeneratorCommand](https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate)
+   * [TransferGeneratorBulkCommand](https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate-bulk)
+   * [DefinitionGeneratorCommand](https://github.com/picamator/transfer-object/wiki/Console-Commands#definition-generate)
  * Includes Symfony services:
-   * [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php)
-   * [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php)
+   * [TransferGeneratorFacade](https://github.com/picamator/transfer-object/wiki/Facade-Interfaces#transfer-object-generator)
+   * [DefinitionGeneratorFacade](https://github.com/picamator/transfer-object/wiki/Facade-Interfaces#definition-generator)
  * Enables automatic Symfony request query data mapping
- * Supports [Symfony validator](https://github.com/symfony/validator) attributes
+ * Supports [Symfony validator](https://github.com/picamator/transfer-object/wiki/Definition-File#attributes) attributes
 
 **Transfer Object:**
 
