@@ -105,7 +105,7 @@ $ composer require picamator/transfer-object
 Documentation
 -------------
 
-* [Examples](examples#readme)
+* [Examples](examples)
 * [Project's Wiki](https://github.com/picamator/transfer-object/wiki)
 
 Publications
