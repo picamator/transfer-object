@@ -1,10 +1,10 @@
-Test Cases
-===========
+Definition Generator Integration Tests
+======================================
 
 Data Provider
 -------------
 
-Definition Files and Transfer Object generators have been tested against the following APIs:
+Definition Generator has been tested against the following APIs:
 
 | File                                                                                                                            | Source                                                                                                               |
 |---------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
