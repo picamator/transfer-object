@@ -102,17 +102,11 @@ $ composer require picamator/transfer-object
 | 4.0.0 | 8.4 | 7.3     |
 | 5.0.0 | 8.5 | 8.0     |
 
-Examples
----------
-
-* [Definition Generator](/examples/try-definition-generator.php)
-* [Transfer Generator](/examples/try-transfer-generator.php)
-* [Advanced Transfer Generator](/examples/try-advanced-transfer-generator.php)
-
 Documentation
 -------------
 
-For more details, please visit [Project's Wiki](https://github.com/picamator/transfer-object/wiki).
+* [Examples](examples)
+* [Project's Wiki](https://github.com/picamator/transfer-object/wiki)
 
 Publications
 ------------

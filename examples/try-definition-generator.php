@@ -16,46 +16,11 @@ echo <<<'STORY'
 =======================================================
 
 STORY;
-$productData = [
-    'sku' => 'T-123',
-    'name' => 'Tomato',
-    'price' => 12.99,
-    'currency' => 'EUR',
-    'stock' => 100,
-    'isDiscounted' => false,
-    'deliveryOptions' => [
-        ['name' => 'express'],
-        ['name' => 'standard'],
-    ],
-    'details' => [
-        'description' => 'Local farm Bio Tomato.',
-        'isRegional' => true,
-    ],
-    'stores' => ['DE', 'AT'],
-    'labels' => [
-       'sale' => 'Sale',
-    ],
-    'availabilities' => [
-        '2024-12-25' => [
-            'total' => 100,
-            'buffer' => 5,
-        ],
-        '2024-12-26' => [
-            'total' => 200,
-            'buffer' => 10,
-        ],
-    ],
-    'measurementUnit' => [
-        'palette' => [
-            'type' => 'p',
-            'items' => 1_000,
-        ],
-        'box' => [
-            'type' => 'b',
-            'items' => 10,
-        ],
-    ],
-];
+
+/** @var string $product */
+$product = file_get_contents(__DIR__ . '/data/product.json');
+/** @var array<string, mixed> $productData */
+$productData = json_decode($product, associative: true, flags: JSON_THROW_ON_ERROR);
 
 echo <<<'STORY'
 =======================================================

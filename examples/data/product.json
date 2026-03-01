@@ -1,0 +1,47 @@
+{
+    "sku": "T-123",
+    "name": "Tomato",
+    "price": 12.99,
+    "currency": "EUR",
+    "stock": 100,
+    "isDiscounted": false,
+    "deliveryOptions": [
+        {
+            "name": "express"
+        },
+        {
+            "name": "standard"
+        }
+    ],
+    "details": {
+        "description": "Local farm Bio Tomato.",
+        "isRegional": true
+    },
+    "stores": [
+        "DE",
+        "AT"
+    ],
+    "labels": {
+        "sale": "Sale"
+    },
+    "availabilities": {
+        "2024-12-25": {
+            "total": 100,
+            "buffer": 5
+        },
+        "2024-12-26": {
+            "total": 200,
+            "buffer": 10
+        }
+    },
+    "measurementUnit": {
+        "palette": {
+            "type": "p",
+            "items": 1000
+        },
+        "box": {
+            "type": "b",
+            "items": 10
+        }
+    }
+}
