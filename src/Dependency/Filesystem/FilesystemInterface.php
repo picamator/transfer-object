@@ -9,11 +9,6 @@ interface FilesystemInterface
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      */
-    public function copy(string $originFile, string $targetFile): void;
-
-    /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
-     */
     public function rename(string $origin, string $target, bool $overwrite = false): void;
 
     /**
