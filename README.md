@@ -109,31 +109,6 @@ Examples
 * [Transfer Generator](/examples/try-transfer-generator.php)
 * [Advanced Transfer Generator](/examples/try-advanced-transfer-generator.php)
 
-Usage Tests
------------
-
-Definition Files and Transfer Object generators have been tested against the following APIs:
-
-* [NASA Open Api](https://api.nasa.gov/neo/rest/v1/neo/2465633?api_key=DEMO_KEY)
-* [OpenWeather](https://openweathermap.org/current?collection=current_forecast#example_JSON)
-* [Google Content API for Shopping](https://developers.google.com/shopping-content/guides/products/products-api?hl=en)
-* [Frankfurter - open-source currency data API](https://api.frankfurter.dev/v1/latest)
-* [Tagesschau API](https://tagesschau.api.bund.dev)
-* [Statistisches Bundesamt (Destatis)](https://www-genesis.destatis.de/genesisWS/swagger-ui/index.html#/find/findPost)
-* [Wero - Digital Payment Wallet](https://developerhub.ppro.com/global-api/docs/wero)
-
-### Scenario
-
-1. Rest API response is used as a blueprint to generate Definition Files
-2. Transfer Objects are generated based on Definition Files
-3. Transfer Object instance is created with the API response
-4. Transfer Object is converted back to the array
-5. The converted array is compared with the API response
-
-For all APIs, data are ✅ matched.
-
-For detailed information, please check [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php).
-
 Documentation
 -------------
 
