@@ -44,36 +44,6 @@ final readonly class FinderBridge implements FinderInterface
         // @codeCoverageIgnoreEnd
     }
 
-    public function findFilesInDirectoryExclude(
-        string $filePattern,
-        string $dirName,
-        string $exclude,
-    ): IteratorAggregate&Countable {
-        try {
-            $finder = Finder::create()
-                ->files()
-                ->name($filePattern)
-                ->depth(0)
-                ->in($dirName)
-                ->exclude($exclude);
-
-            return $this->getFinderBridge($finder);
-            // @codeCoverageIgnoreStart
-        } catch (Throwable $e) {
-            throw new FinderException(
-                sprintf(
-                    'Failed to find files "%s" in directory "%s" excluding "%s". Error: "%s".',
-                    $filePattern,
-                    $dirName,
-                    $exclude,
-                    $e->getMessage(),
-                ),
-                previous: $e,
-            );
-        }
-        // @codeCoverageIgnoreEnd
-    }
-
     /**
      * @return Countable&IteratorAggregate<string,SplFileInfoBridge>
      */
