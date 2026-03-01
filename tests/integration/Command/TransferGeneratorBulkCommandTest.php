@@ -8,6 +8,7 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\FailedFiberTrait;
+use Picamator\Tests\Integration\TransferObject\Helper\FileTrait;
 use Picamator\TransferObject\Command\TransferGeneratorBulkCommand;
 use Picamator\TransferObject\TransferGenerator\TransferGeneratorFacadeInterface;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -16,15 +17,16 @@ use Symfony\Component\Console\Tester\CommandTester;
 final class TransferGeneratorBulkCommandTest extends TestCase
 {
     use FailedFiberTrait;
+    use FileTrait;
 
     private const string SUCCESS_CONFIG_LIST_PATH = '/tests/integration/Command/data/config/success/config.list.txt';
 
     private const array SUCCESS_GENERATED_FILES = [
-        'Generated/Success/CommandBulkFirstTransfer.php',
-        'Generated/Success/CommandBulkSecondTransfer.php',
-        'Generated/Success/CommandBulkThirdTransfer.php',
-        'Generated/Success/transfer-object.bulk.first.list.csv',
-        'Generated/Success/transfer-object.bulk.second.list.csv',
+        __DIR__ . '/Generated/Success/CommandBulkFirstTransfer.php',
+        __DIR__ . '/Generated/Success/CommandBulkSecondTransfer.php',
+        __DIR__ . '/Generated/Success/CommandBulkThirdTransfer.php',
+        __DIR__ . '/Generated/Success/transfer-object.bulk.first.list.csv',
+        __DIR__ . '/Generated/Success/transfer-object.bulk.second.list.csv',
     ];
 
     private const string ERROR_CONFIG_EMPTY_LIST_PATH
@@ -76,10 +78,7 @@ final class TransferGeneratorBulkCommandTest extends TestCase
         // Assert
         $this->commandTester->assertCommandIsSuccessful($output);
         $this->assertStringContainsString('All Transfer Objects were generated successfully!', $output);
-
-        foreach (self::SUCCESS_GENERATED_FILES as $file) {
-            $this->assertFileExists(__DIR__ . '/' . $file);
-        }
+        $this->assertFilesExist(self::SUCCESS_GENERATED_FILES);
     }
 
     #[TestDox('Run command with empty configuration should show error message')]
