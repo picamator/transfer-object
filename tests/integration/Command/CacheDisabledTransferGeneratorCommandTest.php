@@ -8,7 +8,6 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Picamator\Tests\Integration\TransferObject\Helper\EnvironmentTrait;
-use Picamator\Tests\Integration\TransferObject\Helper\FailedFiberTrait;
 use Picamator\Tests\Integration\TransferObject\Helper\FileTrait;
 use Picamator\TransferObject\Command\TransferGeneratorCommand;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,15 +16,14 @@ use Symfony\Component\Console\Tester\CommandTester;
 #[Group('command')]
 final class CacheDisabledTransferGeneratorCommandTest extends TestCase
 {
-    use FailedFiberTrait;
     use EnvironmentTrait;
     use FileTrait;
 
-    private const string SUCCESS_CONFIG_PATH
+    private const string CONFIG_PATH
         = '/tests/integration/Command/data/config/success/generator.cache.disabled.config.yml';
 
-    private const array SUCCESS_GENERATED_FILES = [
-        __DIR__ . '/Generated/Success/CommandCacheDisabledFirstTransfer.php',
+    private const array GENERATED_FILES = [
+        __DIR__ . '/Generated/Success/CommandCacheDisabledTransfer.php',
         __DIR__ . '/Generated/Success/transfer-object.cache.disabled.list.csv',
     ];
 
@@ -48,26 +46,26 @@ final class CacheDisabledTransferGeneratorCommandTest extends TestCase
     }
 
     #[TestDox('Run command with disabled cache should show always regenerate transfers')]
-    public function testRunCommandWithValidConfigurationShouldShowSuccessMessage(): void
+    public function testRunCommandWithDisabledCacheShouldAlwaysRegenerateTransfers(): void
     {
         // Arrange
-        $modifiedTimesBefore = $this->getModifiedTimes(self::SUCCESS_GENERATED_FILES);
+        $modifiedTimesBefore = $this->getModifiedTimes(self::GENERATED_FILES);
 
         // Act
         $this->commandTester->execute(
-            ['-c' => self::SUCCESS_CONFIG_PATH],
+            ['-c' => self::CONFIG_PATH],
             ['verbosity' => OutputInterface::VERBOSITY_VERBOSE]
         );
         $output = $this->commandTester->getDisplay();
 
-        $modifiedTimesAfter = $this->getModifiedTimes(self::SUCCESS_GENERATED_FILES);
+        $modifiedTimesAfter = $this->getModifiedTimes(self::GENERATED_FILES);
 
         // Assert
         $this->commandTester->assertCommandIsSuccessful($output);
-        $this->assertStringContainsString('command.transfer.yml: CommandCacheDisabledFirst', $output);
+        $this->assertStringContainsString('command.transfer.yml: CommandCacheDisabled', $output);
         $this->assertStringContainsString('All Transfer Objects were generated successfully!', $output);
 
-        $this->assertFilesExist(self::SUCCESS_GENERATED_FILES);
+        $this->assertFilesExist(self::GENERATED_FILES);
         $this->assertNotSameModifiedTimes($modifiedTimesBefore, $modifiedTimesAfter);
     }
 }

@@ -28,17 +28,22 @@ trait FileTrait
     {
         $modificationTimes = [];
         foreach ($paths as $path) {
-            $modificationTime = filemtime($path);
-
-            $this->assertNotFalse(
-                $modificationTime,
-                sprintf('Failed to get file "%s" modified date.', $path),
-            );
-
-            $modificationTimes[$path] = $modificationTime;
+            $modificationTimes[$path] = $this->getModifiedTime($path);
         }
 
         return $modificationTimes;
+    }
+
+    final protected function getModifiedTime(string $path): int
+    {
+        $modificationTime = filemtime($path);
+
+        $this->assertNotFalse(
+            $modificationTime,
+            sprintf('Failed to get file "%s" modified date.', $path),
+        );
+
+        return $modificationTime;
     }
 
     /**
@@ -54,11 +59,34 @@ trait FileTrait
         );
 
         foreach ($modifiedTimesBefore as $path => $modifiedTimeBefore) {
-            $this->assertNotSame(
-                $modifiedTimeBefore,
-                $modifiedTimesAfter[$path],
-                sprintf('Modified file time "%s" should be different.', $path),
+            $this->assertArrayHasKey(
+                $path,
+                $modifiedTimesAfter,
+                sprintf('Modified Time Before "%s" should exist.', $path),
             );
+
+            $this->assertNotSameModifiedTime($modifiedTimeBefore, $modifiedTimesAfter[$path]);
         }
+    }
+
+    final protected function assertNotSameModifiedTime(int $modifiedTimeBefore, int $modifiedTimeAfter): void
+    {
+        $this->assertNotSame(
+            $modifiedTimeBefore,
+            $modifiedTimeAfter,
+            'Modified file time should be different.',
+        );
+    }
+
+    final protected function saveFileContent(string $path, string $content): void
+    {
+        $result = file_put_contents($path, $content);
+        $this->assertNotFalse($result, sprintf('Failed to save content to "%s".', $path));
+    }
+
+    final protected function createEmptyFile(string $path): void
+    {
+        $result = touch($path);
+        $this->assertNotFalse($result, sprintf('Failed to create file "%s".', $path));
     }
 }

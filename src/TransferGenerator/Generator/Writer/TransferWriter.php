@@ -15,7 +15,7 @@ readonly class TransferWriter implements TransferWriterInterface
     public function __construct(
         private TransferHashReaderInterface $hashReader,
         private GeneratorFilesystemInterface $filesystem,
-        private readonly ConfigInterface $config,
+        private ConfigInterface $config,
     ) {
     }
 

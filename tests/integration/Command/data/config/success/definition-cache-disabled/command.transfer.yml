@@ -1,4 +1,4 @@
 # $schema: ./../../../../../../../schema/definition.schema.json
-CommandCacheDisabledFirst:
+CommandCacheDisabled:
   run:
     type: true
