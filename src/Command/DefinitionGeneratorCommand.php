@@ -36,9 +36,9 @@ readonly class DefinitionGeneratorCommand
 {
     use InputNormalizerTrait;
 
-    private const string QUESTION_DEFINITION_PATH = 'Definition directory path: ';
-    private const string QUESTION_CLASS_NAME = 'Transfer Object class name: ';
-    private const string QUESTION_JSON_PATH = 'JSON local path or url: ';
+    private const string QUESTION_DEFINITION_PATH = 'Definition directory path';
+    private const string QUESTION_CLASS_NAME = 'Transfer Object class name';
+    private const string QUESTION_JSON_PATH = 'JSON local path or url';
 
     private const string START_SECTION_NAME = 'Generating Transfer Object Definitions ✨';
 
