@@ -29,7 +29,12 @@ trait FilesystemTrait
      */
     final protected function getTemporaryPath(?string $filename = null): string
     {
-        $path = $this->config->getTransferPath() . DIRECTORY_SEPARATOR . self::TEMPORARY_DIR;
+        $path = $this->config->getTransferPath()
+            . DIRECTORY_SEPARATOR
+            . self::TEMPORARY_DIR
+            . DIRECTORY_SEPARATOR
+            . $this->config->getUuid();
+
         if ($filename !== null) {
             $path .= DIRECTORY_SEPARATOR . $filename;
         }
