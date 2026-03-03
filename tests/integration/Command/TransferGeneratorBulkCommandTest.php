@@ -25,8 +25,8 @@ final class TransferGeneratorBulkCommandTest extends TestCase
         __DIR__ . '/Generated/Success/CommandBulkFirstTransfer.php',
         __DIR__ . '/Generated/Success/CommandBulkSecondTransfer.php',
         __DIR__ . '/Generated/Success/CommandBulkThirdTransfer.php',
-        __DIR__ . '/Generated/Success/transfer-object.bulk.first.list.csv',
-        __DIR__ . '/Generated/Success/transfer-object.bulk.second.list.csv',
+        __DIR__ . '/Generated/Success/0522db555dcdc49fa936ab8d1d3345d16a865d7c.transfer.hash.csv',
+        __DIR__ . '/Generated/Success/660b282118a23a83dc1e5b63e91f543eb7ccfedb.transfer.hash.csv',
     ];
 
     private const string ERROR_CONFIG_EMPTY_LIST_PATH

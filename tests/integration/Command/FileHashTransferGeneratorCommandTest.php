@@ -22,7 +22,8 @@ final class FileHashTransferGeneratorCommandTest extends TestCase
     private const string CONFIG_PATH
         = '/tests/integration/Command/data/config/success/generator.file.hash.config.yml';
 
-    private const string HASH_FILE_PATH = __DIR__ . '/Generated/Success/transfer-object.file.hash.list.csv';
+    private const string HASH_FILE_PATH =
+        __DIR__ . '/Generated/Success/11f6d3fa94ad43441cad6f58298fb442f506dfed.transfer.hash.csv';
 
     private const string HASH_FILE_CONTENT = <<<'CONTENT'
 CommandFileHashTransfer,some-hash-1

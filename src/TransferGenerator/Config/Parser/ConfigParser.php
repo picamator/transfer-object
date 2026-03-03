@@ -38,6 +38,10 @@ readonly class ConfigParser implements ConfigParserInterface
     private function expandConfig(array $configData): array
     {
         $configData[ConfigContentTransfer::UUID_PROP] = uniqid(more_entropy: true);
+
+        $definitionPath = $configData[ConfigContentTransfer::DEFINITION_PATH_PROP] ?? '';
+        $configData[ConfigContentTransfer::HASH_FILE_NAME_PROP] = sha1((string)$definitionPath) . '.transfer.hash.csv';
+
         $configData[ConfigContentTransfer::IS_CACHE_ENABLED_PROP] = $this->environmentReader->getIsCacheEnabled();
 
         return $configData;

@@ -60,7 +60,5 @@ final class ConfigLoaderTest extends TestCase
         yield 'invalid definition root key' => ['invalid-definition-root-key.config.yml'];
 
         yield 'transfer path is not local' => ['transfer-path-is-not-local.config.yml'];
-
-        yield 'invalid hash file name' => ['invalid-hash-file-name.config.yml'];
     }
 }

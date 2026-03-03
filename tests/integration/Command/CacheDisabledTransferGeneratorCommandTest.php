@@ -24,7 +24,7 @@ final class CacheDisabledTransferGeneratorCommandTest extends TestCase
 
     private const array GENERATED_FILES = [
         __DIR__ . '/Generated/Success/CommandCacheDisabledTransfer.php',
-        __DIR__ . '/Generated/Success/transfer-object.cache.disabled.list.csv',
+        __DIR__ . '/Generated/Success/58208de788342fbf62cf9c812c7950fa44cf8ecf.transfer.hash.csv',
     ];
 
     private CommandTester $commandTester;

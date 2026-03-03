@@ -3,4 +3,3 @@ generator:
   transferNamespace: "Picamator\\Tests\\Integration\\TransferObject\\Command\\Generated\\Success"
   transferPath: "${PROJECT_ROOT}/tests/integration/Command/Generated/Success"
   definitionPath: "${PROJECT_ROOT}/tests/integration/Command/data/config/success/definition-file-hash"
-  hashFileName: "transfer-object.file.hash.list.csv"
