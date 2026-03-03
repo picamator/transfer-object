@@ -25,14 +25,19 @@ readonly class TransferGeneratorWorkflow implements TransferGeneratorWorkflowInt
             return false;
         }
 
-        $transferGenerator = $this->processTransfers();
+        try {
+            $transferGenerator = $this->processTransfers();
 
-        yield from $transferGenerator;
+            yield from $transferGenerator;
 
-        /** @var bool $isSuccessful */
-        $isSuccessful = $transferGenerator->getReturn();
+            /** @var bool $isSuccessful */
+            $isSuccessful = $transferGenerator->getReturn();
+        } finally {
+            $isSuccessful ??= false;
+            $transferGenerator = $this->postProcessTransfers($isSuccessful);
+        }
 
-        yield $this->postProcessTransfers($isSuccessful);
+        yield $transferGenerator;
 
         return $isSuccessful;
     }
