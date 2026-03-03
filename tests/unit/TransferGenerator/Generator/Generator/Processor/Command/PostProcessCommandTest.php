@@ -14,6 +14,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFil
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilder;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command\PostProcessCommand;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command\PostProcessCommandInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Writer\TransferLockerInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Writer\TransferRotatorInterface;
 
 #[Group('transfer-generator')]
@@ -32,10 +33,16 @@ final class PostProcessCommandTest extends TestCase
         $this->filesystemStub = $this->createStub(GeneratorFilesystemInterface::class);
         $this->transferRotatorMock = $this->createMock(TransferRotatorInterface::class);
 
+        $transferLockerStub = $this->createStub(TransferLockerInterface::class);
+        $transferLockerStub
+            ->method('releaseLock')
+            ->seal();
+
         $this->command = new PostProcessCommand(
             $builder,
             $this->filesystemStub,
             $this->transferRotatorMock,
+            $transferLockerStub,
         );
     }
 

@@ -30,6 +30,8 @@ use Picamator\TransferObject\TransferGenerator\Generator\Reader\TransferHashRead
 use Picamator\TransferObject\TransferGenerator\Generator\Reader\TransferHashReaderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\RenderFactory;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Writer\TransferLocker;
+use Picamator\TransferObject\TransferGenerator\Generator\Writer\TransferLockerInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Writer\TransferRotator;
 use Picamator\TransferObject\TransferGenerator\Generator\Writer\TransferRotatorInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Writer\TransferWriter;
@@ -55,6 +57,7 @@ class GeneratorFactory
             $this->createTransferGeneratorBuilder(),
             $this->createGeneratorFilesystem(),
             $this->createTransferRotator(),
+            $this->createTransferLocker(),
         );
     }
 
@@ -81,6 +84,18 @@ class GeneratorFactory
             $this->createConfigLoader(),
             $this->createTransferGeneratorBuilder(),
             $this->createGeneratorFilesystem(),
+            $this->createTransferLocker(),
+        );
+    }
+
+    protected function createTransferLocker(): TransferLockerInterface
+    {
+        return $this->getCached(
+            key: 'transfer-generator:TransferLocker',
+            factory: fn(): TransferLockerInterface => new TransferLocker(
+                $this->createFileLocker(),
+                $this->getConfig(),
+            ),
         );
     }
 
