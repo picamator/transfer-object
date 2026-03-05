@@ -17,11 +17,13 @@ readonly class TransferGeneratorWorkflow implements TransferGeneratorWorkflowInt
 
     public function generateTransfers(string $configPath): Generator
     {
-        $generatorTransfer = $this->processConfig($configPath);
+        $generatorTransfer = $this->preProcess($configPath);
 
         yield $generatorTransfer;
 
         if (!$this->isValidTransfer($generatorTransfer)) {
+            $this->postProcessTransfers(isSuccessful: false);
+
             return false;
         }
 
@@ -55,8 +57,7 @@ readonly class TransferGeneratorWorkflow implements TransferGeneratorWorkflowInt
         return $this->processor->process();
     }
 
-
-    private function processConfig(string $configPath): TransferGeneratorTransfer
+    private function preProcess(string $configPath): TransferGeneratorTransfer
     {
         return $this->processor->preProcess($configPath);
     }

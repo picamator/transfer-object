@@ -59,25 +59,4 @@ final class PostProcessCommandTest extends TestCase
         // Assert
         $this->assertFalse($actual->validator->isValid);
     }
-
-    #[TestDox('Filesystem exception should be handled on PostProcessError')]
-    public function testFilesystemExceptionShouldBeHandledOnPostProcessError(): void
-    {
-        // Arrange
-        $this->filesystemStub
-            ->method('deleteTempDir')
-            ->willThrowException(new FilesystemException())
-            ->seal();
-
-        // Expect
-        $this->transferRotatorMock->expects($this->never())
-            ->method('rotateFiles')
-            ->seal();
-
-        // Act
-        $actual = $this->command->postProcess(false);
-
-        // Assert
-        $this->assertFalse($actual->validator->isValid);
-    }
 }

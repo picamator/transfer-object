@@ -24,10 +24,9 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 
     public function createTempDir(): void
     {
-        $temporaryPath = $this->getTemporaryPath();
+        $tempPath = $this->getTemporaryPath();
 
-        $this->deleteTempDir();
-        $this->filesystem->mkdir($temporaryPath);
+        $this->filesystem->mkdir($tempPath);
     }
 
     /**
@@ -35,9 +34,10 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
      */
     public function deleteTempDir(): void
     {
-        $temporaryPath = $this->getTemporaryPath();
-        if ($this->filesystem->exists($temporaryPath)) {
-            $this->filesystem->remove($temporaryPath);
+        $tempPath = $this->getTemporaryPath();
+
+        if ($this->filesystem->exists($tempPath)) {
+            $this->filesystem->remove($tempPath);
         }
     }
 

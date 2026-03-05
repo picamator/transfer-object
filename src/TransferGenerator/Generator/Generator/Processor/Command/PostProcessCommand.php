@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command;
 
-use Picamator\TransferObject\Dependency\Exception\FilesystemException;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilderInterface;
@@ -43,11 +42,7 @@ readonly class PostProcessCommand implements PostProcessCommandInterface
 
     private function postProcessError(): TransferGeneratorTransfer
     {
-        try {
-            $this->filesystem->deleteTempDir();
-        } catch (FilesystemException $e) {
-            return $this->builder->createErrorGeneratorTransfer($e->getMessage());
-        }
+        $this->filesystem->deleteTempDir();
 
         return $this->builder->createSuccessGeneratorTransfer();
     }
