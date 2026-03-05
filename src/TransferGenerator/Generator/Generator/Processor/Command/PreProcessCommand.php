@@ -9,7 +9,6 @@ use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Loader\ConfigLoaderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilderInterface;
-use Picamator\TransferObject\TransferGenerator\Generator\Writer\TransferLockerInterface;
 
 readonly class PreProcessCommand implements PreProcessCommandInterface
 {
@@ -17,7 +16,6 @@ readonly class PreProcessCommand implements PreProcessCommandInterface
         private ConfigLoaderInterface $configLoader,
         private TransferGeneratorBuilderInterface $builder,
         private GeneratorFilesystemInterface $filesystem,
-        private TransferLockerInterface $transferLocker,
     ) {
     }
 
@@ -40,7 +38,6 @@ readonly class PreProcessCommand implements PreProcessCommandInterface
     {
         try {
             $this->filesystem->createTempDir();
-            $this->transferLocker->acquireLock();
         } catch (FilesystemException $e) {
             return $this->builder->createErrorGeneratorTransfer($e->getMessage());
         }

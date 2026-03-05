@@ -55,21 +55,10 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
         $this->filesystem->dumpFile($filePath, $contentTransfer->content);
     }
 
-    public function rotateFiles(ArrayObject $toCopyClassNames, ArrayObject $toDeleteClassNames): void
-    {
-        if ($toCopyClassNames->count() > 0) {
-            $this->renameTempFiles($toCopyClassNames);
-        }
-
-        if ($toDeleteClassNames->count() > 0) {
-            $this->deleteFiles($toDeleteClassNames);
-        }
-    }
-
     /**
      * @param \ArrayObject<int, string> $classNames
      */
-    private function deleteFiles(ArrayObject $classNames): void
+    public function deleteFiles(ArrayObject $classNames): void
     {
         $fileNames = $this->getFileNames($classNames);
         foreach ($fileNames as $fileName) {
@@ -81,7 +70,7 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
     /**
      * @param \ArrayObject<int, string> $classNames
      */
-    private function renameTempFiles(ArrayObject $classNames): void
+    public function renameTempFiles(ArrayObject $classNames): void
     {
         $fileNames = $this->getFileNames($classNames);
         foreach ($fileNames as $fileName) {

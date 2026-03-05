@@ -16,26 +16,52 @@ readonly class TransferRotator implements TransferRotatorInterface
         private TransferHashReaderInterface $hashReader,
         private HashFilesystemInterface $hashFilesystem,
         private GeneratorFilesystemInterface $filesystem,
+        private TransferLockerInterface $transferLocker,
     ) {
     }
 
     public function rotateFiles(): void
     {
         $hashTransfer = $this->hashReader->readHashFile();
-        $toDeleteClassNames = $this->getToDeleteClassNames($hashTransfer);
+        $toDelete = $this->getToDelete($hashTransfer);
 
-        if ($toDeleteClassNames->count() === 0 && $hashTransfer->toCopyClassNames->count() === 0) {
-            $this->filesystem->deleteTempDir();
+        $isToDelete = $toDelete->count() > 0;
+        $isToCopy = $hashTransfer->toCopyClassNames->count() > 0;
+
+        if (!$isToDelete && !$isToCopy) {
+            return;
         }
 
-        $this->filesystem->rotateFiles($hashTransfer->toCopyClassNames, $toDeleteClassNames);
-        $this->hashFilesystem->rotateHashFile($hashTransfer->actualHashes);
+        $this->transferLocker->acquireLock();
+
+        try {
+            if ($isToDelete) {
+                $this->filesystem->deleteFiles($toDelete);
+            }
+
+            if ($isToCopy) {
+                $this->filesystem->renameTempFiles($hashTransfer->toCopyClassNames);
+            }
+
+            $this->rotateHashFile($hashTransfer->actualHashes);
+        } finally {
+            $this->transferLocker->releaseLock();
+        }
+    }
+
+    /**
+     * @param ArrayObject<string, string> $actualHashes
+     */
+    private function rotateHashFile(ArrayObject $actualHashes): void
+    {
+        $this->hashFilesystem->writeHashTmpFile($actualHashes);
+        $this->hashFilesystem->renameHashTmpFile();
     }
 
     /**
      * @return \ArrayObject<int, string>
      */
-    private function getToDeleteClassNames(TransferHashTransfer $hashTransfer): ArrayObject
+    private function getToDelete(TransferHashTransfer $hashTransfer): ArrayObject
     {
         /** @var \ArrayObject<int, string> $classesNames */
         $classesNames = new ArrayObject();
@@ -49,9 +75,7 @@ readonly class TransferRotator implements TransferRotatorInterface
                 continue;
             }
 
-            /** @var string $className */
-            $className = pathinfo($className, flags: PATHINFO_BASENAME);
-            $classesNames[] = $className;
+            $classesNames[] = basename($className);
         }
 
         return $classesNames;

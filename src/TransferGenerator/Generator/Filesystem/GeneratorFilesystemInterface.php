@@ -21,16 +21,20 @@ interface GeneratorFilesystemInterface
 
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException
      */
     public function writeTempFile(TransferGeneratorContentTransfer $contentTransfer): void;
 
     /**
-     * @param \ArrayObject<int, string> $toCopyClassNames
-     * @param \ArrayObject<int, string> $toDeleteClassNames
+     * @param \ArrayObject<int, string> $classNames
      *
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
      */
-    public function rotateFiles(ArrayObject $toCopyClassNames, ArrayObject $toDeleteClassNames): void;
+    public function renameTempFiles(ArrayObject $classNames): void;
+
+    /**
+     * @param \ArrayObject<int, string> $classNames
+     *
+     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
+     */
+    public function deleteFiles(ArrayObject $classNames): void;
 }

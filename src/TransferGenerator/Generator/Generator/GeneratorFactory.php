@@ -57,7 +57,6 @@ class GeneratorFactory
             $this->createTransferGeneratorBuilder(),
             $this->createGeneratorFilesystem(),
             $this->createTransferRotator(),
-            $this->createTransferLocker(),
         );
     }
 
@@ -84,7 +83,6 @@ class GeneratorFactory
             $this->createConfigLoader(),
             $this->createTransferGeneratorBuilder(),
             $this->createGeneratorFilesystem(),
-            $this->createTransferLocker(),
         );
     }
 
@@ -123,6 +121,7 @@ class GeneratorFactory
                 $this->createTransferHashReader(),
                 $this->createHashFilesystem(),
                 $this->createGeneratorFilesystem(),
+                $this->createTransferLocker(),
             ),
         );
     }

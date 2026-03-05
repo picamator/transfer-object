@@ -13,5 +13,10 @@ interface HashFilesystemInterface
      *
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
      */
-    public function rotateHashFile(ArrayObject $hashes): void;
+    public function writeHashTmpFile(ArrayObject $hashes): void;
+
+    /**
+     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
+     */
+    public function renameHashTmpFile(): void;
 }

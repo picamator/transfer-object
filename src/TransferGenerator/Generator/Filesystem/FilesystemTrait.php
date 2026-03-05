@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Filesystem;
 
-/**
- * @property \Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface $config
- */
 trait FilesystemTrait
 {
     private const string TEMPORARY_DIR = '_tmp';

@@ -16,7 +16,6 @@ use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFil
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilder;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command\PreProcessCommand;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command\PreProcessCommandInterface;
-use Picamator\TransferObject\TransferGenerator\Generator\Writer\TransferLockerInterface;
 
 #[Group('transfer-generator')]
 final class PreProcessCommandTest extends TestCase
@@ -35,16 +34,10 @@ final class PreProcessCommandTest extends TestCase
 
         $this->filesystemStub = $this->createStub(GeneratorFilesystemInterface::class);
 
-        $transferLockerStub = $this->createStub(TransferLockerInterface::class);
-        $transferLockerStub
-            ->method('acquireLock')
-            ->seal();
-
         $this->command = new PreProcessCommand(
             $this->configLoaderStub,
             $builder,
             $this->filesystemStub,
-            $transferLockerStub,
         );
     }
 

@@ -20,13 +20,16 @@ readonly class HashFilesystem implements HashFilesystemInterface
     ) {
     }
 
-    public function rotateHashFile(ArrayObject $hashes): void
+    /**
+     * @param \ArrayObject<string, string> $hashes
+     */
+    public function writeHashTmpFile(ArrayObject $hashes): void
     {
-        $this->writeHashTmpFile($hashes);
-        $this->renameHashTmpFile();
+        $filePath = $this->getTemporaryPath($this->config->getHashFileName());
+        $this->fileWriter->writeFile($filePath, $hashes);
     }
 
-    private function renameHashTmpFile(): void
+    public function renameHashTmpFile(): void
     {
         $fileName = $this->config->getHashFileName();
 
@@ -34,14 +37,5 @@ readonly class HashFilesystem implements HashFilesystemInterface
         $targetFile = $this->getTransferPath($fileName);
 
         $this->filesystem->rename($originalFile, $targetFile, overwrite: true);
-    }
-
-    /**
-     * @param \ArrayObject<string, string> $hashes
-     */
-    private function writeHashTmpFile(ArrayObject $hashes): void
-    {
-        $filePath = $this->getTemporaryPath($this->config->getHashFileName());
-        $this->fileWriter->writeFile($filePath, $hashes);
     }
 }
