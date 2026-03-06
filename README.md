@@ -101,9 +101,9 @@ $ composer require picamator/transfer-object
 ```
 
 | Version | PHP | Symfony |
-|-------|-----|---------|
-| 4.0.0 | 8.4 | 7.3     |
-| 5.0.0 | 8.5 | 8.0     |
+|---------|-----|---------|
+| ≤ 4.0.0 | 8.4 | 7.3     |
+| ≥ 5.0.0 | 8.5 | 8.0     |
 
 **Directory Structure:**
 
