@@ -46,7 +46,7 @@ Then, running [console command](https://github.com/picamator/transfer-object/wik
 $ ./vendor/bin/transfer-generate [-c|--configuration CONFIGURATION]
 ```
 
-Builds the Transfer Object:
+Builds the transfer object:
 
 ```php
 $customerTransfer = new CustomerTransfer();

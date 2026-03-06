@@ -1,19 +1,15 @@
 Purpose
 -------
 
-This file is the project index for "agents":
-
-- the modules that generate or use PHP transfer objects
-- the IDE plugins that help to develop the project
-- the IDE plugins that help to integrate PHP transfer objects into the application
-
+This file is for AI Agents.
 It is intentionally short and only contains agent-specific facts and a concise inventory.
+
 Full how-to and contribution guides are in the canonical destinations:
 
-- README.md
-- CONTRIBUTING.md
-- CODE_OF_CONDUCT.md
-- SECURITY.md
+- [README.md](README.md)
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+- [SECURITY.md](SECURITY.md)
 - [WIKI](https://github.com/picamator/transfer-object/wiki)
 
 Installation
