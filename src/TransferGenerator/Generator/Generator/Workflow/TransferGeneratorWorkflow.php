@@ -22,8 +22,6 @@ readonly class TransferGeneratorWorkflow implements TransferGeneratorWorkflowInt
         yield $generatorTransfer;
 
         if (!$this->isValidTransfer($generatorTransfer)) {
-            $this->postProcessTransfers(isSuccessful: false);
-
             return false;
         }
 

@@ -31,14 +31,15 @@ readonly class TransferGeneratorService implements TransferGeneratorServiceInter
                 continue;
             }
 
-            $exception = $this->getException($generatorTransfer);
+            $errorMessage = $this->getErrorMessage($generatorTransfer);
+            $exception = new TransferGeneratorException($errorMessage);
             $generator->throw($exception);
         }
 
         return $count;
     }
 
-    private function getException(TransferGeneratorTransfer $generatorTransfer): TransferGeneratorException
+    private function getErrorMessage(TransferGeneratorTransfer $generatorTransfer): string
     {
         $messageParts[] = self::ERROR_MESSAGE;
         if ($generatorTransfer->className !== null) {
@@ -56,8 +57,6 @@ readonly class TransferGeneratorService implements TransferGeneratorServiceInter
             $messageParts[] = $message->errorMessage;
         }
 
-        $message = implode(PHP_EOL, $messageParts);
-
-        return new TransferGeneratorException($message);
+        return implode(PHP_EOL, $messageParts);
     }
 }
