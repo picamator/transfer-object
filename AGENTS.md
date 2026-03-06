@@ -55,8 +55,18 @@ Directory Structure
   * should not contain any custom-written code
   * each transfer object generator run overwrites all the files in the directory
   * can be used across modules
-- `src/Generated/_tmp`: temporary directory including newly generated transfer objects before they are finally moved to the `src/Generated`
+- `src/Generated/_tmp`: temporary directory to hold the transfer object generator's process directories
+- `src/Generated/_tmp/{uuid}`: transfer object generator's process directory named by UUID.
+The directory is created before the process starts and holds new transfer objects.
+  * only when the process is finished successfully, the transfer objects are moved to the `Generated` directory.
+  * each process directory is deleted after the process is finished
   * in case of an unexpected error, the directory might not be deleted.
+- `src/Generated/_tmp/{uuid}/{hash}.transfer.hash.csv`: hash file each line of which contains comma separated:
+  * transfer object class name
+  * transfer object content hash
+- `src/Generated/{hash}.transfer.hash.csv`: hash file from previous transfer object generation run.
+It is used to check for transfer object content changes as well as if some transfer objects should be deleted.
+- `src/Generated/transfer.lock`: lock file used to prevent multiple processes to write to the `Generated` directory at the same time.
 - `src/Shared`: contains code shared across modules
   * can be used across modules
 - `src/Transfer`: transfer object module
