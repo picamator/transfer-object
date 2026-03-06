@@ -151,6 +151,7 @@ Documentation
 
 * [Project's Wiki](https://github.com/picamator/transfer-object/wiki)
 * [Examples](examples)
+* [Integration Test Scenario](tests/integration/DefinitionGenerator/data/README.md)
 
 Publications
 ------------
