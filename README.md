@@ -107,7 +107,7 @@ $ composer require picamator/transfer-object
 
 **Directory Structure:**
 
-After installation, for the small project size, the following directory structure is recommended:
+After installation, for the small project, the following directory structure is recommended:
 
 * `src/Generated`: directory to keep all the project's Transfer Objects
 * `src/config/generator.config.yml`: generator's [configuration file](https://github.com/picamator/transfer-object/wiki/Console-Commands#configuration)
@@ -129,6 +129,7 @@ Where `YourVendorNamespace\\YourProjectNamespace` should be replaced with your v
 Additionally, `.gitignore` should contain:
 
 ```shell
+# Transfer Objects
 src/Generated/_tmp
 src/Generated/transfer.lock
 ```
@@ -140,12 +141,13 @@ $ ./vendor/bin/transfer-generate -c config/generator.config.yml
 ```
 
 > [!TIP]
-> For large projects, each module can keep its own Transfer Object Generator configuration.
+> For large projects, each module can have its own generator configuration.
 > It is still possible to keep all transfer objects in one directory
 > please be sure the transfer object names are unique.
 
 > [!TIP]
-> To generate transfer objects in the multi-configuration setup, the [bulk command](https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate-bulk) should be used.
+> To generate transfer objects in the multi-configuration setup,
+> the [bulk command](https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate-bulk) should be used.
 
 Documentation
 -------------
