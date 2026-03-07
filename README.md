@@ -109,10 +109,10 @@ $ composer require picamator/transfer-object
 
 After installation, the following directory structure is recommended:
 
-* `src/Generated`: directory to keep all the project's transfer objects
+* `src/Generated`: transfer objects directory
 * `src/config/generator.config.yml`: generator's [configuration file](https://github.com/picamator/transfer-object/wiki/Console-Commands#configuration)
-* `src/config/definition/*.transfer.yml`: [definition files](https://github.com/picamator/transfer-object/wiki/Definition-File),
-where each of them groups transfer objects definitions by business domain.
+* `src/config/definition/*.transfer.yml`: transfer objects [definition files](https://github.com/picamator/transfer-object/wiki/Definition-File),
+where each of them groups transfer objects definitions by business domain, e.g. `payment.transfer.yml`, `sales.transfer.yml`, etc.
 
 With this setup, `generator.config.yml` looks like:
 
