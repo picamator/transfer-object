@@ -20,9 +20,6 @@ readonly class TransferGeneratorService implements TransferGeneratorServiceInter
     ) {
     }
 
-    /**
-     * @throws \Picamator\TransferObject\Shared\Exception\TransferExceptionInterface
-     */
     public function generateTransfersOrFail(string $configPath): int
     {
         $count = 0;
@@ -34,16 +31,15 @@ readonly class TransferGeneratorService implements TransferGeneratorServiceInter
                 continue;
             }
 
-            $this->throwError($generatorTransfer);
+            $errorMessage = $this->getErrorMessage($generatorTransfer);
+            $exception = new TransferGeneratorException($errorMessage);
+            $generator->throw($exception);
         }
 
         return $count;
     }
 
-    /**
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException
-     */
-    private function throwError(TransferGeneratorTransfer $generatorTransfer): never
+    private function getErrorMessage(TransferGeneratorTransfer $generatorTransfer): string
     {
         $messageParts[] = self::ERROR_MESSAGE;
         if ($generatorTransfer->className !== null) {
@@ -61,8 +57,6 @@ readonly class TransferGeneratorService implements TransferGeneratorServiceInter
             $messageParts[] = $message->errorMessage;
         }
 
-        $message = implode(PHP_EOL, $messageParts);
-
-        throw new TransferGeneratorException($message);
+        return implode(PHP_EOL, $messageParts);
     }
 }

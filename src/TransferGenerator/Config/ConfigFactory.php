@@ -123,6 +123,7 @@ class ConfigFactory
                 $ghost->__construct(
                     $this->createYmlParser(),
                     $this->createConfigContentBuilder(),
+                    $this->createEnvironmentReader(),
                 );
             }
         );

@@ -11,7 +11,7 @@
 Transfer Object Generator
 ==========================
 
-Would you like to build Symfony-compatible Transfer Objects?
+Would you like to build Symfony-compatible transfer objects?
 
 You're in the right place! 🎉
 
@@ -46,7 +46,7 @@ Then, running [console command](https://github.com/picamator/transfer-object/wik
 $ ./vendor/bin/transfer-generate [-c|--configuration CONFIGURATION]
 ```
 
-Builds the Transfer Object:
+Builds the transfer object:
 
 ```php
 $customerTransfer = new CustomerTransfer();
@@ -60,14 +60,14 @@ Key Features
 **Symfony Compatibility:**
 
  * Provides Symfony console command:
-   * [TransferGeneratorCommand](/src/Command/TransferGeneratorCommand.php)
-   * [TransferGeneratorBulkCommand](/src/Command/TransferGeneratorBulkCommand.php)
-   * [DefinitionGeneratorCommand](/src/Command/DefinitionGeneratorCommand.php)
+   * [TransferGeneratorCommand](https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate)
+   * [TransferGeneratorBulkCommand](https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate-bulk)
+   * [DefinitionGeneratorCommand](https://github.com/picamator/transfer-object/wiki/Console-Commands#definition-generate)
  * Includes Symfony services:
-   * [TransferGeneratorFacade](/src/TransferGenerator/TransferGeneratorFacade.php)
-   * [DefinitionGeneratorFacade](/src/DefinitionGenerator/DefinitionGeneratorFacade.php)
+   * [TransferGeneratorFacade](https://github.com/picamator/transfer-object/wiki/Facade-Interfaces#transfer-object-generator)
+   * [DefinitionGeneratorFacade](https://github.com/picamator/transfer-object/wiki/Facade-Interfaces#definition-generator)
  * Enables automatic Symfony request query data mapping
- * Supports [Symfony validator](https://github.com/symfony/validator) attributes
+ * Supports [Symfony validator](https://github.com/picamator/transfer-object/wiki/Definition-File#attributes) attributes
 
 **Transfer Object:**
 
@@ -78,7 +78,7 @@ Key Features
   * `IteratorAggregate`
   * `JsonSerializable`
   * `Countable`
-* Handles embedded and collection Transfer Objects.
+* Handles embedded and collection transfer objects.
 * Works with PHP primitive data types.
 * Extends compatibility to advanced types:
   * `BackedEnum`
@@ -86,58 +86,72 @@ Key Features
   * `DateTimeImmutable`
   * `BcMath\Number`
 * Supports asymmetric property visibility.
-* Integrates with external Transfer Objects.
+* Integrates with external transfer objects.
 
 Installation
 ------------
 
-Composer installation:
+**Composer installation:**
+
+The Transfer Object Generator is available on [Packagist](https://packagist.org/packages/picamator/transfer-object)
+and can be installed using [Composer](https://getcomposer.org/):
 
 ```console
 $ composer require picamator/transfer-object
 ```
 
 | Version | PHP | Symfony |
-|-------|-----|---------|
-| 4.0.0 | 8.4 | 7.3     |
-| 5.0.0 | 8.5 | 8.0     |
+|---------|-----|---------|
+| ≤ 4.0.0 | 8.4 | 7.3     |
+| ≥ 5.0.0 | 8.5 | 8.0     |
 
-Examples
----------
+**Directory Structure:**
 
-* [Definition Generator](/examples/try-definition-generator.php)
-* [Transfer Generator](/examples/try-transfer-generator.php)
-* [Advanced Transfer Generator](/examples/try-advanced-transfer-generator.php)
+After installation, the following directory structure is recommended:
 
-Usage Tests
------------
+* `src/Generated`: transfer objects directory
+* `src/config/generator.config.yml`: generator's [configuration file](https://github.com/picamator/transfer-object/wiki/Console-Commands#configuration)
+* `src/config/definition/*.transfer.yml`: transfer objects [definition files](https://github.com/picamator/transfer-object/wiki/Definition-File),
+where each of them groups transfer objects definitions by business domain, e.g. `payment.transfer.yml`, `sales.transfer.yml`, etc.
 
-Definition Files and Transfer Object generators have been tested against the following APIs:
+With this setup, `generator.config.yml` looks like:
 
-* [NASA Open Api](https://api.nasa.gov/neo/rest/v1/neo/2465633?api_key=DEMO_KEY)
-* [OpenWeather](https://openweathermap.org/current?collection=current_forecast#example_JSON)
-* [Google Content API for Shopping](https://developers.google.com/shopping-content/guides/products/products-api?hl=en)
-* [Frankfurter - open-source currency data API](https://api.frankfurter.dev/v1/latest)
-* [Tagesschau API](https://tagesschau.api.bund.dev)
-* [Statistisches Bundesamt (Destatis)](https://www-genesis.destatis.de/genesisWS/swagger-ui/index.html#/find/findPost)
-* [Wero - Digital Payment Wallet](https://developerhub.ppro.com/global-api/docs/wero)
+```yml
+# $schema: ./../vendor/picamator/transfer-object/schema/config.schema.json
+generator:
+    transferNamespace: "YourVendorNamespace\\YourProjectNamespace\\Generated"
+    transferPath: "${PROJECT_ROOT}/src/Generated"
+    definitionPath: "${PROJECT_ROOT}/config/definition"
+```
 
-### Scenario
+Where `YourVendorNamespace\\YourProjectNamespace` should be replaced with
+your vendor and project namespace.
 
-1. Rest API response is used as a blueprint to generate Definition Files
-2. Transfer Objects are generated based on Definition Files
-3. Transfer Object instance is created with the API response
-4. Transfer Object is converted back to the array
-5. The converted array is compared with the API response
+Additionally, `.gitignore` should contain:
 
-For all APIs, data are ✅ matched.
+```shell
+# transfer objects
+src/Generated/_tmp
+src/Generated/transfer.lock
+```
 
-For detailed information, please check [DefinitionGeneratorFacadeTest](/tests/integration/DefinitionGenerator/DefinitionGeneratorFacadeTest.php).
+Then, running command generates transfer objects:
+
+```console
+$ ./vendor/bin/transfer-generate -c config/generator.config.yml
+```
+
+> [!TIP]
+> For large projects, each module can have its own generator configuration.
+> Please use [bulk command](https://github.com/picamator/transfer-object/wiki/Console-Commands#transfer-generate-bulk)
+> to generate transfer objects for the multi-configuration setup.
 
 Documentation
 -------------
 
-For more details, please visit [Project's Wiki](https://github.com/picamator/transfer-object/wiki).
+* [Project's Wiki](https://github.com/picamator/transfer-object/wiki)
+* [Examples](examples)
+* [Integration Test Scenario](tests/integration/DefinitionGenerator/data/README.md)
 
 Publications
 ------------

@@ -19,15 +19,4 @@ interface FinderInterface
         string $dirName,
         ?string $maxFileSize = null,
     ): IteratorAggregate&Countable;
-
-    /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
-     *
-     * @return Countable&IteratorAggregate<string,SplFileInfoBridge>
-     */
-    public function findFilesInDirectoryExclude(
-        string $filePattern,
-        string $dirName,
-        string $exclude,
-    ): IteratorAggregate&Countable;
 }

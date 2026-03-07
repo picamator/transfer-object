@@ -33,8 +33,11 @@ var/cache/*
 
 # project
 src/**/_tmp
+src/**/transfer.lock
 examples/**/_tmp
+examples/**/transfer.lock
 tests/**/_tmp
+tests/**/transfer.lock
 
 # environment
 .env

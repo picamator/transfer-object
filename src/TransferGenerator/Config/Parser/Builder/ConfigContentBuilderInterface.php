@@ -9,7 +9,7 @@ use Picamator\TransferObject\Generated\ConfigContentTransfer;
 interface ConfigContentBuilderInterface
 {
     /**
-     * @param array<string, string|null> $configData
+     * @param array<string, string|bool|null> $configData
      */
     public function createContentTransfer(array $configData): ConfigContentTransfer;
 }

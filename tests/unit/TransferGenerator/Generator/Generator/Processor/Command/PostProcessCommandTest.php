@@ -6,6 +6,7 @@ namespace Picamator\Tests\Unit\TransferObject\TransferGenerator\Generator\Genera
 
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Dependency\Exception\FilesystemException;
@@ -13,6 +14,7 @@ use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFil
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilder;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command\PostProcessCommand;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Processor\Command\PostProcessCommandInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Writer\TransferRotatorInterface;
 
 #[Group('transfer-generator')]
 final class PostProcessCommandTest extends TestCase
@@ -21,15 +23,19 @@ final class PostProcessCommandTest extends TestCase
 
     private GeneratorFilesystemInterface&Stub $filesystemStub;
 
+    private TransferRotatorInterface&MockObject $transferRotatorMock;
+
     protected function setUp(): void
     {
         $builder = new TransferGeneratorBuilder();
 
         $this->filesystemStub = $this->createStub(GeneratorFilesystemInterface::class);
+        $this->transferRotatorMock = $this->createMock(TransferRotatorInterface::class);
 
         $this->command = new PostProcessCommand(
             $builder,
             $this->filesystemStub,
+            $this->transferRotatorMock,
         );
     }
 
@@ -38,28 +44,17 @@ final class PostProcessCommandTest extends TestCase
     {
         // Arrange
         $this->filesystemStub
-            ->method('rotateTempDir')
+            ->method('deleteTempDir')
+            ->seal();
+
+        // Expect
+        $this->transferRotatorMock->expects($this->once())
+            ->method('rotateFiles')
             ->willThrowException(new FilesystemException())
             ->seal();
 
         // Act
         $actual = $this->command->postProcess(true);
-
-        // Assert
-        $this->assertFalse($actual->validator->isValid);
-    }
-
-    #[TestDox('Filesystem exception should be handled on PostProcessError')]
-    public function testFilesystemExceptionShouldBeHandledOnPostProcessError(): void
-    {
-        // Arrange
-        $this->filesystemStub
-            ->method('deleteTempDir')
-            ->willThrowException(new FilesystemException())
-            ->seal();
-
-        // Act
-        $actual = $this->command->postProcess(false);
 
         // Assert
         $this->assertFalse($actual->validator->isValid);

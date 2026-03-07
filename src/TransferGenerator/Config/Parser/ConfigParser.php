@@ -6,6 +6,7 @@ namespace Picamator\TransferObject\TransferGenerator\Config\Parser;
 
 use Picamator\TransferObject\Dependency\YmlParser\YmlParserInterface;
 use Picamator\TransferObject\Generated\ConfigContentTransfer;
+use Picamator\TransferObject\Shared\Environment\EnvironmentReaderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Parser\Builder\ConfigContentBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Config\Parser\Filter\ConfigNormalizerTrait;
 
@@ -16,14 +17,33 @@ readonly class ConfigParser implements ConfigParserInterface
     public function __construct(
         private YmlParserInterface $parser,
         private ConfigContentBuilderInterface $builder,
+        private EnvironmentReaderInterface $environmentReader,
     ) {
     }
 
     public function parseConfig(string $configPath): ConfigContentTransfer
     {
-        $configData = $this->parser->parseFile($configPath);
-        $normalizedConfigData = $this->normalizeConfig($configData);
+        $configData = $this->parser->parseFile($configPath)
+                |> $this->normalizeConfig(...)
+                |> $this->expandConfig(...);
 
-        return $this->builder->createContentTransfer($normalizedConfigData);
+        return $this->builder->createContentTransfer($configData);
+    }
+
+    /**
+     * @param array<string,string|bool> $configData
+     *
+     * @return array<string,string|bool>
+     */
+    private function expandConfig(array $configData): array
+    {
+        $configData[ConfigContentTransfer::UUID_PROP] = uniqid(more_entropy: true);
+
+        $definitionPath = $configData[ConfigContentTransfer::DEFINITION_PATH_PROP] ?? '';
+        $configData[ConfigContentTransfer::HASH_FILE_NAME_PROP] = sha1((string)$definitionPath) . '.transfer.hash.csv';
+
+        $configData[ConfigContentTransfer::IS_CACHE_ENABLED_PROP] = $this->environmentReader->getIsCacheEnabled();
+
+        return $configData;
     }
 }

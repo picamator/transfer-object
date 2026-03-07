@@ -11,22 +11,30 @@ trait ConfigNormalizerTrait
     private const string CONFIG_SECTION_KEY = 'generator';
 
     /**
-     * @return array<string,string>
+     * @return array<string,string|bool>
      */
     final protected function normalizeConfig(mixed $configData): array
     {
-        $defaultConfig = ConfigKeyEnum::getDefaultConfig();
         if (!is_array($configData)) {
-            return $defaultConfig;
+            return ConfigKeyEnum::getDefaultConfig();
         }
 
         $sectionData = $configData[self::CONFIG_SECTION_KEY] ?? null;
-        if (!is_array($sectionData)) {
-            return $defaultConfig;
-        }
 
+        return is_array($sectionData)
+            ? $this->filterSectionData($sectionData)
+            : ConfigKeyEnum::getDefaultConfig();
+    }
+
+    /**
+     * @param array<string|int, mixed> $sectionData
+     *
+     * @return array<string,string|bool>
+     */
+    private function filterSectionData(array $sectionData): array
+    {
         $filteredData = [];
-        foreach ($defaultConfig as $key => $defaultValue) {
+        foreach (ConfigKeyEnum::getDefaultConfig() as $key => $defaultValue) {
             $sectionValue = $sectionData[$key] ?? null;
             $filteredData[$key] = is_string($sectionValue) ? $sectionValue : $defaultValue;
         }

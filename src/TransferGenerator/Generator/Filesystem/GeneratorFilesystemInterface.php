@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Filesystem;
 
+use ArrayObject;
 use Picamator\TransferObject\Generated\TransferGeneratorContentTransfer;
 
 interface GeneratorFilesystemInterface
@@ -20,14 +21,20 @@ interface GeneratorFilesystemInterface
 
     /**
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
-     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
      */
-    public function rotateTempDir(): void;
+    public function writeTempFile(TransferGeneratorContentTransfer $contentTransfer): void;
 
     /**
+     * @param \ArrayObject<int, string> $classNames
+     *
      * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException
      */
-    public function writeFile(TransferGeneratorContentTransfer $contentTransfer): void;
+    public function renameTempFiles(ArrayObject $classNames): void;
+
+    /**
+     * @param \ArrayObject<int, string> $classNames
+     *
+     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
+     */
+    public function deleteFiles(ArrayObject $classNames): void;
 }

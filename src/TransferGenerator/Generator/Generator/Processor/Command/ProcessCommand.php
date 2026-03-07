@@ -9,16 +9,16 @@ use Picamator\TransferObject\Generated\DefinitionTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorContentTransfer;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
-use Picamator\TransferObject\TransferGenerator\Generator\Filesystem\GeneratorFilesystemInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBuilderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Render\TemplateRenderInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Writer\TransferWriterInterface;
 
 readonly class ProcessCommand implements ProcessCommandInterface
 {
     public function __construct(
         private TransferGeneratorBuilderInterface $builder,
         private TemplateRenderInterface $render,
-        private GeneratorFilesystemInterface $filesystem,
+        private TransferWriterInterface $transferWriter,
     ) {
     }
 
@@ -45,7 +45,7 @@ readonly class ProcessCommand implements ProcessCommandInterface
 
     private function saveContent(TransferGeneratorContentTransfer $contentTransfer): void
     {
-        $this->filesystem->writeFile($contentTransfer);
+        $this->transferWriter->writeFile($contentTransfer);
     }
 
     private function renderContent(DefinitionTransfer $definitionTransfer): TransferGeneratorContentTransfer

@@ -25,4 +25,19 @@ interface ConfigInterface
      * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
      */
     public function getRelativeDefinitionPath(): string;
+
+    /**
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
+     */
+    public function getUuid(): string;
+
+    /**
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
+     */
+    public function getHashFileName(): string;
+
+    /**
+     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
+     */
+    public function getIsCacheEnabled(): bool;
 }

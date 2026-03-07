@@ -15,17 +15,17 @@ readonly final class FilesystemBridge implements FilesystemInterface
     ) {
     }
 
-    public function copy(string $originFile, string $targetFile): void
+    public function rename(string $origin, string $target, bool $overwrite = false): void
     {
         try {
-            $this->filesystem->copy($originFile, $targetFile);
+            $this->filesystem->rename($origin, $target, $overwrite);
             // @codeCoverageIgnoreStart
         } catch (Throwable $e) {
             throw new FilesystemException(
                 sprintf(
-                    'Failed to copy "%s" to "%s". Error: "%s".',
-                    $originFile,
-                    $targetFile,
+                    'Failed to rename "%s" to "%s". Error: "%s".',
+                    $origin,
+                    $target,
                     $e->getMessage(),
                 ),
                 previous: $e,

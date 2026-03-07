@@ -11,7 +11,13 @@ use Picamator\TransferObject\Shared\Filesystem\FileAppender;
 use Picamator\TransferObject\Shared\Filesystem\FileAppenderInterface;
 use Picamator\TransferObject\Shared\Filesystem\FileReader;
 use Picamator\TransferObject\Shared\Filesystem\FileReaderInterface;
+use Picamator\TransferObject\Shared\Hash\HashFileReader;
+use Picamator\TransferObject\Shared\Hash\HashFileReaderInterface;
+use Picamator\TransferObject\Shared\Hash\HashFileWriter;
+use Picamator\TransferObject\Shared\Hash\HashFileWriterInterface;
 use Picamator\TransferObject\Shared\Initializer\LazyGhostInitializerTrait;
+use Picamator\TransferObject\Shared\Locker\FileLocker;
+use Picamator\TransferObject\Shared\Locker\FileLockerInterface;
 use Picamator\TransferObject\Shared\Reader\FileReaderProgress;
 use Picamator\TransferObject\Shared\Reader\FileReaderProgressInterface;
 use Picamator\TransferObject\Shared\Reader\JsonReader;
@@ -110,6 +116,30 @@ trait SharedFactoryTrait
         return $this->getCached(
             key: 'shared:EnvironmentReader',
             factory: fn(): EnvironmentReaderInterface => new EnvironmentReader(),
+        );
+    }
+
+    final protected function createHashFileReader(): HashFileReaderInterface
+    {
+        return $this->getCached(
+            key: 'shared:HashFileReader',
+            factory: fn(): HashFileReaderInterface => new HashFileReader($this->createFileReader()),
+        );
+    }
+
+    final protected function createHashFileWriter(): HashFileWriterInterface
+    {
+        return $this->getCached(
+            key: 'shared:HashFileWriter',
+            factory: fn(): HashFileWriterInterface => new HashFileWriter($this->createFilesystem()),
+        );
+    }
+
+    final protected function createFileLocker(): FileLockerInterface
+    {
+        return $this->getCached(
+            key: 'shared:FileLocker',
+            factory: fn(): FileLockerInterface => new FileLocker(),
         );
     }
 }

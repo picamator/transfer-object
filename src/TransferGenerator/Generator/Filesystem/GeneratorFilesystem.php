@@ -4,32 +4,29 @@ declare(strict_types=1);
 
 namespace Picamator\TransferObject\TransferGenerator\Generator\Filesystem;
 
+use ArrayObject;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
-use Picamator\TransferObject\Dependency\Finder\FinderInterface;
 use Picamator\TransferObject\Generated\TransferGeneratorContentTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
 
 readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
 {
-    private const string TEMPORARY_DIR = '_tmp';
+    use FilesystemTrait;
 
-    private const string FILE_EXTENSION = '.php';
-    private const string FILE_NAME_PATTERN = '*Transfer.php';
+    private const string TRANSFER_FILE_EXTENSION = '.php';
 
     public function __construct(
         private FilesystemInterface $filesystem,
-        private FinderInterface $finder,
         private ConfigInterface $config,
     ) {
     }
 
     public function createTempDir(): void
     {
-        $temporaryPath = $this->getTemporaryPath();
+        $tempPath = $this->getTemporaryPath();
 
-        $this->deleteTempDir();
-        $this->filesystem->mkdir($temporaryPath);
+        $this->filesystem->mkdir($tempPath);
     }
 
     /**
@@ -37,25 +34,17 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
      */
     public function deleteTempDir(): void
     {
-        $temporaryPath = $this->getTemporaryPath();
-        if ($this->filesystem->exists($temporaryPath)) {
-            $this->filesystem->remove($temporaryPath);
+        $tempPath = $this->getTemporaryPath();
+
+        if ($this->filesystem->exists($tempPath)) {
+            $this->filesystem->remove($tempPath);
         }
     }
 
-    public function rotateTempDir(): void
+    public function writeTempFile(TransferGeneratorContentTransfer $contentTransfer): void
     {
-        $this->deleteOldFiles();
-        $this->copyTempFiles();
-        $this->deleteTempDir();
-    }
-
-    public function writeFile(TransferGeneratorContentTransfer $contentTransfer): void
-    {
-        $filePath = $this->getTemporaryPath()
-            . DIRECTORY_SEPARATOR
-            . $contentTransfer->className
-            . self::FILE_EXTENSION;
+        $fileName = $this->getFileName($contentTransfer->className);
+        $filePath = $this->getTemporaryPath($fileName);
 
         if ($this->filesystem->exists($filePath)) {
             throw new TransferGeneratorException(
@@ -67,45 +56,48 @@ readonly class GeneratorFilesystem implements GeneratorFilesystemInterface
     }
 
     /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
-     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
+     * @param \ArrayObject<int, string> $classNames
      */
-    private function deleteOldFiles(): void
+    public function deleteFiles(ArrayObject $classNames): void
     {
-        $finder = $this->finder->findFilesInDirectoryExclude(
-            filePattern: self::FILE_NAME_PATTERN,
-            dirName: $this->config->getTransferPath(),
-            exclude: self::TEMPORARY_DIR,
-        );
-
-        $this->filesystem->remove($finder);
-    }
-
-    /**
-     * @throws \Picamator\TransferObject\Dependency\Exception\FilesystemException
-     * @throws \Picamator\TransferObject\Dependency\Exception\FinderException
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
-     */
-    private function copyTempFiles(): void
-    {
-        $finder = $this->finder->findFilesInDirectory(
-            filePattern: self::FILE_NAME_PATTERN,
-            dirName: $this->getTemporaryPath(),
-        );
-
-        $destinationPath = $this->config->getTransferPath() . DIRECTORY_SEPARATOR;
-        foreach ($finder as $file) {
-            $targetFile = $destinationPath . $file->getFilename();
-            $this->filesystem->copy($file->getRealPath(), $targetFile);
+        $fileNames = $this->getFileNames($classNames);
+        foreach ($fileNames as $fileName) {
+            $filePath = $this->getTransferPath($fileName);
+            $this->filesystem->remove($filePath);
         }
     }
 
     /**
-     * @throws \Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorConfigNotFoundException
+     * @param \ArrayObject<int, string> $classNames
      */
-    private function getTemporaryPath(): string
+    public function renameTempFiles(ArrayObject $classNames): void
     {
-        return $this->config->getTransferPath() . DIRECTORY_SEPARATOR . self::TEMPORARY_DIR;
+        $fileNames = $this->getFileNames($classNames);
+        foreach ($fileNames as $fileName) {
+            $originalFile = $this->getTemporaryPath($fileName);
+            $targetFile = $this->getTransferPath($fileName);
+
+            $this->filesystem->rename($originalFile, $targetFile, overwrite: true);
+        }
+    }
+
+    /**
+     * @param \ArrayObject<int, string> $classNames
+     *
+     * @return array<int, string>
+     */
+    private function getFileNames(ArrayObject $classNames): array
+    {
+        $fileNames = [];
+        foreach ($classNames as $className) {
+            $fileNames[] = $this->getFileName($className);
+        }
+
+        return $fileNames;
+    }
+
+    private function getFileName(string $className): string
+    {
+        return $className . self::TRANSFER_FILE_EXTENSION;
     }
 }

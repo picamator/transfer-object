@@ -68,7 +68,7 @@ MESSAGE;
         if ($configListPath === '') {
             $io->error(self::ERROR_MISSED_OPTION_BULK_MESSAGE);
 
-            return Command::FAILURE;
+            return Command::INVALID;
         }
 
         $io->writeln(sprintf(self::CONFIGURATION_LIST_MESSAGE_TEMPLATE, $configListPath));

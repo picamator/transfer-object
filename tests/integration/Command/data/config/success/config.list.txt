@@ -1,1 +1,2 @@
-tests/integration/Command/data/config/success/generator.config.yml
+tests/integration/Command/data/config/success/generator.bulk.first.config.yml
+tests/integration/Command/data/config/success/generator.bulk.second.config.yml

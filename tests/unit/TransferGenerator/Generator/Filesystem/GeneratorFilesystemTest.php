@@ -9,7 +9,6 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Dependency\Filesystem\FilesystemInterface;
-use Picamator\TransferObject\Dependency\Finder\FinderInterface;
 use Picamator\TransferObject\Generated\TransferGeneratorContentTransfer;
 use Picamator\TransferObject\TransferGenerator\Config\Config\ConfigInterface;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
@@ -29,13 +28,10 @@ final class GeneratorFilesystemTest extends TestCase
     {
         $this->filesystemStub = $this->createStub(FilesystemInterface::class);
 
-        $finderStub = $this->createStub(FinderInterface::class);
-
         $this->configStub = $this->createStub(ConfigInterface::class);
 
         $this->generatorFilesystem = new GeneratorFilesystem(
             $this->filesystemStub,
-            $finderStub,
             $this->configStub,
         );
     }
@@ -65,6 +61,6 @@ final class GeneratorFilesystemTest extends TestCase
         $this->expectException(TransferGeneratorException::class);
 
         // Act
-        $this->generatorFilesystem->writeFile($contentTransfer);
+        $this->generatorFilesystem->writeTempFile($contentTransfer);
     }
 }

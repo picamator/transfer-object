@@ -1,0 +1,4 @@
+# $schema: ./../../../../../../../schema/definition.schema.json
+CommandBulkThird:
+  run:
+    type: true

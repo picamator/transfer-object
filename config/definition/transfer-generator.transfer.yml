@@ -20,6 +20,18 @@ ConfigContent:
   relativeDefinitionPath:
     type: string
     required:
+  hashFileName:
+    type: string
+    required:
+    protected:
+  uuid:
+    type: string
+    required:
+    protected:
+  isCacheEnabled:
+    type: bool
+    required:
+    protected:
 
 Definition:
   fileName:
@@ -116,6 +128,23 @@ TransferGeneratorContent:
     type: string
     required:
     protected:
+  hash:
+    type: string
+    required:
+    protected:
+
+TransferHash:
+  hashes:
+    type: ArrayObject<string,string>
+    protected:
+  configUuid:
+    type: string
+    required:
+    protected:
+  actualHashes:
+    type: ArrayObject<string,string>
+  toCopyClassNames:
+    type: ArrayObject<int,string>
 
 TransferGeneratorBulk:
   progress:

@@ -1,19 +1,15 @@
 Purpose
 -------
 
-This file is the project index for "agents":
-
-- the modules that generate or use PHP transfer objects
-- the IDE plugins that help to develop the project
-- the IDE plugins that help to integrate PHP transfer objects into the application
-
+This file is for AI Agents.
 It is intentionally short and only contains agent-specific facts and a concise inventory.
+
 Full how-to and contribution guides are in the canonical destinations:
 
-- README.md
-- CONTRIBUTING.md
-- CODE_OF_CONDUCT.md
-- SECURITY.md
+- [README.md](README.md)
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+- [SECURITY.md](SECURITY.md)
 - [WIKI](https://github.com/picamator/transfer-object/wiki)
 
 Installation
@@ -29,11 +25,9 @@ Directory Structure
 ### Console commands
 
 - `bin`: project's console commands:
-  * `transfer-generate`: generate transfer objects from configuration files
-  * `transfer-generate-bulk`: generate transfer objects by the list of configuration files
-  * `definition-generate`: generate definition files
-
-> Installing the project by composer, the console commands are available in the vendor's bin directory.
+  * `transfer-generate`: generate transfer objects from a single configuration file
+  * `transfer-generate-bulk`: generate transfer objects from a list of configuration files
+  * `definition-generate`: generate definition files from JSON blueprints
 
 ### Config
 
@@ -53,10 +47,19 @@ Directory Structure
 - `src/Dependency`: wrapper over third-party dependencies
 - `src/Generated`: directory where generated transfer objects are saved
   * should not contain any custom-written code
-  * each transfer object generator run overwrites all the files in the directory
-  * can be used across modules
-- `src/Generated/_tmp`: temporary directory including newly generated transfer objects before they are finally moved to the `src/Generated`
+  * can be used across modules like `src/ModuleOne/Generated`, `src/ModuleTwo/Generated`, etc.
+- `src/Generated/_tmp`: temporary directory to hold the transfer object generator's process directories
+- `src/Generated/_tmp/{uuid}`: transfer object generator's process directory named by UUID.
+The directory is created before the process starts and holds new transfer objects.
+  * only when the process is finished successfully, the transfer objects are moved to the `Generated` directory.
+  * each process directory is deleted after the process is finished
   * in case of an unexpected error, the directory might not be deleted.
+- `src/Generated/_tmp/{uuid}/{hash}.transfer.hash.csv`: hash file, each line of which contains comma-separated:
+  * transfer object class name
+  * transfer object content hash
+- `src/Generated/{hash}.transfer.hash.csv`: hash file from previous transfer object generation run.
+It is used to check for transfer object content changes as well as if some transfer objects should be deleted.
+- `src/Generated/transfer.lock`: lock file used to prevent multiple processes from writing to the `Generated` directory at the same time.
 - `src/Shared`: contains code shared across modules
   * can be used across modules
 - `src/Transfer`: transfer object module
@@ -65,7 +68,7 @@ Directory Structure
 
 ### Technical
 
-- `.github`: GitHub CI actions, template and README.md images
+- `.github`: GitHub CI actions, template, and README.md images
 - `.xdebug`: Xdebug configuration for [Native Path Mapping](https://xdebug.org/funding/001-native-path-mapping)
 - `docker`: [dockerized development environment](https://github.com/picamator/transfer-object/wiki/Development-Environment) configuration with shell helper commands
 
@@ -89,7 +92,7 @@ Code Style
 - classes should be `readonly` when possible
 - classes should use Constructor Property Promotion
 - class properties should have `private` visibility unless one is a transfer object, or it is necessary for inheritance
-- class method's and property's names should be similar across modules
+- class methods and property names should be similar across modules
   * **expander** classes should have `public` methods prefixed by `expand`
   * **parser** classes should have `public` methods prefixed by `parse`
   * **builder** classes should have `public` methods prefixed by `create`
@@ -139,6 +142,7 @@ How To Install Project
 ----------------------
 
 The project is installed by running the following command:
+
 ```console
 docker/sdk install
 ```
@@ -147,16 +151,19 @@ How To Build/Start/Stop Docker Environment
 -------------------------------------------
 
 Docker Environment is built by running the following command:
+
 ```console
 docker/sdk build
 ```
 
 Docker Environment is started by running the following command:
+
 ```console
 docker/sdk start
 ```
 
 Docker Environment is stopped by running the following command:
+
 ```console
 docker/sdk stop
 ```
@@ -165,11 +172,13 @@ How to Run PHP Script
 ---------------------
 
 The PHP script runs by command:
+
 ```console
 docker/sdk cli [path-to-script]
 ```
 
 For instance, the `./examples/try-transfer-generator.php`:
+
 ```console
 docker/sdk cli ./examples/try-transfer-generator.php
 ```
@@ -177,12 +186,14 @@ docker/sdk cli ./examples/try-transfer-generator.php
 How to Generate Internal Transfer Objects
 -----------------------------------------
 
-All project transfer objects (generator's, examples, tests) can be generated with the following command:
+All project transfer objects (generators, examples, tests) can be generated with the following command:
+
 ```console
 docker/sdk to-generate-bulk
 ```
 
-To generate only generator's transfer objects, please run the following command:
+To generate only the generator's transfer objects, please run the following command:
+
 ```console
 docker/sdk to-generate
 ```
@@ -190,9 +201,20 @@ docker/sdk to-generate
 How to Generate Transfer Objects By Configuration File
 ------------------------------------------------------
 
-Transfer objects can be generated by a configuration file path, relative from the project's root, by running the following command:
+Transfer objects can be generated by a configuration file path,
+relative to the project's root, by running the following command:
+
 ```console
 docker/sdk to-generate [path-to-configuration-file]
+```
+
+How to Generate Definition Files
+--------------------------------
+
+To generate definition files from JSON blueprints, please run the following command:
+
+```console
+docker/sdk df-generate
 ```
 
 How to Run PHPUnit Tests
@@ -201,6 +223,7 @@ How to Run PHPUnit Tests
 ### How to Run All Tests
 
 All tests can be run with the following command:
+
 ```console
 docker/sdk phpunit
 ```
@@ -208,6 +231,7 @@ docker/sdk phpunit
 ### How to Run Test Group
 
 A test group can be run with the following command:
+
 ```console
 docker/sdk phpunit-group <group>
 ```
@@ -215,12 +239,14 @@ docker/sdk phpunit-group <group>
 ### How to Run Test Case
 
 A test case can be run with the following command:
+
 ```console
 docker/sdk phpunit '<test-case-full-qualifided-name>'
 ```
 
 For instance, the test case `Picamator\Tests\Unit\TransferObject\Command\Helper\InputNormalizerTest`
 can be run with the following command:
+
 ```console
 docker/sdk phpunit 'Picamator\\Tests\\Unit\\TransferObject\\Command\\Helper\\InputNormalizerTest'
 ```
@@ -228,12 +254,14 @@ docker/sdk phpunit 'Picamator\\Tests\\Unit\\TransferObject\\Command\\Helper\\Inp
 How to Run PHPStan
 ------------------
 
-For all project's files, PHPStan can be run with the following command:
+For all project files, PHPStan can be run with the following command:
+
 ```console
 docker/sdk phpstan
 ```
 
 For the specific file:
+
 ```console
 docker/sdk phpstan <file-path>
 ```
@@ -241,12 +269,14 @@ docker/sdk phpstan <file-path>
 How to Run PHP CodeSniffer
 --------------------------
 
-For all project's files, PHP CodeSniffer can be run with the following command:
+For all project files, PHP CodeSniffer can be run with the following command:
+
 ```console
 docker/sdk phpcs
 ```
 
 For the specific file:
+
 ```console
 docker/sdk phpcs <file-path>
 ```
@@ -254,12 +284,14 @@ docker/sdk phpcs <file-path>
 How to Run PHP Code Beautifier and Fixer
 ----------------------------------------
 
-For all project's files, PHP Code Beautifier and Fixer can be run with the following command:
+For all project files, PHP Code Beautifier and Fixer can be run with the following command:
+
 ```console
 docker/sdk phpcbf
 ```
 
 For the specific file:
+
 ```console
 docker/sdk phpcbf <file-path>
 ```
@@ -268,11 +300,13 @@ How to Run Composer
 -------------------
 
 Composer can be run with the following command:
+
 ```console
 docker/sdk composer
 ```
 
 The command supports multiple arguments, for example:
+
 ```console
 docker/sdk composer install
 ```
