@@ -42,7 +42,10 @@ $credentialsData->login = 'ignacy.rzecki';
 $credentialsData->token = 'Lalka';
 
 $encodedCredentialsData = json_encode($credentialsData);
-$iteratedCredentialsData = implode(', ', iterator_to_array($credentialsData));
+
+/** @var array<string,string> $credentialsArray */
+$credentialsArray = iterator_to_array($credentialsData);
+$iteratedCredentialsData = implode(', ', $credentialsArray);
 
 echo <<<DEBUG
 Count: {$credentialsData->count()}
@@ -69,7 +72,9 @@ $addressData->country = 'Polska';
 
 $encodedAddressData = json_encode($addressData);
 
-$iteratedAddressData = implode(', ', iterator_to_array($addressData));
+/** @var array<string, string> $addressArray */
+$addressArray = iterator_to_array($addressData);
+$iteratedAddressData = implode(', ', $addressArray);
 
 echo <<<DEBUG
 Count: {$addressData->count()}
