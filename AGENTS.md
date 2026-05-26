@@ -49,15 +49,15 @@ Directory Structure
   * Should not contain any custom-written code.
 - `src/Generated/_tmp`: temporary directory to hold the transfer object generator's process directories.
 - `src/Generated/_tmp/{uuid}`: transfer object generator's process directory named by UUID.
-The directory is created before the process starts and holds new transfer objects:
+  The directory is created before the process starts and holds new transfer objects:
   * only when the process is finished successfully, the transfer objects are moved to the `Generated` directory
   * the directory is deleted after the process is finished
   * in case of an unexpected error, the directory might not be deleted.
 - `src/Generated/_tmp/{uuid}/{hash}.transfer.hash.csv`: hash file.
-Each hash file line contains a comma-separated transfer object class name and transfer object content hash.
+  Each hash file line contains a comma-separated transfer object class name and transfer object content hash.
 - `src/Generated/{hash}.transfer.hash.csv`: hash file from previous transfer object generation run.
-It is used to check for transfer object content changes and if some transfer objects should be deleted.
-The hash file can be deleted. In that case, all transfer objects will be generated with the new hash file.
+  It is used to check for transfer object content changes and if some transfer objects should be deleted.
+  The hash file can be deleted. In that case, all transfer objects will be generated with the new hash file.
 - `src/Generated/transfer.lock`: lock file used to prevent multiple processes from writing to the `Generated` directory at the same time.
 - `src/Shared`: contains code shared across modules.
 - `src/Transfer`: transfer object module.
@@ -119,12 +119,12 @@ Module Structure
 
 - Module might contain submodules.
 - Each submodule should have at least one factory class.
-- Factory class name should include submodule name with `Factory` suffix.
-- Factory class should be used for class wiring.
-- Factory class should use:
+- A factory class name should include the submodule name with the `Factory` suffix.
+- A factory class should be used for class wiring.
+- A factory class should use:
   * `Picamator\TransferObject\Shared\CachedFactoryTrait`
   * `Picamator\TransferObject\Shared\SharedFactoryTrait`
-- Factory methods should be `public` only when method is used in `Facade` classes, all others should be `protected`.
+- Factory methods should be `public` only when the method is used in `Facade` classes; all others should be `protected`.
 
 Unit and Integration Tests
 --------------------------
@@ -135,29 +135,29 @@ Unit and Integration Tests
 - Use `PHPUnit` attributes.
 - Use [PHP generator](https://www.php.net/manual/en/class.generator.php) for the data providers.
 
-How To Install Project
+How to Install Project
 ----------------------
 
-The project installs by command:
+The project is installed by the command:
 ```console
 docker/sdk install
 ```
 
-How To Build/Start/Stop Docker Environment
+How to Build/Start/Stop Docker Environment
 -------------------------------------------
 
-Docker Environment builds by command:
+The Docker environment is built by the command:
 ```console
 docker/sdk build
 ```
 
-Docker Environment starts by command:
+The Docker environment is started by the command:
 
 ```console
 docker/sdk start
 ```
 
-Docker Environment stops by command:
+The Docker environment is stopped by the command:
 ```console
 docker/sdk stop
 ```
@@ -165,7 +165,7 @@ docker/sdk stop
 How to Run PHP File
 --------------------
 
-The PHP file runs by command:
+A PHP file is run by the command:
 ```console
 docker/sdk cli [path-to-the-file]
 ```
@@ -178,20 +178,20 @@ docker/sdk cli ./examples/try-transfer-generator.php
 How to Generate Internal Transfer Objects
 -----------------------------------------
 
-To generate all project transfer objects (generators, examples, tests), run a command:
+To generate all project transfer objects (generators, examples, tests), run the command:
 ```console
 docker/sdk to-generate-bulk
 ```
 
-To generate only the generator's transfer objects, run a command:
+To generate only the generator's transfer objects, run the command:
 ```console
 docker/sdk to-generate
 ```
 
-How to Generate Transfer Objects By Configuration File
+How to Generate Transfer Objects by Configuration File
 ------------------------------------------------------
 
-To generate transfer objects by a configuration file path, relative to the project's root, runs a command:
+To generate transfer objects by a configuration file path, relative to the project's root, run the command:
 ```console
 docker/sdk to-generate [path-to-configuration-file]
 ```
@@ -199,7 +199,7 @@ docker/sdk to-generate [path-to-configuration-file]
 How to Generate Definition Files
 --------------------------------
 
-To generate definition files from JSON blueprints, runs a command:
+To generate definition files from JSON blueprints, run the command:
 ```console
 docker/sdk df-generate
 ```
@@ -209,27 +209,27 @@ How to Run PHPUnit Tests
 
 ### How to Run All Tests
 
-All tests run by command:
+All tests are run by the command:
 ```console
 docker/sdk phpunit
 ```
 
-### How to Run Test Group
+### How to Run a Test Group
 
-A test group runs by command:
+A test group is run by the command:
 ```console
 docker/sdk phpunit-group <group>
 ```
 
-### How to Run Test Case
+### How to Run a Test Case
 
-A test case runs by command:
+A test case is run by the command:
 ```console
-docker/sdk phpunit '<test-case-full-qualifided-name>'
+docker/sdk phpunit '<test-case-full-qualified-name>'
 ```
 
 For instance, the test case `Picamator\Tests\Unit\TransferObject\Command\Helper\InputNormalizerTest`
-runs by command:
+is run by the command:
 ```console
 docker/sdk phpunit 'Picamator\\Tests\\Unit\\TransferObject\\Command\\Helper\\InputNormalizerTest'
 ```
@@ -237,12 +237,12 @@ docker/sdk phpunit 'Picamator\\Tests\\Unit\\TransferObject\\Command\\Helper\\Inp
 How to Run PHPStan
 ------------------
 
-For all project files, PHPStan runs by command:
+For all project files, PHPStan is run by the command:
 ```console
 docker/sdk phpstan
 ```
 
-For the specific file, PHPStan runs by command:
+For a specific file, PHPStan is run by the command:
 ```console
 docker/sdk phpstan <file-path>
 ```
@@ -250,12 +250,12 @@ docker/sdk phpstan <file-path>
 How to Run PHP CodeSniffer
 --------------------------
 
-For all project files, PHP CodeSniffer runs by command:
+For all project files, PHP CodeSniffer is run by the command:
 ```console
 docker/sdk phpcs
 ```
 
-For the specific file, PHP CodeSniffer runs by command:
+For a specific file, PHP CodeSniffer is run by the command:
 ```console
 docker/sdk phpcs <file-path>
 ```
@@ -263,12 +263,12 @@ docker/sdk phpcs <file-path>
 How to Run PHP Code Beautifier and Fixer
 ----------------------------------------
 
-For all project files, PHP Code Beautifier and Fixer run by command:
+For all project files, PHP Code Beautifier and Fixer are run by the command:
 ```console
 docker/sdk phpcbf
 ```
 
-For the specific file, PHP Code Beautifier and Fixer run by command:
+For a specific file, PHP Code Beautifier and Fixer are run by the command:
 ```console
 docker/sdk phpcbf <file-path>
 ```
@@ -276,7 +276,7 @@ docker/sdk phpcbf <file-path>
 How to Run Composer
 -------------------
 
-Composer runs by command:
+Composer is run by the command:
 ```console
 docker/sdk composer
 ```
