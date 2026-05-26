@@ -25,9 +25,9 @@ Directory Structure
 ### Console commands
 
 - `bin`: project's console commands:
-  * `transfer-generate`: generate transfer objects from a single configuration file.
-  * `transfer-generate-bulk`: generate transfer objects from a list of configuration files.
-  * `definition-generate`: generate definition files from JSON blueprints.
+  * `transfer-generate`: generates transfer objects from a single configuration file.
+  * `transfer-generate-bulk`: generates transfer objects from a list of configuration files.
+  * `definition-generate`: generates definition files from JSON blueprints.
 
 ### Config
 
@@ -37,7 +37,7 @@ Directory Structure
 
 ### Examples
 
-- `examples`: samples on how to use `DefinitionGeneratorFacade` and `TransferGeneratorFacade`.
+- `examples`: how to use `DefinitionGeneratorFacade` and `TransferGeneratorFacade` samples.
 
 ### Source
 
@@ -51,7 +51,7 @@ Directory Structure
 - `src/Generated/_tmp/{uuid}`: transfer object generator's process directory named by UUID.
 The directory is created before the process starts and holds new transfer objects:
   * only when the process is finished successfully, the transfer objects are moved to the `Generated` directory
-  * each process directory is deleted after the process is finished
+  * the directory is deleted after the process is finished
   * in case of an unexpected error, the directory might not be deleted.
 - `src/Generated/_tmp/{uuid}/{hash}.transfer.hash.csv`: hash file.
 Each hash file line contains a comma-separated transfer object class name and transfer object content hash.
@@ -108,7 +108,7 @@ Module Structure
 
 #### Facade
 
-- Each module, except `src/Transfer` should have a facade class with an interface.
+- Each module, except `src/Transfer`, should have a facade class with an interface.
 - The facade class and interface name should include the module name with `Facade` suffix.
 - The facade is used for communication between modules.
 - The facade uses factories.
@@ -138,8 +138,7 @@ Unit and Integration Tests
 How To Install Project
 ----------------------
 
-The project is installed by running the following command:
-
+The project installs by command:
 ```console
 docker/sdk install
 ```
@@ -147,20 +146,18 @@ docker/sdk install
 How To Build/Start/Stop Docker Environment
 -------------------------------------------
 
-Docker Environment builds by running a command:
-
+Docker Environment builds by command:
 ```console
 docker/sdk build
 ```
 
-Docker Environment starts by running a command:
+Docker Environment starts by command:
 
 ```console
 docker/sdk start
 ```
 
-Docker Environment stops by running a command:
-
+Docker Environment stops by command:
 ```console
 docker/sdk stop
 ```
@@ -169,13 +166,11 @@ How to Run PHP File
 --------------------
 
 The PHP file runs by command:
-
 ```console
 docker/sdk cli [path-to-the-file]
 ```
 
 For instance, for the PHP file `./examples/try-transfer-generator.php`:
-
 ```console
 docker/sdk cli ./examples/try-transfer-generator.php
 ```
@@ -184,13 +179,11 @@ How to Generate Internal Transfer Objects
 -----------------------------------------
 
 To generate all project transfer objects (generators, examples, tests), run a command:
-
 ```console
 docker/sdk to-generate-bulk
 ```
 
 To generate only the generator's transfer objects, run a command:
-
 ```console
 docker/sdk to-generate
 ```
@@ -199,7 +192,6 @@ How to Generate Transfer Objects By Configuration File
 ------------------------------------------------------
 
 To generate transfer objects by a configuration file path, relative to the project's root, runs a command:
-
 ```console
 docker/sdk to-generate [path-to-configuration-file]
 ```
@@ -208,7 +200,6 @@ How to Generate Definition Files
 --------------------------------
 
 To generate definition files from JSON blueprints, runs a command:
-
 ```console
 docker/sdk df-generate
 ```
@@ -218,31 +209,27 @@ How to Run PHPUnit Tests
 
 ### How to Run All Tests
 
-All tests can be run with the following command:
-
+All tests run by command:
 ```console
 docker/sdk phpunit
 ```
 
 ### How to Run Test Group
 
-A test group can be run with the following command:
-
+A test group runs by command:
 ```console
 docker/sdk phpunit-group <group>
 ```
 
 ### How to Run Test Case
 
-A test case can be run with the following command:
-
+A test case runs by command:
 ```console
 docker/sdk phpunit '<test-case-full-qualifided-name>'
 ```
 
 For instance, the test case `Picamator\Tests\Unit\TransferObject\Command\Helper\InputNormalizerTest`
-can be run with the following command:
-
+runs by command:
 ```console
 docker/sdk phpunit 'Picamator\\Tests\\Unit\\TransferObject\\Command\\Helper\\InputNormalizerTest'
 ```
@@ -250,14 +237,12 @@ docker/sdk phpunit 'Picamator\\Tests\\Unit\\TransferObject\\Command\\Helper\\Inp
 How to Run PHPStan
 ------------------
 
-For all project files, PHPStan can be run with the following command:
-
+For all project files, PHPStan runs by command:
 ```console
 docker/sdk phpstan
 ```
 
-For the specific file:
-
+For the specific file, PHPStan runs by command:
 ```console
 docker/sdk phpstan <file-path>
 ```
@@ -265,14 +250,12 @@ docker/sdk phpstan <file-path>
 How to Run PHP CodeSniffer
 --------------------------
 
-For all project files, PHP CodeSniffer can be run with the following command:
-
+For all project files, PHP CodeSniffer runs by command:
 ```console
 docker/sdk phpcs
 ```
 
-For the specific file:
-
+For the specific file, PHP CodeSniffer runs by command:
 ```console
 docker/sdk phpcs <file-path>
 ```
@@ -280,14 +263,12 @@ docker/sdk phpcs <file-path>
 How to Run PHP Code Beautifier and Fixer
 ----------------------------------------
 
-For all project files, PHP Code Beautifier and Fixer can be run with the following command:
-
+For all project files, PHP Code Beautifier and Fixer run by command:
 ```console
 docker/sdk phpcbf
 ```
 
-For the specific file:
-
+For the specific file, PHP Code Beautifier and Fixer run by command:
 ```console
 docker/sdk phpcbf <file-path>
 ```
@@ -295,14 +276,12 @@ docker/sdk phpcbf <file-path>
 How to Run Composer
 -------------------
 
-Composer can be run with the following command:
-
+Composer runs by command:
 ```console
 docker/sdk composer
 ```
 
 The command supports multiple arguments, for example:
-
 ```console
 docker/sdk composer install
 ```
