@@ -93,7 +93,7 @@ Code Style
   * **expander** classes should have `public` methods prefixed by `expand`
   * **parser** classes should have `public` methods prefixed by `parse`
   * **builder** classes should have `public` methods prefixed by `create`
-  * **reader** classes should have `public` methods prefixed by `get`
+  * **reader** classes should have `public` methods prefixed by `get` or `read`
   * **render** classes should have `public` methods prefixed by `render`
   * **validator** classes should have `public` methods prefixed by `validate`
   * methods returning `bool` should be prefixed by `is`.
