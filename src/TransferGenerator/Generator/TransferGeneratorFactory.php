@@ -7,6 +7,8 @@ namespace Picamator\TransferObject\TransferGenerator\Generator;
 use Picamator\TransferObject\Shared\SharedFactoryTrait;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBulkBuilder;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Builder\TransferGeneratorBulkBuilderInterface;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\Render\ErrorMessageRender;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\Render\ErrorMessageRenderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorBulkFiber;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorBulkFiberInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorFiber;
@@ -39,7 +41,10 @@ class TransferGeneratorFactory
         return $this->getCached(
             key: 'transfer-generator:TransferGeneratorService',
             factory: fn(): TransferGeneratorServiceInterface =>
-                new TransferGeneratorService($this->createTransferGeneratorWorkflow()),
+                new TransferGeneratorService(
+                    $this->createErrorMessageRender(),
+                    $this->createTransferGeneratorWorkflow()
+                ),
         );
     }
 
@@ -65,5 +70,10 @@ class TransferGeneratorFactory
     {
         return $this->workflowFactory
             ->createTransferGeneratorWorkflow();
+    }
+
+    protected function createErrorMessageRender(): ErrorMessageRenderInterface
+    {
+        return new ErrorMessageRender();
     }
 }

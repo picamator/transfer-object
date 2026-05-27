@@ -5,17 +5,15 @@ declare(strict_types=1);
 namespace Picamator\TransferObject\TransferGenerator\Generator\Generator;
 
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
+use Picamator\TransferObject\Shared\Exception\TransferExceptionInterface;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\Render\ErrorMessageRenderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Workflow\TransferGeneratorWorkflowInterface;
 
 readonly class TransferGeneratorService implements TransferGeneratorServiceInterface
 {
-    private const string ERROR_MESSAGE = 'Failed to generate Transfer Objects.';
-
-    private const string TRANSFER_OBJECT_MESSAGE_TEMPLATE = 'Transfer Object: "%s".';
-    private const string DEFINITION_MESSAGE_TEMPLATE = 'Definition file: "%s".';
-
     public function __construct(
+        private ErrorMessageRenderInterface $errorMessageRender,
         private TransferGeneratorWorkflowInterface $workflow,
     ) {
     }
@@ -31,32 +29,17 @@ readonly class TransferGeneratorService implements TransferGeneratorServiceInter
                 continue;
             }
 
-            $errorMessage = $this->getErrorMessage($generatorTransfer);
-            $exception = new TransferGeneratorException($errorMessage);
+            $exception = $this->createException($generatorTransfer);
             $generator->throw($exception);
         }
 
         return $count;
     }
 
-    private function getErrorMessage(TransferGeneratorTransfer $generatorTransfer): string
+    private function createException(TransferGeneratorTransfer $generatorTransfer): TransferExceptionInterface
     {
-        $messageParts[] = self::ERROR_MESSAGE;
-        if ($generatorTransfer->className !== null) {
-            $messageParts[] = sprintf(self::TRANSFER_OBJECT_MESSAGE_TEMPLATE, $generatorTransfer->className);
-        }
+        $errorMessage = $this->errorMessageRender->render($generatorTransfer);
 
-        if ($generatorTransfer->fileName !== null) {
-            $messageParts[] = sprintf(self::DEFINITION_MESSAGE_TEMPLATE, $generatorTransfer->fileName);
-        }
-
-        $messageParts[] = PHP_EOL;
-
-        $validatorMessages = $generatorTransfer->validator->errorMessages;
-        foreach ($validatorMessages as $message) {
-            $messageParts[] = $message->errorMessage;
-        }
-
-        return implode(PHP_EOL, $messageParts);
+        return new TransferGeneratorException($errorMessage);
     }
 }
