@@ -27,7 +27,7 @@ readonly class EnvironmentReader implements EnvironmentReaderInterface
         $environment = EnvironmentEnum::MAX_FILE_SIZE_MB;
         $maxFileSize = (int)$this->getEnvironment($environment);
 
-        if ($maxFileSize === 0) {
+        if ($maxFileSize <= 0) {
             $maxFileSize = (int)$environment->getDefault();
         }
 

@@ -124,6 +124,7 @@ final class EnvironmentReaderTest extends TestCase
     #[TestWith([false, 10])]
     #[TestWith(['', 10])]
     #[TestWith(['0', 10])]
+    #[TestWith(['-1', 10])]
     #[TestWith(['test', 10])]
     #[TestWith(['20', 20])]
     #[TestWith(['200000', 1024])]
