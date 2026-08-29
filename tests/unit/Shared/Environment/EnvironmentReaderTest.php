@@ -120,15 +120,19 @@ final class EnvironmentReaderTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
+    /**
+     * @param string|array<int, string>|bool $maxSizeMegabytes
+     */
     #[TestDox('Environment variable MAX_FILE_SIZE_MB: "$maxSizeMegabytes" is rendered as "$expected"')]
     #[TestWith([false, 10])]
+    #[TestWith([[1], 10])]
     #[TestWith(['', 10])]
     #[TestWith(['0', 10])]
     #[TestWith(['-1', 10])]
     #[TestWith(['test', 10])]
     #[TestWith(['20', 20])]
     #[TestWith(['200000', 1024])]
-    public function testGetMaxFileSizeMegabytes(string|bool $maxSizeMegabytes, int $expected): void
+    public function testGetMaxFileSizeMegabytes(string|array|bool $maxSizeMegabytes, int $expected): void
     {
         // Expect
         $this->readerMock->expects($this->once())
