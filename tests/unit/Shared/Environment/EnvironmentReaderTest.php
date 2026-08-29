@@ -30,7 +30,7 @@ final class EnvironmentReaderTest extends TestCase
             ->getMock();
     }
 
-    #[TestDox('Environment variable project root "$projectRoot" is set with "$expected"')]
+    #[TestDox('Environment variable project root "$projectRoot" is rendered as "$expected"')]
     #[TestWith(['/home/my-user', '/home/my-user'])]
     #[TestWith([' /home/my-user/ ', '/home/my-user'])]
     public function testProjectRootVariableIsSet(string $projectRoot, string $expected): void
@@ -120,7 +120,7 @@ final class EnvironmentReaderTest extends TestCase
         $this->assertSame($expected, $actual);
     }
 
-    #[TestDox('Environment variable max file size megabytes "$maxSizeMegabytes" is set with "$expected"')]
+    #[TestDox('Environment variable MAX_FILE_SIZE_MB: "$maxSizeMegabytes" is rendered as "$expected"')]
     #[TestWith([false, 10])]
     #[TestWith(['', 10])]
     #[TestWith(['0', 10])]
@@ -132,11 +132,36 @@ final class EnvironmentReaderTest extends TestCase
         // Expect
         $this->readerMock->expects($this->once())
             ->method('getenv')
+            ->with(EnvironmentEnum::MAX_FILE_SIZE_MB->value)
             ->willReturn($maxSizeMegabytes)
             ->seal();
 
         // Act
         $actual = $this->readerMock->getMaxFileSizeMegabytes();
+
+        // Assert
+        $this->assertSame($expected, $actual);
+    }
+
+    #[TestDox('Environment variable IS_CACHE_ENABLED: "$isCacheEnabled" is rendered as "$expected"')]
+    #[TestWith(['1', true])]
+    #[TestWith(['true', true])]
+    #[TestWith(['TRUE', true])]
+    #[TestWith(['True', true])]
+    #[TestWith(['true', true])]
+    #[TestWith(['0', false])]
+    #[TestWith(['false', false])]
+    public function testGetIsCacheEnabled(string $isCacheEnabled, bool $expected): void
+    {
+        // Expect
+        $this->readerMock->expects($this->once())
+            ->method('getenv')
+            ->with(EnvironmentEnum::IS_CACHE_ENABLED->value)
+            ->willReturn($isCacheEnabled)
+            ->seal();
+
+        // Act
+        $actual = $this->readerMock->getIsCacheEnabled();
 
         // Assert
         $this->assertSame($expected, $actual);

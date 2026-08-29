@@ -46,9 +46,7 @@ readonly class EnvironmentReader implements EnvironmentReaderInterface
     {
         $isCacheEnabled = $this->getEnvironment(EnvironmentEnum::IS_CACHE_ENABLED);
 
-        return $isCacheEnabled === '1'
-            || $isCacheEnabled === 'true'
-            || $isCacheEnabled === 'TRUE';
+        return $isCacheEnabled === '1' || strtolower($isCacheEnabled) === 'true';
     }
 
     private function getEnvironment(EnvironmentEnum $environment): string
