@@ -11,6 +11,8 @@ use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGen
 use Picamator\TransferObject\DefinitionGenerator\Generator\Builder\DefinitionGeneratorBuilderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Filesystem\DefinitionFilesystem;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Filesystem\DefinitionFilesystemInterface;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Builder\FilesystemBuilder;
+use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Builder\FilesystemBuilderInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\DefinitionGeneratorService;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\DefinitionGeneratorServiceInterface;
 use Picamator\TransferObject\DefinitionGenerator\Generator\Generator\Processor\Command\DefinitionProcessCommand;
@@ -39,6 +41,7 @@ class DefinitionGeneratorFactory
         return $this->getCached(
             key: 'definition-generator:DefinitionGeneratorService',
             factory: fn(): DefinitionGeneratorServiceInterface => new DefinitionGeneratorService(
+                $this->createFilesystemBuilder(),
                 $this->createDefinitionGeneratorProcessor(),
             ),
         );
@@ -55,6 +58,11 @@ class DefinitionGeneratorFactory
                 $this->createJsonReader(),
             ),
         );
+    }
+
+    protected function createFilesystemBuilder(): FilesystemBuilderInterface
+    {
+        return new FilesystemBuilder();
     }
 
     protected function createDefinitionGeneratorProcessor(): DefinitionGeneratorProcessorInterface

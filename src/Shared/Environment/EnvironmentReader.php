@@ -27,7 +27,7 @@ readonly class EnvironmentReader implements EnvironmentReaderInterface
         $environment = @EnvironmentEnum::MAX_FILE_SIZE_MB;
         $maxFileSize = (int)$this->getEnvironment($environment);
 
-        if ($maxFileSize === 0) {
+        if ($maxFileSize <= 0) {
             $maxFileSize = (int)$environment->getDefault();
         }
 
@@ -39,16 +39,14 @@ readonly class EnvironmentReader implements EnvironmentReaderInterface
 
     public function getMaxFileSizeBytes(): int
     {
-        return $this->getMaxFileSizeMegabytes() * 1_000_000;
+        return $this->getMaxFileSizeMegabytes() << 20;
     }
 
     public function getIsCacheEnabled(): bool
     {
         $isCacheEnabled = $this->getEnvironment(@EnvironmentEnum::IS_CACHE_ENABLED);
 
-        return $isCacheEnabled === '1'
-            || $isCacheEnabled === 'true'
-            || $isCacheEnabled === 'TRUE';
+        return $isCacheEnabled === '1' || strtolower($isCacheEnabled) === 'true';
     }
 
     private function getEnvironment(EnvironmentEnum $environment): string

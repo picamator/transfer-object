@@ -11,6 +11,7 @@ use PHPUnit\Framework\TestCase;
 use Picamator\TransferObject\Generated\TransferGeneratorTransfer;
 use Picamator\TransferObject\Generated\ValidatorTransfer;
 use Picamator\TransferObject\TransferGenerator\Exception\TransferGeneratorException;
+use Picamator\TransferObject\TransferGenerator\Generator\Generator\Render\ErrorMessageRenderInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorService;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\TransferGeneratorServiceInterface;
 use Picamator\TransferObject\TransferGenerator\Generator\Generator\Workflow\TransferGeneratorWorkflowInterface;
@@ -24,9 +25,13 @@ final class ServiceTransferGeneratorTest extends TestCase
 
     protected function setUp(): void
     {
+        $errorMessageRenderStub = $this->createStub(ErrorMessageRenderInterface::class);
         $this->generatorStub = $this->createStub(TransferGeneratorWorkflowInterface::class);
 
-        $this->serviceGenerator = new TransferGeneratorService($this->generatorStub);
+        $this->serviceGenerator = new TransferGeneratorService(
+            $errorMessageRenderStub,
+            $this->generatorStub,
+        );
     }
 
     #[TestDox('Generator iterates invalid item should throw exception')]

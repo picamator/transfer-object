@@ -25,160 +25,152 @@ Directory Structure
 ### Console commands
 
 - `bin`: project's console commands:
-  * `transfer-generate`: generate transfer objects from a single configuration file
-  * `transfer-generate-bulk`: generate transfer objects from a list of configuration files
-  * `definition-generate`: generate definition files from JSON blueprints
+  * `transfer-generate`: generates transfer objects from a single configuration file.
+  * `transfer-generate-bulk`: generates transfer objects from a list of configuration files.
+  * `definition-generate`: generates definition files from JSON blueprints.
 
 ### Config
 
-- `config`: transfer object and definition configurations used for definition and transfer generators
-- `var/config`: configuration for the project's transfer bulk generator
-- `schema`: JSON schemas for definition and transfer configurations
+- `config`: transfer object and definition configurations used for definition and transfer generators.
+- `var/config`: configuration for the project's transfer bulk generator.
+- `schema`: JSON schemas for definition and transfer configurations.
 
 ### Examples
 
-- `examples`: samples on how to use `DefinitionGeneratorFacade` and `TransferGeneratorFacade`
+- `examples`: how to use `DefinitionGeneratorFacade` and `TransferGeneratorFacade` samples.
 
 ### Source
 
-- `src`: code source
-- `src/Command`: Symfony console commands to generate definition and transfer object files
-- `src/DefinitionGenerator`: definition generator module
-- `src/Dependency`: wrapper over third-party dependencies
-- `src/Generated`: directory where generated transfer objects are saved
-  * should not contain any custom-written code
-  * can be used across modules like `src/ModuleOne/Generated`, `src/ModuleTwo/Generated`, etc.
-- `src/Generated/_tmp`: temporary directory to hold the transfer object generator's process directories
+- `src`: code source.
+- `src/Command`: Symfony console commands to generate definition and transfer object files.
+- `src/DefinitionGenerator`: definition generator module.
+- `src/Dependency`: wrapper over third-party dependencies.
+- `src/Generated`: directory where generated transfer objects are saved.
+  * Should not contain any custom-written code.
+- `src/Generated/_tmp`: temporary directory to hold the transfer object generator's process directories.
 - `src/Generated/_tmp/{uuid}`: transfer object generator's process directory named by UUID.
-The directory is created before the process starts and holds new transfer objects.
-  * only when the process is finished successfully, the transfer objects are moved to the `Generated` directory.
-  * each process directory is deleted after the process is finished
+  The directory is created before the process starts and holds new transfer objects:
+  * only when the process is finished successfully, the transfer objects are moved to the `Generated` directory
+  * the directory is deleted after the process is finished
   * in case of an unexpected error, the directory might not be deleted.
-- `src/Generated/_tmp/{uuid}/{hash}.transfer.hash.csv`: hash file, each line of which contains comma-separated:
-  * transfer object class name
-  * transfer object content hash
+- `src/Generated/_tmp/{uuid}/{hash}.transfer.hash.csv`: hash file.
+  Each hash file line contains a comma-separated transfer object class name and transfer object content hash.
 - `src/Generated/{hash}.transfer.hash.csv`: hash file from previous transfer object generation run.
-It is used to check for transfer object content changes as well as if some transfer objects should be deleted.
+  It is used to check for transfer object content changes and if some transfer objects should be deleted.
+  The hash file can be deleted. In that case, all transfer objects will be generated with the new hash file.
 - `src/Generated/transfer.lock`: lock file used to prevent multiple processes from writing to the `Generated` directory at the same time.
-- `src/Shared`: contains code shared across modules
-  * can be used across modules
-- `src/Transfer`: transfer object module
-  * can be used across modules
-- `src/TransferGenerator`: transfer generator module
+- `src/Shared`: contains code shared across modules.
+- `src/Transfer`: transfer object module.
+- `src/TransferGenerator`: transfer generator module.
 
 ### Technical
 
-- `.github`: GitHub CI actions, template, and README.md images
-- `.xdebug`: Xdebug configuration for [Native Path Mapping](https://xdebug.org/funding/001-native-path-mapping)
-- `docker`: [dockerized development environment](https://github.com/picamator/transfer-object/wiki/Development-Environment) configuration with shell helper commands
+- `.github`: GitHub CI actions, template, and README.md images.
+- `.xdebug`: Xdebug configuration for [Native Path Mapping](https://xdebug.org/funding/001-native-path-mapping).
+- `docker`: [dockerized development environment](https://github.com/picamator/transfer-object/wiki/Development-Environment) configuration with shell helper commands.
 
 ### Tests
 
-- `tests`: unit and integration PHPUnit tests
-- `tests/extension`: PHPUnit extension
-- `tests/integration`: integration tests
-- `tests/unit`: unit tests
+- `tests`: unit and integration PHPUnit tests.
+- `tests/extension`: PHPUnit extension.
+- `tests/integration`: integration tests.
+- `tests/unit`: unit tests.
 
 Code Style
 ----------
 
-- code style should follow [PER Coding Style 3.0](https://www.php-fig.org/per/coding-style/)
-- each exception should implement `Picamator\TransferObject\Shared\Exception\TransferExceptionInterface`
-- exception messages should follow the same text and structure across all modules
+- Code style should follow [PER Coding Style 3.0](https://www.php-fig.org/per/coding-style/).
+- Each exception should implement `Picamator\TransferObject\Shared\Exception\TransferExceptionInterface`.
+- Exception messages should follow the same text and structure across all modules.
 
 ### Classes
 
-- classes should have a strict mode
-- classes should be `readonly` when possible
-- classes should use Constructor Property Promotion
-- class properties should have `private` visibility unless one is a transfer object, or it is necessary for inheritance
-- class methods and property names should be similar across modules
+- Classes should have a strict mode.
+- Classes should be `readonly` when possible.
+- Classes should use Constructor Property Promotion.
+- Class properties should have `private` visibility unless one is a transfer object, or it is necessary for inheritance.
+- Class methods and property names should be similar across modules:
   * **expander** classes should have `public` methods prefixed by `expand`
   * **parser** classes should have `public` methods prefixed by `parse`
   * **builder** classes should have `public` methods prefixed by `create`
-  * **reader** classes should have `public` methods prefixed by `get`
+  * **reader** classes should have `public` methods prefixed by `get` or `read`
   * **render** classes should have `public` methods prefixed by `render`
   * **validator** classes should have `public` methods prefixed by `validate`
-  * methods returning `bool` should be prefixed by `is`
+  * methods returning `bool` should be prefixed by `is`.
 
 ### Tests
 
-- test classes should be `final`
-- tests should have at least one test group
+- Test classes should be `final`.
+- Tests should have at least one test group.
 
 Module Structure
 ----------------
 
 #### Facade
 
-- each module should have a facade class with an interface.
-- the facade class and interface name should include the module name with `Facade` suffix.
-- the facade is used for communication between modules.
-- the facade uses factories.
-- the facade should not include any business logic.
-- the facade `public` methods should have a specification doc-block.
+- Each module, except `src/Transfer`, should have a facade class with an interface.
+- The facade class and interface name should include the module name with `Facade` suffix.
+- The facade is used for communication between modules.
+- The facade uses factories.
+- The facade should not include any business logic.
+- The facade `public` methods should have a specification doc-block.
 
 ### Factory
 
-- module might contain sub-modules
-- each submodule should have at least one factory class
-- factory class name should include submodule name with `Factory` suffix
-- factory class should be used for class wiring
-- factory class should use:
+- Module might contain submodules.
+- Each submodule should have at least one factory class.
+- A factory class name should include the submodule name with the `Factory` suffix.
+- A factory class should be used for class wiring.
+- A factory class should use:
   * `Picamator\TransferObject\Shared\CachedFactoryTrait`
   * `Picamator\TransferObject\Shared\SharedFactoryTrait`
-- factory methods should be `public` only when method is used in `Facade` classes, all others should be `protected`
+- Factory methods should be `public` only when the method is used in `Facade` classes; all others should be `protected`.
 
 Unit and Integration Tests
 --------------------------
 
-- tests should follow a similar structure to the existing ones.
-- separate test implementation by comment sections: "Arrange", "Act", "Assert" (optionally with "Expect").
-- use `setUp` method to initialize the tested object's stubs and mocks.
-- use `PHPUnit` attributes.
-- use [PHP generator](https://www.php.net/manual/en/class.generator.php) for the data providers.
+- Tests should follow a similar structure to the existing ones.
+- Separate test implementation by comment sections: "Arrange", "Act", "Assert" (optionally with "Expect").
+- Use `setUp` method to initialize the tested object's stubs and mocks.
+- Use `PHPUnit` attributes.
+- Use [PHP generator](https://www.php.net/manual/en/class.generator.php) for the data providers.
 
-How To Install Project
+How to Install Project
 ----------------------
 
-The project is installed by running the following command:
-
+The project is installed by the command:
 ```console
 docker/sdk install
 ```
 
-How To Build/Start/Stop Docker Environment
+How to Build/Start/Stop Docker Environment
 -------------------------------------------
 
-Docker Environment is built by running the following command:
-
+The Docker environment is built by the command:
 ```console
 docker/sdk build
 ```
 
-Docker Environment is started by running the following command:
+The Docker environment is started by the command:
 
 ```console
 docker/sdk start
 ```
 
-Docker Environment is stopped by running the following command:
-
+The Docker environment is stopped by the command:
 ```console
 docker/sdk stop
 ```
 
-How to Run PHP Script
----------------------
+How to Run PHP File
+--------------------
 
-The PHP script runs by command:
-
+A PHP file is run by the command:
 ```console
-docker/sdk cli [path-to-script]
+docker/sdk cli [path-to-the-file]
 ```
 
-For instance, the `./examples/try-transfer-generator.php`:
-
+For instance, for the PHP file `./examples/try-transfer-generator.php`:
 ```console
 docker/sdk cli ./examples/try-transfer-generator.php
 ```
@@ -186,24 +178,20 @@ docker/sdk cli ./examples/try-transfer-generator.php
 How to Generate Internal Transfer Objects
 -----------------------------------------
 
-All project transfer objects (generators, examples, tests) can be generated with the following command:
-
+To generate all project transfer objects (generators, examples, tests), run the command:
 ```console
 docker/sdk to-generate-bulk
 ```
 
-To generate only the generator's transfer objects, please run the following command:
-
+To generate only the generator's transfer objects, run the command:
 ```console
 docker/sdk to-generate
 ```
 
-How to Generate Transfer Objects By Configuration File
+How to Generate Transfer Objects by Configuration File
 ------------------------------------------------------
 
-Transfer objects can be generated by a configuration file path,
-relative to the project's root, by running the following command:
-
+To generate transfer objects by a configuration file path, relative to the project's root, run the command:
 ```console
 docker/sdk to-generate [path-to-configuration-file]
 ```
@@ -211,8 +199,7 @@ docker/sdk to-generate [path-to-configuration-file]
 How to Generate Definition Files
 --------------------------------
 
-To generate definition files from JSON blueprints, please run the following command:
-
+To generate definition files from JSON blueprints, run the command:
 ```console
 docker/sdk df-generate
 ```
@@ -222,31 +209,27 @@ How to Run PHPUnit Tests
 
 ### How to Run All Tests
 
-All tests can be run with the following command:
-
+All tests are run by the command:
 ```console
 docker/sdk phpunit
 ```
 
-### How to Run Test Group
+### How to Run a Test Group
 
-A test group can be run with the following command:
-
+A test group is run by the command:
 ```console
 docker/sdk phpunit-group <group>
 ```
 
-### How to Run Test Case
+### How to Run a Test Case
 
-A test case can be run with the following command:
-
+A test case is run by the command:
 ```console
-docker/sdk phpunit '<test-case-full-qualifided-name>'
+docker/sdk phpunit '<test-case-full-qualified-name>'
 ```
 
 For instance, the test case `Picamator\Tests\Unit\TransferObject\Command\Helper\InputNormalizerTest`
-can be run with the following command:
-
+is run by the command:
 ```console
 docker/sdk phpunit 'Picamator\\Tests\\Unit\\TransferObject\\Command\\Helper\\InputNormalizerTest'
 ```
@@ -254,14 +237,12 @@ docker/sdk phpunit 'Picamator\\Tests\\Unit\\TransferObject\\Command\\Helper\\Inp
 How to Run PHPStan
 ------------------
 
-For all project files, PHPStan can be run with the following command:
-
+For all project files, PHPStan is run by the command:
 ```console
 docker/sdk phpstan
 ```
 
-For the specific file:
-
+For a specific file, PHPStan is run by the command:
 ```console
 docker/sdk phpstan <file-path>
 ```
@@ -269,14 +250,12 @@ docker/sdk phpstan <file-path>
 How to Run PHP CodeSniffer
 --------------------------
 
-For all project files, PHP CodeSniffer can be run with the following command:
-
+For all project files, PHP CodeSniffer is run by the command:
 ```console
 docker/sdk phpcs
 ```
 
-For the specific file:
-
+For a specific file, PHP CodeSniffer is run by the command:
 ```console
 docker/sdk phpcs <file-path>
 ```
@@ -284,14 +263,12 @@ docker/sdk phpcs <file-path>
 How to Run PHP Code Beautifier and Fixer
 ----------------------------------------
 
-For all project files, PHP Code Beautifier and Fixer can be run with the following command:
-
+For all project files, PHP Code Beautifier and Fixer are run by the command:
 ```console
 docker/sdk phpcbf
 ```
 
-For the specific file:
-
+For a specific file, PHP Code Beautifier and Fixer are run by the command:
 ```console
 docker/sdk phpcbf <file-path>
 ```
@@ -299,14 +276,12 @@ docker/sdk phpcbf <file-path>
 How to Run Composer
 -------------------
 
-Composer can be run with the following command:
-
+Composer is run by the command:
 ```console
 docker/sdk composer
 ```
 
 The command supports multiple arguments, for example:
-
 ```console
 docker/sdk composer install
 ```

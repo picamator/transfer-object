@@ -40,7 +40,7 @@ readonly class TestSuiteStartedSubscriber implements StartedSubscriber
         $reflectionAttribute = $reflection->getAttributes(Group::class)[0] ?? null;
 
         if ($reflectionAttribute === null) {
-            return '';
+            return 'unknown';
         }
 
         /** @var Group $groupAttribute */
