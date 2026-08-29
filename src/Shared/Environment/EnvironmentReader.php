@@ -39,7 +39,7 @@ readonly class EnvironmentReader implements EnvironmentReaderInterface
 
     public function getMaxFileSizeBytes(): int
     {
-        return $this->getMaxFileSizeMegabytes() * 1_000_000;
+        return $this->getMaxFileSizeMegabytes() << 20;
     }
 
     public function getIsCacheEnabled(): bool
