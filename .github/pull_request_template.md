@@ -4,9 +4,11 @@ Pull Request Template
 Description
 -----------
 
-Please include a summary of the changes and the related issue. Clearly describe the purpose of the pull request.
+Short summary about changes and the pull request purpose.
 
-Fixes # (issue)
+In case the pull request solves the issue, please provide the issue number:
+
+* Fixed # (issue number).
 
 Type of Change
 --------------
@@ -16,9 +18,9 @@ Please delete options that are not relevant:
 - [ ] Bug fix (non-breaking change which fixes an issue)
 - [ ] Improvements (non-breaking changes such as refactoring, performance optimization, etc.)
 - [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (bug fix, new feature, dependency upgrade, etc.)
+- [ ] Breaking change (bug fix, new feature, major dependency upgrade, etc.)
 - [ ] Documentation update
-- [ ] Other (please specify):
+- [ ] Other (please specify)
 
 Checklist
 ---------
